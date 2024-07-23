@@ -26,7 +26,7 @@ CREATE TABLE Kategoriak (
 CREATE TABLE Autok (
     autok_id INT AUTO_INCREMENT PRIMARY KEY,
     gyartmany ENUM('Skoda', 'VW', 'KIA', 'Opel', 'Renault'),
-    tipus VARCHAR(62) NOT NULL,
+    tipus VARCHAR(10) NOT NULL,
     rendszam VARCHAR(9) NOT NULL,
     teljesitmeny TINYINT CHECK(teljesitmeny IN (18,36,65,50,45)),
     gyorsulas Decimal(3,1) NOT NULL,
@@ -64,6 +64,10 @@ CREATE TABLE Berles (
     rendszam_FK VARCHAR(9),
     FOREIGN KEY (rendszam_FK)
     REFERENCES Autok(rendszam)
+
+    CHECK (berles_veg IS NULL OR berles_veg <= CURDATE()),-- A bérlés vége mezőt ellenőrzi, hogy üres-e vagy nem kisebb-e az aktuális dátumnál.
+    CHECK (berles_kezd IS NULL OR (berles_veg IS NULL OR berles_kezd IS NOT NULL)) 
+
 );
 
 CREATE TABLE Felhasznalok (
@@ -91,4 +95,10 @@ CREATE TABLE Szemely (
 
     kor AS (YEAR(CURDATE()) - YEAR(szul_datum)) PERSISTENT,
     jogosítvány_ideje AS (YEAR(CURDATE()) - YEAR(jogositvany_ervenyesseg)) PERSISTENT
+
+    -- Hibakezelések (születési dátumra és jogosítványra):
+    CHECK (szul_datum <= CURDATE()),
+    CHECK (YEAR(CURDATE()) - YEAR(szul_datum) >= 18),
+    CHECK (jogositvany_ervenyesseg >= CURDATE() + INTERVAL 1 YEAR),
+    CHECK (jogositvany_lejarata >= GREATEST(CURDATE(), jogositvany_ervenyesseg)),
 );
