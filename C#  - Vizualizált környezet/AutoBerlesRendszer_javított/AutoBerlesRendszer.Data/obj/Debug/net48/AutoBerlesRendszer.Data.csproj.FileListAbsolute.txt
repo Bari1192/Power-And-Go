@@ -1,0 +1,18 @@
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Data\bin\Debug\net48\AutoBerlesRendszer.Data.dll
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Data\bin\Debug\net48\AutoBerlesRendszer.Data.pdb
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.AssemblyInfo.cs
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.dll
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Data\bin\Debug\net48\AutoBerlesRendszer.Data.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Data\bin\Debug\net48\AutoBerlesRendszer.Data.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.csproj.AssemblyReference.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.AssemblyInfoInputs.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.AssemblyInfo.cs
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.csproj.CoreCompileInputs.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Data\obj\Debug\net48\AutoBerlesRendszer.Data.pdb

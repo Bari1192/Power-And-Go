@@ -1,0 +1,11 @@
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Data\bin\Debug\net8.0\AutoBerlesRendszer.Data.deps.json
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Data\bin\Debug\net8.0\AutoBerlesRendszer.Data.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Data\bin\Debug\net8.0\AutoBerlesRendszer.Data.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net8.0\AutoBerlesRendszer.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net8.0\AutoBerlesRendszer.Data.AssemblyInfoInputs.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net8.0\AutoBerlesRendszer.Data.AssemblyInfo.cs
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net8.0\AutoBerlesRendszer.Data.csproj.CoreCompileInputs.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net8.0\AutoBerlesRendszer.Data.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net8.0\refint\AutoBerlesRendszer.Data.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net8.0\AutoBerlesRendszer.Data.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Data\obj\Debug\net8.0\ref\AutoBerlesRendszer.Data.dll

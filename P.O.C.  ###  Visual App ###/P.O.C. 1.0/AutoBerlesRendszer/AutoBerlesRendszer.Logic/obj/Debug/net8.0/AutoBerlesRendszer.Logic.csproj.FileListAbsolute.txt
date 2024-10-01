@@ -1,0 +1,17 @@
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\bin\Debug\net8.0\AutoBerlesRendszer.Logic.deps.json
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\bin\Debug\net8.0\AutoBerlesRendszer.Logic.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\bin\Debug\net8.0\AutoBerlesRendszer.Logic.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\bin\Debug\net8.0\AutoBerlesRendszer.Data.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\bin\Debug\net8.0\AutoBerlesRendszer.Repository.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\bin\Debug\net8.0\AutoBerlesRendszer.Data.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\bin\Debug\net8.0\AutoBerlesRendszer.Repository.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\obj\Debug\net8.0\AutoBerlesRendszer.Logic.csproj.AssemblyReference.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\obj\Debug\net8.0\AutoBerlesRendszer.Logic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\obj\Debug\net8.0\AutoBerlesRendszer.Logic.AssemblyInfoInputs.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\obj\Debug\net8.0\AutoBerlesRendszer.Logic.AssemblyInfo.cs
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\obj\Debug\net8.0\AutoBerlesRendszer.Logic.csproj.CoreCompileInputs.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\obj\Debug\net8.0\AutoBerl.6CDCB545.Up2Date
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\obj\Debug\net8.0\AutoBerlesRendszer.Logic.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\obj\Debug\net8.0\refint\AutoBerlesRendszer.Logic.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\obj\Debug\net8.0\AutoBerlesRendszer.Logic.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.Logic\obj\Debug\net8.0\ref\AutoBerlesRendszer.Logic.dll

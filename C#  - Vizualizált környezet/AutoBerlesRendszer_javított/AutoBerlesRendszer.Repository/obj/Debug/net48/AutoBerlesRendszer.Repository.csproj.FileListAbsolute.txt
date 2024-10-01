@@ -1,0 +1,24 @@
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\bin\Debug\net48\AutoBerlesRendszer.Repository.dll
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\bin\Debug\net48\AutoBerlesRendszer.Repository.pdb
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\bin\Debug\net48\AutoBerlesRendszer.Data.dll
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\bin\Debug\net48\AutoBerlesRendszer.Data.pdb
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.AssemblyInfo.cs
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.csproj.CopyComplete
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.dll
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\bin\Debug\net48\AutoBerlesRendszer.Repository.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\bin\Debug\net48\AutoBerlesRendszer.Repository.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\bin\Debug\net48\AutoBerlesRendszer.Data.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\bin\Debug\net48\AutoBerlesRendszer.Data.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.csproj.AssemblyReference.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.AssemblyInfoInputs.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.AssemblyInfo.cs
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.csproj.CoreCompileInputs.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerl.4BD17BC6.Up2Date
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.Repository\obj\Debug\net48\AutoBerlesRendszer.Repository.pdb

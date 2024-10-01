@@ -1,0 +1,51 @@
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.csproj.SuggestedBindingRedirects.cache
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\MainWindow.g.cs
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\App.g.cs
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI_MarkupCompile.cache
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI_MarkupCompile.lref
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.GUI.exe.config
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.GUI.exe
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.GUI.pdb
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Data.dll
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Logic.dll
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Repository.dll
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Data.pdb
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Logic.pdb
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Repository.pdb
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\MainWindow.baml
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.g.resources
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.Properties.Resources.resources
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.csproj.GenerateResource.cache
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.csproj.CopyComplete
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.exe
+C:\Users\user\Desktop\Neu\Asztali alk\113.RSZE_Asz_SZFT-Projektmunka-11948\Barabás Márk_80799_assignsubmission_file\AutoBerlesRendszer\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.GUI.exe.config
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.GUI.exe
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.GUI.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Data.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Logic.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Repository.dll
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Data.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Logic.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\AutoBerlesRendszer.Repository.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.csproj.AssemblyReference.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\MainWindow.g.cs
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\App.g.cs
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI_MarkupCompile.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI_MarkupCompile.lref
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\MainWindow.baml
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.g.resources
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.Properties.Resources.resources
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.csproj.GenerateResource.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.csproj.CoreCompileInputs.cache
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\AutoBerl.AD603F31.Up2Date
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.exe
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI.pdb
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\Autok.txt
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\Berles.txt
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\Felhasznalok.txt
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\Kategoriak.txt
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\bin\Debug\Szemely.txt
+C:\Users\barab\Desktop\AutoBerlesRendszer_javított\AutoBerlesRendszer.GUI\obj\Debug\AutoBerlesRendszer.GUI_Content.g.cs

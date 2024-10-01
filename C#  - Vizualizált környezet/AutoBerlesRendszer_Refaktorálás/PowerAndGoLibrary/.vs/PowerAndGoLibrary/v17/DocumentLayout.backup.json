@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\AutoBerlesRendszer_Refaktor\u00E1l\u00E1s\\PowerAndGoLibrary\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CF38E669-428E-4850-9DCA-99DE2354B990}|PowerAndGoLibrary\\PowerAndGoLibrary.csproj|c:\\users\\barab\\desktop\\ny\u00E1ri projekt tervek\\power-and-go\\c#  - vizualiz\u00E1lt k\u00F6rnyezet\\autoberlesrendszer_refaktor\u00E1l\u00E1s\\powerandgolibrary\\powerandgolibrary\\autok.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF38E669-428E-4850-9DCA-99DE2354B990}|PowerAndGoLibrary\\PowerAndGoLibrary.csproj|solutionrelative:powerandgolibrary\\autok.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF38E669-428E-4850-9DCA-99DE2354B990}|PowerAndGoLibrary\\PowerAndGoLibrary.csproj|c:\\users\\barab\\desktop\\ny\u00E1ri projekt tervek\\power-and-go\\c#  - vizualiz\u00E1lt k\u00F6rnyezet\\autoberlesrendszer_refaktor\u00E1l\u00E1s\\powerandgolibrary\\powerandgolibrary\\szemely.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF38E669-428E-4850-9DCA-99DE2354B990}|PowerAndGoLibrary\\PowerAndGoLibrary.csproj|solutionrelative:powerandgolibrary\\szemely.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF38E669-428E-4850-9DCA-99DE2354B990}|PowerAndGoLibrary\\PowerAndGoLibrary.csproj|c:\\users\\barab\\desktop\\ny\u00E1ri projekt tervek\\power-and-go\\c#  - vizualiz\u00E1lt k\u00F6rnyezet\\autoberlesrendszer_refaktor\u00E1l\u00E1s\\powerandgolibrary\\powerandgolibrary\\kategoriak.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF38E669-428E-4850-9DCA-99DE2354B990}|PowerAndGoLibrary\\PowerAndGoLibrary.csproj|solutionrelative:powerandgolibrary\\kategoriak.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF38E669-428E-4850-9DCA-99DE2354B990}|PowerAndGoLibrary\\PowerAndGoLibrary.csproj|c:\\users\\barab\\desktop\\ny\u00E1ri projekt tervek\\power-and-go\\c#  - vizualiz\u00E1lt k\u00F6rnyezet\\autoberlesrendszer_refaktor\u00E1l\u00E1s\\powerandgolibrary\\powerandgolibrary\\felhasznalok.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF38E669-428E-4850-9DCA-99DE2354B990}|PowerAndGoLibrary\\PowerAndGoLibrary.csproj|solutionrelative:powerandgolibrary\\felhasznalok.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF38E669-428E-4850-9DCA-99DE2354B990}|PowerAndGoLibrary\\PowerAndGoLibrary.csproj|c:\\users\\barab\\desktop\\ny\u00E1ri projekt tervek\\power-and-go\\c#  - vizualiz\u00E1lt k\u00F6rnyezet\\autoberlesrendszer_refaktor\u00E1l\u00E1s\\powerandgolibrary\\powerandgolibrary\\berles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF38E669-428E-4850-9DCA-99DE2354B990}|PowerAndGoLibrary\\PowerAndGoLibrary.csproj|solutionrelative:powerandgolibrary\\berles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 274,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Felhasznalok.cs",
+              "DocumentMoniker": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\AutoBerlesRendszer_Refaktor\u00E1l\u00E1s\\PowerAndGoLibrary\\PowerAndGoLibrary\\Felhasznalok.cs",
+              "RelativeDocumentMoniker": "PowerAndGoLibrary\\Felhasznalok.cs",
+              "ToolTip": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\AutoBerlesRendszer_Refaktor\u00E1l\u00E1s\\PowerAndGoLibrary\\PowerAndGoLibrary\\Felhasznalok.cs*",
+              "RelativeToolTip": "PowerAndGoLibrary\\Felhasznalok.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T10:22:44.245Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Kategoriak.cs",
+              "DocumentMoniker": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\AutoBerlesRendszer_Refaktor\u00E1l\u00E1s\\PowerAndGoLibrary\\PowerAndGoLibrary\\Kategoriak.cs",
+              "RelativeDocumentMoniker": "PowerAndGoLibrary\\Kategoriak.cs",
+              "ToolTip": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\AutoBerlesRendszer_Refaktor\u00E1l\u00E1s\\PowerAndGoLibrary\\PowerAndGoLibrary\\Kategoriak.cs*",
+              "RelativeToolTip": "PowerAndGoLibrary\\Kategoriak.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T10:22:38.823Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Szemely.cs",
+              "DocumentMoniker": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\AutoBerlesRendszer_Refaktor\u00E1l\u00E1s\\PowerAndGoLibrary\\PowerAndGoLibrary\\Szemely.cs",
+              "RelativeDocumentMoniker": "PowerAndGoLibrary\\Szemely.cs",
+              "ToolTip": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\AutoBerlesRendszer_Refaktor\u00E1l\u00E1s\\PowerAndGoLibrary\\PowerAndGoLibrary\\Szemely.cs*",
+              "RelativeToolTip": "PowerAndGoLibrary\\Szemely.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T10:22:34.353Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Berles.cs",
+              "DocumentMoniker": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\AutoBerlesRendszer_Refaktor\u00E1l\u00E1s\\PowerAndGoLibrary\\PowerAndGoLibrary\\Berles.cs",
+              "RelativeDocumentMoniker": "PowerAndGoLibrary\\Berles.cs",
+              "ToolTip": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\AutoBerlesRendszer_Refaktor\u00E1l\u00E1s\\PowerAndGoLibrary\\PowerAndGoLibrary\\Berles.cs*",
+              "RelativeToolTip": "PowerAndGoLibrary\\Berles.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T10:21:41.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Autok.cs",
+              "DocumentMoniker": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\AutoBerlesRendszer_Refaktor\u00E1l\u00E1s\\PowerAndGoLibrary\\PowerAndGoLibrary\\Autok.cs",
+              "RelativeDocumentMoniker": "PowerAndGoLibrary\\Autok.cs",
+              "ToolTip": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\AutoBerlesRendszer_Refaktor\u00E1l\u00E1s\\PowerAndGoLibrary\\PowerAndGoLibrary\\Autok.cs",
+              "RelativeToolTip": "PowerAndGoLibrary\\Autok.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-01T10:21:11.12Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

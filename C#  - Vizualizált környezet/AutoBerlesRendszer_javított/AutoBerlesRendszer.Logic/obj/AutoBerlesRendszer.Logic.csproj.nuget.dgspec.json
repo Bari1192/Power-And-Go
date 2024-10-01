@@ -1,0 +1,166 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Logic\\AutoBerlesRendszer.Logic.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Data\\AutoBerlesRendszer.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Data\\AutoBerlesRendszer.Data.csproj",
+        "projectName": "AutoBerlesRendszer.Data",
+        "projectPath": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Data\\AutoBerlesRendszer.Data.csproj",
+        "packagesPath": "C:\\Users\\barab\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\barab\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Logic\\AutoBerlesRendszer.Logic.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Logic\\AutoBerlesRendszer.Logic.csproj",
+        "projectName": "AutoBerlesRendszer.Logic",
+        "projectPath": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Logic\\AutoBerlesRendszer.Logic.csproj",
+        "packagesPath": "C:\\Users\\barab\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Logic\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\barab\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {
+              "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Data\\AutoBerlesRendszer.Data.csproj": {
+                "projectPath": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Data\\AutoBerlesRendszer.Data.csproj"
+              },
+              "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Repository\\AutoBerlesRendszer.Repository.csproj": {
+                "projectPath": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Repository\\AutoBerlesRendszer.Repository.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Repository\\AutoBerlesRendszer.Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Repository\\AutoBerlesRendszer.Repository.csproj",
+        "projectName": "AutoBerlesRendszer.Repository",
+        "projectPath": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Repository\\AutoBerlesRendszer.Repository.csproj",
+        "packagesPath": "C:\\Users\\barab\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Repository\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\barab\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {
+              "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Data\\AutoBerlesRendszer.Data.csproj": {
+                "projectPath": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer_javított\\AutoBerlesRendszer.Data\\AutoBerlesRendszer.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{87447E92-31CA-4909-800F-08841E863952}|AutoBerlesRendszer.Logic\\AutoBerlesRendszer.Logic.csproj|c:\\users\\barab\\desktop\\autoberlesrendszer\\autoberlesrendszer.logic\\autoberleslogika.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87447E92-31CA-4909-800F-08841E863952}|AutoBerlesRendszer.Logic\\AutoBerlesRendszer.Logic.csproj|solutionrelative:autoberlesrendszer.logic\\autoberleslogika.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D88DB926-01FB-48AF-8869-B0E50E0D6B3E}|AutoBerlesRendszer.CLI\\AutoBerlesRendszer.CLI.csproj|c:\\users\\barab\\desktop\\autoberlesrendszer\\autoberlesrendszer.cli\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D88DB926-01FB-48AF-8869-B0E50E0D6B3E}|AutoBerlesRendszer.CLI\\AutoBerlesRendszer.CLI.csproj|solutionrelative:autoberlesrendszer.cli\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AutoBerlesLogika.cs",
+              "DocumentMoniker": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer\\AutoBerlesRendszer.Logic\\AutoBerlesLogika.cs",
+              "RelativeDocumentMoniker": "AutoBerlesRendszer.Logic\\AutoBerlesLogika.cs",
+              "ToolTip": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer\\AutoBerlesRendszer.Logic\\AutoBerlesLogika.cs",
+              "RelativeToolTip": "AutoBerlesRendszer.Logic\\AutoBerlesLogika.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAMYAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T08:41:44.756Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer\\AutoBerlesRendszer.CLI\\Program.cs",
+              "RelativeDocumentMoniker": "AutoBerlesRendszer.CLI\\Program.cs",
+              "ToolTip": "C:\\Users\\barab\\Desktop\\AutoBerlesRendszer\\AutoBerlesRendszer.CLI\\Program.cs",
+              "RelativeToolTip": "AutoBerlesRendszer.CLI\\Program.cs",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAqwDcAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-12T08:31:40.721Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

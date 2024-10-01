@@ -1,0 +1,1 @@
+1. 	A REFAKTORIZÁLT környezet .Net 8.0 Framework keretrendszerben készült.
