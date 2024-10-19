@@ -1,0 +1,53 @@
+# # # Probléma felvetései és kérdései # # #
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# 1. 		A generálás sorrendjében követve az adatbázis szerkezeti felépítésének diagrammját, hogyan oldjuk meg az összekapcsolásokat, elsődleges / másodlagos 		kulcsok összefüggését?
+		Mivel a Személy táblának sorrendiségben hamarabb kell létrejönnie, mint a Felhasználok táblának, (Személy regisztráció ==> Felhasználó regisztráció) ezért:
+		# 1.1	Célszerű lenne előbb a Személy Táblához kapcsolódó összes adatot (pl. személyigazolvány szám, telefon, email stb.) legeneráltatni,
+
+1.1	# # # KIZÁRÁSOK ÉS KORLÁTOZÁSOK # # #
+
+	# 1.	Aktuális dátum MÍNUSZ 64 év lehet "Minimum" születési dátum && Aktuális dátum MÍNUSZ 18 év lehet a "legkésőbbi" születési dátum. Ezek között generál.
+	# 2.	TELEFON ==> Mivel az E164-es e-mail nem működik "magyarul", ezért faker + regex-szel csak 20/30/70-es előjelű + random számos telefonszám jöhet létre.
+	# 3.	E-MAIL ==> safeEmail(), ami BIZTOSAN nem létező, tesztkörnyezetre van kiépítve
+	# 4.	SZEMÉLYIKNÉL ==> Függvényben generálunk 2 betűt, továbbá 6 számot. Ezeket "összeillesztjük", majd 
+		# 4.1 ELLENŐRÍZZÜK, hogy biztosan ne lehessen ismétlődés [KULCS] miatt közöttük. || Ha van, akkor újat generálunk.
+	# 5. JOGOSÍTVÁNY "gyártása" függvény:
+		# 5.1 Jogosítványszámok számok ne ismétlődhessenek soha & Ne is egyezzenek egyetlen személyigazolvány számmal sem!
+		# 5.2 Mivel a jogosítványszámok formátumban egyeznek a Személyivel, mehet ugyanaz a formátum + ellenőrzés is megvan!
+		# 5.3 CLONE -ozzuk a kiállítás dátumát, hogy elkerüljük az eredeti $jogositvany_ervenyesseg értékének módosítását!
+			- Lemásolja a $jogositvany_ervenyesseg -et, hogy az eredeti dátumot ne módosítsa.
+			- modify('+10 years'): Hozzáadunk  +10 évet a dátumhoz, majd
+			- A format('Y-m-d')  az eredményt formázzuk 'év-hónap-nap' formátumban és ezt visszaadjuk.
+
+Az adatokat egy tömbbe gyűjtjük össze, majd a program két fájlformátum közül választva mentheti azokat:
+
+		# 1.	 CSV formátum: Ha a megadott fájlnév ".csv" végződésű, a program tabulált formában, pontosvesszővel elválasztva menti az adatokat egy CSV fájlba. A nevek, születési dátumok, telefonszámok stb. egymás után, megfelelő formázással kerülnek be a fájlba.
+
+		# 2. 	JSON formátum: Ha a megadott fájlnév ".json" végződésű, a program a generált adatokat JSON formátumban menti el. Az adatok könnyen olvasható és feldolgozható struktúrában kerülnek elmentésre.
+
+A program az adatokat egy szépen formázott JSON, vagy CSV formátumban exportálja a megadott névvel attól függően, milyen fájlformátumot választunk.
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+ 
+majd.....
+		# 1.2	Ezeket az adatokat később felhasználni a Felhasználók generálása során (behívni). Átadni a teljes elkészült JSON, vagy tömb formátumot, majd a 				felhasználók generálásakor megkapja a függvény, amikhez hozzá rendeli a:
+					- Felh. nevet,
+					- Előfizetési kat.
+					- Jelszó második & utolsó karakterét.
+
+# 2. 		Az autok generálásának kell lennie az első adatbázisnak, amit legeneráltatunk. A generálás sorrendjében követve az adatbázis szerkezeti felépítésének diagrammját, követnie kell a generálásban a:
+		# 1.1	KATEGÓRIÁK táblának, ahol figyelembe kell majd vennie az AUTOK .JSON / Array-t és úgy kiválasztania, hogy melyik KATEGÓRIA BESOROLÁST 				kapja meg. (A többi adatra nem lesz így szükség)
+		# 1.2	FELSZERELTSÉG táblának követnie kell azt, hogy az adott autó:
+					- Melyik márkához tartozik?
+					- Mekkora a teljesítménye?
+					- Azon belül "mekkora eséllyel" legyen teljesen vagy részben felszerelt
+		# 1.2.1 				Az autók FELSZERELTSÉGEI lehetnek:
+								- Tolatókamera
+								- Multifunkcionális Kormány
+								- Sávtartó
+								- Tempómat
+
+
+

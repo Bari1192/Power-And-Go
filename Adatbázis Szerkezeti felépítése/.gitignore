@@ -1,0 +1,24 @@
+vendor
+.sql
+docker-compose.override.yml
+.env
+/.docker
+*.log
+*.log.*
+.idea/
+.vscode/
+*.swp
+*.swo
+/node_modules/
+/public/storage
+/storage/*.key
+.env.testing
+/vendor/composer/autoload_classmap.php
+/vendor/composer/autoload_real.php
+/var/
+/app/cache/
+/app/logs/
+Thumbs.db
+desktop.ini
+### Mac esetében még: ###
+.DS_Store

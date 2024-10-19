@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PowerAndGo_CLI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9bdfd87a05cf247a26b740781c8d8831f80711b3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a3b2f804433d3c14f3e1e3e5b72036171a0aee21")]
 [assembly: System.Reflection.AssemblyProductAttribute("PowerAndGo_CLI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PowerAndGo_CLI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
