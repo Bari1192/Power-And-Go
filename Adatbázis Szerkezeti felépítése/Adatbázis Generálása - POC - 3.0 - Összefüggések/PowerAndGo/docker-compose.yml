@@ -1,0 +1,10 @@
+version: '3'
+services:
+  app:
+    build: .
+    volumes:
+      - ./src/output:/app/src/output 
+    working_dir: /app
+    command: php szemely_generator.php 10 csv
+
+    # Lokálisan is csapja hozzá az src/output mappát, hogy lássuk a kimeneti fájlokat!

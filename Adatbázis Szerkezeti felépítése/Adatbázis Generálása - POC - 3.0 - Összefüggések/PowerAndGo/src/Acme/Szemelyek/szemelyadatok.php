@@ -1,16 +1,19 @@
 <?php
 declare(strict_types=1);
-error_reporting(E_ALL);
+
+namespace Acme\Szemelyek;
 
 # Azonosító [id] számot nem itt kap!
 # jogositvany_szama, jogositvany_ervenyesseg, jogositvany_lejarata, V_nev, K_nev, Szig_szam, felh_jelszo, szul_datum, telefon, email
 
-class Szemely{
+class Szemely
+{
+    private int $azonosito;
     private string $V_nev;
     private string $K_nev;
     private \DateTime $szul_datum;
     private string $telefon;
-    private string $email; 
+    private string $email;
     private string $Szig_szam;
     private string $jogositvany_szama;
     private \DateTime $jogositvany_ervenyesseg;
@@ -19,8 +22,9 @@ class Szemely{
     private string $felh_jelszo_megegyszer;
 
 
-    public function __construct(string $jogositvany_szama, \DateTime $jogositvany_ervenyesseg, \DateTime $jogositvany_lejarata, string $V_nev, string $K_nev, string $Szig_szam, string $felh_jelszo, \DateTime $szul_datum, string $telefon, string $email, string $felh_jelszo_megegyszer)
+    public function __construct(int $azonosito, string $jogositvany_szama, \DateTime $jogositvany_ervenyesseg, \DateTime $jogositvany_lejarata, string $V_nev, string $K_nev, string $Szig_szam, string $felh_jelszo, \DateTime $szul_datum, string $telefon, string $email, string $felh_jelszo_megegyszer)
     {
+        $this->azonosito = $azonosito;
         $this->jogositvany_szama = $jogositvany_szama;
         $this->jogositvany_ervenyesseg = $jogositvany_ervenyesseg;
         $this->jogositvany_lejarata = $jogositvany_lejarata;
@@ -31,7 +35,11 @@ class Szemely{
         $this->szul_datum = $szul_datum;
         $this->telefon = $telefon;
         $this->email = $email;
-        $this->felh_jelszo_megegyszer=$felh_jelszo_megegyszer;
+        $this->felh_jelszo_megegyszer = $felh_jelszo_megegyszer;
+    }
+    function getAzonosito(): int
+    {
+        return $this->azonosito;
     }
     public function getJogsi(): string
     {
@@ -65,11 +73,12 @@ class Szemely{
     {
         return $this->felh_jelszo;
     }
-    public function getFelhJelszoUjra(): string{
+    public function getFelhJelszoUjra(): string
+    {
         if ($this->felh_jelszo === $this->felh_jelszo_megegyszer) {
             return $this->felh_jelszo_megegyszer;
-        }else{
-            echo"A Megadott jelszavak nem egyeznek!";
+        } else {
+            echo "A Megadott jelszavak nem egyeznek!";
             return ''; // Üres string ha nem egyezik!
         }
     }
