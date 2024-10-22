@@ -37,8 +37,43 @@ majd.....
 					- Előfizetési kat.
 					- Jelszó második & utolsó karakterét.
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+- Docker fájl átírása:
+- Fájlok másolása / bash indítás alap legyen / 
+
 # 2. 		Az autok generálásának kell lennie az első adatbázisnak, amit legeneráltatunk. A generálás sorrendjében követve az adatbázis szerkezeti felépítésének diagrammját, követnie kell a generálásban a:
+
+sulyozott auto generátornál:
+# 1 Sulyozott_autok .csv VAGY .Json néven jön létre
+# 2 random generálásnál autok .csv VAGY .Json néven jön létre.
+# Felhasználónevek ismétlődés nélkül - 2 féle képpen - EGYEDIKÉNT [no-repeat] generálja.
+
+### AUTO GENERÁTORBA BEKERÜLT MÉG ###
+- Km óra állása:
+	#     Gyártási év alapján cirka mennyi km. legyen benne. (
+	# 	Ha 2023 utáni autó kerül hozzáadásra, a rendszer automatikusan 0 kilométerrel RÖGZÍTI!
+	# 	Sulyozott & Random-ban is beépítésre került.
+
+
+
+
 		# 1.1	KATEGÓRIÁK táblának, ahol figyelembe kell majd vennie az AUTOK .JSON / Array-t és úgy kiválasztania, hogy melyik KATEGÓRIA BESOROLÁST 				kapja meg. (A többi adatra nem lesz így szükség)
+
+Megoldási út:
+autokból generáltatnom kell egy külön csv/json fájlt, mint az előbbiekben, csak:
+- Le kell tárolnom az adott auto rendszámát,
+- A modell típus-t
+- A besorolási számát (1-2-3-4-5) attól függően, hogy 18,36,45,50 vagy 60 kw-os az akksija. 
+
+Az autók generálásakor ezt párhuzamosan kell megtennem (hasonlóan, mint a szemely & felhasználók generálasakor)
+
+# # # KÉSZ # # #
+	# Autók generálásakor legenerálja a kategóriákat is RENDSZÁM [PK]-val azonosíthatóak.
+	# Tárolja az autó  Rendszámát, Típusát, és a BESOROLÁSI SZÁMÁT.
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
 		# 1.2	FELSZERELTSÉG táblának követnie kell azt, hogy az adott autó:
 					- Melyik márkához tartozik?
 					- Mekkora a teljesítménye?
@@ -48,6 +83,48 @@ majd.....
 								- Multifunkcionális Kormány
 								- Sávtartó
 								- Tempómat
+# # # KÉSZ # # #
+	- Felszereltség generálása a besorolásuk illetve a gyártó alapján történik.
+	- 18 kW esetén 50%-ban teljes felszereltség, 50%-ban részleges
+        - 36 kW esetén 80%-ban teljes felszereltség, 20%-ban részleges
+        - Minden más esetben teljes felszereltség
+	- Ahol az adott autó nem rendelkezik a meghatározott felszereltséggel, ott "Nincs" szó szerepel az adott részben.[oszlopban]
+	- Az Autok & Kategoriak & Felszereltség most már együtt generálódik le és 3 külön CSV / JSON fájl jön létre az Autogenerálás futtatásakor.
 
 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # B É R L É S E K  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+Nah most ugrik a majom a vízbe....
+Ugyanúgy el kell készíteni egy "Lezárt_Bérlések Class -t" és a  "Lezárt_Bérlések_generátort", aminek tartalmaznia kell:
+- Berles azonosítót [id],
+- A Bérléshez használt autó rendszámát (amivel a bérlés volt),
+- Az autonak a Kategoria besorolását,
+- A bérlés kezdeti dátumát (percre, másodpercre pontosan)
+- A bérlés végének dátumát (percre, másodpercre pontosan)
+- A felhasználó nevét (felh_nev)
+
+Úgy kell ezzel külön generálnunk adatsorokat, hogy:
+- A bérlések 85%- random 1perc és 1 óra között legyenek. [A bérlés kezdeti dátuma és A bérlés végének dátuma között]
+- A bérlések 15%- random 1nap és 3 nap között legyenek.[A bérlés kezdeti dátuma és A bérlés végének dátuma között]
+- Rendszám ÉS Dátum alapján figyelembevéve, hogy NEM LEHET ismétlődés!!! 
+	# 	Azaz azonos rendszámú autót azonos időpontba, párhuzamosan nem bérelhetnek többen.
+- Az adott autó kibérlések között (ha ugyanaz a rendszám) nem lehet másodpercre pontosan egy másik felhasználó által kibérelve!!!
+	# 	Ilyen esetben random 5 perc - 1óra különbözetet generáljunk közéjük.
+
+Legenerálódás folyamata:
+	# 1.	Autok+Kategóriabesorolások+Felszereltség
+	# 2. A Személy, Felhasználok
+	# 3.	A lezárt bérlések generáása ezekre!
+
+Összességében lezárt (mai nap végdátummal) bérléseket generálunk az autókra (nem mindre, random).
+
+
+KEZELNI KELL MÉG / HIBA:
+	1. 	Idézőjelek 	" 	"  Dátumok között (lezárt bérlések)[.csv]
+	1. 	Idézőjelek 	" 	"  Vezeték és Keresztnév előtt-után (szemelyek)[.csv]
+
+TESZTEK:
+- JSON-ben sikeresen generál mindent.
+- CSV-ben is sikeresen generál mindent.
+- Külön-külön is használhatóak, nem kell mind2 formátumban!
 

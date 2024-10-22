@@ -30,7 +30,11 @@ namespace PowerAndGoLibrary
         {
             teljesitmenyCsoportok = OsszegyujtTeljesitmenyek(Path.Combine(fajlhelye, "Autok.txt"));
 
-            autok = File.ReadLines(Path.Combine(fajlhelye, "Autok.txt")).Select(sor => Autok.BeolvasEsKategorizal(sor, teljesitmenyCsoportok)).Where(x => x != null).Select(x => x!).ToList(); berlesek = File.ReadLines(Path.Combine(fajlhelye, "Berles.txt")).Select(Berles.Beolvasas).Where(x => x != null).Select(x => x!).ToList();
+            autok = File.ReadLines(Path.Combine(fajlhelye, "Autok.csv"))
+                .Select(sor => Autok.BeolvasEsKategorizal(sor, teljesitmenyCsoportok))
+                .Where(x => x != null)
+                .Select(x => x!).ToList();
+            berlesek = File.ReadLines(Path.Combine(fajlhelye, "Berles.txt")).Select(Berles.Beolvasas).Where(x => x != null).Select(x => x!).ToList();
             felhasznalok = File.ReadLines(Path.Combine(fajlhelye, "Felhasznalok.txt")).Select(Felhasznalok.Beolvasas).Where(x => x != null).Select(x => x!).ToList();
             kategoriak = File.ReadLines(Path.Combine(fajlhelye, "Kategoriak.txt")).Select(Kategoriak.Beolvasas).Where(x => x != null).Select(x => x!).ToList();
             szemelyek = File.ReadLines(Path.Combine(fajlhelye, "Szemely.txt")).Select(Szemely.Beolvasas).Where(x => x != null).Select(x => x!).ToList();
