@@ -1,0 +1,42 @@
+services:
+  composer_install:
+    build: .
+    working_dir: /app
+    command: /bin/sh -c "composer install && tail -f /dev/null"
+    volumes:
+      - .:/app
+    healthcheck:
+      test: ["CMD", "test", "-f", "/app/vendor/autoload.php"]
+      interval: 5s
+      timeout: 30s
+      retries: 10
+
+  autok_generalasa:
+    build: .
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ["/bin/sh", "-c", "while [ ! -f /app/vendor/autoload.php ]; do sleep 1; done; php auto_generator.php 450 csv"]
+    depends_on:
+      composer_install:
+        condition: service_healthy
+
+  szemely_generalasa:
+    build: .
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ["/bin/sh", "-c", "while [ ! -f /app/vendor/autoload.php ]; do sleep 1; done;
+     php szemely_generator.php 1000 csv"]
+    depends_on:
+      - autok_generalasa
+
+  lezart_berles_generator:
+    build: .
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: ["/bin/sh", "-c", "while [ ! -f /app/vendor/autoload.php ]; do sleep 1; done;
+     php lezart_berlesek_generator.php 2750 csv"]
+    depends_on:
+      - szemely_generalasa

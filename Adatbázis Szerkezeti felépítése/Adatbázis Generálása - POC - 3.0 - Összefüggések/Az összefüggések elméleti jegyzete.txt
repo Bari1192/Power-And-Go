@@ -119,12 +119,39 @@ Legenerálódás folyamata:
 Összességében lezárt (mai nap végdátummal) bérléseket generálunk az autókra (nem mindre, random).
 
 
-KEZELNI KELL MÉG / HIBA:
-	1. 	Idézőjelek 	" 	"  Dátumok között (lezárt bérlések)[.csv]
-	1. 	Idézőjelek 	" 	"  Vezeték és Keresztnév előtt-után (szemelyek)[.csv]
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # T Á B L Á K  # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+AUTOK 			 ||	Gyarto;	Tipus;	Teljesitmeny;	Vegsebesseg;	Gumimeret;	Hatótav;	Rendszam;	Gyartasi_ev;		Km_ora_allas
+FELHASZNÁLÓK || 	id;	Felhasználónév;	Jelszó;	"Előfizetési Kategória"
 
-TESZTEK:
+
+UNIT-TESZTEK:
+	#  felhasznalonev-ben NEM lehet ékezet!			KESZ | TESZTELT
+	#  V_nev & K_nev külön van szedve. Majd az adatokat kezelő programban lesz egyben (ha kell).		KESZ | TESZTELT
+	#  Tabla neve ékezet nélkül! (felhasznalok)	KESZ | TESZTELT
+	# Lezárt bérléseknék a bérlés kezdetét / végét is külön bontani:
+		# Dátum - év / hó / nap												KESZ | TESZTELT
+		# Dátum - óra-perc-mp												KESZ | TESZTELT
+		##	kezdet / vég változók külön-külön 2 változóra bontva!				KESZ | TESZTELT
+		##	kezdet / vég változók FÁJLBAN is külön-külön 2 változóra bontva!	KESZ | TESZTELT
+	# 	Idézőjelek 	" 	"  Dátumok között (lezárt bérlések)[.csv] 				MEGOLDVA | TESZTELT
+	# 	Idézőjelek 	" 	"  Vezeték és Keresztnév előtt-után (szemelyek)[.csv]	MEGOLDVA | TESZTELT
+	# 	Idézőjelek 	" 	"  FEJLEC jelölese	 (szemelyek)[.csv]				MEGOLDVA | TESZTELT
+
+MODUL-TESZTEK - KÉSZEN:
 - JSON-ben sikeresen generál mindent.
 - CSV-ben is sikeresen generál mindent.
 - Külön-külön is használhatóak, nem kell mind2 formátumban!
+- 	Személyek esetében HOZZÁFŰZ, nem ír felül adatokat. Ezeket minden táblára érvényesítsük!	KESZ | TESZTELT
+- 	1 havi lezárt bérléseken túl ==> 3 havi | 6 havi | 1 ÉVES bérlések. 		KESZ | TESZTELT
+
+A program első futásakor a 3 generátor automatikusan elinduljon például:
+- 450 auto_generator (adatsort) generáljon .csv-ben
+- 250 szemely_generator (adatsort) generáljon .csv-ben
+- 100 lezart_berles_generator (adatsort) generáljon .csv-ben
+
+# Yaml  és a Dockerfile fájl is átírásra került annak érdekében, hogy a teljes program "egy-kódos" megoldással futtatható legyen.
+# A gyökérmappába lépve futtasd az alábbi parancsot:
+		docker compose up --build
+# Az elkészült .csv fájlokat az src/output mappában találod.
+
 

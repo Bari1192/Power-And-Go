@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Acme\\": "src/Acme/"
+        }
+    },
+    "require": {
+        "fakerphp/faker": "^1.23"
+    }
+}
