@@ -1,0 +1,12 @@
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\bin\Debug\net8.0\PowerAndGo.deps.json
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\bin\Debug\net8.0\PowerAndGo.dll
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\bin\Debug\net8.0\PowerAndGo.pdb
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\obj\Debug\net8.0\PowerAndGo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\obj\Debug\net8.0\PowerAndGo.AssemblyInfoInputs.cache
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\obj\Debug\net8.0\PowerAndGo.AssemblyInfo.cs
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\obj\Debug\net8.0\PowerAndGo.csproj.CoreCompileInputs.cache
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\obj\Debug\net8.0\PowerAndGo.sourcelink.json
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\obj\Debug\net8.0\PowerAndGo.dll
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\obj\Debug\net8.0\refint\PowerAndGo.dll
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\obj\Debug\net8.0\PowerAndGo.pdb
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGo\obj\Debug\net8.0\ref\PowerAndGo.dll

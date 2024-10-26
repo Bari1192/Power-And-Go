@@ -1,0 +1,7 @@
+lezart_berlesek_generator.php 3750 db - elmúlt 2 évben
+
+auto_generator.php 550
+
+szemely_generator.php 1450
+
+
