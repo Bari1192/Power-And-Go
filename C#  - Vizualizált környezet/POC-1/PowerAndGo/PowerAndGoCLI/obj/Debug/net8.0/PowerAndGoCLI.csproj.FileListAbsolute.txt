@@ -17,3 +17,9 @@ C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált kö
 C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGoCLI\obj\Debug\net8.0\PowerAndGoCLI.pdb
 C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGoCLI\obj\Debug\net8.0\PowerAndGoCLI.genruntimeconfig.cache
 C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGoCLI\obj\Debug\net8.0\ref\PowerAndGoCLI.dll
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGoCLI\bin\Debug\net8.0\input\autok.csv
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGoCLI\bin\Debug\net8.0\input\felhasznalok.csv
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGoCLI\bin\Debug\net8.0\input\felszereltsegek.csv
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGoCLI\bin\Debug\net8.0\input\kategoriak.csv
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGoCLI\bin\Debug\net8.0\input\lezart_berlesek.csv
+C:\Users\barab\Desktop\Nyári Projekt Tervek\Power-And-Go\C#  - Vizualizált környezet\POC-1\PowerAndGo\PowerAndGoCLI\bin\Debug\net8.0\input\szemelyek.csv

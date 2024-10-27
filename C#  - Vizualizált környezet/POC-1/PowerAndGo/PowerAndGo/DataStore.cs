@@ -8,32 +8,50 @@ namespace PowerAndGo
 {
     public class DataStore
     {
-        readonly List<Auto> autok;
-        readonly List<Felszereltseg> felszereltseg;
-        readonly List<Kategoria> kategoriak;
-        readonly List<Szemely> szemelyek;
-        readonly List<Felhasznalo> felhasznalok;
-        readonly List<Lezart_berles> lezart_Berlesek;
-        public IEnumerable<Lezart_berles> Lezart_Berlesek => lezart_Berlesek;
-        public IEnumerable<Felhasznalo> Felhasznalok => felhasznalok;
+        // ##   Listák a fájltípusokhoz  ## \\
+        readonly List<Auto> autok = new();
+        readonly List<Felszereltseg> felszereltseg = new();
+        readonly List<Kategoria> kategoriak = new();
+        readonly List<Szemely> szemelyek = new();
+        readonly List<Felhasznalo> felhasznalok = new();
+        readonly List<Lezart_berles> lezart_Berlesek = new();
 
-        public IEnumerable<Szemely> Szemelyek => szemelyek;
-        public IEnumerable<Kategoria> Kategoriak => kategoriak;
-        public IEnumerable<Felszereltseg> Felszereltsegek => felszereltseg;
+        // Publikus Interface hozzáférések \\
         public IEnumerable<Auto> Autok => autok;
+        public IEnumerable<Felszereltseg> Felszereltsegek => felszereltseg;
+        public IEnumerable<Kategoria> Kategoriak => kategoriak;
+        public IEnumerable<Szemely> Szemelyek => szemelyek;
+        public IEnumerable<Felhasznalo> Felhasznalok => felhasznalok;
+        public IEnumerable<Lezart_berles> Lezart_Berlesek => lezart_Berlesek;
 
 
         private DataStore(string fajlhelye)
         {
-            autok = File.ReadLines(Path.Combine(fajlhelye, "Auto.cs")).Select(Auto.Beolvasas).Where(x => x != null).Select(x => x!).ToList();
-            felszereltseg = File.ReadLines(Path.Combine(fajlhelye, "Felszereltseg.cs")).Select(Felszereltseg.Beolvasas).Where(x => x != null).Select(x => x!).ToList();
-            kategoriak = File.ReadLines(Path.Combine(fajlhelye, "Kategoria.cs")).Select(Kategoria.Beolvasas).Where(x => x != null).Select(x => x!).ToList();
-            szemelyek = File.ReadLines(Path.Combine(fajlhelye, "Szemely.cs")).Select(Szemely.Beolvasas).Where(x => x != null).Select(x => x!).ToList();
-            felhasznalok = File.ReadLines(Path.Combine(fajlhelye, "Felhasznalo.cs")).Select(Felhasznalo.Beolvasas).Where(x => x != null).Select(x => x!).ToList();
-            lezart_Berlesek = File.ReadLines(Path.Combine(fajlhelye, "Lezart_berles.cs")).Select(Lezart_berles.Beolvasas).Where(x => x != null).Select(x => x!).ToList();
-
-        } // DataStore Class Lezárása
-
-        public DataStore Beolvasas(string directory = "input") => new(directory);
+            Parallel.Invoke(
+                () => FajlBeolvasasok(Path.Combine(fajlhelye, "autok.csv"), autok, Auto.Beolvasas),
+                () => FajlBeolvasasok(Path.Combine(fajlhelye, "felszereltsegek.csv"), felszereltseg, Felszereltseg.Beolvasas),
+                () => FajlBeolvasasok(Path.Combine(fajlhelye, "kategoriak.csv"), kategoriak, Kategoria.Beolvasas),
+                () => FajlBeolvasasok(Path.Combine(fajlhelye, "szemelyek.csv"), szemelyek, Szemely.Beolvasas),
+                () => FajlBeolvasasok(Path.Combine(fajlhelye, "felhasznalok.csv"), felhasznalok, Felhasznalo.Beolvasas),
+                () => FajlBeolvasasok(Path.Combine(fajlhelye, "lezart_berlesek.csv"), lezart_Berlesek, Lezart_berles.Beolvasas)
+            );
+        }
+        private void FajlBeolvasasok<T>(string filePath, List<T> lista, Func<string, T?> parseFunc) where T : class
+        {
+            using (var reader = new StreamReader(filePath))
+            {
+                reader.ReadLine(); // Fejléc egyikhez sem kell \\
+                string? sor;
+                while ((sor = reader.ReadLine()) != null)
+                {
+                    var elem = parseFunc(sor); // Beolvasás függvényt hívja meg az adott osztályon belül. \\
+                    if (elem != null)
+                    {
+                        lista.Add(elem);
+                    }
+                }
+            }
+        }
+        public static DataStore Beolvasas(string directory = "input") => new(directory);
     }
 }

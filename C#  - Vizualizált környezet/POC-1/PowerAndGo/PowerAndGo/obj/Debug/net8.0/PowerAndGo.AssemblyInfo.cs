@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PowerAndGo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a55e043e9dea99115b9fd807f3c83d8f554d924")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4fff5fa47fe30324d3299bb3c68dcbe4e3b416ab")]
 [assembly: System.Reflection.AssemblyProductAttribute("PowerAndGo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PowerAndGo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

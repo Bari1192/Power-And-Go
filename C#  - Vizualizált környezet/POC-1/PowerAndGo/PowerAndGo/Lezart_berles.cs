@@ -14,16 +14,15 @@ namespace PowerAndGo
             var tordelo = sor.Split(';');
             try
             {
-                tordelo.Skip(1);
                 return new Lezart_berles(
                     int.Parse(tordelo[0]),
                     tordelo[1],
                     int.Parse(tordelo[2]),
-                    DateOnly.Parse(tordelo[4]),
-                    TimeOnly.Parse(tordelo[5]),
-                    DateOnly.Parse(tordelo[6]),
-                    TimeOnly.Parse(tordelo[7]),
-                    tordelo[8]
+                    DateOnly.Parse(tordelo[3]),
+                    TimeOnly.Parse(tordelo[4]),
+                    DateOnly.Parse(tordelo[5]),
+                    TimeOnly.Parse(tordelo[6]),
+                    tordelo[7]
                     );
             }
             catch { return null; }

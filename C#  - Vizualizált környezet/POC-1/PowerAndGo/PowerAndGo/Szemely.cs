@@ -12,7 +12,6 @@ namespace PowerAndGo
         public static Szemely? Beolvasas(string sor)
         {
             var tordelo = sor.Split(';');
-            tordelo.Skip(1);
             try
             {
                 return new Szemely(

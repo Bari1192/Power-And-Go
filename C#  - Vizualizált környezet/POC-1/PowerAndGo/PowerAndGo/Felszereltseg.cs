@@ -12,7 +12,6 @@ namespace PowerAndGo
         public static Felszereltseg? Beolvasas(string sor)
         {
             var tordelo = sor.Split(';');
-            tordelo.Skip(1);
             try
             {
                 return new Felszereltseg(

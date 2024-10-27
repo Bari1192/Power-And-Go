@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace PowerAndGo
 {
-    public record Kategoria(int Rendszam, string Tipus, int Besorolas)
+    public record Kategoria(string Rendszam, string Tipus, int Besorolas)
     {
         public static Kategoria? Beolvasas(string sor)
         {
             var tordelo = sor.Split(';');
-            tordelo.Skip(1);
             try
             {
                 return new Kategoria(
-                    int.Parse(tordelo[0]),
                     tordelo[0],
+                    tordelo[1],
                     int.Parse(tordelo[2])
                     );
             }
