@@ -21,7 +21,7 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 351,
+          "DockedWidth": 415,
           "SelectedChildIndex": 1,
           "Children": [
             {
@@ -35,8 +35,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-26T16:38:48.864Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -46,18 +45,12 @@
               "RelativeDocumentMoniker": "PowerAndGoCLI\\Program.cs",
               "ToolTip": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\POC-1\\PowerAndGo\\PowerAndGoCLI\\Program.cs",
               "RelativeToolTip": "PowerAndGoCLI\\Program.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAAACsAAABQAAAAAAAAAA==",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAAALcAAAB0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-27T15:06:29.138Z",
               "IsPinned": true,
               "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 197,
-          "SelectedChildIndex": 0,
-          "Children": [
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
@@ -68,7 +61,7 @@
               "RelativeToolTip": "PowerAndGo\\input\\autok.csv",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
-              "WhenOpened": "2024-10-27T17:10:01.531Z",
+              "WhenOpened": "2024-10-28T16:40:43.263Z",
               "EditorCaption": ""
             }
           ]

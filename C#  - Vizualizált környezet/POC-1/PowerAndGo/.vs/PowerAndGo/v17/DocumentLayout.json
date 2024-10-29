@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{566543ED-1835-4FFD-A294-4DC4B2D3542B}|PowerAndGoCLI\\PowerAndGoCLI.csproj|solutionrelative:powerandgocli\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{04C926B5-8EC3-4EB0-BC16-DCA63BE23D31}|PowerAndGo\\PowerAndGo.csproj|c:\\users\\barab\\desktop\\ny\u00E1ri projekt tervek\\power-and-go\\c#  - vizualiz\u00E1lt k\u00F6rnyezet\\poc-1\\powerandgo\\powerandgo\\input\\autok.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{04C926B5-8EC3-4EB0-BC16-DCA63BE23D31}|PowerAndGo\\PowerAndGo.csproj|solutionrelative:powerandgo\\input\\autok.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{04C926B5-8EC3-4EB0-BC16-DCA63BE23D31}|PowerAndGo\\PowerAndGo.csproj|c:\\users\\barab\\desktop\\ny\u00E1ri projekt tervek\\power-and-go\\c#  - vizualiz\u00E1lt k\u00F6rnyezet\\poc-1\\powerandgo\\powerandgo\\datastore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{04C926B5-8EC3-4EB0-BC16-DCA63BE23D31}|PowerAndGo\\PowerAndGo.csproj|solutionrelative:powerandgo\\datastore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -17,12 +21,12 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 351,
+          "DockedWidth": 415,
           "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "DataStore.cs",
               "DocumentMoniker": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\POC-1\\PowerAndGo\\PowerAndGo\\DataStore.cs",
               "RelativeDocumentMoniker": "PowerAndGo\\DataStore.cs",
@@ -31,8 +35,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-26T16:38:48.864Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -42,10 +45,23 @@
               "RelativeDocumentMoniker": "PowerAndGoCLI\\Program.cs",
               "ToolTip": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\POC-1\\PowerAndGo\\PowerAndGoCLI\\Program.cs",
               "RelativeToolTip": "PowerAndGoCLI\\Program.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAkwE4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAK8AAAAAAAAAAAAAAMoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-27T15:06:29.138Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "autok.csv",
+              "DocumentMoniker": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\POC-1\\PowerAndGo\\PowerAndGo\\input\\autok.csv",
+              "RelativeDocumentMoniker": "PowerAndGo\\input\\autok.csv",
+              "ToolTip": "C:\\Users\\barab\\Desktop\\Ny\u00E1ri Projekt Tervek\\Power-And-Go\\C#  - Vizualiz\u00E1lt k\u00F6rnyezet\\POC-1\\PowerAndGo\\PowerAndGo\\input\\autok.csv",
+              "RelativeToolTip": "PowerAndGo\\input\\autok.csv",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2024-10-28T16:40:43.263Z",
               "EditorCaption": ""
             }
           ]

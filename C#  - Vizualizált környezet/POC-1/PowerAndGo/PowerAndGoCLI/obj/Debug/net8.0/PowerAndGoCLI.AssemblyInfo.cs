@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PowerAndGoCLI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4fff5fa47fe30324d3299bb3c68dcbe4e3b416ab")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d8be3369469de8bb247376f842c2d9c62111a5a")]
 [assembly: System.Reflection.AssemblyProductAttribute("PowerAndGoCLI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PowerAndGoCLI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
