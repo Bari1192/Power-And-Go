@@ -1,0 +1,37 @@
+networks:
+  fullstack:
+
+services:
+  proxy:
+    image: nginx:1.26-alpine3.19
+    depends_on:
+      - jsonserver
+    networks:
+      - fullstack
+    ports:
+      - 80:80
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./proxy/conf.d:/etc/nginx/conf.d:ro
+
+  frontend:
+    image: idomi27/vue
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app:rw
+    networks:
+      - fullstack
+
+  jsonserver:
+    image: idomi27/json-server
+    build:
+      context: ./jsonserver
+      dockerfile: Dockerfile
+    networks:
+      - fullstack
+    volumes:
+      - ./jsonserver:/app
+      - /app/node_modules
+  

@@ -1,0 +1,4404 @@
+{
+    "vehicle_specs":[
+        {
+            "Rendszam": "AAAC-436",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PFB-333",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAN-407",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TDB-450",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-553",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RGW-157",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PGB-624",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NUM-248",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAO-438",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NOS-448",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACN-530",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAB-840",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TIC-261",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABN-951",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RET-812",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PGM-847",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NHS-517",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SIQ-672",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAE-180",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABB-073",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAM-592",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TJC-968",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SXT-516",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PFH-973",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-824",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-415",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAK-013",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-765",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABA-882",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RNN-789",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "THL-803",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MEM-535",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAO-532",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAK-872",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACN-859",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACJ-429",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MQX-106",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACB-521",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MKM-210",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SSC-045",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SCY-472",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NNQ-379",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RRR-152",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-207",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-774",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PLW-971",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-236",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAN-696",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABB-660",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NAH-789",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RIO-734",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACN-811",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PKB-975",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABC-058",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAI-792",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACE-768",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-908",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAL-143",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABE-688",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACE-104",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NYV-132",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACO-443",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-034",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PAU-500",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABH-098",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAA-664",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RJT-885",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SBZ-411",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABD-151",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACO-739",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAO-345",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TWD-492",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACF-685",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABF-410",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MOT-629",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SER-169",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACL-668",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RSQ-545",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MJC-561",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SIB-572",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABD-650",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NAI-301",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NYL-369",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACK-020",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABL-795",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAD-898",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SES-579",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACB-061",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACE-465",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABM-301",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "STQ-967",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABO-909",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAA-317",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RNE-411",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABM-700",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-705",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MRX-129",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAH-814",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABC-245",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACL-215",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TVB-726",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABM-771",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACL-491",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAH-068",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NXU-381",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TDO-453",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RFV-296",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACJ-936",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PRP-861",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TDW-852",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-426",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SUL-169",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACN-504",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "STQ-636",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RVX-006",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MRA-272",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACE-752",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACA-328",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACL-920",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-157",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACG-978",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NLX-809",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACA-515",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAM-459",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACA-075",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SAA-100",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PTV-733",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABM-718",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SFX-625",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAI-190",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NEG-829",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SVH-429",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TAI-172",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PTN-188",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TTQ-861",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TPR-268",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACL-017",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAC-253",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABF-777",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACH-846",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PGG-470",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABA-571",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PML-974",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABE-336",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MVE-654",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TIB-187",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RAR-336",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABB-092",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PNX-464",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAC-029",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TVJ-235",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NZJ-112",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RGG-731",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NGB-541",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACI-519",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABC-858",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NAB-598",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NEX-643",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABB-673",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NUT-215",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TJQ-371",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MEY-432",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABG-395",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MSR-023",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACD-066",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABJ-733",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NDQ-140",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MJS-498",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAE-752",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TLW-993",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TFY-544",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PFU-719",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACA-061",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABN-678",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAN-427",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAB-770",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAA-569",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PWO-506",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-716",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABE-173",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAE-109",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAB-742",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PBG-810",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABG-080",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAI-617",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TNF-590",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAO-067",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAI-583",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MUB-012",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAF-972",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TOD-630",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RDG-260",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAM-128",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAN-386",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MMA-566",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NVF-904",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TUC-604",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TZX-371",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAN-655",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MBC-441",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MLN-048",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAK-310",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-917",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-856",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAE-926",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAC-477",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABF-768",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SKF-791",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MFA-161",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SFR-462",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACE-746",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SNM-052",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SPF-033",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACK-788",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SOA-370",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACE-185",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MQB-678",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SKM-079",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABL-564",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABN-993",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MNN-363",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAO-751",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABA-490",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAN-345",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MXH-206",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACJ-861",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABJ-117",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-501",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAO-201",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MCW-062",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SBC-675",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RMO-547",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NIU-523",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RFB-077",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SOL-278",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NMY-938",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PUY-708",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NYP-946",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MOB-937",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RYL-770",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PUZ-182",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-063",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABG-530",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAM-524",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACI-543",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SHR-357",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAN-300",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SFV-272",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABI-098",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACG-312",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-960",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAE-986",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAL-940",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABN-657",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACJ-156",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SHR-939",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NCR-041",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MTU-043",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABG-706",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-345",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABH-370",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TPY-529",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACG-311",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABB-253",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAM-848",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PGJ-816",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACD-381",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAL-406",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABB-013",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABO-304",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NOV-873",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NFL-016",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABG-108",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MQI-513",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NIG-190",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MCI-441",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PIP-251",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SDX-838",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MHE-428",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABO-127",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SLS-245",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABN-117",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TGM-254",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACD-408",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NTU-496",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABB-970",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABA-473",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACJ-457",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACL-444",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACH-241",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NTW-256",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABB-244",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABI-013",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RFE-334",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACL-000",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PPP-878",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACM-711",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACI-882",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TMA-458",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABJ-196",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RZB-562",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RMC-311",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAK-652",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACF-859",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TRH-709",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACK-853",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NQS-930",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABF-910",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TSX-706",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SYC-663",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TXV-469",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RXD-819",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-510",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MNQ-016",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABO-341",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PRV-697",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABG-456",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACM-651",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAL-833",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-078",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NGC-647",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAO-992",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACF-828",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-608",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SCO-277",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RKY-445",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SMA-865",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAI-728",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MBR-854",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABD-075",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NFO-756",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAO-524",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAG-742",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACM-006",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SKK-310",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACA-320",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RMC-415",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACJ-654",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACB-011",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-154",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAA-214",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RKV-525",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MNV-879",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TLB-652",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABG-142",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NOC-873",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACN-798",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABI-067",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABA-731",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SNM-297",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABO-480",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAB-964",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACF-461",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SEZ-615",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABD-766",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NXZ-923",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SNL-625",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MGK-508",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TGI-077",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MHV-030",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-199",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TJC-624",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MLZ-788",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-637",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MFR-855",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABA-476",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PMW-010",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACJ-607",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TKD-467",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PWF-469",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABH-229",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACA-705",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAM-977",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NNX-083",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-907",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PFP-568",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RHW-303",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RML-863",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PMS-664",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAH-030",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RUZ-081",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MXD-759",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TTY-793",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TVQ-275",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAN-906",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABA-639",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACB-963",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAN-538",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABL-309",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NFW-637",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAG-577",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MKC-446",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NNR-368",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-405",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MTF-634",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAM-344",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABF-331",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NMA-540",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TCE-154",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABI-069",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PJA-971",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SPH-137",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABE-325",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABA-492",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-316",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAI-634",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TWV-306",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RPP-696",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TGV-855",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TJU-846",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PVB-132",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAD-355",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABH-490",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAE-769",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PRN-587",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NPG-554",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACN-205",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NUK-119",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PNU-182",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TMX-441",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NFY-245",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PEA-577",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PQE-599",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SYA-343",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PLM-955",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABF-634",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACN-701",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "THZ-688",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-320",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MIE-739",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAD-833",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACI-205",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABF-904",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABF-022",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACJ-915",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NYN-146",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-237",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABB-723",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NNY-090",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABH-549",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAO-304",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABG-206",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-571",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RBG-377",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SWZ-968",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACH-540",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RXA-028",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NYZ-765",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACA-143",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MFD-076",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABL-195",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SPE-482",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACN-289",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABD-386",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABE-426",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SGE-590",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TXN-693",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACH-024",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABJ-870",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-578",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PCR-700",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAM-225",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABG-501",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RHF-383",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TKE-454",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MOP-509",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SJA-301",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SFD-581",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAE-903",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAE-548",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RGO-501",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAK-207",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MJZ-954",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAF-838",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MVN-898",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-890",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAM-100",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SME-119",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NJP-065",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-797",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PRS-096",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACE-303",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABE-805",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RDF-018",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PFT-776",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RZQ-917",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-421",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NGG-899",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACL-104",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PZZ-360",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-368",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABJ-105",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "THE-092",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TCL-575",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NDF-177",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PUJ-676",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PTF-682",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "POA-569",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAF-818",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACG-345",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SOR-048",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAI-865",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RSZ-594",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PNG-807",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAM-390",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABM-950",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NQH-515",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAB-401",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MGX-848",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TTE-926",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABE-174",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAD-374",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NVV-548",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MOX-203",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PZZ-338",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PHD-049",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PJM-746",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SQX-485",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "SAQ-589",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABJ-404",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAK-772",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAH-647",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RYH-185",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PWP-374",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACD-819",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAD-861",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAE-593",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABD-212",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "POQ-210",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAH-653",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAJ-431",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACE-989",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NBH-457",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TCD-772",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MIW-961",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PAE-060",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TGA-334",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAO-335",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABG-126",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "PVX-932",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACN-213",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "RLB-546",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AACC-803",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AAAO-044",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "MIH-711",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-469",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABK-830",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "AABN-924",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "TIO-042",
+            "Tolatokamera": "Tolatokamera",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Multifunkcionalis_Kormany",
+            "Savtarto": "Savtarto",
+            "Tempomat": "Tempomat"
+        },
+        {
+            "Rendszam": "NWZ-112",
+            "Tolatokamera": "Nincs",
+            "Tolatoradar": "Tolatoradar",
+            "Multifunkcionalis_Kormany": "Nincs",
+            "Savtarto": "Nincs",
+            "Tempomat": "Tempomat"
+        }
+    ]
+}

@@ -1,0 +1,2754 @@
+{
+    "car_category":[
+        {
+            "Rendszam": "AAAC-436",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PFB-333",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAN-407",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TDB-450",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACC-553",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "RGW-157",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PGB-624",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "NUM-248",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAO-438",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "NOS-448",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACN-530",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAB-840",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "TIC-261",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABN-951",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "RET-812",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "PGM-847",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "NHS-517",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "SIQ-672",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAE-180",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABB-073",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAM-592",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "TJC-968",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "SXT-516",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "PFH-973",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAJ-824",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABK-415",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAK-013",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAJ-765",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABA-882",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "RNN-789",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "THL-803",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MEM-535",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAO-532",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAK-872",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACN-859",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACJ-429",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "MQX-106",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACB-521",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "MKM-210",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "SSC-045",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "SCY-472",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "NNQ-379",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "RRR-152",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABK-207",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACC-774",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "PLW-971",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABK-236",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAN-696",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABB-660",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "NAH-789",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "RIO-734",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AACN-811",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PKB-975",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABC-058",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAI-792",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACE-768",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAJ-908",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAL-143",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABE-688",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACE-104",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "NYV-132",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACO-443",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABK-034",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "PAU-500",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABH-098",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAA-664",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "RJT-885",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SBZ-411",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABD-151",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACO-739",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAO-345",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "TWD-492",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACF-685",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABF-410",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MOT-629",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SER-169",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACL-668",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "RSQ-545",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MJC-561",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "SIB-572",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABD-650",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "NAI-301",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "NYL-369",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACK-020",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABL-795",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAD-898",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "SES-579",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACB-061",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACE-465",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABM-301",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "STQ-967",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABO-909",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAA-317",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "RNE-411",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABM-700",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAJ-705",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MRX-129",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAH-814",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABC-245",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACL-215",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "TVB-726",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABM-771",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACL-491",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAH-068",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NXU-381",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TDO-453",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "RFV-296",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACJ-936",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PRP-861",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "TDW-852",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAJ-426",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "SUL-169",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACN-504",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "STQ-636",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "RVX-006",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MRA-272",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACE-752",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACA-328",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACL-920",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAJ-157",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACG-978",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "NLX-809",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACA-515",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAM-459",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACA-075",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SAA-100",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "PTV-733",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABM-718",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SFX-625",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAI-190",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "NEG-829",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SVH-429",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "TAI-172",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "PTN-188",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TTQ-861",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "TPR-268",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACL-017",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAC-253",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABF-777",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACH-846",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "PGG-470",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABA-571",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "PML-974",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABE-336",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "MVE-654",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "TIB-187",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "RAR-336",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABB-092",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "PNX-464",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAC-029",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TVJ-235",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "NZJ-112",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "RGG-731",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "NGB-541",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACI-519",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABC-858",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NAB-598",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NEX-643",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABB-673",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NUT-215",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "TJQ-371",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "MEY-432",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABG-395",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MSR-023",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACD-066",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABJ-733",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "NDQ-140",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "MJS-498",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AAAE-752",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "TLW-993",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "TFY-544",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "PFU-719",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACA-061",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABN-678",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAN-427",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAB-770",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AAAA-569",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "PWO-506",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAJ-716",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABE-173",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAE-109",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAB-742",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "PBG-810",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABG-080",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAI-617",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "TNF-590",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAO-067",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAI-583",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MUB-012",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAF-972",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TOD-630",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "RDG-260",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAM-128",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AAAN-386",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "MMA-566",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NVF-904",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "TUC-604",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "TZX-371",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAN-655",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MBC-441",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "MLN-048",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAK-310",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AACC-917",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAJ-856",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAE-926",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAC-477",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABF-768",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "SKF-791",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "MFA-161",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SFR-462",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACE-746",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "SNM-052",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "SPF-033",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACK-788",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "SOA-370",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACE-185",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "MQB-678",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SKM-079",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABL-564",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABN-993",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "MNN-363",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAO-751",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABA-490",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAN-345",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MXH-206",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACJ-861",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABJ-117",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACC-501",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AAAO-201",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "MCW-062",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "SBC-675",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "RMO-547",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "NIU-523",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "RFB-077",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SOL-278",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NMY-938",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "PUY-708",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NYP-946",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MOB-937",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "RYL-770",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "PUZ-182",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABK-063",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABG-530",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAM-524",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACI-543",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "SHR-357",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAN-300",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "SFV-272",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABI-098",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACG-312",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACC-960",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAE-986",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AAAL-940",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABN-657",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACJ-156",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "SHR-939",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "NCR-041",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "MTU-043",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABG-706",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABK-345",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABH-370",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "TPY-529",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AACG-311",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABB-253",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAM-848",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "PGJ-816",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACD-381",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAL-406",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABB-013",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABO-304",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "NOV-873",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "NFL-016",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABG-108",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "MQI-513",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "NIG-190",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MCI-441",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "PIP-251",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SDX-838",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "MHE-428",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABO-127",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "SLS-245",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABN-117",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TGM-254",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACD-408",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NTU-496",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABB-970",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABA-473",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACJ-457",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACL-444",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACH-241",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NTW-256",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABB-244",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABI-013",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "RFE-334",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACL-000",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PPP-878",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACM-711",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACI-882",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "TMA-458",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABJ-196",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "RZB-562",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "RMC-311",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAK-652",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AACF-859",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "TRH-709",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACK-853",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NQS-930",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABF-910",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TSX-706",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "SYC-663",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "TXV-469",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "RXD-819",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACC-510",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MNQ-016",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABO-341",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PRV-697",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABG-456",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AACM-651",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAL-833",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAJ-078",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "NGC-647",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAO-992",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACF-828",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAJ-608",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "SCO-277",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "RKY-445",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SMA-865",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAI-728",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "MBR-854",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABD-075",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NFO-756",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAO-524",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAG-742",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACM-006",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "SKK-310",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACA-320",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "RMC-415",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACJ-654",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACB-011",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACC-154",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAA-214",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "RKV-525",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "MNV-879",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "TLB-652",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABG-142",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NOC-873",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACN-798",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABI-067",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABA-731",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "SNM-297",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABO-480",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AAAB-964",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACF-461",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SEZ-615",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABD-766",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "NXZ-923",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SNL-625",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MGK-508",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "TGI-077",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "MHV-030",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAJ-199",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "TJC-624",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MLZ-788",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACC-637",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "MFR-855",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABA-476",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "PMW-010",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACJ-607",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "TKD-467",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "PWF-469",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABH-229",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACA-705",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAM-977",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NNX-083",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABK-907",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PFP-568",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "RHW-303",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "RML-863",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PMS-664",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAH-030",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "RUZ-081",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MXD-759",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "TTY-793",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "TVQ-275",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAN-906",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABA-639",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACB-963",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAN-538",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABL-309",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "NFW-637",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAG-577",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "MKC-446",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "NNR-368",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAJ-405",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "MTF-634",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAM-344",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABF-331",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "NMA-540",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TCE-154",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABI-069",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "PJA-971",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "SPH-137",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABE-325",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABA-492",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACC-316",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAI-634",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TWV-306",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "RPP-696",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "TGV-855",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "TJU-846",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PVB-132",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AAAD-355",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABH-490",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAE-769",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "PRN-587",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "NPG-554",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACN-205",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "NUK-119",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "PNU-182",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "TMX-441",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "NFY-245",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "PEA-577",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PQE-599",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SYA-343",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "PLM-955",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABF-634",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACN-701",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "THZ-688",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABK-320",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MIE-739",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AAAD-833",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACI-205",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABF-904",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABF-022",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACJ-915",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NYN-146",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABK-237",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABB-723",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "NNY-090",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABH-549",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AAAO-304",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABG-206",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AACC-571",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "RBG-377",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SWZ-968",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AACH-540",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "RXA-028",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "NYZ-765",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACA-143",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "MFD-076",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABL-195",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "SPE-482",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACN-289",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABD-386",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABE-426",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SGE-590",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TXN-693",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACH-024",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABJ-870",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAJ-578",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PCR-700",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AAAM-225",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AABG-501",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "RHF-383",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "TKE-454",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MOP-509",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SJA-301",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "SFD-581",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAE-903",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAE-548",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "RGO-501",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAK-207",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MJZ-954",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAF-838",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MVN-898",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABK-890",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAM-100",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "SME-119",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NJP-065",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACC-797",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "PRS-096",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AACE-303",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABE-805",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "RDF-018",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "PFT-776",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "RZQ-917",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABK-421",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "NGG-899",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACL-104",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "PZZ-360",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AACC-368",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABJ-105",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "THE-092",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "TCL-575",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "NDF-177",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "PUJ-676",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PTF-682",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "POA-569",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAF-818",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACG-345",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SOR-048",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAI-865",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "RSZ-594",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "PNG-807",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAM-390",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABM-950",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "NQH-515",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAB-401",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "MGX-848",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "TTE-926",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABE-174",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAD-374",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "NVV-548",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "MOX-203",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "PZZ-338",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "PHD-049",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "PJM-746",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "SQX-485",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "SAQ-589",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AABJ-404",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAK-772",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AAAH-647",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "RYH-185",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PWP-374",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AACD-819",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAD-861",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAE-593",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABD-212",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "POQ-210",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "AAAH-653",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AAAJ-431",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AACE-989",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "NBH-457",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TCD-772",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        },
+        {
+            "Rendszam": "MIW-961",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "PAE-060",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "TGA-334",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AAAO-335",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABG-126",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "PVX-932",
+            "Tipus": "Vivaro-e",
+            "Besorolas": 4
+        },
+        {
+            "Rendszam": "AACN-213",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "RLB-546",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AACC-803",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AAAO-044",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "MIH-711",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "AABK-469",
+            "Tipus": "Citigo-e-iV",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "AABK-830",
+            "Tipus": "Kangoo-Z.E.",
+            "Besorolas": 3
+        },
+        {
+            "Rendszam": "AABN-924",
+            "Tipus": "e-up!",
+            "Besorolas": 2
+        },
+        {
+            "Rendszam": "TIO-042",
+            "Tipus": "Niro-EV",
+            "Besorolas": 5
+        },
+        {
+            "Rendszam": "NWZ-112",
+            "Tipus": "e-up!",
+            "Besorolas": 1
+        }
+    ]
+}
