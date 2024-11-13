@@ -1,5 +1,0 @@
-C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.CLI\obj\Debug\net8.0\AutoBerlesRendszer.CLI.csproj.AssemblyReference.cache
-C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.CLI\obj\Debug\net8.0\AutoBerlesRendszer.CLI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.CLI\obj\Debug\net8.0\AutoBerlesRendszer.CLI.AssemblyInfoInputs.cache
-C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.CLI\obj\Debug\net8.0\AutoBerlesRendszer.CLI.AssemblyInfo.cs
-C:\Users\barab\Desktop\AutoBerlesRendszer\AutoBerlesRendszer.CLI\obj\Debug\net8.0\AutoBerlesRendszer.CLI.csproj.CoreCompileInputs.cache
