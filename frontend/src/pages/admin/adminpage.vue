@@ -16,7 +16,7 @@
           Kategóriák listázása
         </button>
         <button
-          @click="szemelyekTablazat"
+          @click="felszereltsegTablazat"
           class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 mr-3 rounded-md transition-colors"
         >
           Felszereltségek áttekintése
@@ -39,16 +39,16 @@
         >
           Lezárt bérlések
         </button>
-        <BaseTable
-          v-if="kivalasztott"
-          :rows="kivalasztott"
-          :columns="kivalasztottOszlopAdatok"
-          :itemsPerPage="50"
-          :currentPage="currentPage"
-          @updatePage="updatePage"
-        />
       </div>
     </div>
+    <BaseTable
+      v-if="kivalasztott"
+      :rows="kivalasztott"
+      :columns="kivalasztottOszlopAdatok"
+      :itemsPerPage="50"
+      :currentPage="currentPage"
+      @updatePage="updatePage"
+    />
   </BaseLayout>
 </template>
 <script>
@@ -105,6 +105,95 @@ export default {
           { key: "Rendszam", ertek: "Rendszám" },
           { key: "Tipus", ertek: "Típus" },
           { key: "Besorolas", ertek: "Besorolási kategória" },
+        ];
+        this.currentPage = 1;
+      } catch (error) {
+        alert("Hiba az adatok lekérése közben. Kérem próbálja újra később!");
+      }
+    },
+    updatePage(page) {
+      this.currentPage = page;
+    },
+    async felszereltsegTablazat() {
+      try {
+        const response = await http.get("/vehicle_specs");
+        this.carsCategory = response.data;
+        this.kivalasztott = this.carsCategory;
+        this.kivalasztottOszlopAdatok = [
+          { key: "Rendszam", ertek: "Rendszám" },
+          { key: "Tolatokamera", ertek: "Tolatókamera" },
+          { key: "Tolatoradar", ertek: "Tolatóradar" },
+          { key: "Multifunkcionalis_Kormany", ertek: "Multifunkcionális kormány" },
+          { key: "Savtarto", ertek: "Sávtartó asszisztens" },
+          { key: "Tempomat", ertek: "Tempomat" },
+        ];
+        this.currentPage = 1;
+      } catch (error) {
+        alert("Hiba az adatok lekérése közben. Kérem próbálja újra később!");
+      }
+    },
+    updatePage(page) {
+      this.currentPage = page;
+    },
+    async szemelyekTablazat() {
+      try {
+        const response = await http.get("/users");
+        this.carsCategory = response.data;
+        this.kivalasztott = this.carsCategory;
+        this.kivalasztottOszlopAdatok = [
+          { key: "ID", ertek: "Azonosító" },
+          { key: "Felh_nev", ertek: "Felhasználó neve" },
+          { key: "Jelszo", ertek: "Teljes jelszó" },
+          { key: "Elofizetesi_Kat", ertek: "Előfizetési csoportja" },
+        ];
+        this.currentPage = 1;
+      } catch (error) {
+        alert("Hiba az adatok lekérése közben. Kérem próbálja újra később!");
+      }
+    },
+    updatePage(page) {
+      this.currentPage = page;
+    },
+    async szemelyesAdatokTablazat() {
+      try {
+        const response = await http.get("/personal_datas");
+        this.carsCategory = response.data;
+        this.kivalasztott = this.carsCategory;
+        this.kivalasztottOszlopAdatok = [
+          { key: "ID", ertek: "Azonosító" },
+          { key: "V_nev", ertek: "Vezetéknév" },
+          { key: "K_nev", ertek: "Keresztnév" },
+          { key: "Szul_datum", ertek: "Születési dátum" },
+          { key: "Tel", ertek: "Telefonszám" },
+          { key: "E-mail", ertek: "E-mail cím" },
+          { key: "Szig_szam", ertek: "Személyigazolvány sz." },
+          { key: "Jogos_szam", ertek: "Jogosítvány Száma" },
+          { key: "Jogos_erv_kezdete", ertek: "Jogosítvány érv. kezdete" },
+          { key: "jogos_erv_vege", ertek: "Jogosítvány érv. vége" },
+          { key: "Felh_jelszo", ertek: "Teljes jelszó" },
+        ];
+        this.currentPage = 1;
+      } catch (error) {
+        alert("Hiba az adatok lekérése közben. Kérem próbálja újra később!");
+      }
+    },
+    updatePage(page) {
+      this.currentPage = page;
+    },
+    async lezartBerlesekTablazat() {
+      try {
+        const response = await http.get("/rental_history");
+        this.carsCategory = response.data;
+        this.kivalasztott = this.carsCategory;
+        this.kivalasztottOszlopAdatok = [
+          { key: "Berles_id", ertek: "Bérlés Azonosítószáma" },
+          { key: "Felh_nev", ertek: "Felh. neve" },
+          { key: "Rendszam", ertek: "Rendszám" },
+          { key: "Kat_besorolas", ertek: "Autó Kat. Besorolása" },
+          { key: "Berles_kezd_ev_ho_nap", ertek: "Bérlés kezdete (év-hó-nap)" },
+          { key: "Berles_kezd_ora_perc_mp", ertek: "Bérlés kezdete (ó-p-mp)" },
+          { key: "Berles_vege_ev_ho_nap", ertek: "Bérlés vége (év-hó-nap)" },
+          { key: "Berles_vege_ora_perc_mp", ertek: "Bérlés vége (ó-p-mp)" },
         ];
         this.currentPage = 1;
       } catch (error) {

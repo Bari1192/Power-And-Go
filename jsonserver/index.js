@@ -39,7 +39,7 @@ class RouteManager {
 // Útvonalak Configja
 const routesConfig = {
     '/cars': { file: './data/autok.json', key: 'cars' },
-    '/vehicle_specs': { file: './data/felszereltseg.json', key: 'vehicle_specs' },
+    '/vehicle_specs': { file: './data/felszereltsegek.json', key: 'vehicle_specs' },
     '/car_category': { file: './data/kategoriak.json', key: 'car_category' },
     '/users': { file: './data/felhasznalok.json', key: 'users' },
     '/personal_datas': { file: './data/szemelyek.json', key: 'personal_datas' },
