@@ -1,42 +1,29 @@
-# Adatgeneráló Projekt – PowerAndGo - Útmutató
+# PowerAndGo Webalkalmazás – Projekt Dokumentáció
 
-Ez a projekt egy autómegosztó alkalmazás háttér-adatbázisát generálja le. Az adatok generálása Docker Compose segítségével történik és az elkészült fájlokat [alapértelmezetten] CSV formátumban menti el.
-A PHP szkriptek automatikusan végrehajtják az adatgenerálást a megfelelő sorrendben.
+Ez a projekt egy **fullstack webalkalmazást** valósít meg, amely egy autómegosztó platformhoz készült. A backend részleg egy JSON-szerver alapú adatbázist használ az autók és felhasználói adatok kezelésére, míg a frontend rész Vue.js alapú és dinamikusan jeleníti meg az adatokat különböző oldalakra bontva.
 
-**Futtatás**
-   Futtasd a következő parancsot (terminal-ban):
-   docker compose up --build
-Ez létrehozza a szükséges környezetet és fájlokat, majd a komponenseket a megfelelő sorrendben futtatja.
+---
 
-## A projekt a következő fájlokat/rekordokat hozza létre:
+## Projekt Felépítése
 
-1. ***auto_generator.php***: 450 rekord a szkript alapján:
-    - **_Autok_**: Gyarto, Tipus, Teljesitmeny, Vegsebesseg, Gumimeret, Hatótav, Rendszam, Gyartasi_ev, Km_ora_allas fejléccel és hozzá tartozó adatsorokkal.
-    - **_Felszereltsegek_**: Rendszam, Tolatokamera, Tolatoradar, Multifunkcionalis_Kormany, Savtarto, Tempomat fejléccel és hozzá tartozó adatsorokkal.
-    - **_Kategoriak_**: Rendszam, Tipus, Besorolas fejléccel és hozzá tartozó adatsorokkal. 
+### Backend
+- **JSON-szerver**: Az alkalmazás adatbázisa, amely Docker Compose segítségével indul el, és JSON formátumban tárolja az adatokat.
+- **Adatbázis-végpontok**: Az adatbázis különböző végepontokkal rendelkezik az egyes adatkategóriákhoz:
+  - `/cars`: Autók adatai (pl. gyártó, típus, teljesítmény)
+  - `/car_category`: Autók kategóriái
+  - `/personal_datas`: Felhasználók személyes adatai
+  - `/users`: Felhasználói adatok (pl. felhasználónév, jelszó)
+  - `/rental_history`: Lezárt bérlések listája
+  - **Dinamikus routing**: A backend dinamikusan irányítja az egyes végpontokat az autoroutes rendszer segítségével.
 
-2. ***szemely_generator.php***: 1000 rekord a szkript alapján:
-    - **_Szemelyek_**: ID, V_nev, K_nev, Szul_datum, Tel, E-mail, Szig_szam, Jogos_szam, Jogos_erv_kezdete, jogos_erv_vege, Felh_jelszo fejléccel és hozzá tartozó adatsorokkal.
-    - **_Felhasznalok_**: ID, Felh_nev, Jelszo, Elofizetesi_Kat fejléccel és hozzá tartozó adatsorokkal.
+### Frontend
+- **Vue.js**: A frontend Vue.js alapú, és különböző oldalakra osztva jeleníti meg az adatokat a felhasználói felületen.
+- **BaseTable komponens**: Egy univerzális táblázatkomponens, amely dinamikusan jeleníti meg az adatokat különböző gombokra kattintva, a megfelelő adatokkal feltöltve.
+- **Navigációs rendszer**: A Vue Router és autoroutes segítségével minden oldal saját útvonallal rendelkezik, így a felhasználók könnyen elérhetik az egyes adatkategóriákat (pl. autók, kategóriák).
 
-3. ***lezart_berlesek_generator.php***: 2750 rekord a  szkript alapján.
-    - **_Lezart_berlesek_**: Berles_id, Rendszam, Kat_besorolas, Berles_kezd_ev_ho_nap, Berles_kezd_ora_perc_mp, Berles_vege_ev_ho_nap, Berles_vege_ora_perc_mp,Felh_nev fejléccel és hozzá tartozó adatsorokkal.
-
-Az adatok a(z) src/output mappába kerülnek!
-
-## Hogyan módosítd a generált adatok mennyiségét / fájlkiterjesztését:
-
-A ***docker-compose.yml*** fájlban változtathatod meg az egyes parancssorok végén lévő szám módosításával, a ***command*** részben, az alábbiak szerint:
-   -  **Autók számának módosítása:** php auto_generator.php [mennyiség] [csv / json]
-   - **Személyek számának módosítása:** php szemely_generator.php [mennyiség] [csv / json]
-   - **Lezárt bérlések számának módosítása:** php lezart_berlesek_generator.php  [mennyiség] [csv / json]
-   - **FIGYELEM!** Az adatmennyiség **megváltoztatásakor is** a program **hozzáfűzi** az új adatmennyiséget a meglévő adatsorokhoz, függetlenül a fájlkiterjesztés módosításától!
-
-
+---
 ## Licenc és Felhasználási feltételek
+
 Ez a projekt az MIT licenc alatt érhető el. Ha a kódot nyilvánosan felhasználod vagy kereskedelmi célra értékesíted, kérjük, tüntesd fel az eredeti készítőt. További részletekért lásd a [LICENSE] fájlt.
 
-Továbbá a program által generált adatsorokban Primary Key és Foreign Key alapú összeköttetésekből áll. Mindebből eredően az adott kulcsok egyediek, így adatbázis felhasználásra optimalizált a használatuk.
-
-**[További fejlesztések várhatóak.]**
-
+---
