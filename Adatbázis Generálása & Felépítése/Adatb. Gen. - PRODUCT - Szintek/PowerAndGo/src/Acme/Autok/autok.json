@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "Flotta_Flotta_id": 1,
         "gyarto": "VW",
         "tipus": "e-up!",
         "teljesitmeny": 18,
@@ -9,7 +9,7 @@
         "hatotav": 130
     },
     {
-        "id": 2,
+        "Flotta_id": 2,
         "gyarto": "VW",
         "tipus": "e-up!",
         "teljesitmeny": 36,
@@ -18,7 +18,7 @@
         "hatotav": 300
     },
     {
-        "id": 3,
+        "Flotta_id": 3,
         "gyarto": "Skoda",
         "tipus": "Citigo-e-iV",
         "teljesitmeny": 36,
@@ -27,7 +27,7 @@
         "hatotav": 300
     },
     {
-        "id": 4,
+        "Flotta_id": 4,
         "gyarto": "Renault",
         "tipus": "Kangoo-Z.E.",
         "teljesitmeny": 45,
@@ -36,7 +36,7 @@
         "hatotav": 285
     },
     {
-        "id": 5,
+        "Flotta_id": 5,
         "gyarto": "Opel",
         "tipus": "Vivaro-e",
         "teljesitmeny": 50,
@@ -45,7 +45,7 @@
         "hatotav": 320
     },
     {
-        "id": 6,
+        "Flotta_id": 6,
         "gyarto": "KIA",
         "tipus": "Niro-EV",
         "teljesitmeny": 65,
