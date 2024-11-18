@@ -19,3 +19,8 @@ if [ -z "${APP_KEY}" ]; then
 else
     echo "Az API kulcs már létezik" 
 fi
+
+# Seederek futtatása - automata adatfeltöltés
+docker compose exec backend php artisan db:seed --force
+
+echo "A projekt sikeresen elindult, az adatbázis feltöltve!"
