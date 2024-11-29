@@ -15,11 +15,13 @@ import Cars from './cars/cars.vue';
 import BaseLayout from '@layouts/BaseLayout.vue'
 import { useCounter } from '@stores/CounterStore.mjs'
 import { mapState, mapActions } from 'pinia'
+import Renthistory from './rents/renthistory.vue';
 
 export default {
   components: {
     Cars,
-    BaseLayout
+    BaseLayout,
+    Renthistory
   },
   computed: {
     ...mapState(useCounter, ['counter'])

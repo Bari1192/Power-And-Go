@@ -1,8 +1,11 @@
 <template>
   <nav class="bg-white dark:bg-gray-800">
     <div class="flex justify-between p-3 border-b-2 flex-wrap dark:border-none">
-      <RouterLink to="/" class="flex items-center space-x-3">
+      <RouterLink to="/" class="flex mx-auto space-x-3">
         <span class="self-center text-2xl font-semibold dark:text-white">Feladat</span>
+      </RouterLink>
+      <RouterLink to="/rents/renthistory" class="flex mx-auto space-x-3">
+        <span class="self-center text-2xl font-semibold dark:text-white">Lezárt Bérlések</span>
       </RouterLink>
       <button class="block md:hidden" @click="toggleMenu">
         <svg
