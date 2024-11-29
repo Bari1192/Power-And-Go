@@ -1,0 +1,22 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Dolgozo;
+use App\Models\Szemely;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class DolgozokSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $szemelyek = Szemely::inRandomOrder()->limit(100)->get();
+
+        foreach ($szemelyek as $szemely) {
+            Dolgozo::factory()->create([
+                'szemely_id_fk' => $szemely->szemely_id,
+            ]);
+        }
+    }
+}
