@@ -1,12 +1,12 @@
 <template>
     <BaseLayout>
 
-        <div class="container" v-for="rent in rents" :key="rent.lezart_berles_id">
-            <div class="col">
+        <div class="container mx-auto my-10" v-for="rent in rents" :key="rent.lezart_berles_id">
+            <div class="col w-3/4 m-auto">
                 <img src="@assets/img/BaseEmail/pelda_logo.png" alt="">
 
             </div>
-            <div class="col text-white">
+            <div class="col text-white col w-3/4  mx-auto">
                 <p class="my-3"><b>Kedves {{ rent.szemely_knev }}!</b></p>
                 <p>Köszönjük, hogy a <b>PowerAndGo</b> e-carsharinget választottad!</p>
                 <p> A(z) <b>{{ rent.auto_rendszam }}</b> rendszámú PowerAndGo bérlését <b>{{ rent.berles_kezdete }}</b>
