@@ -1,5 +1,5 @@
 networks:
-  backend:
+  fullstack:
 
 volumes:
   mysql:
@@ -12,9 +12,11 @@ services:
       - swagger
       - db
       - phpmyadmin
+      - jsonserver
+      - docs
       - mailcatcher
     networks:
-      - backend
+      - fullstack
     ports:
       - 80:80
     volumes:
@@ -32,10 +34,20 @@ services:
       - ./backend:/www:rw
       - ./backend/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
     networks:
-      - backend
+      - fullstack
     depends_on:
       db:
         condition: service_healthy
+
+  frontend:
+    image: idomi27/vue
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app:rw
+    networks:
+      - fullstack
 
   db:
     image: mysql:8.0.37
@@ -49,7 +61,7 @@ services:
     volumes:
       - "mysql:/var/lib/mysql:rw"
     networks:
-      - backend
+      - fullstack
     healthcheck:
       test: "/usr/bin/mysql --user=root --password=$DB_ROOT_PASSWORD --execute \"SHOW DATABASES;\""
       timeout: 20s
@@ -66,7 +78,14 @@ services:
       - PMA_ABSOLUTE_URI=${PMA_ABSOLUTE_URI}
       - UPLOAD_LIMIT=300M
     networks:
-      - backend
+      - fullstack
+  
+  docs:
+    image: idomi27/nuxt-content:3.11.2
+    volumes:
+      - ./docs:/app/content:ro
+    networks:
+      - fullstack
 
   swagger:
     image: swaggerapi/swagger-ui
@@ -75,10 +94,20 @@ services:
     environment:
         - SWAGGER_JSON=/docs/openapi.yaml
     networks:
-      - backend
+      - fullstack
 
+  jsonserver:
+    image: idomi27/json-server
+    build:
+      context: ./jsonserver
+      dockerfile: Dockerfile
+    networks:
+      - fullstack
+    volumes:
+      - ./jsonserver:/app
+      - /app/node_modules
   
   mailcatcher:
     image: dockage/mailcatcher:0.9.0
     networks:
-      - backend
+      - fullstack
