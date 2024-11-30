@@ -27,6 +27,9 @@ return new class extends Migration
             $table->integer('repter_be_terminal')->nullable();       # Reptéri felár terminálnál (reptérRŐL)
             $table->integer('zona_nyit_felar')->nullable();                  # Külső zónából való bérlés nyitási, indítási felára (nyitás)
             $table->integer('zona_zar_felar')->nullable();                  # Külső zónában való bérlés zárási felára (zárás)
+            $table->integer('harom_ora_dij')->nullable();
+            $table->integer('hat_ora_dij')->nullable();
+            $table->integer('tizenketto_ora_dij')->nullable();
             $table->timestamps();
         });
     }

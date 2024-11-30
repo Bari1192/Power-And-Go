@@ -52,11 +52,15 @@
     - `zona_zar_felar`              # Külső zónában való bérlés zárási felára (zárás)
 
     [Seeder]
-    - Manuálisan van feltöltve mivel az előfizetési (alap) csomagok fixek.ű
-    - Ezek adatai változhatnak majd, ha idővel új:
-        - Előfizetési csomagokat,
-        - Árakat
-        - Szolgáltatásokat vezetünk be.
+    - Teljesítményenként az autok 5 csoportban vannak:
+            `18 => 1-es`
+            `33 => 2-es`
+            `36 => 3-as`
+            `65 => 4-es`
+            `75 => 5-ös`
+            `default => 5-ös` - Ha új autót vennénk fel, de még nincsen neki teljesítményalapú beosztása - akkor sem lesz hibás a kalkulálás -> hibamegelőzés.
+    - Minden elofizetési kategoriahoz manuálisan hozzuk létre az árak meghatározását. Így később könyebben lehet módosítani, ha változtatásokat kell eszközölni ezekben.
+
     [Relációk]
     - 1:N -hez | Előfizetések - Felhasználók | Mivel egy előfizetési kategóriát több felhasználó is választhat.
     - Elofizetesek | HasMany lesz a Modelben -> A Felhasznalo::class `elofiz_id` [FK], `id` [PK]-ra.
