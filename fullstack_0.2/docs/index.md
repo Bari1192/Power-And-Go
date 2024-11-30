@@ -14,23 +14,42 @@
 
 
 ### Előfizetések tábla - létrehozása
+1. [Entitások]-[Migráció]:
+    - `elofiz_id` - Az előfizetés azonosítójának a száma. [PK],[AI].
+    - `elofiz_nev` - Az előfizetésnek a megnevezése
+    - `havi_dij` - Az előfizetés havi díjának összege (opcionálisan).
+    - `eves_dij` - Az előfizetés éves díjának összege (opcionálisan).
+
+2. [Seeder]:
+    `elofiz_nev` - 4 előfizetési csoportot hozunk létre manuálisan.
+    - Közvetlenül adatbázisba szúrjuk bele az adatokat, nem generálási folyamattal (Factory)-vel.
+    - `havi_dij` összeg opció csak a `Power-Plus`,`Power-Premium`,`Power-VIP` előfizetéseknél van.
+    - `havi_dij` és `eves_dij` együttese csak a `Power-VIP` -ben érhető el.
+
+3. [Relációk]-[Model]
+
+### Árazások tábla - létrehozása
 1.  Árkategóriák & besorolások 
     - A tábla létrehozása alapvető, mivel az előfizetési csomagok adatait le kell tárolni.
     - Minden felhasználó ehhez kapcsolódik FK-n keresztül:
         - Egyszerűbb karbantartást biztosít később - árak, kedvezmények, frissítések stb.
         - Egyértelmű és egységes logika - Statikus tömb-érték (korábbi) rendszer helyett.
     [Entitások]
-    - `berles_ind` - Bérlésindítási díj
-    - `vez_perc` - Vezetés (percdíj)
-    - `kedv_vez` - Kedvezményes vezetés (percdíj, 6:00 - 9:00) - opcionális
-    - `parkolas_perc` - Parkolás (percdíj)
-    - `foglalasi_perc` - Foglalás (percdíj, 20 perc után)
-    - `kedv_parkolas_perc` Kedvezményes parkolás (percdíj)
-    - `napidij` - Napidíj
-    - `km_dij` - Ingyenesen (125) megtehető km-en felüli útdíj
-    - `repter_felar` - Reptéri felár transzferrel (reptérre/reptérről)
-    - `repter_felar_terminal` - Reptéri felár terminálnál (reptérre/reptérről)
-    - `zona_felar` - Külső zóna felár (indítás/zárás)
+    - `berles_ind` - Bérlésindítási díj.
+    - `vez_perc` - Vezetés (percdíj).
+    - `kedv_vez` - Kedvezményes vezetés (percdíj, 6:00 - 9:00) - opcionális.
+    - `parkolas_perc` - Parkolás (percdíj).
+    - `foglalasi_perc` - Foglalás (percdíj, 20 perc után).
+    - `kedv_parkolas_perc` Kedvezményes parkolás (percdíj).
+    - `napidij` - Napidíj összege egy adott autóra vetítve.
+    - `napi_km_limit`                           # A napidíjban foglalt megtehető INGYENES km-ek száma.
+    - `km_dij`                      # Ingyenesen (125) megtehető km-en felüli útdíj
+    - `repter_ki_felar`             # Reptéri felár transzferrel (reptérRE)
+    - `repter_be_felar`             # Reptéri felár transzferrel (reptérRŐL)
+    - `repter_ki_terminal`       # Reptéri felár terminálnál (reptérRE)
+    - `repter_be_terminal`       # Reptéri felár terminálnál (reptérRŐL)
+    - `zona_nyit_felar`               # Külső zónából való bérlés nyitási, indítási felára (nyitás)
+    - `zona_zar_felar`              # Külső zónában való bérlés zárási felára (zárás)
 
     [Seeder]
     - Manuálisan van feltöltve mivel az előfizetési (alap) csomagok fixek.ű

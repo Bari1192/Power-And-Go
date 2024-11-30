@@ -11,8 +11,8 @@ return new class extends Migration
         Schema::create('elofizetesek', function (Blueprint $table) {
             $table->id('elofiz_id');
             $table->string('elofiz_nev');
-            $table->integer('havi_dij');
-            $table->integer('eves_dij');
+            $table->integer('havi_dij')->nullable();
+            $table->integer('eves_dij')->nullable();
             $table->timestamps();
         });
     }

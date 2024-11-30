@@ -11,6 +11,12 @@ class ArazasSeeder extends Seeder
     public function run(): void
     {
         DB::table('arazasok')->insert([
+            # E-up              18 kW       1-es besorolas
+            # Renault Kangoo    33 kW       2-es besorolas
+            # E-up & Citigo     36 kW       3-as besorolas
+            # Kia Niro          65 kW       4-es besorolas
+            # Opel Vivaro       75 kW       5-ös besorolas
+            
             ## [Power] árak * [5 kategoria]
             [
                 'elofiz_id' => 1,
@@ -34,7 +40,7 @@ class ArazasSeeder extends Seeder
             # E-up 36kW && Citigo 36kW
             [
                 'elofiz_id' => 1,
-                'auto_besorolas' => 1,
+                'auto_besorolas' => 3,
                 'berles_ind' => 380,
                 'vez_perc' => 105,
                 'kedv_vez' => null,             # null -> nem elérhető
