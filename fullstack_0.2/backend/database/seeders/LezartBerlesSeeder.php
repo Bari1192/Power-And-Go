@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\LezartBerles;
 use Illuminate\Database\Seeder;
-use App\Models\Auto; 
 
-class AutokSeeder extends Seeder
+class LezartBerlesSeeder extends Seeder
 {
     public function run(): void
     {
-        Auto::factory(250)->create();
+        LezartBerles::factory(100)->create();
     }
 }

@@ -2,19 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\Felhasznalo;
+use App\Models\Dolgozo;
 use App\Models\Szemely;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class FelhasznalokSeeder extends Seeder
+class DolgozoSeeder extends Seeder
 {
     public function run(): void
     {
         $szemelyek = Szemely::inRandomOrder()->limit(100)->get();
+
         foreach ($szemelyek as $szemely) {
-            Felhasznalo::factory()->create([
-                'szemely_id' => $szemely->szemely_id,
+            Dolgozo::factory()->create([
+                'szemely_id_fk' => $szemely->szemely_id,
             ]);
         }
     }

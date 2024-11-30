@@ -7,7 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 
-class SzemelyekSeeder extends Seeder
+class SzemelySeeder extends Seeder
 {
     public function run(): void
     {
