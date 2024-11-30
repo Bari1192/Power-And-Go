@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class LezartBerles extends Model
 {
-    use HasFactory; use HasFactory;
+    use HasFactory;
 
     protected $table = 'lezart_berlesek';
     protected $primaryKey = 'lezart_berles_id';
+    public $incrementing = true;
+    protected $fillable = [];
 
     public function auto()
     {

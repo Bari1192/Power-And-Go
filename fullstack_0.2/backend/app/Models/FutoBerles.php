@@ -15,9 +15,6 @@ class FutoBerles extends Model
     protected $fillable = [
         'rendszam',
         'auto_kategoria',
-        'szemely_id_fk',
-        'berles_kezd_datum',
-        'berles_kezd_ido',
     ];
     public function auto()
     {

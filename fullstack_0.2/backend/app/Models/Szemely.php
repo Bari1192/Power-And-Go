@@ -13,9 +13,6 @@ class Szemely extends Model
     public $incrementing = true;
 
     protected $fillable = [
-        'szemely_jelszo',
-        'szig_szam',
-        'jogos_szam',
         'jogos_erv_kezdete',
         'jogos_erv_vege',
         'v_nev',

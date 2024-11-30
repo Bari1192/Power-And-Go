@@ -13,7 +13,6 @@ class Elofizetes extends Model
     public $incrementing = true;
 
     protected $fillable = [
-        'elofiz_id',
         'elofiz_nev',
         'havi_dij',
         'eves_dij',

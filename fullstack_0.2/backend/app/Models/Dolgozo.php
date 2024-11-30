@@ -12,7 +12,14 @@ class Dolgozo extends Model
     protected $table = 'dolgozok';
     protected $primaryKey = 'dolgozo_id';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'terulet',
+        'munkakor',
+        'beosztas',
+        'munkaido',
+        'fizetes_ossz',
+        'belepes_datum',
+    ];
     public function szemely(): BelongsTo
     {
         return $this->belongsTo(Szemely::class, 'szemely_id_fk', 'szemely_id');

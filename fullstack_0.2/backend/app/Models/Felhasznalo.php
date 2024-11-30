@@ -16,9 +16,6 @@ class Felhasznalo extends Model
     protected $guarded = ['szemely_id_FK'];
     
     protected $fillable = [
-        'felh_egyenleg',
-        'jelszo_2_4',
-        'felh_nev',
         'elofiz_kat',
     ];
     public function szemely(): BelongsTo
