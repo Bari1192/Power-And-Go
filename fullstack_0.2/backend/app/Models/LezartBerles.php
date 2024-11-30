@@ -11,8 +11,9 @@ class LezartBerles extends Model
 
     protected $table = 'lezart_berlesek';
     protected $primaryKey = 'lezart_berles_id';
-    
+    public $timestamps = true; 
     public $incrementing = true;
+    
     protected $fillable = [];
 
     public function auto()

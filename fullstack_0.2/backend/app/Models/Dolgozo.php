@@ -11,6 +11,8 @@ class Dolgozo extends Model
     use HasFactory;
     protected $table = 'dolgozok';
     protected $primaryKey = 'dolgozo_id';
+    public $timestamps = true;
+    public $incrementing = true;
 
     protected $fillable = [
         'terulet',

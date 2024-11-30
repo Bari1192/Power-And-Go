@@ -10,6 +10,7 @@ class FutoBerles extends Model
     use HasFactory;
     protected $table = 'futo_berlesek';
     protected $primaryKey = 'futo_id';
+    public $timestamps = true; 
     public $incrementing = true;
 
     protected $fillable = [

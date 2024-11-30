@@ -12,6 +12,7 @@ class Arazas extends Model
     use HasFactory;
     protected $table = 'arazasok';
     protected $primaryKey = 'id';
+    public $timestamps = true; 
     public $incrementing = true;
 
     protected $fillable = [];

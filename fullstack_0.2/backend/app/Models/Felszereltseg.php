@@ -11,6 +11,7 @@ class Felszereltseg extends Model
     use HasFactory;
     protected $table = 'felszereltsegek';
     protected $primaryKey = 'felsz_id';
+    public $timestamps = true; 
     public $incrementing = true;
 
     protected $fillable = [

@@ -10,6 +10,7 @@ class Elofizetes extends Model
     use HasFactory;
     protected $table = 'elofizetesek';
     protected $primaryKey = 'elofiz_id';
+    public $timestamps = true; 
     public $incrementing = true;
 
     protected $fillable = [

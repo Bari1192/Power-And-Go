@@ -11,10 +11,9 @@ class Flotta_tipusok extends Model
     use HasFactory;
     protected $table = 'flotta_tipusok';
     protected $primaryKey = 'flotta_id';
+    public $timestamps = true; 
     public $incrementing = true;
 
-
-    # adat meghat.:
     protected $fillable = [
         'gyarto',
         'tipus',

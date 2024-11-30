@@ -12,6 +12,7 @@ class Felhasznalo extends Model
 
     protected $table = 'felhasznalok';
     protected $primaryKey = 'felh_id';
+    public $timestamps = true; 
     public $incrementing = true;
     protected $guarded = ['szemely_id_FK'];
     

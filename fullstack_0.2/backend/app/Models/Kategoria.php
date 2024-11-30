@@ -13,8 +13,9 @@ class Kategoria extends Model
     protected $table = 'kategoriak';
     protected $primaryKey = 'kat_id';
 
+    public $timestamps = true; 
     public $incrementing = true;
-    protected $fillable = ['kat_besorolas'];
+    protected $fillable = [];
 
 
     public function autok(): HasMany

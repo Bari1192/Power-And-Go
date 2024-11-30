@@ -10,17 +10,10 @@ class Szemely extends Model
     use HasFactory;
     protected $table = 'szemelyek';
     protected $primaryKey = 'szemely_id';
+    public $timestamps = true;
     public $incrementing = true;
 
-    protected $fillable = [
-        'jogos_erv_kezdete',
-        'jogos_erv_vege',
-        'v_nev',
-        'k_nev',
-        'szul_datum',
-        'telefon',
-        'email',
-    ];
+    protected $fillable = [];
     public function felhasznalo()
     {
         return $this->hasOne(Felhasznalo::class, 'szemely_id_FK', 'szemely_id');
