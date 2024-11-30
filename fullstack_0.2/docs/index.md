@@ -4,6 +4,14 @@
 
 
 ## Backend
+[SORREND]
+1. Egy árazási szabályzat táblát,
+2. Elofizetes táblát,
+3. Majd át kell írni a `lezárt_bérlések` táblát, hogy a már így generált `elofizetéseket` többé `ne array`-ből random generálja be (értéknek), hanem `FK-ként vegye át` a táblából.
+4. `Factory-ban` ki kell egészítenem, hogy parkolási időt is generáljon arányosan.
+5. A `folyamatban lévő bérléseket` is át kell alakítani, hogy `státusz` alapján `lezárás után` a `lezárt bérlések táblába kerüljenek` az adatok
+6. `Konyvelesi táblát` is létre kell hozni, ahová a `lezárt bérlések számlák` kifizetés után `kerülnek` (hogy profilban elérhető legyen + könyvelési osztály is elérje, hogy a NAV ne szóljon be)
+
 
 ### Előfizetések tábla - létrehozása
 1.  Árkategóriák & besorolások 

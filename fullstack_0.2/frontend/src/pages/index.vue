@@ -1,12 +1,6 @@
 <template>
   <BaseLayout>
-    <h1 class="text-6xl my-10 dark:text-white">Hello!</h1>
-
-    <Cars /> <!-- AUTOK OLDAL IDE TÖLTVE! -->
-
-    <button class="bg-blue-500 text-white rounded py-2 px-4" @click="increment()">
-      Számláló: {{ counter }}
-    </button>
+    <h1 class="text-6xl my-10 dark:text-white">Főoldal</h1>
   </BaseLayout>
 </template>
 
