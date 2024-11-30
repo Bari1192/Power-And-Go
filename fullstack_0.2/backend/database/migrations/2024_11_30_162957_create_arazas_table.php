@@ -13,13 +13,20 @@ return new class extends Migration
     {
         Schema::create('arazas', function (Blueprint $table) {
             $table->id();
+            $table->integer('berles_ind');
+            $table->integer('vez_perc');
+            $table->integer('kedv_vez')->nullable();                    # Kedvezményes vezetés (percdíj, 6:00 - 9:00) - opcionális
+            $table->integer('parkolas_perc');                           # Parkolás (percdíj)
+            $table->integer('foglalasi_perc');                          # Foglalás (percdíj, 20 perc után)
+            $table->integer('kedv_parkolas_perc')->nullable();          # Kedvezményes parkolás (percdíj)
+            $table->integer('napidij');                                 # Napidíj
+            $table->integer('km_dij');                                  # Ingyenesen (125) megtehető km-en felüli útdíj
+            $table->integer('repter_felar')->nullable();                # Reptéri felár transzferrel (reptérre/reptérről)
+            $table->integer('repter_felar_terminal')->nullable();       # Reptéri felár terminálnál (reptérre/reptérről)
+            $table->integer('zona_felar')->nullable();                  # Külső zóna felár (indítás/zárás)
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('arazas');
