@@ -12,15 +12,20 @@ class Felhasznalo extends Model
 
     protected $table = 'felhasznalok';
     protected $primaryKey = 'felh_id';
-    public $timestamps = true; 
+    public $timestamps = true;
     public $incrementing = true;
-    protected $guarded = ['szemely_id_FK'];
-    
+
     protected $fillable = [
-        'elofiz_kat',
+        'elofiz_id',
     ];
+
     public function szemely(): BelongsTo
     {
-        return $this->belongsTo(Szemely::class, 'szemely_id', 'szemely_id'); 
+        return $this->belongsTo(Szemely::class, 'szemely_id', 'szemely_id');
+    }
+
+    public function elofizetes(): BelongsTo
+    {
+        return $this->belongsTo(Elofizetes::class, 'elofiz_id', 'elofiz_id');
     }
 }

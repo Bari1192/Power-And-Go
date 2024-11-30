@@ -23,7 +23,7 @@ return new class extends Migration
                     ->on('kategoriak')                       # Melyik táblában van
                     ->onDelete('cascade');                   # Törlési szabály            
             
-                    $table->integer('berles_ind');
+            $table->integer('berles_ind');
             $table->integer('vez_perc')->nullable();;
             $table->integer('kedv_vez')->nullable();                    # Kedvezményes vezetés (percdíj, 6:00 - 9:00) - opcionális
             $table->integer('parkolas_perc')->nullable();                           # Parkolás (percdíj)

@@ -2,14 +2,15 @@
 
 namespace Database\Factories;
 
+use App\Models\Elofizetes;
 use App\Models\Felhasznalo;
 use App\Models\Szemely;
 use Illuminate\Database\Eloquent\Factories\Factory;
+
 class FelhasznaloFactory extends Factory
 {
     protected $model = Felhasznalo::class;
     private array $felhNevekEllTar = [];
-    private array $elofizKategoriak = ['Power', 'Power-Plus', 'Power-Premium', 'Power-VIP'];
 
     public function definition(): array
     {
@@ -20,12 +21,14 @@ class FelhasznaloFactory extends Factory
             ->inRandomOrder()
             ->first();
 
+        $elofizetes = Elofizetes::inRandomOrder()->first();
+
         return [
             'szemely_id' => $szemely->szemely_id,
             'felh_egyenleg' => 0,
-            'jelszo_2_4' => $this->jelszoMasodikNegyedik($szemely->szemely_jelszo), 
+            'jelszo_2_4' => $this->jelszoMasodikNegyedik($szemely->szemely_jelszo),
             'felh_nev' => $this->felhasznaloNevGenerator($szemely->v_nev),
-            'elofiz_kat' => $this->elofizetesBesorolasa(),
+            'elofiz_id' => $elofizetes->elofiz_id,
         ];
     }
     public function felhasznaloNevGenerator(string $V_nev): string
@@ -49,21 +52,14 @@ class FelhasznaloFactory extends Factory
             $keszFelhNev = strtr($keszFelhNev, 'áéíóöőúüűÁÉÍÓÖŐÚÜŰ', 'aeiooouuuAEIOOOUUU');
             # Vissza Ell. a DB-ben (UNIQE):
             $foglaltFelhNev = Felhasznalo::where('felh_nev', '=', $keszFelhNev)->exists();
-
         } while ($foglaltFelhNev || in_array($keszFelhNev, $this->felhNevekEllTar));
 
         $this->felhNevekEllTar[] = $keszFelhNev;
 
         return $keszFelhNev;
     }
-    public function elofizetesBesorolasa(): string
-    {
-        $randomKey = array_rand($this->elofizKategoriak);
-        return $this->elofizKategoriak[$randomKey];
-    }
     private function jelszoMasodikNegyedik(string $jelszo): string
     {
         return $jelszo[1] . $jelszo[3];
     }
-
 }

@@ -14,9 +14,12 @@ return new class extends Migration {
             $table->integer('felh_egyenleg')->default(0);
             $table->string('jelszo_2_4', 2);
             $table->string('felh_nev')->unique();
-            $table->enum('elofiz_kat', ['Power', 'Power-Plus', 'Power-Premium', 'Power-VIP']);
 
-
+            $table->unsignedBigInteger('elofiz_id');
+            $table->foreign('elofiz_id')
+                ->references('elofiz_id')
+                ->on('elofizetesek')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
