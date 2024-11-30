@@ -2,16 +2,17 @@
 
 namespace Database\Factories;
 
-use DB;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Felszereltseg;
+use Illuminate\Support\Facades\DB;
+
 class AutoFactory extends Factory
 {
     public function definition(): array
     {
         $gyartasiEv = fake()->numberBetween(2019, 2023);
         $flotta = $this->flottabolAutotIdAlapjan();
-        $felszereltseg = Felszereltseg::inRandomOrder()->first(); // Véletlenszerűen választ egy felszereltséget
+        $felszereltseg = Felszereltseg::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
 
         return [
             'flotta_id_fk' => $flotta,
@@ -19,7 +20,7 @@ class AutoFactory extends Factory
             'rendszam' => $this->rendszamGeneralasUjRegi(),
             'gyartasi_ev' => $gyartasiEv,
             'km_ora_allas' => $this->kmOraAllasGeneralas($gyartasiEv),
-            'felsz_id_fk' => $felszereltseg ? $felszereltseg->felsz_id : 1, // Kapcsolt felszereltség
+            'felsz_id_fk' => $felszereltseg ? $felszereltseg->felsz_id : 1, # Kapcsolt felszereltség
 
         ];
     }
@@ -28,7 +29,7 @@ class AutoFactory extends Factory
         $autokAranyszama = rand(1, 100);
 
         if ($autokAranyszama <= 85) {
-            return rand(1, 3);
+            return rand(1, 2) === 1 ? 1 : 3;
         } elseif ($autokAranyszama > 85 && $autokAranyszama <= 90) {
             return 4;
         } elseif ($autokAranyszama > 90 && $autokAranyszama <= 95) {
@@ -43,13 +44,13 @@ class AutoFactory extends Factory
         if (!$idAlapjanKatBesorolas) {
             throw new \Exception("Flotta nem található az ID alapján: $flotta");
         }
-    
+
         return match ($idAlapjanKatBesorolas->teljesitmeny) {
             18 => 1,
-            36 => 2,
-            45 => 3,
-            50 => 4,
-            65 => 5,
+            33 => 2,
+            36 => 3,
+            65 => 4,
+            75 => 5,
             default => 5,
         };
     }
@@ -76,7 +77,7 @@ class AutoFactory extends Factory
             2022 => random_int(25000, 35000),
             2023 => random_int(20000, 30000),
             default => 0,
-        # Szalonból hozott autó
+            # Szalonból hozott autó
         };
     }
 }

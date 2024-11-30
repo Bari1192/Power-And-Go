@@ -19,10 +19,14 @@ return new class extends Migration
             $table->integer('foglalasi_perc');                          # Foglalás (percdíj, 20 perc után)
             $table->integer('kedv_parkolas_perc')->nullable();          # Kedvezményes parkolás (percdíj)
             $table->integer('napidij');                                 # Napidíj
+            $table->integer('napi_km_limit');                           # A napidíjban foglalt megtehető INGYENES km-ek száma.
             $table->integer('km_dij');                                  # Ingyenesen (125) megtehető km-en felüli útdíj
-            $table->integer('repter_felar')->nullable();                # Reptéri felár transzferrel (reptérre/reptérről)
-            $table->integer('repter_felar_terminal')->nullable();       # Reptéri felár terminálnál (reptérre/reptérről)
-            $table->integer('zona_felar')->nullable();                  # Külső zóna felár (indítás/zárás)
+            $table->integer('repter_ki_felar')->nullable();                # Reptéri felár transzferrel (reptérRE)
+            $table->integer('repter_be_felar')->nullable();                # Reptéri felár transzferrel (reptérRŐL)
+            $table->integer('repter_ki_terminal')->nullable();       # Reptéri felár terminálnál (reptérRE)
+            $table->integer('repter_be_terminal')->nullable();       # Reptéri felár terminálnál (reptérRŐL)
+            $table->integer('zona_nyit_felar')->nullable();                  # Külső zónából való bérlés nyitási, indítási felára (nyitás)
+            $table->integer('zona_zar_felar')->nullable();                  # Külső zónában való bérlés zárási felára (zárás)
             $table->timestamps();
         });
     }
