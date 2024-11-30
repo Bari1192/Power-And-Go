@@ -14,19 +14,7 @@ class Arazas extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
 
-    protected $fillable = [
-        'berles_ind',
-        'vez_perc',
-        'kedv_vez',
-        'parkolas_perc',
-        'foglalasi_perc',
-        'kedv_parkolas_perc',
-        'napidij',
-        'km_dij',
-        'repter_felar',
-        'repter_felar_terminal',
-        'zona_felar',
-    ];
+    protected $fillable = [];
     public function kategoria(): BelongsTo
     {
         return $this->belongsTo(Kategoria::class, 'auto_besorolas', 'kat_id');

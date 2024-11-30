@@ -10,13 +10,24 @@ return new class extends Migration
     {
         Schema::create('arazasok', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('elofiz_azon')->constrained('elofizetesek', 'elofiz_id')->onDelete('cascade');
-            $table->integer('auto_besorolas')->constrained('kategoriak', 'kat_id')->onDelete('cascade');
-            $table->integer('berles_ind');
-            $table->integer('vez_perc');
+            $table->unsignedBigInteger('elofiz_azon');      # Idegen kulcs oszlop létrehozása
+            
+            $table->foreign('elofiz_azon')                  # Az idegen kulcs beállítása
+                ->references('elofiz_id')                   # Mire hivatkozik
+                ->on('elofizetesek')                        # Melyik táblában van
+                ->onDelete('cascade');                      # Törlési szabály            
+                
+            $table->unsignedBigInteger('auto_besorolas');   # Idegen kulcs létrehozása
+            $table->foreign('auto_besorolas')            # Az idegen kulcs beállítása
+                    ->references('kat_id')                   # Mire hivatkozik
+                    ->on('kategoriak')                       # Melyik táblában van
+                    ->onDelete('cascade');                   # Törlési szabály            
+            
+                    $table->integer('berles_ind');
+            $table->integer('vez_perc')->nullable();;
             $table->integer('kedv_vez')->nullable();                    # Kedvezményes vezetés (percdíj, 6:00 - 9:00) - opcionális
-            $table->integer('parkolas_perc');                           # Parkolás (percdíj)
-            $table->integer('foglalasi_perc');                          # Foglalás (percdíj, 20 perc után)
+            $table->integer('parkolas_perc')->nullable();                           # Parkolás (percdíj)
+            $table->integer('foglalasi_perc')->nullable();                          # Foglalás (percdíj, 20 perc után)
             $table->integer('kedv_parkolas_perc')->nullable();          # Kedvezményes parkolás (percdíj)
             $table->integer('napidij');                                 # Napidíj
             $table->integer('napi_km_limit');                           # A napidíjban foglalt megtehető INGYENES km-ek száma.
@@ -27,9 +38,10 @@ return new class extends Migration
             $table->integer('repter_be_terminal')->nullable();       # Reptéri felár terminálnál (reptérRŐL)
             $table->integer('zona_nyit_felar')->nullable();                  # Külső zónából való bérlés nyitási, indítási felára (nyitás)
             $table->integer('zona_zar_felar')->nullable();                  # Külső zónában való bérlés zárási felára (zárás)
-            $table->integer('harom_ora_dij')->nullable();
-            $table->integer('hat_ora_dij')->nullable();
-            $table->integer('tizenketto_ora_dij')->nullable();
+            $table->integer('harom_ora_dij')->nullable();                   # 3 órás bérlés esetén a bérlés összege [CSAK OPEL-VIVARO-nál]
+            $table->integer('hat_ora_dij')->nullable();                     # 6 órás bérlés esetén a bérlés összege [CSAK OPEL-VIVARO-nál]
+            $table->integer('tizenketto_ora_dij')->nullable();              # 12 órás bérlés esetén a bérlés összege
+            $table->integer('hetvegi_napi_dij')->nullable();              # 12 órás bérlés esetén a bérlés összege
             $table->timestamps();
         });
     }

@@ -10,8 +10,10 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call(FlottaTipusSeeder::class);
         $this->call(KategoriaSeeder::class);
+        $this->call(ElofizetesSeeder::class);
+        $this->call(ArazasSeeder::class);
+        $this->call(FlottaTipusSeeder::class);
         $this->call(FelszereltsegSeeder::class);
         $this->call(AutoSeeder::class);
         $this->call(SzemelySeeder::class);

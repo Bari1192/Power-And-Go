@@ -22,7 +22,7 @@ class ArazasSeeder extends Seeder
             ## [Power] árak * [5 kategoria]
             # E-up | 18 kW | 1-es besorolas |
             [
-                'elofiz_id' => 1,
+                'elofiz_azon' => 1,
                 'auto_besorolas' => 1,
                 'berles_ind' => 380,
                 'vez_perc' => 105,
@@ -46,7 +46,7 @@ class ArazasSeeder extends Seeder
             ],
             # Renault Kangoo | 33 kW | 2-es besorolas |
             [
-                'elofiz_id' => 1,
+                'elofiz_azon' => 1,
                 'auto_besorolas' => 2,
                 'berles_ind' => 380,
                 'vez_perc' => 105,
@@ -70,7 +70,7 @@ class ArazasSeeder extends Seeder
             ],
             # E-up, Citigo | 36kW | 3-as besorolas |
             [
-                'elofiz_id' => 1,
+                'elofiz_azon' => 1,
                 'auto_besorolas' => 3,
                 'berles_ind' => 380,
                 'vez_perc' => 105,
@@ -94,7 +94,7 @@ class ArazasSeeder extends Seeder
             ],
             # Kia Niro | 65 kW | 4-es besorolas |
             [
-                'elofiz_id' => 1,
+                'elofiz_azon' => 1,
                 'auto_besorolas' => 4,
                 'berles_ind' => 1990,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
@@ -118,7 +118,7 @@ class ArazasSeeder extends Seeder
             ],
             # Opel Vivaro | 75 kW | 5-ös besorolas |
             [
-                'elofiz_id' => 1,
+                'elofiz_azon' => 1,
                 'auto_besorolas' => 5,
                 'berles_ind' => 1990,
                 'vez_perc' => 69,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
@@ -144,7 +144,7 @@ class ArazasSeeder extends Seeder
             ## [Power-Plus] árak * [5 kategoria]
             # E-up | 18 kW | 1-es besorolas |
             [
-                'elofiz_id' => 2,
+                'elofiz_azon' => 2,
                 'auto_besorolas' => 1,
                 'berles_ind' => 290,
                 'vez_perc' => 83,
@@ -168,7 +168,7 @@ class ArazasSeeder extends Seeder
             ],
             # Renault Kangoo - 33 kW
             [
-                'elofiz_id' => 2,
+                'elofiz_azon' => 2,
                 'auto_besorolas' => 2,
                 'berles_ind' => 290,
                 'vez_perc' => 83,
@@ -192,7 +192,7 @@ class ArazasSeeder extends Seeder
             ],
             # E-up, Citigo | 36kW | 3-as besorolas |
             [
-                'elofiz_id' => 2,
+                'elofiz_azon' => 2,
                 'auto_besorolas' => 3,
                 'berles_ind' => 290,
                 'vez_perc' => 83,
@@ -216,7 +216,7 @@ class ArazasSeeder extends Seeder
             ],
             # Kia Niro | 65 kW | 4-es besorolas |
             [
-                'elofiz_id' => 2,
+                'elofiz_azon' => 2,
                 'auto_besorolas' => 4,
                 'berles_ind' => 1990,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
@@ -240,7 +240,7 @@ class ArazasSeeder extends Seeder
             ],
             # Opel Vivaro | 75 kW | 5-ös besorolas |
             [
-                'elofiz_id' => 2,
+                'elofiz_azon' => 2,
                 'auto_besorolas' => 5,
                 'berles_ind' => 4500,
                 'vez_perc' => 69,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
@@ -266,7 +266,7 @@ class ArazasSeeder extends Seeder
             ## [Power-Prémium] árak * [5 kategoria]
             # E-up | 18 kW | 1-es besorolas |
             [
-                'elofiz_id' => 3,
+                'elofiz_azon' => 3,
                 'auto_besorolas' => 1,
                 'berles_ind' => 290,
                 'vez_perc' => 83,
@@ -290,7 +290,7 @@ class ArazasSeeder extends Seeder
             ],
             # Renault Kangoo - 33 kW
             [
-                'elofiz_id' => 3,
+                'elofiz_azon' => 3,
                 'auto_besorolas' => 2,
                 'berles_ind' => 290,
                 'vez_perc' => 78,
@@ -314,7 +314,7 @@ class ArazasSeeder extends Seeder
             ],
             # E-up, Citigo | 36kW | 3-as besorolas |
             [
-                'elofiz_id' => 3,
+                'elofiz_azon' => 3,
                 'auto_besorolas' => 4,
                 'berles_ind' => 1990,
                 'vez_perc' => 59,
@@ -338,7 +338,7 @@ class ArazasSeeder extends Seeder
             ],
             # Kia Niro | 65 kW | 4-es besorolas |
             [
-                'elofiz_id' => 2,
+                'elofiz_azon' => 3,
                 'auto_besorolas' => 4,
                 'berles_ind' => 1990,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
@@ -362,7 +362,7 @@ class ArazasSeeder extends Seeder
             ],
             # Opel Vivaro | 75 kW | 5-ös besorolas |
             [
-                'elofiz_id' => 2,
+                'elofiz_azon' => 3,
                 'auto_besorolas' => 5,
                 'berles_ind' => 4500,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
@@ -388,7 +388,7 @@ class ArazasSeeder extends Seeder
             ## [Power-VIP] árak * [5 kategoria]
             # E-up | 18 kW | 1-as besorolas |
             [
-                'elofiz_id' => 4,
+                'elofiz_azon' => 4,
                 'auto_besorolas' => 1,
                 'berles_ind' => 250,
                 'vez_perc' => 58,
@@ -412,7 +412,7 @@ class ArazasSeeder extends Seeder
             ],
             # Renault Kangoo - 33 kW
             [
-                'elofiz_id' => 5,
+                'elofiz_azon' => 4,
                 'auto_besorolas' => 2,
                 'berles_ind' => 250,
                 'vez_perc' => 58,
@@ -436,7 +436,7 @@ class ArazasSeeder extends Seeder
             ],
             # E-up, Citigo | 36kW | 3-as besorolas |
             [
-                'elofiz_id' => 4,
+                'elofiz_azon' => 4,
                 'auto_besorolas' => 3,
                 'berles_ind' => 250,
                 'vez_perc' => 58,
@@ -460,7 +460,7 @@ class ArazasSeeder extends Seeder
             ],
             # Kia Niro | 65 kW | 4-es besorolas |
             [
-                'elofiz_id' => 4,
+                'elofiz_azon' => 4,
                 'auto_besorolas' => 4,
                 'berles_ind' => 1990,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
@@ -484,7 +484,7 @@ class ArazasSeeder extends Seeder
             ],
             # Opel Vivaro | 75 kW | 5-ös besorolas |
             [
-                'elofiz_id' => 4,
+                'elofiz_azon' => 4,
                 'auto_besorolas' => 5,
                 'berles_ind' => 4500,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
