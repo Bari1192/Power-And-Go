@@ -6,13 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('arazas', function (Blueprint $table) {
+        Schema::create('arazasok', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('elofiz_azon')->constrained('elofizetesek', 'elofiz_id')->onDelete('cascade');
+            $table->integer('auto_besorolas')->constrained('kategoriak', 'kat_id')->onDelete('cascade');
             $table->integer('berles_ind');
             $table->integer('vez_perc');
             $table->integer('kedv_vez')->nullable();                    # Kedvezményes vezetés (percdíj, 6:00 - 9:00) - opcionális
@@ -29,6 +28,6 @@ return new class extends Migration
     }
     public function down(): void
     {
-        Schema::dropIfExists('arazas');
+        Schema::dropIfExists('arazasok');
     }
 };

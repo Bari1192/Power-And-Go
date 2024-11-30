@@ -21,4 +21,8 @@ class Kategoria extends Model
     {
         return $this->hasMany(Auto::class, 'kategoria_besorolas_fk', 'kategoria_besorolas');
     }
+    public function arazasok(): HasMany
+    {
+        return $this->hasMany(Arazas::class, 'auto_besorolas', 'kat_id');
+    }
 }
