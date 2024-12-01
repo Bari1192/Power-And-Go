@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FelhasznaloSeeder::class);
         $this->call(LezartBerlesSeeder::class);
         $this->call(FutoBerlesSeeder::class);
+        $this->call(NapiBerlesSeeder::class);
     }
 }
