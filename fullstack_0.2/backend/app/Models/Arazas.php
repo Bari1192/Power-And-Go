@@ -22,6 +22,9 @@ class Arazas extends Model
     }
     public function elofizetes(): BelongsTo
     {
-        return $this->belongsTo(Elofizetes::class, 'elofiz_azon', 'elofiz_id');
+        return $this->belongsTo(Elofizetes::class, 'elofiz_id', 'elofiz_id');
+    }
+    public function napiBerlesek():HasMany{
+        return $this->hasMany(NapiBerles::class,'arazas_id','id');
     }
 }

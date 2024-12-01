@@ -13,7 +13,7 @@ class Kategoria extends Model
     protected $table = 'kategoriak';
     protected $primaryKey = 'kat_id';
 
-    public $timestamps = true; 
+    public $timestamps = true;
     public $incrementing = true;
     protected $fillable = [];
 
@@ -25,5 +25,9 @@ class Kategoria extends Model
     public function arazasok(): HasMany
     {
         return $this->hasMany(Arazas::class, 'auto_besorolas', 'kat_id');
+    }
+    public function napiBerlesek(): HasMany
+    {
+        return $this->hasMany(NapiBerles::class, 'auto_tipus', 'kat_id');
     }
 }
