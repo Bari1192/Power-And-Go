@@ -26,6 +26,6 @@ class Auto extends Model
 
     public function kategoria(): BelongsTo
     {
-        return $this->belongsTo(Kategoria::class, 'kategoria_besorolas_fk', 'kat_id');
+        return $this->belongsTo(Kategoria::class, 'kategoria_besorolas_fk', 'kat_besorolas');
     }
 }

@@ -11,9 +11,9 @@ class LezartBerles extends Model
 
     protected $table = 'lezart_berlesek';
     protected $primaryKey = 'lezart_berles_id';
-    public $timestamps = true; 
+    public $timestamps = true;
     public $incrementing = true;
-    
+
     protected $fillable = [];
 
     public function auto()
@@ -28,6 +28,6 @@ class LezartBerles extends Model
 
     public function felhasznalo()
     {
-        return $this->belongsTo(Felhasznalo::class, 'szemely_id_fk', 'szemely_id'); // FK helyes neve
+        return $this->belongsTo(Felhasznalo::class, 'szemely_id_fk', 'szemely_id'); 
     }
 }

@@ -20,7 +20,7 @@ class Kategoria extends Model
 
     public function autok(): HasMany
     {
-        return $this->hasMany(Auto::class, 'kategoria_besorolas_fk', 'kategoria_besorolas');
+        return $this->hasMany(Auto::class, 'kategoria_besorolas_fk', 'kat_besorolas');
     }
     public function arazasok(): HasMany
     {

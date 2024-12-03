@@ -11,18 +11,18 @@ return new class extends Migration
         Schema::create('arazasok', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('elofiz_azon');      # Idegen kulcs oszlop létrehozása
-            
+
             $table->foreign('elofiz_azon')                  # Az idegen kulcs beállítása
                 ->references('elofiz_id')                   # Mire hivatkozik
                 ->on('elofizetesek')                        # Melyik táblában van
                 ->onDelete('cascade');                      # Törlési szabály            
-                
-            $table->unsignedBigInteger('auto_besorolas');   # Idegen kulcs létrehozása
-            $table->foreign('auto_besorolas')            # Az idegen kulcs beállítása
-                    ->references('kat_id')                   # Mire hivatkozik
-                    ->on('kategoriak')                       # Melyik táblában van
-                    ->onDelete('cascade');                   # Törlési szabály            
-            
+
+            $table->unsignedBigInteger('auto_besorolas');
+            $table->foreign('auto_besorolas')
+                ->references('kat_besorolas') // kat_id helyett kat_besorolas
+                ->on('kategoriak')
+                ->onDelete('cascade');                  # Törlési szabály            
+
             $table->integer('berles_ind');
             $table->integer('vez_perc')->nullable();;
             $table->integer('kedv_vez')->nullable();                    # Kedvezményes vezetés (percdíj, 6:00 - 9:00) - opcionális

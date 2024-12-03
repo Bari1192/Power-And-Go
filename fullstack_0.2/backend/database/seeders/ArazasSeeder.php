@@ -339,7 +339,7 @@ class ArazasSeeder extends Seeder
             # E-up, Citigo | 36kW | 3-as besorolas |
             [
                 'elofiz_azon' => 3,
-                'auto_besorolas' => 4,
+                'auto_besorolas' => 3,
                 'berles_ind' => 1990,
                 'vez_perc' => 59,
                 'kedv_vez' => null,

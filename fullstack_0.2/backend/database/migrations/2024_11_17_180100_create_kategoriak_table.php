@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('kategoriak', function (Blueprint $table) {
             $table->id('kat_id');
-            $table->integer('kat_besorolas')->unique(); 
+            $table->unsignedBigInteger('kat_besorolas')->unique();
             $table->timestamps();
         });
     }
