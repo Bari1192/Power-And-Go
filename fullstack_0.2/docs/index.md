@@ -2,25 +2,26 @@
 
 ### [Számlázás-TÁBLA]
 1.   Az egész tábla tartalma cirka származtatott lenne, ami annyit jelent, hogy létrejönne a(z):
-    - szamla_id('szamla_sorszam') [PK] -> Egyedi azonosítószáma a számlának.
-    - szamla_tipus     ->  A számla kiállításának típusát írja le, mely származhat bérlésből, baleset -ből (mint baleset okozója),károkozás-ból (mint rongálás, törés stb.), magatartás -ból (mint autóban dohányzás, tilosban parkolás, gyorshajtás). Egyik értéket mindig kötelező felvennie.
-    - felh_nev ('felhasznalo') [FK] -> felh_id_fk érték kerül ide, ami beazonosítja, hogy melyik felhasználóhoz tartozik a számla.
-    - berles_kezd_datum     ->  Meghatározza a berles kedzetének dátumát (év-hónap-nap).
-    - berles_kezd_ido       ->  Meghatározza a berles kedzetének időpontját (óra-perc-másodperc).
-    - berles_veg_datum      -> Meghatározza a bérlés végének dátumát (év-hónap-nap).
-    - berles_veg_ido        -> Meghatározza a berles végének időpontját (óra-perc-másodperc).
-    - megtett_tavolsag      -> Meghatározza a bérlés során az autóval megtett távolságot (km-ben).
-    - parkolasi_perc        -> Meghatározza a bérlés során az autóval parkolt időt (percben, egész számként).
-    - vezetesi_perc         -> Meghatározza a bérlés során az autóval levezetett időt (percben, egész számként).
-    - berles_osszeg         -> Meghatározza a bérlés során az autó típusától és a felhasználó előfizetési csomagjától (ha van) függően a megtett távolság, vezetési percdíj, parkolás és egyéb szolgálatások fejében a bérlésének a teljes költségét. (Ft-ban, egész számként).
-    - szamla_kelt           -> A számla készítésének időpontját -> created_at érték.
-    - szamla_status         -> Az 'aktiv','függőben','archivált' értékek egyikét veszifel, attól függően, hogy a számla kifizetésre került-e. Alapértelmezetten a 'függőben' státust kapja, míg a számla kifizetése valóban meg nem történik. 
+    - `szamla_id`('szamla_sorszam') [PK] -> Egyedi azonosítószáma a számlának.
+    - `szamla_tipus`     ->  A számla kiállításának típusát írja le, mely származhat bérlésből, baleset -ből (mint baleset okozója),károkozás-ból (mint rongálás, törés stb.), magatartás -ból (mint autóban dohányzás, tilosban parkolás, gyorshajtás). Egyik értéket mindig kötelező felvennie.
+    - `felh_id` ('felhasznalo') [FK] -> felh_id_fk érték kerül ide, ami beazonosítja, hogy melyik felhasználóhoz tartozik a számla.
+    - `szemely_id` ('szemely') [FK] -> szemely_id érték kerül ide, ami beazonosítja, hogy az adott személyhez ez a felhasznaló tartozik (azonosítószám alapján) a számla. (többszörös védelem a biztosan hibamentes számla kiállításához.)
+    - `berles_kezd_datum`     ->  Meghatározza a berles kedzetének dátumát (év-hónap-nap).
+    - `berles_kezd_ido`       ->  Meghatározza a berles kedzetének időpontját (óra-perc-másodperc).
+    - `berles_veg_datum`      -> Meghatározza a bérlés végének dátumát (év-hónap-nap).
+    - `berles_veg_ido`        -> Meghatározza a berles végének időpontját (óra-perc-másodperc).
+    - `megtett_tavolsag`      -> Meghatározza a bérlés során az autóval megtett távolságot (km-ben).
+    - `parkolasi_perc`        -> Meghatározza a bérlés során az autóval parkolt időt (percben, egész számként).
+    - `vezetesi_perc`         -> Meghatározza a bérlés során az autóval levezetett időt (percben, egész számként).
+    - `berles_osszeg`         -> Meghatározza a bérlés során az autó típusától és a felhasználó előfizetési csomagjától (ha van) függően a megtett távolság, vezetési percdíj, parkolás és egyéb szolgálatások fejében a bérlésének a teljes költségét. (Ft-ban, egész számként).
+    - `szamla_kelt`           -> A számla készítésének időpontját -> created_at érték.
+    - `szamla_status`         -> Az 'aktiv','függőben','archivált' értékek egyikét veszifel, attól függően, hogy a számla kifizetésre került-e. Alapértelmezetten a 'függőben' státust kapja, míg a számla kifizetése valóban meg nem történik. 
 
     Mivel az adatok jórésze már a `lezart_berlesek` táblában elérhető, ezért onnan fel tudjuk használni. Fontos ugyanakkor, hogy az ottani értékek megmaradnak annak érdekében, hogy ahhoz a táblához / táblába a `felhasználó NEM láthat bele`. Ennek érdekében kerül elkészítésre a `szamlak` tábla, ahol majd a számlákkal:
-    - Státuszát tudjuk állítani,
-    - Új számlát tudunk kiállítani,
-    - Számlát tudunk törölni,
-    - Számlát tudunk módosítani - hiba esetére -> megfelelő jogosultságg(ok)al.
+    - `Státuszát` tudjuk állítani,
+    - `Új számlát` tudunk kiállítani,
+    - Számlát tudunk `törölni`,
+    - Számlát tudunk `módosítani` - hiba esetére -> megfelelő jogosultságg(ok)al.
 
 
 ### SZÁMLÁZÁSI LOGIKA LEÍRÁSA [ENYÉM]:

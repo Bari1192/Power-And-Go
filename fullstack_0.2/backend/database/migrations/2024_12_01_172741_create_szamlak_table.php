@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('szamla_id');
             $table->enum('szamla_tipus', ['berles', 'baleset', 'karokozas', 'magatartas']);
             $table->unsignedBigInteger('felh_id');
+
             $table->foreign('felh_id')
                 ->references('felh_id')
                 ->on('felhasznalok')
@@ -24,14 +25,20 @@ return new class extends Migration
                 ->references('szemely_id')
                 ->on('szemelyek')
                 ->onDelete('cascade');
+            $table->unsignedBigInteger('auto_azon');
+            $table->foreign('auto_azon')
+                ->references('autok_id')
+                ->on('autok')
+                ->onDelete('cascade');
+
+            $table->integer('berles_osszeg');
+            $table->integer('megtett_tavolsag');
+            $table->integer('parkolasi_perc');
+            $table->integer('vezetesi_perc');
             $table->date('berles_kezd_datum');
             $table->time('berles_kezd_ido');
             $table->date('berles_veg_datum');
             $table->time('berles_veg_ido');
-            $table->integer('megtett_tavolsag');
-            $table->integer('parkolasi_perc');
-            $table->integer('vezetesi_perc');
-            $table->integer('berles_osszeg');
             $table->timestamp('szamla_kelt')->useCurrent();
             $table->enum('szamla_status', ['active', 'pending', 'archiv'])->default('pending');
             $table->timestamps();

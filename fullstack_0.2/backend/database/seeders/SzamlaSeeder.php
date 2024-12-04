@@ -16,13 +16,14 @@ class SzamlaSeeder extends Seeder
     public function run(): void
     {
         $mindenLezartBerles = LezartBerles::all();
-        
-        foreach($mindenLezartBerles as $egySzamla) {
+
+        foreach ($mindenLezartBerles as $egySzamla) {
             $felhasznalo = Felhasznalo::where('szemely_id', '=', $egySzamla->szemely_id_fk)->first();
             Szamla::create([
                 'szamla_tipus' => 'berles',
                 'felh_id' => $felhasznalo->felh_id,
                 'szemely_id' => $egySzamla->szemely_id_fk,
+                'auto_azon' => $egySzamla->auto_azonosito,
                 'berles_kezd_datum' => $egySzamla->berles_kezd_datum,
                 'berles_kezd_ido' => $egySzamla->berles_kezd_ido,
                 'berles_veg_datum' => $egySzamla->berles_veg_datum,
