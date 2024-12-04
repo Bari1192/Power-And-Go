@@ -15,12 +15,19 @@ class LezartBerlesResource extends JsonResource
 
 
 
-        if ($this->vezetesi_perc == 0 && $this->vezetesi_perc % 60 == 0) {
+        if ($this->vezetesi_perc == 0) {
+            $vezetesHaVolt = sprintf('%d percet vezettél', $this->vezetesi_perc);
+        } elseif (intdiv($this->parkolasi_perc, 60) == 0) {
+            $vezetesHaVolt = sprintf('%d percet parkoltál', $this->vezetesi_perc % 60);
+        } else {
+            $vezetesHaVolt = sprintf('%d óra %d percet parkoltál', intdiv($this->vezetesi_perc, 60), $this->vezetesi_perc % 60);
+        }
+        if ($this->parkolasi_perc == 0 && $this->parkolasi_perc % 60 == 0) {
             $parkolasHaVolt = sprintf('%d percet parkoltál', $this->parkolasi_perc);
         } elseif (intdiv($this->parkolasi_perc, 60) == 0) {
             $parkolasHaVolt = sprintf('%d percet parkoltál', $this->parkolasi_perc % 60);
         } else {
-            $parkolasHaVolt = sprintf('%d óra és %d percet parkoltál', intdiv($this->parkolasi_perc, 60), $this->parkolasi_perc % 60);
+            $parkolasHaVolt = sprintf('%d óra %d percet parkoltál', intdiv($this->parkolasi_perc, 60), $this->parkolasi_perc % 60);
         }
         return [
             'lezart_berles_id' => $this->lezart_berles_id,
@@ -30,7 +37,7 @@ class LezartBerlesResource extends JsonResource
             'berles_kezdete' => $berles_kezdete->format('Y-m-d H:i'),
             'berles_vege' => $berles_vege->format('Y-m-d H:i'),
             'parkolasi_idotartam' => $parkolasHaVolt,
-            'vezetesi_idotartam' => sprintf('%d óra és %d percet vezettél', intdiv($this->vezetesi_perc, 60), $this->vezetesi_perc % 60),
+            'vezetesi_idotartam' => $vezetesHaVolt,
             'berles_osszeg' => number_format($this->berles_osszeg, 0, '', ' '),
             ### A FELHASZNALO e-mail és k_nev lekérése más táblákból.
             'szemely_knev' => $this->felhasznalo->szemely->k_nev,
