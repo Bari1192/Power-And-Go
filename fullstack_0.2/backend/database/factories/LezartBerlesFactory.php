@@ -27,11 +27,11 @@ class LezartBerlesFactory extends Factory
         }
 
         # Bérlési időszak generálása
+        $autoKategoria = $auto->kategoria_besorolas_fk;
         $berlesKezdete = $this->berlesKezdete();
-        $berlesIdotartam = $this->berlesIdotartama(); ## másodperc - rand_int-ből!!!
+        $berlesIdotartam = $this->berlesIdotartama($autoKategoria); ## másodperc - rand_int-ből!!!
         $berlesVege = (clone $berlesKezdete)->modify("+{$berlesIdotartam} seconds");
         $megtettTavolsag = $this->megtettTavolsag($berlesIdotartam);
-        $autoKategoria = $auto->kategoria_besorolas_fk;
 
         $parkolasok = $this->generaltParkolasok($berlesKezdete, $berlesVege);
         $teljesParkolasIdo = array_sum(array_column($parkolasok, 'hossza_perc'));
@@ -66,10 +66,19 @@ class LezartBerlesFactory extends Factory
         return fake()->dateTimeBetween('-180 days', 'now');
     }
 
-    private function berlesIdotartama(): int
+    private function berlesIdotartama($autoKategoria): int
     {
-        ## 80% eséllyel 1-60 perc közötti bérlés, egyébként 1-3 nap közötti
-        return random_int(1, 100) <= 80 ? random_int(60, 3600) : random_int(86400, 259200);
+        if (in_array($autoKategoria, [2, 5])) {
+            return random_int(1, 100) <= 66 ? random_int(1652, 4267) :  random_int(86400, 259200);
+            ## 34-66 arányban rövid & hosszútávú bérlés lesz -> inkább rövid a "pakolós furgon"
+        } elseif ($autoKategoria == 4) {
+            return random_int(1, 100) <= 30 ? random_int(86000, 87000) :  random_int(86400, 259200);
+            ## 30-70 arányban rövid & hosszútávú bérlés lesz -> inkább hosszú a "kényelmes Niro"
+            ## 30 %-ban cirka 24 óra és akörüli bérlés || 70%-ban pedig 1-3 napos bérlés.
+        } else {
+            return random_int(1, 100) <= 80 ? random_int(60, 3600) : random_int(86400, 259200);
+            ## 80% eséllyel 1-60 perc közötti bérlés, egyébként 1-3 nap közötti
+        }
     }
 
     private function megtettTavolsag(int $idoKulonbseg): int
@@ -175,18 +184,18 @@ class LezartBerlesFactory extends Factory
             $minimumOsszeg = $arazas->napidij + $kmDijOsszeg + $berlesInditasa;
             return max($minimumOsszeg, $alapOsszeg);
         }
-        if (($berlesIdotartam/60) <= 180 && $arazas->auto_besorolas == 5) {
+        if (($berlesIdotartam / 60) <= 180 && $arazas->auto_besorolas == 5) {
             $minimumOsszeg = $arazas->harom_ora_dij + $kmDijOsszeg + $berlesInditasa;
             return max($minimumOsszeg, $alapOsszeg);
-        } elseif (($berlesIdotartam/60) > 180 && $berlesIdotartam < 360 && $arazas->auto_besorolas == 5) {
+        } elseif (($berlesIdotartam / 60) > 180 && $berlesIdotartam < 360 && $arazas->auto_besorolas == 5) {
             $minimumOsszeg = $arazas->harom_ora_dij + $kmDijOsszeg + $berlesInditasa;
             $maximumOsszeg = $arazas->hat_ora_dij + $kmDijOsszeg + $berlesInditasa;
             return min($minimumOsszeg, $maximumOsszeg);
-        } elseif (($berlesIdotartam/60) >= 360 && $berlesIdotartam < 720 && $arazas->auto_besorolas == 5) {
+        } elseif (($berlesIdotartam / 60) >= 360 && $berlesIdotartam < 720 && $arazas->auto_besorolas == 5) {
             $minimumOsszeg = $arazas->hat_ora_dij + $kmDijOsszeg + $berlesInditasa;
             $maximumOsszeg = $arazas->tizenketto_ora_dij + $kmDijOsszeg + $berlesInditasa;
             return min($minimumOsszeg, $maximumOsszeg);
-        } elseif (($berlesIdotartam/60) >= 720 && $berlesIdotartam < 1440 && $arazas->auto_besorolas == 5) {
+        } elseif (($berlesIdotartam / 60) >= 720 && $berlesIdotartam < 1440 && $arazas->auto_besorolas == 5) {
             $minimumOsszeg = $arazas->tizenketto_ora_dij + $kmDijOsszeg + $berlesInditasa;
             $maximumOsszeg = $arazas->napidij + $kmDijOsszeg + $berlesInditasa;
             return min($minimumOsszeg, $maximumOsszeg);

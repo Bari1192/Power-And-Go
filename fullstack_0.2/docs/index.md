@@ -1,5 +1,27 @@
 # Dokumentáció
 
+### [Számlázás-TÁBLA]
+1.   Az egész tábla tartalma cirka származtatott lenne, ami annyit jelent, hogy létrejönne a(z):
+    - szamla_id('szamla_sorszam') [PK] -> Egyedi azonosítószáma a számlának.
+    - felh_nev ('felhasznalo') [FK] -> felh_id_fk érték kerül ide, ami beazonosítja, hogy melyik felhasználóhoz tartozik a számla.
+    - berles_kezd_datum     ->  Meghatározza a berles kedzetének dátumát (év-hónap-nap).
+    - berles_kezd_ido       ->  Meghatározza a berles kedzetének időpontját (óra-perc-másodperc).
+    - berles_veg_datum      -> Meghatározza a bérlés végének dátumát (év-hónap-nap).
+    - berles_veg_ido        -> Meghatározza a berles végének időpontját (óra-perc-másodperc).
+    - megtett_tavolsag      -> Meghatározza a bérlés során az autóval megtett távolságot (km-ben).
+    - parkolasi_perc        -> Meghatározza a bérlés során az autóval parkolt időt (percben, egész számként).
+    - vezetesi_perc         -> Meghatározza a bérlés során az autóval levezetett időt (percben, egész számként).
+    - berles_osszeg         -> Meghatározza a bérlés során az autó típusától és a felhasználó előfizetési csomagjától (ha van) függően a megtett távolság, vezetési percdíj, parkolás és egyéb szolgálatások fejében a bérlésének a teljes költségét. (Ft-ban, egész számként).
+    - szamla_kelt           -> A számla készítésének időpontját -> created_at érték.
+    - szamla_status         -> Az 'aktiv','függőben','archivált' értékek egyikét veszifel, attól függően, hogy a számla kifizetésre került-e. Alapértelmezetten a 'függőben' státust kapja, míg a számla kifizetése valóban meg nem történik. 
+
+    Mivel az adatok jórésze már a `lezart_berlesek` táblában elérhető, ezért onnan fel tudjuk használni. Fontos ugyanakkor, hogy az ottani értékek megmaradnak annak érdekében, hogy ahhoz a táblához / táblába a `felhasználó NEM láthat bele`. Ennek érdekében kerül elkészítésre a `szamlak` tábla, ahol majd a számlákkal:
+    - Státuszát tudjuk állítani,
+    - Új számlát tudunk kiállítani,
+    - Számlát tudunk törölni,
+    - Számlát tudunk módosítani - hiba esetére -> megfelelő jogosultságg(ok)al.
+
+
 ### SZÁMLÁZÁSI LOGIKA LEÍRÁSA [ENYÉM]:
 Ugye a `4-es előfizetési kategóriával`, `4-es kategóriájú autóval` bérelt. `közel 1,5 napig` bérelte az autót. Mivel a 4-es kat. autókat `CSAK napokra lehet bérelni` ezért úgy kellene számolnia, hogy:
  ArazasSeederben kikeresi ezt (elofiz_azon,auto_besorolas, díjak stb.), majd utána:
@@ -36,10 +58,6 @@ Ugyanakkor meg kell vizsgálnunk, helyesen - ahogy tetted -, hogy azzal jár-e j
 
 ## Backend
 [SORREND]
-1. Egy árazási szabályzat táblát,
-2. Elofizetes táblát,
-3. Majd át kell írni a `lezárt_bérlések` táblát, hogy a már így generált `elofizetéseket` többé `ne array`-ből random generálja be (értéknek), hanem `FK-ként vegye át` a táblából.
-4. `Factory-ban` ki kell egészítenem, hogy parkolási időt is generáljon arányosan.
 5. A `folyamatban lévő bérléseket` is át kell alakítani, hogy `státusz` alapján `lezárás után` a `lezárt bérlések táblába kerüljenek` az adatok
 6. `Konyvelesi táblát` is létre kell hozni, ahová a `lezárt bérlések számlák` kifizetés után `kerülnek` (hogy profilban elérhető legyen + könyvelési osztály is elérje, hogy a NAV ne szóljon be)
 
