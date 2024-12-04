@@ -28,7 +28,7 @@ class LezartBerlesFactory extends Factory
 
         # Bérlési időszak generálása
         $berlesKezdete = $this->berlesKezdete();
-        $berlesIdotartam = $this->berlesIdotartama(); // másodperc
+        $berlesIdotartam = $this->berlesIdotartama(); // másodperc - rand_int-ből!!!
         $berlesVege = (clone $berlesKezdete)->modify("+{$berlesIdotartam} seconds");
         $megtettTavolsag = $this->megtettTavolsag($berlesIdotartam);
         $autoKategoria = $auto->kategoria_besorolas_fk;
@@ -37,7 +37,7 @@ class LezartBerlesFactory extends Factory
         $teljesParkolasIdo = array_sum(array_column($parkolasok, 'hossza_perc'));
         $vezetesIdo = max(0, ($berlesIdotartam / 60) - $teljesParkolasIdo);
 
-        # Parkolás kezd és vég, ha létezik parkolás
+        # Parkolás kezd és vég - ha egyáltalán volt és létezik a parkolás
         $parkKezdIdo = !empty($parkolasok) ? $parkolasok[0]['kezd'] : null;
         $parkVegIdo = !empty($parkolasok) ? end($parkolasok)['veg'] : null;
 
@@ -68,8 +68,8 @@ class LezartBerlesFactory extends Factory
 
     private function berlesIdotartama(): int
     {
-        // 85% eséllyel 1-60 perc közötti bérlés, egyébként 1-3 nap közötti
-        return random_int(1, 100) <= 85 ? random_int(60, 3600) : random_int(86400, 259200);
+        ## 80% eséllyel 1-60 perc közötti bérlés, egyébként 1-3 nap közötti
+        return random_int(1, 100) <= 80 ? random_int(60, 3600) : random_int(86400, 259200);
     }
 
     private function megtettTavolsag(int $idoKulonbseg): int
@@ -102,7 +102,7 @@ class LezartBerlesFactory extends Factory
     {
         $parkolasok = [];
         $berlesIdoMasodperc = $berlesVege->getTimestamp() - $berlesKezdete->getTimestamp();
-        $berlesIdotartam = $berlesIdoMasodperc / 3600; // Bérlés időtartam órában
+        $berlesIdotartam = $berlesIdoMasodperc / 3600; ## Bérlés időtartam órában
 
         $parkolasokSzama = 0;
         if ($berlesIdotartam > 1 && $berlesIdotartam <= 3) {
@@ -113,7 +113,7 @@ class LezartBerlesFactory extends Factory
             $parkolasokSzama = 3;
         }
 
-        // A parkolási időket a bérlés időtartamához igazítjuk, max. 30%
+        ## A parkolási időket a bérlés időtartamához igazítjuk, max. 30%
         $maxParkolasPerc = (int)(($berlesIdoMasodperc / 60) * 0.3);
         $minParkolas = 5;
         $maxParkolas = max($minParkolas, $maxParkolasPerc);
@@ -143,35 +143,23 @@ class LezartBerlesFactory extends Factory
         return $parkolasok;
     }
 
-    private function berlesVegosszegSzamolas(
-        Arazas $arazas,
-        int $idoKulonbseg,
-        int $tavolsag,
-        array $parkolasok,
-        int $autoKategoria
-    ): float {
-        $idoPerc = $idoKulonbseg / 60;
-        $napok = ceil($idoKulonbseg / 86400);
+    private function berlesVegosszegSzamolas(Arazas $arazas, int $idoKulonbseg, int $tavolsag, array $parkolasok, int $autoKategoria): float
+    {
+        $idoPerc = $idoKulonbseg / 60; // Másodpercek átváltása percre
+        $napok = ceil($idoKulonbseg / 86400); // Napok kiszámítása
 
-        // Napi bérlés, ha >= 24 óra (86400 másodperc)
-        $napiBerles = $idoKulonbseg >= 86400;
-
-        $berlesInditasa = $arazas->berles_ind ?? 0;
-        $vezPercDij = $arazas->vez_perc ?? 0;
-        $parkolasPercDij = $arazas->parkolas_perc ?? 0;
-        $napiKmLimit = $arazas->napi_km_limit ?? 0;
-        $kmDij = $arazas->km_dij ?? 0;
+        $berlesInditasa = $arazas->berles_ind;
+        $vezPercDij = $arazas->vez_perc;
+        $parkolasPercDij = $arazas->parkolas_perc;
+        $napiKmLimit = $arazas->napi_km_limit;
+        $kmDij = $arazas->km_dij;
 
         $teljesParkolasIdo = array_sum(array_column($parkolasok, 'hossza_perc'));
         $vezetesPerc = max(0, $idoPerc - $teljesParkolasIdo);
 
-        // Ha nem napi bérlés, a km díjat nem számítjuk!
-        // Ha napi bérlés, akkor ha túllépi a km limitet, kifizetteti a km díjat is.
-        $kmDijOsszeg = 0;
-        if ($napiBerles) {
-            $kmTobbseg = max(0, $tavolsag - ($napok * $napiKmLimit));
-            $kmDijOsszeg = $kmTobbseg * $kmDij;
-        }
+        // Km díj kiszámítása
+        $kmTobbseg = max(0, $tavolsag - ($napok * $napiKmLimit));
+        $kmDijOsszeg = $kmTobbseg * $kmDij;
 
         // Parkolási díj
         $parkolasiOsszeg = $teljesParkolasIdo * $parkolasPercDij;
@@ -179,35 +167,34 @@ class LezartBerlesFactory extends Factory
         // Vezetési díj
         $vezetesOsszeg = $vezetesPerc * $vezPercDij;
 
-        // Alapösszeg: (Indítási díj + vezetés + parkolás)
-        // Napi bérlés esetén ehhez adódhat km díj, ha van.
-        $alapOsszeg = $berlesInditasa + $vezetesOsszeg + $parkolasiOsszeg;
-        if ($napiBerles) {
-            $alapOsszeg += $kmDijOsszeg;
+        // Alap konstrukció: vezetési díj + parkolási díj + indítási díj + km díj (ha van)
+        $alapOsszeg = $berlesInditasa + $vezetesOsszeg + $parkolasiOsszeg + $kmDijOsszeg;
+
+        // Ha 24 órán belüli bérlésről van szó a 2-es vagy 4-es kategóriában, legalább a napidíjat kell visszaadni
+        if ($napok <= 1 && in_array($autoKategoria, [2, 4])) {
+            $minimumOsszeg = $arazas->napidij + $kmDijOsszeg+$berlesInditasa;
+            return max($minimumOsszeg, $alapOsszeg);
         }
 
-        // Napi díjas konstrukció vizsgálata, csak ha napi bérlés
-        if ($napiBerles) {
-            $osszegNapiDijjal = $arazas->napidij;
+        // Ha többnapos bérlésről van szó, lekérjük a NapiBerles táblából az értékeket
+        if ($napok > 1) {
             $napiBerlesek = NapiBerles::where('arazas_id', $arazas->id)
                 ->where('auto_tipus', $autoKategoria)
-                ->where('napok', '<=', $napok)
-                ->orderByDesc('napok')
+                ->orderBy('napok')
                 ->get();
 
-            foreach ($napiBerlesek as $napiBerlet) {
-                if ($napiBerlet->napok <= $napok) {
-                    $osszegNapiDijjal += $napiBerlet->ar;
-                }
+            if ($napiBerlesek->isEmpty()) {
+                throw new \Exception("NapiBerles adatok nem találhatók!");
             }
 
-            // Napi díjas konstrukcióhoz is hozzáadjuk a km díjat, ha túllépés történt.
-            $osszegNapiDijjal += $kmDijOsszeg;
-            return min($alapOsszeg, $osszegNapiDijjal);
+            $napiDijTomb = $napiBerlesek->pluck('ar')->toArray();
+            $tobbNaposDij = $napiDijTomb[$napok - 2] ?? end($napiDijTomb); // A $napok-2 elem a megfelelő napi díj
+
+            // Többnapos bérlés esetén az alapösszeggel és a napi díjas összeggel hasonlítunk
+            return min($alapOsszeg, $tobbNaposDij + $kmDijOsszeg+$berlesInditasa);
         }
 
-        // Nem napi bérlés esetén nincs napi díj összehasonlítás
-        // és nincs km díj, már nem is számítottuk hozzá.
+        // Egyéb esetekben visszaadjuk az alapösszeget
         return $alapOsszeg;
     }
 }

@@ -18,7 +18,7 @@ class NapiBerlesSeeder extends Seeder
             $autoTipusok = range(1, 5);
 
             foreach ($autoTipusok as $tipus) {
-                $prices = $this->napiBerlesAutokEsElofizAlapjan($arazas->auto_besorolas, $arazas->elofiz_azon);
+                $prices = $this->napiBerlesAutokEsElofizAlapjan($arazas->elofiz_azon,$arazas->auto_besorolas);
 
                 foreach ($prices as $nap => $ar) {
                     NapiBerles::create([
@@ -32,7 +32,7 @@ class NapiBerlesSeeder extends Seeder
         }
     }
     # Árak generálása az autókategória és előfizetési csoport alapján
-    private function napiBerlesAutokEsElofizAlapjan($auto_besorolas, $elofiz_azon)
+    private function napiBerlesAutokEsElofizAlapjan($elofiz_azon,$auto_besorolas)
     {
         # MÁSODIK NAPTÓL VANNAK!
         $napiarak = [

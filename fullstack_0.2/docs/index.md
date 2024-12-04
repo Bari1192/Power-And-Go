@@ -1,7 +1,38 @@
 # Dokumentáció
 
+### SZÁMLÁZÁSI LOGIKA LEÍRÁSA [ENYÉM]:
+Ugye a `4-es előfizetési kategóriával`, `4-es kategóriájú autóval` bérelt. `közel 1,5 napig` bérelte az autót. Mivel a 4-es kat. autókat `CSAK napokra lehet bérelni` ezért úgy kellene számolnia, hogy:
+ ArazasSeederben kikeresi ezt (elofiz_azon,auto_besorolas, díjak stb.), majd utána:
+`berles_ind` díja, =>1990  Ft + `napidij` => 20680 
+Majd ellenőrzi, hogy a LezartBerlesFactory `megtettTavolsag`() alapján generált érték (`pl:128km`)
+Benne van-e az ArazasSeeder -ben lévő  `napi_km_limit` -ben, ami => `125`, ennél az előfizetőnél.
+Mivel 3 km-rel többet autózott el, mint a napi limit, ezért 3 *48 Ft-ot kéne fizetnie pluszban. (Amennyiben 1 napig bérelte. Hogy ha 2 napot bérli, akkor minden egyes további nappal +125km-rel nő az ő napi_km_limit értéke.)
+Maradva a számolásnál ez azt jelenti, hogy elsőnek ki kell számolnunk, hogy:
+1. 1990+20680+(3*48)+((~5óra*60) *vez_perc => 78) = 46 214 Ft (ha jól számolom),
+VAGY AMENNYIBEN KEDVEZŐBB NEKI, akkor:
+2. 1990+20680(1.nap)+40360(2.nap), ami = 63030 Ft (azaz cirka annyi, mint az eredeti számolásban. Lehet kihagytam valamit)
 
+Ergó ebben az esetben az ügyfélnek az 1. eset lesz a kedvezőbb, így azt a számlát kell kiállítanunk.
 
+[Viszont]
+Ha nem napi bérlésről van szó, akkor a kilóméterdíjat nem szabad hozzácsapni a végösszeghez. Alapesetben (ha nem napi bérlés lesz). 
+Napi bérlések esetén pedig a km limitig nem számolunk kilóméterdíjat. A kilóméterlimit túllépése után pedig felszámoljuk az "extra" kilómétereket.
+Ugyanakkor meg kell vizsgálnunk, helyesen - ahogy tetted -, hogy azzal jár-e jobban, hogy az alaposszeget fizeti ki, vagy a napidijat (még akkor is, ha a napidijban mondjuk benne lenne extra kilóméterdíj).
+24 órán belüli bérlés kezelése (2-es és 4-es kategória):
+
+`Ha a bérlés időtartama 24 órán belül van ($napok <= 1) ÉS az autó 2-es vagy 4-es kategóriájú` 
+- Akkor a minimum összeg a napidij + extra kilométerdíj (ha túllépte a km-limitet).
+- Az alapösszeg és a minimum napi díj közül a nagyobbat adjuk vissza.
+
+`Többnapos bérlés kezelése`:
+- Ha több mint 1 napos bérlésről van szó, akkor a NapiBerles táblából lekérjük a megfelelő napi díjat.
+- A napi díjat a $napok - 2 index alapján határozzuk meg, mivel a 2 napos bérlés ára a 0. indexen van.
+
+`Km-díj hozzáadása`:
+- Ha túllépi a napi km-limitet, akkor az extra kilométerek díját (kmDijOsszeg) minden esetben hozzáadjuk.
+
+`Kedvezőbb ár kiválasztása:`
+- A minimum napi díj (vagy többnapos díj) és az alapösszeg közül mindig a kedvezőbbet adjuk vissza.
 
 ## Backend
 [SORREND]

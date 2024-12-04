@@ -105,7 +105,7 @@ class ArazasSeeder extends Seeder
                 'berles_ind' => 1990,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
                 'kedv_vez' => null,
-                'parkolas_perc' => null,
+                'parkolas_perc' => 78,
                 'foglalasi_perc' => null,
                 'kedv_parkolas_perc' => null,
                 'napidij' => 25680,
@@ -131,7 +131,7 @@ class ArazasSeeder extends Seeder
                 'berles_ind' => 1990,
                 'vez_perc' => 69,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
                 'kedv_vez' => null,
-                'parkolas_perc' => null,
+                'parkolas_perc' => 69,
                 'foglalasi_perc' => null,
                 'kedv_parkolas_perc' => null,
                 'napidij' => 22678,
@@ -237,7 +237,7 @@ class ArazasSeeder extends Seeder
                 'berles_ind' => 1990,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
                 'kedv_vez' => null,
-                'parkolas_perc' => null,
+                'parkolas_perc' => 78,
                 'foglalasi_perc' => null,
                 'kedv_parkolas_perc' => null,
                 'napidij' => 22680,
@@ -263,7 +263,7 @@ class ArazasSeeder extends Seeder
                 'berles_ind' => 4500,
                 'vez_perc' => 69,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
                 'kedv_vez' => null,
-                'parkolas_perc' => null,
+                'parkolas_perc' => 69,
                 'foglalasi_perc' => null,
                 'kedv_parkolas_perc' => null,
                 'napidij' => 20128,
@@ -369,7 +369,7 @@ class ArazasSeeder extends Seeder
                 'berles_ind' => 1990,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
                 'kedv_vez' => null,
-                'parkolas_perc' => null,
+                'parkolas_perc' => 78,
                 'foglalasi_perc' => null,
                 'kedv_parkolas_perc' => null,
                 'napidij' => 22680,
@@ -395,7 +395,7 @@ class ArazasSeeder extends Seeder
                 'berles_ind' => 4500,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
                 'kedv_vez' => null,
-                'parkolas_perc' => null,
+                'parkolas_perc' => 78,
                 'foglalasi_perc' => null,
                 'kedv_parkolas_perc' => null,
                 'napidij' => 20128,
