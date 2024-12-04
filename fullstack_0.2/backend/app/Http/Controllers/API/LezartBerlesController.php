@@ -13,6 +13,8 @@ class LezartBerlesController extends Controller
     {
          ### Minden lezárt bérlés lekérése az AUTOK adataival együtt.
          $lezartBerlesek = LezartBerles::with(['felhasznalo.szemely','auto'])->get();
+        ## El tudd érni a LezartBerles-en belül/keresztül a Felhasznalokon [átmenve] a [szemely] adatokat.
+        ##'szemely_knev' => $this->felhasznalo->szemely->k_nev,
 
         return LezartBerlesResource::collection($lezartBerlesek);
     }

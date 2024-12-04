@@ -180,6 +180,11 @@ class LezartBerlesFactory extends Factory
         $alapOsszeg = $berlesInditasa + $vezetesOsszeg + $parkolasiOsszeg + $kmDijOsszeg;
 
         ## Ha 24 órán belüli bérlésről van szó a 2-es vagy 4-es kategóriában, legalább a napidíjat kell visszaadni
+        if ($napok <= 1 && in_array($autoKategoria, [1, 3])) {
+            $minimumOsszeg = $alapOsszeg;
+            $maximumOsszeg = $arazas->napidij + $kmDijOsszeg + $berlesInditasa;
+            return min($minimumOsszeg, $maximumOsszeg);
+        }
         if ($napok <= 1 && in_array($autoKategoria, [2, 4])) {
             $minimumOsszeg = $arazas->napidij + $kmDijOsszeg + $berlesInditasa;
             return max($minimumOsszeg, $alapOsszeg);
