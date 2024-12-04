@@ -231,7 +231,7 @@ class ArazasSeeder extends Seeder
                 'updated_at' => now(),
             ],
             # Kia Niro | 65 kW | 4-es besorolas |
-            [
+            [ ## 46350 +
                 'elofiz_azon' => 2,
                 'auto_besorolas' => 4,
                 'berles_ind' => 1990,

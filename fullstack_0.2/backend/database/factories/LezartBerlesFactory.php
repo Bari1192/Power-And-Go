@@ -28,7 +28,7 @@ class LezartBerlesFactory extends Factory
 
         # Bérlési időszak generálása
         $berlesKezdete = $this->berlesKezdete();
-        $berlesIdotartam = $this->berlesIdotartama(); // másodperc - rand_int-ből!!!
+        $berlesIdotartam = $this->berlesIdotartama(); ## másodperc - rand_int-ből!!!
         $berlesVege = (clone $berlesKezdete)->modify("+{$berlesIdotartam} seconds");
         $megtettTavolsag = $this->megtettTavolsag($berlesIdotartam);
         $autoKategoria = $auto->kategoria_besorolas_fk;
@@ -42,7 +42,7 @@ class LezartBerlesFactory extends Factory
         $parkVegIdo = !empty($parkolasok) ? end($parkolasok)['veg'] : null;
 
         # Végösszeg számítása
-        $berlesOsszeg = $this->berlesVegosszegSzamolas($arazas, $berlesIdotartam, $megtettTavolsag, $parkolasok, $autoKategoria);
+        $berlesOsszeg = $this->berlesVegosszegSzamolas($arazas, $berlesIdotartam, $megtettTavolsag, $parkolasok, $autoKategoria, $berlesIdotartam);
 
         return [
             'auto_azonosito' => $auto->autok_id,
@@ -102,7 +102,7 @@ class LezartBerlesFactory extends Factory
     {
         $parkolasok = [];
         $berlesIdoMasodperc = $berlesVege->getTimestamp() - $berlesKezdete->getTimestamp();
-        $berlesIdotartam = $berlesIdoMasodperc / 3600; ## Bérlés időtartam órában
+        $berlesIdotartam = $berlesIdoMasodperc / 3600; ## Bérlés időtartam ÓRÁBAN!
 
         $parkolasokSzama = 0;
         if ($berlesIdotartam > 1 && $berlesIdotartam <= 3) {
@@ -143,10 +143,10 @@ class LezartBerlesFactory extends Factory
         return $parkolasok;
     }
 
-    private function berlesVegosszegSzamolas(Arazas $arazas, int $idoKulonbseg, int $tavolsag, array $parkolasok, int $autoKategoria): float
+    private function berlesVegosszegSzamolas(Arazas $arazas, int $idoKulonbseg, int $tavolsag, array $parkolasok, int $autoKategoria, $berlesIdotartam): float
     {
-        $idoPerc = $idoKulonbseg / 60; // Másodpercek átváltása percre
-        $napok = ceil($idoKulonbseg / 86400); // Napok kiszámítása
+        $idoPerc = $idoKulonbseg / 60; ## Másodpercek átváltása percre
+        $napok = ceil($idoKulonbseg / 86400); ## Napok kiszámítása
 
         $berlesInditasa = $arazas->berles_ind;
         $vezPercDij = $arazas->vez_perc;
@@ -157,26 +157,43 @@ class LezartBerlesFactory extends Factory
         $teljesParkolasIdo = array_sum(array_column($parkolasok, 'hossza_perc'));
         $vezetesPerc = max(0, $idoPerc - $teljesParkolasIdo);
 
-        // Km díj kiszámítása
+        ## Km díj kiszámítása
         $kmTobbseg = max(0, $tavolsag - ($napok * $napiKmLimit));
         $kmDijOsszeg = $kmTobbseg * $kmDij;
 
-        // Parkolási díj
+        ## Parkolási díj
         $parkolasiOsszeg = $teljesParkolasIdo * $parkolasPercDij;
 
-        // Vezetési díj
+        ## Vezetési díj
         $vezetesOsszeg = $vezetesPerc * $vezPercDij;
 
-        // Alap konstrukció: vezetési díj + parkolási díj + indítási díj + km díj (ha van)
+        ## Alap konstrukció: vezetési díj + parkolási díj + indítási díj + km díj (ha van)
         $alapOsszeg = $berlesInditasa + $vezetesOsszeg + $parkolasiOsszeg + $kmDijOsszeg;
 
-        // Ha 24 órán belüli bérlésről van szó a 2-es vagy 4-es kategóriában, legalább a napidíjat kell visszaadni
+        ## Ha 24 órán belüli bérlésről van szó a 2-es vagy 4-es kategóriában, legalább a napidíjat kell visszaadni
         if ($napok <= 1 && in_array($autoKategoria, [2, 4])) {
-            $minimumOsszeg = $arazas->napidij + $kmDijOsszeg+$berlesInditasa;
+            $minimumOsszeg = $arazas->napidij + $kmDijOsszeg + $berlesInditasa;
             return max($minimumOsszeg, $alapOsszeg);
         }
+        if (($berlesIdotartam/60) <= 180 && $arazas->auto_besorolas == 5) {
+            $minimumOsszeg = $arazas->harom_ora_dij + $kmDijOsszeg + $berlesInditasa;
+            return max($minimumOsszeg, $alapOsszeg);
+        } elseif (($berlesIdotartam/60) > 180 && $berlesIdotartam < 360 && $arazas->auto_besorolas == 5) {
+            $minimumOsszeg = $arazas->harom_ora_dij + $kmDijOsszeg + $berlesInditasa;
+            $maximumOsszeg = $arazas->hat_ora_dij + $kmDijOsszeg + $berlesInditasa;
+            return min($minimumOsszeg, $maximumOsszeg);
+        } elseif (($berlesIdotartam/60) >= 360 && $berlesIdotartam < 720 && $arazas->auto_besorolas == 5) {
+            $minimumOsszeg = $arazas->hat_ora_dij + $kmDijOsszeg + $berlesInditasa;
+            $maximumOsszeg = $arazas->tizenketto_ora_dij + $kmDijOsszeg + $berlesInditasa;
+            return min($minimumOsszeg, $maximumOsszeg);
+        } elseif (($berlesIdotartam/60) >= 720 && $berlesIdotartam < 1440 && $arazas->auto_besorolas == 5) {
+            $minimumOsszeg = $arazas->tizenketto_ora_dij + $kmDijOsszeg + $berlesInditasa;
+            $maximumOsszeg = $arazas->napidij + $kmDijOsszeg + $berlesInditasa;
+            return min($minimumOsszeg, $maximumOsszeg);
+        }
 
-        // Ha többnapos bérlésről van szó, lekérjük a NapiBerles táblából az értékeket
+
+        ## Ha többnapos a bérlés ==> lekérjük a NapiBerles táblából annak az értékekét.
         if ($napok > 1) {
             $napiBerlesek = NapiBerles::where('arazas_id', $arazas->id)
                 ->where('auto_tipus', $autoKategoria)
@@ -188,13 +205,12 @@ class LezartBerlesFactory extends Factory
             }
 
             $napiDijTomb = $napiBerlesek->pluck('ar')->toArray();
-            $tobbNaposDij = $napiDijTomb[$napok - 2] ?? end($napiDijTomb); // A $napok-2 elem a megfelelő napi díj
+            $tobbNaposDij = $napiDijTomb[$napok - 2] ?? end($napiDijTomb);
+            ## Mivel a napidíjak a 2. naptól indulnak, ezt figyelembevéve kell a $napok-2.
 
-            // Többnapos bérlés esetén az alapösszeggel és a napi díjas összeggel hasonlítunk
-            return min($alapOsszeg, $tobbNaposDij + $kmDijOsszeg+$berlesInditasa);
+            ## Többnapos bérlés => alapösszeggel +napi díjas összeggel hasonlítunk
+            return min($alapOsszeg, $tobbNaposDij + $kmDijOsszeg + $berlesInditasa);
         }
-
-        // Egyéb esetekben visszaadjuk az alapösszeget
         return $alapOsszeg;
     }
 }
