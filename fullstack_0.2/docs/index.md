@@ -3,6 +3,7 @@
 ### [Számlázás-TÁBLA]
 1.   Az egész tábla tartalma cirka származtatott lenne, ami annyit jelent, hogy létrejönne a(z):
     - szamla_id('szamla_sorszam') [PK] -> Egyedi azonosítószáma a számlának.
+    - szamla_tipus     ->  A számla kiállításának típusát írja le, mely származhat bérlésből, baleset -ből (mint baleset okozója),károkozás-ból (mint rongálás, törés stb.), magatartás -ból (mint autóban dohányzás, tilosban parkolás, gyorshajtás). Egyik értéket mindig kötelező felvennie.
     - felh_nev ('felhasznalo') [FK] -> felh_id_fk érték kerül ide, ami beazonosítja, hogy melyik felhasználóhoz tartozik a számla.
     - berles_kezd_datum     ->  Meghatározza a berles kedzetének dátumát (év-hónap-nap).
     - berles_kezd_ido       ->  Meghatározza a berles kedzetének időpontját (óra-perc-másodperc).

@@ -19,8 +19,9 @@ class DatabaseSeeder extends Seeder
         $this->call(SzemelySeeder::class);
         $this->call(DolgozoSeeder::class);
         $this->call(FelhasznaloSeeder::class);
-        $this->call(NapiBerlesSeeder::class); 
+        $this->call(NapiBerlesSeeder::class);
         $this->call(LezartBerlesSeeder::class);
         $this->call(FutoBerlesSeeder::class);
+        $this->call(SzamlaSeeder::class);
     }
 }
