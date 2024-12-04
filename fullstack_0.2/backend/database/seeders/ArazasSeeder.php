@@ -260,7 +260,7 @@ class ArazasSeeder extends Seeder
             [
                 'elofiz_azon' => 2,
                 'auto_besorolas' => 5,
-                'berles_ind' => 4500,
+                'berles_ind' => 1990,
                 'vez_perc' => 69,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
                 'kedv_vez' => null,
                 'parkolas_perc' => 69,
@@ -392,7 +392,7 @@ class ArazasSeeder extends Seeder
             [
                 'elofiz_azon' => 3,
                 'auto_besorolas' => 5,
-                'berles_ind' => 4500,
+                'berles_ind' => 1990,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
                 'kedv_vez' => null,
                 'parkolas_perc' => 78,
@@ -525,7 +525,7 @@ class ArazasSeeder extends Seeder
             [
                 'elofiz_azon' => 4,
                 'auto_besorolas' => 5,
-                'berles_ind' => 4500,
+                'berles_ind' => 1990,
                 'vez_perc' => 78,           # Csak ha a 24 órán túl (napi bérlés minimum! túlmegy akkor pluszban.)
                 'kedv_vez' => null,
                 'parkolas_perc' => null,
