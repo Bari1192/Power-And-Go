@@ -14,7 +14,7 @@ class ElofizetesSeeder extends Seeder
 
             [
                 'elofiz_nev' => 'Power',
-                'havi_dij' => 0,
+                'havi_dij' => null,
                 'eves_dij' => null,
                 'created_at' => now(),
                 'updated_at' => now(),

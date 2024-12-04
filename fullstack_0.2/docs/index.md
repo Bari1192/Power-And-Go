@@ -16,15 +16,15 @@
 ### Előfizetések tábla - létrehozása
 1. [Entitások]-[Migráció]:
     - `elofiz_id` - Az előfizetés azonosítójának a száma. [PK],[AI].
-    - `elofiz_nev` - Az előfizetésnek a megnevezése
-    - `havi_dij` - Az előfizetés havi díjának összege (opcionálisan).
-    - `eves_dij` - Az előfizetés éves díjának összege (opcionálisan).
+    - `elofiz_nev` - Az előfizetésnek a megnevezése - kötelező, fix csomagok közül.
+    - `havi_dij` - Az előfizetés havi díjának összege (opcionális).
+    - `eves_dij` - Az előfizetés éves kedv. díja (opcionális VIP csomaghoz).
 
 2. [Seeder]:
-    `elofiz_nev` - 4 előfizetési csoportot hozunk létre manuálisan.
-    - Közvetlenül adatbázisba szúrjuk bele az adatokat, nem generálási folyamattal (Factory)-vel.
+    `elofiz_nev` - 4 előfizetési csopor "választható". Alapértelmezetten aki nem havidíjas előfizetést választ - alkalmi felhasználó -, azon személyeket a 'Power' csomag részeként kezeljük.
     - `havi_dij` összeg opció csak a `Power-Plus`,`Power-Premium`,`Power-VIP` előfizetéseknél van.
     - `havi_dij` és `eves_dij` együttese csak a `Power-VIP` -ben érhető el.
+    Ahol a havidíj, vagy az éves díj `null` értékként van kezelve, az azt jelenti, hogy az adott előfizetési csomagban `nincs/nem elérhető` ilyen opció.
 
 3. [Relációk]-[Model]
 

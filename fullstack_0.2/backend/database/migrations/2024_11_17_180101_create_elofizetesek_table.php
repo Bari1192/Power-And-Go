@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('elofizetesek', function (Blueprint $table) {
             $table->id('elofiz_id');
-            $table->string('elofiz_nev');
+            $table->enum('elofiz_nev',['Power','Power-Plus','Power-Premium','Power-VIP']);
             $table->integer('havi_dij')->nullable();
             $table->integer('eves_dij')->nullable();
             $table->timestamps();
