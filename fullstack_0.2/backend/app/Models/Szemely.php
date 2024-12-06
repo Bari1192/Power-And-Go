@@ -13,7 +13,18 @@ class Szemely extends Model
     public $timestamps = true;
     public $incrementing = true;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'szemely_jelszo',
+        'szig_szam',
+        'jogos_szam',
+        'jogos_erv_kezdete',
+        'jogos_erv_vege',
+        'v_nev',
+        'k_nev',
+        'szul_datum',
+        'telefon',
+        'email',
+    ];
     public function felhasznalo()
     {
         return $this->hasOne(Felhasznalo::class, 'szemely_id_FK', 'szemely_id');
