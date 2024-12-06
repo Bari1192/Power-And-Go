@@ -16,6 +16,9 @@ class Auto extends Model
 
     protected $fillable = [
         'rendszam',
+        'kategoria_besorolas_fk',
+        'felsz_id_fk',
+        'flotta_id_fk',
         'km_ora_allas',
         'gyartasi_ev',
     ];
