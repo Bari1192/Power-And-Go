@@ -14,11 +14,10 @@ class AutoFactory extends Factory
         $gyartasiEv = fake()->numberBetween(2019, 2023);
         $flotta = $this->flottabolAutotIdAlapjan();
         $felszereltseg = Felszereltseg::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
-        $flottaTipus = Flotta_tipusok::inRandomOrder()->first();
+        $flottaTipus = Flotta_tipusok::find($flotta);
 
-        $toltes_szazalek = fake()->randomFloat(2, 15, 100);
+        $toltes_szazalek = fake()->randomFloat(2, 15, 100); // 15% és 100% között
         $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
-        $egyKilowattHanyKm = round($flottaTipus->teljesitmeny * ($toltes_kw / 100), 1);
         $becsultHatotav = round(($flottaTipus->hatotav / $flottaTipus->teljesitmeny) * $toltes_kw, 1);
         return [
             'flotta_id_fk' => $flotta,
@@ -26,9 +25,9 @@ class AutoFactory extends Factory
             'rendszam' => $this->rendszamGeneralasUjRegi(),
             'gyartasi_ev' => $gyartasiEv,
             'km_ora_allas' => $this->kmOraAllasGeneralas($gyartasiEv),
-            'felsz_id_fk' => $felszereltseg ? $felszereltseg->felsz_id : 1, # Kapcsolt felszereltség
+            'felsz_id_fk' => $felszereltseg ? $felszereltseg->felsz_id : 1,
             'toltes_szazalek' => $toltes_szazalek,
-            'toltes_kw' => $egyKilowattHanyKm,
+            'toltes_kw' => $toltes_kw,
             'becsult_hatotav' => $becsultHatotav,
 
         ];
