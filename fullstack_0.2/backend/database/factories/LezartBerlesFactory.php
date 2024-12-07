@@ -8,7 +8,6 @@ use App\Models\Felhasznalo;
 use App\Models\LezartBerles;
 use App\Models\NapiBerles;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use PhpParser\Node\Scalar\Float_;
 
 class LezartBerlesFactory extends Factory
 {
@@ -16,25 +15,40 @@ class LezartBerlesFactory extends Factory
 
     public function definition(): array
     {
-        $auto = Auto::with('flotta')->inRandomOrder()->first();
-        $flottaTipus = $auto->flotta;
+        do {
+            $auto = Auto::with('flotta')->where('foglalhato', true)->inRandomOrder()->first();
+            $autoKategoria = $auto->kategoria_besorolas_fk;
+            $flottaTipus = $auto->flotta;
+
+            $nyitasToltesSzazalek = $auto->toltes_szazalek;
+            $nyitasToltesKw = round($auto->flotta->teljesitmeny * ($nyitasToltesSzazalek / 100), 1);
+
+            $berlesIdotartam = $this->berlesIdotartama($autoKategoria); ## másodperc - rand_int-ből!!!
+            $megtettTavolsag = $this->megtettTavolsag($berlesIdotartam, $auto);
+
+            $egyKwKilometerben = $flottaTipus->hatotav / $flottaTipus->teljesitmeny;
+            $kwFogyasztas = round($megtettTavolsag / $egyKwKilometerben, 1);
+            $zaraskoriToltesKw = max($nyitasToltesKw - $kwFogyasztas, 0);
+            $zarasToltesSzazalek = round(($zaraskoriToltesKw / $flottaTipus->teljesitmeny) * 100, 2);
+
+            if ($zarasToltesSzazalek > 12.0) {
+                if ($zarasToltesSzazalek < 15.0) {
+                    $auto->foglalhato = false;
+                    $auto->save();
+                }
+                break;
+            } else {
+                continue;
+            }
+        } while (true);
+
 
         $felhasznalo = Felhasznalo::inRandomOrder()->first();
         $arazas = Arazas::where('auto_besorolas', $auto->kategoria_besorolas_fk)
             ->where('elofiz_azon', $felhasznalo->elofiz_id)
             ->first();
-
-        if (!$arazas) {
-            throw new \Exception("Arazas nem található.");
-        }
-
-        # Bérlési időszak generálása
-        $autoKategoria = $auto->kategoria_besorolas_fk;
         $berlesKezdete = $this->berlesKezdete();
-        $berlesIdotartam = $this->berlesIdotartama($autoKategoria); ## másodperc - rand_int-ből!!!
         $berlesVege = (clone $berlesKezdete)->modify("+{$berlesIdotartam} seconds");
-
-        $megtettTavolsag = $this->megtettTavolsag($berlesIdotartam, $auto);
 
         $parkolasok = $this->generaltParkolasok($berlesKezdete, $berlesVege);
         $teljesParkolasIdo = array_sum(array_column($parkolasok, 'hossza_perc'));
@@ -47,17 +61,7 @@ class LezartBerlesFactory extends Factory
         # Végösszeg számítása
         $berlesOsszeg = $this->berlesVegosszegSzamolas($arazas, $berlesIdotartam, $megtettTavolsag, $parkolasok, $autoKategoria, $berlesIdotartam);
 
-        
-        $nyitasToltesSzazalek = $auto->toltes_szazalek;
-        $nyitasToltesKw = round($auto->flotta->teljesitmeny * ($nyitasToltesSzazalek / 100), 1);
-        
-        $egyKwKilometerben = $flottaTipus->hatotav / $flottaTipus->teljesitmeny;
-        $kwFogyasztas = round($megtettTavolsag / $egyKwKilometerben, 1);
-        $zaraskoriToltesKw = max($nyitasToltesKw - $kwFogyasztas, 0);
-        $zarasToltesSzazalek = round(($zaraskoriToltesKw / $flottaTipus->teljesitmeny) * 100, 2);
         # Adott autonak a flottaTipusának a hatótávja OSZTVA a teljesitményével ==> 1kw = 7.3768 km (pl.)
-
-        ## Frissíteni kell az Autok tábla autóit, hogy a kövi bérlés helyes legyen:
         $this->frissitsAutoToltes($auto, $zarasToltesSzazalek, $zaraskoriToltesKw);
 
         return [
@@ -84,9 +88,13 @@ class LezartBerlesFactory extends Factory
     }
     private function frissitsAutoToltes(Auto $auto, float $zarasToltesSzazalek, float $zaraskoriToltesKw): void
     {
-        $auto->toltes_szazalek = $zarasToltesSzazalek;
-        $auto->toltes_kw = $zaraskoriToltesKw;
-        $auto->becsult_hatotav = round(($auto->flotta->hatotav / 100) * $zarasToltesSzazalek, 1);
+        // Garantáljuk, hogy a töltöttségi szint ne essen 15% alá
+        $auto->toltes_szazalek = max($zarasToltesSzazalek, 15);
+        $auto->toltes_kw = max($zaraskoriToltesKw, 0);
+        $auto->becsult_hatotav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szazalek, 1);
+
+        // Állítsuk be a foglalhatóságot
+        $auto->foglalhato = $zarasToltesSzazalek >= 15.0;
         $auto->save();
     }
 
@@ -116,7 +124,6 @@ class LezartBerlesFactory extends Factory
         ### Ha legenerálna, akkor  túlmennénk az akkumulátor kapacitásán.
 
         $aktualisHatotav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szazalek);
-
         if ($idoKulonbseg <= 1800) {
             return min(random_int(5, 10), $aktualisHatotav);
             ## A random gen. távot MINDIG összehasonlítjuk az aktuális hatótávval,

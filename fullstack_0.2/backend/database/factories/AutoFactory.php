@@ -16,11 +16,11 @@ class AutoFactory extends Factory
         $felszereltseg = Felszereltseg::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
         $flottaTipus = Flotta_tipusok::find($flotta);
 
-        $toltes_szazalek = fake()->randomFloat(2, 15, 100); 
+        $toltes_szazalek = fake()->randomFloat(2, 15, 100);
         $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
         $becsultHatotav = round(($flottaTipus->hatotav / $flottaTipus->teljesitmeny) * $toltes_kw, 1);
         return [
-            'flotta_id_fk' => $flotta,
+            'flotta_id_fk' => $flottaTipus->flotta_id,
             'kategoria_besorolas_fk' => $this->katBesorolasAutomatan($flotta),
             'rendszam' => $this->rendszamGeneralasUjRegi(),
             'gyartasi_ev' => $gyartasiEv,
@@ -29,7 +29,7 @@ class AutoFactory extends Factory
             'toltes_szazalek' => $toltes_szazalek,
             'toltes_kw' => $toltes_kw,
             'becsult_hatotav' => $becsultHatotav,
-
+            'foglalhato' => true,
         ];
     }
     private function flottabolAutotIdAlapjan(): int

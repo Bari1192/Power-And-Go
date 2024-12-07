@@ -21,6 +21,10 @@ class Auto extends Model
         'flotta_id_fk',
         'km_ora_allas',
         'gyartasi_ev',
+        'foglalhato',
+        'toltes_szazalek',
+        'toltes_kw',
+        'becsult_hatotav',
     ];
     public function flotta(): BelongsTo
     {

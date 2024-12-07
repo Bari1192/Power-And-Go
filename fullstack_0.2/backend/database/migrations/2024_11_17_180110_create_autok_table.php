@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->float('toltes_szazalek', 2);
             $table->float('toltes_kw', 1);
             $table->float('becsult_hatotav', 1);
+            $table->boolean('foglalhato')->default(true); # Foglalható-e az autó -> lezárt bérlésekben vizsgáljuk ezt!
 
             # FK KULCSOK
             $table->foreignId('kategoria_besorolas_fk')->constrained('kategoriak', 'kat_id')->onDelete('cascade');
