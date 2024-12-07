@@ -1,5 +1,25 @@
 # Dokumentáció
 
+
+### [Autok-Töltöttség-%-Hatótáv-km]
+
+Az Autok Migrációmat, Seederemet és a hozzá tartozó Model, Factory, stb. Ki akarom egészíteni számított érték mezőkkel, az alábbiak szerint:
+1. Az adott autonak van egy bizonyos akkumulátor kapacitása (pl: 36kw).  (Flotta_tipusok táblából jön), ezalapján generálnunk kell töltöttségi szinteket. 
+2. A Töltöttségi szinteket úgy kellene generálni, hogy:
+- %-os (float, pl: 76.4%) formátumban kapja meg az értéket.
+- Ez a %-os formátum pedig felhasználásra kerülne úgy, hogy a maximum kW kapacitás flotta_tipus (Autok táblában a flotta_id_fk érték alapján, ami pl: 3-as, az:
+"                ['gyarto' => 'Skoda', 'tipus' => 'Citigo-e-iV', 'teljesitmeny' => 36, 'vegsebesseg' => 130, 'gumimeret' => '165|65-R16', 'hatotav' => 265, 'created_at' => now(), 'updated_at' => now()],
+"
+ (36*0,764) megadná a ToltottsegKw mező értékét (27,504), ami nekünk 1 tizedesig kellene. (27,5 kW)
+- Majd lekérné ugyaninnen lekérdezné a 'hatotav' mező értékét (265 km hatótáv), amit eloszt  a kw értékkel, akkor kijön, hogy 1kW töltés =7,361111 km. Így már csak ezt az értéket kell felszorozni a 27,5kW értékkel. Ebből kijön az, hogy az autó max hatótávja ezzel a töltöttségi szinttel  kb. 202,4km. Ezt az értéket kapná meg a 'becsult_hatotav' mező. 
+Viszont amennyiben lehetséges ezt számított mezőként szeretném létrehozni, de a táblában érdemes lenne letárolni.
+
+Összességében kellene akkor:
+- Töltöttséget generálnunk (%-osan 15% és 100% között) minden autónak egyénileg,
+- Becsült hatótávot ->(km-ben, arányosan a töltöttséggel).
+
+
+
 ### [Számlázás-TÁBLA]
 1.   Az egész tábla tartalma cirka származtatott lenne, ami annyit jelent, hogy létrejönne a(z):
     - `szamla_id`('szamla_sorszam') [PK] -> Egyedi azonosítószáma a számlának.

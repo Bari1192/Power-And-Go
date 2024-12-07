@@ -11,11 +11,15 @@ return new class extends Migration {
             $table->id('autok_id');
             $table->string('rendszam', 20)->unique();
 
+            $table->float('toltes_szazalek', 2);
+            $table->float('toltes_kw', 1);
+            $table->float('becsult_hatotav', 1);
+
             # FK KULCSOK
             $table->foreignId('kategoria_besorolas_fk')->constrained('kategoriak', 'kat_id')->onDelete('cascade');
             $table->foreignId('felsz_id_fk')->nullable()->constrained('felszereltsegek', 'felsz_id')->onDelete('set null');
+
             $table->unsignedBigInteger('flotta_id_fk');
-            
             $table->foreign('flotta_id_fk')->references('flotta_id')->on('flotta_tipusok')->onDelete('cascade');
 
             $table->integer('km_ora_allas');
