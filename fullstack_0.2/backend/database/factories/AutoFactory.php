@@ -16,7 +16,7 @@ class AutoFactory extends Factory
         $felszereltseg = Felszereltseg::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
         $flottaTipus = Flotta_tipusok::find($flotta);
 
-        $toltes_szazalek = fake()->randomFloat(2, 15, 100); // 15% és 100% között
+        $toltes_szazalek = fake()->randomFloat(2, 15, 100); 
         $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
         $becsultHatotav = round(($flottaTipus->hatotav / $flottaTipus->teljesitmeny) * $toltes_kw, 1);
         return [

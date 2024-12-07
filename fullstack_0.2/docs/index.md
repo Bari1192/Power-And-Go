@@ -6,6 +6,26 @@
 6. `Konyvelesi táblát` is létre kell hozni, ahová a `lezárt bérlések számlák` kifizetés után `kerülnek` (hogy profilban elérhető legyen + könyvelési osztály is elérje, hogy a NAV ne szóljon be)
 
 
+### [Lezárt-Bérlések]-[Autok-Töltöttség-%-Hatótáv-km]
+1. Generálási logika szerkesztése:
+    - A táblának a távolság generálás metód. (megtett_km_tavolsag) -kor figyelembe kell vennie, hogy az adott autónak mekkora töltöttségi szintje van.
+    - A töltöttségi szintből (és a becsült megtehető km-ek) meg kell határozni, hogy maximum távolság a számított érték lehet.
+    - Amikor az adott autóval a lezárt bérlés táblába generálódik az adat el kell tárolnunk:
+        - A nyitás_toltes állapotot, ami a nyitáskori töltési szintet mutatja (jelenleg az Autok táblában az “aktuális”)
+        - A zaras_toltes állapotot, ami a nyitáskori töltési szintből levonja a generált km távolságot (maximálisan a %-os aktuális töltési szint 98%-át felhasználva) a lezárt időszakra mérten. 
+            - Azaz 50%-os töltésnél indított bérléssel,
+            - 10km-es útszakasz megtétele során,
+            - Átlagos fogyasztási értékekkel számolva,
+            - Visszaadásra kerül (Referencia-auto: 36kw-os, 50% töltés, 132,5km becs. táv. elég.)
+                - 18kw töltéssel indult, ~1,3584 kW-ot fogyasztott.
+                - zaras_toltes_kw = 16,641 kW
+                - zaras_becs_hatotav =122,49625 km
+                - zaras_toltes_szazalek = 46,225 %
+2. Egy Auto aktuális töltöttségi szintje mindig az Autok táblából érkezik. Amikor kibérlik a ‘lezart_berlesek’ generálódik, az autót onnan kapja meg a bérlésre → Frissíteni kell folyamatosan az Autok táblában az aktuális autó Töltöttségi állapotát.
+-   Amint újra kibérelik azt az autót, ennek megfelelően - ha a legelső bérlő 90%-os töltöttségű autót vett fel, lezáráskor 75%-os volt -akkor a következő felhasznalonak 75%-os auto volt a nyitas_toltes_szint, innen kell folytatni a számolást.
+-   Egészen addig generálhat az adott autóval lezart_berlest, ameddig a töltöttségi szint max 10%-ra csökken! 
+-   Utána az autó nem foglalható.
+
 ### [Autok-Töltöttség-%-Hatótáv-km]
 1. Autok tábla bővítésének részletei:
 -   `toltes_szazalek`: Az adott autó töltöttségi szintjét adja meg, százalékos (float) formátumban, 15.0% és 100.0% közötti értékkel. A cél, hogy minden autó egyedi töltöttségi értéket kapjon.
