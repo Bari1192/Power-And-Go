@@ -12,6 +12,12 @@ return new class extends Migration {
             $table->unsignedBigInteger('auto_azonosito');
             $table->unsignedBigInteger('auto_kategoria');
             $table->unsignedBigInteger('szemely_id_fk');
+
+            $table->float('nyitas_toltes_szazalek',2);
+            $table->float('nyitas_toltes_kw',1);
+            $table->float('zaras_toltes_szazalek',2);
+            $table->float('zaras_toltes_kw',1);
+
             $table->date('berles_kezd_datum');
             $table->time('berles_kezd_ido');
             $table->date('berles_veg_datum');
