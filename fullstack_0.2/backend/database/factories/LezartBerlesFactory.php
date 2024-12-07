@@ -32,7 +32,7 @@ class LezartBerlesFactory extends Factory
             $zarasToltesSzazalek = round(($zaraskoriToltesKw / $flottaTipus->teljesitmeny) * 100, 2);
 
             if ($zarasToltesSzazalek > 12.0) {
-                if ($zarasToltesSzazalek < 15.0) {
+                if ($zarasToltesSzazalek <= 15.0) {
                     $auto->foglalhato = false;
                     $auto->save();
                 }
@@ -62,7 +62,8 @@ class LezartBerlesFactory extends Factory
         $berlesOsszeg = $this->berlesVegosszegSzamolas($arazas, $berlesIdotartam, $megtettTavolsag, $parkolasok, $autoKategoria, $berlesIdotartam);
 
         # Adott autonak a flottaTipusának a hatótávja OSZTVA a teljesitményével ==> 1kw = 7.3768 km (pl.)
-        $this->frissitsAutoToltes($auto, $zarasToltesSzazalek, $zaraskoriToltesKw);
+        $this->autoToltesFrissites($auto, $zarasToltesSzazalek, $zaraskoriToltesKw);
+        $this->autoKmOraFrissites($auto, $megtettTavolsag);
 
         return [
             'auto_azonosito' => $auto->autok_id,
@@ -86,15 +87,21 @@ class LezartBerlesFactory extends Factory
             'berles_osszeg' => $berlesOsszeg,
         ];
     }
-    private function frissitsAutoToltes(Auto $auto, float $zarasToltesSzazalek, float $zaraskoriToltesKw): void
+    private function autoKmOraFrissites(Auto $auto, $megtettTavolsag): void
+    {
+        $auto->km_ora_allas += $megtettTavolsag;
+        $auto->save();
+        # A save() nélkül a változások CSAK a memóriaállapotban maradnak,
+        # NEM kerülnek elmentésre az adatbázisba... NE FELEJTSD EL!
+    }
+
+    private function autoToltesFrissites(Auto $auto, float $zarasToltesSzazalek, float $zaraskoriToltesKw): void
     {
         // Garantáljuk, hogy a töltöttségi szint ne essen 15% alá
         $auto->toltes_szazalek = max($zarasToltesSzazalek, 15);
         $auto->toltes_kw = max($zaraskoriToltesKw, 0);
         $auto->becsult_hatotav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szazalek, 1);
 
-        // Állítsuk be a foglalhatóságot
-        $auto->foglalhato = $zarasToltesSzazalek >= 15.0;
         $auto->save();
     }
 
