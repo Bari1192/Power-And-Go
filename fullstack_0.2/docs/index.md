@@ -1,23 +1,32 @@
 # Dokumentáció
 
+## Backend
+[SORREND]
+5. A `folyamatban lévő bérléseket` is át kell alakítani, hogy `státusz` alapján `lezárás után` a `lezárt bérlések táblába kerüljenek` az adatok
+6. `Konyvelesi táblát` is létre kell hozni, ahová a `lezárt bérlések számlák` kifizetés után `kerülnek` (hogy profilban elérhető legyen + könyvelési osztály is elérje, hogy a NAV ne szóljon be)
+
 
 ### [Autok-Töltöttség-%-Hatótáv-km]
+1. Autok tábla bővítésének részletei:
+-   `toltes_szazalek`: Az adott autó töltöttségi szintjét adja meg, százalékos (float) formátumban, 15.0% és 100.0% közötti értékkel. A cél, hogy minden autó egyedi töltöttségi értéket kapjon.
+-   `toltes_kw`: A töltöttségi szint alapján kiszámított érték az akkumulátor maximális kapacitásának (kW) figyelembevételével. Ez az érték az autóhoz rendelt flotta típus teljesitmeny mezőjéből származik, és a számított érték 1 tizedesjegyre kerekítve kerül tárolásra.
+-   `becsult_hatotav`: A megadott töltöttségi szint alapján becsült maximális hatótávot (km) adja meg. A számításhoz a flotta típus hatotav és teljesitmeny mezőjének arányát használjuk fel, szintén 1 tizedesjegyre kerekítve.
 
-Az Autok Migrációmat, Seederemet és a hozzá tartozó Model, Factory, stb. Ki akarom egészíteni számított érték mezőkkel, az alábbiak szerint:
-1. Az adott autonak van egy bizonyos akkumulátor kapacitása (pl: 36kw).  (Flotta_tipusok táblából jön), ezalapján generálnunk kell töltöttségi szinteket. 
-2. A Töltöttségi szinteket úgy kellene generálni, hogy:
-- %-os (float, pl: 76.4%) formátumban kapja meg az értéket.
-- Ez a %-os formátum pedig felhasználásra kerülne úgy, hogy a maximum kW kapacitás flotta_tipus (Autok táblában a flotta_id_fk érték alapján, ami pl: 3-as, az:
-"                ['gyarto' => 'Skoda', 'tipus' => 'Citigo-e-iV', 'teljesitmeny' => 36, 'vegsebesseg' => 130, 'gumimeret' => '165|65-R16', 'hatotav' => 265, 'created_at' => now(), 'updated_at' => now()],
-"
- (36*0,764) megadná a ToltottsegKw mező értékét (27,504), ami nekünk 1 tizedesig kellene. (27,5 kW)
-- Majd lekérné ugyaninnen lekérdezné a 'hatotav' mező értékét (265 km hatótáv), amit eloszt  a kw értékkel, akkor kijön, hogy 1kW töltés =7,361111 km. Így már csak ezt az értéket kell felszorozni a 27,5kW értékkel. Ebből kijön az, hogy az autó max hatótávja ezzel a töltöttségi szinttel  kb. 202,4km. Ezt az értéket kapná meg a 'becsult_hatotav' mező. 
-Viszont amennyiben lehetséges ezt számított mezőként szeretném létrehozni, de a táblában érdemes lenne letárolni.
+2. [Entitások] közötti összefüggések:
+-   A töltöttségi szint (%-os) értéke (toltes_szazalek) felhasználásra kerül a maximális akkumulátor kapacitás kiszámításához:
+        - `toltes_kw = teljesitmeny * (toltes_szazalek / 100).`
+Az autóhoz tartozó hatótáv (hatotav) alapján kiszámítható az, hogy egy kW energia hány km megtételére elegendő:
+        - `egy_kW_hany_km = hatotav / teljesitmeny.`
+Ezután a toltes_kw értékével felszorozva meghatározható a becsült hatótáv:
+        - `becsult_hatotav = egy_kW_hany_km * toltes_kw.`
 
-Összességében kellene akkor:
-- Töltöttséget generálnunk (%-osan 15% és 100% között) minden autónak egyénileg,
-- Becsült hatótávot ->(km-ben, arányosan a töltöttséggel).
-
+3. `A letárolt adatok szerepe:`
+-   A számított mezők közül a toltes_szazalek, toltes_kw, és becsult_hatotav értékeit az autók táblában tároljuk. Ennek oka, hogy ezek az értékek gyakran kerülnek felhasználásra, így a számítások helyett a közvetlen tárolt értékek biztosítanak gyorsabb hozzáférést.
+4. `Gyakorlati felhasználása és az alkalmazása:`
+-   Mivel, hogy az autók egyedi töltöttségi szinttel kerülnek létrehozásra (15-100% között), és ezek alapján automatikusan kiszámításra kerül a pillanatnyi kW-ban mért töltöttség és a várható hatótáv.
+Az adatok előkészítésével biztosítható a flottákhoz rendelt autók állapotának és teljesítményének pontos nyilvántartása.
+5. `Célok`:
+-   Az autók akkumulátor-teljesítményének és hatótávjának pontos, dinamikusan változtatható nyilvántartása, amely lehetővé teszi az autók energiafelhasználásának hatékony monitorozását, valamint az egyes autók várható teljesítményének egyszerű elemzését.
 
 
 ### [Számlázás-TÁBLA]
@@ -78,10 +87,6 @@ Ugyanakkor meg kell vizsgálnunk, helyesen - ahogy tetted -, hogy azzal jár-e j
 `Kedvezőbb ár kiválasztása:`
 - A minimum napi díj (vagy többnapos díj) és az alapösszeg közül mindig a kedvezőbbet adjuk vissza.
 
-## Backend
-[SORREND]
-5. A `folyamatban lévő bérléseket` is át kell alakítani, hogy `státusz` alapján `lezárás után` a `lezárt bérlések táblába kerüljenek` az adatok
-6. `Konyvelesi táblát` is létre kell hozni, ahová a `lezárt bérlések számlák` kifizetés után `kerülnek` (hogy profilban elérhető legyen + könyvelési osztály is elérje, hogy a NAV ne szóljon be)
 
 
 ### Előfizetések tábla - létrehozása
