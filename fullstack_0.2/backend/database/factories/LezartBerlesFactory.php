@@ -7,6 +7,7 @@ use App\Models\Auto;
 use App\Models\Felhasznalo;
 use App\Models\LezartBerles;
 use App\Models\NapiBerles;
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class LezartBerlesFactory extends Factory
@@ -59,7 +60,7 @@ class LezartBerlesFactory extends Factory
         $parkVegIdo = !empty($parkolasok) ? end($parkolasok)['veg'] : null;
 
         # Végösszeg számítása
-        $berlesOsszeg = $this->berlesVegosszegSzamolas($arazas, $berlesIdotartam, $megtettTavolsag, $parkolasok, $autoKategoria, $berlesIdotartam);
+        $berlesOsszeg = $this->berlesVegosszegSzamolas($arazas, $felhasznalo, $berlesIdotartam, $megtettTavolsag, $parkolasok, $autoKategoria, $berlesIdotartam);
 
         # Adott autonak a flottaTipusának a hatótávja OSZTVA a teljesitményével ==> 1kw = 7.3768 km (pl.)
         $this->autoToltesFrissites($auto, $zarasToltesSzazalek, $zaraskoriToltesKw);
@@ -172,8 +173,8 @@ class LezartBerlesFactory extends Factory
             $parkolasokSzama = 3;
         }
 
-        ## A parkolási időket a bérlés időtartamához igazítjuk, max. 30%
-        $maxParkolasPerc = (int)(($berlesIdoMasodperc / 60) * 0.3);
+        ## A parkolási időket a bérlés időtartamához igazítjuk, max. 50%
+        $maxParkolasPerc = (int)(($berlesIdoMasodperc / 60) * 0.5);
         $minParkolas = 5;
         $maxParkolas = max($minParkolas, $maxParkolasPerc);
 
@@ -202,7 +203,7 @@ class LezartBerlesFactory extends Factory
         return $parkolasok;
     }
 
-    private function berlesVegosszegSzamolas(Arazas $arazas, int $idoKulonbseg, int $tavolsag, array $parkolasok, int $autoKategoria, $berlesIdotartam): float
+    private function berlesVegosszegSzamolas(Arazas $arazas, $felhasznalo, int $idoKulonbseg, int $tavolsag, array $parkolasok, int $autoKategoria, $berlesIdotartam): float
     {
         $idoPerc = $idoKulonbseg / 60; ## Másodpercek átváltása percre
         $napok = ceil($idoKulonbseg / 86400); ## Napok kiszámítása
@@ -221,13 +222,45 @@ class LezartBerlesFactory extends Factory
         $kmDijOsszeg = $kmTobbseg * $kmDij;
 
         ## Parkolási díj
-        $parkolasiOsszeg = $teljesParkolasIdo * $parkolasPercDij;
+        $ejszakaiParkolasIdeje = 0;
+        $normalParkolasIdeje = 0;
+        foreach ($parkolasok as $parkolas) {
+            $kezdIdo = new DateTime($parkolas['kezd']);
+            $vegIdo = new DateTime($parkolas['veg']);
+
+            $ejszakaiParkKezd = new DateTime($kezdIdo->format('Y-m-d') . ' 22:00:00');
+            $ejszakaiParkVeg = new DateTime($vegIdo->format('Y-m-d') . ' 07:00:00');
+
+            if ($kezdIdo >= $ejszakaiParkKezd || $vegIdo <= $ejszakaiParkVeg) {
+                // Éjszakai parkolás idejének kiszámítása itt
+                if ($kezdIdo >= $ejszakaiParkKezd && $vegIdo <= $ejszakaiParkVeg) {
+                    $ejszakaiParkolasIdeje += ($vegIdo->getTimestamp() - $kezdIdo->getTimestamp()) / 60;
+                } elseif ($kezdIdo >= $ejszakaiParkKezd) {
+                    $ejszakaiParkolasIdeje += ($vegIdo->getTimestamp() - $ejszakaiParkKezd->getTimestamp()) / 60;
+                } elseif ($vegIdo <= $ejszakaiParkVeg) {
+                    $ejszakaiParkolasIdeje += ($ejszakaiParkVeg->getTimestamp() - $kezdIdo->getTimestamp()) / 60;
+                }
+            } else {
+                // AMúgy meg a normál parkolási idő kiszámítása
+                $normalParkolasIdeje += ($vegIdo->getTimestamp() - $kezdIdo->getTimestamp()) / 60;
+            }
+        }
+        $ejszakaiParkolasiOsszeg = $ejszakaiParkolasIdeje * $parkolasPercDij;
+        $normalParkolasiOsszeg = $normalParkolasIdeje * $parkolasPercDij;
 
         ## Vezetési díj
         $vezetesOsszeg = $vezetesPerc * $vezPercDij;
 
         ## Alap konstrukció: vezetési díj + parkolási díj + indítási díj + km díj (ha van)
-        $alapOsszeg = $berlesInditasa + $vezetesOsszeg + $parkolasiOsszeg + $kmDijOsszeg;
+        $alapOsszeg = $berlesInditasa + $vezetesOsszeg + $normalParkolasiOsszeg + $kmDijOsszeg;
+
+        # Csak a 4-es VIP előfizetésre vonatkozzon ez!
+        if ($napok <= 1 && $felhasznalo->elofiz_id == 4) {
+            $alapOsszeg = $alapOsszeg - $ejszakaiParkolasiOsszeg;
+        } else {
+            $alapOsszeg = $alapOsszeg;
+        }
+
 
         ## Ha 24 órán belüli bérlésről van szó a 2-es vagy 4-es kategóriában, legalább a napidíjat kell visszaadni
         if ($napok <= 1 && in_array($autoKategoria, [1, 3])) {
