@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('szamlak', function (Blueprint $table) {
             $table->id('szamla_id');
-            $table->enum('szamla_tipus', ['berles', 'baleset', 'karokozas', 'magatartas']);
+            $table->enum('szamla_tipus', ['berles', 'baleset', 'karokozas', 'toltes_buntetes']);
             $table->unsignedBigInteger('felh_id');
 
             $table->foreign('felh_id')
@@ -31,7 +31,7 @@ return new class extends Migration
                 ->on('autok')
                 ->onDelete('cascade');
 
-            $table->integer('berles_osszeg');
+            $table->integer('osszeg');
             $table->integer('megtett_tavolsag');
             $table->integer('parkolasi_perc');
             $table->integer('vezetesi_perc');

@@ -7,6 +7,9 @@
       <RouterLink to="/rents/renthistory" class="flex mx-auto space-x-3">
         <span class="self-center text-2xl font-semibold dark:text-white">Lezárt Bérlések</span>
       </RouterLink>
+      <RouterLink to="/bills/fines" class="flex mx-auto space-x-3">
+        <span class="self-center text-2xl font-semibold dark:text-white">Bírságok</span>
+      </RouterLink>
       <RouterLink to="/cars/cars" class="flex mx-auto space-x-3">
         <span class="self-center text-2xl font-semibold dark:text-white">Autok</span>
       </RouterLink>
