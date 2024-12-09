@@ -29,17 +29,11 @@ class SzemelyController extends Controller
         return new SzemelyResource($szemely);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Szemely $szemely)
     {
-        //
+        return new SzemelyResource($szemely);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Szemely $szemely)
     {
         //
@@ -50,6 +44,6 @@ class SzemelyController extends Controller
      */
     public function destroy(Szemely $szemely)
     {
-        //
+        return ($szemely->delete()) ? response()->noContent() : abort(500);
     }
 }
