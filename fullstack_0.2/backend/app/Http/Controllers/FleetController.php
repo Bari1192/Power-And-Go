@@ -7,6 +7,7 @@ use App\Http\Resources\FleetResource;
 use App\Models\Flotta_tipusok;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class FleetController extends Controller
 {
@@ -23,27 +24,17 @@ class FleetController extends Controller
         return new FleetResource($fleet);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Flotta_tipusok $flotta_tipusok)
     {
-        //
+        return new FleetResource($flotta_tipusok);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Flotta_tipusok $flotta_tipusok): Response
     {
-        //
+        return ($flotta_tipusok->delete()) ? response()->noContent() : abort(500);
     }
 }

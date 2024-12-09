@@ -6,9 +6,9 @@ use App\Http\Requests\StoreSzamlaRequest;
 use App\Http\Resources\SzamlaResource;
 use App\Http\Resources\ToltesBuntetesResource;
 use App\Models\Szamla;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class SzamlaController extends Controller
 {
@@ -33,18 +33,20 @@ class SzamlaController extends Controller
         # 3. Számla "visszaadása"
         return new SzamlaResource($szamla);
     }
-    public function show(string $id)
+    public function show(Szamla $szamla)
     {
-        //
+        return new SzamlaResource($szamla);
     }
     public function update(Request $request, string $id)
     {
         //
     }
-    public function destroy(string $id)
+    
+    public function destroy(Szamla $szamla):Response
     {
-        //
+        return ($szamla->delete()) ? response()->noContent() : abort(500);
     }
+
     public function filter(string $type): JsonResource
     {
         $validFilterezes = ['buntetesek', 'baleset', 'karokozas', 'toltes_buntetes'];

@@ -7,21 +7,16 @@ use App\Http\Resources\SzemelyResource;
 use App\Models\Szemely;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class SzemelyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): JsonResource
     {
         $szemelyek = Szemely::all();
         return SzemelyResource::collection($szemelyek);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreSzemelyRequest $request)
     {
         $data = $request->validated();
@@ -39,10 +34,7 @@ class SzemelyController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Szemely $szemely)
+    public function destroy(Szemely $szemely):Response
     {
         return ($szemely->delete()) ? response()->noContent() : abort(500);
     }

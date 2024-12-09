@@ -7,6 +7,7 @@ use App\Http\Resources\AutoResource;
 use App\Models\Auto;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class AutoController extends Controller
 {
@@ -16,9 +17,6 @@ class AutoController extends Controller
         return AutoResource::collection($autok);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreAutoRequest $request)
     {
         $data = $request->validated();
@@ -35,8 +33,8 @@ class AutoController extends Controller
     {
         //
     }
-    public function destroy(string $id)
+    public function destroy(Auto $auto): Response
     {
-        //
+        return ($auto->delete()) ? response()->noContent() : abort(500);
     }
 }
