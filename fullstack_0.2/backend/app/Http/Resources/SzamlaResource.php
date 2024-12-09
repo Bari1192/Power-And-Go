@@ -16,7 +16,7 @@ class SzamlaResource extends JsonResource
     {
         return [
             "szamla_tipus" => $this->szamla_tipus,
-            "osszeg" => $this->osszeg,
+            "osszeg" =>number_format($this->osszeg,0,'',' ') ,
             "megtett_tavolsag" => $this->megtett_tavolsag,
             "parkolasi_perc" => $this->parkolasi_perc,
             "vezetesi_perc" => $this->vezetesi_perc,

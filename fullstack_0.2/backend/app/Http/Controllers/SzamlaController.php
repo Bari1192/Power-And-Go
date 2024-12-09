@@ -12,9 +12,14 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class SzamlaController extends Controller
 {
-    public function index(): JsonResource
+    public function index(Request $request): JsonResource
     {
-        $szamlak = Szamla::all();
+
+        # 1. ötlet -> Frontenden fejlécre kattintás esetében:
+        # index -> rendezés fejléc neve alapján (Pl: id, rendszám, stb.)
+
+        $szamlak = Szamla::paginate(20);
+        # 2. ötlet -> kezelnü a paginate (lapozást)
         return SzamlaResource::collection($szamlak);
     }
     public function store(StoreSzamlaRequest $request)
@@ -57,24 +62,5 @@ class SzamlaController extends Controller
         } else {
             return SzamlaResource::collection($szamlak);
         }
-
-        // $validFilterezes = ['buntetesek', 'baleset', 'karokozas', 'toltes_buntetes'];
-        // if (in_array($type, $validFilterezes)) {
-        //     if ($type=='toltes_buntetesek') {
-        //         $szamlak = Szamla::where('szamla_tipus', '=', 'toltes_buntetes')->get();
-        //         return SzamlaResource::collection($szamlak);
-        //     }
-        //     elseif ($type=='baleset') {
-        //         $szamlak = Szamla::where('szamla_tipus', '=', 'baleset')->get();
-        //         return SzamlaResource::collection($szamlak);
-        //     }
-        //     elseif ($type=='karokozas') {
-        //         $szamlak = Szamla::where('szamla_tipus', '=', 'karokozas')->get();
-        //         return SzamlaResource::collection($szamlak);
-        //     }
-        //     elseif ($type=='buntetesek') {
-        //         $szamlak = Szamla::where('szamla_tipus', '=', 'buntetesek')->get();
-        //         return SzamlaResource::collection($szamlak);
-        //     }
     }
 }
