@@ -32,9 +32,14 @@ class LezartBerlesFactory extends Factory
             $zaraskoriToltesKw = max($nyitasToltesKw - $kwFogyasztas, 0);
             $zarasToltesSzazalek = round(($zaraskoriToltesKw / $flottaTipus->teljesitmeny) * 100, 2);
 
+            ### Ezt majd át kell írni, mert ez fogja a státusz állapot kapcsolóját "irányítani".
+            ### A "kapcsolót" állítsd majd át 15%-ra. Onanantól "vegye ki" a foglalhatósági rendszerből.
+            ### 
             if ($zarasToltesSzazalek > 12.0) {
                 if ($zarasToltesSzazalek <= 15.0) {
                     $auto->foglalhato = false;
+                    ### Ezt a foglalható státuszt át kell majd alakítani a tényleges STÁTUS alapján.
+                    ### Az eddigi Bool (1-0) foglalhatóságról.
                     $auto->save();
                 }
                 break;
@@ -98,11 +103,15 @@ class LezartBerlesFactory extends Factory
 
     private function autoToltesFrissites(Auto $auto, float $zarasToltesSzazalek, float $zaraskoriToltesKw): void
     {
-        // Garantáljuk, hogy a töltöttségi szint ne essen 15% alá
         $auto->toltes_szazalek = $zarasToltesSzazalek;
         $auto->toltes_kw = max($zaraskoriToltesKw, 0);
         $auto->becsult_hatotav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szazalek, 1);
 
+        // ## ide írható majd, hogy ha a toltes_kw<=
+        #### if ($auto->toltes_kw <=15.0) {
+        ####     $auto->status=1;
+        ####     $auto->status_name='Low Battery';
+        #### }
         $auto->save();
     }
 

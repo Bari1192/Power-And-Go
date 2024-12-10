@@ -4,7 +4,90 @@
 
 [SORREND] 5. A `folyamatban lévő bérléseket` is át kell alakítani, hogy `státusz` alapján `lezárás után` a `lezárt bérlések táblába kerüljenek` az adatok 6. `Konyvelesi táblát` is létre kell hozni, ahová a `lezárt bérlések számlák` kifizetés után `kerülnek` (hogy profilban elérhető legyen + könyvelési osztály is elérje, hogy a NAV ne szóljon be)
 
-### [Lezárt-Bérlések]-[Autok-Töltöttség-%-Hatótáv-km]
+## [Flotta-Menedzsment]-[Autók-Státuszok]
+
+### Funkciók és Alapvető Célok
+Létre kell hoznom egy olyan rendszert, amely az autók különböző állapotait (státuszait) kezeli a flotta hatékony menedzsmentje érdekében. Az állapotoknak dinamikusan kell frissülniük, és egyértelműen kell jelezniük az autók aktuális használhatóságát és elérhetőségét.
+
+#### A következő célokat kell elérnem:
+- Az autók státusza a rendszerben mindig pontos legyen, megkönnyítve a kezelést.
+- Automatikusan frissüljön a státusz minden esemény (pl. bérlés, szerviz) alapján.
+- Biztosítanom kell, hogy a státuszok kezelése egyszerű és átlátható legyen mind a frontend, mind a backend szempontjából.
+
+### Státuszok Meghatározása 
+Ki kell dolgoznom az autók státuszainak egyértelmű definícióit. Ezeket fogom használni a rendszer működtetéséhez:
+
+-   Szabad (1): Az autó elérhető és bérlésre kész.
+-   Foglalva (2): Az autót lefoglalta egy felhasználó.
+-   Bérlés alatt (3): Az autót éppen használják.
+-   Szervízre vár (4): Az autó meghibásodott és javításra vár.
+-   Tisztításra vár (5): Az autót tisztításra ki kell vonni a forgalomból.
+-   Kritikus töltés (6): Az autó akkumulátora rendkívül alacsony szinten van, nem használható.
+
+### Státuszok Entitásainak Létrehozása
+létre kell hoznom a CarsStatus táblát a státuszok kezelésére:
+
+CarStatus (alosztálya lesz a Cars táblának):
+-   id (PK, AI)
+-   status_name (enum): A státusz megnevezése.
+-   status_description (string:100): A státusz rövid leírása.
+-   Kapcsolatot kell létrehoznom a Cars táblával:
+
+Az autók alapértelmezett státusza: Szabad (1) -gyel lesz megadva.
+A Cars táblában létre kell hoznom egy status_id FK-t, amely kapcsolódik majd a CarStatus táblához.
+
+### Működési Logika 
+A rendszer gyakorlati működése érdekében meg kell írnom az alábbiakat:
+1.    Migrációs táblák létrehozása:
+2.    Generálni kell majd a CarStatus táblát és a Cars táblában a status_id FK-val összekötni a Cars-hoz.
+
+#### Státuszváltás logikája:
+1.  Olyan függvényeket kell írnom, amelyek dinamikusan frissítik az autó státuszát különböző események alapján (pl. bérlés lezárása, szervizelés, tisztítás).
+2. Az AutoToltesFrissites() függvényben ellenőriznem kell az autók töltöttségi szintjét, és ennek megfelelően módosítanom a status_id mezőt.
+3. A foglalhatóság ellenőrzése:
+  -     A rendszer nem generálhat új bérlést, ha az autó státusza 2, 3, 4, 5 vagy 6. Ehhez létre kell hoznom - át kell alakítanom a korábban létrehozozz "foglalhato" bool - egy bool értékke rendelkező foglalhatóságot, mely jelzi, épít a státusz fajtájára. Ezalapján változtatja meg a rendszerben az "állapotát".
+
+
+### Frontend Implementáció Az autók részletes adatlapját meg kell jelenítenem:
+
+1. A részletek megjelenítése egy 2 oszlopos elrendezésben történjen:
+  - Bal oldalon [w-1/3]: Az autó képe (250x250 px).
+  - Jobb oldalon [w-2/3]: Az autó adatai (rendszám, flottaazonosító, kategória, gyártási év, kilométeróra állás, töltöttségi szint, stb.).
+
+2. FormKit használata:
+  - Az autó adatainak megjelenítésére csak olvasható (disabled) mezőket kell készítenem.
+  - Egy legördülő menüben választható státuszváltást kell biztosítanom.
+  - Egy input mezőt kell elhelyeznem a details szöveg beírására, amely kötelező (required) és 255 karakterre korlátozott.
+
+3. Táblázat megjelenítése:
+  - Az autóval kapcsolatos lezárt bérlések listázása (Car-History).
+  - Oszlopok:
+    -   Bérlés ID
+    -   Bérlő neve
+    -   Bérlés kezdete és vége
+    -   Bérlés hossza
+    -   Bérlés összege
+
+### Backend Implementáció 
+Függvényeket és útvonalakat kell készítenem:
+  - Az autók teljes listájának lekérése.
+  - Az admin által küldött státuszváltások kezelése:
+  - Validálni kell a küldött adatokat:
+  - status_name: Létező státusz-e?
+  - status_id: Megfelelő az adott státuszhoz?
+  - details: Minimum 20, maximum 255 karakter, nem lehet üres, és nem tartalmazhat veszélyes kódot.
+
+### Adatbázis frissítése:
+  - A státuszváltás végrehajtása után vissza kell igazolnom a foglalhatóságot.
+  - Ha sikeres, egy 200-as HTTP választ kell visszaküldenem a frontendnek.
+
+### Tesztelés és Ellenőrzés
+  - Ellenőriznem kell, hogy az autók státuszai pontosan frissülnek-e minden eseménynél.
+  - Tesztelnem kell az adminisztrátor által végrehajtott módosításokat, hogy a backend validálása megfelelően működik-e.
+  - Gondoskodnom kell arról, hogy a frontend logikája pontosan tükrözze az adatbázis állapotát
+
+
+## [Lezárt-Bérlések]-[Autok-Töltöttség-%-Hatótáv-km]
 
 1. Funkciók és Alapvető Célok
    Az Autók és Lezárt bérlések kapcsolatrendszerének célja az autók aktuális állapotának, töltöttségi szintjének, hatótávjának és bérlési adatainak pontos nyilvántartása. A logika biztosítja, hogy:
@@ -14,7 +97,7 @@
 - Az autó "foglalható" státusza automatikusan frissüljön a változások bekövetkeztekor.
 
 2. Fő Komponensek és Funkcióik
-   1. `Töltöttségi` Szint Számítás:
+   ### Töltöttségi Szint Számítás:
       - Az autók kezdeti és záró töltöttségi szintjét a toltes_szazalek mező határozza meg.
       - A hatótáv számítása:
       - Egy kW energia által megtett távolság:
@@ -22,7 +105,7 @@
       - Kezdeti hatótáv kiszámítása:
       - becsult_hatotav = egy_kW_hany_km \* toltes_kw
       - Záráskor várható állapot: zaras_toltes_kw = nyitas_toltes_kw - fogyasztott_kw
-   2. Az autók csak akkor `foglalhatók`, ha:
+   2. Az autók csak akkor foglalhatók, ha:
       - Nyitási töltöttség >= 15%.
       - Zárási töltöttség > 12%.
         Amennyiben az autó nem felel meg ezeknek a kritériumoknak, automatikusan foglalhato = `false` állapotba kerül.
@@ -30,7 +113,7 @@
       - A megtett távolság (megtettTavolsag) alapján az km_ora_allas mező automatikusan frissül.
       - Új érték:
         km_ora_allas = km_ora_allas + megtettTavolsag
-3. Működési Logika
+### Működési Logika
    1. Autó Bérlésének Generálása:
       - Az autó adatainak frissítése a lezárt bérlés adatai alapján történik.
       - Ha a záró töltöttségi szint 10% alá csökkenne, a bérlés nem generálható, és az autó "foglalhatatlan" lesz.
@@ -40,7 +123,7 @@
         - Ha a töltöttségi szint < 15%, akkor az autó "foglalhatatlan" státuszt kap.
       - Kilométeróra:
         - A megtett távolság automatikusan hozzáadódik a meglévő kilométeróra álláshoz.
-4. Példák és Használati Esetek
+### Példák és Használati Esetek
    1. Autó 75%-os töltöttségi szintről indul:
       - 20 km megtételével 72%-ra csökken.
       - Új hatótáv számítása:
@@ -51,13 +134,13 @@
    3. Új bérlésnél figyelembe vett töltöttségi szint:
       - Az előző bérlés után megmaradt töltöttség az alapja az új bérlésnek.
 
-`Ez a logika lehetővé teszi:`
+### Ez a logika lehetővé teszi
 
 - Az autók bérlésének dinamikus és pontos nyilvántartását.
 - Az autók foglalhatósági állapotának automatikus kezelését.
 - A töltöttségi és hatótáv-adatok gyors és hatékony frissítését.
 
-### [Autok-Töltöttség-%-Hatótáv-km]
+## [Autok-Töltöttség-%-Hatótáv-km]
 
 1. Autok tábla bővítésének részletei:
 
@@ -84,7 +167,7 @@
 
 - Az autók akkumulátor-teljesítményének és hatótávjának pontos, dinamikusan változtatható nyilvántartása, amely lehetővé teszi az autók energiafelhasználásának hatékony monitorozását, valamint az egyes autók várható teljesítményének egyszerű elemzését.
 
-### [Számlázás-TÁBLA]
+## [Számlázás-TÁBLA]
 
 1.  Az egész tábla tartalma cirka származtatott lenne, ami annyit jelent, hogy létrejönne a(z):
 
@@ -110,7 +193,7 @@
     - Számlát tudunk `törölni`,
     - Számlát tudunk `módosítani` - hiba esetére -> megfelelő jogosultságg(ok)al.
 
-### SZÁMLÁZÁSI LOGIKA LEÍRÁSA [ENYÉM]:
+## SZÁMLÁZÁSI LOGIKA LEÍRÁSA [ENYÉM]:
 
 Ugye a `4-es előfizetési kategóriával`, `4-es kategóriájú autóval` bérelt. `közel 1,5 napig` bérelte az autót. Mivel a 4-es kat. autókat `CSAK napokra lehet bérelni` ezért úgy kellene számolnia, hogy:
 ArazasSeederben kikeresi ezt (elofiz_azon,auto_besorolas, díjak stb.), majd utána:
@@ -150,7 +233,7 @@ Ugyanakkor meg kell vizsgálnunk, helyesen - ahogy tetted -, hogy azzal jár-e j
 
 - A minimum napi díj (vagy többnapos díj) és az alapösszeg közül mindig a kedvezőbbet adjuk vissza.
 
-### Előfizetések tábla - létrehozása
+## Előfizetések tábla - létrehozása
 
 1. [Entitások]-[Migráció]:
 
@@ -168,7 +251,7 @@ Ugyanakkor meg kell vizsgálnunk, helyesen - ahogy tetted -, hogy azzal jár-e j
 
 3. [Relációk]-[Model]
 
-### Árazások tábla - létrehozása
+## Árazások tábla - létrehozása
 
 1.  Árkategóriák & besorolások
 
@@ -211,7 +294,7 @@ Ugyanakkor meg kell vizsgálnunk, helyesen - ahogy tetted -, hogy azzal jár-e j
     - Mivel az adatok szemléltetésekor szemantikailag hatékonyabb az előfizetés megnevezését megjeleníteni, így:
       - Frontenden a lekéréskor az `elofizetes` tábla, `elofiz_nev` entitás értékét fogjuk lekérdezni -> Ami visszaadja, hogy az aktuális felhasználó például a 'Power-VIP'előfizetéssel rendelkezik.
 
-### A folyamatban lévő & lezárt bérlések összhangja
+## A folyamatban lévő & lezárt bérlések összhangja
 
 1.  [Logika]
     - Folyamatban lévő bérlés:
@@ -224,7 +307,7 @@ Ugyanakkor meg kell vizsgálnunk, helyesen - ahogy tetted -, hogy azzal jár-e j
       A bérlés lezárásakor a `futo_berlesek` adatai átkerüljenek a `lezart_berlesek` táblába.
       A `lezart_berlesek`-ben a `status`-nak `lezart`-nak kell lennie a táblában.
 
-### Parkolási díjak és éjszakai időszakok kezelése
+## Parkolási díjak és éjszakai időszakok kezelése
 
 1. Éjszakai parkolás szabálya (22:00-07:00) Power-Plus Power-VIP esetében
    - Ez az időszak nem számít díjkötelesnek a prémium csomagok esetén.
@@ -257,11 +340,11 @@ Ugyanakkor meg kell vizsgálnunk, helyesen - ahogy tetted -, hogy azzal jár-e j
        [Számla]:
      - Összesen: 5 710 Ft
 
-### Lezárt bérlések
+## Lezárt bérlések
 
 [parkolasi_perc]
 
-#### E-mail kiküldés alapja
+### E-mail kiküldés alapja
 
 Elsőnek tesztelés céljából az e-mail kiküldéséhez szükséges adatokat összegyűjtjük a táblá(k)ból:
 [LezartBerlesek] - berles_kezd_datum, - berles_kezd_ido, - berles_veg_datum, - berles_veg_ido,
