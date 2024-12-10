@@ -70,37 +70,36 @@ export default {
     components: {
         BaseLayout,
     },
-    async loadFines(page = 1) {
-        try {
-            const resp = await http.get('/szamlak');
-            this.fines = resp.data.data;
-            this.currentPage = resp.data.meta.current_page;  // --> Metaadatok alapján nézi meg!
-            this.links = resp.data.links;
-        } catch (error) {
-            console.error('Hiba történt az API hívás során:', error);
-        }
-    },
     async mounted() {
         await this.loadFines(); // Kezdésként az első oldalt tölti be
     },
 
     methods: {
+        async loadFines(page = 1) {
+            try {
+                const resp = await http.get(`/szamlak?page=${page}`);
+                this.fines = resp.data.data;
+                this.currentPage = resp.data.meta.current_page;  // Metaadatok alapján
+                this.links = resp.data.links;
+                this.lastPage = resp.data.meta.last_page; // Ha létezik a válaszban
+            } catch (error) {
+                console.error('Hiba történt az API hívás során:', error);
+            }
+        },
         async gotoPage(page) {
             if (page < 1 || page > this.lastPage) return;
-            await this.loadFines(page)
+            await this.loadFines(page);
         },
-
         async gotoNext() {
             if (this.links.next) {
-                await this.fetchFines(this.currentPage + 1);
+                await this.gotoPage(this.currentPage + 1);
             }
         },
         async backtoPage() {
             if (this.links.prev) {
-                await this.fetchFines(this.currentPage - 1);
+                await this.gotoPage(this.currentPage - 1);
             }
-        },
-    },
+        }
+    }
 }
-
 </script>

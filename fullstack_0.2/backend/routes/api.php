@@ -7,7 +7,7 @@ use App\Http\Controllers\SzemelyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('szamlak/filter/', [SzamlaController::class, 'filter']);
+Route::get('szamlak/filter/{type}', [SzamlaController::class, 'filter']);
 Route::apiResource('szamlak', SzamlaController::class)->except(['update']);
 
 Route::apiResource('autok', AutoController::class)->except(['update']);
