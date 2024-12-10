@@ -17,7 +17,7 @@ class StoreAutoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "rendszam" => ["required", "string", "max:20", "unique:autok,rendszam"],
+            "rendszam" => ["required", "string", "between:7,10", "unique:autok,rendszam"],
             "kategoria_besorolas_fk" => ["required", "integer", "exists:kategoriak,kat_id"],
             "felsz_id_fk" => ["nullable", "integer", "exists:felszereltsegek,felsz_id"],
             "flotta_id_fk" => ["required", "integer", "exists:flotta_tipusok,flotta_id"],

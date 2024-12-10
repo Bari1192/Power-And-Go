@@ -29,7 +29,7 @@ class AutoFactory extends Factory
             'toltes_szazalek' => $toltes_szazalek,
             'toltes_kw' => $toltes_kw,
             'becsult_hatotav' => $becsultHatotav,
-            'foglalhato' => true,
+            'status' => random_int(1,6),
         ];
     }
     private function flottabolAutotIdAlapjan(): int

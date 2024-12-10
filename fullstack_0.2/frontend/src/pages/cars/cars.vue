@@ -13,7 +13,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-white text-lg">
-                    <tr v-for="car in cars" :key="car.autok_id"
+                    <tr v-for="car in cars" :key="car.rendszam"
                         class="text-white cursor-pointer odd:hover:bg-sky-900 even:hover:bg-sky-800 odd:bg-sky-500 even:bg-sky-600">
                         <td class="text-center p-2">{{ car.autok_id }}</td>
                         <td class="text-center p-2">{{ car.rendszam }}</td>

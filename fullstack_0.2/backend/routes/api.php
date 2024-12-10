@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AutoController;
+use App\Http\Controllers\CarStatusController;
 use App\Http\Controllers\FleetController;
 use App\Http\Controllers\SzamlaController;
 use App\Http\Controllers\SzemelyController;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('szamlak/filter/{type}', [SzamlaController::class, 'filter']);
 Route::apiResource('szamlak', SzamlaController::class)->except(['update']);
+
+Route::apiResource('carstatus', CarStatusController::class)->except(['update']);
 
 Route::apiResource('autok', AutoController::class)->except(['update']);
 Route::apiResource('szemelyek', SzemelyController::class)->except(['update']);

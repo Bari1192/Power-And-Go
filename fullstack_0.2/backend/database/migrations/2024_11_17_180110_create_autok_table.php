@@ -9,12 +9,13 @@ return new class extends Migration {
     {
         Schema::create('autok', function (Blueprint $table) {
             $table->id('autok_id');
-            $table->string('rendszam', 20)->unique();
+            $table->string('rendszam', 10)->unique();
 
             $table->float('toltes_szazalek', 2);
             $table->float('toltes_kw', 1);
             $table->float('becsult_hatotav', 1);
-            $table->boolean('foglalhato')->default(true); # Foglalható-e az autó -> lezárt bérlésekben vizsgáljuk ezt!
+            // $table->tinyInteger('status'); ### Alapértelmezetten random kap egy számot a factory-ben 1-6 között.
+            $table->foreignId('status')->constrained('carstatus','id')->onDelete('cascade');
 
             # FK KULCSOK
             $table->foreignId('kategoria_besorolas_fk')->constrained('kategoriak', 'kat_id')->onDelete('cascade');

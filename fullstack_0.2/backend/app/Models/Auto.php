@@ -21,7 +21,7 @@ class Auto extends Model
         'flotta_id_fk',
         'km_ora_allas',
         'gyartasi_ev',
-        'foglalhato',
+        'status',
         'toltes_szazalek',
         'toltes_kw',
         'becsult_hatotav',
@@ -35,5 +35,8 @@ class Auto extends Model
     {
         return $this->belongsTo(Kategoria::class, 'kategoria_besorolas_fk', 'kat_besorolas');
     }
-    
+    public function carstatus(): BelongsTo
+    {
+        return $this->belongsTo(CarStatus::class, 'status', 'carstatus_id');
+    }
 }

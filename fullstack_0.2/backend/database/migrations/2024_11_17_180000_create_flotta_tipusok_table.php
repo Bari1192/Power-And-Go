@@ -9,11 +9,11 @@ return new class extends Migration {
     {
         Schema::create('flotta_tipusok', function (Blueprint $table) {
             $table->id('flotta_id');
-            $table->string('gyarto');
-            $table->string('tipus');
+            $table->string('gyarto',30);
+            $table->string('tipus',30);
             $table->integer('teljesitmeny');
             $table->integer('vegsebesseg');
-            $table->string('gumimeret');
+            $table->string('gumimeret',30);
             $table->integer('hatotav');
             $table->timestamps();
         });

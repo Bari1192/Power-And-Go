@@ -17,7 +17,7 @@ class LezartBerlesFactory extends Factory
     public function definition(): array
     {
         do {
-            $auto = Auto::with('flotta')->where('foglalhato', true)->inRandomOrder()->first();
+            $auto = Auto::with('flotta')->where('status', 1)->inRandomOrder()->first();
             $autoKategoria = $auto->kategoria_besorolas_fk;
             $flottaTipus = $auto->flotta;
 
@@ -32,15 +32,11 @@ class LezartBerlesFactory extends Factory
             $zaraskoriToltesKw = max($nyitasToltesKw - $kwFogyasztas, 0);
             $zarasToltesSzazalek = round(($zaraskoriToltesKw / $flottaTipus->teljesitmeny) * 100, 2);
 
-            ### Ezt majd át kell írni, mert ez fogja a státusz állapot kapcsolóját "irányítani".
-            ### A "kapcsolót" állítsd majd át 15%-ra. Onanantól "vegye ki" a foglalhatósági rendszerből.
-            ### 
-            if ($zarasToltesSzazalek > 12.0) {
-                if ($zarasToltesSzazalek <= 15.0) {
-                    $auto->foglalhato = false;
-                    ### Ezt a foglalható státuszt át kell majd alakítani a tényleges STÁTUS alapján.
-                    ### Az eddigi Bool (1-0) foglalhatóságról.
+            if ($zarasToltesSzazalek > 12.0) { ## 12% alatt nem indulhat el bérlés!
+                if ($zarasToltesSzazalek <= 15.0) { ## 15% alatt lett lezárva -> instant bünti érte!
+                    $auto->status = 6;
                     $auto->save();
+                    ## Autó "kritikus töltés" értékre kerül -> nem foglalható!
                 }
                 break;
             } else {
