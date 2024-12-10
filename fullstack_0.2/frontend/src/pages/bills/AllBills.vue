@@ -1,21 +1,21 @@
 <template>
     <BaseLayout>
-        <div class="mx-auto my-10 border-2 rounded-2xl border-sky-300">
-            <div class="flex justify-center p-3 border-b-2 flex-wrap dark:border-none">
+        <div class="mx-auto w-fit my-10 border-2 rounded-2xl border-lime-500">
+            <div class="m-auto w-fit mx-auto px-auto py-3 border-b-2 flex-wrap dark:border-none">
                 <button @click="gotoPage(1)"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mx-3 ">
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 border border-blue-700 rounded mx-3 ">
                     1. oldal
                 </button>
                 <button @click="backtoPage" :disabled="!links.prev"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mx-3 ">
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 border border-blue-700 rounded mx-3 ">
                     Előző
                 </button>
                 <button @click="gotoNext" :disabled="!links.next"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mx-3 ">
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 border border-blue-700 rounded mx-3 ">
                     Következő
                 </button>
                 <button @click="gotoPage(lastPage)"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mx-3 ">
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 border border-blue-700 rounded mx-3 ">
                     Utolsó oldal
                 </button>
             </div>
@@ -41,12 +41,12 @@
                         <td class="text-center p-2 font-semibold">{{ fine.szamla_tipus }}</td>
                         <td class="text-center p-2">{{ fine.szamla_kelt }}</td>
                         <td class="text-center p-2 font-semibold">{{ fine.osszeg }} Ft</td>
-                        <td class="text-center p-2">{{ fine.szamla_status }}</td>
+                        <td class="text-center text-lime-300 font-bold p-2 italic">{{ fine.szamla_status }}</td>
                         <td class="text-center p-2">{{ fine.megtett_tavolsag }} km</td>
                         <td class="text-center p-2">{{ fine.parkolasi_perc }} perc</td>
                         <td class="text-center p-2">{{ fine.vezetesi_perc }} perc</td>
-                        <td class="text-center p-2">{{ fine.berles_kezd_datum }}{{ fine.berles_kezd_ido }}</td>
-                        <td class="text-center p-2">{{ fine.berles_veg_datum }}{{ fine.berles_veg_ido }}</td>
+                        <td class="text-center p-2">{{ fine.berles_kezd_datum }} <b>{{ fine.berles_kezd_ido }}</b></td>
+                        <td class="text-center p-2">{{ fine.berles_veg_datum }} <b>{{ fine.berles_veg_ido }}</b></td>
                     </tr>
                 </tbody>
             </table>

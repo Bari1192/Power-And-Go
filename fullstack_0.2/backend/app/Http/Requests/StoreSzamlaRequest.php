@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreSzamlaRequest extends FormRequest
 {
@@ -17,7 +18,7 @@ class StoreSzamlaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "szamla_tipus" => ["required", "in:berles,baleset,karokozas,toltes_buntetes"],
+            "szamla_tipus" => ["required", Rule::in(['berles','baleset','karokozas','toltes_buntetes'])],
             "osszeg" => ["required", "integer", "min:0"],
             "megtett_tavolsag" => ["nullable", "integer", "min:0"],
             "parkolasi_perc" => ["nullable", "integer", "min:0"],
