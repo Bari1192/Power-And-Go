@@ -99,7 +99,7 @@ class LezartBerlesFactory extends Factory
     private function autoToltesFrissites(Auto $auto, float $zarasToltesSzazalek, float $zaraskoriToltesKw): void
     {
         // Garantáljuk, hogy a töltöttségi szint ne essen 15% alá
-        $auto->toltes_szazalek = max($zarasToltesSzazalek, 15);
+        $auto->toltes_szazalek = $zarasToltesSzazalek;
         $auto->toltes_kw = max($zaraskoriToltesKw, 0);
         $auto->becsult_hatotav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szazalek, 1);
 
