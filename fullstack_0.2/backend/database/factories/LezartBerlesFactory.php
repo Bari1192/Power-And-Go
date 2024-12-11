@@ -17,7 +17,6 @@ class LezartBerlesFactory extends Factory
 
     public function definition(): array
     {
-        DB::enableQueryLog();
         do {
             $auto = Auto::with('flotta')->where('status', 1)->inRandomOrder()->first();
             $autoKategoria = $auto->kategoria_besorolas_fk;
@@ -34,7 +33,7 @@ class LezartBerlesFactory extends Factory
             $zaraskoriToltesKw = max($nyitasToltesKw - $kwFogyasztas, 0);
             $zarasToltesSzazalek = round(($zaraskoriToltesKw / $flottaTipus->teljesitmeny) * 100, 2);
 
-            if ($zarasToltesSzazalek < 12.0) { ## 12% alatt nem indulhat el bérlés!
+            if ($zarasToltesSzazalek >= 12.0) { ## 12% alatt nem indulhat el bérlés!
                 if ($zarasToltesSzazalek <= 15.0) { ## 15% alatt lett lezárva -> instant bünti érte!
                     $auto->status = 6;
                     $auto->save();

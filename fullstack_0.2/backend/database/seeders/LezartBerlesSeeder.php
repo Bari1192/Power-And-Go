@@ -11,7 +11,5 @@ class LezartBerlesSeeder extends Seeder
     public function run(): void
     {
         LezartBerles::factory(100)->create();
-        dd(DB::getQueryLog());
-
     }
 }

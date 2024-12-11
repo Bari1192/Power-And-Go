@@ -14,6 +14,10 @@ class NapiBerlesSeeder extends Seeder
     {
         $arazasok = Arazas::all(['id', 'auto_besorolas', 'elofiz_azon']);
 
+        ### Tömeges beszúrás, a gyorsabb betöltés végett:
+        ### ebbe bele az összes rekordot!
+        $insertData = []; 
+
         foreach ($arazasok as $arazas) {
             $autoTipusok = range(1, 5);
 
@@ -21,15 +25,16 @@ class NapiBerlesSeeder extends Seeder
                 $prices = $this->napiBerlesAutokEsElofizAlapjan($arazas->elofiz_azon,$arazas->auto_besorolas);
 
                 foreach ($prices as $nap => $ar) {
-                    NapiBerles::create([
+                    $insertData[] = [
                         'arazas_id' => $arazas->id,
                         'auto_tipus' => $tipus,
                         'napok' => $nap + 2, ## Csak a 2. naptól kellenek!
                         'ar' => $ar,
-                    ]);
+                    ];
                 }
             }
         }
+        NapiBerles::insert($insertData);
     }
     # Árak generálása az autókategória és előfizetési csoport alapján
     private function napiBerlesAutokEsElofizAlapjan($elofiz_azon,$auto_besorolas)

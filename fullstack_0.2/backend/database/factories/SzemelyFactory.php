@@ -27,7 +27,7 @@ class SzemelyFactory extends Factory
             'jogos_szam' => $this->egyediJogosSzam(),
             'jogos_erv_kezdete' => $jogsiKezdete->format('Y-m-d'),
             'jogos_erv_vege' => $jogsiVege->format('Y-m-d'),
-            'szemely_jelszo' => str_pad((string) fake()->numberBetween(1000, 9999), 4, '0', STR_PAD_LEFT), // Helyesen generált jelszó
+            'szemely_jelszo' => fake()->numberBetween(1000, 9999_9999),
         ];
     }
     private function egyediSzigSzam(): string

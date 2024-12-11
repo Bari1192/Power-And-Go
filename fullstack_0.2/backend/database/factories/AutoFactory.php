@@ -29,7 +29,7 @@ class AutoFactory extends Factory
             'toltes_szazalek' => $toltes_szazalek,
             'toltes_kw' => $toltes_kw,
             'becsult_hatotav' => $becsultHatotav,
-            'status' => random_int(1,6),
+            'status' => 1, ## Alapnak 1-est, hogy teszteléskor látszódjon a változtatás!
         ];
     }
     private function flottabolAutotIdAlapjan(): int
