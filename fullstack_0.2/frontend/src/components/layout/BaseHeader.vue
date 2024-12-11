@@ -23,6 +23,9 @@
       <RouterLink to="/fleets/fleets" class="flex mx-auto space-x-3" active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold  dark:hover:text-lime-500">Flotta</span>
       </RouterLink>
+      <RouterLink to="/logins/adminPage" class="flex mx-auto space-x-3" active-class="font-bold text-lime-500">
+        <span class="self-center text-2xl font-semibold  dark:hover:text-lime-500">Bejelentkezés</span>
+      </RouterLink>
       <button class="block md:hidden" @click="toggleMenu">
         <svg class="w-5 h-5 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

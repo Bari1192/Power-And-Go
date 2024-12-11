@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('k_nev');
             $table->date('szul_datum');
             $table->string('telefon');
-            $table->string('email')->unique();
+            $table->string('email')->collation('utf8mb4_unicode_ci');
             $table->timestamps();
         });
     }

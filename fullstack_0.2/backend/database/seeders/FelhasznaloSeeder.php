@@ -6,7 +6,6 @@ use App\Models\Elofizetes;
 use App\Models\Felhasznalo;
 use App\Models\Szemely;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class FelhasznaloSeeder extends Seeder
 {
