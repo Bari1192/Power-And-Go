@@ -15,7 +15,7 @@ class AutoResource extends JsonResource
             'kategoria_besorolas_fk' => $this->kategoria_besorolas_fk,
             'felsz_id_fk' => $this->felsz_id_fk,
             'flotta_id_fk' => $this->flotta_id_fk,
-            'km_ora_allas' => $this->km_ora_allas,
+            'km_ora_allas' => number_format($this->km_ora_allas, 0, '', ' '),
             'gyartasi_ev' => $this->gyartasi_ev,
         ];
     }

@@ -1,54 +1,42 @@
 <template>
     <BaseLayout>
-        <div class="mx-auto my-10 w-3/4 border-2 rounded-2xl border-sky-300">
-            <table class="w-full border-collapse rounded-2xl overflow-hidden ">
-                <thead>
-                    <tr class="text-white text-xl bg-sky-600">
-                        <th class="px-2">Azonosító</th>
-                        <th class="px-2">Rendszám</th>
-                        <th class="px-2">Futásteljesítmény</th>
-                        <th class="px-2">Gyártási év</th>
-                        <th class="px-2">Felszereltség bes.</th>
-                        <th class="px-2">Flotta bes.</th>
-                    </tr>
-                </thead>
-                <tbody class="text-white text-lg">
-                    <tr v-for="car in cars" :key="car.rendszam"
-                        class="text-white cursor-pointer odd:hover:bg-sky-900 even:hover:bg-sky-800 odd:bg-sky-500 even:bg-sky-600">
-                        <td class="text-center p-2">{{ car.autok_id }}</td>
-                        <td class="text-center p-2">{{ car.rendszam }}</td>
-                        <td class="text-center p-2">{{ car.km_ora_allas }}</td>
-                        <td class="text-center p-2">{{ car.gyartasi_ev }}</td>
-                        <td class="text-center p-2">{{ car.felsz_id_fk }}</td>
-                        <td class="text-center p-2">{{ car.flotta_id_fk }}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="container">
+            <div class="col">
+                <div class="row">
+                    <p class="text-5xl text-center mt-10 text-sky-100 font-semibold">Autók Megjelenítése</p>
+                    <div class=" w-2/5 border-b-4 mx-auto border-lime-500 mt-3 mb-5" ></div>
+                    <div class=" w-2/3 border-b-4 mx-auto border-lime-500 mt-0 mb-10"></div>
+                </div>
+                <div class="row">
+                    <BaseTable :cars />
+                </div>
+            </div>
         </div>
     </BaseLayout>
 </template>
 
 <script>
-import { http } from '@utils/http.mjs';
-import BaseLayout from '@layouts/BaseLayout.vue'
+import BaseLayout from "@layouts/BaseLayout.vue";
+import BaseTable from "@layouts/BaseTable.vue";
+import { http } from "@utils/http";
 
 export default {
-    data() {
-        return {
-            cars: []
-        }
-    },
     components: {
         BaseLayout,
+        BaseTable,
+    },
+    data() {
+        return {
+            cars: [],
+        };
     },
     async mounted() {
         try {
-            const resp = await http.get('/autok');
-            this.cars = resp.data.data;
+            const response = await http.get("/cars");
+            this.cars = response.data.data;
         } catch (error) {
-            console.error('Hiba történt az API hívás során:', error);
+            console.error("Hiba történt az API-hívás során:", error);
         }
     }
-}
-
+};
 </script>

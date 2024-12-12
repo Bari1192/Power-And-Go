@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -10,12 +9,15 @@ class KategoriaSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('kategoriak')->insert([
-            ['kat_besorolas' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['kat_besorolas' => 2, 'created_at' => now(), 'updated_at' => now()],
-            ['kat_besorolas' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['kat_besorolas' => 4, 'created_at' => now(), 'updated_at' => now()],
-            ['kat_besorolas' => 5, 'created_at' => now(), 'updated_at' => now()],
-        ]);
+        $teljesitmenyek = DB::table('flotta_tipusok')->distinct()->pluck('teljesitmeny');
+
+        foreach ($teljesitmenyek as $index => $teljesitmenyErteke) {
+            DB::table('kategoriak')->insert([
+                'kat_besorolas' => $index + 1, // Az indexet használjuk kategória besorolásként
+                'teljesitmeny' => $teljesitmenyErteke,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

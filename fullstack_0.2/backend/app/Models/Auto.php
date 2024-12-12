@@ -13,6 +13,7 @@ class Auto extends Model
     protected $table = 'autok';
     protected $primaryKey = 'autok_id';
     public $incrementing = true;
+    protected $keyType='int';
 
     protected $fillable = [
         'rendszam',

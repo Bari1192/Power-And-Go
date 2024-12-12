@@ -33,8 +33,10 @@ class LezartBerlesFactory extends Factory
             $zaraskoriToltesKw = max($nyitasToltesKw - $kwFogyasztas, 0);
             $zarasToltesSzazalek = round(($zaraskoriToltesKw / $flottaTipus->teljesitmeny) * 100, 2);
 
-            if ($zarasToltesSzazalek >= 12.0) { ## 12% alatt nem indulhat el bérlés!
-                if ($zarasToltesSzazalek <= 15.0) { ## 15% alatt lett lezárva -> instant bünti érte!
+            ## 1% alatt nem indulhat el a bérlés, ha valaki úgy zárta le az autót!
+            if ($zarasToltesSzazalek >= 1.0) { 
+                ## 15% alatt zárják le, akkor egyből vegye ki a rendszer az autót és -> instant bünti érte!
+                if ($zarasToltesSzazalek <= 15.0) { 
                     $auto->status = 6;
                     $auto->save();
                     ## Autó "kritikus töltés" értékre kerül -> nem foglalható!
@@ -103,12 +105,6 @@ class LezartBerlesFactory extends Factory
         $auto->toltes_szazalek = $zarasToltesSzazalek;
         $auto->toltes_kw = max($zaraskoriToltesKw, 0);
         $auto->becsult_hatotav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szazalek, 1);
-
-        // ## ide írható majd, hogy ha a toltes_kw<=
-        #### if ($auto->toltes_kw <=15.0) {
-        ####     $auto->status=1;
-        ####     $auto->status_name='Low Battery';
-        #### }
         $auto->save();
     }
 

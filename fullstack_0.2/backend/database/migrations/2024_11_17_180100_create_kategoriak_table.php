@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('kategoriak', function (Blueprint $table) {
             $table->id('kat_id');
             $table->unsignedBigInteger('kat_besorolas')->unique();
+            $table->tinyInteger('teljesitmeny');
             $table->timestamps();
         });
     }

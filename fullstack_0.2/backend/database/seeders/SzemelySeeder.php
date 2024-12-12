@@ -11,6 +11,6 @@ class SzemelySeeder extends Seeder
 {
     public function run(): void
     {
-        Szemely::factory(300)->create();
+        Szemely::factory(450)->create();
     }
 }

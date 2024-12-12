@@ -43,8 +43,8 @@
                         <td class="text-center p-2 font-semibold">{{ fine.osszeg }} Ft</td>
                         <td class="text-center text-lime-300 font-bold p-2 italic">{{ fine.szamla_status }}</td>
                         <td class="text-center p-2">{{ fine.megtett_tavolsag }} km</td>
-                        <td class="text-center p-2">{{ fine.parkolasi_perc }} perc</td>
-                        <td class="text-center p-2">{{ fine.vezetesi_perc }} perc</td>
+                        <td class="text-center p-2">{{ timeFormat(fine.parkolasi_perc) }} </td>
+                        <td class="text-center p-2">{{ timeFormat(fine.vezetesi_perc) }} </td>
                         <td class="text-center p-2">{{ fine.berles_kezd_datum }} <b>{{ fine.berles_kezd_ido }}</b></td>
                         <td class="text-center p-2">{{ fine.berles_veg_datum }} <b>{{ fine.berles_veg_ido }}</b></td>
                     </tr>
@@ -75,6 +75,18 @@ export default {
     },
 
     methods: {
+        timeFormat(minutes) {
+            if (minutes < 60) {
+                return `${minutes} perc`;
+            }
+            const hours = Math.floor(minutes / 60);
+            const plusMinutes = minutes % 60;
+            if (plusMinutes === 0) {
+                return `${hours} óra`;
+            }
+            return `${hours}ó ${plusMinutes}p`;
+        },
+
         async loadFines(page = 1) {
             try {
                 const resp = await http.get(`/szamlak?page=${page}`);

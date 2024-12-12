@@ -13,8 +13,8 @@ class AutoController extends Controller
 {
     public function index(): JsonResource
     {
-        $autok = Auto::all();
-        return AutoResource::collection($autok);
+        $cars = Auto::all();
+        return AutoResource::collection($cars);
     }
 
     public function store(StoreAutoRequest $request)
@@ -24,17 +24,18 @@ class AutoController extends Controller
         return new AutoResource($car);
     }
 
-    public function show(Auto $auto): JsonResource
+    public function show(Auto $car): JsonResource
     {
-        return new AutoResource($auto);
+        // Ekkor a Laravel automatikusan kikeresi az `id` alapján a rekordot
+        return new AutoResource($car); 
     }
 
     public function update(Request $request, string $id)
     {
         //
     }
-    public function destroy(Auto $auto): Response
+    public function destroy(Auto $car): Response
     {
-        return ($auto->delete()) ? response()->noContent() : abort(500);
+        return ($car->delete()) ? response()->noContent() : abort(500);
     }
 }
