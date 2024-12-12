@@ -5,7 +5,7 @@
                 <div class="row">
                     <p class="text-5xl text-center mt-10 text-sky-100 font-semibold">Autók Megjelenítése</p>
                     <div class=" w-2/5 border-b-4 mx-auto border-lime-500 mt-3 mb-5" ></div>
-                    <div class=" w-2/3 border-b-4 mx-auto border-lime-500 mt-0 mb-10"></div>
+                    <div class=" w-2/3 border-b-4 mx-auto border-lime-500 mt-0 mb-6"></div>
                 </div>
                 <div class="row">
                     <BaseTable :cars />

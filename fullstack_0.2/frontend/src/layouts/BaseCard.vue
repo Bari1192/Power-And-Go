@@ -1,6 +1,6 @@
 <template>
-  <div class="card-body border border-sky-500 rounded-md my-2 overflow-hidden">
-    <div class="card-title bg-sky-500 px-2 text-white">
+  <div class="card-body border-2 border-lime-500 rounded-md my-2 overflow-hidden text-lg">
+    <div class="card-title bg-lime-100 px-2 text-lime-600 font-semibold">
       {{ title }}
     </div>
     <div class="card-text p-3 text-sky-100">
@@ -12,7 +12,7 @@
 <script>
 export default {
   props: {
-    title: String,
+    title: [String, Number],
     text: [String, Number], // Elfogad string és szám típusokat is
   },
 }

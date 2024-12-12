@@ -17,6 +17,7 @@ class AutoResource extends JsonResource
             'flotta_id_fk' => $this->flotta_id_fk,
             'km_ora_allas' => number_format($this->km_ora_allas, 0, '', ' '),
             'gyartasi_ev' => $this->gyartasi_ev,
+            'flotta' => new FleetResource($this->whenLoaded('flotta')),
         ];
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-sky-500 rounded-3xl overflow-hidden">
+  <div class=" mx-auto w-4/5 border border-sky-500 rounded-3xl overflow-hidden">
     <table class="w-full">
       <thead>
         <tr class="text-white bg-sky-500 ">
@@ -12,9 +12,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="car in cars" :key="car.autok_id" class="odd:bg-sky-800 even:bg-sky-950 text-center">
-          <td class="px-4 py-2 text-lime-500 underline">
-            <RouterLink :to="{ name: '/cars/[id]/', params: { id: car.autok_id } }">
+        <tr v-for="car in cars" :key="car.autok_id" class="odd:bg-sky-800 even:bg-sky-950 text-center text-lg">
+          <td class="px-4 py-2 text-lime-500 font-semibold ">
+            <RouterLink class="hover:text-lime-300" :to="{ name: '/cars/[id]/', params: { id: car.autok_id } }">
               {{ car.rendszam }}
             </RouterLink>
           </td>
