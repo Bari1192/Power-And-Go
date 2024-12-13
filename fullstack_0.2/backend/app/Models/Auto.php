@@ -38,6 +38,6 @@ class Auto extends Model
     }
     public function carstatus(): BelongsTo
     {
-        return $this->belongsTo(CarStatus::class, 'status', 'carstatus_id');
+        return $this->belongsTo(CarStatus::class, 'status', 'id');
     }
 }

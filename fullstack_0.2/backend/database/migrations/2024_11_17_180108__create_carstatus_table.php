@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('carstatus', function (Blueprint $table) {
             $table->id();
             $table->enum('status_name',['Szabad','Foglalva','Bérlés alatt','Szervízre vár','Tisztításra vár','Kritikus töltés']);
-            $table->string('status_descrip');
+            $table->string('status_descrip',255);
             $table->timestamps();
         });
     }

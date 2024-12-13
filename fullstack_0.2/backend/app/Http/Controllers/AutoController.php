@@ -32,7 +32,7 @@ class AutoController extends Controller
         ### (ha a Modelben megírtad!) + AutoResource megfelelően kezeli a relációkat.
         ### Resourcba ==>  'flotta' => new FlottaResource($this->whenLoaded('flotta')),
 
-        $car->load('flotta');
+        $car->load(['flotta','carstatus']);
         
         return new AutoResource($car); 
     }

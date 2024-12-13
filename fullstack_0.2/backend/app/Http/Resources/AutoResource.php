@@ -11,6 +11,7 @@ class AutoResource extends JsonResource
     {
         return [
             'autok_id' => $this->autok_id,
+            "status"=>new CarstatusResource($this->whenLoaded('carstatus')),
             'rendszam' => $this->rendszam,
             'kategoria_besorolas_fk' => $this->kategoria_besorolas_fk,
             'felsz_id_fk' => $this->felsz_id_fk,

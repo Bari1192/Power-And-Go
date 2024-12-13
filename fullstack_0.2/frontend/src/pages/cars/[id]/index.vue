@@ -5,6 +5,10 @@
       <h1 class="text-5xl text-sky-100 mb-6"> {{ car.rendszam }}</h1>
       <div class=" w-1/5 border-t-4 border-lime-500 mt-3 mb-3"></div>
       <div class="grid grid-cols-3 gap-6">
+        <BaseCard :title="'Státusza'" :text="car.statusz" />
+        <BaseCard :title="'Becsült hatótáv hátra'" :text="car.becsult_hatotav+' km'" />
+        <BaseCard :title="'Töltési energia'" :text="car.toltes_kw" />
+        <BaseCard :title="'Töltési százalék'" :text="car.toltes_szazalek" />
         <BaseCard :title="'Gyártó'" :text="car.flotta.gyarto" />
         <BaseCard :title="'Típus'" :text="car.flotta.tipus" />
         <BaseCard :title="'Teljesítmény'" :text="car.flotta.teljesitmeny+' kW'" />
