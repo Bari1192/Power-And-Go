@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Auto extends Model
 {
@@ -13,7 +14,7 @@ class Auto extends Model
     protected $table = 'autok';
     protected $primaryKey = 'autok_id';
     public $incrementing = true;
-    protected $keyType='int';
+    protected $keyType = 'int';
 
     protected $fillable = [
         'rendszam',
@@ -32,12 +33,19 @@ class Auto extends Model
         return $this->belongsTo(Flotta_tipusok::class, 'flotta_id_fk', 'flotta_id');
     }
 
+    
     public function kategoria(): BelongsTo
     {
         return $this->belongsTo(Kategoria::class, 'kategoria_besorolas_fk', 'kat_besorolas');
     }
+    
     public function carstatus(): BelongsTo
     {
         return $this->belongsTo(CarStatus::class, 'status', 'id');
+    }
+
+    public function lezartberlesek(): HasMany
+    {
+        return $this->hasMany(LezartBerles::class, 'auto_azonosito', 'autok_id');
     }
 }

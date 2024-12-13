@@ -14,6 +14,7 @@ class AutoController extends Controller
 {
     public function index(): JsonResource
     {
+        // $cars = Auto::with(['flotta','carstatus','lezartberlesek'])->get();
         $cars = Auto::all();
         return AutoResource::collection($cars);
     }
@@ -27,14 +28,12 @@ class AutoController extends Controller
 
     public function show(Auto $car): JsonResource
     {// Ekkor a Laravel automatikusan kikeresi az `id` alapján a rekordot
-        
         ### Esetben az AutoResource automatikusan tartalmazni fogja a kapcsolódó flotta adatokat is
         ### (ha a Modelben megírtad!) + AutoResource megfelelően kezeli a relációkat.
         ### Resourcba ==>  'flotta' => new FlottaResource($this->whenLoaded('flotta')),
-
-        $car->load(['flotta','carstatus']);
         
-        return new AutoResource($car); 
+        $car->load(['flotta', 'carstatus', 'lezartberlesek']);
+        return new AutoResource($car);
     }
 
     public function update(Request $request, string $id)

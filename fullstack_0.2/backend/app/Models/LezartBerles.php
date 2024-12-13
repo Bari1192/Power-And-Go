@@ -14,7 +14,26 @@ class LezartBerles extends Model
     public $timestamps = true;
     public $incrementing = true;
 
-    protected $fillable = [];
+    protected $fillable = [
+        "lezart_berles_id",
+        "auto_azonosito",
+        "auto_kategoria",
+        "szemely_id_fk",
+        "nyitas_toltes_szazalek",
+        "nyitas_toltes_kw",
+        "zaras_toltes_szazalek",
+        "zaras_toltes_kw",
+        "berles_kezd_datum",
+        "berles_kezd_ido",
+        "berles_veg_datum",
+        "berles_veg_ido",
+        "megtett_tavolsag",
+        "parkolas_kezd",
+        "parkolas_veg",
+        "parkolasi_perc",
+        "vezetesi_perc",
+        "berles_osszeg",
+    ];
 
     public function auto()
     {
@@ -28,6 +47,6 @@ class LezartBerles extends Model
 
     public function felhasznalo()
     {
-        return $this->belongsTo(Felhasznalo::class, 'szemely_id_fk', 'szemely_id'); 
+        return $this->belongsTo(Felhasznalo::class, 'szemely_id_fk', 'szemely_id');
     }
 }
