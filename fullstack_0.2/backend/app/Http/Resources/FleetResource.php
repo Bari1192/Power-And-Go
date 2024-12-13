@@ -20,7 +20,7 @@ class FleetResource extends JsonResource
                 'tipus' => $this->tipus,
                 'teljesitmeny' => $this->teljesitmeny,
                 'vegsebesseg' => $this->vegsebesseg,
-                'gumimeret' => $this->gumimeret,
+                // 'gumimeret' => $this->gumimeret,
                 'hatotav' => $this->hatotav,
             ];
     }
