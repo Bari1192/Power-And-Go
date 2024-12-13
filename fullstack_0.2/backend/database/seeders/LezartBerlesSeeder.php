@@ -10,6 +10,6 @@ class LezartBerlesSeeder extends Seeder
 {
     public function run(): void
     {
-        LezartBerles::factory(350)->create();
+        LezartBerles::factory(1000)->create();
     }
 }

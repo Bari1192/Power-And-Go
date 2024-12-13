@@ -21,10 +21,9 @@
           <td class="py-2 text-sky-300 font-semibold">{{ car.km_ora_allas }}</td>
           <td class="py-2 text-sky-300 font-semibold">{{ car.gyartasi_ev }}</td>
           <td class="py-2 text-sky-300 font-semibold">{{ car.felsz_id_fk }}</td>
-          <td class="py-2 text-sky-300 font-semibold">{{ car.flotta_id_fk }}</td>
+          <td class="py-2 text-sky-300 font-semibold">{{ car.flotta.flotta_id }}</td>
           <td class="py-2 text-sky-300 font-semibold">{{ car.kategoria_besorolas_fk }}</td>
         </tr>
-
       </tbody>
     </table>
   </div>

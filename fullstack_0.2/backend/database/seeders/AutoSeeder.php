@@ -9,6 +9,6 @@ class AutoSeeder extends Seeder
 {
     public function run(): void
     {
-        Auto::factory(450)->create();
+        Auto::factory(500)->create();
     }
 }

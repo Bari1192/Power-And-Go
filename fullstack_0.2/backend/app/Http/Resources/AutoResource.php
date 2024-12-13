@@ -19,7 +19,9 @@ class AutoResource extends JsonResource
             'km_ora_allas' => number_format($this->km_ora_allas, 0, '', ' '),
             'gyartasi_ev' => $this->gyartasi_ev,
             'flotta' => new FleetResource($this->whenLoaded('flotta')),
-            'lezartberlesek' => RenthistoryResource::collection($this->whenLoaded('lezartberlesek')),
+            'histories' =>RenthistoryResource::collection($this->whenLoaded('lezartberlesek')),
+            'felsz_id_fk'=>$this->felsz_id_fk,
+            'kategoria_besorolas_fk'=>$this->kategoria_besorolas_fk,
         ];
     }
 }

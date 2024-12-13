@@ -58,42 +58,72 @@
         </div>
       </transition>
       <div ref="adatokAlja"></div>
-      
-      
+
+
       <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4"> Bejegyzések
         <button @click="noteDetails"
-        class="flex items-center justify-center bg-indigo-500 text-white font-bold rounded-full hover:bg-indigo-700"
-        style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;"
-        :style="{ transform: noteOpen ? 'rotate(90deg)' : 'rotate(-90deg)' }">
-        +
-      </button>
-    </h1>
-    <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
+          class="flex items-center justify-center bg-indigo-500 text-white font-bold rounded-full hover:bg-indigo-700"
+          style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;"
+          :style="{ transform: noteOpen ? 'rotate(90deg)' : 'rotate(-90deg)' }">
+          +
+        </button>
+      </h1>
+      <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
 
-    <transition name="fade-slide">
-      <div v-if="noteOpen">
-        <BaseCard class="h-40 text-2xl" :title="'Megjegyzések / Részletek'" :text="car.status.status_descrip" />
-      </div>
-    </transition>
-    <div ref="noteBottom"></div>
+      <transition name="fade-slide">
+        <div v-if="noteOpen">
+          <BaseCard class="h-40 text-2xl" :title="'Megjegyzések / Részletek'" :text="car.status.status_descrip" />
+        </div>
+      </transition>
+      <div ref="noteBottom"></div>
 
-    <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4"> Bérlési előzmények
+      <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4"> Bérlési előzmények
         <button @click="rentHistoryDetails"
-        class="flex items-center justify-center bg-indigo-500 text-white font-bold rounded-full hover:bg-indigo-700"
-        style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;"
-        :style="{ transform: rentHistoryOpen ? 'rotate(90deg)' : 'rotate(-90deg)' }">
-        +
-      </button>
-    </h1>
-    <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
+          class="flex items-center justify-center bg-indigo-500 text-white font-bold rounded-full hover:bg-indigo-700"
+          style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;"
+          :style="{ transform: rentHistoryOpen ? 'rotate(90deg)' : 'rotate(-90deg)' }">
+          +
+        </button>
+      </h1>
+      <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
 
-    <transition name="fade-slide">
-      <div v-if="rentHistoryOpen">
-        <BaseCard class="h-40 text-2xl" :title="'Megjegyzések / Részletek'" :text="car.status.status_descrip" />
-      </div>
-    </transition>
-    <div ref="rentHistoryBottom"></div>
-  </div>
+      <transition name="fade-slide">
+        <div v-if="rentHistoryOpen">
+          <div class=" mx-auto border-4 border-indigo-600 rounded-3xl overflow-hidden">
+            <table class="w-full">
+              <thead>
+                <tr class="text-lime-600 font-semibold bg-amber-50 border-b-8 border-lime-600">
+                  <th class="py-2 text-center">Bérlés azon</th>
+                  <th class="py-2 text-center">Felh azon.</th>
+                  <th class="py-2 text-center">Nyitás</th>
+                  <th class="py-2 text-center">Zárás</th>
+                  <th class="py-2 text-center">Kezd dátum</th>
+                  <th class="py-2 text-center">Záró dátum</th>
+                  <th class="py-2 text-center">Megtett út</th>
+                  <th class="py-2 text-center">Bérlés</th>
+                  <th class="py-2 text-center">Összeg</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="history in car.histories" :key="history.id"
+                  class="odd:bg-amber-50 even:bg-yellow-50 even:border-b-4 even:border-t-4 even:border-lime-400 text-center text-lg font-semibold text-lime-700">
+                  <td class="py-2">{{ history.id }}</td>
+                  <td class="py-2">{{ history.personId }}</td>
+                  <td class="py-2">{{ history.openPercent }} %</td>
+                  <td class="py-2">{{ history.closedPercent }} %</td>
+                  <td class="py-2">{{ history.startDate }} <b> {{ history.startTime }}</b></td>
+                  <td class="py-2">{{ history.closeDate }} <b>{{ history.closeTime }}</b></td>
+                  <td class="py-2">{{ history.distance }} km</td>
+                  <td class="py-2">{{ history.driveMin }} p</td>
+                  <td class="py-2">{{ history.rentCost }} Ft</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </transition>
+      <div ref="rentHistoryBottom"></div>
+    </div>
 
   </BaseLayout>
 </template>
@@ -113,8 +143,8 @@ export default {
     return {
       car: {},
       carOpen: false,
-      noteOpen:false,
-      rentHistoryOpen:false,
+      noteOpen: false,
+      rentHistoryOpen: false,
     }
   },
   async mounted() {

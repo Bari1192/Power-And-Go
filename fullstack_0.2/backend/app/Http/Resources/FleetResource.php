@@ -16,6 +16,7 @@ class FleetResource extends JsonResource
     {
         return
             [
+                'flotta_id' => $this->flotta_id,
                 'gyarto' => $this->gyarto,
                 'tipus' => $this->tipus,
                 'teljesitmeny' => $this->teljesitmeny,

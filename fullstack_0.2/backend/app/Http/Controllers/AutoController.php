@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAutoRequest;
 use App\Http\Resources\AutoResource;
 use App\Models\Auto;
-use App\Models\Flotta_tipusok;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
@@ -15,7 +14,7 @@ class AutoController extends Controller
     public function index(): JsonResource
     {
         // $cars = Auto::with(['flotta','carstatus','lezartberlesek'])->get();
-        $cars = Auto::all();
+        $cars = Auto::with('flotta')->get();
         return AutoResource::collection($cars);
     }
 
