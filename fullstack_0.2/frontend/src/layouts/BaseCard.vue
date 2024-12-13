@@ -5,6 +5,7 @@
     </div>
     <div class="card-text p-3 h-16 text-lime-50">
       {{ text }}
+      <slot />
     </div>
   </div>
 </template>

@@ -24,17 +24,13 @@ class SzamlaController extends Controller
     }
     public function store(StoreSzamlaRequest $request)
     {
-        # 1. Adatellenőrzés
         $data = $request->validated();
-
-        # 2. Szamla létrehozása
         $szamla = Szamla::create($data);
-
-        # 3. Számla "visszaadása"
         return new SzamlaResource($szamla);
     }
-    public function show(Szamla $szamla)
+    public function show(Szamla $szamla):JsonResource
     {
+        $szamla->load('autok');
         return new SzamlaResource($szamla);
     }
     public function update(Request $request, string $id)

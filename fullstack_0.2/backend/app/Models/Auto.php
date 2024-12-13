@@ -33,12 +33,12 @@ class Auto extends Model
         return $this->belongsTo(Flotta_tipusok::class, 'flotta_id_fk', 'flotta_id');
     }
 
-    
+
     public function kategoria(): BelongsTo
     {
         return $this->belongsTo(Kategoria::class, 'kategoria_besorolas_fk', 'kat_besorolas');
     }
-    
+
     public function carstatus(): BelongsTo
     {
         return $this->belongsTo(CarStatus::class, 'status', 'id');
@@ -47,5 +47,9 @@ class Auto extends Model
     public function lezartberlesek(): HasMany
     {
         return $this->hasMany(LezartBerles::class, 'auto_azonosito', 'autok_id');
+    }
+    public function szamlak(): HasMany
+    {
+        return $this->hasMany(Szamla::class, 'auto_azon', 'autok_id');
     }
 }

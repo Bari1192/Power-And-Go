@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Szamla extends Model
 {
@@ -25,4 +26,8 @@ class Szamla extends Model
         'szamla_kelt',
         'szamla_status',
     ];
+    public function autok(): BelongsTo
+    {
+        return $this->belongsTo(Auto::class, 'auto_azon', 'autok_id');
+    }
 }

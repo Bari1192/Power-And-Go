@@ -22,6 +22,7 @@ class AutoResource extends JsonResource
             'histories' =>RenthistoryResource::collection($this->whenLoaded('lezartberlesek')),
             'felsz_id_fk'=>$this->felsz_id_fk,
             'kategoria_besorolas_fk'=>$this->kategoria_besorolas_fk,
+            'szamlak'=>new SzamlaResource($this->whenLoaded('szamlak')),
         ];
     }
 }
