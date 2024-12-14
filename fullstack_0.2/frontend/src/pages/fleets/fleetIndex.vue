@@ -10,14 +10,18 @@
 
             <div class="flex flex-wrap my-12">
                 <div v-for="fleet in fleets" :key="fleet.flotta_id" class="w-1/2 px-3 mb-3 cursor-pointer">
-                    <ActualFleet :src="fleet.flotta_id" :imgalt="fleet.gyarto + fleet.tipus + 'képe'" :title="fleet.gyarto === 'VW' ? 'Volkswagen ' + fleet.tipus :
-                        fleet.gyarto === 'Renault' ? fleet.gyarto + ' Kangoo Z.E.'
-                            : fleet.gyarto + ' ' + fleet.tipus">
+                    <BaseFleet 
+                        :src="fleet.flotta_id" 
+                        :imgalt="fleet.gyarto + fleet.tipus + ' képe'" 
+                        :title="fleet.gyarto + ' ' + fleet.tipus"
+                        @edit="editFleet"
+                        @delete="deleteFleet"
+                    >
                         <p>Teljesítmény: <b>{{ fleet.teljesitmeny }}</b> kW </p>
                         <p>Végsebesség: {{ fleet.vegsebesseg }} </p>
                         <p>Hatótáv: {{ fleet.hatotav }}</p>
                         <p>Abroncs méret: {{ fleet.gumimeret }}</p>
-                    </ActualFleet>
+                    </BaseFleet>
                 </div>
             </div>
         </div>
@@ -28,7 +32,7 @@
 import { http } from '@utils/http.mjs';
 import BaseLayout from '@layouts/BaseLayout.vue';
 import NewFleetCar from './fleetcomponents/newFleetCar.vue';
-import ActualFleet from './fleetcomponents/BaseFleetCards.vue';
+import BaseFleet from './fleetcomponents/BaseFleetCards.vue';
 
 export default {
     data() {
@@ -39,12 +43,20 @@ export default {
     components: {
         BaseLayout,
         NewFleetCar,
-        ActualFleet,
+        BaseFleet,
     },
     async mounted() {
         const resp = await http.get('/fleets')
         this.fleets = resp.data.data;
-    }
+    },
+    methods: {
+        editFleet(flotta_id) {
+            alert(`Módosítás: ${flotta_id}`);
+        },
+        deleteFleet(flotta_id) {
+            alert(`Törlés: ${flotta_id}`);
+        },
+    },
 }
 
 </script>

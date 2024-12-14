@@ -9,7 +9,9 @@
             class=" ml-2 text-red-600 rounded-md  bg-amber-100 bg-opacity-95 max-w-fit  font-semibold text-3xl italic p-1 underline">
             Kérjük fokozott figyelemmel töltse ki!</p>
         <FormKit type="form" id="registration-example" :form-class="submitted ? 'hide' : 'show'" submit-label="Küldés"
-            @submit="submitHandler" :actions="false" #default="{ value }">
+            @submit="submitHandler" :actions="false" #default="{ value }" :validation="'required'" :validation-messages="{
+                required: 'Kérjük minden adatot töltsön ki!'
+            }">
             <div class="flex flex-wrap my-5">
                 <div class="w-full md:w-1/3 px-3">
                     <FormKit name="gyarto" type="text" label="Gyártó neve" placeholder="például: VW, Skoda!"
@@ -53,7 +55,7 @@
                         :help="'Csak a szám értékét írja be!'" help-class="text-gray-500 italic text-start my-1" />
                 </div>
                 <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="gumimeret" type="text" label="Gumiméret" placeholder="például: 165|65-R15"
+                    <FormKit name="gumimeret" value="165|65-R15" type="text" label="Gumiméret" placeholder="például: 165|65-R15"
                         :validation="'length:8,30|required'" :validation-messages="{
                             required: 'Kötelező kitölteni!',
                             length: 'A szövegnek 8-30 karakter között kell lennie!',
