@@ -5,6 +5,9 @@
             új flotta modell hozzáadása
         </p>
         <div class="m-auto d-flex justify-center border-b-4 border-sky-300 w-2/3 mb-20"></div>
+        <div v-if="submitted" class="flex justify-center mb-10 mx-auto">
+            <h2 class="text-green-600 italic w-fit bg-amber-50 font-semibold text-3xl">Az adatok sikeresen beküldésre kerültek!</h2>
+        </div>
         <p
             class=" ml-2 text-red-600 rounded-md  bg-amber-100 bg-opacity-95 max-w-fit  font-semibold text-3xl italic p-1 underline">
             Kérjük fokozott figyelemmel töltse ki!</p>
@@ -55,8 +58,8 @@
                         :help="'Csak a szám értékét írja be!'" help-class="text-gray-500 italic text-start my-1" />
                 </div>
                 <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="gumimeret" value="165|65-R15" type="text" label="Gumiméret" placeholder="például: 165|65-R15"
-                        :validation="'length:8,30|required'" :validation-messages="{
+                    <FormKit name="gumimeret" value="165|65-R15" type="text" label="Gumiméret"
+                        placeholder="például: 165|65-R15" :validation="'length:8,30|required'" :validation-messages="{
                             required: 'Kötelező kitölteni!',
                             length: 'A szövegnek 8-30 karakter között kell lennie!',
                         }" label-class="block tracking-wider text-sky-400 text-lg font-semibold mb-2"
@@ -75,13 +78,11 @@
                         input-class="appearance-none block w-full bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                 </div>
             </div>
+
             <div class="flex justify-center my-5 ">
                 <FormKit type="submit" label="Hozzáadás"
                     class="bg-blue-500 hover:bg-blue-400 text-white font-semiboldpy-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                 </FormKit>
-            </div>
-            <div v-if="submitted">
-                <h2 class="text-xl text-green-500 mx-auto">Az adatok sikeresen beküldésre kerültek!</h2>
             </div>
         </FormKit>
     </div>

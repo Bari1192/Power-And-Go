@@ -18,4 +18,4 @@ Route::apiResource('carstatus', CarStatusController::class)->except(['update']);
 Route::apiResource('cars', AutoController::class)->except(['update']);
 Route::apiResource('szemelyek', SzemelyController::class)->except(['update']);
 
-Route::apiResource('fleets', FleetController::class)->only(['show','index','store']);
+Route::apiResource('fleets', FleetController::class)->only(['show','index','store','destroy']);

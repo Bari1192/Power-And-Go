@@ -8,6 +8,7 @@ use App\Models\Flotta_tipusok;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class FleetController extends Controller
 {
@@ -33,8 +34,11 @@ class FleetController extends Controller
         //
     }
 
-    public function destroy(Flotta_tipusok $flotta_tipusok): Response
+    public function destroy(Flotta_tipusok $fleet)
     {
-        return ($flotta_tipusok->delete()) ? response()->noContent() : abort(500);
+        if ($fleet->delete()) {
+            return response(204);
+        }
+        return abort(500,'A törlés sikertelen volt!');
     }
 }

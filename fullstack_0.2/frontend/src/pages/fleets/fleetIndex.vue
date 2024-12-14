@@ -10,13 +10,8 @@
 
             <div class="flex flex-wrap my-12">
                 <div v-for="fleet in fleets" :key="fleet.flotta_id" class="w-1/2 px-3 mb-3 cursor-pointer">
-                    <BaseFleet 
-                        :src="fleet.flotta_id" 
-                        :imgalt="fleet.gyarto + fleet.tipus + ' képe'" 
-                        :title="fleet.gyarto + ' ' + fleet.tipus"
-                        @edit="editFleet"
-                        @delete="deleteFleet"
-                    >
+                    <BaseFleet :src="fleet.flotta_id" :imgalt="fleet.gyarto + fleet.tipus + ' képe'"
+                        :title="fleet.gyarto + ' ' + fleet.tipus" @edit="editFleet" @delete="deleteFleet">
                         <p>Teljesítmény: <b>{{ fleet.teljesitmeny }}</b> kW </p>
                         <p>Végsebesség: {{ fleet.vegsebesseg }} </p>
                         <p>Hatótáv: {{ fleet.hatotav }}</p>
@@ -53,10 +48,22 @@ export default {
         editFleet(flotta_id) {
             alert(`Módosítás: ${flotta_id}`);
         },
-        deleteFleet(flotta_id) {
-            alert(`Törlés: ${flotta_id}`);
-        },
-    },
+        async deleteFleet(flotta_id) {
+            if (confirm('Biztosan törölni szeretné?')) {
+                console.log(this.flotta_id)
+                try {
+                    const response = await http.delete(`/fleets/${flotta_id}`);
+                    if (response.status === 200) {
+                        alert('A törlés sikeres!');
+                        this.fleets = this.fleets.filter(fleet => fleet.flotta_id !== flotta_id);
+                    }
+                } catch (error) {
+                    alert('Törlési hiba: ' + error.response.data.message);
+                }
+            } else {
+                alert('A törlés visszavonva.');
+            }
+        }
+    }
 }
-
 </script>
