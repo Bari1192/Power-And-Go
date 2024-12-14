@@ -129,7 +129,7 @@
 
       <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4">
         Büntetések
-        <button :disabled="!carBills.length" @click="rentBillDetails"
+        <button @click="rentBillDetails" :disabled="!carBills.length"
           class="flex items-center justify-center font-bold rounded-full"
           :class="carBills.length ? 'bg-indigo-500 hover:bg-indigo-700 text-white' : 'bg-gray-500 text-gray-400 cursor-not-allowed'"
           :style="{
@@ -137,12 +137,15 @@
             backgroundColor: carBills.length ? '#4F46E5' : '#6B7280',
             color: carBills.length ? 'white' : '#a3a3a3',
             cursor: carBills.length ? 'pointer' : 'not-allowed'
-          }" style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;">
+          }"
+          style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;">
           +
         </button>
       </h1>
       <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
-
+      <div v-if="!carBills.length">
+        <p class="text-gray-200 font-semibold italic px-2 text-lg">Ehhez az autóhoz nem tartozik egyetlen bírság sem</p>
+      </div>
       <transition name="fade-slide">
         <div v-if="rentBillOpen">
           <div v-for="fine in carBills" :key="fine.szamla_azon">
@@ -203,6 +206,9 @@ export default {
     const response = await http.get(`/cars/${this.$route.params.id}`);
     this.car = response.data.data;
 
+    const billsresponse = await http.get(`/cars/${this.$route.params.id}/szamlak`);
+    this.carBills = billsresponse.data.data;
+
 
   },
   methods: {
@@ -228,8 +234,6 @@ export default {
       }
     },
     async rentBillDetails() {
-      const billsresponse = await http.get(`/cars/${this.$route.params.id}/szamlak`);
-      this.carBills = billsresponse.data.data;
       this.rentBillOpen = !this.rentBillOpen;
 
       // Inicializáljuk az állapotokat minden számlához
