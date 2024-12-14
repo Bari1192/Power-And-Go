@@ -11,7 +11,7 @@ class DolgozoSeeder extends Seeder
 {
     public function run(): void
     {
-        $szemelyek = Szemely::inRandomOrder()->limit(100)->get();
+        $szemelyek = Szemely::inRandomOrder()->limit(300)->get();
 
         foreach ($szemelyek as $szemely) {
             Dolgozo::factory()->create([

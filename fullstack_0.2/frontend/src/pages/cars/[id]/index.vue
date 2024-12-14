@@ -127,11 +127,17 @@
 
 
 
-      <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4"> Büntetések
-        <button @click="rentBillDetails"
-          class="flex items-center justify-center bg-indigo-500 text-white font-bold rounded-full hover:bg-indigo-700"
-          style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;"
-          :style="{ transform: rentBillOpen ? 'rotate(90deg)' : 'rotate(-90deg)' }">
+      <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4">
+        Büntetések
+        <button :disabled="!carBills.length" @click="rentBillDetails"
+          class="flex items-center justify-center font-bold rounded-full"
+          :class="carBills.length ? 'bg-indigo-500 hover:bg-indigo-700 text-white' : 'bg-gray-500 text-gray-400 cursor-not-allowed'"
+          :style="{
+            transform: rentBillOpen ? 'rotate(90deg)' : 'rotate(-90deg)',
+            backgroundColor: carBills.length ? '#4F46E5' : '#6B7280',
+            color: carBills.length ? 'white' : '#a3a3a3',
+            cursor: carBills.length ? 'pointer' : 'not-allowed'
+          }" style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;">
           +
         </button>
       </h1>

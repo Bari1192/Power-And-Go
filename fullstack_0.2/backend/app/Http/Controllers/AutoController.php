@@ -14,9 +14,9 @@ use Illuminate\Http\Response;
 class AutoController extends Controller
 {
     public function index(): JsonResource
-    {
-        // $cars = Auto::with(['flotta','carstatus','lezartberlesek'])->get();
-        $cars = Auto::with('flotta')->get();
+    {// $cars = Auto::with(['flotta','carstatus','lezartberlesek'])->get();
+
+        $cars = Auto::with('flotta')->paginate(100,['*'],'oldal',1,);
         return AutoResource::collection($cars);
     }
 

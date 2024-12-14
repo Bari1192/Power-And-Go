@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Database\Seeders\databaseViewSeeders\ToltesBuntetesViewSeederDB;
 use Illuminate\Database\Seeder;
 
 
@@ -24,5 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(LezartBerlesSeeder::class);
         $this->call(FutoBerlesSeeder::class);
         $this->call(SzamlaSeeder::class);
+
+        ## Nézet fájlok futtatásai:
+        $this->call(ToltesBuntetesViewSeederDB::class);
     }
 }

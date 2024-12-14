@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCarStatusRequest;
 use App\Http\Resources\CarstatusResource;
 use App\Models\CarStatus;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
@@ -18,7 +19,6 @@ class CarStatusController extends Controller
 
     public function store(StoreCarStatusRequest $request)
     {
-        # létrehozunk egy újat
         $data = $request->validated();
         $carstatus = CarStatus::create($data);
         return new CarstatusResource($carstatus);
@@ -28,8 +28,14 @@ class CarStatusController extends Controller
         return new CarstatusResource($carStatus);
     }
 
+    public function update(Request $request, string $id)
+    {
+        
+    }
+    
     public function destroy(CarStatus $carStatus):Response
     {
         return($carStatus->delete()) ? response()->noContent() : abort(500);
     }
+
 }
