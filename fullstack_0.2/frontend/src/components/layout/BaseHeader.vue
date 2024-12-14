@@ -20,7 +20,7 @@
       <RouterLink to="/cars/cars" class="flex mx-auto space-x-3" active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold  dark:hover:text-lime-500">Autok</span>
       </RouterLink>
-      <RouterLink to="/fleets/fleets" class="flex mx-auto space-x-3" active-class="font-bold text-lime-500">
+      <RouterLink to="/fleets/fleetIndex" class="flex mx-auto space-x-3" active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold  dark:hover:text-lime-500">Flotta</span>
       </RouterLink>
       <RouterLink to="/logins/adminPage" class="flex mx-auto space-x-3" active-class="font-bold text-lime-500">

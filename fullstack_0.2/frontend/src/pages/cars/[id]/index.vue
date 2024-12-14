@@ -136,7 +136,7 @@
             transform: rentBillOpen ? 'rotate(90deg)' : 'rotate(-90deg)',
             backgroundColor: carBills.length ? '#4F46E5' : '#6B7280',
             color: carBills.length ? 'white' : '#a3a3a3',
-            cursor: carBills.length ? 'pointer' : 'not-allowed'
+            cursor: carBills.length ? 'pointer' : 'default'
           }"
           style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;">
           +

@@ -20,8 +20,8 @@ class StoreFleetRequest extends FormRequest
             "tipus" => ['required', 'string', 'between:2,30'],
             "teljesitmeny" => ['required', 'integer', 'min:18', 'max:500'],
             "vegsebesseg" => ['required', 'integer', 'min:100', 'max:300'],
-            "gumimeret" => ['required', 'string','between:8,30'],
-            "hatotav" => ['required', 'integer', 'min:100', 'maximum:1000'],
+            "gumimeret" => ['required','between:8,30'],
+            "hatotav" => ['required', 'integer', 'min:100', 'max:1000'],
         ];
     }
 }

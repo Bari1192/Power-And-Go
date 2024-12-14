@@ -11,10 +11,10 @@ return new class extends Migration {
             $table->id('flotta_id');
             $table->string('gyarto',30);
             $table->string('tipus',30);
+            $table->integer('hatotav');
             $table->integer('teljesitmeny');
             $table->integer('vegsebesseg');
             $table->string('gumimeret',30);
-            $table->integer('hatotav');
             $table->timestamps();
         });
     }

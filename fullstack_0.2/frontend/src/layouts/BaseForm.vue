@@ -4,10 +4,26 @@
         <div
             class="m-auto d-flex justify-center my-10 w-3/4 border-2 rounded-2xl border-sky-300 dark:text-red-600 dark:italic dark:font-semibold ">
             <p class="text-center tracking-wide text-4xl font-semibold text-sky-100 my-5 ">
-                Új flottatípus felvétele
+                Tisztasági Állapot Bejelentése
+
+                szemely_id
+                felh_id
+
+                1. [carstatus] tábla fog kelleni
+                2. Azon belül: 
+                        1, status_name, -> automatán ha "tisztaság gombra kattint, akkor a kódszám 1-es lesz"
+                        2, status_descrip -> default jöhet + BELE IS ÍRHAT MEGJEGYZÉST.
+                3. Utána a (`/cars/${this.$route.params.id}`) -> hoz kell MÓDOSÍTANI státuszt ==> Utána frissítse az oldalt, hogy módosult
+                    adatokat lássuk az autó oldalán. ==> adatbázist csekkolni, hogy mentette-e, de elv. fogja.
+
+                4. Ezalatt legyen egy card alapú (mint a bírságoknál) megjelenés, HA VAN MÁR RAJTA bejelentés.!
+                        5. Ha nincs -> nem jelenik meg. Ha van, megjelenik.
+                5. Amint elküldjük a kérést, és response 201, akkor -> jelenjen meg egyből bejelentési gombok alatt a bejelentésünk. 
+                
+
             </p>
             <div class="m-auto d-flex justify-center border-b-4 border-sky-300 w-2/3 mb-20"></div>
-            <FormKit type="form" id="registration-example" :form-class="submitted ? 'hide' : 'show'" submit-label="Post"
+            <FormKit type="form" id="carCleanIssue" :form-class="submitted ? 'hide' : 'show'" submit-label="Post"
                 @submit="submitHandler" :actions="false" #default="{ value }">
                 <div class="flex flex-wrap my-5">
                     <div class="w-full md:w-1/3 px-3">
@@ -76,6 +92,10 @@ import BaseLayout from '@layouts/BaseLayout.vue'
 
 
 export default {
+    props: {
+        title: [String, Number],
+        text: [String, Number], 
+    },
     data() {
         return {
             fleets: []

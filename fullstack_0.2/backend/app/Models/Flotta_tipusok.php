@@ -15,12 +15,13 @@ class Flotta_tipusok extends Model
     public $incrementing = true;
 
     protected $fillable = [
+        'flotta_id',
         'gyarto',
         'tipus',
+        'hatotav',
         'teljesitmeny',
         'vegsebesseg',
         'gumimeret',
-        'hatotav',
     ];
     public function autok(): HasMany
     {
