@@ -10,15 +10,34 @@
 
             <div class="flex flex-wrap my-12">
                 <div v-for="fleet in fleets" :key="fleet.flotta_id" class="w-1/2 px-3 mb-3 cursor-pointer">
-                    <BaseFleet :src="fleet.flotta_id" :imgalt="fleet.gyarto + fleet.tipus + ' képe'"
-                        :title="fleet.gyarto + ' ' + fleet.tipus" @edit="editFleet" @delete="deleteFleet">
+                    <BaseFleet :src="fleet.flotta_id" :imgalt="fleet.gyarto + fleet.tipus + 'képe'" :title="fleet.gyarto === 'VW' ? 'Volkswagen ' + fleet.tipus :
+                        fleet.gyarto === 'Renault' ? fleet.gyarto + ' Kangoo Z.E.'
+                            : fleet.gyarto + ' ' + fleet.tipus" @edit="editFleet" @delete="deleteFleet"
+                            :teljesitmeny="fleet.teljesitmeny"
+                            :vegsebesseg="fleet.vegsebesseg"
+                            :hatotav="fleet.hatotav"
+                            :abroncs="fleet.gumimeret"
+                            >
                         <p>Teljesítmény: <b>{{ fleet.teljesitmeny }}</b> kW </p>
                         <p>Végsebesség: {{ fleet.vegsebesseg }} </p>
                         <p>Hatótáv: {{ fleet.hatotav }}</p>
                         <p>Abroncs méret: {{ fleet.gumimeret }}</p>
                     </BaseFleet>
                 </div>
+                <div v-if="isEditing" class="flex flex-wrap my-12">
+                    <div v-for="selectedfleet in fleet" :key="fleet.flotta_id" class="w-1/2 px-3 mb-3 cursor-pointer">
+                        <BaseFleet :src="selectedfleet.flotta_id" :imgalt="fleet.gyarto + fleet.tipus + ' képe'"
+                            :title="edita.gyarto + ' ' + selectedfleet.tipus"
+                            :teljesitmeny="selectedfleet.teljesitmeny" 
+                            :vegsebesseg="selectedfleet.vegsebesseg"
+                            :hatotav="selectedfleet.hatotav" 
+                            :abroncs="selectedfleet.gumimeret">
+                        
+                        </BaseFleet>
+                    </div>
+                </div>
             </div>
+
         </div>
     </BaseLayout>
 </template>
@@ -33,6 +52,7 @@ export default {
     data() {
         return {
             fleets: [],
+            isEditing: false,
         }
     },
     components: {
@@ -45,12 +65,19 @@ export default {
         this.fleets = resp.data.data;
     },
     methods: {
-        editFleet(flotta_id) {
-            alert(`Módosítás: ${flotta_id}`);
+        async updateFleet(flotta_id, updatedData) {
+            try {
+                const response = await http.put(`/fleets/${flotta_id}`, updatedData);
+                if (response.status === 200) {
+                    alert('A módosítás sikeres!');
+                    this.fetchFleets();
+                }
+            } catch (error) {
+                alert('Hiba történt a mentés során: ' + error.response.data.message);
+            }
         },
         async deleteFleet(flotta_id) {
             if (confirm('Biztosan törölni szeretné?')) {
-                console.log(this.flotta_id)
                 try {
                     const response = await http.delete(`/fleets/${flotta_id}`);
                     if (response.status === 200) {
