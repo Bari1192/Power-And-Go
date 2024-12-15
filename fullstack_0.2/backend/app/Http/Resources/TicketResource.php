@@ -10,9 +10,11 @@ class TicketResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "description" => $this->description,
-            "car_id" => $this->car_id,
-            "status_id" => $this->status_id,
+            'id' => $this->id,
+            'description' => $this->description,
+            'car_id' => $this->car_id,
+            'status_id' => $this->status_id,
+            'created_at' => $this->created_at,
         ];
     }
 }

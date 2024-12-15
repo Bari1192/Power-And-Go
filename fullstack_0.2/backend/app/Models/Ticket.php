@@ -10,11 +10,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Ticket extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id';
+
 
     public $fillable = [
+        'id',
+        'description',
         'car_id',
         'status_id',
-        'description',
+        'created_at',
     ];
     public function auto(): BelongsTo
     {
