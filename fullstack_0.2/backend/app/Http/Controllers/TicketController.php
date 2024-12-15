@@ -47,7 +47,7 @@ class TicketController extends Controller
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        $data=$request->validated();
+        $data = $request->validated();
         $ticket->update($data);
         return new TicketResource($ticket); // Frissített adat visszaadása
     }
@@ -57,6 +57,6 @@ class TicketController extends Controller
      */
     public function destroy(Ticket $ticket)
     {
-        //
+        return ($ticket->delete() ? response(200) : abort(500));
     }
 }
