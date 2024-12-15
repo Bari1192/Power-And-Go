@@ -20,4 +20,8 @@ class CarStatus extends Model
     {
         return $this->hasMany(Auto::class, 'status', 'carstatus_id');
     }
+    public function tickets(): HasMany
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }

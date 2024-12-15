@@ -52,4 +52,8 @@ class Auto extends Model
     {
         return $this->hasMany(Szamla::class, 'auto_azon', 'autok_id');
     }
+    public function tickets(): HasMany
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }
