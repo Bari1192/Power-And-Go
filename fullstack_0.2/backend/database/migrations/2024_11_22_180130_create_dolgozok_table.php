@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('munkaido');
             $table->integer('fizetes_ossz'); 
             $table->date('belepes_datum');
-            $table->timestamps();
         });
     }
     public function down(): void

@@ -7,6 +7,7 @@ use App\Models\LezartBerles;
 use App\Models\Szamla;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SzamlaSeeder extends Seeder
 {
@@ -55,29 +56,33 @@ class SzamlaSeeder extends Seeder
             $autoKat = $egyBerles->auto_kategoria;
             $zarasToltesSzazalek = $egyBerles->zaras_toltes_szazalek;
 
-            if (isset($kategoriak[$autoKat])) {
-                $szabaly = $kategoriak[$autoKat];
-
-                if ($zarasToltesSzazalek < $szabaly['min_toltes']) {
-                    # Büntetési számla generálása
-                    Szamla::create([
-                        'szamla_tipus' => 'toltes_buntetes',
-                        'felh_id' => $felhasznalo->felh_id,
-                        'szemely_id' => $egyBerles->szemely_id_fk,
-                        'auto_azon' => $egyBerles->auto_azonosito,
-                        'berles_kezd_datum' => $egyBerles->berles_kezd_datum,
-                        'berles_kezd_ido' => $egyBerles->berles_kezd_ido,
-                        'berles_veg_datum' => $egyBerles->berles_veg_datum,
-                        'berles_veg_ido' => $egyBerles->berles_veg_ido,
-                        'megtett_tavolsag' => $egyBerles->megtett_tavolsag,
-                        'parkolasi_perc' => $egyBerles->parkolasi_perc,
-                        'vezetesi_perc' => $egyBerles->vezetesi_perc,
-                        'osszeg' => $szabaly['buntetes'],
-                        'szamla_kelt' => now(),
-                        'szamla_status' => 'pending',
-                    ]);
-                }
+            if (isset($kategoriak[$autoKat]) && $zarasToltesSzazalek < $kategoriak[$autoKat]['min_toltes']) {
+                $buntetesAdatok[] = [
+                    'szamla_tipus' => 'toltes_buntetes',
+                    'felh_id' => $felhasznalo->felh_id,
+                    'szemely_id' => $egyBerles->szemely_id_fk,
+                    'auto_azon' => $egyBerles->auto_azonosito,
+                    'berles_kezd_datum' => $egyBerles->berles_kezd_datum,
+                    'berles_kezd_ido' => $egyBerles->berles_kezd_ido,
+                    'berles_veg_datum' => $egyBerles->berles_veg_datum,
+                    'berles_veg_ido' => $egyBerles->berles_veg_ido,
+                    'megtett_tavolsag' => $egyBerles->megtett_tavolsag,
+                    'parkolasi_perc' => $egyBerles->parkolasi_perc,
+                    'vezetesi_perc' => $egyBerles->vezetesi_perc,
+                    'osszeg' => $kategoriak[$autoKat]['buntetes'],
+                    'szamla_kelt' => now(),
+                    'szamla_status' => 'pending',
+                ];
             }
+        }
+
+        // Tömeges adatbeszúrás
+        if (!empty($szamlaAdatok)) {
+            DB::table('szamlak')->insert($szamlaAdatok);
+        }
+
+        if (!empty($buntetesAdatok)) {
+            DB::table('szamlak')->insert($buntetesAdatok);
         }
     }
 }

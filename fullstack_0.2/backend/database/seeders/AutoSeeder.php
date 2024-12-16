@@ -3,12 +3,14 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Auto; 
+use App\Models\Auto;
+use Illuminate\Support\Facades\DB;
 
 class AutoSeeder extends Seeder
 {
     public function run(): void
     {
-        Auto::factory(1000)->create();
+        $autok = Auto::factory(500)->make()->toArray();
+        DB::table('autok')->insert($autok);
     }
 }

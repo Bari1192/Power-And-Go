@@ -2,19 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Models\Auto;
-use App\Models\Elofizetes;
-use App\Models\Felhasznalo;
-use App\Models\Flotta_tipusok;
-use App\Models\LezartBerles;
 use Database\Seeders\ArazasSeeder;
 use Database\Seeders\ElofizetesSeeder;
 use Database\Seeders\FelszereltsegSeeder;
 use Database\Seeders\FlottaTipusSeeder;
 use Database\Seeders\KategoriaSeeder;
 use Database\Seeders\SzemelySeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class AutoKmOraFrissitesTest extends TestCase

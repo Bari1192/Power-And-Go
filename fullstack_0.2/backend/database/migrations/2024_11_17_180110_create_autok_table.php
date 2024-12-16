@@ -11,9 +11,9 @@ return new class extends Migration {
             $table->id('autok_id');
             $table->string('rendszam', 10)->unique();
 
-            $table->float('toltes_szazalek', 2);
-            $table->float('toltes_kw', 1);
-            $table->float('becsult_hatotav', 1);
+            $table->float('toltes_szazalek', 2)->default(100.0);
+            $table->float('toltes_kw', 1)->default(18.0);
+            $table->float('becsult_hatotav', 1)->default(130);
 
             $table->foreignId('status')->constrained('carstatus','id')->onDelete('cascade');
             $table->foreignId('kategoria_besorolas_fk')->constrained('kategoriak', 'kat_id')->onDelete('cascade');

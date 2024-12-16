@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAutoRequest;
+use App\Http\Requests\UpdateCarRequest;
 use App\Http\Resources\AutoResource;
 use App\Http\Resources\SzamlaResource;
 use App\Models\Auto;
 use App\Models\Szamla;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
@@ -37,9 +39,13 @@ class AutoController extends Controller
         return new AutoResource($car);
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateCarRequest $request, Auto $car)
     {
-        //
+        $data=$request->validated();
+        $car->load(['flotta', 'carstatus', 'lezartberlesek']);
+        $car->update($data);
+        return new AutoResource($car);
+
     }
     public function destroy(Auto $car): Response
     {

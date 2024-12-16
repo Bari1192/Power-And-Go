@@ -6,6 +6,7 @@ use App\Models\Dolgozo;
 use App\Models\Szemely;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DolgozoSeeder extends Seeder
 {
@@ -14,9 +15,13 @@ class DolgozoSeeder extends Seeder
         $szemelyek = Szemely::inRandomOrder()->limit(300)->get();
 
         foreach ($szemelyek as $szemely) {
-            Dolgozo::factory()->create([
+            // Létrehozzuk a dolgozó adatait factory segítségével
+            $dolgozo = Dolgozo::factory()->make([
                 'szemely_id_fk' => $szemely->szemely_id,
-            ]);
+            ])->toArray();
+
+            // Beszúrás az adatbázisba
+            DB::table('dolgozok')->insert($dolgozo);
         }
     }
 }

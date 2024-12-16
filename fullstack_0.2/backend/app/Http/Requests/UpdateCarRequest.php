@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Resources\FleetResource;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAutoRequest extends FormRequest
+class UpdateCarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,7 +18,7 @@ class StoreAutoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "rendszam" => ["required", "string", "between:7,10", "exists:autok,rendszam"],
+            "rendszam" => ["required", "string", "between:7,10", "exists:autok,rendszam"], 
             "kategoria_besorolas_fk" => ["nullable", "integer", "exists:kategoriak,kat_id"],
             "felsz_id_fk" => ["nullable", "integer", "exists:felszereltsegek,felsz_id"],
             "flotta_id_fk" => ["nullable", "integer", "exists:flotta_tipusok,flotta_id"],

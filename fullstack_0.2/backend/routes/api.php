@@ -15,11 +15,11 @@ Route::get('cars/{car}/szamlak', [AutoController::class, 'filterCarFines']);
 
 Route::apiResource('/tickets', TicketController::class);
 Route::apiResource('/renthistories', RenthistoryController::class);
-Route::apiResource('szamlak', SzamlaController::class)->except(['update']);
+Route::apiResource('szamlak', SzamlaController::class);
 
-Route::apiResource('carstatus', CarStatusController::class)->except(['update']);
+Route::apiResource('carstatus', CarStatusController::class);
 
-Route::apiResource('cars', AutoController::class)->except(['update']);
-Route::apiResource('szemelyek', SzemelyController::class)->except(['update']);
+Route::apiResource('cars', AutoController::class);
+Route::apiResource('szemelyek', SzemelyController::class);
 
-Route::apiResource('fleets', FleetController::class)->only(['show', 'index', 'store', 'destroy']);
+Route::apiResource('fleets', FleetController::class);
