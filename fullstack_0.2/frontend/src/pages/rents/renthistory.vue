@@ -103,7 +103,7 @@ export default {
         return {
             rents: [],
             currentPage: 1,
-            itemsPerPage: 10,
+            itemsPerPage: 100,
         }
     },
     computed: {

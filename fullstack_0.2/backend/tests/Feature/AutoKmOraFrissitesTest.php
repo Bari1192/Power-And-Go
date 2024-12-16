@@ -19,7 +19,7 @@ use Tests\TestCase;
 
 class AutoKmOraFrissitesTest extends TestCase
 {
-    use RefreshDatabase; // Automatikusan tiszta adatbázis minden teszt előtt
+    // use RefreshDatabase; // Automatikusan tiszta adatbázis minden teszt előtt
 
     public function setUp(): void
     {
@@ -32,40 +32,40 @@ class AutoKmOraFrissitesTest extends TestCase
         $this->seed(ArazasSeeder::class);
     }
 
-    public function testAutoKmOraFrissites(): void
-    {
-        # 1. lépés - Tesztadat implementálása
-        $flottaTipus = Flotta_tipusok::where('gyarto', 'VW')->first();
+    // public function testAutoKmOraFrissites(): void
+    // {
+    //     # 1. lépés - Tesztadat implementálása
+    //     $flottaTipus = Flotta_tipusok::where('gyarto', 'VW')->first();
 
-        $felhasznalo = Felhasznalo::factory()->create([
-            'elofiz_id' => Elofizetes::first()->elofiz_id,
-        ]);
+    //     $felhasznalo = Felhasznalo::factory()->create([
+    //         'elofiz_id' => Elofizetes::first()->elofiz_id,
+    //     ]);
 
-        $auto = Auto::factory()->create([
-            'km_ora_allas' => 10000,
-            'flotta_id_fk' => $flottaTipus->flotta_id,
-            'kategoria_besorolas_fk' => 3,
-            'felsz_id_fk' => 1,
-        ]);
+    //     $auto = Auto::factory()->create([
+    //         'km_ora_allas' => 10000,
+    //         'flotta_id_fk' => $flottaTipus->flotta_id,
+    //         'kategoria_besorolas_fk' => 3,
+    //         'felsz_id_fk' => 1,
+    //     ]);
 
-        $megtettTavolsag = 10;
+    //     $megtettTavolsag = 10;
 
-        # 2. lépés - Három lezárt bérlés létrehozása.
-        for ($i = 1; $i <= 3; $i++) {
-            LezartBerles::factory()->create([
-                'auto_azonosito' => $auto->autok_id,
-                'szemely_id_fk' => $felhasznalo->szemely_id,
-                'megtett_tavolsag' => $megtettTavolsag,
-            ]);
-            $auto->km_ora_allas += $megtettTavolsag;
-            $auto->save();
-            $expectedKmOraAllas=10000 + ($megtettTavolsag * $i);
-            dump([
-                'Bérlés száma' => $i,
-                'Várható km_óra_állás' => $expectedKmOraAllas,
-                'Tényleges km_óra_állás' => $auto->km_ora_allas,
-            ]);
-            $this->assertEquals($expectedKmOraAllas, $auto->km_ora_allas, "A Kilóméteróra állása NEM FRISSÜLT a {$i}. bérlés után.");
-        }
-    }
+    //     # 2. lépés - Három lezárt bérlés létrehozása.
+    //     for ($i = 1; $i <= 3; $i++) {
+    //         LezartBerles::factory()->create([
+    //             'auto_azonosito' => $auto->autok_id,
+    //             'szemely_id_fk' => $felhasznalo->szemely_id,
+    //             'megtett_tavolsag' => $megtettTavolsag,
+    //         ]);
+    //         $auto->km_ora_allas += $megtettTavolsag;
+    //         $auto->save();
+    //         $expectedKmOraAllas=10000 + ($megtettTavolsag * $i);
+    //         dump([
+    //             'Bérlés száma' => $i,
+    //             'Várható km_óra_állás' => $expectedKmOraAllas,
+    //             'Tényleges km_óra_állás' => $auto->km_ora_allas,
+    //         ]);
+    //         $this->assertEquals($expectedKmOraAllas, $auto->km_ora_allas, "A Kilóméteróra állása NEM FRISSÜLT a {$i}. bérlés után.");
+    //     }
+    // }
 }

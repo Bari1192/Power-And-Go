@@ -18,7 +18,7 @@ class SzamlaController extends Controller
         # 1. ötlet -> Frontenden fejlécre kattintás esetében:
         # index -> rendezés fejléc neve alapján (Pl: id, rendszám, stb.)
 
-        $szamlak = Szamla::paginate(20);
+        $szamlak = Szamla::orderBy('berles_veg_datum', 'desc')->paginate(20);
         # 2. ötlet -> kezelnü a paginate (lapozást)
         return SzamlaResource::collection($szamlak);
     }
