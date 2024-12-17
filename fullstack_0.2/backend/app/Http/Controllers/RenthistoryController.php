@@ -14,7 +14,7 @@ class RenthistoryController extends Controller
      */
     public function index(): JsonResource
     {
-        $histories = LezartBerles::all();
+        $histories = LezartBerles::with(["auto.tickets","auto.carstatus","kategoriak", "felhasznalo.szemely"])->get();
         return RenthistoryResource::collection($histories);
     }
 

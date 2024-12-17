@@ -16,6 +16,11 @@ class Felhasznalo extends Model
     public $incrementing = true;
 
     protected $fillable = [
+        'felh_id',
+        'szemely_id',
+        'felh_egyenleg',
+        'felh_nev',
+        'jelszo_2_4',
         'elofiz_id',
     ];
 

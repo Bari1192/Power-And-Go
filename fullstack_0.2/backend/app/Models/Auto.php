@@ -32,8 +32,6 @@ class Auto extends Model
     {
         return $this->belongsTo(Flotta_tipusok::class, 'flotta_id_fk', 'flotta_id');
     }
-
-
     public function kategoria(): BelongsTo
     {
         return $this->belongsTo(Kategoria::class, 'kategoria_besorolas_fk', 'kat_besorolas');
@@ -54,6 +52,6 @@ class Auto extends Model
     }
     public function tickets(): HasMany
     {
-        return $this->hasMany(Ticket::class);
+        return $this->hasMany(Ticket::class,'car_id','autok_id');
     }
 }

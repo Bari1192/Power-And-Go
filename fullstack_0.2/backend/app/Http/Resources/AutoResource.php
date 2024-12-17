@@ -10,19 +10,20 @@ class AutoResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'autok_id' => $this->autok_id,
+            'auto_id' => $this->autok_id,
             'status' => new CarstatusResource($this->whenLoaded('carstatus')),
-            'toltes_szazalek' => $this->toltes_szazalek,
-            'toltes_kw' => $this->toltes_kw,
+            'tolt_szaz' => $this->toltes_szazalek,
+            'tolt_kw' => $this->toltes_kw,
             'hatotav' => $this->becsult_hatotav,
             'rendszam' => $this->rendszam,
-            'km_ora_allas' => number_format($this->km_ora_allas, 0, '', ' '),
-            'gyartasi_ev' => $this->gyartasi_ev,
+            'km_allas' => number_format($this->km_ora_allas, 0, '', ' '),
+            'gyart_ev' => $this->gyartasi_ev,
             'flotta' => new FleetResource($this->whenLoaded('flotta')),
-            'histories' =>RenthistoryResource::collection($this->whenLoaded('lezartberlesek')),
-            'felsz_id_fk'=>$this->felsz_id_fk,
-            'kategoria_besorolas_fk'=>$this->kategoria_besorolas_fk,
-            'szamlak'=>new SzamlaResource($this->whenLoaded('szamlak')),
+            // 'histories' => new RenthistoryResource($this->whenLoaded('lezartberlesek')),
+            'felsz_id' => $this->felsz_id_fk,
+            'kategoria' => $this->kategoria_besorolas_fk,
+            //'szamlak' => SzamlaResource::collection($this->whenLoaded('szamlak')),
+            'tickets' => TicketResource::collection($this->whenLoaded('tickets')),
         ];
     }
 }
