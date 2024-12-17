@@ -94,20 +94,20 @@
               <thead>
                 <tr class="text-lime-600 font-semibold bg-amber-50 border-b-8 border-lime-600">
                   <th class="py-2 text-center">Bérlés azon</th>
-                  <th class="py-2 text-center">Felh azon.</th>
-                  <th class="py-2 text-center">Nyitás</th>
-                  <th class="py-2 text-center">Zárás</th>
-                  <th class="py-2 text-center">Kezd dátum</th>
-                  <th class="py-2 text-center">Záró dátum</th>
+                  <th class="py-2 text-center">Bérlés összege</th>
+                  <th class="py-2 text-center">Megtett távolság</th>
+                  <th class="py-2 text-center">Parkolási idő</th>
+                  <th class="py-2 text-center">Bérlés kezdete és vége</th>
+                  <th class="py-2 text-center">Számla kiállítva</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="bill in carRentBills" :key="carRentBill.szamla_azon"
+                <tr v-for="bill in carRentBills" :key="bill.szamla_azon"
                   class="odd:bg-amber-50 even:bg-yellow-50 even:border-b-4 even:border-t-4 even:border-lime-400 text-center text-lg font-semibold text-lime-700">
                   <td class="py-2">{{ bill.szamla_azon }}</td>
                   <td class="py-2">{{ bill.osszeg }}</td>
-                  <td class="py-2">{{ bill.megtett_tavolsag }} %</td>
-                  <td class="py-2">{{ bill.parkolasi_perc }} %</td>
+                  <td class="py-2">{{ bill.megtett_tavolsag }} km</td>
+                  <td class="py-2">{{ bill.parkolasi_perc }} p</td>
                   <td class="py-2">{{ bill.berles_kezd_datum }} {{ bill.berles_kezd_ido }}</td>
                   <td class="py-2">{{ bill.szamla_kelt }} </td>
                 </tr>
