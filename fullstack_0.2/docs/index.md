@@ -1,5 +1,18 @@
 # Dokumentáció
 
+
+## [Adatbázis-Nézetek]
+
+### Indulás
+- A Migrációs folyamat és a szerver felépülése után a Seederek függőségi sorrendjében feltöltésre kerül az adatbázisba a Töltés büntetésekhez tartozó nézetfájl, továbbá a Számlákat csoportosító nézetfájl. 
+
+### A nézetnek funkcionalitása
+- A Töltésbüntetések során az adatbázis adatgenerálási folyamata során az automatán működő büntetés-kiosztás segítségével a nézetfájlban megjelennek a(z):
+- Autok azonosítói
+- Az auto rendszáma
+- Az adott autónak a töltése százalékos értékben az akkumulátor kapacitásához viszonyítva.
+- Az auto státusza, mely kiváltó oka volt a nézetfájlba integrálásában.
+
 ## Backend
 
 [SORREND] 5. A `folyamatban lévő bérléseket` is át kell alakítani, hogy `státusz` alapján `lezárás után` a `lezárt bérlések táblába kerüljenek` az adatok 6. `Konyvelesi táblát` is létre kell hozni, ahová a `lezárt bérlések számlák` kifizetés után `kerülnek` (hogy profilban elérhető legyen + könyvelési osztály is elérje, hogy a NAV ne szóljon be)
