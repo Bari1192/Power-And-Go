@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('szamlak/filter/{type}', [SzamlaController::class, 'filter']);
 Route::get('cars/{car}/szamlak', [AutoController::class, 'filterCarFines']);
+Route::get('renthistories/filterCarHistory/{type}/{car}', [RenthistoryController::class, 'filterCarHistory']);
 
 Route::apiResource('/tickets', TicketController::class);
 Route::apiResource('/renthistories', RenthistoryController::class);

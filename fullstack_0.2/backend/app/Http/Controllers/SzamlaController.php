@@ -45,7 +45,7 @@ class SzamlaController extends Controller
 
     public function filter(string $type): JsonResource
     {
-        $validFilterezes = ['buntetesek', 'baleset', 'karokozas', 'toltes_buntetes'];
+        $validFilterezes = ['berles','buntetesek', 'baleset', 'karokozas', 'toltes_buntetes'];
 
         if (!in_array($type, $validFilterezes)) {
             return response()->json(['error' => 'Invalid filter type'], 400);

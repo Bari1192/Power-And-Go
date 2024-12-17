@@ -48,13 +48,13 @@
         <div class="grid grid-cols-3 gap-6" v-if="carOpen">
           <BaseCard :title="'Állapota'" :text="car.status.status_name" />
           <BaseCard :title="'Becsült megtehető távolság'" :text="car.hatotav + ' km'" />
-          <BaseCard :title="'Akkumulátor töltöttsége'" :text="car.toltes_kw + ' kW'" />
+          <BaseCard :title="'Akkumulátor töltöttsége'" :text="car.tolt_kw + ' kW'" />
           <BaseCard :title="'Töltöttségi állapota'" :text="car.toltes_szazalek + ' %'" />
           <BaseCard :title="'Akkumulátor kapacitása'" :text="car.flotta.teljesitmeny + ' kW'" />
           <BaseCard :title="'Végsebesség'" :text="car.flotta.vegsebesseg + ' km/h'" />
           <BaseCard :title="'Maximális hatótáv egy töltéssel'" :text="car.flotta.hatotav + ' km'" />
-          <BaseCard :title="'Aktuális futásteljesítménye'" :text="car.km_ora_allas + ' km'" />
-          <BaseCard :title="'Gyártási éve'" :text="car.gyartasi_ev" />
+          <BaseCard :title="'Aktuális futásteljesítménye'" :text="car.km_allas + ' km'" />
+          <BaseCard :title="'Gyártási éve'" :text="car.gyart_ev" />
         </div>
       </transition>
       <div ref="adatokAlja"></div>
@@ -99,23 +99,17 @@
                   <th class="py-2 text-center">Zárás</th>
                   <th class="py-2 text-center">Kezd dátum</th>
                   <th class="py-2 text-center">Záró dátum</th>
-                  <th class="py-2 text-center">Megtett út</th>
-                  <th class="py-2 text-center">Bérlés</th>
-                  <th class="py-2 text-center">Összeg</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="history in car.histories" :key="history.id"
+                <tr v-for="bill in carRentBills" :key="carRentBill.szamla_azon"
                   class="odd:bg-amber-50 even:bg-yellow-50 even:border-b-4 even:border-t-4 even:border-lime-400 text-center text-lg font-semibold text-lime-700">
-                  <td class="py-2">{{ history.id }}</td>
-                  <td class="py-2">{{ history.personId }}</td>
-                  <td class="py-2">{{ history.openPercent }} %</td>
-                  <td class="py-2">{{ history.closedPercent }} %</td>
-                  <td class="py-2">{{ history.startDate }} <b> {{ history.startTime }}</b></td>
-                  <td class="py-2">{{ history.closeDate }} <b>{{ history.closeTime }}</b></td>
-                  <td class="py-2">{{ history.distance }} km</td>
-                  <td class="py-2">{{ history.driveMin }} p</td>
-                  <td class="py-2">{{ history.rentCost }} Ft</td>
+                  <td class="py-2">{{ bill.szamla_azon }}</td>
+                  <td class="py-2">{{ bill.osszeg }}</td>
+                  <td class="py-2">{{ bill.megtett_tavolsag }} %</td>
+                  <td class="py-2">{{ bill.parkolasi_perc }} %</td>
+                  <td class="py-2">{{ bill.berles_kezd_datum }} {{ bill.berles_kezd_ido }}</td>
+                  <td class="py-2">{{ bill.szamla_kelt }} </td>
                 </tr>
               </tbody>
             </table>
@@ -195,6 +189,7 @@ export default {
     return {
       car: {},
       carBills: [],
+      carRentBills: [],
       carOpen: false,
       noteOpen: false,
       rentHistoryOpen: false,
@@ -206,9 +201,11 @@ export default {
     const response = await http.get(`/cars/${this.$route.params.id}`);
     this.car = response.data.data;
 
-    const billsresponse = await http.get(`/cars/${this.$route.params.id}/szamlak`);
+    const billsresponse = await http.get(`/renthistories/filterCarHistory/toltes_buntetes/${this.$route.params.id}`);
     this.carBills = billsresponse.data.data;
 
+    const rentresponse = await http.get(`/renthistories/filterCarHistory/berles/${this.$route.params.id}`);
+    this.carRentBills = rentresponse.data.data;
 
   },
   methods: {

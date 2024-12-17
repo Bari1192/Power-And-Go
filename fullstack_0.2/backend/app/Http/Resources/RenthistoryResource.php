@@ -19,7 +19,7 @@ class RenthistoryResource extends JsonResource
                 'berles_kezd_datum' => $this->berles_kezd_datum,
                 'berles_veg_datum' => $this->berles_veg_datum,
                 'megtett_tavolsag' => $this->megtett_tavolsag,
-                'berles_osszeg' => $this->berles_osszeg,
+                'berles_osszeg' => number_format($this->berles_osszeg,0,'',' '),
             ];
     }
 }
