@@ -24,9 +24,9 @@ class FleetController extends Controller
         return new FleetResource($fleet);
     }
 
-    public function show(Fleet $flotta_tipusok)
+    public function show(Fleet $fleet)
     {
-        return new FleetResource($flotta_tipusok);
+        return new FleetResource($fleet);
     }
     public function update(UpdateFleetRequest $request, Fleet $fleet)
     {

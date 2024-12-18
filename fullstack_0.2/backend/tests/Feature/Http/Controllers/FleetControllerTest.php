@@ -36,21 +36,35 @@ class FleetControllerTest extends TestCase
             "hatotav" => 445
         ]);
     }
-    public function test_delete_fake_fleet_type_from_db(): void
+    public function test_put_previous_fake_fleet_modifing()
     {
-        $data = [
+        $latestFleet = Fleet::latest('id')->first();
+
+        $modifiedData = [
+            "id"=>$latestFleet->id,
             "gyarto" => "Renault",
-            "tipus" => "UI-UX-ULTRA",
+            "tipus" => "MODIFIED-ULTRA-SUPER",
             "teljesitmeny" => 100,
             "vegsebesseg" => 300,
             "gumimeret" => "165|65-R15",
             "hatotav" => 445
         ];
-        ### Most ezt a kamu adatot töröljük is ki!
+
+        $response = $this->put("api/fleets/{$latestFleet->id}", $modifiedData);
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('fleets', array_merge(['id' => $latestFleet->id], $modifiedData));
+    }
+
+    public function test_delete_fake_fleet_type_from_db(): void
+    {
+        ### Most az előző kamu adatot töröljük is ki!
         $latestFleet = Fleet::latest('id')->first();
+
         $response = $this->delete("api/fleets/{$latestFleet->id}");
+
         $response->assertStatus(204);
-        $this->assertDatabaseMissing('fleets',
+        $this->assertDatabaseMissing(
+            'fleets',
             [
                 'id' => $latestFleet->id,
             ]

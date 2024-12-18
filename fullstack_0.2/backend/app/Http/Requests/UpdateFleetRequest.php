@@ -15,13 +15,13 @@ class UpdateFleetRequest extends FormRequest
     {
         return
             [
-                'flotta_id' => $this->flotta_id,
-                'gyarto' => $this->gyarto,
-                'tipus' => $this->tipus,
-                'teljesitmeny' => $this->teljesitmeny,
-                'vegsebesseg' => $this->vegsebesseg,
-                'gumimeret' => $this->gumimeret,
-                'hatotav' => $this->hatotav,
+                'id' => ["required"],
+                'gyarto' => ["required"],
+                'tipus' => ["required"],
+                'teljesitmeny' => ["required"],
+                'vegsebesseg' => ["required"],
+                'gumimeret' => ["required"],
+                'hatotav' => ["required"],
             ];
     }
 }
