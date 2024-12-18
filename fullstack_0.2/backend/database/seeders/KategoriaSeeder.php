@@ -9,7 +9,7 @@ class KategoriaSeeder extends Seeder
 {
     public function run(): void
     {
-        $teljesitmenyek = DB::table('flotta_tipusok')->distinct()->pluck('teljesitmeny');
+        $teljesitmenyek = DB::table('fleets')->distinct()->pluck('teljesitmeny');
 
         foreach ($teljesitmenyek as $index => $teljesitmenyErteke) {
             DB::table('kategoriak')->insert([

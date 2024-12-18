@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->foreignId('status')->constrained('carstatus','id')->onDelete('cascade');
             $table->foreignId('kategoria')->constrained('kategoriak', 'kat_id')->onDelete('cascade');
             $table->foreignId('felszereltseg')->nullable()->constrained('felszereltsegek', 'felsz_id')->onDelete('set null');
-            $table->foreignId('flotta_azon')->constrained('flotta_tipusok','flotta_id')->onDelete('cascade');
+            $table->foreignId('flotta_azon')->constrained('fleets','id')->onDelete('cascade');
 
             $table->integer('kilometerora');
             $table->year('gyartasi_ev');
@@ -26,6 +26,6 @@ return new class extends Migration {
     }
     public function down(): void
     {
-        Schema::dropIfExists('autok');
+        Schema::dropIfExists('cars');
     }
 };

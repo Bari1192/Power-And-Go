@@ -11,18 +11,15 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class TicketController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    #####   ####   ####   ####   ####   ####
     public function index(): JsonResource
     {
         $tickets = Ticket::all();
         return TicketResource::collection($tickets);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    #####   ####   ####   ####   ####   ####
     public function store(StoreTicketRequest $request)
     {
         ### Amikor létrehozunk egy új ticket-et --> majd ELFOGADÁSI mechanizmus után 
@@ -34,27 +31,20 @@ class TicketController extends Controller
         return new TicketResource($ticket);
     }
 
-    /**
-     * Display the specified resource.
-     */
+    #####   ####   ####   ####   ####   ####
     public function show(Ticket $ticket)
     {
-        //
+        return new TicketResource($ticket);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    #####   ####   ####   ####   ####   ####
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
         $data = $request->validated();
         $ticket->update($data);
         return new TicketResource($ticket); // Frissített adat visszaadása
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    #####   ####   ####   ####   ####   ####
     public function destroy(Ticket $ticket)
     {
         return ($ticket->delete() ? response(200) : abort(500));

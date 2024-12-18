@@ -10,7 +10,7 @@ class LezartBerlesSeeder extends Seeder
 {
     public function run(): void
     {
-        $lezart = LezartBerles::factory(100)->make()->toArray();
+        $lezart = LezartBerles::factory(500)->make()->toArray();
         DB::table('lezart_berlesek')->insert($lezart); 
     }
 }

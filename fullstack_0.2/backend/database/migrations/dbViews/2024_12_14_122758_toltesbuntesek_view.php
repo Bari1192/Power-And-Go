@@ -17,19 +17,19 @@ return new class extends Migration
             DB::statement(
                 "CREATE OR REPLACE VIEW toltes_buntetes_autok AS
        SELECT 
-           `powerandgo`.`autok`.`autok_id` AS `autok_id`,
-           `powerandgo`.`autok`.`rendszam` AS `rendszam`,
-           `powerandgo`.`autok`.`toltes_szazalek` AS `toltes_szazalek`,
-           `powerandgo`.`autok`.`status` AS `status`
+           `powerandgo`.`cars`.`id` AS `id`,
+           `powerandgo`.`cars`.`rendszam` AS `rendszam`,
+           `powerandgo`.`cars`.`toltes_szaz` AS `toltes_szaz`,
+           `powerandgo`.`cars`.`status` AS `status`
        FROM 
-           `powerandgo`.`autok`
+           `powerandgo`.`cars`
        JOIN 
            `powerandgo`.`szamlak` 
        ON 
-           (`powerandgo`.`autok`.`autok_id` = `powerandgo`.`szamlak`.`auto_azon`)
+           (`powerandgo`.`cars`.`id` = `powerandgo`.`szamlak`.`auto_azon`)
        WHERE 
            (`powerandgo`.`szamlak`.`szamla_tipus` = 'toltes_buntetes')
-       ORDER BY `powerandgo`.`autok`.`autok_id` ASC"
+       ORDER BY `powerandgo`.`cars`.`id` ASC"
             );
         }
     }

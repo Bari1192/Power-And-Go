@@ -18,19 +18,19 @@ class Car extends Model
 
     protected $fillable = [
         'rendszam',
-        'kategoria_besorolas_fk',
-        'felsz_id_fk',
-        'flotta_id_fk',
-        'km_ora_allas',
-        'gyartasi_ev',
-        'status',
-        'toltes_szazalek',
+        'toltes_szaz',
         'toltes_kw',
-        'becsult_hatotav',
+        'becs_tav',
+        'status',
+        'kategoria',
+        'felszereltseg',
+        'flotta_azon',
+        'kilometerora',
+        'gyartasi_ev',
     ];
     public function flotta(): BelongsTo
     {
-        return $this->belongsTo(Flotta_tipusok::class, 'flotta_azon', 'flotta_id');
+        return $this->belongsTo(Fleet::class, 'flotta_azon', 'id');
     }
     public function kategoria(): BelongsTo
     {

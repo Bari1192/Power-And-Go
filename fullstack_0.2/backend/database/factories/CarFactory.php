@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Felszereltseg;
-use App\Models\Flotta_tipusok;
+use App\Models\Fleet;
 use Illuminate\Support\Facades\DB;
 
 class CarFactory extends Factory
@@ -14,13 +14,13 @@ class CarFactory extends Factory
         $gyartasiEv = fake()->numberBetween(2019, 2023);
         $flotta = $this->flottabolAutotIdAlapjan();
         $felszereltseg = Felszereltseg::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
-        $flottaTipus = Flotta_tipusok::find($flotta);
+        $flottaTipus = Fleet::find($flotta);
 
         $toltes_szazalek = fake()->randomFloat(2, 15, 100);
         $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
         $becsultHatotav = round(($flottaTipus->hatotav / $flottaTipus->teljesitmeny) * $toltes_kw, 1);
         return [
-            'flotta_azon' => $flottaTipus->flotta_id,
+            'flotta_azon' => $flottaTipus->id,
             'kategoria' => $this->katBesorolasAutomatan($flotta),
             'rendszam' => $this->rendszamGeneralasUjRegi(),
             'gyartasi_ev' => $gyartasiEv,
@@ -48,7 +48,7 @@ class CarFactory extends Factory
     }
     private function katBesorolasAutomatan(int $flotta): int
     {
-        $idAlapjanKatBesorolas = DB::table('flotta_tipusok')->where('flotta_id', $flotta)->first();
+        $idAlapjanKatBesorolas = DB::table('fleets')->where('id', $flotta)->first();
         if (!$idAlapjanKatBesorolas) {
             throw new \Exception("Flotta nem található az ID alapján: $flotta");
         }
