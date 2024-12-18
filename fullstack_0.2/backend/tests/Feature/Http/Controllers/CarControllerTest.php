@@ -2,22 +2,21 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\Auto;
-use Illuminate\Support\Facades\DB;
+use App\Models\Car;
 use Tests\TestCase;
 
 
 class CarControllerTest extends TestCase
 {
-    public function test_can_get_all_cars(): void
+    public function can_get_all_cars(): void
     {
-        Auto::factory()->count(3)->create();
+        Car::factory()->count(3)->create();
 
         $response = $this->getJson('/api/cars');
         $response->assertStatus(200);
     }
 
-    public function test_can_create_car()
+    public function can_create_car()
     {
         $carData = [
             "autok_id" => 1,
@@ -51,15 +50,15 @@ class CarControllerTest extends TestCase
     
     
     
-    public function test_delete_car(): void
+    public function delete_car(): void
     {
         $response=$this->delete('/api/cars/111');
         $response->assertStatus(204);
     }
 
-    public function test_update_car_data(): void
+    public function update_car_data(): void
     {
-        $car = Auto::factory()->create([
+        $car = Car::factory()->create([
             "status" => 1,
             "toltes_szazalek" => 66.67,
             "toltes_kw" => 1.2,

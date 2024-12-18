@@ -11,17 +11,17 @@ class Fleet extends Model
     use HasFactory;
     protected $table = 'fleets';
     protected $primaryKey = 'id';
-    public $timestamps = false; 
+    public $timestamps = false;
     public $incrementing = true;
 
     protected $fillable = [
-        'id',
-        'gyarto',
-        'tipus',
-        'hatotav',
-        'teljesitmeny',
-        'vegsebesseg',
-        'gumimeret',
+        "id",
+        "gyarto",
+        "tipus",
+        "hatotav",
+        "teljesitmeny",
+        "vegsebesseg",
+        "gumimeret",
     ];
     public function autok(): HasMany
     {

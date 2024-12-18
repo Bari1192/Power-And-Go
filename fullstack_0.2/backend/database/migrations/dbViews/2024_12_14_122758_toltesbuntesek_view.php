@@ -13,23 +13,23 @@ return new class extends Migration
     public function up(): void
     {
 
-        if (Schema::hasTable('szamlak') && Schema::hasTable('lezart_berlesek')) {
+        if (Schema::hasTable('bills') && Schema::hasTable('renthistories')) {
             DB::statement(
                 "CREATE OR REPLACE VIEW toltes_buntetes_autok AS
        SELECT 
-           `powerandgo`.`cars`.`id` AS `id`,
-           `powerandgo`.`cars`.`rendszam` AS `rendszam`,
-           `powerandgo`.`cars`.`toltes_szaz` AS `toltes_szaz`,
-           `powerandgo`.`cars`.`status` AS `status`
+           `cars`.`id` AS `id`,
+           `cars`.`rendszam` AS `rendszam`,
+           `cars`.`toltes_szaz` AS `toltes_szaz`,
+           `cars`.`status` AS `status`
        FROM 
-           `powerandgo`.`cars`
+           `cars`
        JOIN 
-           `powerandgo`.`szamlak` 
+           `bills` 
        ON 
-           (`powerandgo`.`cars`.`id` = `powerandgo`.`szamlak`.`auto_azon`)
+           `cars`.`id` = `bills`.`auto_azon`
        WHERE 
-           (`powerandgo`.`szamlak`.`szamla_tipus` = 'toltes_buntetes')
-       ORDER BY `powerandgo`.`cars`.`id` ASC"
+           `bills`.`szamla_tipus` = 'toltes_buntetes'
+       ORDER BY `cars`.`id` ASC"
             );
         }
     }

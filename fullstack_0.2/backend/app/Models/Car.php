@@ -39,7 +39,7 @@ class Car extends Model
 
     public function carstatus(): BelongsTo
     {
-        return $this->belongsTo(CarStatus::class);
+        return $this->belongsTo(CarStatus::class, 'status');
     }
 
     public function lezartberlesek(): HasMany

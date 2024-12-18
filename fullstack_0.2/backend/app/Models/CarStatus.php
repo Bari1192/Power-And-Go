@@ -12,13 +12,14 @@ class CarStatus extends Model
     protected $table = 'carstatus';
 
     protected $fillable = [
-        'status_name',
-        'status_descrip',
+        "status_name",
+        "status_descrip",
+        "created",
     ];
 
     public function cars(): HasMany
     {
-        return $this->hasMany(Car::class, 'status', 'carstatus_id');
+        return $this->hasMany(Car::class, 'status', 'id');
     }
     public function tickets(): HasMany
     {

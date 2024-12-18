@@ -16,6 +16,7 @@ class CarstatusResource extends JsonResource
     {
         return
             [
+                "satus_id"=>$this->id,
                 "status_name" => $this->status_name,
                 "status_descrip" => $this->status_descrip,
             ];

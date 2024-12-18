@@ -12,13 +12,13 @@ class TicketControllerTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_can_get_all_tickets(): void
+    public function can_get_all_tickets(): void
     {
         $response = $this->getJson('/api/cars');
         $response->assertStatus(200);
     }
 
-    public function test_can_create_ticket()
+    public function can_create_ticket()
     {
         $ticketData = [
             "car_id" => 10,
@@ -32,7 +32,7 @@ class TicketControllerTest extends TestCase
 
         $this->assertDatabaseHas('tickets', ["description" => "Az autóban dohányoztak. A Dohányzás szagot és hamufoltokat hagyott az autóban. A hátsó üléseket össze is kenték."]);
     }
-    public function test_delete_ticket(): void
+    public function delete_ticket(): void
     {
         $ticket = Ticket::create([
             "car_id" => 10,
@@ -47,7 +47,7 @@ class TicketControllerTest extends TestCase
     
     
     
-    public function test_update_ticket_data(): void
+    public function update_ticket_data(): void
     {
         $ticket = Ticket::create([
             "description" => "Az autóban dohányoztak.",

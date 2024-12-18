@@ -6,6 +6,7 @@ use App\Http\Requests\StoreAutoRequest;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Http\Resources\AutoResource;
+use App\Http\Resources\BillResource;
 use App\Http\Resources\CarResource;
 use App\Http\Resources\SzamlaResource;
 use App\Models\Bill;
@@ -61,6 +62,6 @@ class CarController extends Controller
         ->where('szamla_tipus','toltes_buntetes')
         ->get();
 
-        return SzamlaResource::collection($szamlak);
+        return BillResource::collection($szamlak);
     }
 }

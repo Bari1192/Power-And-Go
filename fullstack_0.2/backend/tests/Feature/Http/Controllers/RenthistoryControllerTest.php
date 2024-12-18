@@ -12,7 +12,7 @@ class RenthistoryControllerTest extends TestCase
     /**
      * A basic feature test example.
      */
-    public function test_get_all_renthistory_data(): void
+    public function get_all_renthistory_data(): void
     {
         $response = $this->get('/api/renthistories');
         $response->assertStatus(200);

@@ -7,7 +7,7 @@ use App\Models\Rentinprocess;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RentInProcessFactory extends Factory
+class RentinprocessFactory extends Factory
 {
     protected $model = Rentinprocess::class;
 

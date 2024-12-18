@@ -7,16 +7,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class FleetResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return
             [
-                'flotta_id' => $this->flotta_id,
+                'flotta_id' => $this->id,
                 'gyarto' => $this->gyarto,
                 'tipus' => $this->tipus,
                 'teljesitmeny' => $this->teljesitmeny,

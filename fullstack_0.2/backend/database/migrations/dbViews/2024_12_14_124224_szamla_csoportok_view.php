@@ -12,14 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (Schema::hasTable('szamlak') && Schema::hasTable('lezart_berlesek')) {
+        if (Schema::hasTable('bills') && Schema::hasTable('renthistories')) {
             DB::statement("
                 CREATE OR REPLACE VIEW SzamlaCsoportok AS
                 SELECT
-                    `szamlak`.`szamla_tipus` AS tipus,
+                    `bills`.`szamla_tipus` AS tipus,
                     COUNT(*) AS darabszam
                 FROM 
-                    `szamlak`
+                    `bills`
                 GROUP BY 
                     `szamla_tipus`
                 ORDER BY 

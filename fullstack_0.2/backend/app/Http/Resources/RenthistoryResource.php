@@ -11,7 +11,7 @@ class RenthistoryResource extends JsonResource
     {
         return
             [
-                'lezart_id' => $this->lezart_berles_id,
+                'lezart_id' => $this->id,
                 'auto' => new CarResource($this->whenLoaded('auto')),
                 'felhasznalo' => new UserResource($this->whenLoaded('felhasznalo')),
                 'szemely'=> new PersonResource($this->whenLoaded('szemely')),

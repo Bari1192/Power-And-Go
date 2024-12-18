@@ -10,7 +10,7 @@ class CarResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'car_id' => $this->autok_id,
+            'car_id' => $this->id,
             'power_perc' => $this->toltes_szazalek,
             'power_kw' => $this->toltes_kw,
             'assum_dist' => $this->becsult_hatotav,
@@ -19,8 +19,8 @@ class CarResource extends JsonResource
             'made' => $this->gyartasi_ev,
             'equipment' => $this->felsz_id_fk,
             'category' => $this->kategoria_besorolas_fk,
-            'status' => new CarstatusResource($this->whenLoaded('carstatus')),
-            'fleet' => new FleetResource($this->whenLoaded('flotta')),
+            'carstatus' => CarstatusResource::collection($this->whenLoaded('carstatus')),
+            'fleet' => FleetResource::collection($this->whenLoaded('flotta')),
             'tickets' => TicketResource::collection($this->whenLoaded('tickets')),
         ];
     }
