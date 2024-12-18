@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('szemelyek', function (Blueprint $table) {
-            $table->id('szemely_id');
-            $table->unsignedInteger('szemely_jelszo');
+        Schema::create('persons', function (Blueprint $table) {
+            $table->id();
+            $table->string('szemely_jelszo',4);
             $table->string('szig_szam')->unique();
             $table->string('jogos_szam')->unique()->nullable(); 
             $table->date('jogos_erv_kezdete')->nullable(); 
@@ -23,6 +23,6 @@ return new class extends Migration {
     }
     public function down(): void
     {
-        Schema::dropIfExists('szemelyek');
+        Schema::dropIfExists('persons');
     }
 };

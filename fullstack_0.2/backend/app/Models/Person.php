@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Szemely extends Model
+class Person extends Model
 {
     use HasFactory;
-    protected $table = 'szemelyek';
-    protected $primaryKey = 'szemely_id';
-    public $timestamps = true;
+    protected $table = 'persons';
+    protected $primaryKey = 'id';
+    public $timestamps = false;
     public $incrementing = true;
 
     protected $fillable = [
@@ -27,10 +27,10 @@ class Szemely extends Model
     ];
     public function felhasznalo()
     {
-        return $this->hasOne(Felhasznalo::class, 'szemely_id_FK', 'szemely_id');
+        return $this->hasOne(Felhasznalo::class, 'szemely_id_FK', 'id');
     }
     public function dolgozo()
     {
-        return $this->hasOne(Dolgozo::class, 'szemely_id_FK', 'szemely_id');
+        return $this->hasOne(Dolgozo::class, 'szemely_id_FK', 'id');
     }
 }

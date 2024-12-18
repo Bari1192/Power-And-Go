@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Elofizetes;
 use App\Models\Felhasznalo;
+use App\Models\Person;
 use App\Models\Subscription;
-use App\Models\Szemely;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FelhasznaloFactory extends Factory
@@ -16,7 +15,7 @@ class FelhasznaloFactory extends Factory
     public function definition(): array
     {
         ### CSAK olyan személyek, AKIKNEK VAN jogosítványuk!!!
-        $szemely = Szemely::whereNotNull('jogos_szam')
+        $szemely = Person::whereNotNull('jogos_szam')
             ->whereNotNull('jogos_erv_kezdete')
             ->whereNotNull('jogos_erv_vege')
             ->inRandomOrder()
@@ -25,7 +24,7 @@ class FelhasznaloFactory extends Factory
         $elofizetes = Subscription::inRandomOrder()->first();
 
         return [
-            'szemely_id' => $szemely->szemely_id,
+            'szemely_id' => $szemely->id,
             'felh_egyenleg' => 0,
             'jelszo_2_4' => $this->jelszoMasodikNegyedik($szemely->szemely_jelszo),
             'felh_nev' => $this->felhasznaloNevGenerator($szemely->v_nev),

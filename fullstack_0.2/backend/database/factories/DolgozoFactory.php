@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Person;
 use App\Models\Szemely;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -16,10 +17,10 @@ class DolgozoFactory extends Factory
         $munkaido = $munkakor === 'Alvállalkozói flottakezelő' ? 'oradij' : 'fix';
         $fizetes = $this->fizetesGeneralas($beosztas, $munkaido);
 
-        $szemely = Szemely::inRandomOrder()->first();
+        $szemely = Person::inRandomOrder()->first();
 
         return [
-            'szemely_id_fk' => $szemely->szemely_id,
+            'szemely_id_fk' => $szemely->id,
             'terulet' => $terulet,
             'munkakor' => $munkakor,
             'beosztas' => $beosztas,

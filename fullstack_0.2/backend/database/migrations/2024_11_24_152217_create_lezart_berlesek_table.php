@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('szemely_azon');
             $table->foreign('auto_azon')->references('id')->on('cars')->onDelete('cascade');
             $table->foreign('auto_kat')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('szemely_azon')->references('szemely_id')->on('szemelyek')->onDelete('cascade');
+            $table->foreign('szemely_azon')->references('id')->on('persons')->onDelete('cascade');
             
             $table->float('nyitas_szaz',2);
             $table->float('nyitas_kw',1);

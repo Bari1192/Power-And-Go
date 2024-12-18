@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Szemely;
+use App\Models\Person;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class SzemelyFactory extends Factory
+class PersonFactory extends Factory
 {
     public function definition(): array
     {
@@ -23,18 +23,18 @@ class SzemelyFactory extends Factory
             'szul_datum' => $szulDatum->format('Y-m-d'),
             'telefon' => fake()->regexify('\+36(20|30|70)[0-9]{3}[0-9]{4}'),
             'email' => $this->emailGeneralas($v_nev, $k_nev),
-            'szig_szam' => $this->egyediSzigSzam(),
-            'jogos_szam' => $this->egyediJogosSzam(),
+            'szig_szam' => strtoupper($this->egyediSzigSzam()),
+            'jogos_szam' => strtoupper($this->egyediJogosSzam()),
             'jogos_erv_kezdete' => $jogsiKezdete->format('Y-m-d'),
             'jogos_erv_vege' => $jogsiVege->format('Y-m-d'),
-            'szemely_jelszo' => fake()->numberBetween(1000, 9999_9999),
+            'szemely_jelszo' => fake()->regexify('\[0-9]{4}'),
         ];
     }
     private function egyediSzigSzam(): string
     {
         do {
             $szigSzam = fake()->unique()->bothify('??######');
-        } while (Szemely::where('szig_szam', $szigSzam)->exists());
+        } while (Person::where('szig_szam', $szigSzam)->exists());
 
         return $szigSzam;
     }
@@ -43,7 +43,7 @@ class SzemelyFactory extends Factory
     {
         do {
             $jogosSzam = fake()->unique()->bothify('??######');
-        } while (Szemely::where('jogos_szam', $jogosSzam)->exists());
+        } while (Person::where('jogos_szam', $jogosSzam)->exists());
 
         return $jogosSzam;
     }
@@ -76,7 +76,7 @@ class SzemelyFactory extends Factory
                 $email = $randomszo . $szamok . $domainek[array_rand($domainek)];
             }
             $email = preg_replace('/[^\x20-\x7E]/', '', $email);
-        } while (Szemely::where('email', $email)->exists());
+        } while (Person::where('email', $email)->exists());
 
         return $email;
     }

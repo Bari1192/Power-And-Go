@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('dolgozok', function (Blueprint $table) {
             $table->id('dolgozo_id');
             $table->unsignedBigInteger('szemely_id_fk');
-            $table->foreign('szemely_id_fk')->references('szemely_id')->on('szemelyek')->onDelete('cascade'); 
+            $table->foreign('szemely_id_fk')->references('id')->on('persons')->onDelete('cascade'); 
             $table->string('terulet');
             $table->string('munkakor');
             $table->string('beosztas');

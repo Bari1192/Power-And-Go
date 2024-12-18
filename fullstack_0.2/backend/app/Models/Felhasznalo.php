@@ -26,11 +26,11 @@ class Felhasznalo extends Model
 
     public function szemely(): BelongsTo
     {
-        return $this->belongsTo(Szemely::class, 'szemely_id', 'szemely_id');
+        return $this->belongsTo(Person::class, 'szemely_id');
     }
 
     public function elofizetes(): BelongsTo
     {
-        return $this->belongsTo(Subscription::class, 'elofiz_id', 'id');
+        return $this->belongsTo(Subscription::class, 'elofiz_id');
     }
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('auto_azon');
 
             $table->foreign('felh_id')->references('felh_id')->on('felhasznalok')->onDelete('cascade');
-            $table->foreign('szemely_id')->references('szemely_id')->on('szemelyek')->onDelete('cascade');
+            $table->foreign('szemely_id')->references('id')->on('persons')->onDelete('cascade');
             $table->foreign('auto_azon')->references('id')->on('cars')->onDelete('cascade');
 
             $table->integer('osszeg');

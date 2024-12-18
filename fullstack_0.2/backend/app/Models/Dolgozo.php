@@ -24,6 +24,6 @@ class Dolgozo extends Model
     ];
     public function szemely(): BelongsTo
     {
-        return $this->belongsTo(Szemely::class, 'szemely_id_fk', 'szemely_id');
+        return $this->belongsTo(Person::class, 'szemely_id_fk', 'id');
     }
 }

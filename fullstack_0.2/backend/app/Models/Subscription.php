@@ -11,7 +11,7 @@ class Subscription extends Model
     use HasFactory;
     protected $table = 'subscriptions';
     protected $primaryKey = 'id';
-    public $timestamps = true;
+    public $timestamps = false;
     public $incrementing = true;
 
     protected $fillable = [];
