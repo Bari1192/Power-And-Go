@@ -16,10 +16,7 @@ return new class extends Migration {
             $table->string('felh_nev', 20)->unique();
 
             $table->unsignedBigInteger('elofiz_id');
-            $table->foreign('elofiz_id')
-                ->references('elofiz_id')
-                ->on('elofizetesek')
-                ->onDelete('cascade');
+            $table->foreign('elofiz_id')->references('id')->on('subscriptions')->onDelete('cascade');
             $table->timestamps();
         });
     }

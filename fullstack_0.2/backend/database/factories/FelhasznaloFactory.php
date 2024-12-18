@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Elofizetes;
 use App\Models\Felhasznalo;
+use App\Models\Subscription;
 use App\Models\Szemely;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,14 +22,14 @@ class FelhasznaloFactory extends Factory
             ->inRandomOrder()
             ->first();
 
-        $elofizetes = Elofizetes::inRandomOrder()->first();
+        $elofizetes = Subscription::inRandomOrder()->first();
 
         return [
             'szemely_id' => $szemely->szemely_id,
             'felh_egyenleg' => 0,
             'jelszo_2_4' => $this->jelszoMasodikNegyedik($szemely->szemely_jelszo),
             'felh_nev' => $this->felhasznaloNevGenerator($szemely->v_nev),
-            'elofiz_id' => $elofizetes->elofiz_id,
+            'elofiz_id' => $elofizetes->id,
         ];
     }
     public function felhasznaloNevGenerator(string $V_nev): string

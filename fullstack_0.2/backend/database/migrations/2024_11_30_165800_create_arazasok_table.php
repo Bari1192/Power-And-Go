@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
 
             $table->unsignedBigInteger('elofiz_azon');
-            $table->foreign('elofiz_azon')->references('elofiz_id')->on('elofizetesek')->onDelete('cascade');
+            $table->foreign('elofiz_azon')->references('id')->on('subscriptions')->onDelete('cascade');
 
             $table->unsignedBigInteger('auto_besorolas');
             $table->foreign('auto_besorolas')->references('id')->on('categories')->onDelete('cascade');

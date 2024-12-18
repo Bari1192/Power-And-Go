@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Elofizetes;
 use App\Models\Felhasznalo;
+use App\Models\Subscription;
 use App\Models\Szemely;
 use Illuminate\Database\Seeder;
 
@@ -19,11 +19,11 @@ class FelhasznaloSeeder extends Seeder
                             ->get();
 
         foreach ($szemelyek as $szemely) {
-            $randomElofizetes = Elofizetes::inRandomOrder()->first();
+            $randomElofizetes = Subscription::inRandomOrder()->first();
 
             Felhasznalo::factory()->create([
                 'szemely_id' => $szemely->szemely_id,
-                'elofiz_id' => $randomElofizetes->elofiz_id, // Az előfizetés ID-t kapcsoljuk
+                'elofiz_id' => $randomElofizetes->id, // Az előfizetés ID-t kapcsoljuk
             ]);
         }
     }

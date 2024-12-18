@@ -9,7 +9,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(FleetSeeder::class);
         $this->call(CategorySeeder::class);
-        $this->call(ElofizetesSeeder::class);
+        $this->call(SubscriptionSeeder::class);
         $this->call(ArazasSeeder::class);
         $this->call(FelszereltsegSeeder::class);
         $this->call(CarStatusSeeder::class);

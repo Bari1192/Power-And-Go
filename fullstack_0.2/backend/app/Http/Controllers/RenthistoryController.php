@@ -8,6 +8,7 @@ use App\Http\Resources\RenthistoryResource;
 use App\Http\Resources\SzamlaResource;
 use App\Http\Resources\ToltesBuntetesResource;
 use App\Models\Auto;
+use App\Models\Car;
 use App\Models\LezartBerles;
 use App\Models\Szamla;
 use Illuminate\Auth\Events\Validated;
@@ -50,7 +51,7 @@ class RenthistoryController extends Controller
         return $renthistory->delete() ? response()->noContent() : abort(500);
     }
 
-    public function filterCarHistory(string $type,Auto $car): JsonResource
+    public function filterCarHistory(string $type,Car $car): JsonResource
     {
         $validFilterezes = ['berles', 'buntetesek', 'baleset', 'karokozas', 'toltes_buntetes'];
 

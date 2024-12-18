@@ -6,11 +6,11 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ElofizetesSeeder extends Seeder
+class SubscriptionSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('elofizetesek')->insert([
+        DB::table('subscriptions')->insert([
 
             [
                 'elofiz_nev' => 'Power',

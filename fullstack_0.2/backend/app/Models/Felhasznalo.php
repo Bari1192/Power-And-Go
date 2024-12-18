@@ -31,6 +31,6 @@ class Felhasznalo extends Model
 
     public function elofizetes(): BelongsTo
     {
-        return $this->belongsTo(Elofizetes::class, 'elofiz_id', 'elofiz_id');
+        return $this->belongsTo(Subscription::class, 'elofiz_id', 'id');
     }
 }
