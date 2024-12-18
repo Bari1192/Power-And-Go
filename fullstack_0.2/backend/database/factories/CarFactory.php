@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Equipment;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Felszereltseg;
 use App\Models\Fleet;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +13,7 @@ class CarFactory extends Factory
     {
         $gyartasiEv = fake()->numberBetween(2019, 2023);
         $flotta = $this->flottabolAutotIdAlapjan();
-        $felszereltseg = Felszereltseg::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
+        $felszereltseg = Equipment::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
         $flottaTipus = Fleet::find($flotta);
 
         $toltes_szazalek = fake()->randomFloat(2, 15, 100);
@@ -25,7 +25,7 @@ class CarFactory extends Factory
             'rendszam' => $this->rendszamGeneralasUjRegi(),
             'gyartasi_ev' => $gyartasiEv,
             'kilometerora' => $this->kmOraAllasGeneralas($gyartasiEv),
-            'felszereltseg' => $felszereltseg ? $felszereltseg->felsz_id : 1,
+            'felszereltseg' => $felszereltseg ? $felszereltseg->id : 1,
             'toltes_szaz' => $toltes_szazalek,
             'toltes_kw' => $toltes_kw,
             'becs_tav' => $becsultHatotav,

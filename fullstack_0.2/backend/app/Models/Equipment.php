@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Felszereltseg extends Model
+class Equipment extends Model
 {
     use HasFactory;
-    protected $table = 'felszereltsegek';
-    protected $primaryKey = 'felsz_id';
-    public $timestamps = true; 
+    protected $table = 'equipments';
+    protected $primaryKey = 'id';
+    public $timestamps = false; 
     public $incrementing = true;
 
     protected $fillable = [
@@ -23,6 +23,6 @@ class Felszereltseg extends Model
     ];
     public function autok(): HasMany
     {
-        return $this->hasMany(Car::class, 'felsz_id', 'id');
+        return $this->hasMany(Car::class);
     }
 }
