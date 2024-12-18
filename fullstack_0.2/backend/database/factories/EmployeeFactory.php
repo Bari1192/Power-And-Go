@@ -3,10 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Person;
-use App\Models\Szemely;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DolgozoFactory extends Factory
+class EmployeeFactory extends Factory
 {
 
     public function definition(): array
@@ -20,7 +19,7 @@ class DolgozoFactory extends Factory
         $szemely = Person::inRandomOrder()->first();
 
         return [
-            'szemely_id_fk' => $szemely->id,
+            'szemely_azon' => $szemely->id,
             'terulet' => $terulet,
             'munkakor' => $munkakor,
             'beosztas' => $beosztas,

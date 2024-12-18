@@ -31,6 +31,6 @@ class Person extends Model
     }
     public function dolgozo()
     {
-        return $this->hasOne(Dolgozo::class, 'szemely_id_FK', 'id');
+        return $this->hasOne(Employee::class, 'szemely_azon', 'id');
     }
 }

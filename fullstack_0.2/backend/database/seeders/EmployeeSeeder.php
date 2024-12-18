@@ -2,14 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Dolgozo;
+use App\Models\Employee;
 use App\Models\Person;
-use App\Models\Szemely;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DolgozoSeeder extends Seeder
+class EmployeeSeeder extends Seeder
 {
     public function run(): void
     {
@@ -17,12 +15,12 @@ class DolgozoSeeder extends Seeder
 
         foreach ($szemelyek as $szemely) {
             // Létrehozzuk a dolgozó adatait factory segítségével
-            $dolgozo = Dolgozo::factory()->make([
-                'szemely_id_fk' => $szemely->id,
+            $dolgozo = Employee::factory()->make([
+                'szemely_azon' => $szemely->id,
             ])->toArray();
 
             // Beszúrás az adatbázisba
-            DB::table('dolgozok')->insert($dolgozo);
+            DB::table('employees')->insert($dolgozo);
         }
     }
 }
