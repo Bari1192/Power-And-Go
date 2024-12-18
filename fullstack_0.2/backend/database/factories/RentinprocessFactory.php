@@ -3,13 +3,13 @@
 namespace Database\Factories;
 
 use App\Models\Car;
-use App\Models\FutoBerles;
+use App\Models\Rentinprocess;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FutoBerlesFactory extends Factory
+class RentInProcessFactory extends Factory
 {
-    protected $model = FutoBerles::class;
+    protected $model = Rentinprocess::class;
 
     private array $usedRendszamok = [];
     private array $usedFelhasznalok = [];

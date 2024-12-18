@@ -24,10 +24,10 @@ class Category extends Model
     }
     public function arazasok(): HasMany
     {
-        return $this->hasMany(Arazas::class, 'auto_besorolas', 'id');
+        return $this->hasMany(Price::class, 'auto_besorolas', 'id');
     }
     public function napiBerlesek(): HasMany
     {
-        return $this->hasMany(NapiBerles::class, 'auto_tipus', 'id');
+        return $this->hasMany(Dailyrental::class, 'auto_tipus', 'id');
     }
 }

@@ -12,18 +12,11 @@ use Illuminate\Http\Response;
 
 class SubscriptionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): JsonResource
     {
         $subs = Subscription::all();
         return new SubscriptionResource($subs);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreSubscriptionRequest $request)
     {
         $data = $request->validated();
@@ -31,9 +24,6 @@ class SubscriptionController extends Controller
         return new SubscriptionResource($sub);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Subscription $subscription): JsonResource
     {
         return new SubscriptionResource($subscription);

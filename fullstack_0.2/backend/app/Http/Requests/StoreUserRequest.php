@@ -23,8 +23,6 @@ class StoreUserRequest extends FormRequest
             "jelszo_2_4" => ["required"],
             "felh_nev" => ["required"],
             "elofiz_id" => ["required"],
-
-
         ];
     }
 }

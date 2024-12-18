@@ -2,9 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Arazas;
 use App\Models\Car;
+use App\Models\Dailyrental;
 use App\Models\NapiBerles;
+use App\Models\Price;
 use App\Models\Renthistory;
 use App\Models\User;
 use DateTime;
@@ -48,7 +49,7 @@ class RenthistoryFactory extends Factory
 
 
         $felhasznalo = User::inRandomOrder()->first();
-        $arazas = Arazas::where('auto_besorolas', $auto->kategoria)
+        $arazas = Price::where('auto_besorolas', $auto->kategoria)
             ->where('elofiz_azon', $felhasznalo->elofiz_id)
             ->first();
         $berlesKezdete = $this->berlesKezdete();
@@ -204,7 +205,7 @@ class RenthistoryFactory extends Factory
         return $parkolasok;
     }
 
-    private function berlesVegosszegSzamolas(Arazas $arazas, $felhasznalo, int $idoKulonbseg, int $tavolsag, array $parkolasok, int $autoKategoria, $berlesIdotartam): float
+    private function berlesVegosszegSzamolas(Price $arazas, $felhasznalo, int $idoKulonbseg, int $tavolsag, array $parkolasok, int $autoKategoria, $berlesIdotartam): float
     {
         $idoPerc = $idoKulonbseg / 60; ## Másodpercek átváltása percre
         $napok = ceil($idoKulonbseg / 86400); ## Napok kiszámítása
@@ -293,7 +294,7 @@ class RenthistoryFactory extends Factory
 
         ## Ha többnapos a bérlés ==> lekérjük a NapiBerles táblából annak az értékekét.
         if ($napok > 1) {
-            $napiBerlesek = NapiBerles::where('arazas_id', $arazas->id)
+            $napiBerlesek = Dailyrental::where('arazas_id', $arazas->id)
                 ->where('auto_tipus', $autoKategoria)
                 ->orderBy('napok')
                 ->get();

@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Arazas;
-use App\Models\NapiBerles;
+use App\Models\Dailyrental;
+use App\Models\Price;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class NapiBerlesSeeder extends Seeder
+class DailyrentalSeeder extends Seeder
 {
     # Összes árazási kategória
     public function run(): void
     {
-        $arazasok = Arazas::all(['id', 'auto_besorolas', 'elofiz_azon']);
+        $arazasok = Price::all(['id', 'auto_besorolas', 'elofiz_azon']);
 
         ### Tömeges beszúrás, a gyorsabb betöltés végett:
         ### ebbe bele az összes rekordot!
@@ -34,7 +34,7 @@ class NapiBerlesSeeder extends Seeder
                 }
             }
         }
-        NapiBerles::insert($insertData);
+        Dailyrental::insert($insertData);
     }
     # Árak generálása az autókategória és előfizetési csoport alapján
     private function napiBerlesAutokEsElofizAlapjan($elofiz_azon,$auto_besorolas)

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SzamlaResource extends JsonResource
+class BillResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -27,7 +27,7 @@ class SzamlaResource extends JsonResource
             "berles_veg_ido" => $this->berles_veg_ido,
             "szamla_kelt" => $this->szamla_kelt,
             "szamla_status" => $this->szamla_status,
-            "auto" => new AutoResource($this->whenLoaded('autok')),
+            "auto" => new CarResource($this->whenLoaded('autok')),
         ];
     }
 }

@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('futo_berlesek', function (Blueprint $table) {
+        Schema::create('rentsinprocess', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('auto_azon'); 
             $table->unsignedBigInteger('kategoria'); 
@@ -21,13 +21,11 @@ return new class extends Migration
             $table->foreign('auto_azon')->references('id')->on('cars')->onDelete('cascade');
             $table->foreign('szemely_azon')->references('id')->on('persons')->onDelete('cascade');
             $table->foreign('kategoria')->references('id')->on('categories')->onDelete('cascade');
-
-            $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('futo_berlesek');
+        Schema::dropIfExists('rentsinprocess');
     }
 };

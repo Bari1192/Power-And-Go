@@ -48,7 +48,7 @@ class Car extends Model
     }
     public function szamlak(): HasMany
     {
-        return $this->hasMany(Szamla::class, 'auto_azon', 'id');
+        return $this->hasMany(Bill::class, 'auto_azon', 'id');
     }
     public function tickets(): HasMany
     {

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCarRequest;
 use App\Http\Resources\AutoResource;
 use App\Http\Resources\CarResource;
 use App\Http\Resources\SzamlaResource;
+use App\Models\Bill;
 use App\Models\Car;
 use App\Models\Szamla;
 use Illuminate\Auth\Events\Validated;
@@ -56,7 +57,7 @@ class CarController extends Controller
 
     public function filterCarFines(Car $car): JsonResource
     {
-        $szamlak = Szamla::where('auto_azon', $car->autok_id)
+        $szamlak = Bill::where('auto_azon', $car->autok_id)
         ->where('szamla_tipus','toltes_buntetes')
         ->get();
 

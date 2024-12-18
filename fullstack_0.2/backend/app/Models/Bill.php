@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Szamla extends Model
+class Bill extends Model
 {
     use HasFactory;
-    protected $table = 'szamlak';
-    protected $primaryKey = 'szamla_id';
+    protected $table = 'bills';
+    protected $primaryKey = 'id';
     public $incrementing = true;
     public $timestamps=false;
 

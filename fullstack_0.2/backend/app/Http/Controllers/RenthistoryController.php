@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRenthistoryRequest;
 use App\Http\Requests\UpdateRenthistoryRequest;
 use App\Http\Resources\RenthistoryResource;
-use App\Http\Resources\SzamlaResource;
 use App\Http\Resources\ToltesBuntetesResource;
+use App\Models\Bill;
 use App\Models\Car;
 use App\Models\Renthistory;
-use App\Models\Szamla;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
@@ -58,7 +56,7 @@ class RenthistoryController extends Controller
         }
 
         // Számlák lekérdezése típus és autó alapján
-        $szamlak = Szamla::with('autok') // Kapcsolat betöltése
+        $szamlak = Bill::with('autok') // Kapcsolat betöltése
             ->where('szamla_tipus', $type)
             ->where('auto_azon', $car) // Auto azonosító szűrése
             ->get();
@@ -68,6 +66,6 @@ class RenthistoryController extends Controller
             return ToltesBuntetesResource::collection($szamlak);
         }
 
-        return SzamlaResource::collection($szamlak);
+        return Bill::collection($szamlak);
     }
 }

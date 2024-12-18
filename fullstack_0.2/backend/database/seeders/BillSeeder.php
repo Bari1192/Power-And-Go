@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bill;
 use App\Models\Renthistory;
-use App\Models\Szamla;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class SzamlaSeeder extends Seeder
+class BillSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -34,7 +34,7 @@ class SzamlaSeeder extends Seeder
 
         foreach ($mindenLezartBerles as $egyBerles) {
             $felhasznalo = User::where('szemely_id', $egyBerles->szemely_azon)->first();
-            Szamla::create([
+            Bill::create([
                 'szamla_tipus' => 'berles',
                 'felh_id' => $felhasznalo->id,
                 'szemely_id' => $egyBerles->szemely_azon,
@@ -80,11 +80,11 @@ class SzamlaSeeder extends Seeder
         ## Tömeges adatbeszúrás || Amennyiben van számla, amiből generálhat,
         ## Akkor készíteni fog addig.
         if (!empty($szamlaAdatok)) {
-            DB::table('szamlak')->insert($szamlaAdatok);
+            DB::table('bills')->insert($szamlaAdatok);
         }
 
         if (!empty($buntetesAdatok)) {
-            DB::table('szamlak')->insert($buntetesAdatok);
+            DB::table('bills')->insert($buntetesAdatok);
         }
     }
 }

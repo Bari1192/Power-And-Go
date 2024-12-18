@@ -6,11 +6,11 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ArazasSeeder extends Seeder
+class PriceSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('arazasok')->insert([
+        DB::table('prices')->insert([
             # E-up              18 kW       1-es besorolas
             # Renault Kangoo    33 kW       2-es besorolas
             # E-up & Citigo     36 kW       3-as besorolas

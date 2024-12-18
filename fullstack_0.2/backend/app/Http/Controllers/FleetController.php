@@ -6,10 +6,8 @@ use App\Http\Requests\StoreFleetRequest;
 use App\Http\Requests\UpdateFleetRequest;
 use App\Http\Resources\FleetResource;
 use App\Models\Fleet;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 
 class FleetController extends Controller
 {
@@ -37,11 +35,8 @@ class FleetController extends Controller
         return new FleetResource($fleet);
     }
 
-    public function destroy(Fleet $fleet)
+    public function destroy(Fleet $fleet):Response
     {
-        if ($fleet->delete()) {
-            return response(204);
-        }
-        return abort(500,'A törlés sikertelen volt!');
+        return ($fleet->delete() ? response()->noContent() : abort(500));
     }
 }

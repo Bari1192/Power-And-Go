@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FutoBerles extends Model
+class Rentinprocess extends Model
 {
     use HasFactory;
-    protected $table = 'futo_berlesek';
+    protected $table = 'rentsinprocess';
     protected $primaryKey = 'id';
-    public $timestamps = true; 
+    public $timestamps = false; 
     public $incrementing = true;
 
     protected $fillable = [

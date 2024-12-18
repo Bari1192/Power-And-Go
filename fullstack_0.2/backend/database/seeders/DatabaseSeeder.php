@@ -10,16 +10,16 @@ class DatabaseSeeder extends Seeder
         $this->call(FleetSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(SubscriptionSeeder::class);
-        $this->call(ArazasSeeder::class);
+        $this->call(PriceSeeder::class);
         $this->call(EquipmentSeeder::class);
         $this->call(CarStatusSeeder::class);
         $this->call(CarSeeder::class);
         $this->call(PersonSeeder::class);
         $this->call(EmployeeSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(NapiBerlesSeeder::class);
+        $this->call(DailyrentalSeeder::class);
         $this->call(RenthistorySeeder::class);
-        $this->call(FutoBerlesSeeder::class);
-        $this->call(SzamlaSeeder::class);
+        $this->call(RentinprocessSeeder::class);
+        $this->call(BillSeeder::class);
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCarStatusRequest;
+use App\Http\Requests\UpdateCarstatusRequest;
 use App\Http\Resources\CarstatusResource;
 use App\Models\CarStatus;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
@@ -28,9 +28,11 @@ class CarStatusController extends Controller
         return new CarstatusResource($carStatus);
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateCarstatusRequest $request, CarStatus $carstatus)
     {
-        
+        $data=$request->validated();
+        $carstatus->update($data);
+        return new CarstatusResource($carstatus);
     }
     
     public function destroy(CarStatus $carStatus):Response
