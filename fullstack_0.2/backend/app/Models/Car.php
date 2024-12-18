@@ -44,7 +44,7 @@ class Car extends Model
 
     public function lezartberlesek(): HasMany
     {
-        return $this->hasMany(LezartBerles::class, 'auto_azonosito', 'id');
+        return $this->hasMany(Renthistory::class, 'auto_azonosito', 'id');
     }
     public function szamlak(): HasMany
     {

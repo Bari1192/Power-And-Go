@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EmployeeSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(NapiBerlesSeeder::class);
-        $this->call(LezartBerlesSeeder::class);
+        $this->call(RenthistorySeeder::class);
         $this->call(FutoBerlesSeeder::class);
         $this->call(SzamlaSeeder::class);
     }

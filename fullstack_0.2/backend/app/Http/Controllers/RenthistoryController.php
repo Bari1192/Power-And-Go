@@ -7,11 +7,9 @@ use App\Http\Requests\UpdateRenthistoryRequest;
 use App\Http\Resources\RenthistoryResource;
 use App\Http\Resources\SzamlaResource;
 use App\Http\Resources\ToltesBuntetesResource;
-use App\Models\Auto;
 use App\Models\Car;
-use App\Models\LezartBerles;
+use App\Models\Renthistory;
 use App\Models\Szamla;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
@@ -20,25 +18,25 @@ class RenthistoryController extends Controller
 {
     public function index(): JsonResource
     {
-        $histories = LezartBerles::with(["auto.tickets", "auto.carstatus", "kategoriak", "felhasznalo.szemely"])->get();
+        $histories = Renthistory::all();
         return RenthistoryResource::collection($histories);
     }
 
     public function store(StoreRenthistoryRequest $request)
     {
         $data=$request->validated();
-        $renthistory=LezartBerles::create($data);
+        $renthistory=Renthistory::create($data);
         return new RenthistoryResource($renthistory);
     }
 
-    public function show(LezartBerles $renthistory): JsonResource
+    public function show(Renthistory $renthistory): JsonResource
     {
         ### Csak a számlát tudod így lekérni!
         $renthistory->load("auto.tickets", "auto.carstatus", "kategoriak", "felhasznalo.szemely");
         return new RenthistoryResource($renthistory);
     }
 
-    public function update(UpdateRenthistoryRequest $request, LezartBerles $renthistory)
+    public function update(UpdateRenthistoryRequest $request, Renthistory $renthistory)
     {
         $data=$request->validated();
         $renthistory->load("auto.tickets", "auto.carstatus", "kategoriak", "felhasznalo.szemely");
@@ -46,7 +44,7 @@ class RenthistoryController extends Controller
         return new RenthistoryResource($renthistory);
     }
 
-    public function destroy(LezartBerles $renthistory):Response
+    public function destroy(Renthistory $renthistory):Response
     {
         return $renthistory->delete() ? response()->noContent() : abort(500);
     }

@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LezartBerles extends Model
+class Renthistory extends Model
 {
     use HasFactory;
 
-    protected $table = 'lezart_berlesek';
-    protected $primaryKey = 'lezart_berles_id';
+    protected $table = 'renthistories';
+    protected $primaryKey = 'id';
     public $timestamps = false;
     public $incrementing = true;
 
     protected $fillable = [
-        "lezart_berles_id",
+        "id",
         "auto_id",
         "auto_kategoria",
         "szemely_id_fk",

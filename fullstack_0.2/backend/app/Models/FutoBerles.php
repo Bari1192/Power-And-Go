@@ -29,6 +29,6 @@ class FutoBerles extends Model
 
     public function felhasznalo()
     {
-        return $this->belongsTo(Felhasznalo::class, 'szemely_id_fk', 'szemely_id');
+        return $this->belongsTo(User::class, 'szemely_id', 'id');
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('lezart_berlesek', function (Blueprint $table) {
+        Schema::create('renthistories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('auto_azon');
             $table->unsignedBigInteger('auto_kat');
@@ -35,6 +35,6 @@ return new class extends Migration {
     }
     public function down(): void
     {
-        Schema::dropIfExists('lezart_berlesek');
+        Schema::dropIfExists('renthistories');
     }
 };

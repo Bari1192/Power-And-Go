@@ -4,17 +4,15 @@ namespace Database\Factories;
 
 use App\Models\Arazas;
 use App\Models\Car;
-use App\Models\Felhasznalo;
-use App\Models\LezartBerles;
 use App\Models\NapiBerles;
+use App\Models\Renthistory;
 use App\Models\User;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\DB;
 
-class LezartBerlesFactory extends Factory
+class RenthistoryFactory extends Factory
 {
-    protected $model = LezartBerles::class;
+    protected $model = Renthistory::class;
 
     public function definition(): array
     {

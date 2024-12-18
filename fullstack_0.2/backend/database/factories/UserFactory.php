@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Felhasznalo;
 use App\Models\Person;
 use App\Models\Subscription;
 use App\Models\User;

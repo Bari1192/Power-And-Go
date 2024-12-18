@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Felhasznalo;
-use App\Models\LezartBerles;
+use App\Models\Renthistory;
 use App\Models\Szamla;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +30,7 @@ class SzamlaSeeder extends Seeder
         # 5-ös besorolas [ Opel Vivaro - 75 kW] típus
 
         ###     Normál számla gyártás   ###
-        $mindenLezartBerles = LezartBerles::all();
+        $mindenLezartBerles = Renthistory::all();
 
         foreach ($mindenLezartBerles as $egyBerles) {
             $felhasznalo = User::where('szemely_id', $egyBerles->szemely_azon)->first();
