@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->float('becs_tav', 1)->default(130);
 
             $table->foreignId('status')->constrained('carstatus','id')->onDelete('cascade');
-            $table->foreignId('kategoria')->constrained('kategoriak', 'kat_id')->onDelete('cascade');
+            $table->foreignId('kategoria')->constrained('categories', 'id')->onDelete('cascade');
             $table->foreignId('felszereltseg')->nullable()->constrained('felszereltsegek', 'felsz_id')->onDelete('set null');
             $table->foreignId('flotta_azon')->constrained('fleets','id')->onDelete('cascade');
 

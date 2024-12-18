@@ -32,7 +32,6 @@ return new class extends Migration
             $table->time('berles_veg_ido');
             $table->timestamp('szamla_kelt')->useCurrent();
             $table->enum('szamla_status', ['active', 'pending', 'archiv'])->default('pending');
-            $table->timestamps();
         });
     }
 

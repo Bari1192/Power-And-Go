@@ -23,7 +23,6 @@ class Felszereltseg extends Model
     ];
     public function autok(): HasMany
     {
-        return $this->hasMany(Auto::class, 'felsz_id_fk');
-        # Nem kell kifejteni [PK] -> [FK], automatán látja, hogy a felsz_id-ról megy az FK.
+        return $this->hasMany(Car::class, 'felsz_id', 'id');
     }
 }

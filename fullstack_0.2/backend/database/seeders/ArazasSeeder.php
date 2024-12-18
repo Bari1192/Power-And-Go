@@ -43,8 +43,6 @@ class ArazasSeeder extends Seeder
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
                 'hetvegi_napi_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Renault Kangoo | 33 kW | 2-es besorolas |
             [
@@ -69,8 +67,6 @@ class ArazasSeeder extends Seeder
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
                 'hetvegi_napi_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # E-up, Citigo | 36kW | 3-as besorolas |
             [
@@ -95,8 +91,6 @@ class ArazasSeeder extends Seeder
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
                 'hetvegi_napi_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Kia Niro | 65 kW | 4-es besorolas |
             [
@@ -121,8 +115,6 @@ class ArazasSeeder extends Seeder
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
                 'hetvegi_napi_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Opel Vivaro | 75 kW | 5-ös besorolas |
             [
@@ -147,8 +139,6 @@ class ArazasSeeder extends Seeder
                 'hat_ora_dij' => 15875,
                 'tizenketto_ora_dij' => 19276,
                 'hetvegi_napi_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             ####################################
             ## [Power-Plus] árak * [5 kategoria]
@@ -175,8 +165,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Renault Kangoo - 33 kW
             [
@@ -201,8 +189,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # E-up, Citigo | 36kW | 3-as besorolas |
             [
@@ -227,8 +213,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Kia Niro | 65 kW | 4-es besorolas |
             [ ## 46350 +
@@ -253,8 +237,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Opel Vivaro | 75 kW | 5-ös besorolas |
             [
@@ -279,8 +261,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => 11070,
                 'hat_ora_dij' => 14090,
                 'tizenketto_ora_dij' => 17109,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             #######################################
             ## [Power-Prémium] árak * [5 kategoria]
@@ -307,8 +287,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Renault Kangoo - 33 kW
             [
@@ -333,8 +311,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # E-up, Citigo | 36kW | 3-as besorolas |
             [
@@ -359,8 +335,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Kia Niro | 65 kW | 4-es besorolas |
             [
@@ -385,8 +359,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Opel Vivaro | 75 kW | 5-ös besorolas |
             [
@@ -411,8 +383,6 @@ class ArazasSeeder extends Seeder
                 'hat_ora_dij' => 14090,
                 'tizenketto_ora_dij' => 17109,
                 'hetvegi_napi_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             ###################################
             ## [Power-VIP] árak * [5 kategoria]
@@ -439,8 +409,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Renault Kangoo - 33 kW
             [
@@ -465,8 +433,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # E-up, Citigo | 36kW | 3-as besorolas |
             [
@@ -491,8 +457,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Kia Niro | 65 kW | 4-es besorolas |
             [
@@ -518,8 +482,6 @@ class ArazasSeeder extends Seeder
                 'harom_ora_dij' => null,
                 'hat_ora_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             # Opel Vivaro | 75 kW | 5-ös besorolas |
             [
@@ -544,8 +506,6 @@ class ArazasSeeder extends Seeder
                 'hat_ora_dij' => 13495,
                 'hetvegi_napi_dij' => null,
                 'tizenketto_ora_dij' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
         ]);
     }

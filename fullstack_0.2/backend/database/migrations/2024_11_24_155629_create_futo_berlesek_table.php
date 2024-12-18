@@ -20,7 +20,7 @@ return new class extends Migration
             // FK kapcsolatok
             $table->foreign('auto_azon')->references('id')->on('cars')->onDelete('cascade');
             $table->foreign('szemely_azon')->references('szemely_id')->on('felhasznalok')->onDelete('cascade');
-            $table->foreign('kategoria')->references('kat_id')->on('kategoriak')->onDelete('cascade');
+            $table->foreign('kategoria')->references('id')->on('categories')->onDelete('cascade');
 
             $table->timestamps();
         });

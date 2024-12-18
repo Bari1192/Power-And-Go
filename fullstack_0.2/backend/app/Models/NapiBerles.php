@@ -20,6 +20,6 @@ class NapiBerles extends Model
     }
     public function kategoria(): BelongsTo
     {
-        return $this->belongsTo(Kategoria::class, 'auto_tipus', 'kat_id');
+        return $this->belongsTo(Category::class, 'auto_tipus', 'id');
     }
 }

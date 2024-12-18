@@ -10,18 +10,12 @@ return new class extends Migration
     {
         Schema::create('arazasok', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('elofiz_azon');      # Idegen kulcs oszlop létrehozása
 
-            $table->foreign('elofiz_azon')                  # Az idegen kulcs beállítása
-                ->references('elofiz_id')                   # Mire hivatkozik
-                ->on('elofizetesek')                        # Melyik táblában van
-                ->onDelete('cascade');                      # Törlési szabály            
+            $table->unsignedBigInteger('elofiz_azon');
+            $table->foreign('elofiz_azon')->references('elofiz_id')->on('elofizetesek')->onDelete('cascade');
 
             $table->unsignedBigInteger('auto_besorolas');
-            $table->foreign('auto_besorolas')
-                ->references('kat_besorolas') // kat_id helyett kat_besorolas
-                ->on('kategoriak')
-                ->onDelete('cascade');                  # Törlési szabály            
+            $table->foreign('auto_besorolas')->references('id')->on('categories')->onDelete('cascade');
 
             $table->integer('berles_ind');
             $table->integer('vez_perc')->nullable();;
@@ -42,7 +36,6 @@ return new class extends Migration
             $table->integer('hat_ora_dij')->nullable();                     # 6 órás bérlés esetén a bérlés összege [CSAK OPEL-VIVARO-nál]
             $table->integer('tizenketto_ora_dij')->nullable();              # 12 órás bérlés esetén a bérlés összege
             $table->integer('hetvegi_napi_dij')->nullable();              # 12 órás bérlés esetén a bérlés összege
-            $table->timestamps();
         });
     }
     public function down(): void

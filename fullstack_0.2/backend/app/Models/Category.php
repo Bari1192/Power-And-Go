@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Kategoria extends Model
+class Category extends Model
 {
     use HasFactory;
 
-    protected $table = 'kategoriak';
-    protected $primaryKey = 'kat_id';
+    protected $table = 'categories';
+    protected $primaryKey = 'id';
 
-    public $timestamps = true;
+    public $timestamps = false;
     public $incrementing = true;
     protected $fillable = [];
 
@@ -24,10 +24,10 @@ class Kategoria extends Model
     }
     public function arazasok(): HasMany
     {
-        return $this->hasMany(Arazas::class, 'auto_besorolas', 'kat_id');
+        return $this->hasMany(Arazas::class, 'auto_besorolas', 'id');
     }
     public function napiBerlesek(): HasMany
     {
-        return $this->hasMany(NapiBerles::class, 'auto_tipus', 'kat_id');
+        return $this->hasMany(NapiBerles::class, 'auto_tipus', 'id');
     }
 }

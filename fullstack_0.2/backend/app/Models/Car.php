@@ -34,7 +34,7 @@ class Car extends Model
     }
     public function kategoria(): BelongsTo
     {
-        return $this->belongsTo(Kategoria::class, 'kategoria', 'kat_besorolas');
+        return $this->belongsTo(Category::class, 'kategoria', 'kat_besorolas');
     }
 
     public function carstatus(): BelongsTo

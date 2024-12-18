@@ -48,7 +48,7 @@ class SzamlaSeeder extends Seeder
                 'parkolasi_perc' => $egyBerles->parkolasi_perc,
                 'vezetesi_perc' => $egyBerles->vezetesi_perc,
                 'osszeg' => $egyBerles->berles_osszeg,
-                'szamla_kelt' => now(),
+                'szamla_kelt' =>now(),
                 'szamla_status' => 'pending',
             ]);
 
@@ -56,6 +56,8 @@ class SzamlaSeeder extends Seeder
             $autoKat = $egyBerles->auto_kat;
             $zarasToltesSzazalek = $egyBerles->zaras_szaz;
 
+            ### NE FELEDD!!!  A BÜNTETÉS KIÁLLÍTÁSI TÖLTÉSI % ALAPJÁN (pl: 4-6-10% alatt bünti)
+            ### ELTÉR ATTÓL ahogyan az autó ZÁRÁS UTÁN 6-OS STÁTUSZRA ÁLLÍTJUK! (státusz 15% alatt ÁLL ÁT!!!)
             if (isset($kategoriak[$autoKat]) && $zarasToltesSzazalek < $kategoriak[$autoKat]['min_toltes']) {
                 $buntetesAdatok[] = [
                     'szamla_tipus' => 'toltes_buntetes',
@@ -70,7 +72,7 @@ class SzamlaSeeder extends Seeder
                     'parkolasi_perc' => $egyBerles->parkolasi_perc,
                     'vezetesi_perc' => $egyBerles->vezetesi_perc,
                     'osszeg' => $kategoriak[$autoKat]['buntetes'],
-                    'szamla_kelt' => now(),
+                    'szamla_kelt' =>now(),
                     'szamla_status' => 'pending',
                 ];
             }

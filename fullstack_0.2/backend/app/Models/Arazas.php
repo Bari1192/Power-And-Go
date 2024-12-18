@@ -18,7 +18,7 @@ class Arazas extends Model
     protected $fillable = [];
     public function kategoria(): BelongsTo
     {
-        return $this->belongsTo(Kategoria::class, 'auto_besorolas', 'kat_besorolas');
+        return $this->belongsTo(Category::class, 'auto_besorolas', 'kat_besorolas');
     }
 
     public function elofizetes(): BelongsTo

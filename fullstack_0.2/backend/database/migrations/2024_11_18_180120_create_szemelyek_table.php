@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->date('szul_datum');
             $table->string('telefon');
             $table->string('email')->collation('utf8mb4_unicode_ci');
-            $table->timestamps();
         });
     }
     public function down(): void

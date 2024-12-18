@@ -42,7 +42,7 @@ class LezartBerles extends Model
 
     public function kategoriak()
     {
-        return $this->belongsTo(Kategoria::class, 'auto_kat', 'kat_id');
+        return $this->belongsTo(Category::class, 'auto_kat', 'id');
     }
 
     public function felhasznalo()

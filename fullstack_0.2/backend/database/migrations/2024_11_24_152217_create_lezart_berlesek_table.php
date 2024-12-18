@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('auto_kat');
             $table->unsignedBigInteger('szemely_azon');
             $table->foreign('auto_azon')->references('id')->on('cars')->onDelete('cascade');
-            $table->foreign('auto_kat')->references('kat_id')->on('kategoriak')->onDelete('cascade');
+            $table->foreign('auto_kat')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('szemely_azon')->references('szemely_id')->on('szemelyek')->onDelete('cascade');
             
             $table->float('nyitas_szaz',2);
@@ -31,9 +31,6 @@ return new class extends Migration {
             $table->integer('parkolasi_perc')->nullable();
             $table->integer('vezetesi_perc');
             $table->integer('berles_osszeg')->nullable();
-            $table->timestamps();
-            
-            // Kapcsolatok
         });
     }
     public function down(): void

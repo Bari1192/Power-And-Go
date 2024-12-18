@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->enum('status_name',['Szabad','Foglalva','Bérlés alatt','Szervízre vár','Tisztításra vár','Kritikus töltés']);
             $table->string('status_descrip',255);
-            $table->timestamps();
+            $table->timestamp('created')->useCurrent();
         });
     }
     public function down(): void

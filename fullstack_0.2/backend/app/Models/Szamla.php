@@ -12,6 +12,7 @@ class Szamla extends Model
     protected $table = 'szamlak';
     protected $primaryKey = 'szamla_id';
     public $incrementing = true;
+    public $timestamps=false;
 
     protected $fillable = [
         'szamla_tipus',
