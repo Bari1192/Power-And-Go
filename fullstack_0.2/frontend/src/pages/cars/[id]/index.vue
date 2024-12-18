@@ -10,7 +10,7 @@
           <h1 class="text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.flotta.tipus }}</h1>
         </div>
       </div>
-      <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4"> Bejelentések</h1>
+      <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4">Új Bejelentés</h1>
       <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
       <div class="flex justify-center my-8 text-center text-xl space-x-8">
         <button label="hiba"

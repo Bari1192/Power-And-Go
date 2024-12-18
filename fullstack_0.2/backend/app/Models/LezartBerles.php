@@ -16,7 +16,7 @@ class LezartBerles extends Model
 
     protected $fillable = [
         "lezart_berles_id",
-        "auto_azonosito",
+        "auto_id",
         "auto_kategoria",
         "szemely_id_fk",
         "nyitas_toltes_szazalek",

@@ -17,7 +17,7 @@ class AutoController extends Controller
 {
     public function index(): JsonResource
     {
-        $cars = Auto::with(["flotta","carstatus"])->get();
+        $cars = Auto::with(["flotta","carstatus","tickets"])->get();
         return AutoResource::collection($cars);
     }
 

@@ -16,7 +16,9 @@ Route::get('cars/{car}/szamlak', [AutoController::class, 'filterCarFines']);
 Route::get('renthistories/filterCarHistory/{type}/{car}', [RenthistoryController::class, 'filterCarHistory']);
 
 Route::apiResource('/tickets', TicketController::class);
-Route::apiResource('/renthistories', RenthistoryController::class);
+
+Route::apiResource('/renthistories', RenthistoryController::class); ## -> 4 + 1 API!
+
 Route::apiResource('szamlak', SzamlaController::class);
 
 Route::apiResource('fleets', FleetController::class);

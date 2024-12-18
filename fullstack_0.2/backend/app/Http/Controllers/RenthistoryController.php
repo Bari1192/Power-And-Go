@@ -2,34 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRenthistoryRequest;
+use App\Http\Requests\UpdateRenthistoryRequest;
 use App\Http\Resources\RenthistoryResource;
 use App\Http\Resources\SzamlaResource;
 use App\Http\Resources\ToltesBuntetesResource;
 use App\Models\Auto;
 use App\Models\LezartBerles;
 use App\Models\Szamla;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class RenthistoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): JsonResource
     {
         $histories = LezartBerles::with(["auto.tickets", "auto.carstatus", "kategoriak", "felhasznalo.szemely"])->get();
         return RenthistoryResource::collection($histories);
     }
 
-    public function store(Request $request)
+    public function store(StoreRenthistoryRequest $request)
     {
-        //
+        $data=$request->validated();
+        $renthistory=LezartBerles::create($data);
+        return new RenthistoryResource($renthistory);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(LezartBerles $renthistory): JsonResource
     {
         ### Csak a számlát tudod így lekérni!
@@ -37,23 +37,20 @@ class RenthistoryController extends Controller
         return new RenthistoryResource($renthistory);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateRenthistoryRequest $request, LezartBerles $renthistory)
     {
-        //
+        $data=$request->validated();
+        $renthistory->load("auto.tickets", "auto.carstatus", "kategoriak", "felhasznalo.szemely");
+        $renthistory->update($data);
+        return new RenthistoryResource($renthistory);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(LezartBerles $renthistory):Response
     {
-        //
+        return $renthistory->delete() ? response()->noContent() : abort(500);
     }
 
-    public function filterCarHistory(string $type, $car): JsonResource
+    public function filterCarHistory(string $type,Auto $car): JsonResource
     {
         $validFilterezes = ['berles', 'buntetesek', 'baleset', 'karokozas', 'toltes_buntetes'];
 
