@@ -28,6 +28,6 @@ class Szamla extends Model
     ];
     public function autok(): BelongsTo
     {
-        return $this->belongsTo(Auto::class, 'auto_azon', 'autok_id');
+        return $this->belongsTo(Car::class, 'auto_azon');
     }
 }

@@ -7,14 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Auto extends Model
+class Car extends Model
 {
     use HasFactory;
 
-    protected $table = 'autok';
-    protected $primaryKey = 'autok_id';
+    protected $table = 'cars';
+    protected $primaryKey = 'id';
     public $incrementing = true;
-    protected $keyType = 'int';
 
     protected $fillable = [
         'rendszam',
@@ -30,28 +29,28 @@ class Auto extends Model
     ];
     public function flotta(): BelongsTo
     {
-        return $this->belongsTo(Flotta_tipusok::class, 'flotta_id_fk', 'flotta_id');
+        return $this->belongsTo(Flotta_tipusok::class, 'flotta_azon', 'flotta_id');
     }
     public function kategoria(): BelongsTo
     {
-        return $this->belongsTo(Kategoria::class, 'kategoria_besorolas_fk', 'kat_besorolas');
+        return $this->belongsTo(Kategoria::class, 'kategoria', 'kat_besorolas');
     }
 
     public function carstatus(): BelongsTo
     {
-        return $this->belongsTo(CarStatus::class, 'status', 'id');
+        return $this->belongsTo(CarStatus::class);
     }
 
     public function lezartberlesek(): HasMany
     {
-        return $this->hasMany(LezartBerles::class, 'auto_azonosito', 'autok_id');
+        return $this->hasMany(LezartBerles::class, 'auto_azonosito', 'id');
     }
     public function szamlak(): HasMany
     {
-        return $this->hasMany(Szamla::class, 'auto_azon', 'autok_id');
+        return $this->hasMany(Szamla::class, 'auto_azon', 'id');
     }
     public function tickets(): HasMany
     {
-        return $this->hasMany(Ticket::class,'car_id','autok_id');
+        return $this->hasMany(Ticket::class,'car_id','id');
     }
 }

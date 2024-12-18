@@ -9,7 +9,7 @@ class FutoBerles extends Model
 {
     use HasFactory;
     protected $table = 'futo_berlesek';
-    protected $primaryKey = 'futo_id';
+    protected $primaryKey = 'id';
     public $timestamps = true; 
     public $incrementing = true;
 
@@ -19,7 +19,7 @@ class FutoBerles extends Model
     ];
     public function auto()
     {
-        return $this->belongsTo(Auto::class, 'auto_azonosito', 'autok_id');
+        return $this->belongsTo(Car::class, 'auto_azon');
     }
 
     public function kategoriak()

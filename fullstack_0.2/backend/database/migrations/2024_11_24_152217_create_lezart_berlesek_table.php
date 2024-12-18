@@ -8,10 +8,13 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('lezart_berlesek', function (Blueprint $table) {
-            $table->id('lezart_berles_id');
-            $table->unsignedBigInteger('auto_azonosito');
-            $table->unsignedBigInteger('auto_kategoria');
-            $table->unsignedBigInteger('szemely_id_fk');
+            $table->id();
+            $table->unsignedBigInteger('auto_azon');
+            $table->unsignedBigInteger('auto_kat');
+            $table->unsignedBigInteger('szemely_azon');
+            $table->foreign('auto_azon')->references('id')->on('cars')->onDelete('cascade');
+            $table->foreign('auto_kat')->references('kat_id')->on('kategoriak')->onDelete('cascade');
+            $table->foreign('szemely_azon')->references('szemely_id')->on('szemelyek')->onDelete('cascade');
             
             $table->float('nyitas_toltes_szazalek',2);
             $table->float('nyitas_toltes_kw',1);
@@ -31,9 +34,6 @@ return new class extends Migration {
             $table->timestamps();
             
             // Kapcsolatok
-            $table->foreign('auto_azonosito')->references('autok_id')->on('autok')->onDelete('cascade');
-            $table->foreign('auto_kategoria')->references('kat_id')->on('kategoriak')->onDelete('cascade');
-            $table->foreign('szemely_id_fk')->references('szemely_id')->on('szemelyek')->onDelete('cascade');
         });
     }
     public function down(): void

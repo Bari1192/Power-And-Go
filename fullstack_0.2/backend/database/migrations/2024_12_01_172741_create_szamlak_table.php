@@ -15,21 +15,12 @@ return new class extends Migration
             $table->id('szamla_id');
             $table->enum('szamla_tipus', ['berles', 'baleset', 'karokozas', 'toltes_buntetes']);
             $table->unsignedBigInteger('felh_id');
-
-            $table->foreign('felh_id')
-                ->references('felh_id')
-                ->on('felhasznalok')
-                ->onDelete('cascade');
             $table->unsignedBigInteger('szemely_id');
-            $table->foreign('szemely_id')
-                ->references('szemely_id')
-                ->on('szemelyek')
-                ->onDelete('cascade');
             $table->unsignedBigInteger('auto_azon');
-            $table->foreign('auto_azon')
-                ->references('autok_id')
-                ->on('autok')
-                ->onDelete('cascade');
+
+            $table->foreign('felh_id')->references('felh_id')->on('felhasznalok')->onDelete('cascade');
+            $table->foreign('szemely_id')->references('szemely_id')->on('szemelyek')->onDelete('cascade');
+            $table->foreign('auto_azon')->references('id')->on('cars')->onDelete('cascade');
 
             $table->integer('osszeg');
             $table->integer('megtett_tavolsag');

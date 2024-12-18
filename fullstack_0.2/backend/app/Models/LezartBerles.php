@@ -37,16 +37,16 @@ class LezartBerles extends Model
 
     public function auto()
     {
-        return $this->belongsTo(Auto::class, 'auto_azonosito', 'autok_id');
+        return $this->belongsTo(Car::class, 'auto_azon','id');
     }
 
     public function kategoriak()
     {
-        return $this->belongsTo(Kategoria::class, 'auto_kategoria', 'kat_id');
+        return $this->belongsTo(Kategoria::class, 'auto_kat', 'kat_id');
     }
 
     public function felhasznalo()
     {
-        return $this->belongsTo(Felhasznalo::class, 'szemely_id_fk', 'szemely_id');
+        return $this->belongsTo(Felhasznalo::class, 'szemely_azon', 'szemely_id');
     }
 }

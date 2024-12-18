@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Resources\FleetResource;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCarRequest extends FormRequest

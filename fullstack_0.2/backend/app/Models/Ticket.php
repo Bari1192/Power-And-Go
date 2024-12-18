@@ -22,7 +22,7 @@ class Ticket extends Model
     ];
     public function auto(): BelongsTo
     {
-        return $this->belongsTo(Auto::class, 'car_id', 'autok_id');
+        return $this->belongsTo(Car::class, 'car_id');
     }
     public function status(): BelongsTo
     {

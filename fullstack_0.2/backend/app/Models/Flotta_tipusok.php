@@ -25,6 +25,6 @@ class Flotta_tipusok extends Model
     ];
     public function autok(): HasMany
     {
-        return $this->hasMany(Auto::class, 'flotta_id_fk', 'flotta_id');
+        return $this->hasMany(Car::class, 'flotta_id_fk', 'flotta_id');
     }
 }

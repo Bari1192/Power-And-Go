@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('car_id')->references('autok_id')->on('autok')->onDelete('cascade');
+            $table->foreignId('car_id')->references('id')->on('cars')->onDelete('cascade');
             $table->foreignId('status_id')->references('id')->on('carstatus')->onDelete('cascade');
             $table->string('description',255);
             $table->timestamps();
