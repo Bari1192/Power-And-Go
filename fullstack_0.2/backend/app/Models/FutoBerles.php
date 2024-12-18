@@ -24,7 +24,7 @@ class FutoBerles extends Model
 
     public function kategoriak()
     {
-        return $this->belongsTo(Kategoria::class, 'auto_kategoria', 'kat_id');
+        return $this->belongsTo(Kategoria::class, 'kategoria', 'kat_id');
     }
 
     public function felhasznalo()

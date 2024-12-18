@@ -7,7 +7,7 @@ use App\Models\Felszereltseg;
 use App\Models\Flotta_tipusok;
 use Illuminate\Support\Facades\DB;
 
-class AutoFactory extends Factory
+class CarFactory extends Factory
 {
     public function definition(): array
     {
@@ -20,15 +20,15 @@ class AutoFactory extends Factory
         $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
         $becsultHatotav = round(($flottaTipus->hatotav / $flottaTipus->teljesitmeny) * $toltes_kw, 1);
         return [
-            'flotta_id_fk' => $flottaTipus->flotta_id,
-            'kategoria_besorolas_fk' => $this->katBesorolasAutomatan($flotta),
+            'flotta_azon' => $flottaTipus->flotta_id,
+            'kategoria' => $this->katBesorolasAutomatan($flotta),
             'rendszam' => $this->rendszamGeneralasUjRegi(),
             'gyartasi_ev' => $gyartasiEv,
-            'km_ora_allas' => $this->kmOraAllasGeneralas($gyartasiEv),
-            'felsz_id_fk' => $felszereltseg ? $felszereltseg->felsz_id : 1,
-            'toltes_szazalek' => $toltes_szazalek,
+            'kilometerora' => $this->kmOraAllasGeneralas($gyartasiEv),
+            'felszereltseg' => $felszereltseg ? $felszereltseg->felsz_id : 1,
+            'toltes_szaz' => $toltes_szazalek,
             'toltes_kw' => $toltes_kw,
-            'becsult_hatotav' => $becsultHatotav,
+            'becs_tav' => $becsultHatotav,
             'status' => 1, ## Alapnak 1-est, hogy teszteléskor látszódjon a változtatás!
         ];
     }

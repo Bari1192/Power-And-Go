@@ -4,13 +4,14 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Auto;
+use App\Models\Car;
 use Illuminate\Support\Facades\DB;
 
-class AutoSeeder extends Seeder
+class CarSeeder extends Seeder
 {
     public function run(): void
     {
-        $autok = Auto::factory(500)->make()->toArray();
-        DB::table('autok')->insert($autok);
+        $cars = Car::factory(100)->make()->toArray();
+        DB::table('cars')->insert($cars);
     }
 }

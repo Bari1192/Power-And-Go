@@ -14,6 +14,7 @@ class Car extends Model
     protected $table = 'cars';
     protected $primaryKey = 'id';
     public $incrementing = true;
+    public $timestamps=false;
 
     protected $fillable = [
         'rendszam',

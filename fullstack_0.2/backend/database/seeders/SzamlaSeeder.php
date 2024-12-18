@@ -34,12 +34,12 @@ class SzamlaSeeder extends Seeder
         $mindenLezartBerles = LezartBerles::all();
 
         foreach ($mindenLezartBerles as $egyBerles) {
-            $felhasznalo = Felhasznalo::where('szemely_id', $egyBerles->szemely_id_fk)->first();
+            $felhasznalo = Felhasznalo::where('szemely_id', $egyBerles->szemely_azon)->first();
             Szamla::create([
                 'szamla_tipus' => 'berles',
                 'felh_id' => $felhasznalo->felh_id,
-                'szemely_id' => $egyBerles->szemely_id_fk,
-                'auto_azon' => $egyBerles->auto_azonosito,
+                'szemely_id' => $egyBerles->szemely_azon,
+                'auto_azon' => $egyBerles->auto_azon,
                 'berles_kezd_datum' => $egyBerles->berles_kezd_datum,
                 'berles_kezd_ido' => $egyBerles->berles_kezd_ido,
                 'berles_veg_datum' => $egyBerles->berles_veg_datum,
@@ -53,15 +53,15 @@ class SzamlaSeeder extends Seeder
             ]);
 
             # Büntetési számla alkalmazása
-            $autoKat = $egyBerles->auto_kategoria;
-            $zarasToltesSzazalek = $egyBerles->zaras_toltes_szazalek;
+            $autoKat = $egyBerles->auto_kat;
+            $zarasToltesSzazalek = $egyBerles->zaras_szaz;
 
             if (isset($kategoriak[$autoKat]) && $zarasToltesSzazalek < $kategoriak[$autoKat]['min_toltes']) {
                 $buntetesAdatok[] = [
                     'szamla_tipus' => 'toltes_buntetes',
                     'felh_id' => $felhasznalo->felh_id,
-                    'szemely_id' => $egyBerles->szemely_id_fk,
-                    'auto_azon' => $egyBerles->auto_azonosito,
+                    'szemely_id' => $egyBerles->szemely_azon,
+                    'auto_azon' => $egyBerles->auto_azon,
                     'berles_kezd_datum' => $egyBerles->berles_kezd_datum,
                     'berles_kezd_ido' => $egyBerles->berles_kezd_ido,
                     'berles_veg_datum' => $egyBerles->berles_veg_datum,
@@ -76,7 +76,8 @@ class SzamlaSeeder extends Seeder
             }
         }
 
-        // Tömeges adatbeszúrás
+        ## Tömeges adatbeszúrás || Amennyiben van számla, amiből generálhat,
+        ## Akkor készíteni fog addig.
         if (!empty($szamlaAdatok)) {
             DB::table('szamlak')->insert($szamlaAdatok);
         }

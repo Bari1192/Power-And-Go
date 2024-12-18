@@ -16,10 +16,10 @@ return new class extends Migration {
             $table->foreign('auto_kat')->references('kat_id')->on('kategoriak')->onDelete('cascade');
             $table->foreign('szemely_azon')->references('szemely_id')->on('szemelyek')->onDelete('cascade');
             
-            $table->float('nyitas_toltes_szazalek',2);
-            $table->float('nyitas_toltes_kw',1);
-            $table->float('zaras_toltes_szazalek',2);
-            $table->float('zaras_toltes_kw',1);
+            $table->float('nyitas_szaz',2);
+            $table->float('nyitas_kw',1);
+            $table->float('zaras_szaz',2);
+            $table->float('zaras_kw',1);
             
             $table->date('berles_kezd_datum');
             $table->time('berles_kezd_ido');

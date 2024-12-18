@@ -22,7 +22,6 @@ return new class extends Migration {
 
             $table->integer('kilometerora');
             $table->year('gyartasi_ev');
-            $table->timestamps();
         });
     }
     public function down(): void

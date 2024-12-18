@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Auto;
+use App\Models\Car;
 use App\Models\Felhasznalo;
 use App\Models\FutoBerles;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -16,8 +16,8 @@ class FutoBerlesFactory extends Factory
     public function definition(): array
     {
         // Rendszám lekérése
-        $auto = Auto::whereNotIn('rendszam', $this->usedRendszamok)->inRandomOrder()->first();
-        $this->usedRendszamok[] = $auto->rendszam;
+        $car = Car::whereNotIn('rendszam', $this->usedRendszamok)->inRandomOrder()->first();
+        $this->usedRendszamok[] = $car->rendszam;
 
         // Felhasználó lekérése
         $felhasznalo = Felhasznalo::whereNotIn('szemely_id', $this->usedFelhasznalok)->inRandomOrder()->first();
@@ -42,9 +42,9 @@ class FutoBerlesFactory extends Factory
         $berlesKezdete = now()->modify($idoKezdet);
 
         return [
-            'auto_azonosito' => $auto->autok_id,
-            'kat_besorolas' => $auto->kategoria_besorolas_fk,
-            'szemely_id' => $felhasznalo->szemely_id,
+            'auto_azon' => $car->id,
+            'kategoria' => $car->kategoria,
+            'szemely_azon' => $felhasznalo->szemely_id,
             'berles_kezd_datum' => $berlesKezdete->format('Y-m-d'),
             'berles_kezd_ido' => $berlesKezdete->format('H:i:s'),
         ];

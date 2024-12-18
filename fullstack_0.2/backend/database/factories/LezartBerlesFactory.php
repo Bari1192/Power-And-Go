@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Arazas;
-use App\Models\Auto;
+use App\Models\Car;
 use App\Models\Felhasznalo;
 use App\Models\LezartBerles;
 use App\Models\NapiBerles;
@@ -18,11 +18,11 @@ class LezartBerlesFactory extends Factory
     public function definition(): array
     {
         do {
-            $auto = Auto::with('flotta')->where('status', 1)->inRandomOrder()->first();
-            $autoKategoria = $auto->kategoria_besorolas_fk;
+            $auto = Car::with('flotta')->where('status', 1)->inRandomOrder()->first();
+            $autoKategoria = $auto->kategoria;
             $flottaTipus = $auto->flotta;
 
-            $nyitasToltesSzazalek = $auto->toltes_szazalek;
+            $nyitasToltesSzazalek = $auto->toltes_szaz;
             $nyitasToltesKw = round($auto->flotta->teljesitmeny * ($nyitasToltesSzazalek / 100), 1);
 
             $berlesIdotartam = $this->berlesIdotartama($autoKategoria); ## másodperc - rand_int-ből!!!
@@ -49,7 +49,7 @@ class LezartBerlesFactory extends Factory
 
 
         $felhasznalo = Felhasznalo::inRandomOrder()->first();
-        $arazas = Arazas::where('auto_besorolas', $auto->kategoria_besorolas_fk)
+        $arazas = Arazas::where('auto_besorolas', $auto->kategoria)
             ->where('elofiz_azon', $felhasznalo->elofiz_id)
             ->first();
         $berlesKezdete = $this->berlesKezdete();
@@ -71,14 +71,14 @@ class LezartBerlesFactory extends Factory
         $this->autoKmOraFrissites($auto, $megtettTavolsag);
 
         return [
-            'auto_azonosito' => $auto->autok_id,
-            'auto_kategoria' => $auto->kategoria_besorolas_fk,
-            'szemely_id_fk' => $felhasznalo->szemely_id,
+            'auto_azon' => $auto->id,
+            'auto_kat' => $auto->kategoria,
+            'szemely_azon' => $felhasznalo->szemely_id,
 
-            'nyitas_toltes_szazalek' => $nyitasToltesSzazalek,
-            'nyitas_toltes_kw' => $nyitasToltesKw,
-            'zaras_toltes_szazalek' => $zarasToltesSzazalek,
-            'zaras_toltes_kw' => $zaraskoriToltesKw,
+            'nyitas_szaz' => $nyitasToltesSzazalek,
+            'nyitas_kw' => $nyitasToltesKw,
+            'zaras_szaz' => $zarasToltesSzazalek,
+            'zaras_kw' => $zaraskoriToltesKw,
 
             'berles_kezd_datum' => $berlesKezdete->format('Y-m-d'),
             'berles_kezd_ido' => $berlesKezdete->format('H:i:s'),
@@ -92,19 +92,19 @@ class LezartBerlesFactory extends Factory
             'berles_osszeg' => $berlesOsszeg,
         ];
     }
-    private function autoKmOraFrissites(Auto $auto, $megtettTavolsag): void
+    private function autoKmOraFrissites(Car $auto, $megtettTavolsag): void
     {
-        $auto->km_ora_allas += $megtettTavolsag;
+        $auto->kilometerora += $megtettTavolsag;
         $auto->save();
         # A save() nélkül a változások CSAK a memóriaállapotban maradnak,
         # NEM kerülnek elmentésre az adatbázisba... NE FELEJTSD EL!
     }
 
-    private function autoToltesFrissites(Auto $auto, float $zarasToltesSzazalek, float $zaraskoriToltesKw): void
+    private function autoToltesFrissites(Car $auto, float $zarasToltesSzazalek, float $zaraskoriToltesKw): void
     {
-        $auto->toltes_szazalek = $zarasToltesSzazalek;
+        $auto->toltes_szaz = $zarasToltesSzazalek;
         $auto->toltes_kw = max($zaraskoriToltesKw, 0);
-        $auto->becsult_hatotav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szazalek, 1);
+        $auto->becs_tav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szaz, 1);
         $auto->save();
     }
 
@@ -128,12 +128,12 @@ class LezartBerlesFactory extends Factory
         }
     }
 
-    private function megtettTavolsag(int $idoKulonbseg, Auto $auto): int
+    private function megtettTavolsag(int $idoKulonbseg, Car $auto): int
     {
         ### Vegye figyelembe, hogy mekkora az autó töltöttségi szintje, aminél hosszabb távolságot (km)-ben ne generáljon le.
         ### Ha legenerálna, akkor  túlmennénk az akkumulátor kapacitásán.
 
-        $aktualisHatotav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szazalek);
+        $aktualisHatotav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szaz);
         if ($idoKulonbseg <= 1800) {
             return min(random_int(5, 10), $aktualisHatotav);
             ## A random gen. távot MINDIG összehasonlítjuk az aktuális hatótávval,
