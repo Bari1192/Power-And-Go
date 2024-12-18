@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Car;
 use App\Models\Felhasznalo;
 use App\Models\FutoBerles;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FutoBerlesFactory extends Factory
@@ -20,7 +21,7 @@ class FutoBerlesFactory extends Factory
         $this->usedRendszamok[] = $car->rendszam;
 
         // Felhasználó lekérése
-        $felhasznalo = Felhasznalo::whereNotIn('szemely_id', $this->usedFelhasznalok)->inRandomOrder()->first();
+        $felhasznalo = User::whereNotIn('szemely_id', $this->usedFelhasznalok)->inRandomOrder()->first();
         $this->usedFelhasznalok[] = $felhasznalo->szemely_id;
 
         // Bérlés kezdési idő generálása

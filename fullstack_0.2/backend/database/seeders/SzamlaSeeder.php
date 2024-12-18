@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Felhasznalo;
 use App\Models\LezartBerles;
 use App\Models\Szamla;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -34,10 +35,10 @@ class SzamlaSeeder extends Seeder
         $mindenLezartBerles = LezartBerles::all();
 
         foreach ($mindenLezartBerles as $egyBerles) {
-            $felhasznalo = Felhasznalo::where('szemely_id', $egyBerles->szemely_azon)->first();
+            $felhasznalo = User::where('szemely_id', $egyBerles->szemely_azon)->first();
             Szamla::create([
                 'szamla_tipus' => 'berles',
-                'felh_id' => $felhasznalo->felh_id,
+                'felh_id' => $felhasznalo->id,
                 'szemely_id' => $egyBerles->szemely_azon,
                 'auto_azon' => $egyBerles->auto_azon,
                 'berles_kezd_datum' => $egyBerles->berles_kezd_datum,
@@ -61,7 +62,7 @@ class SzamlaSeeder extends Seeder
             if (isset($kategoriak[$autoKat]) && $zarasToltesSzazalek < $kategoriak[$autoKat]['min_toltes']) {
                 $buntetesAdatok[] = [
                     'szamla_tipus' => 'toltes_buntetes',
-                    'felh_id' => $felhasznalo->felh_id,
+                    'felh_id' => $felhasznalo->id,
                     'szemely_id' => $egyBerles->szemely_azon,
                     'auto_azon' => $egyBerles->auto_azon,
                     'berles_kezd_datum' => $egyBerles->berles_kezd_datum,

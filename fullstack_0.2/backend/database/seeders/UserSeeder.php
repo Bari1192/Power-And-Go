@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\Felhasznalo;
 use App\Models\Person;
 use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class FelhasznaloSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     public function run(): void
     {
@@ -21,7 +21,7 @@ class FelhasznaloSeeder extends Seeder
         foreach ($szemelyek as $szemely) {
             $randomElofizetes = Subscription::inRandomOrder()->first();
 
-            Felhasznalo::factory()->create([
+            User::factory()->create([
                 'szemely_id' => $szemely->id,
                 'elofiz_id' => $randomElofizetes->id, // Az előfizetés ID-t kapcsoljuk
             ]);

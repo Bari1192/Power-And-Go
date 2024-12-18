@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Felhasznalo extends Model
+class User extends Model
 {
     use HasFactory;
 
-    protected $table = 'felhasznalok';
-    protected $primaryKey = 'felh_id';
+    protected $table = 'users';
+    protected $primaryKey = 'id';
     public $timestamps = true;
     public $incrementing = true;
 
     protected $fillable = [
-        'felh_id',
+        'id',
         'szemely_id',
         'felh_egyenleg',
         'felh_nev',

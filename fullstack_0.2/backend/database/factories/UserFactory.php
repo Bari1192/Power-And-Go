@@ -5,11 +5,12 @@ namespace Database\Factories;
 use App\Models\Felhasznalo;
 use App\Models\Person;
 use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FelhasznaloFactory extends Factory
+class UserFactory extends Factory
 {
-    protected $model = Felhasznalo::class;
+    protected $model = User::class;
     private array $felhNevekEllTar = [];
 
     public function definition(): array
@@ -51,7 +52,7 @@ class FelhasznaloFactory extends Factory
             # Speciális magyar karakterekre kell lecserélni a vezetéknevet!
             $keszFelhNev = strtr($keszFelhNev, 'áéíóöőúüűÁÉÍÓÖŐÚÜŰ', 'aeiooouuuAEIOOOUUU');
             # Vissza Ell. a DB-ben (UNIQE):
-            $foglaltFelhNev = Felhasznalo::where('felh_nev', '=', $keszFelhNev)->exists();
+            $foglaltFelhNev = User::where('felh_nev', '=', $keszFelhNev)->exists();
         } while ($foglaltFelhNev || in_array($keszFelhNev, $this->felhNevekEllTar));
 
         $this->felhNevekEllTar[] = $keszFelhNev;

@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('felhasznalok', function (Blueprint $table) {
-            $table->id('felh_id');
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('szemely_id');
             $table->foreign('szemely_id')->references('id')->on('persons')->onDelete('cascade');
             $table->integer('felh_egyenleg')->default(0);
@@ -23,6 +23,6 @@ return new class extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('felhasznalok');
+        Schema::dropIfExists('users');
     }
 };

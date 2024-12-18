@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Models\Felhasznalo;
 use App\Models\LezartBerles;
 use App\Models\NapiBerles;
+use App\Models\User;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +49,7 @@ class LezartBerlesFactory extends Factory
         } while (true);
 
 
-        $felhasznalo = Felhasznalo::inRandomOrder()->first();
+        $felhasznalo = User::inRandomOrder()->first();
         $arazas = Arazas::where('auto_besorolas', $auto->kategoria)
             ->where('elofiz_azon', $felhasznalo->elofiz_id)
             ->first();

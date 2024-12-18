@@ -47,6 +47,6 @@ class LezartBerles extends Model
 
     public function felhasznalo()
     {
-        return $this->belongsTo(Felhasznalo::class, 'szemely_azon', 'szemely_id');
+        return $this->belongsTo(User::class, 'szemely_azon', 'id');
     }
 }
