@@ -16,7 +16,7 @@ class RenthistoryController extends Controller
 {
     public function index(): JsonResource
     {
-        $histories = Renthistory::with(["auto", "felhasznalo.szemely", "kategoriak"])->get();
+        $histories = Renthistory::with(["auto", "felhasznalo", "kategoriak"])->get();
         return RenthistoryResource::collection($histories);
     }
 
