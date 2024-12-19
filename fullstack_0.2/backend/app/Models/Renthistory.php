@@ -16,13 +16,13 @@ class Renthistory extends Model
 
     protected $fillable = [
         "id",
-        "auto_id",
-        "auto_kategoria",
-        "szemely_id_fk",
-        "nyitas_toltes_szazalek",
-        "nyitas_toltes_kw",
-        "zaras_toltes_szazalek",
-        "zaras_toltes_kw",
+        "auto_azon",
+        "auto_kat",
+        "szemely_azon",
+        "nyitas_szaz",
+        "nyitas_kw",
+        "zaras_szaz",
+        "zaras_kw",
         "berles_kezd_datum",
         "berles_kezd_ido",
         "berles_veg_datum",
@@ -37,7 +37,7 @@ class Renthistory extends Model
 
     public function auto()
     {
-        return $this->belongsTo(Car::class, 'auto_azon','id');
+        return $this->belongsTo(Car::class, 'auto_azon', 'id');
     }
 
     public function kategoriak()

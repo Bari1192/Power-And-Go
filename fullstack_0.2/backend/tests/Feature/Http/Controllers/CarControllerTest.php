@@ -27,18 +27,7 @@ class CarControllerTest extends TestCase
             "rendszam" => "XYZ-000",
             "km_ora_allas" => 4715,
             "gyartasi_ev" => "2019",
-            "flotta" => [
-                "flotta_id" => 1,
-                "gyarto" => "VW",
-                "tipus" => "e-up!",
-                "teljesitmeny" => 18,
-                "vegsebesseg" => 130,
-                "gumimeret" => "165|65-R15",
-                "hatotav" => 135
-            ],
-            "felsz_id_fk" => 3,
-            "kategoria_besorolas_fk" => 1,
-            "flotta_id_fk" => 1
+            
         ];
 
         $response = $this->postJson('/api/cars', $carData);

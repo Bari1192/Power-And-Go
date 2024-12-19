@@ -2,18 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAutoRequest;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
-use App\Http\Resources\AutoResource;
 use App\Http\Resources\BillResource;
 use App\Http\Resources\CarResource;
-use App\Http\Resources\SzamlaResource;
 use App\Models\Bill;
 use App\Models\Car;
-use App\Models\Szamla;
-use Illuminate\Auth\Events\Validated;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 

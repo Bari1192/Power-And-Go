@@ -14,8 +14,8 @@ class BillController extends Controller
 {
     public function index(): JsonResource
     {
-        $szamlak = Bill::orderBy('berles_veg_datum', 'desc')->paginate(20);
-        return new BillResource($szamlak);
+        $bills = Bill::with("autok")->get();
+        return BillResource::collection($bills);
     }
     public function store(StoreBillRequest $request)
     {

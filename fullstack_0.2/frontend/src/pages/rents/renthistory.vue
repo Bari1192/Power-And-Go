@@ -28,7 +28,7 @@
         </div>
 
         <!-- VISSZAIGAZOLÓ E-MAIL TELJES SZERKEZETE -->
-        <div class="container mx-auto my-10" v-for="rent in paginatedRents" :key="rent.lezart_id">
+        <div class="container mx-auto my-10" v-for="rent in paginatedRents" :key="rent.id">
             <div class="col w-3/4 m-auto">
                 <img src="@assets/img/BaseEmail/pelda_logo.png" class="opacity-80">
 

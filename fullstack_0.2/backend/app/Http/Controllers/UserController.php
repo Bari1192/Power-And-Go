@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function index(): JsonResource
     {
-        $users = User::with(['szemely','elofizetes'])->get();
+        $users = User::all();
         return UserResource::collection($users);
     }
 

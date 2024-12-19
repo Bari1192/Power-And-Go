@@ -16,14 +16,14 @@ class RenthistoryController extends Controller
 {
     public function index(): JsonResource
     {
-        $histories = Renthistory::all();
+        $histories = Renthistory::with(["auto", "felhasznalo.szemely", "kategoriak"])->get();
         return RenthistoryResource::collection($histories);
     }
 
     public function store(StoreRenthistoryRequest $request)
     {
-        $data=$request->validated();
-        $renthistory=Renthistory::create($data);
+        $data = $request->validated();
+        $renthistory = Renthistory::create($data);
         return new RenthistoryResource($renthistory);
     }
 
@@ -36,18 +36,18 @@ class RenthistoryController extends Controller
 
     public function update(UpdateRenthistoryRequest $request, Renthistory $renthistory)
     {
-        $data=$request->validated();
+        $data = $request->validated();
         $renthistory->load("auto.tickets", "auto.carstatus", "kategoriak", "felhasznalo.szemely");
         $renthistory->update($data);
         return new RenthistoryResource($renthistory);
     }
 
-    public function destroy(Renthistory $renthistory):Response
+    public function destroy(Renthistory $renthistory): Response
     {
         return $renthistory->delete() ? response()->noContent() : abort(500);
     }
 
-    public function filterCarHistory(string $type,Car $car): JsonResource
+    public function filterCarHistory(string $type, Car $car): JsonResource
     {
         $validFilterezes = ['berles', 'buntetesek', 'baleset', 'karokozas', 'toltes_buntetes'];
 
