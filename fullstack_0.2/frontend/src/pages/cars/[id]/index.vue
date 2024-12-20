@@ -1,13 +1,13 @@
 <template>
   <BaseLayout>
-    <div class="container mt-20 mb-20 w-2/3 mx-auto" v-if="car && car.flotta">
+    <div class="container mt-20 mb-20 w-2/3 mx-auto" v-if="car">
 
       <div
         class="m-auto py-6 d-flex justify-center my-10 w-3/4 border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
         <div class="text-center grid grid-cols-3">
-          <h1 class="text-5xl text-sky-100 border-r-4 border-sky-500 italic"> {{ car.flotta.gyarto }}</h1>
+          <h1 class="text-5xl text-sky-100 border-r-4 border-sky-500 italic"> {{ car.gyarto }}</h1>
           <h1 class="text-5xl text-lime-300 border-x-4 border-sky-500"> {{ car.rendszam }}</h1>
-          <h1 class="text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.flotta.tipus }}</h1>
+          <h1 class="text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.tipus }}</h1>
         </div>
       </div>
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4">Új Bejelentés</h1>
@@ -46,15 +46,15 @@
       <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
       <transition name="fade-slide">
         <div class="grid grid-cols-3 gap-6" v-if="carOpen">
-          <BaseCard :title="'Állapota'" :text="car.status.status_name" />
-          <BaseCard :title="'Becsült megtehető távolság'" :text="car.hatotav + ' km'" />
-          <BaseCard :title="'Akkumulátor töltöttsége'" :text="car.tolt_kw + ' kW'" />
-          <BaseCard :title="'Töltöttségi állapota'" :text="car.toltes_szazalek + ' %'" />
-          <BaseCard :title="'Akkumulátor kapacitása'" :text="car.flotta.teljesitmeny + ' kW'" />
-          <BaseCard :title="'Végsebesség'" :text="car.flotta.vegsebesseg + ' km/h'" />
-          <BaseCard :title="'Maximális hatótáv egy töltéssel'" :text="car.flotta.hatotav + ' km'" />
-          <BaseCard :title="'Aktuális futásteljesítménye'" :text="car.km_allas + ' km'" />
-          <BaseCard :title="'Gyártási éve'" :text="car.gyart_ev" />
+          <BaseCard :title="'Állapota'" :text="car.status" />
+          <BaseCard :title="'Becsült megtehető távolság'" :text="car.becs_tav + ' km'" />
+          <BaseCard :title="'Akkumulátor töltöttsége'" :text="car.toltes_kw + ' kW'" />
+          <BaseCard :title="'Töltöttségi állapota'" :text="car.toltes_szaz + ' %'" />
+          <BaseCard :title="'Akkumulátor kapacitása'" :text="car.teljesitmeny + ' kW'" />
+          <BaseCard :title="'Végsebesség'" :text="car.vegsebesseg + ' km/h'" />
+          <BaseCard :title="'Maximális hatótáv egy töltéssel'" :text="car.hatotav + ' km'" />
+          <BaseCard :title="'Aktuális futásteljesítménye'" :text="car.kilometerora + ' km'" />
+          <BaseCard :title="'Gyártási éve'" :text=" car.gyartasi_ev" />
         </div>
       </transition>
       <div ref="adatokAlja"></div>
@@ -94,6 +94,7 @@
               <thead>
                 <tr class="text-lime-600 font-semibold bg-amber-50 border-b-8 border-lime-600">
                   <th class="py-2 text-center">Bérlés azon</th>
+                  <th class="py-2 text-center">Felhasználó</th>  <!--  IDE MAJD ROUTER-LINK A FELHASZNÁLÓRA!-->
                   <th class="py-2 text-center">Bérlés összege</th>
                   <th class="py-2 text-center">Megtett távolság</th>
                   <th class="py-2 text-center">Parkolási idő</th>
@@ -102,9 +103,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="bill in carRentBills" :key="bill.szamla_azon"
+                <tr v-for="bill in car" :key="bill.id"
                   class="odd:bg-amber-50 even:bg-yellow-50 even:border-b-4 even:border-t-4 even:border-lime-400 text-center text-lg font-semibold text-lime-700">
-                  <td class="py-2">{{ bill.szamla_azon }}</td>
+                  <td class="py-2">{{ bill.id }}</td>
+                  <td class="py-2">{{ bill.felh_nev }}</td>
                   <td class="py-2">{{ bill.osszeg }}</td>
                   <td class="py-2">{{ bill.megtett_tavolsag }} km</td>
                   <td class="py-2">{{ bill.parkolasi_perc }} p</td>

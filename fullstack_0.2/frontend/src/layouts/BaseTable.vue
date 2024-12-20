@@ -15,15 +15,15 @@
       <tbody>
         <tr v-for="car in cars" :key="car.autok_id" class="odd:bg-sky-800 even:bg-sky-950 text-center text-lg">
           <td class="py-2 text-lime-500 font-semibold ">
-            <RouterLink class="hover:text-lime-300" :to="{ name: '/cars/[id]/', params: { id: car.auto_id } }">
+            <RouterLink class="hover:text-lime-300" :to="{ name: '/cars/[id]/', params: { id: car.id } }">
               {{ car.rendszam }}
             </RouterLink>
           </td>
           <td class="py-2 text-sky-300 font-semibold">{{ car.auto_id }}</td>
-          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.km_allas }}</td>
-          <td class="py-2 text-sky-300 font-semibold">{{ car.gyart_ev }}</td>
-          <td class="py-2 text-sky-300 font-semibold">{{ car.felsz_id }}</td>
-          <td class="py-2 text-sky-300 font-semibold">{{ car.flotta.flotta_id }}</td>
+          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.kilometerora }}</td>
+          <td class="py-2 text-sky-300 font-semibold">{{ car.gyartasi_ev }}</td>
+          <td class="py-2 text-sky-300 font-semibold">{{ car.felszereltseg }}</td>
+          <td class="py-2 text-sky-300 font-semibold">{{ car.flotta_azon }}</td>
           <td class="py-2 text-sky-300 font-semibold">{{ car.kategoria }}</td>
         </tr>
       </tbody>

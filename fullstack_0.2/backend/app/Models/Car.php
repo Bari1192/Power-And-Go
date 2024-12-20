@@ -43,10 +43,10 @@ class Car extends Model
         return $this->belongsTo(CarStatus::class, 'status');
     }
 
-    public function lezartberlesek(): HasMany
-    {
-        return $this->hasMany(Renthistory::class, 'auto_azonosito', 'id');
-    }
+    // public function lezartberlesek(): HasMany
+    // {
+    //     return $this->hasMany(Renthistory::class, 'auto_azonosito', 'id');
+    // }
     public function szamlak(): HasMany
     {
         return $this->hasMany(Bill::class, 'auto_azon', 'id');
