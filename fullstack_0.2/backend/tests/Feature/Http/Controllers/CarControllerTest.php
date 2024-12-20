@@ -8,51 +8,39 @@ use Tests\TestCase;
 
 class CarControllerTest extends TestCase
 {
-    public function can_get_all_cars(): void
+    public function test_can_get_all_cars(): void
     {
-        Car::factory()->count(3)->create();
-
         $response = $this->getJson('/api/cars');
         $response->assertStatus(200);
     }
 
-    public function can_create_car()
+    public function test_can_create_fake_car_data()
     {
         $carData = [
-            "autok_id" => 1,
-            "status" => 1,
-            "toltes_szazalek" => 6.67,
-            "toltes_kw" => 1.2,
-            "becsult_hatotav" => 9,
-            "rendszam" => "XYZ-000",
-            "km_ora_allas" => 4715,
-            "gyartasi_ev" => "2019",
-            "flotta" => [
-                "flotta_id" => 1,
-                "gyarto" => "VW",
-                "tipus" => "e-up!",
-                "teljesitmeny" => 18,
-                "vegsebesseg" => 130,
-                "gumimeret" => "165|65-R15",
-                "hatotav" => 135
-            ],
-            "felsz_id_fk" => 3,
-            "kategoria_besorolas_fk" => 1,
-            "flotta_id_fk" => 1
+            "rendszam" => "XXX-001",
+            "toltes_szaz" => 13.06,
+            "toltes_kw" => 4.7,
+            "becs_tav" => 34.6,
+            "status" => 6,
+            "kategoria" => 3,
+            "felszereltseg" => 3,
+            "flotta_azon" => 3,
+            "kilometerora" => 28252,
+            "gyartasi_ev" => "2023"
         ];
 
         $response = $this->postJson('/api/cars', $carData);
 
         $response->assertStatus(201);
 
-        $this->assertDatabaseHas('autok', ["rendszam" => "XYZ-000"]);
+        $this->assertDatabaseHas('cars', ["rendszam" => "XXX-001"]);
     }
-    
-    
-    
+
+
+
     public function delete_car(): void
     {
-        $response=$this->delete('/api/cars/111');
+        $response = $this->delete('/api/cars/111');
         $response->assertStatus(204);
     }
 

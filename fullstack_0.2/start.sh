@@ -24,6 +24,8 @@ docker compose exec backend php artisan migrate:fresh --seed
 
 docker compose exec backend php artisan migrate --path=database/migrations/dbViews
 
+docker compose exec backend php artisan test
+
 echo "A konténerek elindultak, a migrációk lefutottak."
 
 if [ -z "${APP_KEY}" ]; then
