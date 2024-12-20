@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreign('auto_besorolas')->references('id')->on('categories')->onDelete('cascade');
 
             $table->integer('berles_ind');
-            $table->integer('vez_perc')->nullable();;
-            $table->integer('kedv_vez')->nullable();                    # Kedvezményes vezetés (percdíj, 6:00 - 9:00) - opcionális
+            $table->integer('vez_perc')->nullable();
+            $table->integer('kedv_vez')->nullable()->default(0);                    # Kedvezményes vezetés (percdíj, 6:00 - 9:00) - opcionális
             $table->integer('parkolas_perc')->nullable();                           # Parkolás (percdíj)
             $table->integer('foglalasi_perc')->nullable();                          # Foglalás (percdíj, 20 perc után)
             $table->integer('kedv_parkolas_perc')->nullable();          # Kedvezményes parkolás (percdíj)

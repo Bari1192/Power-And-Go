@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->time('berles_veg_ido');
             $table->integer('megtett_tavolsag')->nullable();
             $table->dateTime('parkolas_kezd')->nullable()->default(null);
-            $table->dateTime('parkolas_veg')->nullable();
+            $table->dateTime('parkolas_veg')->nullable()->default(null);
             $table->integer('parkolasi_perc')->nullable();
             $table->integer('vezetesi_perc');
             $table->integer('berles_osszeg')->nullable();

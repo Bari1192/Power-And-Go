@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('szemely_id');
             $table->foreign('szemely_id')->references('id')->on('persons')->onDelete('cascade');
             $table->integer('felh_egyenleg')->default(0);
-            $table->char('jelszo_2_4', 2);
+            $table->string('jelszo_2_4', 2);
             $table->string('felh_nev', 20)->unique();
 
             $table->unsignedBigInteger('elofiz_id');
