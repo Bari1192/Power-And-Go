@@ -17,16 +17,15 @@ class CarControllerTest extends TestCase
     public function test_can_create_fake_car_data()
     {
         $carData = [
-            "rendszam" => "XXX-001",
-            "toltes_szaz" => 13.06,
-            "toltes_kw" => 4.7,
-            "becs_tav" => 34.6,
-            "status" => 6,
-            "kategoria" => 3,
-            "felszereltseg" => 3,
-            "flotta_azon" => 3,
-            "kilometerora" => 28252,
-            "gyartasi_ev" => "2023"
+            "autok_id" => 1,
+            "status" => 1,
+            "toltes_szazalek" => 6.67,
+            "toltes_kw" => 1.2,
+            "becsult_hatotav" => 9,
+            "rendszam" => "XYZ-000",
+            "km_ora_allas" => 4715,
+            "gyartasi_ev" => "2019",
+            
         ];
 
         $response = $this->postJson('/api/cars', $carData);

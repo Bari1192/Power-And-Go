@@ -10,7 +10,7 @@ class CarResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id"=>$this->id,
+            'id' => $this->id,
             "rendszam" => $this->rendszam,
             "toltes_szaz" => $this->toltes_szaz,
             "toltes_kw" => $this->toltes_kw,
@@ -19,11 +19,8 @@ class CarResource extends JsonResource
             "kategoria" => $this->kategoria,
             "felszereltseg" => $this->felszereltseg,
             "flotta_azon" => $this->flotta_azon,
-            'kilometerora' => number_format($this->kilometerora, 0, '', ' '),
+            "kilometerora" => $this->kilometerora,
             "gyartasi_ev" => $this->gyartasi_ev,
-            // 'carstatus' => CarstatusResource::collection($this->whenLoaded('carstatus')),
-            // 'fleet' => FleetResource::collection($this->whenLoaded('flotta')),
-            // 'tickets' => TicketResource::collection($this->whenLoaded('tickets')),
         ];
     }
 }

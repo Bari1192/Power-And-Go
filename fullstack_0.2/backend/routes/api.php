@@ -18,7 +18,7 @@ Route::apiResource('/tickets', TicketController::class);
 
 Route::apiResource('renthistories', RenthistoryController::class); ## -> 4 + 1 API!
 
-Route::apiResource('bills', BillController::class);
+Route::apiResource('/bills', BillController::class);
 
 Route::apiResource('fleets', FleetController::class);
 

@@ -15,7 +15,7 @@ class SubscriptionController extends Controller
     public function index(): JsonResource
     {
         $subs = Subscription::all();
-        return new SubscriptionResource($subs);
+        return SubscriptionResource::collection($subs);
     }
     public function store(StoreSubscriptionRequest $request)
     {
