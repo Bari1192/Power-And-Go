@@ -11,7 +11,7 @@ class CarSeeder extends Seeder
 {
     public function run(): void
     {
-        $cars = Car::factory(100)->make()->toArray();
+        $cars = Car::factory(500)->make()->toArray();
         DB::table('cars')->insert($cars);
     }
 }

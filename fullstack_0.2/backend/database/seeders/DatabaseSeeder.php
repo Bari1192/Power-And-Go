@@ -18,8 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call(EmployeeSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(DailyrentalSeeder::class);
-        $this->call(RenthistorySeeder::class);
-        $this->call(RentinprocessSeeder::class);
+       //$this->call(RenthistorySeeder::class);
+       //$this->call(RentinprocessSeeder::class);
+        $this->call(CarUserRentsSeeder::class);
         $this->call(BillSeeder::class);
     }
 }

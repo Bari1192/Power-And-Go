@@ -38,7 +38,7 @@ class BillSeeder extends Seeder
                 'szamla_tipus' => 'berles',
                 'felh_id' => $felhasznalo->id,
                 'szemely_id' => $egyBerles->szemely_azon,
-                'auto_azon' => $egyBerles->auto_azon,
+                'car_id' => $egyBerles->car_id,
                 'berles_kezd_datum' => $egyBerles->berles_kezd_datum,
                 'berles_kezd_ido' => $egyBerles->berles_kezd_ido,
                 'berles_veg_datum' => $egyBerles->berles_veg_datum,
@@ -52,7 +52,7 @@ class BillSeeder extends Seeder
             ]);
 
             # Büntetési számla alkalmazása
-            $autoKat = $egyBerles->auto_kat;
+            $autoKat = $egyBerles->kategoria;
             $zarasToltesSzazalek = $egyBerles->zaras_szaz;
 
             ### NE FELEDD!!!  A BÜNTETÉS KIÁLLÍTÁSI TÖLTÉSI % ALAPJÁN (pl: 4-6-10% alatt bünti)
@@ -62,7 +62,7 @@ class BillSeeder extends Seeder
                     'szamla_tipus' => 'toltes_buntetes',
                     'felh_id' => $felhasznalo->id,
                     'szemely_id' => $egyBerles->szemely_azon,
-                    'auto_azon' => $egyBerles->auto_azon,
+                    'car_id' => $egyBerles->car_id,
                     'berles_kezd_datum' => $egyBerles->berles_kezd_datum,
                     'berles_kezd_ido' => $egyBerles->berles_kezd_ido,
                     'berles_veg_datum' => $egyBerles->berles_veg_datum,

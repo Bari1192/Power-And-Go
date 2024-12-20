@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Foundation\Auth\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserController extends Controller
@@ -23,14 +22,15 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function show(User $user):JsonResource
+    public function show(User $user): JsonResource
     {
+        $user = User::with(['person', 'cars'])->findOrFail($user->id); // Betölti a `cars` és `person` relációkat
         return new UserResource($user);
     }
-
+    
     public function update(StoreUserRequest $request, User $user)
     {
-        $data=$request->validated();
+        $data = $request->validated();
         $user->update($data);
         return new UserResource($user);
     }

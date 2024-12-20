@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Car extends Model
@@ -14,7 +15,7 @@ class Car extends Model
     protected $table = 'cars';
     protected $primaryKey = 'id';
     public $incrementing = true;
-    public $timestamps=false;
+    public $timestamps = false;
 
     protected $fillable = [
         'rendszam',
@@ -52,6 +53,28 @@ class Car extends Model
     }
     public function tickets(): HasMany
     {
-        return $this->hasMany(Ticket::class,'car_id','id');
+        return $this->hasMany(Ticket::class, 'car_id', 'id');
     }
-}
+
+    public function berlok(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'car_user_rents', 'car_id', 'user_id')
+            ->withPivot([
+                'nyitas_szaz',
+                'nyitas_kw',
+                'zaras_szaz',
+                'zaras_kw',
+                'berles_kezd_datum',
+                'berles_kezd_ido',
+                'berles_veg_datum',
+                'berles_veg_ido',
+                'megtett_tavolsag',
+                'parkolas_kezd',
+                'parkolas_veg',
+                'parkolasi_perc',
+                'vezetesi_perc',
+                'berles_osszeg',
+                'rentstatus'
+            ]);
+    }
+}    

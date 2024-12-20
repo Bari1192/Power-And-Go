@@ -15,7 +15,7 @@ class CarFactory extends Factory
         $flotta = $this->flottabolAutotIdAlapjan();
         $felszereltseg = Equipment::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
         $flottaTipus = Fleet::find($flotta);
-
+        
         $toltes_szazalek = fake()->randomFloat(2, 15, 100);
         $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
         $becsultHatotav = round(($flottaTipus->hatotav / $flottaTipus->teljesitmeny) * $toltes_kw, 1);
@@ -29,7 +29,7 @@ class CarFactory extends Factory
             'toltes_szaz' => $toltes_szazalek,
             'toltes_kw' => $toltes_kw,
             'becs_tav' => $becsultHatotav,
-            'status' => 1, ## Alapnak 1-est, hogy teszteléskor látszódjon a változtatás!
+            'status' => 1, 
         ];
     }
     private function flottabolAutotIdAlapjan(): int

@@ -9,6 +9,6 @@ class RentinprocessSeeder extends Seeder
 {
     public function run(): void
     {
-        Rentinprocess::factory(100)->create();
+        Rentinprocess::factory(10)->create();
     }
 }

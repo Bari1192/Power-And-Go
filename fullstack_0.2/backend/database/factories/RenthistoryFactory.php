@@ -70,9 +70,9 @@ class RenthistoryFactory extends Factory
         $this->autoKmOraFrissites($auto, $megtettTavolsag);
 
         return [
-            'auto_azon' => $auto->id,
-            'auto_kat' => $auto->kategoria,
-            'szemely_azon' => $felhasznalo->szemely_id,
+            'car_id' => $auto->id,
+            'kategoria' => $auto->kategoria,
+            'user_id' => $felhasznalo->szemely_id,
 
             'nyitas_szaz' => $nyitasToltesSzazalek,
             'nyitas_kw' => $nyitasToltesKw,

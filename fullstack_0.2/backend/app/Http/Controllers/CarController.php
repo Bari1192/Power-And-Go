@@ -27,11 +27,8 @@ class CarController extends Controller
     }
 
     public function show(Car $car): JsonResource
-    { // Ekkor a Laravel automatikusan kikeresi az `id` alapján a rekordot
-        ### Esetben az AutoResource automatikusan tartalmazni fogja a kapcsolódó flotta adatokat is
-        ### (ha a Modelben megírtad!) + AutoResource megfelelően kezeli a relációkat.
-        ### Resourcba ==>  'flotta' => new FlottaResource($this->whenLoaded('flotta')),
-
+    {
+        $car = Car::with(['berlok.person'])->findOrFail($car->id);
         return new CarResource($car);
     }
 

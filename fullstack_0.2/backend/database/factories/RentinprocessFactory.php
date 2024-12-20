@@ -41,12 +41,16 @@ class RentinprocessFactory extends Factory
         }
         $berlesKezdete = now()->modify($idoKezdet);
 
+        $nyitasToltesSzazalek = $car->toltes_szaz;
+        $nyitasToltesKw = round($car->fleet->teljesitmeny * ($nyitasToltesSzazalek / 100), 1);
         return [
-            'auto_azon' => $car->id,
+            'car_id' => $car->id,
             'kategoria' => $car->kategoria,
-            'szemely_azon' => $felhasznalo->szemely_id,
+            'user_id' => $felhasznalo->szemely_id,
             'berles_kezd_datum' => $berlesKezdete->format('Y-m-d'),
             'berles_kezd_ido' => $berlesKezdete->format('H:i:s'),
+            'nyitas_szaz' => $nyitasToltesSzazalek,
+            'nyitas_kw' => $nyitasToltesKw,
         ];
     }
 }

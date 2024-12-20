@@ -10,15 +10,17 @@ return new class extends Migration
     {
         Schema::create('rentsinprocess', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('auto_azon'); 
-            $table->unsignedBigInteger('kategoria'); 
+            $table->unsignedBigInteger('car_id');
+            $table->unsignedBigInteger('kategoria');
             $table->unsignedBigInteger('szemely_azon');
-            
+
             $table->date('berles_kezd_datum');
             $table->time('berles_kezd_ido');
+            $table->float('nyitas_szaz', 2);
+            $table->float('nyitas_kw', 1);
 
             // FK kapcsolatok
-            $table->foreign('auto_azon')->references('id')->on('cars')->onDelete('cascade');
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
             $table->foreign('szemely_azon')->references('id')->on('persons')->onDelete('cascade');
             $table->foreign('kategoria')->references('id')->on('categories')->onDelete('cascade');
         });

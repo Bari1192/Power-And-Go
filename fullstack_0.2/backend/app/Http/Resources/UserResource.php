@@ -10,12 +10,20 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "felh_id" => $this->id,
-            "szemely_id" => $this->szemely_id,
-            "felh_egyenleg" => $this->felh_egyenleg,
-            "felh_nev" => $this->felh_nev,
-            "jelszo_2_4" => $this->jelszo_2_4,
-            "elofiz_id" => $this->elofiz_id,
+            'id' => $this->id,
+            'felh_nev' => $this->felh_nev,
+            'felh_egyenleg' => $this->felh_egyenleg,
+            'elofiz_id' => $this->elofiz_id,
+            'person' => $this->whenLoaded('person', function () {
+                return [
+                    'v_nev' => $this->person->v_nev,
+                    'k_nev' => $this->person->k_nev,
+                    'szul_datum' => $this->person->szul_datum,
+                    'telefon' => $this->person->telefon,
+                    'email' => $this->person->email,
+                ];
+            }),
+            'cars' => CarResource::collection($this->whenLoaded('cars')), 
         ];
     }
 }

@@ -9,11 +9,11 @@ return new class extends Migration {
     {
         Schema::create('renthistories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('auto_azon');
-            $table->unsignedBigInteger('auto_kat');
+            $table->unsignedBigInteger('car_id');
+            $table->unsignedBigInteger('kategoria');
             $table->unsignedBigInteger('szemely_azon');
-            $table->foreign('auto_azon')->references('id')->on('cars')->onDelete('cascade');
-            $table->foreign('auto_kat')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
+            $table->foreign('kategoria')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('szemely_azon')->references('id')->on('persons')->onDelete('cascade');
             
             $table->float('nyitas_szaz',2);

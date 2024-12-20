@@ -16,11 +16,11 @@ return new class extends Migration
             $table->enum('szamla_tipus', ['berles', 'baleset', 'karokozas', 'toltes_buntetes']);
             $table->unsignedBigInteger('felh_id');
             $table->unsignedBigInteger('szemely_id');
-            $table->unsignedBigInteger('auto_azon');
+            $table->unsignedBigInteger('car_id');
 
             $table->foreign('felh_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('szemely_id')->references('id')->on('persons')->onDelete('cascade');
-            $table->foreign('auto_azon')->references('id')->on('cars')->onDelete('cascade');
+            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
 
             $table->integer('osszeg');
             $table->integer('megtett_tavolsag');
