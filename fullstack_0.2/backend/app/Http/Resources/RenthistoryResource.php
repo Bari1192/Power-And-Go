@@ -29,7 +29,8 @@ class RenthistoryResource extends JsonResource
                 "vezetesi_perc" => $this->vezetesi_perc,
                 "berles_osszeg" => $this->berles_osszeg,
                 "auto" => new CarResource($this->whenLoaded('auto')),
-                "felhasznalo" => new UserResource($this->whenLoaded('felhasznalo')),
+                "szemely" => new PersonResource($this->whenLoaded('person')),
+                "felhasznalo" => new UserResource($this->whenLoaded('person.user')),
             ];
     }
 }

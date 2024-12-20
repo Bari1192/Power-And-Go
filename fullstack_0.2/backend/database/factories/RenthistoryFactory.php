@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Car;
 use App\Models\Dailyrental;
-use App\Models\NapiBerles;
 use App\Models\Price;
 use App\Models\Renthistory;
 use App\Models\User;
@@ -17,13 +16,13 @@ class RenthistoryFactory extends Factory
 
     public function definition(): array
     {
+        $auto = Car::with('fleet')->where('status', 1)->first();
         do {
-            $auto = Car::with('flotta')->where('status', 1)->inRandomOrder()->first();
             $autoKategoria = $auto->kategoria;
-            $flottaTipus = $auto->flotta;
+            $flottaTipus = $auto->fleet;
 
             $nyitasToltesSzazalek = $auto->toltes_szaz;
-            $nyitasToltesKw = round($auto->flotta->teljesitmeny * ($nyitasToltesSzazalek / 100), 1);
+            $nyitasToltesKw = round($auto->fleet->teljesitmeny * ($nyitasToltesSzazalek / 100), 1);
 
             $berlesIdotartam = $this->berlesIdotartama($autoKategoria); ## másodperc - rand_int-ből!!!
             $megtettTavolsag = $this->megtettTavolsag($berlesIdotartam, $auto);
@@ -34,9 +33,9 @@ class RenthistoryFactory extends Factory
             $zarasToltesSzazalek = round(($zaraskoriToltesKw / $flottaTipus->teljesitmeny) * 100, 2);
 
             ## 1% alatt nem indulhat el a bérlés, ha valaki úgy zárta le az autót!
-            if ($zarasToltesSzazalek >= 1.0) { 
+            if ($zarasToltesSzazalek >= 1.0) {
                 ## 15% alatt zárják le, akkor egyből vegye ki a rendszer az autót és -> instant bünti érte!
-                if ($zarasToltesSzazalek <= 15.0) { 
+                if ($zarasToltesSzazalek <= 15.0) {
                     $auto->status = 6;
                     $auto->save();
                     ## Autó "kritikus töltés" értékre kerül -> nem foglalható!
@@ -104,7 +103,7 @@ class RenthistoryFactory extends Factory
     {
         $auto->toltes_szaz = $zarasToltesSzazalek;
         $auto->toltes_kw = max($zaraskoriToltesKw, 0);
-        $auto->becs_tav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szaz, 1);
+        $auto->becs_tav = round(($auto->fleet->hatotav / 100) * $auto->toltes_szaz, 1);
         $auto->save();
     }
 
@@ -133,7 +132,7 @@ class RenthistoryFactory extends Factory
         ### Vegye figyelembe, hogy mekkora az autó töltöttségi szintje, aminél hosszabb távolságot (km)-ben ne generáljon le.
         ### Ha legenerálna, akkor  túlmennénk az akkumulátor kapacitásán.
 
-        $aktualisHatotav = round(($auto->flotta->hatotav / 100) * $auto->toltes_szaz);
+        $aktualisHatotav = round(($auto->fleet->hatotav / 100) * $auto->toltes_szaz);
         if ($idoKulonbseg <= 1800) {
             return min(random_int(5, 10), $aktualisHatotav);
             ## A random gen. távot MINDIG összehasonlítjuk az aktuális hatótávval,

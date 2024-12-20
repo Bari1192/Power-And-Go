@@ -25,7 +25,7 @@ class Person extends Model
         'telefon',
         'email',
     ];
-    public function felhasznalo()
+    public function user()
     {
         return $this->hasOne(User::class, 'szemely_id', 'id');
     }

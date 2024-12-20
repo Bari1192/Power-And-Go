@@ -15,7 +15,7 @@ class Subscription extends Model
     public $incrementing = true;
 
     protected $fillable = [];
-    public function felhasznalok(): HasMany
+    public function user(): HasMany
     {
         return $this->hasMany(User::class, 'elofiz_id', 'id');
     }

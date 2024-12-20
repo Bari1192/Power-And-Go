@@ -45,9 +45,8 @@ class Renthistory extends Model
         return $this->belongsTo(Category::class, 'auto_kat', 'id');
     }
 
-    public function felhasznalo()
+    public function person()
     {
         return $this->belongsTo(Person::class, 'szemely_azon', 'id');
-        ###     EZ A KAPCSOLAT NEM VOLT JÓ USER-EN VOLT! ÁT KELL NÉZNI A LEKÉRÉSHEZ!!!!!
     }
 }

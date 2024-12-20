@@ -28,7 +28,7 @@ class Car extends Model
         'kilometerora',
         'gyartasi_ev',
     ];
-    public function flotta(): BelongsTo
+    public function fleet(): BelongsTo
     {
         return $this->belongsTo(Fleet::class, 'flotta_azon', 'id');
     }

@@ -21,73 +21,57 @@ class CarControllerTest extends TestCase
             "toltes_szaz" => 66.67,
             "toltes_kw" => 1.2,
             "becs_tav" => 9.5,
-            "rendszam" => "XXX-111",
+            "rendszam" => "XYZ-999",
             "kilometerora" => 4715,
-            "gyartasi_ev" => 2019,
+            "gyartasi_ev" => "2019",
             "flotta_azon" => 1,
             "felszereltseg" => 3,
-            "kategoria" => 1,
-            
+            "kategoria" => 1
         ];
 
         $response = $this->postJson('/api/cars', $carData);
 
         $response->assertStatus(201);
 
-        $this->assertDatabaseHas('cars', ["rendszam" => "XXX-111"]);
+        $this->assertDatabaseHas('cars', ["rendszam" => "XYZ-999"]);
     }
 
 
-
-    public function delete_car(): void
+    public function test_put_previous_fake_car_modifing()
     {
-        $response = $this->delete('/api/cars/111');
-        $response->assertStatus(204);
-    }
+        $latestCardata = Car::latest('id')->first();
 
-    public function update_car_data(): void
-    {
-        $car = Car::factory()->create([
+        $modifiedData = [
+            "id" => $latestCardata->id,
             "status" => 1,
             "toltes_szaz" => 66.67,
             "toltes_kw" => 1.2,
-            "becs_tav" => 9,
-            "rendszam" => "XXX-000",
+            "becs_tav" => 9.5,
+            "rendszam" => "XXX-111",
             "kilometerora" => 4715,
-            "gyartasi_ev" => 2019,
-            "flotta_azon" => 1,
-            "felszereltseg" => 3,
-            "kategoria" => 1,
-        ]);
-        $updatedData = [
-            "status" => 1,
-            "toltes_szaz" => 66.67,
-            "toltes_kw" => 1.2,
-            "becs_tav" => 9,
-            "rendszam" => "XXX-000",
-            "kilometerora" => 4715,
-            "gyartasi_ev" => 2019,
+            "gyartasi_ev" => "2019",
             "flotta_azon" => 1,
             "felszereltseg" => 3,
             "kategoria" => 1,
         ];
 
-        $response = $this->putJson("/api/cars/{$car->autok_id}", $updatedData);
+        $response = $this->put("api/cars/{$latestCardata->id}", $modifiedData);
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('cars', array_merge(['id' => $latestCardata->id], $modifiedData));
+    }
+    public function test_delete_fake_fleet_type_from_db(): void
+    {
+        ### Most az előző kamu adatot töröljük is ki!
+        $latestCardata = Car::latest('id')->first();
 
-        // Ellenőrizd a válasz státuszt
-        $response->assertStatus(201);
+        $response = $this->delete("api/cars/{$latestCardata->id}");
 
-        // Ellenőrizd a válasz tartalmát
-        $response->assertJsonFragment(array_merge($updatedData, ['autok_id' => $car->autok_id]));
-
-        // Ellenőrizd az adatbázis rekordot
-        $this->assertDatabaseHas('autok', array_merge($updatedData, ['autok_id' => $car->autok_id]));
-        $response->assertJsonFragment([
-            "autok_id" => $car->autok_id,
-            "status" => [
-                "status_name" => "Szabad",
-                "status_descrip" => "Az autó elérhető és bérlésre kész.",
-            ],
-        ]);
+        $response->assertStatus(204);
+        $this->assertDatabaseMissing(
+            'cars',
+            [
+                'id' => $latestCardata->id,
+            ]
+        );
     }
 }

@@ -16,7 +16,7 @@ class RenthistoryController extends Controller
 {
     public function index(): JsonResource
     {
-        $histories = Renthistory::with(["auto", "felhasznalo", "kategoriak"])->get();
+        $histories = Renthistory::with(['auto', 'person.user'])->get();
         return RenthistoryResource::collection($histories);
     }
 
@@ -30,7 +30,7 @@ class RenthistoryController extends Controller
     public function show(Renthistory $renthistory): JsonResource
     {
         ### Csak a számlát tudod így lekérni!
-        $renthistory->load("auto.tickets", "auto.carstatus", "kategoriak", "felhasznalo.szemely");
+        $renthistory->load("auto", "person");
         return new RenthistoryResource($renthistory);
     }
 

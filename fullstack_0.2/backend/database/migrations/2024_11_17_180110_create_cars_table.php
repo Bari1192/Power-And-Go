@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->foreignId('status')->constrained('carstatus','id')->onDelete('cascade');
             $table->foreignId('kategoria')->constrained('categories', 'id')->onDelete('cascade');
             $table->foreignId('felszereltseg')->nullable()->constrained('equipments', 'id')->onDelete('set null');
-            $table->foreignId('flotta_azon')->constrained('fleets','id')->onDelete('cascade');
+            $table->foreignId('flotta_azon')->nullable()->constrained('fleets', 'id')->onDelete('cascade');
 
             $table->integer('kilometerora');
             $table->year('gyartasi_ev');

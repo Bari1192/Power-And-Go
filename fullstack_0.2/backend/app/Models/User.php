@@ -24,12 +24,12 @@ class User extends Model
         'elofiz_id',
     ];
 
-    public function szemely(): BelongsTo
+    public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class, 'szemely_id');
     }
 
-    public function elofizetes(): BelongsTo
+    public function subscription(): BelongsTo
     {
         return $this->belongsTo(Subscription::class, 'elofiz_id');
     }

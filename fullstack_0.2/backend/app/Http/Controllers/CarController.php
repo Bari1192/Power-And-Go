@@ -32,14 +32,12 @@ class CarController extends Controller
         ### (ha a Modelben megírtad!) + AutoResource megfelelően kezeli a relációkat.
         ### Resourcba ==>  'flotta' => new FlottaResource($this->whenLoaded('flotta')),
 
-        $car->load(['flotta', 'carstatus', 'lezartberlesek']);
         return new CarResource($car);
     }
 
     public function update(UpdateCarRequest $request, Car $car)
     {
         $data = $request->validated();
-        $car->load(['flotta', 'carstatus', 'lezartberlesek']);
         $car->update($data);
         return new CarResource($car);
     }
