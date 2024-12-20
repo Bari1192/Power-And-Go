@@ -28,7 +28,7 @@ class CarController extends Controller
 
     public function show(Car $car): JsonResource
     {
-        $car = Car::with(['berlok.person'])->findOrFail($car->id);
+        $car = Car::with(['berlok.person'])->findOrFail($car->id); // Töltsük be a bérlőket és azok `person` kapcsolatait
         return new CarResource($car);
     }
 

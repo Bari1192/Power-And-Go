@@ -54,7 +54,6 @@ class User extends Model
                 'vezetesi_perc',
                 'berles_osszeg',
                 'rentstatus'
-            ])
-            ->with('person'); // A person reláció automatikus betöltése
+            ]);
     }
 }

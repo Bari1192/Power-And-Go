@@ -75,6 +75,8 @@ class Car extends Model
                 'vezetesi_perc',
                 'berles_osszeg',
                 'rentstatus'
-            ]);
+            ])
+            ->with('person'); // Automatikusan töltsük be a `person` relációt is
+
     }
-}    
+}
