@@ -51,6 +51,7 @@ class RentinprocessFactory extends Factory
             'berles_kezd_ido' => $berlesKezdete->format('H:i:s'),
             'nyitas_szaz' => $nyitasToltesSzazalek,
             'nyitas_kw' => $nyitasToltesKw,
+            'szamla_kelt'=>now(),
             'rentstatus'=>1,
         ];
     }

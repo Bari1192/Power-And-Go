@@ -33,6 +33,7 @@ return new class extends Migration
             $table->integer('parkolasi_perc')->nullable();
             $table->integer('vezetesi_perc')->nullable();
             $table->integer('berles_osszeg')->nullable();
+            $table->timestamp('szamla_kelt')->now();
 
             // Státusz: folyamatban (0) vagy lezárt (1)
             $table->boolean('rentstatus')->default(0);

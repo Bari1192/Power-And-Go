@@ -8,7 +8,7 @@
                     <div class=" w-2/3 border-b-4 mx-auto border-lime-500 mt-0 mb-6"></div>
                 </div>
                 <div class="row">
-                    <BaseTable :cars />
+                    <BaseTable :cars="cars" />
                 </div>
             </div>
         </div>

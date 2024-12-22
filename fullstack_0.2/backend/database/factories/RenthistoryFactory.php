@@ -87,6 +87,7 @@ class RenthistoryFactory extends Factory
             'parkolasi_perc' => $teljesParkolasIdo,
             'vezetesi_perc' => $vezetesIdo,
             'berles_osszeg' => $berlesOsszeg,
+            'szamla_kelt'=>now(),
             'rentstatus' => 2,
         ];
     }

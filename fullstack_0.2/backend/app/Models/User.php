@@ -54,6 +54,7 @@ class User extends Model
                 'vezetesi_perc',
                 'berles_osszeg',
                 'rentstatus',
+                'szamla_kelt',
             ])
             ->as('rent_details'); 
     }

@@ -9,7 +9,7 @@
             <h2 class="text-green-600 italic w-fit bg-amber-50 font-semibold text-3xl">Az adatok sikeresen beküldésre kerültek!</h2>
         </div>
         <p
-            class=" ml-2 text-red-600 rounded-md  bg-amber-100 bg-opacity-95 max-w-fit  font-semibold text-3xl italic p-1 underline">
+            class=" ml-2 text-red-600 rounded-md  bg-amber-100 bg-opacity-95 max-w-fit  font-semibold text-3xl italic py-2 px-4">
             Kérjük fokozott figyelemmel töltse ki!</p>
         <FormKit type="form" id="registration-example" :form-class="submitted ? 'hide' : 'show'" submit-label="Küldés"
             @submit="submitHandler" :actions="false" #default="{ value }" :validation="'required'" :validation-messages="{
