@@ -56,10 +56,11 @@ class Car extends Model
         return $this->hasMany(Ticket::class, 'car_id', 'id');
     }
 
-    public function berlok(): BelongsToMany
+    public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'car_user_rents', 'car_id', 'user_id')
+        return $this->belongsToMany(User::class, 'car_user_rents')
             ->withPivot([
+                'kategoria',
                 'nyitas_szaz',
                 'nyitas_kw',
                 'zaras_szaz',
@@ -69,8 +70,6 @@ class Car extends Model
                 'berles_veg_datum',
                 'berles_veg_ido',
                 'megtett_tavolsag',
-                'parkolas_kezd',
-                'parkolas_veg',
                 'parkolasi_perc',
                 'vezetesi_perc',
                 'berles_osszeg',

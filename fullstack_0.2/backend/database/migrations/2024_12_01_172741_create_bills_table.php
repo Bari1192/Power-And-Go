@@ -14,22 +14,18 @@ return new class extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
             $table->enum('szamla_tipus', ['berles', 'baleset', 'karokozas', 'toltes_buntetes']);
-            $table->unsignedBigInteger('felh_id');
-            $table->unsignedBigInteger('szemely_id');
-            $table->unsignedBigInteger('car_id');
-
-            $table->foreign('felh_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('szemely_id')->references('id')->on('persons')->onDelete('cascade');
-            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
+            $table->foreignId('felh_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('szemely_id')->constrained('persons')->onDelete('cascade');
+            $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
 
             $table->integer('osszeg');
-            $table->integer('megtett_tavolsag');
-            $table->integer('parkolasi_perc');
-            $table->integer('vezetesi_perc');
-            $table->date('berles_kezd_datum');
-            $table->time('berles_kezd_ido');
-            $table->date('berles_veg_datum');
-            $table->time('berles_veg_ido');
+            $table->integer('megtett_tavolsag')->nullable();
+            $table->integer('parkolasi_perc')->nullable();
+            $table->integer('vezetesi_perc')->nullable();
+            $table->date('berles_kezd_datum')->nullable();
+            $table->time('berles_kezd_ido')->nullable();
+            $table->date('berles_veg_datum')->nullable();
+            $table->time('berles_veg_ido')->nullable();
             $table->timestamp('szamla_kelt')->useCurrent();
             $table->enum('szamla_status', ['active', 'pending', 'archiv'])->default('pending');
         });

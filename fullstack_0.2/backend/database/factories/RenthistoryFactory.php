@@ -47,7 +47,7 @@ class RenthistoryFactory extends Factory
         } while (true);
 
 
-        $felhasznalo = User::inRandomOrder()->first();
+        $felhasznalo = User::inRandomOrder()->firstOrFail(); 
         $arazas = Price::where('auto_besorolas', $auto->kategoria)
             ->where('elofiz_azon', $felhasznalo->elofiz_id)
             ->first();
@@ -72,23 +72,22 @@ class RenthistoryFactory extends Factory
         return [
             'car_id' => $auto->id,
             'kategoria' => $auto->kategoria,
-            'user_id' => $felhasznalo->szemely_id,
-
+            'user_id' => $felhasznalo->id,
             'nyitas_szaz' => $nyitasToltesSzazalek,
             'nyitas_kw' => $nyitasToltesKw,
             'zaras_szaz' => $zarasToltesSzazalek,
             'zaras_kw' => $zaraskoriToltesKw,
-
-            'berles_kezd_datum' => $berlesKezdete->format('Y-m-d'),
-            'berles_kezd_ido' => $berlesKezdete->format('H:i:s'),
-            'berles_veg_datum' => $berlesVege->format('Y-m-d'),
-            'berles_veg_ido' => $berlesVege->format('H:i:s'),
+            'berles_kezd_datum' => $berlesKezdete,
+            'berles_kezd_ido' => $berlesKezdete,
+            'berles_veg_datum' => $berlesVege,
+            'berles_veg_ido' => $berlesVege,
             'megtett_tavolsag' => $megtettTavolsag,
             'parkolas_kezd' => $parkKezdIdo,
             'parkolas_veg' => $parkVegIdo,
             'parkolasi_perc' => $teljesParkolasIdo,
             'vezetesi_perc' => $vezetesIdo,
             'berles_osszeg' => $berlesOsszeg,
+            'rentstatus' => 2,
         ];
     }
     private function autoKmOraFrissites(Car $auto, $megtettTavolsag): void

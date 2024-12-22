@@ -15,23 +15,10 @@ class CarUserRentsSeeder extends Seeder
         ### 1 - folyamatban
         ### 2 - lezárt
 
-        $folyamatban = Rentinprocess::factory(100)
-            ->make()
-            ->map(function ($rent) {
-                $rent['rentstatus'] = 1; // Státusz: folyamatban
-                return $rent->toArray(); // Átalakítás tömbbé
-            })
-            ->toArray();
+        $folyamatban = Rentinprocess::factory(50)->make()->toArray();
         DB::table('car_user_rents')->insert($folyamatban);
 
-        // Lezárt bérlések generálása
-        $lezart = Renthistory::factory(1000)
-            ->make()
-            ->map(function ($rent) {
-                $rent['rentstatus'] = 2; // Státusz: lezárt
-                return $rent->toArray(); // Átalakítás tömbbé
-            })
-            ->toArray();
+        $lezart = Renthistory::factory(500)->make()->toArray();
         DB::table('car_user_rents')->insert($lezart);
     }
 }

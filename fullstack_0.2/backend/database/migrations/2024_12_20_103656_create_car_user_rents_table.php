@@ -13,21 +13,18 @@ return new class extends Migration
     {
         Schema::create('car_user_rents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('kategoria');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('car_id');
-            $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
-            $table->foreign('kategoria')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('persons')->onDelete('cascade');
+            $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
+            $table->foreignId('kategoria')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('persons')->onDelete('cascade');
 
             // Specifikus mezők
-            $table->float('nyitas_szaz', 2)->default(100.00);
-            $table->float('nyitas_kw', 1)->default(18.0);
+            $table->float('nyitas_szaz', 2)->nullable();
+            $table->float('nyitas_kw', 1)->nullable();
             $table->float('zaras_szaz', 2)->nullable();
             $table->float('zaras_kw', 1)->nullable();
 
-            $table->date('berles_kezd_datum');
-            $table->time('berles_kezd_ido');
+            $table->date('berles_kezd_datum')->nullable();
+            $table->time('berles_kezd_ido')->nullable();
             $table->date('berles_veg_datum')->nullable();
             $table->time('berles_veg_ido')->nullable();
             $table->integer('megtett_tavolsag')->nullable();
