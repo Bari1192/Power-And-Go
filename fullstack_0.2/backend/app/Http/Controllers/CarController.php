@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Http\Resources\BillResource;
 use App\Http\Resources\CarResource;
+use App\Http\Resources\CarWithUsersResource;
 use App\Models\Bill;
 use App\Models\Car;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -15,7 +16,7 @@ class CarController extends Controller
 {
     public function index(): JsonResource
     {
-        $cars = Car::all();
+        $cars = Car::with('fleet')->get();
         return CarResource::collection($cars);
     }
 
@@ -28,8 +29,8 @@ class CarController extends Controller
 
     public function show(Car $car): JsonResource
     {
-        $car = Car::with(['berlok.person'])->findOrFail($car->id); // Töltsük be a bérlőket és azok `person` kapcsolatait
-        return new CarResource($car);
+        $car->load(['users','fleet','users.person']);
+        return new CarWithUsersResource($car);
     }
 
     public function update(UpdateCarRequest $request, Car $car)

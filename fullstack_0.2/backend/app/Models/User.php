@@ -35,11 +35,10 @@ class User extends Model
         return $this->belongsTo(Subscription::class, 'elofiz_id');
     }
 
-    public function cars()
+    public function cars(): BelongsToMany
     {
-        return $this->belongsToMany(Car::class, 'car_user_rents')
+        return $this->belongsToMany(Car::class, 'car_user_rents', 'user_id', 'car_id')
             ->withPivot([
-                'kategoria',
                 'nyitas_szaz',
                 'nyitas_kw',
                 'zaras_szaz',
@@ -49,10 +48,13 @@ class User extends Model
                 'berles_veg_datum',
                 'berles_veg_ido',
                 'megtett_tavolsag',
+                'parkolas_kezd',
+                'parkolas_veg',
                 'parkolasi_perc',
                 'vezetesi_perc',
                 'berles_osszeg',
-                'rentstatus'
-            ]);
+                'rentstatus',
+            ])
+            ->as('rent_details'); 
     }
 }
