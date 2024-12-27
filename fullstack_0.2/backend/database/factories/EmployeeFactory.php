@@ -23,8 +23,8 @@ class EmployeeFactory extends Factory
             'terulet' => $terulet,
             'munkakor' => $munkakor,
             'beosztas' => $beosztas,
-            'munkaido' => $munkaido,
-            'fizetes_ossz' => $fizetes,
+            'munkaber_tipus' => $munkaido,
+            'fizetes' => $fizetes,
             'belepes_datum' => fake()->dateTimeBetween('-5 years', 'now')->format('Y-m-d'),
         ];
     }

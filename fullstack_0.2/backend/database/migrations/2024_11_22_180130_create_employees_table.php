@@ -10,13 +10,12 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('szemely_azon');
-            $table->foreign('szemely_azon')->references('id')->on('persons')->onDelete('cascade'); 
-            $table->string('terulet');
-            $table->string('munkakor');
-            $table->string('beosztas');
-            $table->string('munkaido');
-            $table->integer('fizetes_ossz'); 
+            $table->foreignId('szemely_azon')->constrained('persons','id')->onDelete('cascade'); 
+            $table->string('terulet',128);
+            $table->string('munkakor',45);
+            $table->string('beosztas',45);
+            $table->enum('munkaber_tipus',['fix','oradij']);
+            $table->integer('fizetes'); 
             $table->date('belepes_datum');
         });
     }

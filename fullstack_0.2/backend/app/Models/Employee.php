@@ -9,18 +9,19 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Employee extends Model
 {
     use HasFactory;
-    protected $table = 'dolgozok';
+    protected $table = 'employees';
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $incrementing = true;
 
     protected $fillable = [
-        'terulet',
-        'munkakor',
-        'beosztas',
-        'munkaido',
-        'fizetes_ossz',
-        'belepes_datum',
+        "szemely_azon",
+        "terulet",
+        "munkakor",
+        "beosztas",
+        "munkaber_tipus",
+        "fizetes",
+        "belepes_datum",
     ];
     public function szemely(): BelongsTo
     {

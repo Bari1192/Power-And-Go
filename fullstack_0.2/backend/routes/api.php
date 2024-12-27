@@ -3,6 +3,7 @@
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CarStatusController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FleetController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\RenthistoryController;
@@ -27,3 +28,4 @@ Route::apiResource('carstatus', CarStatusController::class);
 
 Route::apiResource('persons', PersonController::class);
 Route::apiResource('users',UserController::class);
+Route::apiResource('employees',EmployeeController::class);
