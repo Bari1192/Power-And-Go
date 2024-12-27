@@ -46,7 +46,8 @@
       <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
       <transition name="fade-slide">
         <div class="grid grid-cols-3 gap-6" v-if="carOpen">
-          <BaseCard :title="'Állapota'" :text="car.status" />
+          <BaseTooltipCard :title="'Állapota'" :text="car.status" />
+
           <BaseCard :title="'Becsült megtehető távolság'" :text="car.becs_tav + ' km'" />
           <BaseCard :title="'Akkumulátor töltöttsége'" :text="car.toltes_kw + ' kW'" />
           <BaseCard :title="'Töltöttségi állapota'" :text="car.toltes_szaz + ' %'" />
@@ -58,8 +59,6 @@
         </div>
       </transition>
       <div ref="adatokAlja"></div>
-
-
       <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4"> Bejegyzések
         <button @click="noteDetails"
           class="flex items-center justify-center bg-indigo-500 text-white font-bold rounded-full hover:bg-indigo-700"
@@ -113,8 +112,10 @@
                   <td class="pl-2 mx-auto">{{ berlo.renthistory.berles_osszeg }} Ft</td>
                   <td class="pl-2 mx-auto">{{ berlo.renthistory.megtett_tavolsag }} km</td>
                   <td class="pl-2 mx-auto">{{ berlo.renthistory.parkolas }} p</td>
-                  <td class="pl-2 mx-auto">{{ berlo.renthistory.berles_kezd_datum }} {{ berlo.renthistory.berles_kezd_ido }}</td>
-                  <td class="pl-2 mx-auto">{{ berlo.renthistory.berles_veg_datum }} {{ berlo.renthistory.berles_veg_ido }}</td>
+                  <td class="pl-2 mx-auto">{{ berlo.renthistory.berles_kezd_datum }} {{
+                    berlo.renthistory.berles_kezd_ido }}</td>
+                  <td class="pl-2 mx-auto">{{ berlo.renthistory.berles_veg_datum }} {{ berlo.renthistory.berles_veg_ido
+                    }}</td>
                   <td class="pl-2 mx-auto">{{ berlo.renthistory.szamla_kelt }} </td>
                 </tr>
               </tbody>
@@ -123,9 +124,6 @@
         </div>
       </transition>
       <div ref="rentHistoryBottom"></div>
-
-
-
 
       <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4">
         Büntetések
@@ -182,12 +180,14 @@
 
 <script>
 import { http } from '@utils/http'
+import BaseTooltipCard from '@layouts/BaseTooltipCard.vue';
 import BaseCard from '@layouts/BaseCard.vue'
 import BaseLayout from "@layouts/BaseLayout.vue";
 import { nextTick } from 'vue';
 
 export default {
   components: {
+    BaseTooltipCard,
     BaseCard,
     BaseLayout,
   },
@@ -201,6 +201,7 @@ export default {
       rentHistoryOpen: false,
       rentBillOpen: false,
       rentBillDetailsOpenStates: {},
+      isTooltipVisible: false,
     }
   },
   async mounted() {
@@ -215,6 +216,10 @@ export default {
 
   },
   methods: {
+    toggleTooltip() {
+      this.isTooltipVisible = !this.isTooltipVisible;
+    },
+
     async cardetails() {
       this.carOpen = !this.carOpen;
       if (this.carOpen) {

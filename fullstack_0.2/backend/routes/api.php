@@ -13,11 +13,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('bills/filter/{type}', [BillController::class, 'filter']);
 Route::get('cars/{car}/bills', [CarController::class, 'filterCarFines']);
-Route::get('renthistories/filterCarHistory/{type}/{car}', [RenthistoryController::class, 'filterCarHistory']);
 
 Route::apiResource('/tickets', TicketController::class);
-
-Route::apiResource('renthistories', RenthistoryController::class); ## -> 4 + 1 API!
 
 Route::apiResource('/bills', BillController::class);
 

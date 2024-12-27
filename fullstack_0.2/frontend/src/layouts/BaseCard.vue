@@ -14,7 +14,7 @@
 export default {
   props: {
     title: [String, Number],
-    text: [String, Number], // Elfogad string és szám típusokat is
+    text: [String, Number], 
   },
 }
 </script>

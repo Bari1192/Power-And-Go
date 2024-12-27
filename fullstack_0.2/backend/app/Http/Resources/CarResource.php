@@ -18,7 +18,7 @@ class CarResource extends JsonResource
             'status' => $this->status,
             'kategoria' => $this->kategoria,
             'felszereltseg' => $this->felszereltseg,
-            'kilometerora' => $this->kilometerora,
+            'kilometerora' => number_format($this->kilometerora,0,'',' '),
             'gyartasi_ev' => $this->gyartasi_ev,
             'flotta_adatok' => new FleetResource($this->whenLoaded('fleet')),
         ];
