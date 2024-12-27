@@ -13,7 +13,9 @@
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4">Új Bejelentés</h1>
       <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
       <div class="flex justify-center my-8 text-center text-xl space-x-8">
-        <button label="hiba"
+        <button 
+          @click="cleanreportOpen"
+          label="hiba"
           class="bg-teal-500 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-teal-400 text-white font-semibold">
           Tisztaság 🚬
         </button>
@@ -33,6 +35,10 @@
           class="bg-red-700 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-red-600 text-sky-100 font-semibold">
           Büntetés 📃
         </button>
+      </div>
+      <div v-if="cleanreport" 
+      class="bg-sky-950 border-4 border-sky-700 rounded-lg mt-10 p-4">
+      <BaseReportCard :carid="carRentHistory.car_id" :statusId="carRentHistory.status_id" :statusDescrip="carRentHistory.status_descrip"/>
       </div>
 
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4"> Jármű adatai
@@ -106,7 +112,7 @@
 
       <transition name="fade-slide">
         <div v-if="rentHistoryOpen">
-          <div class=" mx-auto border-4 border-indigo-600 rounded-3xl overflow-hidden">
+          <div class=" mx-auto border-4 border-indigo-900 rounded-3xl overflow-hidden">
             <table class="w-full">
               <thead>
                 <tr class="text-lime-600 font-semibold bg-amber-50 border-b-8 border-lime-600">
@@ -121,17 +127,17 @@
 
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="p-8">
                 <tr v-for="rent in carRentHistory.berlok" :key="rent.berles_id"
                   class="odd:bg-amber-50 even:bg-yellow-50 even:border-b-4 even:border-t-4 even:border-lime-400 text-center text-lg font-semibold text-sky-900">
-                  <td class="mx-auto"><router-link to=""> {{ rent.user }} </router-link></td>
-                  <td class="mx-auto">{{ rent.berles_kezd_datum + " " + rent.berles_kezd_ido }}</td>
-                  <td class="mx-auto">{{ rent.nyitas_szaz }} %</td>
-                  <td class="mx-auto">{{ rent.berles_veg_datum + " " + rent.berles_veg_ido }}</td>
-                  <td class="mx-auto">{{ rent.zaras_szaz }} %</td>
-                  <td class="mx-auto">{{ rent.megtett_tavolsag }} km</td>
-                  <td class="mx-auto">{{ rent.berles_osszeg }} Ft</td>
-                  <td class="mx-auto">{{ rent.szamla_kelt }}</td>
+                  <td class="mx-auto py-2"><router-link to=""> {{ rent.user }} </router-link></td>
+                  <td class="mx-auto py-2">{{ rent.berles_kezd_datum + " " + rent.berles_kezd_ido }}</td>
+                  <td class="mx-auto py-2">{{ rent.nyitas_szaz }} %</td>
+                  <td class="mx-auto py-2">{{ rent.berles_veg_datum + " " + rent.berles_veg_ido }}</td>
+                  <td class="mx-auto py-2">{{ rent.zaras_szaz }} %</td>
+                  <td class="mx-auto py-2">{{ rent.megtett_tavolsag }} km</td>
+                  <td class="mx-auto py-2">{{ rent.berles_osszeg }} Ft</td>
+                  <td class="mx-auto py-2">{{ rent.szamla_kelt }}</td>
                 </tr>
               </tbody>
             </table>
@@ -197,10 +203,12 @@ import { http } from '@utils/http'
 import BaseTooltipCard from '@layouts/BaseTooltipCard.vue';
 import BaseCard from '@layouts/BaseCard.vue'
 import BaseLayout from "@layouts/BaseLayout.vue";
+import BaseReportCard from '@layouts/BaseReportCard.vue';
 import { nextTick } from 'vue';
 
 export default {
   components: {
+    BaseReportCard,
     BaseTooltipCard,
     BaseCard,
     BaseLayout,
@@ -217,6 +225,7 @@ export default {
       rentBillOpen: false,
       rentBillDetailsStates: {},
       isTooltipVisible: false,
+      cleanreport:false,
     }
   },
   async mounted() {
@@ -268,6 +277,9 @@ export default {
     toggleBillDetails(szamla_azon) {
       this.rentBillDetailsStates[szamla_azon] =
         !this.rentBillDetailsStates[szamla_azon];
+    },
+    async cleanreportOpen(){
+      this.cleanreport=!this.cleanreport;
     },
   }
 }

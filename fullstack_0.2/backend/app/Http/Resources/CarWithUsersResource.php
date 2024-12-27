@@ -37,7 +37,7 @@ class CarWithUsersResource extends JsonResource
                     'megtett_tavolsag' => $user->rent_details->megtett_tavolsag,
                     'berles_osszeg' => number_format($user->rent_details->berles_osszeg, 0, '', ' '),
                     'parkolas' => $user->rent_details->parkolasi_perc,
-                    'szamla_kelt' => $user->rent_details->szamla_kelt,
+                    'szamla_kelt' => $user->rent_details->date_format($this->szamla_kelt, "Y-m-d H:i:s"),
                 ];
             }),
         ];

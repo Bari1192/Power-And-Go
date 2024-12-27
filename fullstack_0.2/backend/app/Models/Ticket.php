@@ -19,7 +19,8 @@ class Ticket extends Model
         'car_id',
         'status_id',
         'description',
-        'szamla_kelt',
+        'bejelentve',
+        'status_descrip',
     ];
     public function auto(): BelongsTo
     {

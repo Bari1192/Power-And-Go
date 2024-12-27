@@ -14,7 +14,8 @@ class TicketResource extends JsonResource
             'description' => $this->description,
             'car_id' => $this->car_id,
             'status_id' => $this->status_id,
-            'szamla_kelt' => $this->szamla_kelt,
+            'status_descrip' => $this->whenLoaded('status', fn() => $this->status->status_descrip),
+            'bejelentve' => $this->bejelentve,
             'car' => $this->whenLoaded('auto', function () {
                 return [
                     'rendszam' => $this->auto->rendszam,

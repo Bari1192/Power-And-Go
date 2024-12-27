@@ -57,7 +57,9 @@ class CarController extends Controller
     }
     public function carTickets(Car $car): JsonResource
     {
-        $tickets = $car->tickets()->get();
+        $tickets = Ticket::with('status')
+        ->where('car_id',$car->id)
+        ->get();
         return TicketResource::collection($tickets);
     }
     public function carWithRentHistory(Car $car):JsonResource{

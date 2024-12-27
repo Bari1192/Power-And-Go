@@ -17,7 +17,6 @@ class UpdateTicketRequest extends FormRequest
             "car_id" => ['required', 'integer', 'exists:cars,id'],
             "status_id" => ['required', 'integer', 'exists:carstatus,id'],
             "description" => ['required','max:255'],
-            "szamla_kelt" => date_format(now(), "Y-m-d H:i:s"),
         ];
     }
 }

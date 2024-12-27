@@ -16,7 +16,7 @@ class ToltesBuntetesResource extends JsonResource
             'szamla_status' => $this->szamla_status,
             'szamla_tipus' => "Minimum töltési ÁSZF megsértése.",
             'osszeg' => number_format($this->osszeg, 0, '', ' '), 
-            'szamla_kelt' => $this->szamla_kelt,
+            'szamla_kelt' => date_format($this->szamla_kelt, "Y-m-d H:i:s"),
         ];
     }
 }
