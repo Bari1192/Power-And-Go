@@ -11,14 +11,15 @@ class Ticket extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-
+    protected $table="tickets";
+    public $incrementing = true;
+    public $timestamps = false; 
 
     public $fillable = [
-        'id',
-        'description',
         'car_id',
         'status_id',
-        'created_at',
+        'description',
+        'szamla_kelt',
     ];
     public function auto(): BelongsTo
     {

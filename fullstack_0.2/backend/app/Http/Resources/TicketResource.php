@@ -14,7 +14,15 @@ class TicketResource extends JsonResource
             'description' => $this->description,
             'car_id' => $this->car_id,
             'status_id' => $this->status_id,
-            'created_at' => $this->created_at,
+            'szamla_kelt' => $this->szamla_kelt,
+            'car' => $this->whenLoaded('auto', function () {
+                return [
+                    'rendszam' => $this->auto->rendszam,
+                    'toltes_szaz' => $this->auto->toltes_szaz,
+                    'toltes_kw' => $this->auto->toltes_kw,
+                    'becs_tav' => $this->auto->becs_tav,
+                ];
+            }),
         ];
     }
 }

@@ -19,22 +19,6 @@ class StoreRenthistoryRequest extends FormRequest
         return [
             "lezart_berles_id" => ['required'],
             "auto_azonosito" => 1,
-            // "auto_kategoria" => ['required'],
-            // "szemely_id_fk" => ['required'],
-            // "nyitas_toltes_szazalek" => ['required'],
-            // "nyitas_toltes_kw" => ['required'],
-            // "zaras_toltes_szazalek" => ['required'],
-            // "zaras_toltes_kw" => ['required'],
-            // "berles_kezd_datum" => ['required'],
-            // "berles_kezd_ido" => ['required'],
-            // "berles_veg_datum" => ['required'],
-            // "berles_veg_ido" => ['required'],
-            // "megtett_tavolsag" => ['required'],
-            // "parkolas_kezd" => ['nullable'],
-            // "parkolas_veg" => ['nullable'],
-            // "parkolasi_perc" => ['nullable'],
-            // "vezetesi_perc" => ['required'],
-            // "berles_osszeg" => ['required'],
         ];
     }
 }

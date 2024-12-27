@@ -7,8 +7,10 @@ use App\Http\Requests\UpdateCarRequest;
 use App\Http\Resources\BillResource;
 use App\Http\Resources\CarResource;
 use App\Http\Resources\CarWithUsersResource;
+use App\Http\Resources\TicketResource;
 use App\Models\Bill;
 use App\Models\Car;
+use App\Models\Ticket;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
@@ -16,7 +18,7 @@ class CarController extends Controller
 {
     public function index(): JsonResource
     {
-        $cars = Car::with('fleet')->get();
+        $cars = Car::with('fleet', 'tickets')->get();
         return CarResource::collection($cars);
     }
 
@@ -29,8 +31,8 @@ class CarController extends Controller
 
     public function show(Car $car): JsonResource
     {
-        $car->load(['users','fleet','users.person']);
-        return new CarWithUsersResource($car);
+        $car->load(['fleet']);
+        return new CarResource($car);
     }
 
     public function update(UpdateCarRequest $request, Car $car)
@@ -52,5 +54,14 @@ class CarController extends Controller
             ->get();
 
         return BillResource::collection($szamlak);
+    }
+    public function carTickets(Car $car): JsonResource
+    {
+        $tickets = $car->tickets()->get();
+        return TicketResource::collection($tickets);
+    }
+    public function carWithRentHistory(Car $car):JsonResource{
+        $car->load(['users', 'fleet', 'users.person']);
+        return new CarWithUsersResource($car);
     }
 }

@@ -6,13 +6,17 @@ use App\Http\Controllers\CarStatusController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FleetController;
 use App\Http\Controllers\PersonController;
-use App\Http\Controllers\RenthistoryController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('bills/filter/{type}', [BillController::class, 'filter']);
 Route::get('cars/{car}/bills', [CarController::class, 'filterCarFines']);
+
+### Egyéni ticket-ek írására -> egy autóra lekérdezni az összeset.
+Route::get('cars/{car}/tickets', [CarController::class, 'carTickets']);
+Route::get('cars/{car}/renthistory', [CarController::class, 'carWithRentHistory']);
+Route::get('/bills/{car}/fees',[BillController::class,'carFees']);
 
 Route::apiResource('/tickets', TicketController::class);
 

@@ -12,7 +12,7 @@ class Bill extends Model
     protected $table = 'bills';
     protected $primaryKey = 'id';
     public $incrementing = true;
-    public $timestamps=false;
+    public $timestamps = false;
 
     protected $fillable = [
         'szamla_tipus',
@@ -27,8 +27,16 @@ class Bill extends Model
         'szamla_kelt',
         'szamla_status',
     ];
-    public function autok(): BelongsTo
+    public function cars(): BelongsTo
     {
-        return $this->belongsTo(Car::class, 'auto_azon');
+        return $this->belongsTo(Car::class, 'car_id');
+    }
+    public function users(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'felh_id');
+    }
+    public function persons(): BelongsTo
+    {
+        return $this->belongsTo(Person::class, 'szemely_id');
     }
 }

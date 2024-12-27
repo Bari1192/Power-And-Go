@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('car_id')->references('id')->on('cars')->onDelete('cascade');
             $table->foreignId('status_id')->references('id')->on('carstatus')->onDelete('cascade');
-            $table->string('description',255);
-            $table->timestamp('szamla_kelt')->useCurrent();
+            $table->string('description', 255);
+            $table->dateTime('szamla_kelt')->useCurrent();
         });
     }
     public function down(): void

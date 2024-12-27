@@ -39,6 +39,7 @@ class User extends Model
     {
         return $this->belongsToMany(Car::class, 'car_user_rents', 'user_id', 'car_id')
             ->withPivot([
+                'id',
                 'nyitas_szaz',
                 'nyitas_kw',
                 'zaras_szaz',

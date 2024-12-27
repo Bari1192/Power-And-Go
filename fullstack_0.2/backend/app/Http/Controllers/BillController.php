@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBillRequest;
 use App\Http\Requests\UpdateBillRequest;
 use App\Http\Resources\BillResource;
-use App\Http\Resources\ToltesBuntetesResource;
 use App\Models\Bill;
+use App\Models\Car;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
@@ -14,7 +14,7 @@ class BillController extends Controller
 {
     public function index(): JsonResource
     {
-        $bills = Bill::with("autok")->get();
+        $bills = Bill::with("cars")->get();
         return BillResource::collection($bills);
     }
     public function store(StoreBillRequest $request)
@@ -25,7 +25,7 @@ class BillController extends Controller
     }
     public function show(Bill $bill): JsonResource
     {
-        $bill->load('autok');
+        $bill->load('cars');
         return new BillResource($bill);
     }
     public function update(UpdateBillRequest $request, Bill $bill)
@@ -39,23 +39,12 @@ class BillController extends Controller
     {
         return ($bill->delete()) ? response()->noContent() : abort(500);
     }
-
-    public function filter(string $type): JsonResource
+    public function carFees(Bill $bills, Car $car): JsonResource
     {
-        $validFilterezes = ['berles', 'buntetesek', 'baleset', 'karokozas', 'toltes_buntetes'];
-
-        if (!in_array($type, $validFilterezes)) {
-            return response()->json(['error' => 'Invalid filter type'], 400);
-        }
-        $szamlak = Bill::where('szamla_tipus', '=', $type)->get();
-
-        if ($type === 'toltes_buntetes') {
-            $szamlak = Bill::select('szamla_id', 'szamla_tipus', 'szemely_id', 'osszeg', 'szamla_kelt', 'felh_id', 'szamla_status')
-                ->where('szamla_tipus', '=', $type)
-                ->get();
-            return ToltesBuntetesResource::collection($szamlak);
-        } else {
-            return BillResource::collection($szamlak);
-        }
+        $bills = Bill::where("car_id", $car->id)
+            ->where('szamla_tipus', 'toltes_buntetes')
+            ->get();
+        $bills->load(['persons','users']);
+        return BillResource::collection($bills);
     }
 }

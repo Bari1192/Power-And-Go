@@ -17,7 +17,7 @@ class UserWithRentalResource extends JsonResource
                     'car_id' => $car->id,
                     'license_plate' => $car->rendszam,
                     'fleet' => $car->fleet->gyarto ?? null,
-                    'rental_details' => $car->rent_details, // Pivot adatok
+                    'rental_details' => $car->rent_details, 
                 ];
             }),
         ];

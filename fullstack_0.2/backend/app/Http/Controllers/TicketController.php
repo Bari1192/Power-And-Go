@@ -6,7 +6,6 @@ use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Http\Resources\TicketResource;
 use App\Models\Ticket;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TicketController extends Controller
@@ -20,6 +19,7 @@ class TicketController extends Controller
     public function store(StoreTicketRequest $request)
     {
         $data = $request->validated();
+        $data['szamla_kelt'] = now(); ## Expliciten belevágjuk
         $ticket = Ticket::create($data);
         return new TicketResource($ticket);
     }
@@ -32,6 +32,7 @@ class TicketController extends Controller
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
         $data = $request->validated();
+        $data['created'] = now(); ## Expliciten belevágjuk frissítéskor is átírva!
         $ticket->update($data);
         return new TicketResource($ticket);
     }
