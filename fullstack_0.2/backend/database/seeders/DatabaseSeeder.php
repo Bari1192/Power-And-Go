@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DailyrentalSeeder::class);
         $this->call(CarUserRentsSeeder::class);
         $this->call(BillSeeder::class);
+        $this->call(TicketSeeder::class);
     }
 }

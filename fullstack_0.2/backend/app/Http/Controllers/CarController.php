@@ -63,7 +63,7 @@ class CarController extends Controller
         return TicketResource::collection($tickets);
     }
     public function carWithRentHistory(Car $car):JsonResource{
-        $car->load(['users', 'fleet', 'users.person']);
+        $car=Car::with(['users', 'fleet', 'users.person'])->find($car->id);
         return new CarWithUsersResource($car);
     }
 }
