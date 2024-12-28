@@ -23,9 +23,9 @@ class BillResource extends JsonResource
             "megtett_tavolsag" => $this->megtett_tavolsag,
             "parkolasi_perc" => $this->parkolasi_perc,
             "vezetesi_perc" => $this->vezetesi_perc,
-            "osszeg" => $this->osszeg,
+            "osszeg" => number_format($this->osszeg,0,'',' '),
             "szamla_tipus"=>$this->szamla_tipus,
-            "szamla_kelt" => date_format($this->szamla_kelt, "Y-m-d H:i:s"),
+            "szamla_kelt" => $this->szamla_kelt,
             "szamla_status" => $this->szamla_status,
         ];
     }

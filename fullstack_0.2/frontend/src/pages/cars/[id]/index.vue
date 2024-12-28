@@ -13,9 +13,7 @@
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4">Új Bejelentés</h1>
       <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
       <div class="flex justify-center my-8 text-center text-xl space-x-8">
-        <button 
-          @click="cleanreportOpen"
-          label="hiba"
+        <button @click="cleanreportOpen" label="hiba"
           class="bg-teal-500 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-teal-400 text-white font-semibold">
           Tisztaság 🚬
         </button>
@@ -36,9 +34,10 @@
           Büntetés 📃
         </button>
       </div>
-      <div v-if="cleanreport" 
-      class="bg-sky-950 border-4 border-sky-700 rounded-lg mt-10 p-4">
-      <BaseReportCard :carid="carRentHistory.car_id" :statusId="carRentHistory.status_id" :statusDescrip="carRentHistory.status_descrip"/>
+      <div v-if="cleanreport && carRentHistory.berlok && carRentHistory.berlok.length > 0"
+        class="bg-sky-950 border-4 border-sky-700 rounded-lg mt-10 p-4">
+        <BaseReportCard :carId="car.car_id" :lastRenter="carRentHistory.berlok[0].user"
+          :statusDescrip="carRentHistory.status_descrip" />
       </div>
 
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4"> Jármű adatai
@@ -66,13 +65,10 @@
       </transition>
       <div ref="adatokAlja"></div>
       <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4"> Bejegyzések
-        <button @click="noteDetails"
-          class="flex items-center justify-centerfont-bold rounded-full"
+        <button @click="noteDetails" class="flex items-center justify-centerfont-bold rounded-full"
           style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;"
           :style="{ transform: noteOpen ? 'rotate(90deg)' : 'rotate(-90deg)' }"
-          :class="rentFees.length ? 'bg-indigo-500 hover:bg-indigo-700 text-white' : 'bg-gray-500 text-gray-400'"
-
-          >
+          :class="rentFees.length ? 'bg-indigo-500 hover:bg-indigo-700 text-white' : 'bg-gray-500 text-gray-400'">
           +
         </button>
 
@@ -92,7 +88,7 @@
                 <p class="mt-1 mb-3">{{ ticket.status_id }}</p>
                 <h2 class="font-semibold">Bejelentés ideje</h2>
                 <div class="w-2/5 border-b-4 border-lime-400 rounded-xl opacity-50"></div>
-                <p class="mt-1 mb-3">{{ ticket.szamla_kelt }}</p>
+                <p class="mt-1 mb-3">{{ ticket.bejelentve }}</p>
               </div>
             </div>
           </BaseCard>
@@ -168,23 +164,27 @@
       <transition name="fade-slide">
         <div v-if="rentBillOpen">
           <div v-for="fine in rentBillFees" :key="fine.szamla_azon">
-            <BaseCard class="cursor-pointer" :class="rentBillDetailsStates[fine.szamla_azon] ? 'h-44' : 'h-10'"
+            <BaseCard class="cursor-pointer" :class="rentBillDetailsStates[fine.szamla_azon] ? 'h-64' : 'h-10'"
               :title="fine.szamla_tipus === 'toltes_buntetes' ? 'Akkumulátor lemerítési & szállítási pótdíj - ' + fine.osszeg : fine.szamla_tipus"
               @click="toggleBillDetails(fine.szamla_azon)">
-              <div class="cursor-default grid grid-cols-3 gap-2" v-if="rentBillDetailsStates[fine.szamla_azon]">
-                <p><b>Számla sorszáma:</b> {{ fine.szamla_azon }}</p>
-                <p><b>Összege:</b> {{ fine.osszeg }} Ft</p>
-                <p><b>Levezetett út:</b> {{ fine.megtett_tavolsag }} km</p>
-                <p><b>Parkolási idő:</b> {{ fine.parkolasi_perc }} perc</p>
-                <p><b>Vezetési idő:</b> {{ fine.vezetesi_perc }} perc</p>
-                <p><b>Bérlés kezdete:</b> {{ fine.berles_kezd_datum }} {{ fine.berles_kezd_ido }}</p>
-                <p><b>Bérlés vége:</b> {{ fine.berles_veg_datum }} {{ fine.berles_veg_ido }}</p>
-                <p> <b>Kiállítva:</b> {{ fine.szamla_kelt }}</p>
-                <p>
+              <div class="cursor-default grid grid-cols-3 gap-2 mx-1" v-if="rentBillDetailsStates[fine.szamla_azon]">
+                <p><b>Számla sorszáma: </b><br><i class="text-lime-500">{{ fine.szamla_azon }}</i></p>
+                <p class="text-center"> <b>Kiállítva:</b> <br><i class="text-lime-500">{{ fine.szamla_kelt }}</i></p>
+                <p class="text-right"><b>Bérlés kezdete:</b><br><i class="text-lime-500">{{ fine.berles_kezd_datum }}
+                    {{ fine.berles_kezd_ido }}</i></p>
+                <p><b>Összege:</b> <br><i class="text-lime-500">{{ fine.osszeg }} Ft</i></p>
+                <p class="text-center"><b>Levezetett út:</b><br> <i class="text-lime-500">{{ fine.megtett_tavolsag }}
+                    km</i></p>
+                <p class="text-right"><b>Bérlés vége:</b> <br><i class="text-lime-500">{{ fine.berles_veg_datum }}
+                    {{ fine.berles_veg_ido }}</i></p>
+                <p><b>Parkolási idő:</b> <br><i class="text-lime-500">{{ fine.parkolasi_perc }} perc</i></p>
+                <p class="text-center"><b>Vezetési idő:</b> <br><i class="text-lime-500">{{ fine.vezetesi_perc }}
+                    perc</i></p>
+                <p class="text-right">
                   <b>Számla állapota: </b>
                   <span
                     :style="fine.szamla_status === 'pending' ? 'color:orange; font-weight:bold;font-style:italic;' : ''">
-                    {{ fine.szamla_status }}
+                    <br>{{ fine.szamla_status }}
                   </span>
                 </p>
               </div>
@@ -225,7 +225,7 @@ export default {
       rentBillOpen: false,
       rentBillDetailsStates: {},
       isTooltipVisible: false,
-      cleanreport:false,
+      cleanreport: false,
     }
   },
   async mounted() {
@@ -237,6 +237,7 @@ export default {
 
     const rentResponse = await http.get(`/cars/${this.$route.params.id}/renthistory`);
     this.carRentHistory = rentResponse.data.data;
+    console.log('Last renter:', this.carRentHistory.berlok?.[this.carRentHistory.berlok.length - 1]?.user);
 
     const feesResponse = await http.get(`/bills/${this.$route.params.id}/fees`);
     this.rentBillFees = feesResponse.data.data;
@@ -278,8 +279,8 @@ export default {
       this.rentBillDetailsStates[szamla_azon] =
         !this.rentBillDetailsStates[szamla_azon];
     },
-    async cleanreportOpen(){
-      this.cleanreport=!this.cleanreport;
+    async cleanreportOpen() {
+      this.cleanreport = !this.cleanreport;
     },
   }
 }
