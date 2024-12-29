@@ -17,7 +17,7 @@
                     :validation-messages="{ required: 'Bejelentés típusát kötelező megjelölni!' }"
                     validation-messages-class="custom-validation-message"
                     label-class="block  tracking-wider text-sky-400 text-lg font-semibold mb-2"
-                    input-class="appearance-none block w-full bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    input-class=" block w-full bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     :options="[
                         { value: '', label: 'Kérem válasszon!' },
                         { value: 5, label: 'Tisztasági takarítást igényel' },

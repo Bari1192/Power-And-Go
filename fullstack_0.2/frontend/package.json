@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@formkit/i18n": "1.6.5",
+    "@formkit/i18n": "^1.6.5",
     "@formkit/themes": "1.6.5",
     "@formkit/vue": "1.6.5",
     "@formkit/zod": "1.6.5",
