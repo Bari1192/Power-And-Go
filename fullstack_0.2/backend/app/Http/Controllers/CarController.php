@@ -38,6 +38,7 @@ class CarController extends Controller
     public function update(UpdateCarRequest $request, Car $car)
     {
         $data = $request->validated();
+        $car->load('fleet');
         $car->update($data);
         return new CarResource($car);
     }
@@ -45,8 +46,6 @@ class CarController extends Controller
     {
         return ($car->delete()) ? response()->noContent() : abort(500);
     }
-
-
     public function filterCarFines(Car $car): JsonResource
     {
         $szamlak = Bill::where('auto_azon', $car->autok_id)

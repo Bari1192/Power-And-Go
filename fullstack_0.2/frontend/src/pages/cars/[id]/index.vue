@@ -254,10 +254,26 @@ export default {
   },
   methods: {
     async handleFormSubmit(data) {
-      const response = await http.post('/tickets', data);
-      console.log('Válasz:', response.data);
-      alert('Az űrlap sikeresen beküldve!');
-      window.location.reload();
+      try {
+        console.log('Bejelentés sikeres, frissítési payload érkezett:', data);
+
+        const updatePayload = {
+          rendszam: this.car.rendszam,
+          kategoria: parseInt(this.car.kategoria, 10),
+          felszereltseg: parseInt(this.car.felszereltseg, 10),
+          flotta_azon: parseInt(this.car.flotta_azon, 10),
+          kilometerora: parseInt(this.car.kilometerora),
+          gyartasi_ev: parseInt(this.car.gyartasi_ev, 10),
+          toltes_szaz: parseFloat(this.car.toltes_szaz),
+          toltes_kw: parseFloat(this.car.toltes_kw),
+          becs_tav: parseFloat(this.car.becs_tav),
+          status: data.status_id,
+        };
+        const response = await http.put(`/cars/${data.car_id}`, updatePayload);
+        window.location.reload();
+      } catch (error) {
+        alert('Hiba történt az autó státuszának frissítése során!');
+      }
     },
 
     // [Felugró buborék helper]

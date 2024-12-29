@@ -95,23 +95,22 @@ export default {
         async submitHandler() {
             try {
                 const payload = {
-                    car_id: this.carId, // Ellenőrizd, hogy biztosan számként kerül átadásra
-                    status_id: parseInt(this.selectedStatus, 10), // Számként konvertálás
-                    description: this.description.trim(), // Szöveg trim-elése
+                    car_id: this.carId,
+                    status_id: parseInt(this.selectedStatus, 10),
+                    description: this.description.trim(),
                 };
-
-                console.log('Küldött payload:', payload); // Debug
-                this.$emit('submit-success', payload); // Esemény kibocsátása az Index.vue felé
+                const response = await http.post('/tickets', payload);
+                this.$emit('submit-success', payload);
             } catch (error) {
-                console.error('Hiba történt a beküldés során:', error);
+                alert('Hiba történt a bejelentés során!');
             }
-        },
+        }
     },
     watch: {
-        selectedStatus(newValue) {
-            if (newValue === 5) {
+        selectedStatus(statusNumber) {
+            if (statusNumber === 5) {
                 this.description = 'Az autót tisztításra ki kell vonni a forgalomból.';
-            } else if (newValue === 1) {
+            } else if (statusNumber === 1) {
                 this.description = 'Az autó elérhető és bérlésre kész.';
             } else {
                 this.description = '';

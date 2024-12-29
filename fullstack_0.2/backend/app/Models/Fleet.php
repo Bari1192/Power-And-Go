@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Fleet extends Model
 {
@@ -23,8 +23,8 @@ class Fleet extends Model
         "vegsebesseg",
         "gumimeret",
     ];
-    public function autok(): HasMany
+    public function cars(): BelongsTo
     {
-        return $this->hasMany(Car::class, 'flotta_azon', 'id');
+        return $this->belongsTo(Car::class, 'flotta_azon', 'id');
     }
 }

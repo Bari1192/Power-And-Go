@@ -18,7 +18,7 @@ class StoreCarRequest extends FormRequest
             "felszereltseg" => ["nullable", "integer", "exists:equipments,id"],
             "flotta_azon" => ["nullable", "integer", "exists:fleets,id"],
             "kilometerora" => ["nullable", "integer", "between:0,300000"],
-            "gyartasi_ev" => ["nullable", "string", "regex:/^\d{4}$/"],
+            "gyartasi_ev" => ["nullable", "integer", "regex:/^\d{4}$/"],
             "toltes_szaz" => ["required", "decimal:2", "between:0,100"],
             "toltes_kw" => ["required", "decimal:1", "between:0,500"],
             "becs_tav" => ["required", "decimal:1", "between:0,1000"],
