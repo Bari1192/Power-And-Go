@@ -8,6 +8,7 @@ use App\Http\Resources\TicketResource;
 use App\Models\CarStatus;
 use App\Models\Ticket;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 
 class TicketController extends Controller
 {
@@ -21,9 +22,8 @@ class TicketController extends Controller
     {
         $data = $request->validated();
         $data['bejelentve'] = now();
-
+    
         $ticket = Ticket::create($data);
-
         return new TicketResource($ticket->load('status'));
     }
 

@@ -37,7 +37,7 @@
       <div v-if="cleanreport && carRentHistory.berlok && carRentHistory.berlok.length > 0"
         class="bg-sky-950 border-4 border-sky-700 rounded-lg mt-10 p-4">
         <BaseReportCard :carId="car.car_id" :lastRenter="carRentHistory.berlok[0].user"
-          :statusDescrip="carRentHistory.status_descrip" />
+          @submit-success="handleFormSubmit" />
       </div>
 
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4"> Jármű adatai
@@ -80,15 +80,23 @@
       <transition name="fade-slide">
         <div v-if="noteOpen">
           <BaseCard v-for="ticket in rentFees" :key="ticket.id" class="h-64 text-2xl mb-4"
-            :title="'Bejegyzés azonosítója: ' + ticket.id" :text="ticket.description">
-            <div class="grid grid-cols-2 gap-4 my-4">
-              <div class="w-2/3 text-white">
-                <h2 class="font-semibold">Bejelentés kódja: </h2>
+            :title="'Bejegyzés azonosítója: ' + ticket.id">
+            <div class="grid grid-cols-3 gap-4 my-4">
+              <!--Első oszlop-->
+              <div class="col-span-1 text-white">
+                <h2 class="font-semibold">Bejelentés kódja:</h2>
                 <div class="w-2/5 border-b-4 border-lime-400 rounded-xl opacity-50"></div>
                 <p class="mt-1 mb-3">{{ ticket.status_id }}</p>
-                <h2 class="font-semibold">Bejelentés ideje</h2>
+
+                <h2 class="font-semibold">Bejelentés ideje:</h2>
                 <div class="w-2/5 border-b-4 border-lime-400 rounded-xl opacity-50"></div>
                 <p class="mt-1 mb-3">{{ ticket.bejelentve }}</p>
+              </div>
+
+              <!--Második-->
+              <div class="col-span-2 text-white bg-slate-700 rounded-2xl p-4">
+                <h2 class="font-semibold text-lime-400">Bejelentés tartalma:</h2>
+                <p class="mt-1 mb-3">{{ ticket.description }}</p>
               </div>
             </div>
           </BaseCard>
@@ -237,7 +245,6 @@ export default {
 
     const rentResponse = await http.get(`/cars/${this.$route.params.id}/renthistory`);
     this.carRentHistory = rentResponse.data.data;
-    console.log('Last renter:', this.carRentHistory.berlok?.[this.carRentHistory.berlok.length - 1]?.user);
 
     const feesResponse = await http.get(`/bills/${this.$route.params.id}/fees`);
     this.rentBillFees = feesResponse.data.data;
@@ -246,6 +253,14 @@ export default {
     });
   },
   methods: {
+    async handleFormSubmit(data) {
+      const response = await http.post('/tickets', data);
+      console.log('Válasz:', response.data);
+      alert('Az űrlap sikeresen beküldve!');
+      window.location.reload();
+    },
+
+    // [Felugró buborék helper]
     toggleTooltip() {
       this.isTooltipVisible = !this.isTooltipVisible;
     },
@@ -282,9 +297,8 @@ export default {
     async cleanreportOpen() {
       this.cleanreport = !this.cleanreport;
     },
-  }
+  },
 }
-
 </script>
 
 <style scoped>
