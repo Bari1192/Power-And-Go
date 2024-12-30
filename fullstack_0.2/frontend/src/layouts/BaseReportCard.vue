@@ -1,6 +1,6 @@
 <template>
     <FormKit type="form" id="cleanreport" :form-class="submitted ? 'hide' : 'show'" submit-label="Küldés"
-        @submit="submitHandler" :actions="false" #default="{ value }" :validation="'required'" :validation-messages="{
+        @submit="submitHandler" :actions="false" #default="{ value }" :config="customConfig" :validation="'required'" :validation-messages="{
             required: 'Kérjük minden adatot töltsön ki!'
         }">
         <div class="flex flex-wrap my-5">
@@ -45,9 +45,8 @@
 
         </div>
 
-        <div class="flex justify-center my-5 ">
-            <FormKit type="submit" label="Bejelentés"
-                class="bg-teal-500 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-teal-400 text-white font-semibold">
+        <div class="flex justify-center my-5">
+            <FormKit type="submit" label="Bejelentés" id="button">
             </FormKit>
         </div>
         <div v-if="submitted" class="flex justify-center mb-10 mx-auto">
@@ -61,13 +60,22 @@
 <script>
 
 import { http } from '@utils/http'
-
+import { generateClasses } from "@formkit/themes";
 
 export default {
     data() {
         return {
             selectedStatus: '',
             description: '',
+            formLocation: this.selectedLocation,
+            customConfig: {
+                classes: generateClasses({
+                    submit: {
+                        input:
+                            "text-lg bg-teal-500 hover:bg-teal-700 hover:border-teal-500 text-white font-bold rounded-lg border-2 border-teal-700 py-2 px-4",
+                    },
+                }),
+            },
         };
     },
     props: {

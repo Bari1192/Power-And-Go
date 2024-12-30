@@ -13,7 +13,7 @@
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4">Új Bejelentés</h1>
       <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
       <div class="flex justify-center my-8 text-center text-xl space-x-8">
-        <button @click="cleanreportOpen" label="hiba"
+        <button @click="toggleSection('cleanreport')" label="hiba"
           class="bg-teal-500 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-teal-400 text-white font-semibold">
           Tisztaság 🚬
         </button>
@@ -25,7 +25,7 @@
           class="bg-rose-600 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-rose-700 text-sky-100 font-semibold">
           Baleset ⛐
         </button>
-        <button label="hiba"
+        <button @click="toggleSection('demageReport')" label="hiba"
           class="bg-indigo-500 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-indigo-400 text-sky-100 font-semibold">
           Rongálás 🔨
         </button>
@@ -38,6 +38,9 @@
         class="bg-sky-950 border-4 border-sky-700 rounded-lg mt-10 p-4">
         <BaseReportCard :carId="car.car_id" :lastRenter="carRentHistory.berlok[0].user"
           @submit-success="handleFormSubmit" />
+      </div>
+      <div v-if="demageReport && carRentHistory.berlok && carRentHistory.berlok.length > 0">
+        <EupModel @submit-success="submitHandler" />
       </div>
 
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4"> Jármű adatai
@@ -213,9 +216,11 @@ import BaseCard from '@layouts/BaseCard.vue'
 import BaseLayout from "@layouts/BaseLayout.vue";
 import BaseReportCard from '@layouts/BaseReportCard.vue';
 import { nextTick } from 'vue';
+import EupModel from '@layouts/carmodels/EupModel.vue';
 
 export default {
   components: {
+    EupModel,
     BaseReportCard,
     BaseTooltipCard,
     BaseCard,
@@ -234,6 +239,7 @@ export default {
       rentBillDetailsStates: {},
       isTooltipVisible: false,
       cleanreport: false,
+      demageReport: false,
     }
   },
   async mounted() {
@@ -253,68 +259,77 @@ export default {
     });
   },
   methods: {
-    async handleFormSubmit(data) {
-      try {
-        console.log('Bejelentés sikeres, frissítési payload érkezett:', data);
+      toggleSection(section) {
+        this.cleanreport = section === 'cleanreport' ? !this.cleanreport : false;
+        this.demageReport = section === 'demageReport' ? !this.demageReport : false;
+      },
 
-        const updatePayload = {
-          rendszam: this.car.rendszam,
-          kategoria: parseInt(this.car.kategoria, 10),
-          felszereltseg: parseInt(this.car.felszereltseg, 10),
-          flotta_azon: parseInt(this.car.flotta_azon, 10),
-          kilometerora: parseInt(this.car.kilometerora),
-          gyartasi_ev: parseInt(this.car.gyartasi_ev, 10),
-          toltes_szaz: parseFloat(this.car.toltes_szaz),
-          toltes_kw: parseFloat(this.car.toltes_kw),
-          becs_tav: parseFloat(this.car.becs_tav),
-          status: data.status_id,
-        };
-        const response = await http.put(`/cars/${data.car_id}`, updatePayload);
-        window.location.reload();
-      } catch (error) {
-        alert('Hiba történt az autó státuszának frissítése során!');
-      }
-    },
+      async handleFormSubmit(data) {
+        try {
+          console.log('Bejelentés sikeres, frissítési payload érkezett:', data);
 
-    // [Felugró buborék helper]
-    toggleTooltip() {
-      this.isTooltipVisible = !this.isTooltipVisible;
-    },
+          const updatePayload = {
+            rendszam: this.car.rendszam,
+            kategoria: parseInt(this.car.kategoria, 10),
+            felszereltseg: parseInt(this.car.felszereltseg, 10),
+            flotta_azon: parseInt(this.car.flotta_azon, 10),
+            kilometerora: parseInt(this.car.kilometerora),
+            gyartasi_ev: parseInt(this.car.gyartasi_ev, 10),
+            toltes_szaz: parseFloat(this.car.toltes_szaz),
+            toltes_kw: parseFloat(this.car.toltes_kw),
+            becs_tav: parseFloat(this.car.becs_tav),
+            status: data.status_id,
+          };
+          const response = await http.put(`/cars/${data.car_id}`, updatePayload);
+          window.location.reload();
+        } catch (error) {
+          alert('Hiba történt az autó státuszának frissítése során!');
+        }
+      },
 
-    async cardetails() {
-      this.carOpen = !this.carOpen;
-      if (this.carOpen) {
-        await nextTick();
-        this.$refs.adatokAlja.scrollIntoView({ behavior: 'smooth' });
-      }
-    },
-    async noteDetails() {
-      this.noteOpen = !this.noteOpen;
-      if (this.noteOpen) {
-        await nextTick();
-        this.$refs.noteBottom.scrollIntoView({ behavior: 'smooth' });
-      }
-    },
-    async rentHistoryDetails() {
-      this.rentHistoryOpen = !this.rentHistoryOpen;
-      if (this.rentHistoryOpen) {
-        await nextTick();
-        this.$refs.rentHistoryBottom.scrollIntoView({ behavior: 'smooth' });
-      }
-    },
-    async rentBillDetails() {
-      this.rentBillOpen = !this.rentBillOpen;
-    },
+      // [Felugró buborék helper]
+      toggleTooltip() {
+        this.isTooltipVisible = !this.isTooltipVisible;
+      },
 
-    toggleBillDetails(szamla_azon) {
-      this.rentBillDetailsStates[szamla_azon] =
-        !this.rentBillDetailsStates[szamla_azon];
+      async cardetails() {
+        this.carOpen = !this.carOpen;
+        if (this.carOpen) {
+          await nextTick();
+          this.$refs.adatokAlja.scrollIntoView({ behavior: 'smooth' });
+        }
+      },
+      async noteDetails() {
+        this.noteOpen = !this.noteOpen;
+        if (this.noteOpen) {
+          await nextTick();
+          this.$refs.noteBottom.scrollIntoView({ behavior: 'smooth' });
+        }
+      },
+      async rentHistoryDetails() {
+        this.rentHistoryOpen = !this.rentHistoryOpen;
+        if (this.rentHistoryOpen) {
+          await nextTick();
+          this.$refs.rentHistoryBottom.scrollIntoView({ behavior: 'smooth' });
+        }
+      },
+      async rentBillDetails() {
+        this.rentBillOpen = !this.rentBillOpen;
+      },
+
+      toggleBillDetails(szamla_azon) {
+        this.rentBillDetailsStates[szamla_azon] =
+          !this.rentBillDetailsStates[szamla_azon];
+      },
+      async cleanreportOpen() {
+        this.cleanreport = !this.cleanreport;
+      },
+      async demageReportOpen() {
+        this.demageReport = !this.demageReport;
+      },
+
     },
-    async cleanreportOpen() {
-      this.cleanreport = !this.cleanreport;
-    },
-  },
-}
+  }
 </script>
 
 <style scoped>

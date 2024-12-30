@@ -2,7 +2,7 @@
     <div class="main-container mx-auto flex">
         <div class="car-section w-2/3 p-4">
             <div class="car-container mx-auto">
-                <img src="http://backend.vm1.test/storage/carsImages/eupmodel.png" alt="VW e-up model"
+                <img src="http://backend.vm1.test/storage/carsImages/vivaromodel.png" alt="VW e-up model"
                     class="car-image max-w-full max-h-full">
                 <div
                     v-for="marker in markers"
@@ -32,20 +32,20 @@ export default {
         return {
             selectedLocation: '',
             markers: [
-                { name: 'Bal hátsó lökhárító', top: '12%', left: '82%' },
-                { name: 'Bal hátsó ajtó', top: '25%', left: '85%' },
+                { name: 'Bal hátsó lökhárító', top: '12%', left: '80%' },
+                { name: 'Bal hátsó ajtó', top: '25%', left: '80%' },
                 { name: 'Bal első ajtó', top: '36%', left: '82%' },
                 { name: 'Bal visszapillantó', top: '40.5%', left: '89%' },
                 { name: 'Bal első sárvédő', top: '71%', left: '80%' },
                 { name: 'Rendszám', top: '74%', left: '48%' },
-                { name: 'Hátsó lökös', top: '2%', left: '48%' },
-                { name: 'Jobb első sárvédő', top: '71%', left: '15%' },
-                { name: 'Jobb visszapillantó tükör', top: '40.5%', left: '8.5%' },
-                { name: 'Jobb hátsó ajtó', top: '23%', left: '15%' },
-                { name: 'Jobb első ajtó', top: '36%', left: '15%' },
-                { name: 'Jobb hátsó lökhárító', top: '12%', left: '15%' },
+                { name: 'Hátsó lökös', top: '4%', left: '50%' },
+                { name: 'Jobb első sárvédő', top: '71%', left: '20%' },
+                { name: 'Jobb visszapillantó tükör', top: '40.5%', left: '10%' },
+                { name: 'Jobb hátsó ajtó', top: '23%', left: '19%' },
+                { name: 'Jobb első ajtó', top: '36%', left: '19%' },
+                { name: 'Jobb hátsó lökhárító', top: '12%', left: '20.5%' },
                 { name: 'Szélvédő', top: '40%', left: '50%' },
-                { name: 'Tető', top: '20%', left: '48%' },
+                { name: 'Tető', top: '20%', left: '50%' },
             ],
         };
     },
