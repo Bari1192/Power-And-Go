@@ -18,7 +18,7 @@ class CarController extends Controller
 {
     public function index(): JsonResource
     {
-        $cars = Car::with('fleet', 'tickets')->get();
+        $cars = Car::with(['fleet', 'tickets'])->get();
         return CarResource::collection($cars);
     }
 

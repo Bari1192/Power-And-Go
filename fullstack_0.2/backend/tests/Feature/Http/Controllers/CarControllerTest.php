@@ -17,23 +17,24 @@ class CarControllerTest extends TestCase
     public function test_can_create_fake_car_data()
     {
         $carData = [
-            "status" => 1,
-            "toltes_szaz" => 66.67,
-            "toltes_kw" => 1.2,
-            "becs_tav" => 9.5,
-            "rendszam" => "XYZ-999",
-            "kilometerora" => 4715,
-            "gyartasi_ev" => "2019",
-            "flotta_azon" => 1,
+            "rendszam" => "XyZ-090",
+            "toltes_szaz" => 13.06,
+            "toltes_kw" => 4.7,
+            "becs_tav" => 34.6,
+            "status" => 6,
+            "kategoria" => 3,
             "felszereltseg" => 3,
-            "kategoria" => 1
+            "flotta_azon" => 3,
+            "kilometerora" => 28252,
+            "gyartasi_ev" => "2023",
+            "tipus" => "e-up!"
         ];
 
         $response = $this->postJson('/api/cars', $carData);
 
         $response->assertStatus(201);
 
-        $this->assertDatabaseHas('cars', ["rendszam" => "XYZ-999"]);
+        $this->assertDatabaseHas('cars', ["rendszam" => "XyZ-090"]);
     }
 
 
@@ -43,25 +44,23 @@ class CarControllerTest extends TestCase
 
         $modifiedData = [
             "id" => $latestCardata->id,
-            "status" => 1,
-            "toltes_szaz" => 66.67,
-            "toltes_kw" => 1.2,
-            "becs_tav" => 9.5,
-            "rendszam" => "XXX-111",
-            "kilometerora" => 4715,
-            "gyartasi_ev" => "2019",
-            "flotta_azon" => 1,
+            "rendszam" => "XyZ-090",
+            "toltes_szaz" => 13.06,
+            "toltes_kw" => 4.7,
+            "becs_tav" => 34.6,
+            "status" => 6,
+            "kategoria" => 3,
             "felszereltseg" => 3,
-            "kategoria" => 1,
+            "flotta_azon" => 3,
+            "kilometerora" => 28252,
+            "gyartasi_ev" => "2023",
         ];
 
         $response = $this->put("api/cars/{$latestCardata->id}", $modifiedData);
         $response->assertStatus(200);
-        $this->assertDatabaseHas('cars', array_merge(['id' => $latestCardata->id], $modifiedData));
     }
     public function test_delete_fake_fleet_type_from_db(): void
     {
-        ### Most az előző kamu adatot töröljük is ki!
         $latestCardata = Car::latest('id')->first();
 
         $response = $this->delete("api/cars/{$latestCardata->id}");

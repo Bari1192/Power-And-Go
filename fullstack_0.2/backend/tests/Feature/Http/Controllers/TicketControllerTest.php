@@ -9,9 +9,6 @@ use Tests\TestCase;
 
 class TicketControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
     public function can_get_all_tickets(): void
     {
         $response = $this->getJson('/api/cars');

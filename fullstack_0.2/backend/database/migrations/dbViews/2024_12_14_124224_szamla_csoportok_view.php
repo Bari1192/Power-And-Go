@@ -7,14 +7,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        if (Schema::hasTable('bills') && Schema::hasTable('renthistories')) {
-            DB::statement("
-                CREATE OR REPLACE VIEW SzamlaCsoportok AS
+        if (Schema::hasTable('bills') && Schema::hasTable('car_user_rents')) {
+            DB::statement(
+                "CREATE OR REPLACE VIEW SzamlakCsoportositva AS
                 SELECT
                     `bills`.`szamla_tipus` AS tipus,
                     COUNT(*) AS darabszam
@@ -23,13 +20,13 @@ return new class extends Migration
                 GROUP BY 
                     `szamla_tipus`
                 ORDER BY 
-                    darabszam DESC
-            ");
+                    darabszam DESC"
+            );
         }
     }
 
     public function down(): void
     {
-        //
+        DB::statement("DROP VIEW IF EXISTS SzamlakCsoportositva");
     }
 };

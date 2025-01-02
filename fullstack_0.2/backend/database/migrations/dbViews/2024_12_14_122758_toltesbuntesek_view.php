@@ -1,32 +1,28 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
 
-        if (Schema::hasTable('bills') && Schema::hasTable('renthistories')) {
+        if (Schema::hasTable('bills') && Schema::hasTable('car_user_rents')) {
             DB::statement(
-                "CREATE OR REPLACE VIEW toltes_buntetes_autok AS
+                "CREATE OR REPLACE VIEW toltes_buntetesek AS
        SELECT 
-           `cars`.`id` AS `id`,
+           `cars`.`id` AS `auto_azon`,
            `cars`.`rendszam` AS `rendszam`,
-           `cars`.`toltes_szaz` AS `toltes_szaz`,
-           `cars`.`status` AS `status`
+           `cars`.`toltes_szaz` AS `toltes_szazalek`,
+           `cars`.`status` AS `allapot`
        FROM 
            `cars`
        JOIN 
            `bills` 
        ON 
-           `cars`.`id` = `bills`.`auto_azon`
+           `cars`.`id` = `bills`.`car_id`
        WHERE 
            `bills`.`szamla_tipus` = 'toltes_buntetes'
        ORDER BY `cars`.`id` ASC"
@@ -35,7 +31,6 @@ return new class extends Migration
     }
     public function down(): void
     {
-        DB::statement("DROP VIEW IF EXISTS toltes_buntetes_autok");
-
+        DB::statement("DROP VIEW IF EXISTS toltes_buntetesek");
     }
 };

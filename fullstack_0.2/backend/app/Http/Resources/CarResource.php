@@ -20,13 +20,14 @@ class CarResource extends JsonResource
             'felszereltseg' => $this->felszereltseg,
             'kilometerora' => number_format($this->kilometerora, 0, '', ' '),
             'gyartasi_ev' => $this->gyartasi_ev,
-            'flotta_azon'=>$this->flotta_azon,
-            'tipus' => $this->whenLoaded('fleet')->tipus,
-            'gyarto' => $this->whenLoaded('fleet')->gyarto,
-            'teljesitmeny'=>$this->whenLoaded('fleet')->teljesitmeny,
-            'vegsebesseg'=>$this->whenLoaded('fleet')->vegsebesseg,
-            'gumimeret'=>$this->whenLoaded('fleet')->gumimeret,
-            'hatotav'=>$this->whenLoaded('fleet')->hatotav,
+            'flotta_azon' => $this->flotta_azon,
+            'tipus' => optional($this->fleet)->tipus,
+            'gyarto' => optional($this->fleet)->gyarto,
+            'teljesitmeny' => optional($this->fleet)->teljesitmeny,
+            'vegsebesseg' => optional($this->fleet)->vegsebesseg,
+            'gumimeret' => optional($this->fleet)->gumimeret,
+            'hatotav' => optional($this->fleet)->hatotav,
+
         ];
     }
 }
