@@ -5,11 +5,7 @@ export default defaultConfig({
   locales: {
     hu: {
       validation: {
-        required: "Kérjük, töltse ki ezt a mezőt!",
-        min: "Kérem röviden foglalja össze!",
-        max: "Túllépte a maximum {max} karaktert hosszt!",
-        length: "A mezőnek {min} és {max} karakter hosszúnak kell lennie.",
-        integer: "Csak egész szám adható meg.",
+        integer: "Csak egész szám adható meg a mezőben.",
       },
     },
   },
@@ -27,8 +23,7 @@ export default defaultConfig({
   },
   config: {
     classes: generateClasses({
-      global: {
-      },
+      global: {},
       label: {
         label: "text-lg font-bold text-sky-300 mb-2",
       },

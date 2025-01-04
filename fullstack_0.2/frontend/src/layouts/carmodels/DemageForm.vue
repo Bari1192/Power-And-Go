@@ -29,7 +29,16 @@
 
                 <FormKit name="details" type="textarea" label="Részletek leírása"
                     input-class="max-h-24 min-h-16 w-full bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    validation="required|min:10|max:255" label-class="text-white text-lg font-semibold" />
+                    validation='required|contains_alpha|length:10,255'
+                    label-class="text-white text-lg font-semibold" 
+                    :validation-messages="{
+                            required: 'Kötelező kitölteni!',
+                            regex: 'A szövegnek tartalmaznia kell legalább egy betűt!',
+                            length:'Kérem pár szóban, de max. 255 karakterben foglalja össze!',
+                            contains_alpha:'Kötelező szöveget is megadnia!'
+                        }"
+                    />
+                    
 
                 <div class="flex justify-center my-5">
                     <FormKit type="submit" label="Bejelentés" id="button">
