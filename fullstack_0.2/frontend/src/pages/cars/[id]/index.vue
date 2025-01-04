@@ -39,8 +39,14 @@
         <BaseReportCard :carId="car.car_id" :lastRenter="carRentHistory.berlok[0].user"
           @submit-success="handleFormSubmit" />
       </div>
-      <div v-if="demageReport && carRentHistory.berlok && carRentHistory.berlok.length > 0">
-        <EupModel @submit-success="submitHandler" />
+
+      <!-- RONGÁLÁS BEJELENTÉSI MODEL -->
+      <div v-if="demageReport">
+        <component
+          :is="currentModel"
+          :car-id="car.car_id"
+          @submit-success="submitHandler"
+        />
       </div>
 
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4"> Jármű adatai
@@ -216,7 +222,11 @@ import BaseCard from '@layouts/BaseCard.vue'
 import BaseLayout from "@layouts/BaseLayout.vue";
 import BaseReportCard from '@layouts/BaseReportCard.vue';
 import { nextTick } from 'vue';
-import EupModel from '@layouts/carmodels/EupModel.vue';
+import EupModel from "@layouts/carmodels/EupModel.vue";
+import CitigoModel from "@layouts/carmodels/CitigoModel.vue";
+import KangooModel from "@layouts/carmodels/KangooModel.vue";
+import VivaroModel from "@layouts/carmodels/VivaroModel.vue";
+import KiaNiroModel from "@layouts/carmodels/KiaNiroModel.vue";
 
 export default {
   components: {
@@ -225,6 +235,11 @@ export default {
     BaseTooltipCard,
     BaseCard,
     BaseLayout,
+    EupModel,
+    CitigoModel,
+    KangooModel,
+    KiaNiroModel,
+    VivaroModel,
   },
   data() {
     return {
@@ -328,6 +343,19 @@ export default {
         this.demageReport = !this.demageReport;
       },
 
+    },
+    computed: {
+      currentModel(){
+        const gyartoAlapjanModel = {
+          VW: "EupModel",
+          Skoda: "CitigoModel",
+          Renault: "KangooModel",
+          Opel: "VivaroModel",
+          Kia: "KiaNiroModel",
+        };
+
+        return gyartoAlapjanModel[this.car.gyarto] || null;
+      }
     },
   }
 </script>

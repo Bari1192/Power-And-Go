@@ -1,8 +1,8 @@
 <template>
-    <div class="main-container mx-auto flex">
-        <div class="car-section w-2/3 p-4">
+    <div class="main-container mx-auto flex -mb-12">
+        <div class="car-section w-3/5 p-4">
             <div class="car-container mx-auto">
-                <img src="http://backend.vm1.test/storage/carsImages/citigomodel.png" alt="VW e-up model"
+                <img src="http://backend.vm1.test/storage/carsImages/citigomodel.png" alt="Skoda Citigo képe"
                     class="car-image max-w-full max-h-full">
                 <div
                     v-for="marker in markers"
@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="form-section w-1/3 p-4 -mt-5">
+        <div class="form-section w-2/5 p-4 -mt-5">
             <DemageForm :selected-location="selectedLocation" />
         </div>
     </div>
@@ -37,16 +37,13 @@ export default {
                 { name: 'Bal első ajtó', top: '33%', left: '82%' },
                 { name: 'Bal visszapillantó', top: '37%', left: '90%' },
                 { name: 'Bal első sárvédő', top: '66%', left: '79%' },
-
                 { name: 'Rendszám', top: '70%', left: '48%' },
-                { name: 'Hátsó lökös', top: '7%', left: '50%' },
-
+                { name: 'Hátsó lökhárító', top: '7%', left: '50%' },
                 { name: 'Jobb első sárvédő', top: '66%', left: '18%' },
                 { name: 'Jobb visszapillantó tükör', top: '37%', left: '10%' },
                 { name: 'Jobb hátsó ajtó', top: '24%', left: '18%' },
                 { name: 'Jobb első ajtó', top: '33%', left: '18%' },
                 { name: 'Jobb hátsó lökhárító', top: '18%', left: '18%' },
-
                 { name: 'Szélvédő', top: '35%', left: '50%' },
                 { name: 'Tető', top: '18%', left: '50%' },
             ],
