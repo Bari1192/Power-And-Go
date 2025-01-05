@@ -18,7 +18,8 @@ Route::get('cars/{car}/tickets', [CarController::class, 'carTickets']);
 Route::get('cars/{car}/renthistory', [CarController::class, 'carWithRentHistory']);
 Route::get('/bills/{car}/fees',[BillController::class,'carFees']);
 
-Route::get('/googlemapsapi', [GoogleMapsController::class, 'getApiUrl']);
+Route::get('/googlemapsapi', [GoogleMapsController::class, 'getApiUrl']);   ## Ez az input alapján a címet adja meg
+Route::get('/geocode', [GoogleMapsController::class, 'getGeocode']);        ## Ez a térképet inicializálja és jeleníti meg rajta.
 
 
 Route::apiResource('/tickets', TicketController::class);
