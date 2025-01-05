@@ -1,48 +1,38 @@
 <template>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 font-semibold">
-        <!-- Első oszlop -->
         <div>
             <label for="location" class="text-2xl  my-4 text-white block">Baleset helyszíne:</label>
-            <input id="location" type="text" class="border rounded px-3 py-2 w-3/5"
+            <input id="location" type="text" class="border rounded-lg px-3 py-2 w-4/5"
                 placeholder="Kezdje el beírni a címet..." ref="autocompleteInput" />
             <div class="mt-4 space-y-2 text-white">
-                <!-- FormKit datetime mező -->
+
+                <FormKit name="lastRenter" type="text" label="Legutóbbi bérlő"
+                    label-class="text-xl my-2 text-white block" :value="lastRenter"
+                    disabled
+                    input-class=" border rounded-lg appearance-none block w-3/5 bg-gray-300 bg-opacity-90 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+
                 <FormKit
                     type="datetime-local"
                     v-model="formattedDateTime"
                     label="Mikor történt a baleset?"
-                    validation="[required|date_before|time_before]"
+                    validation="required|date_before"
                     :validation-messages="{
-                        time_before: 'NHibás időpont!' ,
-                        date_before: 'Nem lehet a mai napnál későbbi a baleset ideje!' ,
+                        date_before: 'Nem lehet a baleset későbbi időpontban!' ,
                         required:'Kötelező megadni!'
                     }"
                     validation-visibility="live"
-
                     input-class="text-sky-900 py-2 pr-4 rounded-xl text-center"
                     inner-class="py-2"
-                    
+                    label-class="text-xl mt-4 text-white block"
                 />
 
-                <FormKit type="form" #default="{ value }" :actions="false">
+                <FormKit type="form" :actions="false">
                     <FormKit formtKit-class=" space-y-10" type="radio" name="someOneInjured" :options="['Igen', 'Nem']"
                         label="Személyi sérülés történt?" />
                 </FormKit>
-
-
-                <p></p>
-                <p>Állítsa le a motort!</p>
-                <p>Kapcsolja be a Vészvillogót!</p>
-                <p>Biztonsági mellényt vegye fel!</p>
-                <p>Helyezze ki az elakadásjelző háromszöget!</p>
-                <p>Készítsen fényképet az autókról, helyszínről, minden lényeges körülményről!</p>
-                <p>Készítse elő a személyes okmányait!</p>
-                <p>Kollégánk hamarosan érkezik a helyszínre. Mindenképpen maradjon a helyszínen!</p>
             </div>
         </div>
-
-        <!-- Második oszlop -->
-        <div class="h-96 border-8 rounded-2xl border-sky-300" id="map"></div>
+        <div class="mt-8 h-96 border-8 rounded-2xl border-sky-300" id="map"></div>
     </div>
 </template>
 
@@ -52,6 +42,12 @@ import { ref, onMounted } from 'vue';
 import { http } from '@utils/http.mjs';
 
 export default {
+    props: {
+        lastRenter: {
+            type: [String, null],
+            required: true,
+        },
+    },
     setup() {
         const formattedDateTime = ref('');
         const autocompleteInput = ref(null);
@@ -59,7 +55,6 @@ export default {
         let map = null;
         let marker = null;
 
-        // Dátum formázása a FormKit számára
         const updateDateTime = () => {
             const now = new Date();
             const year = now.getFullYear();
@@ -96,7 +91,6 @@ export default {
 
         const initMap = () => {
             if (typeof google === 'undefined' || !google.maps) {
-                console.error('Google Maps API még nem áll készen.');
                 return;
             }
 
@@ -161,7 +155,7 @@ export default {
 };
 </script>
 
-<style>
+<!-- <style scoped>
 [data-invalid] .formkit-inner::after {
   content: '❌'; /* Piros X ikon */
   font-size: larger;
@@ -179,6 +173,7 @@ export default {
   content: '✅'; /* Zöld pipa ikon */
   display: inline-flex;
   color: green;
+  font-size: larger;
   margin-left: 8px;
 }
-</style>
+</style> -->

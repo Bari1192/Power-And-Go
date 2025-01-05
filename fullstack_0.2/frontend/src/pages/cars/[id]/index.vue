@@ -3,11 +3,11 @@
     <div class="container mt-20 mb-20 w-2/3 mx-auto">
 
       <div
-        class="m-auto py-6 d-flex justify-center my-10 w-3/4 border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
+        class="m-auto py-6 d-flex justify-center my-10 w-full border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
         <div class="text-center grid grid-cols-3">
-          <h1 class="text-5xl text-sky-100 border-r-4 border-sky-500 italic"> {{ car.gyarto }}</h1>
-          <h1 class="text-5xl text-lime-300 border-x-4 border-sky-500"> {{ car.rendszam }}</h1>
-          <h1 class="text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.tipus }}</h1>
+          <h1 class="text-5xl text-sky-100 border-r-4 border-sky-500 italic"> {{ car.gyarto }} </h1>
+          <h1 class="text-5xl text-lime-300 border-x-4 border-sky-500"> {{ car.rendszam }} </h1>
+          <h1 class="text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.tipus }} </h1>
         </div>
       </div>
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4">Új Bejelentés</h1>
@@ -21,7 +21,7 @@
           class="bg-orange-500 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-orange-600 hove:text-white text-white font-semibold">
           Meghibásodás 🔧
         </button>
-        <button label="hiba"
+        <button @click="toggleSection('accidentReport')" label="hiba"
           class="bg-rose-600 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-rose-700 text-sky-100 font-semibold">
           Baleset ⛐
         </button>
@@ -42,11 +42,12 @@
 
       <!-- RONGÁLÁS BEJELENTÉSI MODEL -->
       <div v-if="demageReport">
-        <component
-          :is="currentModel"
-          :car-id="car.car_id"
-          @submit-success="submitHandler"
-        />
+        <component :is="currentModel" :car-id="car.car_id" @submit-success="submitHandler" />
+      </div>
+
+      <!-- BALESET BEJELENTÉSI KOMPONENS -->
+      <div v-if="accidentReport">
+        <CarAccidentReport :lastRenter="carRentHistory.berlok[0].user" />
       </div>
 
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4"> Jármű adatai
@@ -227,6 +228,7 @@ import CitigoModel from "@layouts/carmodels/CitigoModel.vue";
 import KangooModel from "@layouts/carmodels/KangooModel.vue";
 import VivaroModel from "@layouts/carmodels/VivaroModel.vue";
 import KiaNiroModel from "@layouts/carmodels/KiaNiroModel.vue";
+import CarAccidentReport from '@layouts/carmodels/caraccidents/CarAccidentReport.vue';
 
 export default {
   components: {
@@ -240,6 +242,7 @@ export default {
     KangooModel,
     KiaNiroModel,
     VivaroModel,
+    CarAccidentReport,
   },
   data() {
     return {
@@ -255,6 +258,7 @@ export default {
       isTooltipVisible: false,
       cleanreport: false,
       demageReport: false,
+      accidentReport: false,
     }
   },
   async mounted() {
@@ -274,90 +278,93 @@ export default {
     });
   },
   methods: {
-      toggleSection(section) {
-        this.cleanreport = section === 'cleanreport' ? !this.cleanreport : false;
-        this.demageReport = section === 'demageReport' ? !this.demageReport : false;
-      },
-
-      async handleFormSubmit(data) {
-        try {
-          console.log('Bejelentés sikeres, frissítési payload érkezett:', data);
-
-          const updatePayload = {
-            rendszam: this.car.rendszam,
-            kategoria: parseInt(this.car.kategoria, 10),
-            felszereltseg: parseInt(this.car.felszereltseg, 10),
-            flotta_azon: parseInt(this.car.flotta_azon, 10),
-            kilometerora: parseInt(this.car.kilometerora),
-            gyartasi_ev: parseInt(this.car.gyartasi_ev, 10),
-            toltes_szaz: parseFloat(this.car.toltes_szaz),
-            toltes_kw: parseFloat(this.car.toltes_kw),
-            becs_tav: parseFloat(this.car.becs_tav),
-            status: data.status_id,
-          };
-          const response = await http.put(`/cars/${data.car_id}`, updatePayload);
-          window.location.reload();
-        } catch (error) {
-          alert('Hiba történt az autó státuszának frissítése során!');
-        }
-      },
-
-      // [Felugró buborék helper]
-      toggleTooltip() {
-        this.isTooltipVisible = !this.isTooltipVisible;
-      },
-
-      async cardetails() {
-        this.carOpen = !this.carOpen;
-        if (this.carOpen) {
-          await nextTick();
-          this.$refs.adatokAlja.scrollIntoView({ behavior: 'smooth' });
-        }
-      },
-      async noteDetails() {
-        this.noteOpen = !this.noteOpen;
-        if (this.noteOpen) {
-          await nextTick();
-          this.$refs.noteBottom.scrollIntoView({ behavior: 'smooth' });
-        }
-      },
-      async rentHistoryDetails() {
-        this.rentHistoryOpen = !this.rentHistoryOpen;
-        if (this.rentHistoryOpen) {
-          await nextTick();
-          this.$refs.rentHistoryBottom.scrollIntoView({ behavior: 'smooth' });
-        }
-      },
-      async rentBillDetails() {
-        this.rentBillOpen = !this.rentBillOpen;
-      },
-
-      toggleBillDetails(szamla_azon) {
-        this.rentBillDetailsStates[szamla_azon] =
-          !this.rentBillDetailsStates[szamla_azon];
-      },
-      async cleanreportOpen() {
-        this.cleanreport = !this.cleanreport;
-      },
-      async demageReportOpen() {
-        this.demageReport = !this.demageReport;
-      },
-
+    toggleSection(section) {
+      this.cleanreport = section === 'cleanreport' ? !this.cleanreport : false;
+      this.demageReport = section === 'demageReport' ? !this.demageReport : false;
+      this.accidentReport = section === 'accidentReport' ? !this.accidentReport : false;
     },
-    computed: {
-      currentModel(){
-        const gyartoAlapjanModel = {
-          VW: "EupModel",
-          Skoda: "CitigoModel",
-          Renault: "KangooModel",
-          Opel: "VivaroModel",
-          Kia: "KiaNiroModel",
-        };
 
-        return gyartoAlapjanModel[this.car.gyarto] || null;
+    async handleFormSubmit(data) {
+      try {
+        console.log('Bejelentés sikeres, frissítési payload érkezett:', data);
+
+        const updatePayload = {
+          rendszam: this.car.rendszam,
+          kategoria: parseInt(this.car.kategoria, 10),
+          felszereltseg: parseInt(this.car.felszereltseg, 10),
+          flotta_azon: parseInt(this.car.flotta_azon, 10),
+          kilometerora: parseInt(this.car.kilometerora),
+          gyartasi_ev: parseInt(this.car.gyartasi_ev, 10),
+          toltes_szaz: parseFloat(this.car.toltes_szaz),
+          toltes_kw: parseFloat(this.car.toltes_kw),
+          becs_tav: parseFloat(this.car.becs_tav),
+          status: data.status_id,
+        };
+        const response = await http.put(`/cars/${data.car_id}`, updatePayload);
+        window.location.reload();
+      } catch (error) {
       }
     },
-  }
+
+    // [Felugró buborék helper]
+    toggleTooltip() {
+      this.isTooltipVisible = !this.isTooltipVisible;
+    },
+
+    async cardetails() {
+      this.carOpen = !this.carOpen;
+      if (this.carOpen) {
+        await nextTick();
+        this.$refs.adatokAlja.scrollIntoView({ behavior: 'smooth' });
+      }
+    },
+    async noteDetails() {
+      this.noteOpen = !this.noteOpen;
+      if (this.noteOpen) {
+        await nextTick();
+        this.$refs.noteBottom.scrollIntoView({ behavior: 'smooth' });
+      }
+    },
+    async rentHistoryDetails() {
+      this.rentHistoryOpen = !this.rentHistoryOpen;
+      if (this.rentHistoryOpen) {
+        await nextTick();
+        this.$refs.rentHistoryBottom.scrollIntoView({ behavior: 'smooth' });
+      }
+    },
+    async rentBillDetails() {
+      this.rentBillOpen = !this.rentBillOpen;
+    },
+
+    toggleBillDetails(szamla_azon) {
+      this.rentBillDetailsStates[szamla_azon] =
+        !this.rentBillDetailsStates[szamla_azon];
+    },
+    async cleanreportOpen() {
+      this.cleanreport = !this.cleanreport;
+    },
+    async demageReportOpen() {
+      this.demageReport = !this.demageReport;
+    },
+    async accidentReportOpen() {
+      this.accidentReport = !this.accidentReport;
+    },
+
+  },
+  computed: {
+    currentModel() {
+      const gyartoAlapjanModel = {
+        VW: "EupModel",
+        Skoda: "CitigoModel",
+        Renault: "KangooModel",
+        Opel: "VivaroModel",
+        KIA: "KiaNiroModel",
+      };
+
+      return gyartoAlapjanModel[this.car.gyarto] || null;
+    }
+  },
+}
 </script>
 
 <style scoped>
