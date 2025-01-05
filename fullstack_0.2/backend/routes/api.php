@@ -5,6 +5,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\CarStatusController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FleetController;
+use App\Http\Controllers\GoogleMapsController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
@@ -16,6 +17,9 @@ Route::get('cars/{car}/bills', [CarController::class, 'filterCarFines']);
 Route::get('cars/{car}/tickets', [CarController::class, 'carTickets']);
 Route::get('cars/{car}/renthistory', [CarController::class, 'carWithRentHistory']);
 Route::get('/bills/{car}/fees',[BillController::class,'carFees']);
+
+Route::get('/googlemapsapi', [GoogleMapsController::class, 'getApiUrl']);
+
 
 Route::apiResource('/tickets', TicketController::class);
 
