@@ -41,10 +41,6 @@
                 label-class="text-sky-400 text-lg font-semibold mb-2"
                 input-class="max-h-28 w-full align-top appearance-none bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 focus:outline-none focus:bg-white focus:border-gray-500" />
         </div>
-        <div class="flex flex-wrap my-5">
-
-        </div>
-
         <div class="flex justify-center my-5">
             <FormKit type="submit" label="Bejelentés" id="button">
             </FormKit>

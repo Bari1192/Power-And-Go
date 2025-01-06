@@ -36,7 +36,7 @@ class RenthistoryFactory extends Factory
             if ($zarasToltesSzazalek >= 1.0) {
                 ## 15% alatt zárják le, akkor egyből vegye ki a rendszer az autót és -> instant bünti érte!
                 if ($zarasToltesSzazalek <= 15.0) {
-                    $auto->status = 6;
+                    $auto->status = 7;
                     $auto->save();
                     ## Autó "kritikus töltés" értékre kerül -> nem foglalható!
                 }

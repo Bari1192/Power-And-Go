@@ -47,7 +47,7 @@
 
       <!-- BALESET BEJELENTÉSI KOMPONENS -->
       <div v-if="accidentReport">
-        <CarAccidentReport :lastRenter="carRentHistory.berlok[0].user" />
+        <CarAccidentReport :lastRenter="carRentHistory.berlok[0].user" @submit-success="submitAccidentReport" />
       </div>
 
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4"> Jármű adatai
@@ -279,9 +279,8 @@ export default {
   },
   methods: {
     toggleSection(section) {
-      this.cleanreport = section === 'cleanreport' ? !this.cleanreport : false;
-      this.demageReport = section === 'demageReport' ? !this.demageReport : false;
-      this.accidentReport = section === 'accidentReport' ? !this.accidentReport : false;
+      const sections = ['cleanreport', 'demageReport', 'accidentReport'];
+      sections.forEach(s => this[s] = s === section ? !this[s] : false);
     },
 
     async handleFormSubmit(data) {
@@ -305,66 +304,70 @@ export default {
       } catch (error) {
       }
     },
-
-    // [Felugró buborék helper]
-    toggleTooltip() {
-      this.isTooltipVisible = !this.isTooltipVisible;
+    async submitAccidentReport() {
+      const areYouSure = confirm("Biztosan bejelenti a balesetet?")
+      if (areYouSure) {
+        try {
+          const CarAccidentData = {
+            description: this.description,
+            car_id: this.car.car_id,
+            status_id: 4,
+          };
+          await http.put('/tickets', CarAccidentData);
+          alert("A baleseti bejelentés elküldve!");
+          window.location.reload();
+        }
+        catch (error) {
+          console.error("Hiba történt a baleseti bejelentés során:", error);
+          alert("Hiba történt! Kérjük, próbálja újra.");
+        }
+      }
     },
 
     async cardetails() {
-      this.carOpen = !this.carOpen;
-      if (this.carOpen) {
-        await nextTick();
-        this.$refs.adatokAlja.scrollIntoView({ behavior: 'smooth' });
-      }
-    },
+        this.carOpen = !this.carOpen;
+        if (this.carOpen) {
+          await nextTick();
+          this.$refs.adatokAlja.scrollIntoView({ behavior: 'smooth' });
+        }
+      },
     async noteDetails() {
-      this.noteOpen = !this.noteOpen;
-      if (this.noteOpen) {
-        await nextTick();
-        this.$refs.noteBottom.scrollIntoView({ behavior: 'smooth' });
-      }
-    },
+        this.noteOpen = !this.noteOpen;
+        if (this.noteOpen) {
+          await nextTick();
+          this.$refs.noteBottom.scrollIntoView({ behavior: 'smooth' });
+        }
+      },
     async rentHistoryDetails() {
-      this.rentHistoryOpen = !this.rentHistoryOpen;
-      if (this.rentHistoryOpen) {
-        await nextTick();
-        this.$refs.rentHistoryBottom.scrollIntoView({ behavior: 'smooth' });
+        this.rentHistoryOpen = !this.rentHistoryOpen;
+        if (this.rentHistoryOpen) {
+          await nextTick();
+          this.$refs.rentHistoryBottom.scrollIntoView({ behavior: 'smooth' });
+        }
+      },
+    async rentBillDetails() {
+        this.rentBillOpen = !this.rentBillOpen;
+      },
+
+      toggleBillDetails(szamla_azon) {
+        this.rentBillDetailsStates[szamla_azon] =
+          !this.rentBillDetailsStates[szamla_azon];
+      },
+    },
+    computed: {
+      currentModel() {
+        const gyartoAlapjanModel = {
+          VW: "EupModel",
+          Skoda: "CitigoModel",
+          Renault: "KangooModel",
+          Opel: "VivaroModel",
+          KIA: "KiaNiroModel",
+        };
+
+        return gyartoAlapjanModel[this.car.gyarto] || null;
       }
     },
-    async rentBillDetails() {
-      this.rentBillOpen = !this.rentBillOpen;
-    },
-
-    toggleBillDetails(szamla_azon) {
-      this.rentBillDetailsStates[szamla_azon] =
-        !this.rentBillDetailsStates[szamla_azon];
-    },
-    async cleanreportOpen() {
-      this.cleanreport = !this.cleanreport;
-    },
-    async demageReportOpen() {
-      this.demageReport = !this.demageReport;
-    },
-    async accidentReportOpen() {
-      this.accidentReport = !this.accidentReport;
-    },
-
-  },
-  computed: {
-    currentModel() {
-      const gyartoAlapjanModel = {
-        VW: "EupModel",
-        Skoda: "CitigoModel",
-        Renault: "KangooModel",
-        Opel: "VivaroModel",
-        KIA: "KiaNiroModel",
-      };
-
-      return gyartoAlapjanModel[this.car.gyarto] || null;
-    }
-  },
-}
+  }
 </script>
 
 <style scoped>

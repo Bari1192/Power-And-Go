@@ -15,7 +15,7 @@ class StoreTicketRequest extends FormRequest
     {
         return [
             "car_id" => ['required', 'integer', 'exists:cars,id'],
-            "status_id" => ['required', 'integer', 'between:1,6', 'exists:carstatus,id'],
+            "status_id" => ['required', 'integer', 'between:1,7', 'exists:carstatus,id'],
             "description" => ['required', 'max:255'],
         ];
     }

@@ -17,12 +17,15 @@
               <li>Bérlés alatt</li>
             </ul>
             <ul v-else-if="text === 4">
-              <li>Az autó meghibásodott.</li>
+              <li>Baleset miatt kivonva.</li>
             </ul>
             <ul v-else-if="text === 5">
-              <li>Tisztításra kivonva a forgalomból.</li>
+              <li>Szervízre vár.</li>
             </ul>
             <ul v-else-if="text === 6">
+              <li>Tisztításra kivonva a forgalomból.</li>
+            </ul>
+            <ul v-else-if="text === 7">
               <li>Kritikus töltöttségi szint.</li>
             </ul>
             <ul v-else>
@@ -35,7 +38,7 @@
         <button
             @click="toggleTooltip"
             class="font-semibold rounded-full mt-1 w-6 h-6 flex items-center align-middle justify-center"
-            :class="text === 6 ? 'bg-red-500 text-white hover:text-white hover:bg-red-600' : 'text-lime-900 bg-amber-100  hover:bg-amber-200 hover:font-bold'"
+            :class="text === 7 ? 'bg-red-500 text-white hover:text-white hover:bg-red-600' : 'text-lime-900 bg-amber-100  hover:bg-amber-200 hover:font-bold'"
             >
           {{ text }}
           </button>

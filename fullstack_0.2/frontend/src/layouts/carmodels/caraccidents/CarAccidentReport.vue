@@ -4,35 +4,50 @@
             <label for="location" class="text-2xl  my-4 text-white block">Baleset helyszíne:</label>
             <input id="location" type="text" class="border rounded-lg px-3 py-2 w-4/5"
                 placeholder="Kezdje el beírni a címet..." ref="autocompleteInput" />
-            <div class="mt-4 space-y-2 text-white">
-
-                <FormKit name="lastRenter" type="text" label="Legutóbbi bérlő"
-                    label-class="text-xl my-2 text-white block" :value="lastRenter"
-                    disabled
-                    input-class=" border rounded-lg appearance-none block w-3/5 bg-gray-300 bg-opacity-90 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
-
-                <FormKit
-                    type="datetime-local"
-                    v-model="formattedDateTime"
-                    label="Mikor történt a baleset?"
-                    validation="required|date_before"
+            <div class="mt-4 space-y-2 text-white ">
+                <FormKit type="form" id="demageReport" :form-class="submitted ? 'hide' : 'show'"
+                    submit-label="Bejelentés" @submit="submitAccidentReport" :actions="false" :validation="'required'"
                     :validation-messages="{
-                        date_before: 'Nem lehet a baleset későbbi időpontban!' ,
-                        required:'Kötelező megadni!'
-                    }"
-                    validation-visibility="live"
-                    input-class="text-sky-900 py-2 pr-4 rounded-xl text-center"
-                    inner-class="py-2"
-                    label-class="text-xl mt-4 text-white block"
-                />
+                        required: 'Kérjük minden adatot töltsön ki!'
+                    }">
+                    <div class="w-full px-3">
+                        <FormKit name="lastRenter" type="text" label="Legutóbbi bérlő"
+                            label-class="text-xl my-2 text-white block" :value="lastRenter" disabled
+                            input-class=" border rounded-lg appearance-none block w-3/5 bg-gray-300 bg-opacity-90 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+                    </div>
 
-                <FormKit type="form" :actions="false">
-                    <FormKit formtKit-class=" space-y-10" type="radio" name="someOneInjured" :options="['Igen', 'Nem']"
-                        label="Személyi sérülés történt?" />
+                    <div class="w-full px-3">
+                        <FormKit type="datetime-local" v-model="formattedDateTime" label="Mikor történt a baleset?"
+                            validation="required|date_before" :validation-messages="{
+                                date_before: 'Nem lehet a baleset későbbi időpontban!',
+                                required: 'Kötelező megadni!'
+                            }" validation-visibility="live" input-class="text-sky-900 py-2 pr-4 rounded-xl text-center"
+                            inner-class="py-2" label-class="text-xl mt-4 text-white block" />
+                    </div>
+
+                    <div class="w-full px-3">
+                        <FormKit formtKit-class="text-xl my-4 py-4 text-white block" type="radio" name="someOneInjured"
+                            :options="['Igen', 'Nem']" label="Személyi sérülés történt?" />
+                    </div>
+                    <div class="w-full my-2 px-3">
+                        <FormKit name="AccidentDescription" type="textarea" label="Baleset rövid leírása"
+                            placeholder="Mennyire sérült az autó? Forgalmat zavarja? Le tudta állítani?"
+                            v-model="description" :validation="'required|length:10,255'" :validation-messages="{
+                                length: 'A bejelentés szövege min 20, maximum 255 karakter hosszú lehet!',
+                                required: 'Kötelező kitölteni!'
+                            }" label-class="text-white text-lg mt-4 font-semibold mb-2"
+                            input-class="max-h-28 min-h-16 w-full align-top appearance-none bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded-md py-3 px-4 focus:outline-none focus:bg-white focus:border-gray-500"
+                            @input="value => description = value" />
+                    </div>
+                    <div
+                        class="flex justify-center mx-auto mt-5 bg-red-600 py-2 px-5 w-1/4 text-xl  border-2 rounded-xl hover:bg-red-800 hover:border-yellow-600">
+                        <FormKit type="submit" label="Bejelentés" id="button">
+                        </FormKit>
+                    </div>
                 </FormKit>
             </div>
         </div>
-        <div class="mt-8 h-96 border-8 rounded-2xl border-sky-300" id="map"></div>
+        <div class="mt-8 h-full border-8 rounded-2xl border-sky-300" id="map"></div>
     </div>
 </template>
 
@@ -51,6 +66,7 @@ export default {
     setup() {
         const formattedDateTime = ref('');
         const autocompleteInput = ref(null);
+        const description = ref('');
 
         let map = null;
         let marker = null;
@@ -150,6 +166,7 @@ export default {
         return {
             formattedDateTime,
             autocompleteInput,
+            description,
         };
     },
 };
