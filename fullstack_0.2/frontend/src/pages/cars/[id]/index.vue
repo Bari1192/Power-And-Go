@@ -47,7 +47,7 @@
 
       <!-- BALESET BEJELENTÉSI KOMPONENS -->
       <div v-if="accidentReport">
-        <CarAccidentReport :lastRenter="carRentHistory.berlok[0].user" @submit-success="submitAccidentReport" />
+        <CarAccidentReport :lastRenter="carRentHistory.berlok[0].user" @submit="submitAccidentReport" />
       </div>
 
       <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4"> Jármű adatai
@@ -214,6 +214,7 @@
       <div ref="rentBillsBottom"></div>
     </div>
   </BaseLayout>
+
 </template>
 
 <script>
@@ -222,7 +223,6 @@ import BaseTooltipCard from '@layouts/BaseTooltipCard.vue';
 import BaseCard from '@layouts/BaseCard.vue'
 import BaseLayout from "@layouts/BaseLayout.vue";
 import BaseReportCard from '@layouts/BaseReportCard.vue';
-import { nextTick } from 'vue';
 import EupModel from "@layouts/carmodels/EupModel.vue";
 import CitigoModel from "@layouts/carmodels/CitigoModel.vue";
 import KangooModel from "@layouts/carmodels/KangooModel.vue";
@@ -282,6 +282,38 @@ export default {
       const sections = ['cleanreport', 'demageReport', 'accidentReport'];
       sections.forEach(s => this[s] = s === section ? !this[s] : false);
     },
+    cardetails() {
+      this.carOpen = !this.carOpen;
+      if (this.carOpen) {
+        this.$nextTick(() => {
+          this.$refs.adatokAlja.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+    },
+    noteDetails() {
+      this.noteOpen = !this.noteOpen;
+      if (this.noteOpen) {
+        this.$nextTick(() => {
+          this.$refs.noteBottom.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+    },
+    rentHistoryDetails() {
+      this.rentHistoryOpen = !this.rentHistoryOpen;
+      if (this.rentHistoryOpen) {
+        this.$nextTick(() => {
+          this.$refs.rentHistoryBottom.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+    },
+    rentBillDetails() {
+      this.rentBillOpen = !this.rentBillOpen;
+    },
+
+    toggleBillDetails(szamla_azon) {
+      this.rentBillDetailsStates[szamla_azon] =
+        !this.rentBillDetailsStates[szamla_azon];
+    },
 
     async handleFormSubmit(data) {
       try {
@@ -304,70 +336,52 @@ export default {
       } catch (error) {
       }
     },
-    async submitAccidentReport() {
-      const areYouSure = confirm("Biztosan bejelenti a balesetet?")
-      if (areYouSure) {
+    async submitAccidentReport(data) {
+      if (this.isSubmitting) return; // Ha már folyamatban van, ne fusson újra
+      this.isSubmitting = true;
+
+      const { description } = data; // gyermektől jön //
+      if (!confirm(`Balesetet fog bejelenteni a ${this.car.rendszam} ${this.car.tipus} tipusú autóra. Megerősíti?`)) {
+        this.isSubmitting = false;
+        return;
+      }
+      else {
         try {
           const CarAccidentData = {
-            description: this.description,
+            description,
             car_id: this.car.car_id,
             status_id: 4,
           };
-          await http.put('/tickets', CarAccidentData);
-          alert("A baleseti bejelentés elküldve!");
-          window.location.reload();
+          const CarAccidentRefreshCarData = {
+            rendszam: this.car.rendszam,
+            toltes_szaz: parseFloat(this.car.toltes_szaz),
+            toltes_kw: parseFloat(this.car.toltes_kw),
+            becs_tav: parseFloat(this.car.becs_tav),
+            status: 4, // baleset //
+          }
+          await http.post('/tickets', CarAccidentData);
+          await http.put(`/cars/${this.car.car_id}`, CarAccidentRefreshCarData)
+          alert("A baleseti bejelentés elküldve, a jármű adatai frissültek!");
         }
         catch (error) {
-          console.error("Hiba történt a baleseti bejelentés során:", error);
-          alert("Hiba történt! Kérjük, próbálja újra.");
         }
       }
-    },
+    }
+  },
+  computed: {
+    currentModel() {
+      const gyartoAlapjanModel = {
+        VW: "EupModel",
+        Skoda: "CitigoModel",
+        Renault: "KangooModel",
+        Opel: "VivaroModel",
+        KIA: "KiaNiroModel",
+      };
 
-    async cardetails() {
-        this.carOpen = !this.carOpen;
-        if (this.carOpen) {
-          await nextTick();
-          this.$refs.adatokAlja.scrollIntoView({ behavior: 'smooth' });
-        }
-      },
-    async noteDetails() {
-        this.noteOpen = !this.noteOpen;
-        if (this.noteOpen) {
-          await nextTick();
-          this.$refs.noteBottom.scrollIntoView({ behavior: 'smooth' });
-        }
-      },
-    async rentHistoryDetails() {
-        this.rentHistoryOpen = !this.rentHistoryOpen;
-        if (this.rentHistoryOpen) {
-          await nextTick();
-          this.$refs.rentHistoryBottom.scrollIntoView({ behavior: 'smooth' });
-        }
-      },
-    async rentBillDetails() {
-        this.rentBillOpen = !this.rentBillOpen;
-      },
-
-      toggleBillDetails(szamla_azon) {
-        this.rentBillDetailsStates[szamla_azon] =
-          !this.rentBillDetailsStates[szamla_azon];
-      },
-    },
-    computed: {
-      currentModel() {
-        const gyartoAlapjanModel = {
-          VW: "EupModel",
-          Skoda: "CitigoModel",
-          Renault: "KangooModel",
-          Opel: "VivaroModel",
-          KIA: "KiaNiroModel",
-        };
-
-        return gyartoAlapjanModel[this.car.gyarto] || null;
-      }
-    },
-  }
+      return gyartoAlapjanModel[this.car.gyarto] || null;
+    }
+  },
+}
 </script>
 
 <style scoped>

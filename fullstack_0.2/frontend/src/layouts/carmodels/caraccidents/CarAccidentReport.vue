@@ -5,8 +5,14 @@
             <input id="location" type="text" class="border rounded-lg px-3 py-2 w-4/5"
                 placeholder="Kezdje el beírni a címet..." ref="autocompleteInput" />
             <div class="mt-4 space-y-2 text-white ">
-                <FormKit type="form" id="demageReport" :form-class="submitted ? 'hide' : 'show'"
-                    submit-label="Bejelentés" @submit="submitAccidentReport" :actions="false" :validation="'required'"
+                <FormKit 
+                    type="form" 
+                    id="demageReport"
+                    :form-class="submitted ? 'hide' : 'show'"
+                    submit-label="Bejelentés"
+                    @submit="onSubmit" 
+                    :actions="false" 
+                    :validation="'required'"
                     :validation-messages="{
                         required: 'Kérjük minden adatot töltsön ki!'
                     }">
@@ -41,8 +47,7 @@
                     </div>
                     <div
                         class="flex justify-center mx-auto mt-5 bg-red-600 py-2 px-5 w-1/4 text-xl  border-2 rounded-xl hover:bg-red-800 hover:border-yellow-600">
-                        <FormKit type="submit" label="Bejelentés" id="button">
-                        </FormKit>
+                        <FormKit type="submit" label="Bejelentés" id="button" />
                     </div>
                 </FormKit>
             </div>
@@ -57,19 +62,33 @@ import { ref, onMounted } from 'vue';
 import { http } from '@utils/http.mjs';
 
 export default {
+    data() {
+        return {
+            map :null,
+            marker : null,
+        }
+    },
     props: {
         lastRenter: {
             type: [String, null],
             required: true,
         },
     },
-    setup() {
+    setup(props, { emit }) {
         const formattedDateTime = ref('');
         const autocompleteInput = ref(null);
+
+        const submitted = ref(false);
         const description = ref('');
 
-        let map = null;
-        let marker = null;
+        const onSubmit = () => {
+          if (description.value.trim().length < 10) {
+            alert('A leírás túl rövid!');
+            return;
+          }
+          emit('submit', { description: description.value });
+          submitted.value = true;
+        };
 
         const updateDateTime = () => {
             const now = new Date();
@@ -166,31 +185,11 @@ export default {
         return {
             formattedDateTime,
             autocompleteInput,
+
+            submitted,
             description,
+            onSubmit,
         };
     },
 };
 </script>
-
-<!-- <style scoped>
-[data-invalid] .formkit-inner::after {
-  content: '❌'; /* Piros X ikon */
-  font-size: larger;
-  margin-left: 8px;
-  display: inline-flex;
-  border: 1px red dotted;
-  color: red;
-}
-[data-invalid] .formkit-messages {
-  color: red;
-  font-style: italic;
-}
-
-[data-complete] .formkit-inner::after {
-  content: '✅'; /* Zöld pipa ikon */
-  display: inline-flex;
-  color: green;
-  font-size: larger;
-  margin-left: 8px;
-}
-</style> -->
