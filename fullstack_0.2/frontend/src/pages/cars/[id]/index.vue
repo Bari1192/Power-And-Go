@@ -10,31 +10,11 @@
           <h1 class="text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.tipus }} </h1>
         </div>
       </div>
-      <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4">Új Bejelentés</h1>
-      <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
-      <div class="flex justify-center my-8 text-center text-xl space-x-8">
-        <button @click="toggleSection('cleanreport')" label="hiba"
-          class="bg-teal-500 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-teal-400 text-white font-semibold">
-          Tisztaság 🚬
-        </button>
-        <button label="hiba"
-          class="bg-orange-500 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-orange-600 hove:text-white text-white font-semibold">
-          Meghibásodás 🔧
-        </button>
-        <button @click="toggleSection('accidentReport')" label="hiba"
-          class="bg-rose-600 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-rose-700 text-sky-100 font-semibold">
-          Baleset ⛐
-        </button>
-        <button @click="toggleSection('demageReport')" label="hiba"
-          class="bg-indigo-500 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-indigo-400 text-sky-100 font-semibold">
-          Rongálás 🔨
-        </button>
-        <button label="hiba"
-          class="bg-red-700 rounded-full py-2 px-6 border-4 border-sky-800 hover:bg-red-600 text-sky-100 font-semibold">
-          Büntetés 📃
-        </button>
-      </div>
-      <div v-if="cleanreport && carRentHistory.berlok && carRentHistory.berlok.length > 0"
+      
+      <CarReportButtons @toggle="toggleSection"/>
+
+      <!-- TISZTASÁG BEJELENTÉSI MODEL -->
+      <div v-if="cleanreport"
         class="bg-sky-950 border-4 border-sky-700 rounded-lg mt-10 p-4">
         <BaseReportCard :carId="car.car_id" :lastRenter="carRentHistory.berlok[0].user"
           @submit-success="handleFormSubmit" />
@@ -74,6 +54,7 @@
         </div>
       </transition>
       <div ref="adatokAlja"></div>
+
       <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4"> Bejegyzések
         <button @click="noteDetails" class="flex items-center justify-centerfont-bold rounded-full"
           style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;"
@@ -229,10 +210,12 @@ import KangooModel from "@layouts/carmodels/KangooModel.vue";
 import VivaroModel from "@layouts/carmodels/VivaroModel.vue";
 import KiaNiroModel from "@layouts/carmodels/KiaNiroModel.vue";
 import CarAccidentReport from '@layouts/carmodels/caraccidents/CarAccidentReport.vue';
+import CarReportButtons from '@layouts/reportforms/CarReportButtons.vue';
 
 export default {
   components: {
     EupModel,
+    CarReportButtons,
     BaseReportCard,
     BaseTooltipCard,
     BaseCard,
@@ -362,6 +345,7 @@ export default {
           await http.post('/tickets', CarAccidentData);
           await http.put(`/cars/${this.car.car_id}`, CarAccidentRefreshCarData)
           alert("A baleseti bejelentés elküldve, a jármű adatai frissültek!");
+          window.location.reload();
         }
         catch (error) {
         }
