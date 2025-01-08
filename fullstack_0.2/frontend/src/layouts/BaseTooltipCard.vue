@@ -46,7 +46,7 @@
 export default {
   props: {
     title: String,
-    text: Number,
+    text: [Number, String],
   },
   data() {
     return {

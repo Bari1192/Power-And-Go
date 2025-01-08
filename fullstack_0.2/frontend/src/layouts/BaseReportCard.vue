@@ -20,7 +20,7 @@
                     input-class=" block w-full bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     :options="[
                         { value: '', label: 'Kérem válasszon!' },
-                        { value: 5, label: 'Tisztasági takarítást igényel' },
+                        { value: 6, label: 'Tisztasági takarítást igényel' },
                         { value: 1, label: 'Tisztítva, forgalomba visszaállítása' },
                     ]" v-model="selectedStatus" />
             </div>

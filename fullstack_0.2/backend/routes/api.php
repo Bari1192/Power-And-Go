@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('bills/filter/{type}', [BillController::class, 'filter']);
 Route::get('cars/{car}/bills', [CarController::class, 'filterCarFines']);
 
+Route::get('cars/{car}/description',[CarController::class, 'carLastTicketDescription']);
 Route::get('cars/{car}/tickets', [CarController::class, 'carTickets']);
 Route::get('cars/{car}/renthistory', [CarController::class, 'carWithRentHistory']);
 Route::get('/bills/{car}/fees',[BillController::class,'carFees']);

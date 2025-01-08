@@ -1,9 +1,9 @@
 <template>
-  <div class="card-body border-2 border-lime-500 rounded-md my-2 overflow-hidden text-xl">
-    <div class="card-title bg-amber-50 py-1 px-2 text-lime-900 font-semibold flex items-center">
+  <div class="card-body sm:min-h-full border-2 border-lime-500 rounded-md my-2 overflow-hidden ">
+    <div class="card-title md:min-h-18 lg:min-h-16 lg:max-h-20 bg-cyan-800 border-b-2 border-lime-600 py-1 text-xl px-2 text-white font-bold flex items-center">
       {{ title }}
     </div>
-    <div class="card-text p-3 h-16 text-white">
+    <div class="card-text sm:min-h-18 lg:min-h-26 font-semibold text-xl p-3 text-white">
       {{ text }}
       <slot />
     </div>

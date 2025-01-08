@@ -65,4 +65,13 @@ class CarController extends Controller
         $car=Car::with(['users', 'fleet', 'users.person'])->find($car->id);
         return new CarWithUsersResource($car);
     }
+
+    ## Utolsó ticket lekérjük az autó ID alapján, státusz szöveggel.
+    public function carLastTicketDescription(Car $car):JsonResource{
+        $tickets = Ticket::with('status')
+        ->where('car_id',$car->id)
+        ->orderBy('id','desc')
+        ->First();
+        return new TicketResource($tickets);
+    }
 }

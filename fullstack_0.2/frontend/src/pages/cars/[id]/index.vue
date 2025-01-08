@@ -1,21 +1,20 @@
 <template>
   <BaseLayout>
-    <div class="container mt-20 mb-20 w-2/3 mx-auto">
+    <div class="container mt-20 mb-20 w-full sm:w-11/12 lg:w-2/3 mx-auto">
 
       <div
-        class="m-auto py-6 d-flex justify-center my-10 w-full border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
+        class="m-auto w-4/5 py-6 d-flex justify-center my-10 sm:w-full border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
         <div class="text-center grid grid-cols-3">
-          <h1 class="text-5xl text-sky-100 border-r-4 border-sky-500 italic"> {{ car.gyarto }} </h1>
-          <h1 class="text-5xl text-lime-300 border-x-4 border-sky-500"> {{ car.rendszam }} </h1>
-          <h1 class="text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.tipus }} </h1>
+          <h1 class="text-3xl md:text-4xl xl:text-5xl text-sky-100 border-r-4 border-sky-500 italic"> {{ car.gyarto }} </h1>
+          <h1 class="text-3xl md:text-4xl xl:text-5xl text-lime-300 border-x-4 border-sky-500"> {{ car.rendszam }} </h1>
+          <h1 class="text-3xl md:text-4xl xl:text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.tipus }} </h1>
         </div>
       </div>
-      
-      <CarReportButtons @toggle="toggleSection"/>
+
+      <CarReportButtons @toggle="toggleSection" />
 
       <!-- TISZTASÁG BEJELENTÉSI MODEL -->
-      <div v-if="cleanreport"
-        class="bg-sky-950 border-4 border-sky-700 rounded-lg mt-10 p-4">
+      <div v-if="cleanreport" class="bg-sky-950 border-4 border-sky-700 rounded-lg mt-10 p-4">
         <BaseReportCard :carId="car.car_id" :lastRenter="carRentHistory.berlok[0].user"
           @submit-success="handleFormSubmit" />
       </div>
@@ -30,18 +29,22 @@
         <CarAccidentReport :lastRenter="carRentHistory.berlok[0].user" @submit="submitAccidentReport" />
       </div>
 
-      <h1 class="text-5xl font-bold text-sky-100 italic mt-20 mb-4"> Jármű adatai
+      <h1 class="text-5xl font-bold text-sky-100 italic mb-4" :style="{
+        marginTop: accidentReport ? '6rem' : (demageReport ? '6rem' : '3rem')
+      }"> Jármű adatai
         <button @click="cardetails"
           class="flex items-center justify-center bg-indigo-500 text-white font-bold rounded-full hover:bg-indigo-700"
           style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;"
-          :style="{ transform: carOpen ? 'rotate(90deg)' : 'rotate(-90deg)' }">
+          :style="{
+            transform: carOpen ? 'rotate(90deg)' : 'rotate(-90deg)'
+          }">
           +
         </button>
       </h1>
       <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
       <transition name="fade-slide">
-        <div class="grid grid-cols-3 gap-6" v-if="carOpen">
-          <BaseTooltipCard :title="'Állapota'" :text="car.status" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 lg:gap-6 gap-2" v-if="carOpen">
+          <BaseCard :title="'Gépjármű aktuális állapota'" :text="latestTicket.status_descrip" />
 
           <BaseCard :title="'Becsült megtehető távolság'" :text="car.becs_tav + ' km'" />
           <BaseCard :title="'Akkumulátor töltöttsége'" :text="car.toltes_kw + ' kW'" />
@@ -64,14 +67,14 @@
         </button>
 
       </h1>
-      <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
+      <div class=" w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
       <div v-if="!rentFees.length">
         <p class="text-gray-200 font-semibold italic px-2 text-lg">Ehhez az autóhoz nem tartozik bejegyzés.</p>
       </div>
       <transition name="fade-slide">
         <div v-if="noteOpen">
-          <BaseCard v-for="ticket in rentFees" :key="ticket.id" class="h-64 text-2xl mb-4"
-            :title="'Bejegyzés azonosítója: ' + ticket.id">
+          <BaseCard v-for="ticket in rentFees" :key="ticket.id" class="min-h-fit text-5xl mb-8"
+            :title="'Bejegyzés azonosítója: ' +  ticket.id">
             <div class="grid grid-cols-3 gap-4 my-4">
               <!--Első oszlop-->
               <div class="col-span-1 text-white">
@@ -163,7 +166,7 @@
       <transition name="fade-slide">
         <div v-if="rentBillOpen">
           <div v-for="fine in rentBillFees" :key="fine.szamla_azon">
-            <BaseCard class="cursor-pointer" :class="rentBillDetailsStates[fine.szamla_azon] ? 'h-64' : 'h-10'"
+            <BaseCard class="cursor-pointer" :class="rentBillDetailsStates[fine.szamla_azon] ? 'min-h-full' : 'h-10 md:h-10 lg:h-14 xl:h-16'"
               :title="fine.szamla_tipus === 'toltes_buntetes' ? 'Akkumulátor lemerítési & szállítási pótdíj - ' + fine.osszeg : fine.szamla_tipus"
               @click="toggleBillDetails(fine.szamla_azon)">
               <div class="cursor-default grid grid-cols-3 gap-2 mx-1" v-if="rentBillDetailsStates[fine.szamla_azon]">
@@ -200,7 +203,6 @@
 
 <script>
 import { http } from '@utils/http'
-import BaseTooltipCard from '@layouts/BaseTooltipCard.vue';
 import BaseCard from '@layouts/BaseCard.vue'
 import BaseLayout from "@layouts/BaseLayout.vue";
 import BaseReportCard from '@layouts/BaseReportCard.vue';
@@ -217,7 +219,7 @@ export default {
     EupModel,
     CarReportButtons,
     BaseReportCard,
-    BaseTooltipCard,
+    // BaseTooltipCard,
     BaseCard,
     BaseLayout,
     EupModel,
@@ -242,6 +244,7 @@ export default {
       cleanreport: false,
       demageReport: false,
       accidentReport: false,
+      latestTicket: [],
     }
   },
   async mounted() {
@@ -251,6 +254,9 @@ export default {
     const ticketresponse = await http.get(`/cars/${this.$route.params.id}/tickets`);
     this.rentFees = ticketresponse.data.data;
 
+    const resp = await http.get(`/cars/${this.$route.params.id}/description`);
+    this.latestTicket = resp.data.data;
+
     const rentResponse = await http.get(`/cars/${this.$route.params.id}/renthistory`);
     this.carRentHistory = rentResponse.data.data;
 
@@ -259,6 +265,7 @@ export default {
     this.rentBillFees.forEach((fine) => {
       this.$set(this.rentBillDetailsStates, fine.szamla_azon, false);
     });
+
   },
   methods: {
     toggleSection(section) {
