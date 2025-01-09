@@ -19,7 +19,7 @@ class CarUserRentsSeeder extends Seeder
         $folyamatban = Rentinprocess::factory(50)->make()->toArray();
         DB::table('car_user_rents')->insert($folyamatban);
 
-        $lezart = Renthistory::factory(500)->make()->toArray();
+        $lezart = Renthistory::factory(1000)->make()->toArray();
         DB::table('car_user_rents')->insert($lezart);
     }
 }

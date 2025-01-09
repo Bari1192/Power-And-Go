@@ -23,9 +23,9 @@ Route::get('/googlemapsapi', [GoogleMapsController::class, 'getApiUrl']);   ## E
 Route::get('/geocode', [GoogleMapsController::class, 'getGeocode']);        ## Ez a térképet inicializálja és jeleníti meg rajta.
 
 
-Route::apiResource('/tickets', TicketController::class);
+Route::apiResource('tickets', TicketController::class);
 
-Route::apiResource('/bills', BillController::class);
+Route::apiResource('bills', BillController::class);
 
 Route::apiResource('fleets', FleetController::class);
 

@@ -48,30 +48,34 @@ class CarController extends Controller
     }
     public function filterCarFines(Car $car): JsonResource
     {
-        $szamlak = Bill::where('auto_azon', $car->autok_id)
-            ->where('szamla_tipus', 'toltes_buntetes')
-            ->get();
+        $szamlak = Bill::with(['users', 'persons'])
+        ->where('car_id', $car->id)
+        ->where('szamla_tipus', 'toltes_buntetes')
+        ->get();
 
         return BillResource::collection($szamlak);
     }
     public function carTickets(Car $car): JsonResource
     {
         $tickets = Ticket::with('status')
-        ->where('car_id',$car->id)
-        ->get();
+            ->where('car_id', $car->id)
+            ->get();
+
         return TicketResource::collection($tickets);
     }
-    public function carWithRentHistory(Car $car):JsonResource{
-        $car=Car::with(['users', 'fleet', 'users.person'])->find($car->id);
+    public function carWithRentHistory(Car $car): JsonResource
+    {
+        $car = Car::with(['users', 'fleet', 'users.person'])->find($car->id);
         return new CarWithUsersResource($car);
     }
 
     ## Utolsó ticket lekérjük az autó ID alapján, státusz szöveggel.
-    public function carLastTicketDescription(Car $car):JsonResource{
+    public function carLastTicketDescription(Car $car): JsonResource
+    {
         $tickets = Ticket::with('status')
-        ->where('car_id',$car->id)
-        ->orderBy('id','desc')
-        ->First();
+            ->where('car_id', $car->id)
+            ->orderBy('id', 'desc')
+            ->First();
         return new TicketResource($tickets);
     }
 }

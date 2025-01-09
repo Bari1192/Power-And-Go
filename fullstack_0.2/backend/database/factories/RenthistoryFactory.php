@@ -16,7 +16,7 @@ class RenthistoryFactory extends Factory
 
     public function definition(): array
     {
-        $auto = Car::with('fleet')->where('status', 1)->first();
+        $auto = Car::with('fleet')->where('status', 1)->first(); // carstatus alapján SZABAD.
         do {
             $autoKategoria = $auto->kategoria;
             $flottaTipus = $auto->fleet;
@@ -88,15 +88,13 @@ class RenthistoryFactory extends Factory
             'vezetesi_perc' => $vezetesIdo,
             'berles_osszeg' => $berlesOsszeg,
             'szamla_kelt'=>now(),
-            'rentstatus' => 2,
+            'rentstatus' => 2,// Lezárt bérlés -> BillSeeder generáláshoz
         ];
     }
     private function autoKmOraFrissites(Car $auto, $megtettTavolsag): void
     {
         $auto->kilometerora += $megtettTavolsag;
         $auto->save();
-        # A save() nélkül a változások CSAK a memóriaállapotban maradnak,
-        # NEM kerülnek elmentésre az adatbázisba... NE FELEJTSD EL!
     }
 
     private function autoToltesFrissites(Car $auto, float $zarasToltesSzazalek, float $zaraskoriToltesKw): void
@@ -129,9 +127,6 @@ class RenthistoryFactory extends Factory
 
     private function megtettTavolsag(int $idoKulonbseg, Car $auto): int
     {
-        ### Vegye figyelembe, hogy mekkora az autó töltöttségi szintje, aminél hosszabb távolságot (km)-ben ne generáljon le.
-        ### Ha legenerálna, akkor  túlmennénk az akkumulátor kapacitásán.
-
         $aktualisHatotav = round(($auto->fleet->hatotav / 100) * $auto->toltes_szaz);
         if ($idoKulonbseg <= 1800) {
             return min(random_int(5, 10), $aktualisHatotav);

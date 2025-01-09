@@ -18,6 +18,7 @@ class Car extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'id',
         'rendszam',
         'toltes_szaz',
         'toltes_kw',

@@ -5,6 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Car;
 use Tests\TestCase;
 
+use function PHPUnit\Framework\assertArrayHasKey;
 
 class CarControllerTest extends TestCase
 {
@@ -72,5 +73,48 @@ class CarControllerTest extends TestCase
                 'id' => $latestCardata->id,
             ]
         );
+    }
+    public function test_one_car_all_tickets(): void
+    {
+        ## Arrange 
+        ## DB már fel van töltve
+        $car = Car::firstOrFail();
+
+        ## Act
+        $response = $this->get("/api/cars/{$car->id}/bills");
+
+        ## Assert
+        $response->assertStatus(200); ## NYÍLRA FIGYELJ!
+
+        $data = collect($response->json('data'));
+
+        if ($data->isEmpty()) {
+            $this->assertTrue($data->isEmpty(), 'Ehhez az autóhoz nincs büntetés kiírva.');
+        } else {
+            $data->each(function ($entry) {
+                $this->assertArrayHasKey('szamla_tipus', $entry);
+                $this->assertEquals('toltes_buntetes', $entry['szamla_tipus']);
+            });
+        }
+    }
+
+    public function test_latest_car_ticket_description_text(): void
+    {
+
+        // Arrange
+        $car = Car::FirstOrFail();
+        // Act
+        $response = $this->get("/api/cars/{$car->id}/description");
+        // Assert
+        $response->assertStatus(200);
+        $data = $response->json('data');
+
+        // Ellenőrizzük, hogy van-e `data` mező és nem üres
+        $this->assertNotEmpty($data, 'Az adat nem érkezett meg vagy üres.');
+
+        // Ellenőrizzük, hogy a `description` kulcs létezik és nem üres
+        $this->assertArrayHasKey('description', $data, 'A leírás hiányzik.');
+        $this->assertIsString($data['description'], 'A description nem szöveg.');
+        $this->assertNotEmpty($data['description'], 'A description mező üres.');
     }
 }

@@ -52,7 +52,7 @@ class RentinprocessFactory extends Factory
             'nyitas_szaz' => $nyitasToltesSzazalek,
             'nyitas_kw' => $nyitasToltesKw,
             'szamla_kelt'=>now(),
-            'rentstatus'=>1,
+            'rentstatus'=>3, // folyamatban -> carstatus alapján
         ];
     }
 }
