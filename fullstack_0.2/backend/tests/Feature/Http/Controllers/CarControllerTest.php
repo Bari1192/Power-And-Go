@@ -98,7 +98,7 @@ class CarControllerTest extends TestCase
         }
     }
 
-    public function test_latest_car_ticket_description_text(): void
+    public function test_car_latest_ticket_description_text(): void
     {
 
         // Arrange
@@ -109,12 +109,28 @@ class CarControllerTest extends TestCase
         $response->assertStatus(200);
         $data = $response->json('data');
 
-        // Ellenőrizzük, hogy van-e `data` mező és nem üres
+        ## Ellenőrizzük, hogy van-e `data` mező és nem üres
         $this->assertNotEmpty($data, 'Az adat nem érkezett meg vagy üres.');
 
-        // Ellenőrizzük, hogy a `description` kulcs létezik és nem üres
+        ## Ellenőrizzük, hogy a `description` kulcs létezik és nem üres
         $this->assertArrayHasKey('description', $data, 'A leírás hiányzik.');
         $this->assertIsString($data['description'], 'A description nem szöveg.');
         $this->assertNotEmpty($data['description'], 'A description mező üres.');
+    }
+
+    public function test_car_all_rent_history():void{
+        ## Arrange
+        $car = Car::FirstOrFail();
+        
+        ## Act
+        $response=$this->get("api/cars/{$car->id}/renthistory");
+
+        ## Assert
+        $response->assertStatus(200);
+        $data=$response->json('data');
+
+        $this->assertNotEmpty($data,"Nem érkezett adat a végpontról / üres!");
+        $this->assertArrayHasKey('berlok',$data,'A bérlők nem töltődtek be!');
+        $this->assertNotEmpty($data['berlok'], 'a `berlok` tömb üresen érkezett vissza!. ');
     }
 }
