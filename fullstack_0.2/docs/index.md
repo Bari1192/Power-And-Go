@@ -1,12 +1,334 @@
-# Dokumentáció
+# Programspecifikációs Dokumentum
+
+## Bevezetés és Áttekintés
+
+A rendszer célja egy átfogó, elektromos járműflottából álló autómegosztó-alkalmazás `Dashboard / Admin felületének` megvalósítása. Mindezeket hiteles és a valóságot mélyen tükröző adatok, adatmodellek nyújtanak átfogó képet.
+
+Funkcionalitása átível az egyszerűbb adatkezelések ösvényén, hiszen egy kézből nyújt átfogó megvalósítási képet:
+
+- A járművek flottakezelési mechanikájáról,
+- Járművek részletes felszereltségéről,
+- Dinamikus Kategóricsoportokba osztásukól,
+- Bérlések, meghibásodások, bejelentések kezeléséről,
+- Felhasználók és dolgozók kezeléséről, jogosultságaikról és adatvédelmeikről,
+- Az automata számlázási, büntetés kiállítási és jármű forgalomba helyezés/kivonási rendszerről,
+- Ügyfél-előfizetési rendszerről és azok adaptív kezeléséről,(_kedvezmények, árazások_)
+- Továbbá mindezeket kibővítve még átfogóbb beépített és frissülő statisztikákkal, kimutatásokkal implementálva támogatja a maximális hatékonyság kifejtését.
+
+Az adatbázis-kapcsolat `RESTful API`-n keresztül biztosított, mely hozzáférést nyújt az adatokhoz. Az adatlekérési pontok kialakításának elsődleges célja a `Frontend`-en való megjelenítés és vizualizáció. Ennek köszönhetően felhasználó-és fejlesztőbarát szemlélettel kerül kialakításra az elkészült alkalmazás.
+
+## Telepítés és Konfiguráció
+
+A rendszer inicializálását és az első indítását a `start.sh` fájl végzi el.
+
+```bash
+sh start.sh
+```
+
+  ***Ez a szkript biztosítja az alábbi lépések automatikus futtatását:***
+
+  1. Adatbázis táblák létrehozását, a **migrációk lefutnak**, és az adatbázis a legfrissebb struktúrával jön létre.
+
+  2. Adatok inicializálását az adatbázisba **seeder**-ek segítségével végzi a rendszer. Előre definiált **struktúra alapján** feltöltésre kerülnek az adatokkal.
+
+  3. Tesztesetek, az előre definiált tesztesetek lefutnak, biztosítva a rendszer stabilitását, annak kifogástalan működését.
+
+  4. Konténerek ellenőrzését. A Docker konténerek elindulnak és működésükről / futásukról visszajelzést kapunk.
+
+## Adatbázis struktúra és Modellek
+
+### Fleet Modul
+
+#### Áttekintés
+
+A **Fleet modul** felelős a flotta adatok kezeléséért. Ez a modul tartalmazza az elektromos járműflották adatait, beleértve a:
+
+- Gyártót,
+- Típust,
+- Teljesítményt,
+- Végsebességet,
+- A gumiabroncsok méretét és sorozatszámát
+- A gépjármű hatótávolságát kilóméterbe vetítve.
+
+A Fleet modul `kapcsolódik` továbbá a **Cars** és a **Users** modulokhoz is, biztosítva az adatkapcsolatot a flotta-jármű-bérlő hierarchia rendszerben.
+
+---
+
+### Migrációk | Nézetek (Views)
+Az alábbi nézeteket (views) az adatbázis migrációk automatikusan létrehozzák. A nézetek célja az adatok aggregálása és egyszerűsített lekérdezések biztosítása a program üzleti logikájában.
+
+#### Nézetek (Views)
+ 1. `most_rented_cars`
+    - **Cél**: A legtöbbet bérelt járműtípusok listázása.
+    - **Forrás táblák**:
+      - `car_user_rents`
+      - `cars`
+      - `fleets`
+    - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az     alábbi parancs kiadásával:
+      ```sql
+      DROP VIEW IF EXISTS most_rented_cars;
+      ```
+---
+
+2. `toltes_buntetesek`
+    - **Cél**: Töltési büntetésekhez kapcsolódó járművek listázása.
+    - **Forrás táblák**:
+      - `cars`
+      - `bills`
+    - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az     alábbi parancs kiadásával:
+      ```sql
+      DROP VIEW IF EXISTS most_rented_cars;
+      ```
+---
+
+3. `user_rents_db`
+    - **Cél**: Felhasználók bérléseinek összesítése.
+    - **Forrás táblák**:
+      - `car_user_rents`
+      - `persons`
+    - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az     alábbi parancs kiadásával:
+      ```sql
+      DROP VIEW IF EXISTS user_rents_db;
+      ```
+
+---
+4. `SzamlakCsoportositva`
+    - **Cél**: Számlák típuscsoportok alapján való rendezése, darabszám szerint csoportosítva.
+    - **Forrás táblák**:
+      - `bills`
+    - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az     alábbi parancs kiadásával:
+      ```sql
+      DROP VIEW IF EXISTS SzamlakCsoportositva;
+      ```
+
+---
+
+Ez a szerkezet logikusan elrendezi a nézetfájlokat. Elkülöníti őket a többi migrációtól, ugyanakkor kiemeli a használatuk előnyeit, üzleti követelményeiket.
+
+---
+#### Migrációk | Táblák
+
+- **fleets**
+  - **Oszlopok**:
+    - `id` (int) – Elsődleges kulcs.
+    - `gyarto` (string) – Gyártó neve (max. 30 karakter).
+    - `tipus` (string) – Jármű típusa (max. 30 karakter).
+    - `teljesitmeny` (int) – Teljesítmény (kW).
+    - `vegsebesseg` (int) – Maximális sebesség (km/h).
+    - `gumimeret` (string) – Gumi mérete (pl. 165|65-R15).
+    - `hatotav` (int) – Hatótávolság (km).
+
+---
 
 
-## [Adatbázis-Nézetek]
+## Modell
 
-### Indulás
-- A Migrációs folyamat és a szerver felépülése után a Seederek függőségi sorrendjében feltöltésre kerül az adatbázisba a Töltés büntetésekhez tartozó nézetfájl, továbbá a Számlákat csoportosító nézetfájl. 
+### Fleet Modell
+
+- **Főbb attribútumok**:
+  - `protected $fillable`:
+    - `gyarto`, `tipus`, `teljesitmeny`, `vegsebesseg`, `gumimeret`, `hatotav`.
+- **Relációk**:
+  - `cars`: **Egy** flotta **típus** _(rekord)_ **több autóhoz** kapcsolódik (`HasMany` kapcsolat).
+
+---
+
+## Seeder
+
+### FleetSeeder
+
+- **Reprezentatív létrehozott adatok**:
+
+```json
+[
+  {
+    "gyarto": "VW",
+    "tipus": "e-up!",
+    "teljesitmeny": 18,
+    "vegsebesseg": 130,
+    "gumimeret": "165|65-R15",
+    "hatotav": 135
+  }
+]
+```
+
+---
+
+## API Végpontok
+
+### Végpontok és Funkcionalitások
+
+1. **GET** `/api/fleets`
+
+   - **Leírás**: A teljes flotta tábla adatainak megjelenítése, lekérése.
+   - **Controller metódus**: `fleets.index`
+   - **Válasz *reprezentatív* eredménye**:
+
+     ```json
+     [
+       {
+         "flotta_id": 1,
+         "gyarto": "VW",
+         "tipus": "e-up!",
+         "teljesitmeny": 18,
+         "vegsebesseg": 130,
+         "gumimeret": "165|65-R15",
+         "hatotav": 135
+       }
+     ]
+     ```
+
+2. **POST** `/api/fleets`
+
+   - **Leírás**: Új flotta létrehozása.
+   - **Validáció**: `StoreFleetRequest` fájl végzi.
+   - **Példa *reprezentatív* adatbeszúrás eredménye**:
+     ```json
+     {
+       "gyarto": "Skoda",
+       "tipus": "Citigo-e-iV",
+       "teljesitmeny": 36,
+       "vegsebesseg": 130,
+       "gumimeret": "165|65-R16",
+       "hatotav": 265
+     }
+     ```
+
+3. **PUT** `/api/fleets/{id}`
+
+   - **Leírás**: Létező flotta frissítése.
+   - **Validáció**: `UpdateFleetRequest`.
+
+4. **DELETE** `/api/fleets/{id}`
+   - **Leírás**: Flotta törlése.
+   - **Validáció**: `FleetController`-ben, amennyiben az adatrekord nem létezik, hibaüzenettel tér vissza.
+
+---
+
+## Kapcsolódások
+
+### Relációk
+- **CarResource** fájlban: 
+  - A flotta adatai (`gyarto`, `tipus`, `teljesitmeny` *és további adatok)* a járművekhez kapcsolódnak.
+- **CarWithUsersResource**:
+  - A flotta adatai járműveken keresztül megjelennek a bérlői adatokhoz kapcsolva.
+
+---
+## Validáció
+
+### `StoreFleetRequest`
+- **Szabályok**:
+  - `gyarto`: Kötelező, max. 30 karakter.
+  - `tipus`: Kötelező, max. 30 karakter.
+  - `teljesitmeny`: Kötelező, 18 és 500 közötti egész szám.
+  - `vegsebesseg`: Kötelező, 100 és 300 közötti egész szám.
+  - `gumimeret`: Kötelező, max. 30 karakter.
+  - `hatotav`: Kötelező, 100 és 1000 közötti egész szám.
+
+### `UpdateFleetRequest`
+- Ugyanaz, mint a `StoreFleetRequest`, az `id` mező kötelező.
+
+---
+
+## Funkcionalitások (Use Case-ek)
+
+## Frontend integrációk
+
+## Bővítések és Testreszabások
+
+## Hibakezelés és Hibaüzenetek
+
+## Tesztelés
+### Automatikus tesztek
+
+#### Fleet Modul Tesztelése
+
+1. **GET /api/fleets**  
+   - **Cél**: A flotta adatok sikeres lekérése.  
+   - **Teszt metódus**: `test_get_all_fleet_types`
+   - **Elvárt eredmény**:
+     - HTTP válasz státusz: `200 OK`.
+
+2. **POST /api/fleets**  
+   - **Cél**: Új flotta típus létrehozása az adatbázisban.  
+   - **Teszt metódus**: `test_post_fake_fleet_type_to_db`
+   - **Adat**:
+     ```json
+     {
+       "gyarto": "Renault",
+       "tipus": "UI-UX-ULTRA",
+       "teljesitmeny": 100,
+       "vegsebesseg": 300,
+       "gumimeret": "165|65-R15",
+       "hatotav": 445
+     }
+     ```
+   - **Elvárt eredmények**:
+     - HTTP válasz státusz: `201 Created`.
+     - Adatbázis tartalmazza az új rekordot.
+
+3. **PUT /api/fleets/{id}**  
+   - **Cél**: Létező flotta adatainak módosítása.  
+   - **Teszt metódus**: `test_put_previous_fake_fleet_modifing`
+   - **Adat**:
+     ```json
+     {
+       "gyarto": "Renault",
+       "tipus": "MODIFIED-ULTRA-SUPER",
+       "teljesitmeny": 100,
+       "vegsebesseg": 300,
+       "gumimeret": "165|65-R15",
+       "hatotav": 445
+     }
+     ```
+   - **Elvárt eredmények**:
+     - HTTP válasz státusz: `200 OK`.
+     - Adatbázis tartalmazza a frissített rekordot.
+
+4. **DELETE /api/fleets/{id}**  
+   - **Cél**: Létező flotta rekord törlése az adatbázisból.  
+   - **Teszt metódus**: `test_delete_fake_fleet_type_from_db`
+   - **Elvárt eredmények**:
+     - HTTP válasz státusz: `204 No Content`.
+     - Adatbázis nem tartalmazza a törölt rekordot.
+
+---
+
+### Tesztek összefoglalása
+- Az automatizált tesztek lefedik a flotta **CRUD** műveleteit.
+- A tesztek biztosítják, hogy az **API végpontok** megfelelően működjenek és az adatbázis tranzakciók **konzisztens állapotukban** maradjanak.
+
+- **Tesztek futtatása**: 
+  
+  ```bash
+  docker compose exec backend fish
+  ```
+  Majd az alábbi parancs kiadása:
+  
+  ```fish
+  php artisan test
+  ```
+  
+  Továbbá a teljes program újraindításával `megváltoztatott adatokkal`, ugyanakkor azonos struktúra felépítéssel a `terminálban`:
+  ```bash
+  sh start.sh
+  ```
+
+## Gyakran ismételt kérdések (GYIK)
+
+## Contributors
+
+_Special thanks to the contributors who helped make this project possible:_
+
+- [@rcsnjszg](https://github.com/rcsnjszg) – Core functionalities, debugging and backend-side feature suggestions
+- [@ignaczdominik](https://github.com/ignaczdominik) – Core functionalities, frontend debugging and refactoring
+
+---
+
+**\*Thank you** for your contributions!\*
 
 ### A nézetnek funkcionalitása
+
 - A Töltésbüntetések során az adatbázis adatgenerálási folyamata során az automatán működő büntetés-kiosztás segítségével a nézetfájlban megjelennek a(z):
 - Autok azonosítói
 - Az auto rendszáma
@@ -20,85 +342,99 @@
 ## [Flotta-Menedzsment]-[Autók-Státuszok]
 
 ### Funkciók és Alapvető Célok
+
 Létre kell hoznom egy olyan rendszert, amely az autók különböző állapotait (státuszait) kezeli a flotta hatékony menedzsmentje érdekében. Az állapotoknak dinamikusan kell frissülniük, és egyértelműen kell jelezniük az autók aktuális használhatóságát és elérhetőségét.
 
 #### A következő célokat kell elérnem:
+
 - Az autók státusza a rendszerben mindig pontos legyen, megkönnyítve a kezelést.
 - Automatikusan frissüljön a státusz minden esemény (pl. bérlés, szerviz) alapján.
 - Biztosítanom kell, hogy a státuszok kezelése egyszerű és átlátható legyen mind a frontend, mind a backend szempontjából.
 
-### Státuszok Meghatározása 
+### Státuszok Meghatározása
+
 Ki kell dolgoznom az autók státuszainak egyértelmű definícióit. Ezeket fogom használni a rendszer működtetéséhez:
 
--   Szabad (1): Az autó elérhető és bérlésre kész.
--   Foglalva (2): Az autót lefoglalta egy felhasználó.
--   Bérlés alatt (3): Az autót éppen használják.
--   Szervízre vár (4): Az autó meghibásodott és javításra vár.
--   Tisztításra vár (5): Az autót tisztításra ki kell vonni a forgalomból.
--   Kritikus töltés (6): Az autó akkumulátora rendkívül alacsony szinten van, nem használható.
+- Szabad (1): Az autó elérhető és bérlésre kész.
+- Foglalva (2): Az autót lefoglalta egy felhasználó.
+- Bérlés alatt (3): Az autót éppen használják.
+- Szervízre vár (4): Az autó meghibásodott és javításra vár.
+- Tisztításra vár (5): Az autót tisztításra ki kell vonni a forgalomból.
+- Kritikus töltés (6): Az autó akkumulátora rendkívül alacsony szinten van, nem használható.
 
 ### Státuszok Entitásainak Létrehozása
+
 létre kell hoznom a CarsStatus táblát a státuszok kezelésére:
 
 CarStatus (alosztálya lesz a Cars táblának):
--   id (PK, AI)
--   status_name (enum): A státusz megnevezése.
--   status_description (string:100): A státusz rövid leírása.
--   Kapcsolatot kell létrehoznom a Cars táblával:
+
+- id (PK, AI)
+- status_name (enum): A státusz megnevezése.
+- status_description (string:100): A státusz rövid leírása.
+- Kapcsolatot kell létrehoznom a Cars táblával:
 
 Az autók alapértelmezett státusza: Szabad (1) -gyel lesz megadva.
 A Cars táblában létre kell hoznom egy status_id FK-t, amely kapcsolódik majd a CarStatus táblához.
 
-### Működési Logika 
+### Működési Logika
+
 A rendszer gyakorlati működése érdekében meg kell írnom az alábbiakat:
-1.    Migrációs táblák létrehozása:
-2.    Generálni kell majd a CarStatus táblát és a Cars táblában a status_id FK-val összekötni a Cars-hoz.
+
+1.  Migrációs táblák létrehozása:
+2.  Generálni kell majd a CarStatus táblát és a Cars táblában a status_id FK-val összekötni a Cars-hoz.
 
 #### Státuszváltás logikája:
-1.  Olyan függvényeket kell írnom, amelyek dinamikusan frissítik az autó státuszát különböző események alapján (pl. bérlés lezárása, szervizelés, tisztítás).
-2. Az AutoToltesFrissites() függvényben ellenőriznem kell az autók töltöttségi szintjét, és ennek megfelelően módosítanom a status_id mezőt.
-3. A foglalhatóság ellenőrzése:
-  -     A rendszer nem generálhat új bérlést, ha az autó státusza 2, 3, 4, 5 vagy 6. Ehhez létre kell hoznom - át kell alakítanom a korábban létrehozozz "foglalhato" bool - egy bool értékke rendelkező foglalhatóságot, mely jelzi, épít a státusz fajtájára. Ezalapján változtatja meg a rendszerben az "állapotát".
 
+1.  Olyan függvényeket kell írnom, amelyek dinamikusan frissítik az autó státuszát különböző események alapján (pl. bérlés lezárása, szervizelés, tisztítás).
+2.  Az AutoToltesFrissites() függvényben ellenőriznem kell az autók töltöttségi szintjét, és ennek megfelelően módosítanom a status_id mezőt.
+3.  A foglalhatóság ellenőrzése:
+
+-     A rendszer nem generálhat új bérlést, ha az autó státusza 2, 3, 4, 5 vagy 6. Ehhez létre kell hoznom - át kell alakítanom a korábban létrehozozz "foglalhato" bool - egy bool értékke rendelkező foglalhatóságot, mely jelzi, épít a státusz fajtájára. Ezalapján változtatja meg a rendszerben az "állapotát".
 
 ### Frontend Implementáció Az autók részletes adatlapját meg kell jelenítenem:
 
 1. A részletek megjelenítése egy 2 oszlopos elrendezésben történjen:
-  - Bal oldalon [w-1/3]: Az autó képe (250x250 px).
-  - Jobb oldalon [w-2/3]: Az autó adatai (rendszám, flottaazonosító, kategória, gyártási év, kilométeróra állás, töltöttségi szint, stb.).
+
+- Bal oldalon [w-1/3]: Az autó képe (250x250 px).
+- Jobb oldalon [w-2/3]: Az autó adatai (rendszám, flottaazonosító, kategória, gyártási év, kilométeróra állás, töltöttségi szint, stb.).
 
 2. FormKit használata:
-  - Az autó adatainak megjelenítésére csak olvasható (disabled) mezőket kell készítenem.
-  - Egy legördülő menüben választható státuszváltást kell biztosítanom.
-  - Egy input mezőt kell elhelyeznem a details szöveg beírására, amely kötelező (required) és 255 karakterre korlátozott.
+
+- Az autó adatainak megjelenítésére csak olvasható (disabled) mezőket kell készítenem.
+- Egy legördülő menüben választható státuszváltást kell biztosítanom.
+- Egy input mezőt kell elhelyeznem a details szöveg beírására, amely kötelező (required) és 255 karakterre korlátozott.
 
 3. Táblázat megjelenítése:
-  - Az autóval kapcsolatos lezárt bérlések listázása (Car-History).
-  - Oszlopok:
-    -   Bérlés ID
-    -   Bérlő neve
-    -   Bérlés kezdete és vége
-    -   Bérlés hossza
-    -   Bérlés összege
 
-### Backend Implementáció 
+- Az autóval kapcsolatos lezárt bérlések listázása (Car-History).
+- Oszlopok:
+  - Bérlés ID
+  - Bérlő neve
+  - Bérlés kezdete és vége
+  - Bérlés hossza
+  - Bérlés összege
+
+### Backend Implementáció
+
 Függvényeket és útvonalakat kell készítenem:
-  - Az autók teljes listájának lekérése.
-  - Az admin által küldött státuszváltások kezelése:
-  - Validálni kell a küldött adatokat:
-  - status_name: Létező státusz-e?
-  - status_id: Megfelelő az adott státuszhoz?
-  - details: Minimum 20, maximum 255 karakter, nem lehet üres, és nem tartalmazhat veszélyes kódot.
+
+- Az autók teljes listájának lekérése.
+- Az admin által küldött státuszváltások kezelése:
+- Validálni kell a küldött adatokat:
+- status_name: Létező státusz-e?
+- status_id: Megfelelő az adott státuszhoz?
+- details: Minimum 20, maximum 255 karakter, nem lehet üres, és nem tartalmazhat veszélyes kódot.
 
 ### Adatbázis frissítése:
-  - A státuszváltás végrehajtása után vissza kell igazolnom a foglalhatóságot.
-  - Ha sikeres, egy 200-as HTTP választ kell visszaküldenem a frontendnek.
+
+- A státuszváltás végrehajtása után vissza kell igazolnom a foglalhatóságot.
+- Ha sikeres, egy 200-as HTTP választ kell visszaküldenem a frontendnek.
 
 ### Tesztelés és Ellenőrzés
-  - Ellenőriznem kell, hogy az autók státuszai pontosan frissülnek-e minden eseménynél.
-  - Tesztelnem kell az adminisztrátor által végrehajtott módosításokat, hogy a backend validálása megfelelően működik-e.
-  - Gondoskodnom kell arról, hogy a frontend logikája pontosan tükrözze az adatbázis állapotát
 
+- Ellenőriznem kell, hogy az autók státuszai pontosan frissülnek-e minden eseménynél.
+- Tesztelnem kell az adminisztrátor által végrehajtott módosításokat, hogy a backend validálása megfelelően működik-e.
+- Gondoskodnom kell arról, hogy a frontend logikája pontosan tükrözze az adatbázis állapotát
 
 ## [Lezárt-Bérlések]-[Autok-Töltöttség-%-Hatótáv-km]
 
@@ -111,13 +447,13 @@ Függvényeket és útvonalakat kell készítenem:
 
 2. Fő Komponensek és Funkcióik
    ### Töltöttségi Szint Számítás:
-      - Az autók kezdeti és záró töltöttségi szintjét a toltes_szazalek mező határozza meg.
-      - A hatótáv számítása:
-      - Egy kW energia által megtett távolság:
-      - egy_kW_hany_km = hatotav / teljesitmeny
-      - Kezdeti hatótáv kiszámítása:
-      - becsult_hatotav = egy_kW_hany_km \* toltes_kw
-      - Záráskor várható állapot: zaras_toltes_kw = nyitas_toltes_kw - fogyasztott_kw
+   - Az autók kezdeti és záró töltöttségi szintjét a toltes_szazalek mező határozza meg.
+   - A hatótáv számítása:
+   - Egy kW energia által megtett távolság:
+   - egy_kW_hany_km = hatotav / teljesitmeny
+   - Kezdeti hatótáv kiszámítása:
+   - becsult_hatotav = egy_kW_hany_km \* toltes_kw
+   - Záráskor várható állapot: zaras_toltes_kw = nyitas_toltes_kw - fogyasztott_kw
    2. Az autók csak akkor foglalhatók, ha:
       - Nyitási töltöttség >= 15%.
       - Zárási töltöttség > 12%.
@@ -126,26 +462,30 @@ Függvényeket és útvonalakat kell készítenem:
       - A megtett távolság (megtettTavolsag) alapján az km_ora_allas mező automatikusan frissül.
       - Új érték:
         km_ora_allas = km_ora_allas + megtettTavolsag
+
 ### Működési Logika
-   1. Autó Bérlésének Generálása:
-      - Az autó adatainak frissítése a lezárt bérlés adatai alapján történik.
-      - Ha a záró töltöttségi szint 10% alá csökkenne, a bérlés nem generálható, és az autó "foglalhatatlan" lesz.
-   2. Adatfrissítés:
-      - Záráskor:
-        - toltes_szazalek, toltes_kw és becsult_hatotav mezők frissítése.
-        - Ha a töltöttségi szint < 15%, akkor az autó "foglalhatatlan" státuszt kap.
-      - Kilométeróra:
-        - A megtett távolság automatikusan hozzáadódik a meglévő kilométeróra álláshoz.
+
+1.  Autó Bérlésének Generálása:
+    - Az autó adatainak frissítése a lezárt bérlés adatai alapján történik.
+    - Ha a záró töltöttségi szint 10% alá csökkenne, a bérlés nem generálható, és az autó "foglalhatatlan" lesz.
+2.  Adatfrissítés:
+    - Záráskor:
+      - toltes_szazalek, toltes_kw és becsult_hatotav mezők frissítése.
+      - Ha a töltöttségi szint < 15%, akkor az autó "foglalhatatlan" státuszt kap.
+    - Kilométeróra:
+      - A megtett távolság automatikusan hozzáadódik a meglévő kilométeróra álláshoz.
+
 ### Példák és Használati Esetek
-   1. Autó 75%-os töltöttségi szintről indul:
-      - 20 km megtételével 72%-ra csökken.
-      - Új hatótáv számítása:
-        - zaraskoriToltesKw = 36kW \* 0.72
-        - becsult_hatotav = zaraskoriToltesKw \* (hatotav / teljesitmeny)
-   2. Autó töltöttségi szint 12% alá csökken:
-      - Az autó nem "foglalható", státusza automatikusan frissül.
-   3. Új bérlésnél figyelembe vett töltöttségi szint:
-      - Az előző bérlés után megmaradt töltöttség az alapja az új bérlésnek.
+
+1.  Autó 75%-os töltöttségi szintről indul:
+    - 20 km megtételével 72%-ra csökken.
+    - Új hatótáv számítása:
+      - zaraskoriToltesKw = 36kW \* 0.72
+      - becsult_hatotav = zaraskoriToltesKw \* (hatotav / teljesitmeny)
+2.  Autó töltöttségi szint 12% alá csökken:
+    - Az autó nem "foglalható", státusza automatikusan frissül.
+3.  Új bérlésnél figyelembe vett töltöttségi szint:
+    - Az előző bérlés után megmaradt töltöttség az alapja az új bérlésnek.
 
 ### Ez a logika lehetővé teszi
 

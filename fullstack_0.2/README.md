@@ -6,10 +6,11 @@ Figyelem! Az `.env.example` fájl a `backend` mappában található, és a `.env
 
 A rendszer inicializálását és az első indítását a `start.sh` végzi.
 
+ A `migráció`, `seedelés` és a `tesztesetek` egyetemlegesen, automatikusan futnak le.
 ```
-./start.sh
+sh start.sh
 ```
-
+parancs futtatásával.
 ## Leállítás
 
 ```
