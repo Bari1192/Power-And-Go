@@ -39,18 +39,29 @@ sh start.sh
 
 ### Fleet Modul
 
-#### Áttekintés
-
 A **Fleet modul** felelős a flotta adatok kezeléséért. Ez a modul tartalmazza az elektromos járműflották adatait, beleértve a:
 
-- Gyártót,
-- Típust,
-- Teljesítményt,
-- Végsebességet,
-- A gumiabroncsok méretét és sorozatszámát
-- A gépjármű hatótávolságát kilóméterbe vetítve.
+- **Gyártót**,
+- **Típust**,
+- **Teljesítményt**,
+- **Végsebességet**,
+- A **gumiabroncsok** méretét és sorozatszámát
+- A gépjármű **hatótávolságát** kilóméterbe vetítve.
 
 A Fleet modul `kapcsolódik` továbbá a **Cars** és a **Users** modulokhoz is, biztosítva az adatkapcsolatot a flotta-jármű-bérlő hierarchia rendszerben.
+
+---
+### Cars Modul
+
+A **Cars modul** felelős az egyedi járművek kezeléséért. Ez a modul tartalmazza az egyes autók:
+- **Rendszámát**,
+- **Töltöttségét (százalék és kW)**,
+- **Becsült hatótávját**,
+- **Kilométeróra állását**,
+- **Gyártási évét**,
+- Valamint kapcsolódik a **flottákhoz**, **kategóriákhoz**, **felszereltségekhez** és az aktuális **állapothoz**.
+
+A Cars modul szoros **kapcsolatban** áll a **Fleet** és **Users** modulokkal, biztosítva az adatkapcsolatot a járművek, flották és bérlők között.
 
 ---
 
@@ -97,26 +108,41 @@ Az alábbi nézeteket (views) az adatbázis migrációk automatikusan létrehozz
     - **Forrás táblák**:
       - `bills`
     - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az     alábbi parancs kiadásával:
-      ```sql
-      DROP VIEW IF EXISTS SzamlakCsoportositva;
-      ```
+        ```sql
+        DROP VIEW IF EXISTS SzamlakCsoportositva;
+        ```
 
 ---
 
 Ez a szerkezet logikusan elrendezi a nézetfájlokat. Elkülöníti őket a többi migrációtól, ugyanakkor kiemeli a használatuk előnyeit, üzleti követelményeiket.
 
 ---
-#### Migrációk | Táblák
+#### **Migrációk** | Táblák
+---
 
-- **fleets**
-  - **Oszlopok**:
-    - `id` (int) – Elsődleges kulcs.
-    - `gyarto` (string) – Gyártó neve (max. 30 karakter).
-    - `tipus` (string) – Jármű típusa (max. 30 karakter).
-    - `teljesitmeny` (int) – Teljesítmény (kW).
-    - `vegsebesseg` (int) – Maximális sebesség (km/h).
-    - `gumimeret` (string) – Gumi mérete (pl. 165|65-R15).
-    - `hatotav` (int) – Hatótávolság (km).
+- **Fleets**
+  - `id` (int) – Elsődleges kulcs.
+  - `gyarto` (string) – Gyártó neve (max. 30 karakter).
+  - `tipus` (string) – Jármű típusa (max. 30 karakter).
+  - `teljesitmeny` (int) – Teljesítmény (kW).
+  - `vegsebesseg` (int) – Maximális sebesség (km/h).
+  - `gumimeret` (string) – Gumi mérete (pl. 165|65-R15).
+  - `hatotav` (int) – Hatótávolság (km).
+
+---
+
+- **Cars**:
+  - `id` (int) – Elsődleges kulcs.
+  - `rendszam` (string) – Egyedi rendszám (max. 10 karakter).
+  - `toltes_szaz` (float) – Töltöttség százalékban (0–100%).
+  - `toltes_kw` (float) – Töltöttség kW-ban.
+  - `becs_tav` (float) – Becsült hatótáv (km).
+  - `status` (foreign key) – Kapcsolat a **carstatus** táblával.
+  - `kategoria` (foreign key) – Kapcsolat a **categories** táblával.
+  - `felszereltseg` (foreign key) – Kapcsolat az **equipments** táblával.
+  - `flotta_azon` (foreign key) – Kapcsolat a **fleets** táblával.
+  - `kilometerora` (int) – Kilométeróra állása.
+  - `gyartasi_ev` (year) – Gyártási év.
 
 ---
 
@@ -127,11 +153,106 @@ Ez a szerkezet logikusan elrendezi a nézetfájlokat. Elkülöníti őket a töb
 
 - **Főbb attribútumok**:
   - `protected $fillable`:
-    - `gyarto`, `tipus`, `teljesitmeny`, `vegsebesseg`, `gumimeret`, `hatotav`.
-- **Relációk**:
+      - `gyarto`, `tipus`, `teljesitmeny`, `vegsebesseg`, `gumimeret`, `hatotav`.
+- **Relációk / kapcsolatok**:
   - `cars`: **Egy** flotta **típus** _(rekord)_ **több autóhoz** kapcsolódik (`HasMany` kapcsolat).
 
 ---
+### Car Modell
+
+- **Főbb attribútumok**:
+  - `protected $fillable`:
+    - `rendszam`, `toltes_szaz`, `toltes_kw`, `becs_tav`, `status`, `kategoria`, `felszereltseg`, `flotta_azon`, `kilometerora`, `gyartasi_ev`.
+- **Relációk / kapcsolatok**:
+  - **`fleet`**: Egy autó tartozik egy flottához (`BelongsTo` kapcsolat).
+
+  - **`kategoria`**: Az autók egy kategóriához tartoznak (`BelongsTo` kapcsolat).
+
+  - **`carstatus`**: Az autók aktuális állapotát tárolja (`BelongsTo` kapcsolat).
+
+  - **`lezartberlesek`**: Egy autóhoz több lezárt bérlés tartozhat (`HasMany`   
+  kapcsolat).
+
+  - **`szamlak`**: Egy autóhoz több számla kapcsolódhat (`HasMany` kapcsolat).
+
+  - **`tickets`**: Egy autóhoz több jegy kapcsolódhat (`HasMany` kapcsolat).
+
+  - **`users`**: Az autók és felhasználók között sok-a-sok kapcsolat van, bérlési 
+  részletekkel kiegészítve (`BelongsToMany` kapcsolat).
+
+## Factory
+
+### CarFactory
+A **CarFactory** felelős a járművek automatikus generálásáért. Ez különösen hasznos a tesztek és seed-ek során, ahol nagyszámú valósághű adatot kell az adatbázisba hatékonyan *- és redundancia mentesen -* kell előállítani.
+
+#### Generált Adatok
+- **Flotta adatok**: A járművek generálása során a flotta véletlenszerűen kerül kiválasztásra, de bizonyos arányok betartásával:
+   - **Flotta ID kiválasztás arányai**:
+     - **85%** - Gyakoribb flotta típusok (pl. VW e-up! vagy Skoda Citigo-e-iV).
+     - **10%** - Ritkább, vagy specifikusabb flotta típusok (pl. Opel Vivaro-e).
+     - **5%** - Exkluzív flotta típusok (pl. KIA Niro-EV).
+
+- **Töltöttségi állapot (`toltes_szaz`) és kW érték (`toltes_kw`)**  
+   - **Százalékos töltöttség (`toltes_szaz`)**:
+     - Véletlenszerűen generált érték 15% és 100% között, két tizedesjegy pontossággal.
+   - **Teljesítmény alapján számított töltöttség kW-ban (`toltes_kw`)**:
+     - Formula: `teljesitmeny * (toltes_szaz / 100)`, egy tizedesjegy pontossággal.
+   - **Vonatkozó kód részlete**:
+     ```php
+     $toltes_szazalek = fake()->randomFloat(2, 15, 100); 
+     $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
+     ```
+- **Becsült hatótáv**: 
+- A hatótáv a flottán belüli jármű hivatalosan meghatározott hatótáv és töltöttségi teljesítmény alapján számítódik:
+     - Számítás mechanikája: (`hatotav` / `teljesitmeny`) * `toltes_kw`.
+     - **Egy tizedesjegy** pontossággal generálódik.
+
+   - **Kód részlete**:
+     ```php
+     $becsultHatotav = round(($flottaTipus->hatotav / $flottaTipus->teljesitmeny) * $toltes_kw, 1);
+     ```
+- **Egyedi rendszám**: 
+ A rendszámot a **magyar szabvány** szerint generálja beépített **regex** kód használatával. Erre építve véletlenszerűen **új** vagy **régi** formátumú rendszámok jönnek létre:
+   - **Új formátum**: `AA[A-C][A-O]-[0-9]{3}` *(pl. "AACO-123")*.
+   - **Régi formátum**: `(M|N|P|R|S|T)[A-Z]{2}-[0-9]{3}` *(pl. "SSA-456")*.
+
+   - **A generált rendszámok egyedisége biztosított**: 
+     - Minden generált rendszámot egy tömbben tárolunk el, mely minden futási *(generálási)* ciklusban ellenőrzi, hogy az adott rendszám legenerálása megtörtént-e. 
+     - Amennyiben a generált rendszám korábban már létrejött, a ciklus újra generál egyet, ezzel megőrizve az ismétlődés elkerülését, az egyediség garanciáját.
+   - **Kód inspekció**:
+     ```php
+     private function rendszamGeneralasUjRegi(): string
+     {
+         static $generaltRendszamok = [];
+         do {
+             $rendszamUjRegi = random_int(0, 1);
+             $rendszam = $rendszamUjRegi > 0
+                 ? strtoupper(fake()->regexify('AA[A-C][A-O]-[0-9]{3}'))
+                 : strtoupper(fake()->regexify('(M|N|P|R|S|T)[A-Z]{2}-[0-9]{3}'));
+         } while (in_array($rendszam, $generaltRendszamok));
+         $generaltRendszamok[] = $rendszam;
+         return $rendszam;
+     }
+     ```
+- **Kilométeróra állás (`kilometerora`)**  
+   A gyártási év funkciójának magja, az évszám szerinti becsülés a már megtett futásteljesítmény megállapítására:
+   - **Például**:
+     - 2019: 50,000–60,000 km.
+     - 2023: 20,000–30,000 km.
+   - **Kód inspekció**:
+     ```php
+     private function kmOraAllasGeneralas(int $gyartasiEv): int
+     {
+         return match ($gyartasiEv) {
+             2019 => random_int(50000, 60000),
+             2020 => random_int(40000, 60000),
+             2021 => random_int(30000, 40000),
+             2022 => random_int(25000, 35000),
+             2023 => random_int(20000, 30000),
+             default => 0,
+         };
+     }
+     ```
 
 ## Seeder
 
@@ -151,7 +272,13 @@ Ez a szerkezet logikusan elrendezi a nézetfájlokat. Elkülöníti őket a töb
   }
 ]
 ```
-
+### CarSeeder
+  - **Cél**: 500 autó generálása a `CarFactory`-ben deklarált egyedi mechanizmus segítségével.
+  - A **CarFactory** a következőképpen használható a Seeder fájlban:
+  ```php
+  $cars = Car::factory(500)->make()->toArray();
+  DB::table('cars')->insert($cars);
+  ```
 ---
 
 ## API Végpontok
@@ -237,6 +364,8 @@ Ez a szerkezet logikusan elrendezi a nézetfájlokat. Elkülöníti őket a töb
 ## Bővítések és Testreszabások
 
 ## Hibakezelés és Hibaüzenetek
+
+--- 
 
 ## Tesztelés
 ### Automatikus tesztek
@@ -327,103 +456,24 @@ _Special thanks to the contributors who helped make this project possible:_
 
 **\*Thank you** for your contributions!\*
 
-### A nézetnek funkcionalitása
+---
+---
+---
+---
 
-- A Töltésbüntetések során az adatbázis adatgenerálási folyamata során az automatán működő büntetés-kiosztás segítségével a nézetfájlban megjelennek a(z):
-- Autok azonosítói
-- Az auto rendszáma
-- Az adott autónak a töltése százalékos értékben az akkumulátor kapacitásához viszonyítva.
-- Az auto státusza, mely kiváltó oka volt a nézetfájlba integrálásában.
 
-## Backend
 
-[SORREND] 5. A `folyamatban lévő bérléseket` is át kell alakítani, hogy `státusz` alapján `lezárás után` a `lezárt bérlések táblába kerüljenek` az adatok 6. `Konyvelesi táblát` is létre kell hozni, ahová a `lezárt bérlések számlák` kifizetés után `kerülnek` (hogy profilban elérhető legyen + könyvelési osztály is elérje, hogy a NAV ne szóljon be)
 
-## [Flotta-Menedzsment]-[Autók-Státuszok]
 
-### Funkciók és Alapvető Célok
 
-Létre kell hoznom egy olyan rendszert, amely az autók különböző állapotait (státuszait) kezeli a flotta hatékony menedzsmentje érdekében. Az állapotoknak dinamikusan kell frissülniük, és egyértelműen kell jelezniük az autók aktuális használhatóságát és elérhetőségét.
 
-#### A következő célokat kell elérnem:
 
-- Az autók státusza a rendszerben mindig pontos legyen, megkönnyítve a kezelést.
-- Automatikusan frissüljön a státusz minden esemény (pl. bérlés, szerviz) alapján.
-- Biztosítanom kell, hogy a státuszok kezelése egyszerű és átlátható legyen mind a frontend, mind a backend szempontjából.
 
-### Státuszok Meghatározása
 
-Ki kell dolgoznom az autók státuszainak egyértelmű definícióit. Ezeket fogom használni a rendszer működtetéséhez:
 
-- Szabad (1): Az autó elérhető és bérlésre kész.
-- Foglalva (2): Az autót lefoglalta egy felhasználó.
-- Bérlés alatt (3): Az autót éppen használják.
-- Szervízre vár (4): Az autó meghibásodott és javításra vár.
-- Tisztításra vár (5): Az autót tisztításra ki kell vonni a forgalomból.
-- Kritikus töltés (6): Az autó akkumulátora rendkívül alacsony szinten van, nem használható.
 
-### Státuszok Entitásainak Létrehozása
 
-létre kell hoznom a CarsStatus táblát a státuszok kezelésére:
 
-CarStatus (alosztálya lesz a Cars táblának):
-
-- id (PK, AI)
-- status_name (enum): A státusz megnevezése.
-- status_description (string:100): A státusz rövid leírása.
-- Kapcsolatot kell létrehoznom a Cars táblával:
-
-Az autók alapértelmezett státusza: Szabad (1) -gyel lesz megadva.
-A Cars táblában létre kell hoznom egy status_id FK-t, amely kapcsolódik majd a CarStatus táblához.
-
-### Működési Logika
-
-A rendszer gyakorlati működése érdekében meg kell írnom az alábbiakat:
-
-1.  Migrációs táblák létrehozása:
-2.  Generálni kell majd a CarStatus táblát és a Cars táblában a status_id FK-val összekötni a Cars-hoz.
-
-#### Státuszváltás logikája:
-
-1.  Olyan függvényeket kell írnom, amelyek dinamikusan frissítik az autó státuszát különböző események alapján (pl. bérlés lezárása, szervizelés, tisztítás).
-2.  Az AutoToltesFrissites() függvényben ellenőriznem kell az autók töltöttségi szintjét, és ennek megfelelően módosítanom a status_id mezőt.
-3.  A foglalhatóság ellenőrzése:
-
--     A rendszer nem generálhat új bérlést, ha az autó státusza 2, 3, 4, 5 vagy 6. Ehhez létre kell hoznom - át kell alakítanom a korábban létrehozozz "foglalhato" bool - egy bool értékke rendelkező foglalhatóságot, mely jelzi, épít a státusz fajtájára. Ezalapján változtatja meg a rendszerben az "állapotát".
-
-### Frontend Implementáció Az autók részletes adatlapját meg kell jelenítenem:
-
-1. A részletek megjelenítése egy 2 oszlopos elrendezésben történjen:
-
-- Bal oldalon [w-1/3]: Az autó képe (250x250 px).
-- Jobb oldalon [w-2/3]: Az autó adatai (rendszám, flottaazonosító, kategória, gyártási év, kilométeróra állás, töltöttségi szint, stb.).
-
-2. FormKit használata:
-
-- Az autó adatainak megjelenítésére csak olvasható (disabled) mezőket kell készítenem.
-- Egy legördülő menüben választható státuszváltást kell biztosítanom.
-- Egy input mezőt kell elhelyeznem a details szöveg beírására, amely kötelező (required) és 255 karakterre korlátozott.
-
-3. Táblázat megjelenítése:
-
-- Az autóval kapcsolatos lezárt bérlések listázása (Car-History).
-- Oszlopok:
-  - Bérlés ID
-  - Bérlő neve
-  - Bérlés kezdete és vége
-  - Bérlés hossza
-  - Bérlés összege
-
-### Backend Implementáció
-
-Függvényeket és útvonalakat kell készítenem:
-
-- Az autók teljes listájának lekérése.
-- Az admin által küldött státuszváltások kezelése:
-- Validálni kell a küldött adatokat:
-- status_name: Létező státusz-e?
-- status_id: Megfelelő az adott státuszhoz?
-- details: Minimum 20, maximum 255 karakter, nem lehet üres, és nem tartalmazhat veszélyes kódot.
 
 ### Adatbázis frissítése:
 
@@ -603,99 +653,6 @@ Ugyanakkor meg kell vizsgálnunk, helyesen - ahogy tetted -, hogy azzal jár-e j
      Ahol a havidíj, vagy az éves díj `null` értékként van kezelve, az azt jelenti, hogy az adott előfizetési csomagban `nincs/nem elérhető` ilyen opció.
 
 3. [Relációk]-[Model]
-
-## Árazások tábla - létrehozása
-
-1.  Árkategóriák & besorolások
-
-    - A tábla létrehozása alapvető, mivel az előfizetési csomagok adatait le kell tárolni.
-    - Minden felhasználó ehhez kapcsolódik FK-n keresztül: - Egyszerűbb karbantartást biztosít később - árak, kedvezmények, frissítések stb. - Egyértelmű és egységes logika - Statikus tömb-érték (korábbi) rendszer helyett.
-      [Entitások]
-    - `berles_ind` - Bérlésindítási díj.
-    - `vez_perc` - Vezetés (percdíj).
-    - `kedv_vez` - Kedvezményes vezetés (percdíj, 6:00 - 9:00) - opcionális.
-    - `parkolas_perc` - Parkolás (percdíj).
-    - `foglalasi_perc` - Foglalás (percdíj, 20 perc után).
-    - `kedv_parkolas_perc` Kedvezményes parkolás (percdíj).
-    - `napidij` - Napidíj összege egy adott autóra vetítve.
-    - `napi_km_limit` # A napidíjban foglalt megtehető INGYENES km-ek száma.
-    - `km_dij` # Ingyenesen (125) megtehető km-en felüli útdíj
-    - `repter_ki_felar` # Reptéri felár transzferrel (reptérRE)
-    - `repter_be_felar` # Reptéri felár transzferrel (reptérRŐL)
-    - `repter_ki_terminal` # Reptéri felár terminálnál (reptérRE)
-    - `repter_be_terminal` # Reptéri felár terminálnál (reptérRŐL)
-    - `zona_nyit_felar` # Külső zónából való bérlés nyitási, indítási felára (nyitás)
-    - `zona_zar_felar` # Külső zónában való bérlés zárási felára (zárás)
-
-    [Seeder]
-
-    - Teljesítményenként az autok 5 csoportban vannak:
-      `18 => 1-es`
-      `33 => 2-es`
-      `36 => 3-as`
-      `65 => 4-es`
-      `75 => 5-ös`
-      `default => 5-ös` - Ha új autót vennénk fel, de még nincsen neki teljesítményalapú beosztása - akkor sem lesz hibás a kalkulálás -> hibamegelőzés.
-    - Minden elofizetési kategoriahoz manuálisan hozzuk létre az árak meghatározását. Így később könyebben lehet módosítani, ha változtatásokat kell eszközölni ezekben.
-
-    [Relációk]
-
-    - 1:N -hez | Előfizetések - Felhasználók | Mivel egy előfizetési kategóriát több felhasználó is választhat.
-    - Elofizetesek | HasMany lesz a Modelben -> A Felhasznalo::class `elofiz_id` [FK], `id` [PK]-ra.
-    - Felhasznalok | BelongsTo lesz a Modelben.-> Az Elofizetes::class `elofiz_id` [FK], `id` [PK]-ra.
-      [Megjelenites]
-    - Mivel az adatok szemléltetésekor szemantikailag hatékonyabb az előfizetés megnevezését megjeleníteni, így:
-      - Frontenden a lekéréskor az `elofizetes` tábla, `elofiz_nev` entitás értékét fogjuk lekérdezni -> Ami visszaadja, hogy az aktuális felhasználó például a 'Power-VIP'előfizetéssel rendelkezik.
-
-## A folyamatban lévő & lezárt bérlések összhangja
-
-1.  [Logika]
-    - Folyamatban lévő bérlés:
-      - `Kezdes_ido` és `status`-nak `aktív`-nak kell lennie.
-    - Lezárt bérlés:
-      - `Kezdes_ido`és `Vege_ido` meg kell lennie (megadva), `status`-nak `lezárt` -nak kell lennie.
-2.  [Megvalositas]
-    - A futo_berlesek táblának tartalmaznia kell a `status`-t, állapot mező egyikét: 1. Aktív (folyamatban), vagy 2. Lezárt (vége van).
-      Ehhez el kell érnünk, hogy:
-      A bérlés lezárásakor a `futo_berlesek` adatai átkerüljenek a `lezart_berlesek` táblába.
-      A `lezart_berlesek`-ben a `status`-nak `lezart`-nak kell lennie a táblában.
-
-## Parkolási díjak és éjszakai időszakok kezelése
-
-1. Éjszakai parkolás szabálya (22:00-07:00) Power-Plus Power-VIP esetében
-   - Ez az időszak nem számít díjkötelesnek a prémium csomagok esetén.
-   - Backend szinten kell meghatározni és kiszámolni a parkolási időt, ami az időzóna között van:
-     1. A parkolás `kezdetét` és a parkolás `végét` kell figyelni.
-     2. Ha a `berles_kezd_ido` 22:00 `ELŐTT` van & az `előfizetési kategória` Power-PLUS/VIP, akkor:
-        - `kezdete` időponttól egészen 22:00-ig a `parkolási percet` adja vissza.
-        - `parkolási perc` alapján (kategória és előfizetés szerint) `normal_parkolási_percdíjat` számolja `22:00-ig` és adja vissza a(z):
-          - `parkolasi_perc`
-          - `parkolasi_osszeg` értékeket.
-     3. Ha a `berles_kezd_ido` 22:00 `UTÁN` van && az `előfizetési kategória` Power-PLUS/VIP, akkor: - `kezdete` időponttól egészen 07:00-ig a --> `parkolási percet` adja vissza. - `parkolási perc` alapján (kategória és előfizetés szerint) `normal_parkolási_percdíjat` számolja `07:00-ig` || a `berles_vege_ido` értékig. Így adja vissza a(z): - `parkolasi_perc` - `parkolasi_osszeg` értékeket.
-        [Összességében]:
-     - Vizsgáljuk meg, hogy 22:00 & 07:00 között parkolt-e?
-     - A teljes parkolási időből kivonjuk a KEDVEZMÉNYES időszakot,
-     - Kiírjuk a teljes parkolási összeget (ha nem lenne 'Plus', vagy 'VIP') -> áthúzzuk ezt az összeget (frontend),
-     - Majd visszadjuk a `teljes_parkolas` - `kedv_parkolás` idejét,
-     - Amit felszorzunk az előfizetésében meghatározott `park_percdij` értékével.
-       [Példa]:
-     - Parkolás kezdete: 2024-11-30 21:30
-     - Parkolás vége: 2024-12-01 07:30
-     - Teljes parkolási idő: 10 óra
-     - Kedvezményes éjszakai parkolási idő: 9 óra
-     - Standard parkolási idő: 1 óra - (60p)
-     - Parkolásra fizetendő részletező: 60 perc \* 41 Forint (Power-VIP tagság)
-     - Vezetésre fizetendő részletező: 60 perc \* 41 Forint (Power-VIP tagság)
-     - `berles_inditasi_dij`: 250 Ft
-     - Parkolás Összege (Kedvezmény nélkül): 22 140 Ft
-     - `Parkolás` Összege (kedvezménnyel): 2 460 Ft
-     - `Vezetés` összege (60\*50 Ft): 3 000 Ft
-       [Számla]:
-     - Összesen: 5 710 Ft
-
-## Lezárt bérlések
-
-[parkolasi_perc]
 
 ### E-mail kiküldés alapja
 
