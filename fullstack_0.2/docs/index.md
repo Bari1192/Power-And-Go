@@ -211,7 +211,7 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
   - **Teljesítmény alapján számított töltöttség kW-ban (`toltes_kw`)**:
     - Formula: `teljesitmeny * (toltes_szaz / 100)`, egy tizedesjegy pontossággal.
   - **Vonatkozó kód részlete**:
-    ```php 
+    ```php
     <?php
     $toltes_szazalek = fake()->randomFloat(2, 15, 100);
     $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
@@ -238,7 +238,7 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
     - Minden generált rendszámot egy tömbben tárolunk el, mely minden futási _(generálási)_ ciklusban ellenőrzi, hogy az adott rendszám legenerálása megtörtént-e.
     - Amennyiben a generált rendszám korábban már létrejött, a ciklus újra generál egyet, ezzel megőrizve az ismétlődés elkerülését, az egyediség garanciáját.
   - **Kód inspekció**:
-    ```php 
+    ```php
     <?php
     private function rendszamGeneralasUjRegi(): string
     {
@@ -256,12 +256,14 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
 
 - **Kilométeróra állás (`kilometerora`)**  
    A gyártási év funkciójának magja, az évszám szerinti becsülés a már megtett futásteljesítmény megállapítására:
+
   - **Például**:
     - 2019: 50,000–60,000 km.
     - 2023: 20,000–30,000 km.
   - **Kód inspekció**:
+
     ```php
-    <?php   
+    <?php
 
     private function kmOraAllasGeneralas(int $gyartasiEv): int
     {
@@ -723,16 +725,67 @@ sh start.sh
 
 ## Gyakran ismételt kérdések (GYIK)
 
+#### 1. Telepítés és Inicializálás
+
+<details>
+  <summary><strong>1. Hogyan tudom inicializálni a projektet?</strong></summary>
+  A projekt inicializálásának leggyorsabb módja Linux alapú Virtual Machine (virtual-server) használatával érhető el. További információkért kövesd az alábbi útmutatót:
+
+[Linux Virtual Machine beállítása](https://www.linuxbabe.com/linux-mint/install-virtualbox-guest-additions-in-linux-mint)
+
+**Lépések**:
+
+1. **Töltsd le a Docker legújabb verzióját** a [hivatalos weboldalról](https://www.docker.com/).
+
+2. **Klónozd** le a repository-t a **Visual Studio Code** termináljában:
+   ```bash
+   git clone "https://github.com/Bari1192/Power-And-Go"
+   cd Power-And-Go
+   ```
+3. **Futtasd** az alábbi parancsot:
+`bash
+     sh start.sh
+     `
+Ez a folyamat automatikusan felépíti a konténereket a szükséges modulokkal és kiegészítőkkel a Docker fájlok segítségével.
+</details>
+
+<details>
+  <summary><strong>2. Hogyan érem el a projektet localhoston?</strong></summary>
+
+Amint a `start.sh` folyamata befejeződött, a projekt az alábbi **lokális linkeken** érhető el:
+
+- [Backend](http://backend.vm1.test)
+
+- [Frontend](http://frontend.vm1.test)
+
+- [JSON Server](http://jsonserver.vm1.test)
+
+- [Proxy](http://proxy.vm1.test)
+
+- [Swagger](http://swagger.vm1.test)
+
+- [Dokumentáció](http://docs.vm1.test)
+</details>
+
 ## Contributors
 
-_Special thanks to the contributors who helped make this project possible:_
+***Special thanks to the contributors who helped make this project possible:***
 
-- [@rcsnjszg](https://github.com/rcsnjszg) – Core functionalities, debugging and backend-side feature suggestions
-- [@ignaczdominik](https://github.com/ignaczdominik) – Core functionalities, frontend debugging and refactoring
+> #### [@rcsnjszg](https://github.com/rcsnjszg)
 
+- Core functionalities, debugging, and backend-side feature suggestions.
+
+- I am deeply grateful for their tireless and persistentefforts over the years. Even during late-night hours, theirsupport and dedication have been invaluable.
+- I **aspire** to **reach the level of knowledge and experience** they possess in my lifetime. 
+---
+> #### [@ignaczdominik](https://github.com/ignaczdominik)
+- Core functionalities, frontend debugging, and refactoring
+
+- I extend my **heartfelt thanks** for their unwavering commitment to **frontend development** ideas and for bringing innovative and efficient solutions that rival even senior developers.
+- Your **knowledge**, **boundless** **energy**, and willingness to help have been the cornerstone of effective frontend implementation.
 ---
 
-**\*Thank you** for your contributions!\*
+> ***Their selfless contributions will always beremembered with gratitude.***
 
 ---
 
