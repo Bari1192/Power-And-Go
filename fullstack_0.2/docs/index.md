@@ -25,15 +25,15 @@ A rendszer inicializálását és az első indítását a `start.sh` fájl végz
 sh start.sh
 ```
 
-  ***Ez a szkript biztosítja az alábbi lépések automatikus futtatását:***
+**_Ez a szkript biztosítja az alábbi lépések automatikus futtatását:_**
 
-  1. Adatbázis táblák létrehozását, a **migrációk lefutnak**, és az adatbázis a legfrissebb struktúrával jön létre.
+1. Adatbázis táblák létrehozását, a **migrációk lefutnak**, és az adatbázis a legfrissebb struktúrával jön létre.
 
-  2. Adatok inicializálását az adatbázisba **seeder**-ek segítségével végzi a rendszer. Előre definiált **struktúra alapján** feltöltésre kerülnek az adatokkal.
+2. Adatok inicializálását az adatbázisba **seeder**-ek segítségével végzi a rendszer. Előre definiált **struktúra alapján** feltöltésre kerülnek az adatokkal.
 
-  3. Tesztesetek, az előre definiált tesztesetek lefutnak, biztosítva a rendszer stabilitását, annak kifogástalan működését.
+3. Tesztesetek, az előre definiált tesztesetek lefutnak, biztosítva a rendszer stabilitását, annak kifogástalan működését.
 
-  4. Konténerek ellenőrzését. A Docker konténerek elindulnak és működésükről / futásukról visszajelzést kapunk.
+4. Konténerek ellenőrzését. A Docker konténerek elindulnak és működésükről / futásukról visszajelzést kapunk.
 
 ## Adatbázis struktúra és Modellek
 
@@ -51,9 +51,11 @@ A **Fleet modul** felelős a flotta adatok kezeléséért. Ez a modul tartalmazz
 A Fleet modul `kapcsolódik` továbbá a **Cars** és a **Users** modulokhoz is, biztosítva az adatkapcsolatot a flotta-jármű-bérlő hierarchia rendszerben.
 
 ---
+
 ### Cars Modul
 
 A **Cars modul** felelős az egyedi járművek kezeléséért. Ez a modul tartalmazza az egyes autók:
+
 - **Rendszámát**,
 - **Töltöttségét (százalék és kW)**,
 - **Becsült hatótávját**,
@@ -66,58 +68,65 @@ A Cars modul szoros **kapcsolatban** áll a **Fleet** és **Users** modulokkal, 
 ---
 
 ### Migrációk | Nézetek (Views)
+
 Az alábbi nézeteket (views) az adatbázis migrációk automatikusan létrehozzák. A nézetek célja az adatok aggregálása és egyszerűsített lekérdezések biztosítása a program üzleti logikájában.
 
 #### Nézetek (Views)
- 1. `most_rented_cars`
+
+1.  `most_rented_cars`
     - **Cél**: A legtöbbet bérelt járműtípusok listázása.
     - **Forrás táblák**:
       - `car_user_rents`
       - `cars`
       - `fleets`
-    - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az     alábbi parancs kiadásával:
+    - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az alábbi parancs kiadásával:
       ```sql
       DROP VIEW IF EXISTS most_rented_cars;
       ```
+
 ---
 
 2. `toltes_buntetesek`
-    - **Cél**: Töltési büntetésekhez kapcsolódó járművek listázása.
-    - **Forrás táblák**:
-      - `cars`
-      - `bills`
-    - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az     alábbi parancs kiadásával:
-      ```sql
-      DROP VIEW IF EXISTS most_rented_cars;
-      ```
+   - **Cél**: Töltési büntetésekhez kapcsolódó járművek listázása.
+   - **Forrás táblák**:
+     - `cars`
+     - `bills`
+   - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az alábbi parancs kiadásával:
+     ```sql
+     DROP VIEW IF EXISTS most_rented_cars;
+     ```
+
 ---
 
 3. `user_rents_db`
-    - **Cél**: Felhasználók bérléseinek összesítése.
-    - **Forrás táblák**:
-      - `car_user_rents`
-      - `persons`
-    - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az     alábbi parancs kiadásával:
-      ```sql
-      DROP VIEW IF EXISTS user_rents_db;
-      ```
+   - **Cél**: Felhasználók bérléseinek összesítése.
+   - **Forrás táblák**:
+     - `car_user_rents`
+     - `persons`
+   - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az alábbi parancs kiadásával:
+     ```sql
+     DROP VIEW IF EXISTS user_rents_db;
+     ```
 
 ---
+
 4. `SzamlakCsoportositva`
-    - **Cél**: Számlák típuscsoportok alapján való rendezése, darabszám szerint csoportosítva.
-    - **Forrás táblák**:
-      - `bills`
-    - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az     alábbi parancs kiadásával:
-        ```sql
-        DROP VIEW IF EXISTS SzamlakCsoportositva;
-        ```
+   - **Cél**: Számlák típuscsoportok alapján való rendezése, darabszám szerint csoportosítva.
+   - **Forrás táblák**:
+     - `bills`
+   - **Törlés**: Migrációs folyamat befejezte után az adatbázisba `admin` / `root` felhasználóként belépve, az alábbi parancs kiadásával:
+     ```sql
+     DROP VIEW IF EXISTS SzamlakCsoportositva;
+     ```
 
 ---
 
 Ez a szerkezet logikusan elrendezi a nézetfájlokat. Elkülöníti őket a többi migrációtól, ugyanakkor kiemeli a használatuk előnyeit, üzleti követelményeiket.
 
 ---
+
 #### **Migrációk** | Táblák
+
 ---
 
 - **Fleets**
@@ -146,113 +155,126 @@ Ez a szerkezet logikusan elrendezi a nézetfájlokat. Elkülöníti őket a töb
 
 ---
 
-
 ## Modell
 
 ### Fleet Modell
 
 - **Főbb attribútumok**:
   - `protected $fillable`:
-      - `gyarto`, `tipus`, `teljesitmeny`, `vegsebesseg`, `gumimeret`, `hatotav`.
+    - `gyarto`, `tipus`, `teljesitmeny`, `vegsebesseg`, `gumimeret`, `hatotav`.
 - **Relációk / kapcsolatok**:
   - `cars`: **Egy** flotta **típus** _(rekord)_ **több autóhoz** kapcsolódik (`HasMany` kapcsolat).
 
 ---
+
 ### Car Modell
 
 - **Főbb attribútumok**:
   - `protected $fillable`:
     - `rendszam`, `toltes_szaz`, `toltes_kw`, `becs_tav`, `status`, `kategoria`, `felszereltseg`, `flotta_azon`, `kilometerora`, `gyartasi_ev`.
 - **Relációk / kapcsolatok**:
+
   - **`fleet`**: Egy autó tartozik egy flottához (`BelongsTo` kapcsolat).
 
   - **`kategoria`**: Az autók egy kategóriához tartoznak (`BelongsTo` kapcsolat).
 
   - **`carstatus`**: Az autók aktuális állapotát tárolja (`BelongsTo` kapcsolat).
 
-  - **`lezartberlesek`**: Egy autóhoz több lezárt bérlés tartozhat (`HasMany`   
-  kapcsolat).
+  - **`lezartberlesek`**: Egy autóhoz több lezárt bérlés tartozhat (`HasMany`  
+    kapcsolat).
 
   - **`szamlak`**: Egy autóhoz több számla kapcsolódhat (`HasMany` kapcsolat).
 
   - **`tickets`**: Egy autóhoz több jegy kapcsolódhat (`HasMany` kapcsolat).
 
-  - **`users`**: Az autók és felhasználók között sok-a-sok kapcsolat van, bérlési 
-  részletekkel kiegészítve (`BelongsToMany` kapcsolat).
+  - **`users`**: Az autók és felhasználók között sok-a-sok kapcsolat van, bérlési
+    részletekkel kiegészítve (`BelongsToMany` kapcsolat).
 
 ## Factory
 
 ### CarFactory
-A **CarFactory** felelős a járművek automatikus generálásáért. Ez különösen hasznos a tesztek és seed-ek során, ahol nagyszámú valósághű adatot kell az adatbázisba hatékonyan *- és redundancia mentesen -* kell előállítani.
+
+A **CarFactory** felelős a járművek automatikus generálásáért. Ez különösen hasznos a tesztek és seed-ek során, ahol nagyszámú valósághű adatot kell az adatbázisba hatékonyan _- és redundancia mentesen -_ kell előállítani.
 
 #### Generált Adatok
+
 - **Flotta adatok**: A járművek generálása során a flotta véletlenszerűen kerül kiválasztásra, de bizonyos arányok betartásával:
-   - **Flotta ID kiválasztás arányai**:
-     - **85%** - Gyakoribb flotta típusok (pl. VW e-up! vagy Skoda Citigo-e-iV).
-     - **10%** - Ritkább, vagy specifikusabb flotta típusok (pl. Opel Vivaro-e).
-     - **5%** - Exkluzív flotta típusok (pl. KIA Niro-EV).
 
-- **Töltöttségi állapot (`toltes_szaz`) és kW érték (`toltes_kw`)**  
-   - **Százalékos töltöttség (`toltes_szaz`)**:
-     - Véletlenszerűen generált érték 15% és 100% között, két tizedesjegy pontossággal.
-   - **Teljesítmény alapján számított töltöttség kW-ban (`toltes_kw`)**:
-     - Formula: `teljesitmeny * (toltes_szaz / 100)`, egy tizedesjegy pontossággal.
-   - **Vonatkozó kód részlete**:
-     ```php
-     $toltes_szazalek = fake()->randomFloat(2, 15, 100); 
-     $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
-     ```
-- **Becsült hatótáv**: 
+  - **Flotta ID kiválasztás arányai**:
+    - **85%** - Gyakoribb flotta típusok (pl. VW e-up! vagy Skoda Citigo-e-iV).
+    - **10%** - Ritkább, vagy specifikusabb flotta típusok (pl. Opel Vivaro-e).
+    - **5%** - Exkluzív flotta típusok (pl. KIA Niro-EV).
+
+- **Töltöttségi állapot (`toltes_szaz`) és kW érték (`toltes_kw`)**
+  - **Százalékos töltöttség (`toltes_szaz`)**:
+    - Véletlenszerűen generált érték 15% és 100% között, két tizedesjegy pontossággal.
+  - **Teljesítmény alapján számított töltöttség kW-ban (`toltes_kw`)**:
+    - Formula: `teljesitmeny * (toltes_szaz / 100)`, egy tizedesjegy pontossággal.
+  - **Vonatkozó kód részlete**:
+    ```php 
+    <?php
+    $toltes_szazalek = fake()->randomFloat(2, 15, 100);
+    $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
+    ```
+- **Becsült hatótáv**:
 - A hatótáv a flottán belüli jármű hivatalosan meghatározott hatótáv és töltöttségi teljesítmény alapján számítódik:
-     - Számítás mechanikája: (`hatotav` / `teljesitmeny`) * `toltes_kw`.
-     - **Egy tizedesjegy** pontossággal generálódik.
 
-   - **Kód részlete**:
-     ```php
-     $becsultHatotav = round(($flottaTipus->hatotav / $flottaTipus->teljesitmeny) * $toltes_kw, 1);
-     ```
-- **Egyedi rendszám**: 
- A rendszámot a **magyar szabvány** szerint generálja beépített **regex** kód használatával. Erre építve véletlenszerűen **új** vagy **régi** formátumú rendszámok jönnek létre:
-   - **Új formátum**: `AA[A-C][A-O]-[0-9]{3}` *(pl. "AACO-123")*.
-   - **Régi formátum**: `(M|N|P|R|S|T)[A-Z]{2}-[0-9]{3}` *(pl. "SSA-456")*.
+  - Számítás mechanikája: (`hatotav` / `teljesitmeny`) \* `toltes_kw`.
+  - **Egy tizedesjegy** pontossággal generálódik.
 
-   - **A generált rendszámok egyedisége biztosított**: 
-     - Minden generált rendszámot egy tömbben tárolunk el, mely minden futási *(generálási)* ciklusban ellenőrzi, hogy az adott rendszám legenerálása megtörtént-e. 
-     - Amennyiben a generált rendszám korábban már létrejött, a ciklus újra generál egyet, ezzel megőrizve az ismétlődés elkerülését, az egyediség garanciáját.
-   - **Kód inspekció**:
-     ```php
-     private function rendszamGeneralasUjRegi(): string
-     {
-         static $generaltRendszamok = [];
-         do {
-             $rendszamUjRegi = random_int(0, 1);
-             $rendszam = $rendszamUjRegi > 0
-                 ? strtoupper(fake()->regexify('AA[A-C][A-O]-[0-9]{3}'))
-                 : strtoupper(fake()->regexify('(M|N|P|R|S|T)[A-Z]{2}-[0-9]{3}'));
-         } while (in_array($rendszam, $generaltRendszamok));
-         $generaltRendszamok[] = $rendszam;
-         return $rendszam;
-     }
-     ```
+  - **Kód részlete**:
+    ```php
+    <?php
+    $becsultHatotav = round(($flottaTipus->hatotav / $flottaTipus->teljesitmeny) * $toltes_kw, 1);
+    ```
+
+- **Egyedi rendszám**:
+  A rendszámot a **magyar szabvány** szerint generálja beépített **regex** kód használatával. Erre építve véletlenszerűen **új** vagy **régi** formátumú rendszámok jönnek létre:
+
+  - **Új formátum**: `AA[A-C][A-O]-[0-9]{3}` _(pl. "AACO-123")_.
+  - **Régi formátum**: `(M|N|P|R|S|T)[A-Z]{2}-[0-9]{3}` _(pl. "SSA-456")_.
+
+  - **A generált rendszámok egyedisége biztosított**:
+    - Minden generált rendszámot egy tömbben tárolunk el, mely minden futási _(generálási)_ ciklusban ellenőrzi, hogy az adott rendszám legenerálása megtörtént-e.
+    - Amennyiben a generált rendszám korábban már létrejött, a ciklus újra generál egyet, ezzel megőrizve az ismétlődés elkerülését, az egyediség garanciáját.
+  - **Kód inspekció**:
+    ```php 
+    <?php
+    private function rendszamGeneralasUjRegi(): string
+    {
+        static $generaltRendszamok = [];
+        do {
+            $rendszamUjRegi = random_int(0, 1);
+            $rendszam = $rendszamUjRegi > 0
+                ? strtoupper(fake()->regexify('AA[A-C][A-O]-[0-9]{3}'))
+                : strtoupper(fake()->regexify('(M|N|P|R|S|T)[A-Z]{2}-[0-9]{3}'));
+        } while (in_array($rendszam, $generaltRendszamok));
+        $generaltRendszamok[] = $rendszam;
+        return $rendszam;
+    }
+    ```
+
 - **Kilométeróra állás (`kilometerora`)**  
    A gyártási év funkciójának magja, az évszám szerinti becsülés a már megtett futásteljesítmény megállapítására:
-   - **Például**:
-     - 2019: 50,000–60,000 km.
-     - 2023: 20,000–30,000 km.
-   - **Kód inspekció**:
-     ```php
-     private function kmOraAllasGeneralas(int $gyartasiEv): int
-     {
-         return match ($gyartasiEv) {
-             2019 => random_int(50000, 60000),
-             2020 => random_int(40000, 60000),
-             2021 => random_int(30000, 40000),
-             2022 => random_int(25000, 35000),
-             2023 => random_int(20000, 30000),
-             default => 0,
-         };
-     }
-     ```
+  - **Például**:
+    - 2019: 50,000–60,000 km.
+    - 2023: 20,000–30,000 km.
+  - **Kód inspekció**:
+    ```php
+    <?php   
+
+    private function kmOraAllasGeneralas(int $gyartasiEv): int
+    {
+        return match ($gyartasiEv) {
+            2019 => random_int(50000, 60000),
+            2020 => random_int(40000, 60000),
+            2021 => random_int(30000, 40000),
+            2022 => random_int(25000, 35000),
+            2023 => random_int(20000, 30000),
+            default => 0,
+        };
+    }
+    ```
 
 ## Seeder
 
@@ -272,24 +294,30 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
   }
 ]
 ```
+
 ### CarSeeder
-  - **Cél**: 500 autó generálása a `CarFactory`-ben deklarált egyedi mechanizmus segítségével.
-  - A **CarFactory** a következőképpen használható a Seeder fájlban:
+
+- **Cél**: 500 autó generálása a `CarFactory`-ben deklarált egyedi mechanizmus segítségével.
+- A **CarFactory** a következőképpen használható a Seeder fájlban:
   ```php
+  <?php
   $cars = Car::factory(500)->make()->toArray();
   DB::table('cars')->insert($cars);
   ```
+
 ---
 
 ## API Végpontok
 
 ### Végpontok és Funkcionalitások
 
+#### Fleets Modul Végpontok
+
 1. **GET** `/api/fleets`
 
    - **Leírás**: A teljes flotta tábla adatainak megjelenítése, lekérése.
-   - **Controller metódus**: `fleets.index`
-   - **Válasz *reprezentatív* eredménye**:
+   - **Controller metódus**: `FleetController@index`
+   - **Válasz _reprezentatív_ eredménye**:
 
      ```json
      [
@@ -309,7 +337,7 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
 
    - **Leírás**: Új flotta létrehozása.
    - **Validáció**: `StoreFleetRequest` fájl végzi.
-   - **Példa *reprezentatív* adatbeszúrás eredménye**:
+   - **Példa _reprezentatív_ adatbeszúrás eredménye**:
      ```json
      {
        "gyarto": "Skoda",
@@ -332,18 +360,86 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
 
 ---
 
+#### Cars Modul Végpontok
+
+1. **GET /api/cars**
+
+   - **Leírás**: Az összes autó adatainak listázása, beleértve a hozzá tartozó `fleet` adatokat, illetve a `carstatus` értékét _(állapotát)_.
+
+   - **Controller metódus**: `CarController@index`
+
+   - **Válasz formátum**:
+     ```json
+     [
+       {
+         "car_id": 1,
+         "rendszam": "AAA-123",
+         "toltes_szaz": 85.0,
+         "toltes_kw": 30.5,
+         "becs_tav": 250,
+         "status": 1,
+         "kategoria": 3,
+         "felszereltseg": 2,
+         "kilometerora": 45000,
+         "gyartasi_ev": 2020,
+         "flotta_azon": 1,
+         "gyarto": "VW",
+         "tipus": "e-up!",
+         "teljesitmeny": 36,
+         "vegsebesseg": 130,
+         "gumimeret": "165|65-R15",
+         "hatotav": 265
+       }
+     ]
+     ```
+
+2. **POST /api/cars**
+
+   - **Leírás**: Új autó létrehozása, hozzáadása.
+
+   - **Validáció**: `StoreCarRequest`.
+
+   - **Reprezentatív kód**:
+     ```json
+     {
+       "rendszam": "BBB-456",
+       "kategoria": 2,
+       "felszereltseg": 1,
+       "flotta_azon": 1,
+       "kilometerora": 10000,
+       "gyartasi_ev": 2023,
+       "toltes_szaz": 90.5,
+       "toltes_kw": 35.0,
+       "becs_tav": 300,
+       "status": 1
+     }
+     ```
+
+3. **PUT /api/cars/{id}**
+
+   - **Leírás**: Már létező autó adatainak módosítása.
+   - **Validáció**: `UpdateCarRequest`.
+
+4. **DELETE /api/cars/{id}**
+   - **Leírás**: Már létező autó törlése az adatbázisból.
+
+---
+
 ## Kapcsolódások
 
 ### Relációk
-- **CarResource** fájlban: 
-  - A flotta adatai (`gyarto`, `tipus`, `teljesitmeny` *és további adatok)* a járművekhez kapcsolódnak.
+
+- **CarResource** fájlban:
+  - A flotta adatai (`gyarto`, `tipus`, `teljesitmeny` _és további adatok)_ a járművekhez kapcsolódnak.
 - **CarWithUsersResource**:
   - A flotta adatai járműveken keresztül megjelennek a bérlői adatokhoz kapcsolva.
 
 ---
+
 ## Validáció
 
 ### `StoreFleetRequest`
+
 - **Szabályok**:
   - `gyarto`: Kötelező, max. 30 karakter.
   - `tipus`: Kötelező, max. 30 karakter.
@@ -353,6 +449,7 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
   - `hatotav`: Kötelező, 100 és 1000 közötti egész szám.
 
 ### `UpdateFleetRequest`
+
 - Ugyanaz, mint a `StoreFleetRequest`, az `id` mező kötelező.
 
 ---
@@ -365,21 +462,24 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
 
 ## Hibakezelés és Hibaüzenetek
 
---- 
+---
 
 ## Tesztelés
+
 ### Automatikus tesztek
 
 #### Fleet Modul Tesztelése
 
-1. **GET /api/fleets**  
-   - **Cél**: A flotta adatok sikeres lekérése.  
+1. **GET /api/fleets**
+
+   - **Cél**: A flotta adatok sikeres lekérése.
    - **Teszt metódus**: `test_get_all_fleet_types`
    - **Elvárt eredmény**:
      - HTTP válasz státusz: `200 OK`.
 
-2. **POST /api/fleets**  
-   - **Cél**: Új flotta típus létrehozása az adatbázisban.  
+2. **POST /api/fleets**
+
+   - **Cél**: Új flotta típus létrehozása az adatbázisban.
    - **Teszt metódus**: `test_post_fake_fleet_type_to_db`
    - **Adat**:
      ```json
@@ -396,8 +496,9 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
      - HTTP válasz státusz: `201 Created`.
      - Adatbázis tartalmazza az új rekordot.
 
-3. **PUT /api/fleets/{id}**  
-   - **Cél**: Létező flotta adatainak módosítása.  
+3. **PUT /api/fleets/{id}**
+
+   - **Cél**: Létező flotta adatainak módosítása.
    - **Teszt metódus**: `test_put_previous_fake_fleet_modifing`
    - **Adat**:
      ```json
@@ -414,8 +515,8 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
      - HTTP válasz státusz: `200 OK`.
      - Adatbázis tartalmazza a frissített rekordot.
 
-4. **DELETE /api/fleets/{id}**  
-   - **Cél**: Létező flotta rekord törlése az adatbázisból.  
+4. **DELETE /api/fleets/{id}**
+   - **Cél**: Létező flotta rekord törlése az adatbázisból.
    - **Teszt metódus**: `test_delete_fake_fleet_type_from_db`
    - **Elvárt eredmények**:
      - HTTP válasz státusz: `204 No Content`.
@@ -423,25 +524,202 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
 
 ---
 
-### Tesztek összefoglalása
-- Az automatizált tesztek lefedik a flotta **CRUD** műveleteit.
-- A tesztek biztosítják, hogy az **API végpontok** megfelelően működjenek és az adatbázis tranzakciók **konzisztens állapotukban** maradjanak.
+#### Car Modul Tesztelése
 
-- **Tesztek futtatása**: 
-  
-  ```bash
-  docker compose exec backend fish
-  ```
-  Majd az alábbi parancs kiadása:
-  
-  ```fish
-  php artisan test
-  ```
-  
-  Továbbá a teljes program újraindításával `megváltoztatott adatokkal`, ugyanakkor azonos struktúra felépítéssel a `terminálban`:
-  ```bash
-  sh start.sh
-  ```
+1. **GET /api/cars**
+   - **Cél**: Az összes autó adatainak sikeres lekérése.
+   - **Teszt metódus**: `test_get_all_cars`
+   - **Elvárt eredmény**:
+     - HTTP válasz státusz: `200 OK`.
+     - Az adatok megfelelő struktúrában jelennek meg, például:
+       ```json
+       [
+         {
+           "car_id": 1,
+           "rendszam": "AAA-123",
+           "toltes_szaz": 85.0,
+           "toltes_kw": 30.5,
+           "becs_tav": 250,
+           "status": 1,
+           "kategoria": 3,
+           "felszereltseg": 2,
+           "kilometerora": 45000,
+           "gyartasi_ev": 2020,
+           "flotta_azon": 1
+         }
+       ]
+       ```
+2. **POST /api/cars**
+
+   - **Cél**: Új autó létrehozása az adatbázisban.
+   - **Teszt metódus**: `test_post_fake_car_to_db`
+   - **Adat**:
+     ```json
+     {
+       "rendszam": "BBB-456",
+       "kategoria": 2,
+       "felszereltseg": 1,
+       "flotta_azon": 1,
+       "kilometerora": 10000,
+       "gyartasi_ev": 2023,
+       "toltes_szaz": 90.5,
+       "toltes_kw": 35.0,
+       "becs_tav": 300,
+       "status": 1
+     }
+     ```
+   - **Elvárt eredmények**:
+     - HTTP válasz státusz: `201 Created`.
+     - Adatbázis tartalmazza az új rekordot:
+     ```sql
+     SELECT * FROM cars WHERE rendszam = 'BBB-456';
+     ```
+
+3. **PUT /api/cars/{id}**
+
+   - **Cél**: Létező autó adatainak módosítása.
+   - **Teszt metódus**: `test_put_existing_car_modifying`
+   - **Adat**:
+     ```json
+     {
+       "rendszam": "BBB-789",
+       "kategoria": 3,
+       "felszereltseg": 2,
+       "flotta_azon": 2,
+       "kilometerora": 15000,
+       "gyartasi_ev": 2021,
+       "toltes_szaz": 80.0,
+       "toltes_kw": 25.0,
+       "becs_tav": 200,
+       "status": 2
+     }
+     ```
+   - **Elvárt eredmények**:
+     - HTTP válasz státusz: `200 OK`.
+     - Adatbázis tartalmazza a frissített rekordot:
+     ```sql
+     SELECT * FROM cars WHERE rendszam = 'BBB-789';
+     ```
+
+4. **DELETE /api/cars/{id}**
+
+   - **Cél**: Létező autó rekord törlése az adatbázisból.
+   - **Teszt metódus**: `test_delete_existing_car`
+   - **Elvárt eredmények**:
+     - HTTP válasz státusz: `204 No Content`.
+     - Adatbázis **_nem tartalmazza_** a törölt **_rekordot_**:
+     ```sql
+     SELECT * FROM cars WHERE id = {id};
+     ```
+
+5. **GET /api/cars/{id}/tickets**
+
+- **Cél**: Egy adott autóhoz kapcsolódó összes jegy _(tickets)_ lekérése.
+  - **Teszt metódus**: `test_get_car_tickets`
+  - **Elvárt eredmények**:
+    - HTTP válasz státusz: `200 OK`.
+    - Az autóhoz kapcsolódó jegyek megfelelően megjelennek:
+    ```json
+    [
+      {
+        "id": 1,
+        "description": "Az autó tisztítása megtörtént.",
+        "car_id": 1,
+        "status_id": 1,
+        "status_descrip": "Az autó elérhető és bérlésre kész.",
+        "bejelentve": "2025-01-11 12:23:58"
+      },
+      {
+        "id": 3,
+        "description": "A kormánykerék ragacsos, tisztításra szorul.",
+        "car_id": 1,
+        "status_id": 6,
+        "status_descrip": "Az autót tisztításra ki kell vonni a forgalomból.",
+        "bejelentve": "2025-01-11 12:23:54"
+      }
+    ]
+    ```
+
+5. **GET /api/cars/{id}/renthistory**
+
+- **Cél**: Egy adott autó bérlési előzményeinek lekérése.
+  - **Teszt metódus**: `test_get_car_rent_history`
+  - **Elvárt eredmények**:
+    - HTTP válasz státusz: `200 OK`.
+    - Az autóhoz kapcsolódó bérlési előzmények listázása:
+    ```json
+    {
+      "car_id": 1,
+      "rendszam": "RNR-590",
+      "kategoria": 1,
+      "felszereltseg": 1,
+      "kilometerora": "31 899",
+      "gyarto": "VW",
+      "tipus": "e-up!",
+      "berlok": [
+        {
+          "berles_id": 51,
+          "user": "FOebiOen1309",
+          "berles_kezd_datum": "2024-10-03",
+          "berles_kezd_ido": "23:02:54",
+          "nyitas_szaz": 32.86,
+          "nyitas_kw": 5.9,
+          "berles_veg_datum": "2024-10-03",
+          "berles_veg_ido": "23:29:26",
+          "zaras_szaz": 26.67,
+          "zaras_kw": 4.8,
+          "megtett_tavolsag": 8,
+          "berles_osszeg": "2 492",
+          "parkolas": 0,
+          "szamla_kelt": "2025-01-11 12:23:15"
+        },
+        {
+          "berles_id": 52,
+          "user": "ex134",
+          "berles_kezd_datum": "2024-12-02",
+          "berles_kezd_ido": "23:59:47",
+          "nyitas_szaz": 26.67,
+          "nyitas_kw": 4.8,
+          "berles_veg_datum": "2024-12-03",
+          "berles_veg_ido": "00:37:36",
+          "zaras_szaz": 18.33,
+          "zaras_kw": 3.3,
+          "megtett_tavolsag": 11,
+          "berles_osszeg": "4 351",
+          "parkolas": 0,
+          "szamla_kelt": "2025-01-11 12:23:15"
+        }
+      ]
+    }
+    ```
+
+### Tesztek összefoglalása
+
+- Az automatizált tesztek lefedik a `Cars` és `Fleets` modulok **CRUD műveleteit**, valamint az ezekhez kapcsolódó speciális funkciókat _(pl. jegyek és bérlési előzmények lekérése)._
+
+- A tesztek biztosítják, hogy az **API végpontok** helyesen működjenek, és az adatbázis tranzakciók mindig **konzisztens állapotukban** maradjanak.
+
+- A tesztelési logika ellenőrzi a relációkat a különböző modulok között (pl. autók és flották, autók és bérlők), biztosítva az adatintegritást az adatbázisban.
+
+- Az elvárt válaszok részletes ellenőrzése garantálja, hogy az API válaszstruktúrái megfeleljenek a specifikációknak, és helyes adatokat szolgáltassanak a frontend számára.
+
+### Tesztek futtatása
+
+```bash
+docker compose exec backend fish
+```
+
+Majd az alábbi parancs kiadása:
+
+```php
+php artisan test
+```
+
+Továbbá a teljes program újraindításával `megváltoztatott adatokkal`, ugyanakkor azonos struktúra felépítéssel a `terminálban`:
+
+```bash
+sh start.sh
+```
 
 ## Gyakran ismételt kérdések (GYIK)
 
@@ -457,23 +735,12 @@ _Special thanks to the contributors who helped make this project possible:_
 **\*Thank you** for your contributions!\*
 
 ---
+
 ---
+
 ---
+
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ### Adatbázis frissítése:
 
