@@ -51,6 +51,12 @@ A **Fleet modul** felelős a flotta adatok kezeléséért. Ez a modul tartalmazz
 A Fleet modul `kapcsolódik` továbbá a **Cars** és a **Users** modulokhoz is, biztosítva az adatkapcsolatot a flotta-jármű-bérlő hierarchia rendszerben.
 
 ---
+### Categories Modul
+
+#### Áttekintés
+A **Categories modul** felelős a járműkategóriák kezeléséért. A kategóriák a flották teljesítménye alapján kerülnek besorolásra, és kulcsfontosságú kapcsolatot biztosítanak az árképzés és a napi bérlési funkciók számára.
+
+---
 
 ### Cars Modul
 
@@ -139,6 +145,12 @@ Ez a szerkezet logikusan elrendezi a nézetfájlokat. Elkülöníti őket a töb
   - `hatotav` (int) – Hatótávolság (km).
 
 ---
+- **categories**:
+  - `id` (unsigned integer): Egyedi azonosító (elsődleges kulcs).
+  - `kat_besorolas` (unsigned tiny integer): Kategória besorolása (egyedi).
+  - `teljesitmeny` (unsigned tiny integer): A kategóriához tartozó teljesítmény kW-ban.
+
+---
 
 - **Cars**:
   - `id` (int) – Elsődleges kulcs.
@@ -164,6 +176,18 @@ Ez a szerkezet logikusan elrendezi a nézetfájlokat. Elkülöníti őket a töb
     - `gyarto`, `tipus`, `teljesitmeny`, `vegsebesseg`, `gumimeret`, `hatotav`.
 - **Relációk / kapcsolatok**:
   - `cars`: **Egy** flotta **típus** _(rekord)_ **több autóhoz** kapcsolódik (`HasMany` kapcsolat).
+
+---
+### Category Modell
+
+- **Főbb attribútumok**:
+  - `protected $fillable`:
+    - A `Category` modell nem rendelkezik kitöltött `$fillable` attribútummal, mivel az adatokat az adatsorai **dinamikusan generálódnak**, felhasználva a `fleets` modult. 
+
+- **Relációk / kapcsolatok**:
+  - **`autok`**: **Egy** kategóriához **több** autó tartozhat (`HasMany` kapcsolat).  
+  - **`arazasok`**: **Egy** kategóriához **több** árképzési adat tartozhat (`HasMany` kapcsolat).  
+  - **`napiBerlesek`**: **Egy** kategóriához **több** napi bérlés kapcsolódhat (`HasMany` kapcsolat).  
 
 ---
 
@@ -284,19 +308,38 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
 
 - **Reprezentatív létrehozott adatok**:
 
-```json
-[
-  {
-    "gyarto": "VW",
-    "tipus": "e-up!",
-    "teljesitmeny": 18,
-    "vegsebesseg": 130,
-    "gumimeret": "165|65-R15",
-    "hatotav": 135
-  }
-]
-```
+  ```json
+  [
+    {
+      "gyarto": "VW",
+      "tipus": "e-up!",
+      "teljesitmeny": 18,
+      "vegsebesseg": 130,
+      "gumimeret": "165|65-R15",
+      "hatotav": 135
+    }
+  ]
+  ```
 
+---
+### CategorySeeder
+- **Reprezentatív létrehozott adatok**:
+
+  ```json
+  [
+    {
+    "id": 1,
+    "kat_besorolas": 1,
+    "teljesitmeny": 18
+    },
+    {
+    "id": 2,
+    "kat_besorolas": 2,
+    "teljesitmeny": 33
+    },
+  ]
+  ```
+---
 ### CarSeeder
 
 - **Cél**: 500 autó generálása a `CarFactory`-ben deklarált egyedi mechanizmus segítségével.
@@ -311,9 +354,7 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
 
 ## API Végpontok
 
-### Végpontok és Funkcionalitások
-
-#### Fleets Modul Végpontok
+### Fleets Modul Végpontok
 
 1. **GET** `/api/fleets`
 
@@ -361,8 +402,64 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
    - **Validáció**: `FleetController`-ben, amennyiben az adatrekord nem létezik, hibaüzenettel tér vissza.
 
 ---
+### Categories Modul Végpontok
 
-#### Cars Modul Végpontok
+1. **GET** `/api/categories`
+
+   - **Leírás**: A teljes kategória tábla adatainak lekérése és adatsorainak megjelenítése.
+   - **Controller metódus**: `CategoryController@index`
+   - **Válasz _reprezentatív_ eredménye**:
+
+     ```json
+     [
+       {
+         "id": 1,
+         "kat_besorolas": 1,
+         "teljesitmeny": 18
+       },
+       {
+         "id": 2,
+         "kat_besorolas": 2,
+         "teljesitmeny": 33
+       },
+       {
+         "id": 3,
+         "kat_besorolas": 3,
+         "teljesitmeny": 65
+       }
+     ]
+     ```
+
+2. **POST** `/api/categories`
+
+   - **Leírás**: Új kategória létrehozása.
+   - **Validáció**: `StoreCategoryRequest` fájl végzi.
+   - **Példa _reprezentatív_ adatbeszúrás eredménye**:
+
+     ```json
+     {
+       "kat_besorolas": 4,
+       "teljesitmeny": 75
+     }
+     ```
+
+3. **PUT** `/api/categories/{id}`
+
+   - **Leírás**: Meglévő kategória adatainak frissítése.
+   - **Validáció**: `UpdateCategoryRequest` végzi el.
+
+4. **DELETE** `/api/categories/{id}`
+
+   - **Leírás**: Egy adott kategória - *adatsor* - törlése.
+   - **Validáció**: `CategoryController`-ben:
+
+      - **HTTP** válasz státusz: `204 No Content`.
+        - Adatbázis nem tartalmazza a törölt rekordot.
+      - **HTTP** válasz státusz: `500`.
+        - Amennyiben nem létező adatot kíván törölni.
+---
+
+### Cars Modul Végpontok
 
 1. **GET /api/cars**
 
@@ -443,16 +540,47 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
 ### `StoreFleetRequest`
 
 - **Szabályok**:
-  - `gyarto`: Kötelező, max. 30 karakter.
-  - `tipus`: Kötelező, max. 30 karakter.
-  - `teljesitmeny`: Kötelező, 18 és 500 közötti egész szám.
-  - `vegsebesseg`: Kötelező, 100 és 300 közötti egész szám.
-  - `gumimeret`: Kötelező, max. 30 karakter.
-  - `hatotav`: Kötelező, 100 és 1000 közötti egész szám.
+  - `gyarto`: **Kötelező**, max. 30 **karakter**.
+  - `tipus`: **Kötelező**, max. 30 **karakter**.
+  - `teljesitmeny`: **Kötelező**, 18 és 500 közötti **egész** szám.
+  - `vegsebesseg`: **Kötelező**, 100 és 300 közötti **egész** szám.
+  - `gumimeret`: **Kötelező**, max. 30 **karakter**.
+  - `hatotav`: **Kötelező**, 100 és 1000 közötti **egész** szám.
 
 ### `UpdateFleetRequest`
 
 - Ugyanaz, mint a `StoreFleetRequest`, az `id` mező kötelező.
+
+---
+### `StoreCategoryRequest`
+
+- **Szabályok**:
+  - `id`: **Kötelező**, léteznie kell a `categories` táblában.
+  - `kat_besorolas`: **Kötelező**, 1 és 10 közötti **egész** szám.
+  - `teljesitmeny`: **Kötelező**, 18 és 200 közötti **egész** szám.
+
+### `UpdateCategoryRequest`
+
+- Ugyanaz, mint a `StoreCategoryRequest`, azzal a különbséggel, hogy a frissítéshez az `id` mező szintén kötelező.
+
+---
+### `StoreCarRequest`
+
+- **Szabályok**:
+  - `rendszam`: **Kötelező**, 7-10 karakter hosszú **szöveg**.
+  - `kategoria`: **Opcionális**, léteznie kell a `categories` táblában, 1-10 közötti értékkel.
+  - `felszereltseg`: **Opcionális**, léteznie kell az `equipments` táblában.
+  - `flotta_azon`: **Opcionális**, léteznie kell a `fleets` táblában.
+  - `kilometerora`: **Opcionális**, 0 és 300.000 közötti **egész** szám.
+  - `gyartasi_ev`: **Opcionális**, négy számjegyből álló **évszám**.
+  - `toltes_szaz`: **Kötelező**, 0-100 közötti **két** **tizedesjegyű** érték.
+  - `toltes_kw`: **Kötelező**, 0-500 közötti **egy** **tizedesjegyű** érték.
+  - `becs_tav`: **Kötelező**, 0-1000 közötti **egy** **tizedesjegyű** érték.
+  - `status`: **Opcionális**, léteznie kell a `carstatus` táblában.
+
+### `UpdateCarRequest`
+
+- Ugyanaz, mint a `StoreCarRequest`, azzal a különbséggel, hogy a frissítéshez az `id` mező szintén kötelező.
 
 ---
 
@@ -738,14 +866,16 @@ sh start.sh
 1. **Töltsd le a Docker legújabb verzióját** a [hivatalos weboldalról](https://www.docker.com/).
 
 2. **Klónozd** le a repository-t a **Visual Studio Code** termináljában:
+
    ```bash
    git clone "https://github.com/Bari1192/Power-And-Go"
    cd Power-And-Go
    ```
+
 3. **Futtasd** az alábbi parancsot:
-`bash
-     sh start.sh
-     `
+    ```bash
+    sh start.sh
+    ```
 Ez a folyamat automatikusan felépíti a konténereket a szükséges modulokkal és kiegészítőkkel a Docker fájlok segítségével.
 </details>
 
@@ -765,6 +895,89 @@ Amint a `start.sh` folyamata befejeződött, a projekt az alábbi **lokális lin
 - [Swagger](http://swagger.vm1.test)
 
 - [Dokumentáció](http://docs.vm1.test)
+</details>
+<details>
+  <summary><strong>3. Hogyan módosíthatom a generálás tartalmát? </strong></summary>
+   
+  `Figyelem!` A generálás összetételének módosítása kihatással lehet a Migrációra, Validálásra, Controllerre és az egyéb vele kapcsolatban álló modulokra!
+  - **Minden** *- Factory -* módosítás esetén **ellenőrizze a dokumentációban** lévő **kapcsolatokat** a redundancia és hibák elkerülése végett!
+    ```php
+    Car -> CarFactory
+    {Model} -> {Model}Factory
+    ```
+  - Az adatgenerálások minden esetben a hozzá tartozó `modul` nevének megfelelő `Factory` részben található, a `backend` mappában.
+  
+    <details>
+
+    <summary><strong>
+    3.1 Csak egy adattípust szeretnék változtatni. Hol találom annak a generálási folyamatát? </strong></summary>
+    
+      - `Figyelem!` A Factory részben szinte minden adat generikusan jön létre, `függvények` segítségével és kerül átadásra az értéke.
+      - A függvények meghívása a `return` metódusban történik:
+        ```php
+        <?php
+        return [
+              'flotta_azon' => $flottaTipus->id,
+              'kategoria' => $this->katBesorolasAutomatan($flotta),
+              'rendszam' => $this->rendszamGeneralasUjRegi(),
+              'gyartasi_ev' => $gyartasiEv,
+              'kilometerora' => $this->kmOraAllasGeneralas($gyartasiEv),
+              'felszereltseg' => $felszereltseg ? $felszereltseg->id : 1,
+              'toltes_szaz' => $toltes_szazalek,
+              'toltes_kw' => $toltes_kw,
+              'becs_tav' => $becsultHatotav,
+              'status' => 1, 
+          ];
+        ```
+
+      - Minden generálási függvény az adott Factory fájl alsó részében helyezkedik el a könyebb olvashatóság jegyében, pl:
+
+        ```php
+          <?php
+          private function katBesorolasAutomatan(int $flotta): int
+          {
+              $idAlapjanKatBesorolas = DB::table('fleets')->where('id', $flotta)->first();
+              if (!$idAlapjanKatBesorolas) {
+                  throw new \Exception("Flotta nem található az ID alapján: $flotta");
+              }
+      
+              return match ($idAlapjanKatBesorolas->teljesitmeny) {
+                  18 => 1,
+                  33 => 2,
+                  36 => 3,
+                  65 => 4,
+                  75 => 5,
+                  default => 5,
+              };
+          }
+        ```
+</details>
+
+<details>
+  <summary><strong>4. Hogyan módosíthatom a generált adatok mennyiségét? </strong></summary>
+
+  `Figyelem!` A generálás adatok mennyiségi módosítása kihatással lehet a többi modelre, Validálásra, kapcsolatokra és a generálási folyamat idejére.
+
+  - Az adatgenerálások mennyiségi változtatását minden esetben a hozzá tartozó `modul` nevének megfelelő `Seeder` osztályban tudjuk végrehajtani, amit, a `backend/database/seeders` útvonalon ér el.
+
+    - Reprezentatív példa a Factory által generált adatok mennyiségére a Seeder fájlban:
+    ```php
+    <?php
+    class CarSeeder extends Seeder
+    {
+        public function run(): void
+        {
+            $cars = Car::factory(500)->make()->toArray();
+            DB::table('cars')->insert($cars);
+        }
+    }
+    ```
+    - **500-ról 1.000-re** emeljük az autók generálását.Ennek eléréshez az alábbi adatsort szükséges módosítani:
+      
+      ```php
+      <?php
+      $cars = Car::factory(1_000)->make()->toArray();
+      ```
 </details>
 
 ## Contributors
@@ -795,184 +1008,6 @@ Amint a `start.sh` folyamata befejeződött, a projekt az alábbi **lokális lin
 
 ---
 
-### Adatbázis frissítése:
-
-- A státuszváltás végrehajtása után vissza kell igazolnom a foglalhatóságot.
-- Ha sikeres, egy 200-as HTTP választ kell visszaküldenem a frontendnek.
-
-### Tesztelés és Ellenőrzés
-
-- Ellenőriznem kell, hogy az autók státuszai pontosan frissülnek-e minden eseménynél.
-- Tesztelnem kell az adminisztrátor által végrehajtott módosításokat, hogy a backend validálása megfelelően működik-e.
-- Gondoskodnom kell arról, hogy a frontend logikája pontosan tükrözze az adatbázis állapotát
-
-## [Lezárt-Bérlések]-[Autok-Töltöttség-%-Hatótáv-km]
-
-1. Funkciók és Alapvető Célok
-   Az Autók és Lezárt bérlések kapcsolatrendszerének célja az autók aktuális állapotának, töltöttségi szintjének, hatótávjának és bérlési adatainak pontos nyilvántartása. A logika biztosítja, hogy:
-
-- Az autók energiafelhasználása és állapota dinamikusan, valós időben frissüljön.
-- Az aktuális töltöttségi szint alapján meghatározott maximális távolság figyelembevételével történjen adatgenerálás.
-- Az autó "foglalható" státusza automatikusan frissüljön a változások bekövetkeztekor.
-
-2. Fő Komponensek és Funkcióik
-   ### Töltöttségi Szint Számítás:
-   - Az autók kezdeti és záró töltöttségi szintjét a toltes_szazalek mező határozza meg.
-   - A hatótáv számítása:
-   - Egy kW energia által megtett távolság:
-   - egy_kW_hany_km = hatotav / teljesitmeny
-   - Kezdeti hatótáv kiszámítása:
-   - becsult_hatotav = egy_kW_hany_km \* toltes_kw
-   - Záráskor várható állapot: zaras_toltes_kw = nyitas_toltes_kw - fogyasztott_kw
-   2. Az autók csak akkor foglalhatók, ha:
-      - Nyitási töltöttség >= 15%.
-      - Zárási töltöttség > 12%.
-        Amennyiben az autó nem felel meg ezeknek a kritériumoknak, automatikusan foglalhato = `false` állapotba kerül.
-   3. `Kilométeróra Állás` Frissítése:
-      - A megtett távolság (megtettTavolsag) alapján az km_ora_allas mező automatikusan frissül.
-      - Új érték:
-        km_ora_allas = km_ora_allas + megtettTavolsag
-
-### Működési Logika
-
-1.  Autó Bérlésének Generálása:
-    - Az autó adatainak frissítése a lezárt bérlés adatai alapján történik.
-    - Ha a záró töltöttségi szint 10% alá csökkenne, a bérlés nem generálható, és az autó "foglalhatatlan" lesz.
-2.  Adatfrissítés:
-    - Záráskor:
-      - toltes_szazalek, toltes_kw és becsult_hatotav mezők frissítése.
-      - Ha a töltöttségi szint < 15%, akkor az autó "foglalhatatlan" státuszt kap.
-    - Kilométeróra:
-      - A megtett távolság automatikusan hozzáadódik a meglévő kilométeróra álláshoz.
-
-### Példák és Használati Esetek
-
-1.  Autó 75%-os töltöttségi szintről indul:
-    - 20 km megtételével 72%-ra csökken.
-    - Új hatótáv számítása:
-      - zaraskoriToltesKw = 36kW \* 0.72
-      - becsult_hatotav = zaraskoriToltesKw \* (hatotav / teljesitmeny)
-2.  Autó töltöttségi szint 12% alá csökken:
-    - Az autó nem "foglalható", státusza automatikusan frissül.
-3.  Új bérlésnél figyelembe vett töltöttségi szint:
-    - Az előző bérlés után megmaradt töltöttség az alapja az új bérlésnek.
-
-### Ez a logika lehetővé teszi
-
-- Az autók bérlésének dinamikus és pontos nyilvántartását.
-- Az autók foglalhatósági állapotának automatikus kezelését.
-- A töltöttségi és hatótáv-adatok gyors és hatékony frissítését.
-
-## [Autok-Töltöttség-%-Hatótáv-km]
-
-1. Autok tábla bővítésének részletei:
-
-- `toltes_szazalek`: Az adott autó töltöttségi szintjét adja meg, százalékos (float) formátumban, 15.0% és 100.0% közötti értékkel. A cél, hogy minden autó egyedi töltöttségi értéket kapjon.
-- `toltes_kw`: A töltöttségi szint alapján kiszámított érték az akkumulátor maximális kapacitásának (kW) figyelembevételével. Ez az érték az autóhoz rendelt flotta típus teljesitmeny mezőjéből származik, és a számított érték 1 tizedesjegyre kerekítve kerül tárolásra.
-- `becsult_hatotav`: A megadott töltöttségi szint alapján becsült maximális hatótávot (km) adja meg. A számításhoz a flotta típus hatotav és teljesitmeny mezőjének arányát használjuk fel, szintén 1 tizedesjegyre kerekítve.
-
-2. [Entitások] közötti összefüggések:
-
-- A töltöttségi szint (%-os) értéke (toltes_szazalek) felhasználásra kerül a maximális akkumulátor kapacitás kiszámításához: - `toltes_kw = teljesitmeny * (toltes_szazalek / 100).`
-  Az autóhoz tartozó hatótáv (hatotav) alapján kiszámítható az, hogy egy kW energia hány km megtételére elegendő: - `egy_kW_hany_km = hatotav / teljesitmeny.`
-  Ezután a toltes_kw értékével felszorozva meghatározható a becsült hatótáv: - `becsult_hatotav = egy_kW_hany_km * toltes_kw.`
-
-3. `A letárolt adatok szerepe:`
-
-- A számított mezők közül a toltes_szazalek, toltes_kw, és becsult_hatotav értékeit az autók táblában tároljuk. Ennek oka, hogy ezek az értékek gyakran kerülnek felhasználásra, így a számítások helyett a közvetlen tárolt értékek biztosítanak gyorsabb hozzáférést.
-
-4. `Gyakorlati felhasználása és az alkalmazása:`
-
-- Mivel, hogy az autók egyedi töltöttségi szinttel kerülnek létrehozásra (15-100% között), és ezek alapján automatikusan kiszámításra kerül a pillanatnyi kW-ban mért töltöttség és a várható hatótáv.
-  Az adatok előkészítésével biztosítható a flottákhoz rendelt autók állapotának és teljesítményének pontos nyilvántartása.
-
-5. `Célok`:
-
-- Az autók akkumulátor-teljesítményének és hatótávjának pontos, dinamikusan változtatható nyilvántartása, amely lehetővé teszi az autók energiafelhasználásának hatékony monitorozását, valamint az egyes autók várható teljesítményének egyszerű elemzését.
-
-## [Számlázás-TÁBLA]
-
-1.  Az egész tábla tartalma cirka származtatott lenne, ami annyit jelent, hogy létrejönne a(z):
-
-    - `szamla_id`('szamla_sorszam') [PK] -> Egyedi azonosítószáma a számlának.
-    - `szamla_tipus` -> A számla kiállításának típusát írja le, mely származhat bérlésből, baleset -ből (mint baleset okozója),károkozás-ból (mint rongálás, törés stb.), magatartás -ból (mint autóban dohányzás, tilosban parkolás, gyorshajtás). Egyik értéket mindig kötelező felvennie.
-    - `felh_id` ('felhasznalo') [FK] -> felh_id_fk érték kerül ide, ami beazonosítja, hogy melyik felhasználóhoz tartozik a számla.
-    - `szemely_id` ('szemely') [FK] -> szemely_id érték kerül ide, ami beazonosítja, hogy az adott személyhez ez a felhasznaló tartozik (azonosítószám alapján) a számla. (többszörös védelem a biztosan hibamentes számla kiállításához.)
-    - `berles_kezd_datum` -> Meghatározza a berles kedzetének dátumát (év-hónap-nap).
-    - `berles_kezd_ido` -> Meghatározza a berles kedzetének időpontját (óra-perc-másodperc).
-    - `berles_veg_datum` -> Meghatározza a bérlés végének dátumát (év-hónap-nap).
-    - `berles_veg_ido` -> Meghatározza a berles végének időpontját (óra-perc-másodperc).
-    - `megtett_tavolsag` -> Meghatározza a bérlés során az autóval megtett távolságot (km-ben).
-    - `parkolasi_perc` -> Meghatározza a bérlés során az autóval parkolt időt (percben, egész számként).
-    - `vezetesi_perc` -> Meghatározza a bérlés során az autóval levezetett időt (percben, egész számként).
-    - `berles_osszeg` -> Meghatározza a bérlés során az autó típusától és a felhasználó előfizetési csomagjától (ha van) függően a megtett távolság, vezetési percdíj, parkolás és egyéb szolgálatások fejében a bérlésének a teljes költségét. (Ft-ban, egész számként).
-    - `szamla_kelt` -> A számla készítésének időpontját -> created_at érték.
-    - `szamla_status` -> Az 'aktiv','függőben','archivált' értékek egyikét veszifel, attól függően, hogy a számla kifizetésre került-e. Alapértelmezetten a 'függőben' státust kapja, míg a számla kifizetése valóban meg nem történik.
-
-    Mivel az adatok jórésze már a `lezart_berlesek` táblában elérhető, ezért onnan fel tudjuk használni. Fontos ugyanakkor, hogy az ottani értékek megmaradnak annak érdekében, hogy ahhoz a táblához / táblába a `felhasználó NEM láthat bele`. Ennek érdekében kerül elkészítésre a `szamlak` tábla, ahol majd a számlákkal:
-
-    - `Státuszát` tudjuk állítani,
-    - `Új számlát` tudunk kiállítani,
-    - Számlát tudunk `törölni`,
-    - Számlát tudunk `módosítani` - hiba esetére -> megfelelő jogosultságg(ok)al.
-
-## SZÁMLÁZÁSI LOGIKA LEÍRÁSA [ENYÉM]:
-
-Ugye a `4-es előfizetési kategóriával`, `4-es kategóriájú autóval` bérelt. `közel 1,5 napig` bérelte az autót. Mivel a 4-es kat. autókat `CSAK napokra lehet bérelni` ezért úgy kellene számolnia, hogy:
-ArazasSeederben kikeresi ezt (elofiz_azon,auto_besorolas, díjak stb.), majd utána:
-`berles_ind` díja, =>1990 Ft + `napidij` => 20680
-Majd ellenőrzi, hogy a LezartBerlesFactory `megtettTavolsag`() alapján generált érték (`pl:128km`)
-Benne van-e az ArazasSeeder -ben lévő `napi_km_limit` -ben, ami => `125`, ennél az előfizetőnél.
-Mivel 3 km-rel többet autózott el, mint a napi limit, ezért 3 \*48 Ft-ot kéne fizetnie pluszban. (Amennyiben 1 napig bérelte. Hogy ha 2 napot bérli, akkor minden egyes további nappal +125km-rel nő az ő napi_km_limit értéke.)
-Maradva a számolásnál ez azt jelenti, hogy elsőnek ki kell számolnunk, hogy:
-
-1. 1990+20680+(3*48)+((~5óra*60) \*vez_perc => 78) = 46 214 Ft (ha jól számolom),
-   VAGY AMENNYIBEN KEDVEZŐBB NEKI, akkor:
-2. 1990+20680(1.nap)+40360(2.nap), ami = 63030 Ft (azaz cirka annyi, mint az eredeti számolásban. Lehet kihagytam valamit)
-
-Ergó ebben az esetben az ügyfélnek az 1. eset lesz a kedvezőbb, így azt a számlát kell kiállítanunk.
-
-[Viszont]
-Ha nem napi bérlésről van szó, akkor a kilóméterdíjat nem szabad hozzácsapni a végösszeghez. Alapesetben (ha nem napi bérlés lesz).
-Napi bérlések esetén pedig a km limitig nem számolunk kilóméterdíjat. A kilóméterlimit túllépése után pedig felszámoljuk az "extra" kilómétereket.
-Ugyanakkor meg kell vizsgálnunk, helyesen - ahogy tetted -, hogy azzal jár-e jobban, hogy az alaposszeget fizeti ki, vagy a napidijat (még akkor is, ha a napidijban mondjuk benne lenne extra kilóméterdíj).
-24 órán belüli bérlés kezelése (2-es és 4-es kategória):
-
-`Ha a bérlés időtartama 24 órán belül van ($napok <= 1) ÉS az autó 2-es vagy 4-es kategóriájú`
-
-- Akkor a minimum összeg a napidij + extra kilométerdíj (ha túllépte a km-limitet).
-- Az alapösszeg és a minimum napi díj közül a nagyobbat adjuk vissza.
-
-`Többnapos bérlés kezelése`:
-
-- Ha több mint 1 napos bérlésről van szó, akkor a NapiBerles táblából lekérjük a megfelelő napi díjat.
-- A napi díjat a $napok - 2 index alapján határozzuk meg, mivel a 2 napos bérlés ára a 0. indexen van.
-
-`Km-díj hozzáadása`:
-
-- Ha túllépi a napi km-limitet, akkor az extra kilométerek díját (kmDijOsszeg) minden esetben hozzáadjuk.
-
-`Kedvezőbb ár kiválasztása:`
-
-- A minimum napi díj (vagy többnapos díj) és az alapösszeg közül mindig a kedvezőbbet adjuk vissza.
-
-## Előfizetések tábla - létrehozása
-
-1. [Entitások]-[Migráció]:
-
-   - `elofiz_id` - Az előfizetés azonosítójának a száma. [PK],[AI].
-   - `elofiz_nev` - Az előfizetésnek a megnevezése - kötelező, fix csomagok közül.
-   - `havi_dij` - Az előfizetés havi díjának összege (opcionális).
-   - `eves_dij` - Az előfizetés éves kedv. díja (opcionális VIP csomaghoz).
-
-2. [Seeder]:
-   `elofiz_nev` - 4 előfizetési csopor "választható". Alapértelmezetten aki nem havidíjas előfizetést választ - alkalmi felhasználó -, azon személyeket a 'Power' csomag részeként kezeljük.
-
-   - `havi_dij` összeg opció csak a `Power-Plus`,`Power-Premium`,`Power-VIP` előfizetéseknél van.
-   - `havi_dij` és `eves_dij` együttese csak a `Power-VIP` -ben érhető el.
-     Ahol a havidíj, vagy az éves díj `null` értékként van kezelve, az azt jelenti, hogy az adott előfizetési csomagban `nincs/nem elérhető` ilyen opció.
-
-3. [Relációk]-[Model]
 
 ### E-mail kiküldés alapja
 
