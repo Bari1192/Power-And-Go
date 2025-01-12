@@ -5,8 +5,6 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Car;
 use Tests\TestCase;
 
-use function PHPUnit\Framework\assertArrayHasKey;
-
 class CarControllerTest extends TestCase
 {
     public function test_can_get_all_cars(): void

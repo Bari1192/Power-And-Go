@@ -15,7 +15,10 @@ class Category extends Model
 
     public $timestamps = false;
     public $incrementing = true;
-    protected $fillable = [];
+    protected $fillable = [
+        "kat_besorolas",
+        "teljesitmeny",
+    ];
 
 
     public function autok(): HasMany

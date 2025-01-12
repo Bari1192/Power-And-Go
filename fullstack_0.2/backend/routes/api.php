@@ -3,6 +3,7 @@
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CarStatusController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FleetController;
 use App\Http\Controllers\GoogleMapsController;
@@ -24,7 +25,7 @@ Route::get('/geocode', [GoogleMapsController::class, 'getGeocode']);        ## E
 
 Route::apiResource('cars', CarController::class);
 Route::apiResource('tickets', TicketController::class);
-
+Route::apiResource('categories', CategoryController::class);
 
 Route::apiResource('bills', BillController::class);
 

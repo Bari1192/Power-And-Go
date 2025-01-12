@@ -434,7 +434,7 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
 
    - **Leírás**: Új kategória létrehozása.
    - **Validáció**: `StoreCategoryRequest` fájl végzi.
-   - **Példa _reprezentatív_ adatbeszúrás eredménye**:
+   - **Példa _reprezentatív_ adatbeszúrás**:
 
      ```json
      {
@@ -652,6 +652,65 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
      - HTTP válasz státusz: `204 No Content`.
      - Adatbázis nem tartalmazza a törölt rekordot.
 
+---
+#### Category Modul Tesztelése
+
+1. **GET** `/api/categories`
+   - **Cél**: Az összes kategória adatának lekérése.
+   - **Teszt metódus**: `test_can_get_all_categories`
+   - **Elvárt eredmény**:
+     - HTTP válasz státusz: `200 OK`.
+     - A visszaadott adatok (`data`) nem üresek.
+
+2. **GET** `/api/categories/{id}`
+   - **Cél**: Egy adott kategória adatainak lekérése.
+   - **Teszt metódusok**:
+     
+    2.1 | **ID mező ellenőrzése**  
+     - **Metódus**: `test_can_get_category_id`
+     - **Elvárt eredmény**:
+       - HTTP válasz státusz: `200 OK`.
+       - Az objektumban szerepel az `id` mező.
+
+    2.2 | **Kategória besorolás ellenőrzése**  
+     - **Metódus**: `test_can_get_category_category_type`
+     - **Elvárt eredmény**:
+       - HTTP válasz státusz: `200 OK`.
+       - Az objektumban szerepel a `kat_besorolas` mező.
+
+     2.3 | **Teljesítmény ellenőrzése**  
+     - **Metódus**: `test_can_get_category_with_power`
+     - **Elvárt eredmény**:
+       - HTTP válasz státusz: `200 OK`.
+       - Az objektumban szerepel a `teljesitmeny` mező.
+
+3. **POST** `/api/categories`
+   - **Cél**: Új kategória létrehozása az adatbázisban.
+   - **Teszt metódus**: `test_post_fake_category_type_into_db`
+   - **Adat**:
+      ```json
+      {
+       "kat_besorolas": 3,
+       "teljesitmeny": 100
+      }
+      ```
+   - **Elvárt eredmények**:
+     - HTTP válasz státusz: `201 Created`.
+     - Az adatbázis tartalmazza az új kategóriát:
+
+      ```json
+      {
+        "kat_besorolas": 3,
+        "teljesitmeny": 100
+      }
+      ```
+
+4. **DELETE** `/api/categories/{id}`
+   - **Cél**: Létező kategória törlése az adatbázisból.
+   - **Teszt metódus**: `test_delete_previous_category_type_from_db`
+   - **Elvárt eredmények**:
+     - HTTP válasz státusz: `204 No Content`.
+     - Az adatbázis már nem tartalmazza a törölt kategóriát.
 ---
 
 #### Car Modul Tesztelése
