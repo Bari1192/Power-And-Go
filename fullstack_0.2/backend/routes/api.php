@@ -8,6 +8,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FleetController;
 use App\Http\Controllers\GoogleMapsController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,15 +25,16 @@ Route::get('/googlemapsapi', [GoogleMapsController::class, 'getApiUrl']);   ## E
 Route::get('/geocode', [GoogleMapsController::class, 'getGeocode']);        ## Ez a térképet inicializálja és jeleníti meg rajta.
 
 Route::apiResource('cars', CarController::class);
+Route::apiResource('fleets', FleetController::class);
+Route::apiResource('subscriptions',SubscriptionController::class);
+
 Route::apiResource('tickets', TicketController::class);
 Route::apiResource('categories', CategoryController::class);
-
 Route::apiResource('bills', BillController::class);
-
-Route::apiResource('fleets', FleetController::class);
-
 Route::apiResource('carstatus', CarStatusController::class);
-
 Route::apiResource('persons', PersonController::class);
 Route::apiResource('users',UserController::class);
+
+# Dinamikusság kell, hogy ha létrejön a dolgozó, akkor 
+# dolgozói kedvezményben legyen (pl: 50% fix).
 Route::apiResource('employees',EmployeeController::class);

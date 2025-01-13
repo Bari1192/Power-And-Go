@@ -11,6 +11,9 @@ class CarControllerTest extends TestCase
     {
         $response = $this->getJson('/api/cars');
         $response->assertStatus(200);
+        $data = $response->json('data');
+
+        $response = $this->assertNotEmpty($data);
     }
 
     public function test_can_create_fake_car_data()

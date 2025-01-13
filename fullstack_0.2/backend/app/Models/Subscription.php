@@ -14,7 +14,11 @@ class Subscription extends Model
     public $timestamps = false;
     public $incrementing = true;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'elofiz_nev',
+        'havi_dij',
+        'eves_dij',
+    ];
     public function user(): HasMany
     {
         return $this->hasMany(User::class, 'elofiz_id', 'id');

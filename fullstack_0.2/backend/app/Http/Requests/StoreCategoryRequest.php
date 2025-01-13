@@ -13,7 +13,6 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //"id" => ["required", "exists:categories,id"],
             "kat_besorolas" => ["required","integer","between:1,10"],
             "teljesitmeny" => ["required","integer","between:18,200"],
         ];

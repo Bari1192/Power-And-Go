@@ -57,7 +57,19 @@ A Fleet modul `kapcsolódik` továbbá a **Cars** és a **Users** modulokhoz is,
 A **Categories modul** felelős a járműkategóriák kezeléséért. A kategóriák a flották teljesítménye alapján kerülnek besorolásra, és kulcsfontosságú kapcsolatot biztosítanak az árképzés és a napi bérlési funkciók számára.
 
 ---
+### Subscription Modul
 
+A **Subscription modul** felelős az előfizetési csomagok kezeléséért, ideértve az előfizetések létrehozását, frissítését, törlését és megjelenítését. Az előfizetések különböző szinteket és díjstruktúrákat tartalmaznak, amelyek a felhasználói igényekhez igazíthatók.
+
+---
+
+- Az előfizetés **nevét** (pl. `Power`, `Power-Plus`, `Power-Premium`, `Power-VIP`),
+- Az előfizetéshez tartozó **havi díjat**,
+- Az előfizetéshez tartozó **éves díjat**.
+
+A Subscription modul `kapcsolódik` a **Users** modulhoz, biztosítva, hogy minden felhasználó rendelkezzen egy hozzárendelt előfizetéssel. Az előfizetések különböző szinteket és szolgáltatásokat biztosítanak, amelyek havi vagy éves díjakkal kezelhetők.
+
+---
 ### Cars Modul
 
 A **Cars modul** felelős az egyedi járművek kezeléséért. Ez a modul tartalmazza az egyes autók:
@@ -149,6 +161,15 @@ Ez a szerkezet logikusan elrendezi a nézetfájlokat. Elkülöníti őket a töb
   - `id` (unsigned integer): Egyedi azonosító (elsődleges kulcs).
   - `kat_besorolas` (unsigned tiny integer): Kategória besorolása (egyedi).
   - `teljesitmeny` (unsigned tiny integer): A kategóriához tartozó teljesítmény kW-ban.
+---
+
+- **Subscriptions**
+  - `id`: Elsődleges kulcs.
+  - `elofiz_nev`: Előfizetési csomag neve (max. 50 karakter, egyedi értékek).
+  - `havi_dij`: Havi díj (opcionális).
+  - `eves_dij`: Éves díj (opcionális).
+  - `created_at`: Rekord létrehozási időpontja.
+  - `updated_at`: Rekord utolsó frissítési időpontja.
 
 ---
 
@@ -190,7 +211,16 @@ Ez a szerkezet logikusan elrendezi a nézetfájlokat. Elkülöníti őket a töb
   - **`napiBerlesek`**: **Egy** kategóriához **több** napi bérlés kapcsolódhat (`HasMany` kapcsolat).  
 
 ---
+### Subscription Modell
 
+- **Főbb attribútumok**:
+  - `protected $fillable`:
+    - `elofiz_nev`, `havi_dij`, `eves_dij`.
+- **Relációk / kapcsolatok**:
+  - `user`: **Egy** előfizetési csomag **több felhasználóhoz** kapcsolódik (`HasMany` kapcsolat).
+
+
+---
 ### Car Modell
 
 - **Főbb attribútumok**:
@@ -340,6 +370,25 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
   ]
   ```
 ---
+### SubscriptionSeeder
+
+- **Reprezentatív létrehozott adatok**:
+
+  ```json
+  [
+    {
+      "elofiz_nev": "Power",
+      "havi_dij": null,
+      "eves_dij": null
+    },
+    {
+      "elofiz_nev": "Power-Plus",
+      "havi_dij": 490,
+      "eves_dij": null
+    },
+  ]
+  ```
+
 ### CarSeeder
 
 - **Cél**: 500 autó generálása a `CarFactory`-ben deklarált egyedi mechanizmus segítségével.
@@ -458,6 +507,55 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
       - **HTTP** válasz státusz: `500`.
         - Amennyiben nem létező adatot kíván törölni.
 ---
+### Subscriptions Modul Végpontok
+
+1. **GET** `/api/subscriptions`
+
+   - **Leírás**: Az összes előfizetés adatainak lekérése.
+   - **Controller metódus**: `SubscriptionController@index`
+   - **Válasz _reprezentatív_ eredménye**:
+
+     ```json
+     [
+       {
+         "elofiz_id": 1,
+         "elofiz_nev": "Power",
+         "havi_dij": null,
+         "eves_dij": null
+       },
+       {
+         "elofiz_id": 2,
+         "elofiz_nev": "Power-Plus",
+         "havi_dij": 490,
+         "eves_dij": null
+       }
+     ]
+     ```
+
+2. **POST** `/api/subscriptions`
+
+   - **Leírás**: Új előfizetési csomag létrehozása.
+   - **Validáció**: `StoreSubscriptionRequest` fájl végzi.
+   - **Példa _reprezentatív_ adatbeszúrás eredménye**:
+     ```json
+     {
+       "elofiz_nev": "Power-Premium",
+       "havi_dij": 1690,
+       "eves_dij": null
+     }
+     ```
+
+3. **PUT** `/api/subscriptions/{id}`
+
+   - **Leírás**: Létező előfizetés frissítése.
+   - **Validáció**: `UpdateSubscriptionRequest`.
+
+4. **DELETE** `/api/subscriptions/{id}`
+
+   - **Leírás**: Előfizetési csomag törlése.
+   - **Validáció**: `SubscriptionController`-ben, amennyiben az adatrekord nem létezik, hibaüzenettel tér vissza.
+
+---
 
 ### Cars Modul Végpontok
 
@@ -524,20 +622,10 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
 
 ---
 
-## Kapcsolódások
-
-### Relációk
-
-- **CarResource** fájlban:
-  - A flotta adatai (`gyarto`, `tipus`, `teljesitmeny` _és további adatok)_ a járművekhez kapcsolódnak.
-- **CarWithUsersResource**:
-  - A flotta adatai járműveken keresztül megjelennek a bérlői adatokhoz kapcsolva.
-
----
-
 ## Validáció
 
-### `StoreFleetRequest`
+### Fleet
+#### `StoreFleetRequest`
 
 - **Szabályok**:
   - `gyarto`: **Kötelező**, max. 30 **karakter**.
@@ -547,24 +635,55 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
   - `gumimeret`: **Kötelező**, max. 30 **karakter**.
   - `hatotav`: **Kötelező**, 100 és 1000 közötti **egész** szám.
 
-### `UpdateFleetRequest`
+#### `UpdateFleetRequest`
 
 - Ugyanaz, mint a `StoreFleetRequest`, az `id` mező kötelező.
 
 ---
-### `StoreCategoryRequest`
+
+### Category
+#### `StoreCategoryRequest`
+
+- **Szabályok**:
+  - `kat_besorolas`: **Kötelező**, 1 és 10 közötti **egész** szám.
+  - `teljesitmeny`: **Kötelező**, 18 és 200 közötti **egész** szám.
+
+#### `UpdateCategoryRequest`
 
 - **Szabályok**:
   - `id`: **Kötelező**, léteznie kell a `categories` táblában.
   - `kat_besorolas`: **Kötelező**, 1 és 10 közötti **egész** szám.
   - `teljesitmeny`: **Kötelező**, 18 és 200 közötti **egész** szám.
 
-### `UpdateCategoryRequest`
+---
+##### **Magyarázat**
 
-- Ugyanaz, mint a `StoreCategoryRequest`, azzal a különbséggel, hogy a frissítéshez az `id` mező szintén kötelező.
+1. **`StoreCategoryRequest`**:
+   - Az `id` mező **nincs jelen** a validációs szabályok között, mivel új rekord létrehozásánál a a migrációban lévő `id` mező `AUTOINCREMENT` tulajdonsága elvégzi az azonosítószám növelését.
+
+2. **`UpdateCategoryRequest`**:
+   - Az `id` mező **kötelező**, hogy azonosítsa a frissítendő kategória `rekordot`.
+   - A többi szabály ugyanaz, mint a `StoreCategoryRequest` esetében.
+---
+
+### Subscription
+#### `StoreSubscriptionRequest`
+
+- **Szabályok**:
+  - `elofiz_nev`: **Kötelező**, 2 és 30 közötti **karakter** hosszúságú szöveg.
+  - `havi_dij`: **Kötelező**, 0 és 10,000 közötti **egész** szám.
+  - `eves_dij`: **Kötelező**, 0 és 10,000 közötti **egész** szám.
+
+#### `UpdateSubscriptionRequest`
+
+- **Szabályok**:
+  - `elofiz_nev`: **Kötelező**, léteznie kell a `subscriptions` táblában.
+  - `havi_dij`: Nem kötelező, 0 és 10,000 közötti **egész** szám.
+  - `eves_dij`: Nem kötelező, 0 és 10,000 közötti **egész** szám.
 
 ---
-### `StoreCarRequest`
+### Car
+#### `StoreCarRequest`
 
 - **Szabályok**:
   - `rendszam`: **Kötelező**, 7-10 karakter hosszú **szöveg**.
@@ -578,7 +697,7 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
   - `becs_tav`: **Kötelező**, 0-1000 közötti **egy** **tizedesjegyű** érték.
   - `status`: **Opcionális**, léteznie kell a `carstatus` táblában.
 
-### `UpdateCarRequest`
+#### `UpdateCarRequest`
 
 - Ugyanaz, mint a `StoreCarRequest`, azzal a különbséggel, hogy a frissítéshez az `id` mező szintén kötelező.
 
@@ -712,7 +831,66 @@ A **CarFactory** felelős a járművek automatikus generálásáért. Ez külön
      - HTTP válasz státusz: `204 No Content`.
      - Az adatbázis már nem tartalmazza a törölt kategóriát.
 ---
+#### Subscription Modul Tesztelése
+1. **GET /api/subscriptions**
 
+   - **Cél**: Az összes előfizetés adatainak sikeres lekérése.
+   - **Teszt metódus**: `test_can_get_all_subscriptions`
+   - **Elvárt eredmény**:
+     - HTTP válasz státusz: `200 OK`.
+     - Az adatok tartalmazzák az előfizetések listáját.
+
+2. **GET /api/subscriptions/{id}**
+
+   - **Cél**: Egy adott előfizetési csomag adatainak lekérése.
+   - **Teszt metódus**: `test_can_get_subscription_by_id`
+   - **Adat**:
+     - Az előfizetés azonosítója (`id`).
+   - **Elvárt eredmény**:
+     - HTTP válasz státusz: `200 OK`.
+     - Az adat tartalmazza a kért előfizetési csomag részleteit (`elofiz_nev`, `havi_dij`, `eves_dij`).
+
+3. **POST /api/subscriptions**
+
+   - **Cél**: Új előfizetési csomag létrehozása az adatbázisban.
+   - **Teszt metódus**: `test_post_new_subscription`
+   - **Adat**:
+     ```json
+     {
+       "elofiz_nev": "Power-Ultimate",
+       "havi_dij": 3990,
+       "eves_dij": 39900
+     }
+     ```
+   - **Elvárt eredmények**:
+     - HTTP válasz státusz: `201 Created`.
+     - Az adatbázis tartalmazza az új rekordot.
+
+4. **PUT /api/subscriptions/{id}**
+
+   - **Cél**: Létező előfizetési csomag adatainak módosítása.
+   - **Teszt metódus**: `test_update_existing_subscription`
+   - **Adat**:
+     ```json
+     {
+       "elofiz_nev": "Power-Ultimate-Updated",
+       "havi_dij": 4490,
+       "eves_dij": 44900
+     }
+     ```
+   - **Elvárt eredmények**:
+     - HTTP válasz státusz: `200 OK`.
+     - Az adatbázis tartalmazza a frissített rekordot.
+
+5. **DELETE /api/subscriptions/{id}**
+
+   - **Cél**: Létező előfizetési csomag törlése az adatbázisból.
+   - **Teszt metódus**: `test_delete_subscription`
+   - **Elvárt eredmények**:
+     - HTTP válasz státusz: `204 No Content`.
+     - Az adatbázis nem tartalmazza a törölt rekordot.
+
+---
 #### Car Modul Tesztelése
 
 1. **GET /api/cars**

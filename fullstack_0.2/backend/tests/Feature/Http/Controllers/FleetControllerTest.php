@@ -11,6 +11,9 @@ class FleetControllerTest extends TestCase
     {
         $response = $this->get('api/fleets');
         $response->assertStatus(200);
+
+        $data = $response->json('data');
+        $response = $this->assertNotEmpty($data);
     }
     public function test_post_fake_fleet_type_to_db(): void
     {

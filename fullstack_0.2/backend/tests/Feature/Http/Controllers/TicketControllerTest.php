@@ -14,8 +14,7 @@ class TicketControllerTest extends TestCase
         $response->assertStatus(200);
 
         $data = $response->json('data');
-
-        $response = $this->assertNotEmpty($data); ## ---> lekérve nem üresen jön vissza!
+        $response = $this->assertNotEmpty($data);
     }
     public function test_can_get_ticket_id(): void
     {

@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->enum('elofiz_nev',['Power','Power-Plus','Power-Premium','Power-VIP']);
+            $table->string('elofiz_nev', 50);
             $table->integer('havi_dij')->nullable();
             $table->integer('eves_dij')->nullable();
             $table->timestamps();
