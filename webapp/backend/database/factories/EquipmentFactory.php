@@ -12,11 +12,11 @@ class EquipmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'tolatokamera' => fake()->boolean(50),
-            'savtarto' => fake()->boolean(50),
-            'tempomat' => fake()->boolean(50),
-            'tolatoradar' => fake()->boolean(50),
-            'multif_kormany' => fake()->boolean(50),
+            'reversing_camera' => fake()->boolean(50),
+            'lane_keep_assist' => fake()->boolean(50),
+            'adaptive_cruise_control' => fake()->boolean(50),
+            'parking_sensors' => fake()->boolean(50),
+            'multifunction_wheel' => fake()->boolean(50),
         ];
     }
 }

@@ -23,9 +23,9 @@ class CarStatusController extends Controller
         $carstatus = CarStatus::create($data);
         return new CarstatusResource($carstatus);
     }
-    public function show(CarStatus $carStatus)
+    public function show(CarStatus $carstatus):JsonResource
     {
-        return new CarstatusResource($carStatus);
+        return new CarstatusResource($carstatus);
     }
 
     public function update(UpdateCarstatusRequest $request, CarStatus $carstatus)
@@ -35,9 +35,9 @@ class CarStatusController extends Controller
         return new CarstatusResource($carstatus);
     }
     
-    public function destroy(CarStatus $carStatus):Response
+    public function destroy(CarStatus $carstatus):Response
     {
-        return($carStatus->delete()) ? response()->noContent() : abort(500);
+        return($carstatus->delete()) ? response()->noContent() : abort(500);
     }
 
 }

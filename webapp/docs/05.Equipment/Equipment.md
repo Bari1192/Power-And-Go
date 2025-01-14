@@ -1,0 +1,57 @@
+# Áttekintés
+
+Az **Equipment modul** felelős az autók felszereltségének kezeléséért. Ez a modul tartalmazza azokat a tulajdonságokat, amelyek az autók kényelmét, biztonságát és funkcionalitását növelik, például:
+
+- **Tolatókamera**,
+- **Sávtartó rendszer**,
+- **adaptive_cruise_control**,
+- **Tolatóradar**,
+- **Multifunkciós kormánykerék**.
+
+Az Equipment modul nem tartalmaz controllert, mivel a felszereltség közvetlen módosítása nem szükséges. A modul **kapcsolódik** a **Cars** modulhoz a **felszereltségek** és az **autók** közötti relációk kezelésére.
+
+---
+
+## **Migrációk** | Táblák
+
+- **Equipments**
+  - `id` (int) – Elsődleges kulcs.
+  - `reversing_camera` (boolean) – Tolatókamera jelenléte (alapértelmezett: 0).
+  - `lane_keep_assist` (boolean) – Sávtartó rendszer jelenléte (alapértelmezett: 0).
+  - `adaptive_cruise_control` (boolean) – adaptive_cruise_control jelenléte (alapértelmezett: 0).
+  - `parking_sensors` (boolean) – Tolatóradar jelenléte (alapértelmezett: 0).
+  - `multifunction_wheel` (boolean) – Multifunkciós kormánykerék jelenléte (alapértelmezett: 0).
+
+---
+
+## Modell
+
+- **Főbb attribútumok**:
+  - `protected $fillable`:
+    - `reversing_camera`, `lane_keep_assist`, `adaptive_cruise_control`, `parking_sensors`, `multifunction_wheel`.
+- **Relációk / kapcsolatok**:
+  - `autok`: **Egy felszereltség rekord** **több autóhoz** kapcsolódik (`HasMany` kapcsolat).
+
+---
+
+## Seeder
+
+- **Reprezentatív létrehozott adatok**:
+
+  ```json
+  [
+    {
+      "reversing_camera": true,
+      "lane_keep_assist": false,
+      "adaptive_cruise_control": true,
+      "parking_sensors": false,
+      "multifunction_wheel": true
+    },
+    {
+      "reversing_camera": false,
+      "lane_keep_assist": true,
+      "adaptive_cruise_control": true,
+      "parking_sensors": true,
+      "multifunction_wheel": false
+    }
+  ]

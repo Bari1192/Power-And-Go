@@ -1,0 +1,120 @@
+# Áttekintés
+
+A **Subscription modul** felelős az előfizetési csomagok kezeléséért, ideértve az előfizetések létrehozását, frissítését, törlését és megjelenítését. Az előfizetések különböző szinteket és díjstruktúrákat tartalmaznak, amelyek a felhasználói igényekhez igazíthatók.
+
+---
+
+- Az előfizetés **nevét** (pl. `Power`, `Power-Plus`, `Power-Premium`, `Power-VIP`),
+- Az előfizetéshez tartozó **havi díjat**,
+- Az előfizetéshez tartozó **éves díjat**.
+
+A Subscription modul `kapcsolódik` a **Users** modulhoz, biztosítva, hogy minden felhasználó rendelkezzen egy hozzárendelt előfizetéssel. Az előfizetések különböző szinteket és szolgáltatásokat biztosítanak, amelyek havi vagy éves díjakkal kezelhetők.
+
+---
+## **Migráció** | Tábla
+
+- **Subscriptions**
+  - `id`: Elsődleges kulcs.
+  - `elofiz_nev`: Előfizetési csomag neve (max. 50 karakter, egyedi értékek).
+  - `havi_dij`: Havi díj (opcionális).
+  - `eves_dij`: Éves díj (opcionális).
+  - `created_at`: Rekord létrehozási időpontja.
+  - `updated_at`: Rekord utolsó frissítési időpontja.
+
+---
+
+## Subscription Modell
+
+- **Főbb attribútumok**:
+  - `protected $fillable`:
+    - `elofiz_nev`, `havi_dij`, `eves_dij`.
+- **Relációk / kapcsolatok**:
+  - `user`: **Egy** előfizetési csomag **több felhasználóhoz** kapcsolódik (`HasMany` kapcsolat).
+---
+
+## Seeder
+
+- **Reprezentatív létrehozott adatok**:
+
+  ```json
+  [
+    {
+      "elofiz_nev": "Power",
+      "havi_dij": null,
+      "eves_dij": null
+    },
+    {
+      "elofiz_nev": "Power-Plus",
+      "havi_dij": 490,
+      "eves_dij": null
+    },
+  ]
+  ```
+
+## API Végpontok
+
+1. **GET** `/api/subscriptions`
+
+   - **Leírás**: Az összes előfizetés adatainak lekérése.
+   - **Controller metódus**: `SubscriptionController@index`
+   - **Válasz _reprezentatív_ eredménye**:
+
+     ```json
+     [
+       {
+         "elofiz_id": 1,
+         "elofiz_nev": "Power",
+         "havi_dij": null,
+         "eves_dij": null
+       },
+       {
+         "elofiz_id": 2,
+         "elofiz_nev": "Power-Plus",
+         "havi_dij": 490,
+         "eves_dij": null
+       }
+     ]
+     ```
+
+2. **POST** `/api/subscriptions`
+
+   - **Leírás**: Új előfizetési csomag létrehozása.
+   - **Validáció**: `StoreSubscriptionRequest` fájl végzi.
+   - **Példa _reprezentatív_ adatbeszúrás eredménye**:
+     ```json
+     {
+       "elofiz_nev": "Power-Premium",
+       "havi_dij": 1690,
+       "eves_dij": null
+     }
+     ```
+
+3. **PUT** `/api/subscriptions/{id}`
+
+   - **Leírás**: Létező előfizetés frissítése.
+   - **Validáció**: `UpdateSubscriptionRequest`.
+
+4. **DELETE** `/api/subscriptions/{id}`
+
+   - **Leírás**: Előfizetési csomag törlése.
+   - **Validáció**: `SubscriptionController`-ben, amennyiben az adatrekord nem létezik, hibaüzenettel tér vissza.
+
+---
+
+
+## Validáció
+### `StoreSubscriptionRequest`
+
+- **Szabályok**:
+  - `elofiz_nev`: **Kötelező**, 2 és 30 közötti **karakter** hosszúságú szöveg.
+  - `havi_dij`: **Kötelező**, 0 és 10,000 közötti **egész** szám.
+  - `eves_dij`: **Kötelező**, 0 és 10,000 közötti **egész** szám.
+
+### `UpdateSubscriptionRequest`
+
+- **Szabályok**:
+  - `elofiz_nev`: **Kötelező**, léteznie kell a `subscriptions` táblában.
+  - `havi_dij`: Nem kötelező, 0 és 10,000 közötti **egész** szám.
+  - `eves_dij`: Nem kötelező, 0 és 10,000 közötti **egész** szám.
+
+---

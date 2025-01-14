@@ -15,11 +15,11 @@ class Equipment extends Model
     public $incrementing = true;
 
     protected $fillable = [
-        'tolatokamera',
-        'savtarto',
-        'tempomat',
-        'tolatoradar',
-        'multif_kormany',
+        'reversing_camera',
+        'lane_keep_assist',
+        'adaptive_cruise_control',
+        'parking_sensors',
+        'multifunction_wheel',
     ];
     public function autok(): HasMany
     {

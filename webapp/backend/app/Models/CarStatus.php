@@ -14,7 +14,6 @@ class CarStatus extends Model
     protected $fillable = [
         "status_name",
         "status_descrip",
-        "created",
     ];
 
     public function cars(): HasMany

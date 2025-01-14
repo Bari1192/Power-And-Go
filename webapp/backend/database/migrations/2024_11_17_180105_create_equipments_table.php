@@ -9,11 +9,11 @@ return new class extends Migration {
     {
         Schema::create('equipments', function (Blueprint $table) {
             $table->id();
-            $table->boolean('tolatokamera')->default(0);
-            $table->boolean('savtarto')->default(0);
-            $table->boolean('tempomat')->default(0);
-            $table->boolean('tolatoradar')->default(0);
-            $table->boolean('multif_kormany')->default(0);
+            $table->boolean('reversing_camera')->default(0);
+            $table->boolean('lane_keep_assist')->default(0);
+            $table->boolean('adaptive_cruise_control')->default(0);
+            $table->boolean('parking_sensors')->default(0);
+            $table->boolean('multifunction_wheel')->default(0);
         });
     }
     public function down(): void

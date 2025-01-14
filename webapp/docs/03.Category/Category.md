@@ -1,0 +1,124 @@
+# Áttekintés
+A **Categories modul** felelős a járműkategóriák kezeléséért. A kategóriák a flották teljesítménye alapján kerülnek besorolásra, és kulcsfontosságú kapcsolatot biztosítanak az árképzés és a napi bérlési funkciók számára.
+
+---
+## **Migráció** | Adatbázis tábla
+
+- **categories**:
+  - `id` (unsigned integer): Egyedi azonosító (elsődleges kulcs).
+  - `kat_besorolas` (unsigned tiny integer): Kategória besorolása (egyedi).
+  - `teljesitmeny` (unsigned tiny integer): A kategóriához tartozó teljesítmény kW-ban.
+---
+## Category Modell
+
+- **Főbb attribútumok**:
+  - `protected $fillable`:
+    - A `Category` modell nem rendelkezik kitöltött `$fillable` attribútummal, mivel az adatokat az adatsorai **dinamikusan generálódnak**, felhasználva a `fleets` modult. 
+
+- **Relációk / kapcsolatok**:
+  - **`autok`**: **Egy** kategóriához **több** autó tartozhat (`HasMany` kapcsolat).  
+  - **`arazasok`**: **Egy** kategóriához **több** árképzési adat tartozhat (`HasMany` kapcsolat).  
+  - **`napiBerlesek`**: **Egy** kategóriához **több** napi bérlés kapcsolódhat (`HasMany` kapcsolat).  
+
+---
+
+## CategorySeeder
+- **Reprezentatív létrehozott adatok**:
+
+  ```json
+  [
+    {
+    "id": 1,
+    "kat_besorolas": 1,
+    "teljesitmeny": 18
+    },
+    {
+    "id": 2,
+    "kat_besorolas": 2,
+    "teljesitmeny": 33
+    },
+  ]
+  ```
+---
+
+## Categories Modul Végpontok
+
+1. **GET** `/api/categories`
+
+   - **Leírás**: A teljes kategória tábla adatainak lekérése és adatsorainak megjelenítése.
+   - **Controller metódus**: `CategoryController@index`
+   - **Válasz _reprezentatív_ eredménye**:
+
+     ```json
+     [
+       {
+         "id": 1,
+         "kat_besorolas": 1,
+         "teljesitmeny": 18
+       },
+       {
+         "id": 2,
+         "kat_besorolas": 2,
+         "teljesitmeny": 33
+       },
+       {
+         "id": 3,
+         "kat_besorolas": 3,
+         "teljesitmeny": 65
+       }
+     ]
+     ```
+
+2. **POST** `/api/categories`
+
+   - **Leírás**: Új kategória létrehozása.
+   - **Validáció**: `StoreCategoryRequest` fájl végzi.
+   - **Példa _reprezentatív_ adatbeszúrás**:
+
+     ```json
+     {
+       "kat_besorolas": 4,
+       "teljesitmeny": 75
+     }
+     ```
+
+3. **PUT** `/api/categories/{id}`
+
+   - **Leírás**: Meglévő kategória adatainak frissítése.
+   - **Validáció**: `UpdateCategoryRequest` végzi el.
+
+4. **DELETE** `/api/categories/{id}`
+
+   - **Leírás**: Egy adott kategória - *adatsor* - törlése.
+   - **Validáció**: `CategoryController`-ben:
+
+      - **HTTP** válasz státusz: `204 No Content`.
+        - Adatbázis nem tartalmazza a törölt rekordot.
+      - **HTTP** válasz státusz: `500`.
+        - Amennyiben nem létező adatot kíván törölni.
+---
+
+## Validáció
+### `StoreCategoryRequest`
+
+- **Szabályok**:
+  - `kat_besorolas`: **Kötelező**, 1 és 10 közötti **egész** szám.
+  - `teljesitmeny`: **Kötelező**, 18 és 200 közötti **egész** szám.
+
+### `UpdateCategoryRequest`
+
+- **Szabályok**:
+  - `id`: **Kötelező**, léteznie kell a `categories` táblában.
+  - `kat_besorolas`: **Kötelező**, 1 és 10 közötti **egész** szám.
+  - `teljesitmeny`: **Kötelező**, 18 és 200 közötti **egész** szám.
+
+---
+### **Magyarázat**
+
+1. **`StoreCategoryRequest`**:
+   - Az `id` mező **nincs jelen** a validációs szabályok között, mivel új rekord létrehozásánál a a migrációban lévő `id` mező `AUTOINCREMENT` tulajdonsága elvégzi az azonosítószám növelését.
+
+2. **`UpdateCategoryRequest`**:
+   - Az `id` mező **kötelező**, hogy azonosítsa a frissítendő kategória `rekordot`.
+   - A többi szabály ugyanaz, mint a `StoreCategoryRequest` esetében.
+---

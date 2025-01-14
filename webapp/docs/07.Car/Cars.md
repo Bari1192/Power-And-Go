@@ -1,0 +1,234 @@
+# Áttekintés
+
+A **Cars modul** felelős az egyedi járművek kezeléséért. Ez a modul tartalmazza az egyes autók:
+
+- **Rendszámát**,
+- **Töltöttségét (százalék és kW)**,
+- **Becsült hatótávját**,
+- **Kilométeróra állását**,
+- **Gyártási évét**,
+- Valamint kapcsolódik a **flottákhoz**, **kategóriákhoz**, **felszereltségekhez** és az aktuális **állapothoz**.
+
+A Cars modul szoros **kapcsolatban** áll a **Fleet** és **Users** modulokkal, biztosítva az adatkapcsolatot a járművek, flották és bérlők között.
+
+---
+## **Migráció** | Tábla
+
+- **Cars**:
+  - `id` (int) – Elsődleges kulcs.
+  - `rendszam` (string) – Egyedi rendszám (max. 10 karakter).
+  - `toltes_szaz` (float) – Töltöttség százalékban (0–100%).
+  - `toltes_kw` (float) – Töltöttség kW-ban.
+  - `becs_tav` (float) – Becsült hatótáv (km).
+  - `status` (foreign key) – Kapcsolat a **carstatus** táblával.
+  - `kategoria` (foreign key) – Kapcsolat a **categories** táblával.
+  - `felszereltseg` (foreign key) – Kapcsolat az **equipments** táblával.
+  - `flotta_azon` (foreign key) – Kapcsolat a **fleets** táblával.
+  - `kilometerora` (int) – Kilométeróra állása.
+  - `gyartasi_ev` (year) – Gyártási év.
+
+---
+## Car Modell
+
+- **Főbb attribútumok**:
+  - `protected $fillable`:
+    - `rendszam`, `toltes_szaz`, `toltes_kw`, `becs_tav`, `status`, `kategoria`, `felszereltseg`, `flotta_azon`, `kilometerora`, `gyartasi_ev`.
+- **Relációk / kapcsolatok**:
+
+  - **`fleet`**: Egy autó tartozik egy flottához (`BelongsTo` kapcsolat).
+
+  - **`kategoria`**: Az autók egy kategóriához tartoznak (`BelongsTo` kapcsolat).
+
+  - **`carstatus`**: Az autók aktuális állapotát tárolja (`BelongsTo` kapcsolat).
+
+  - **`lezartberlesek`**: Egy autóhoz több lezárt bérlés tartozhat (`HasMany`  
+    kapcsolat).
+
+  - **`szamlak`**: Egy autóhoz több számla kapcsolódhat (`HasMany` kapcsolat).
+
+  - **`tickets`**: Egy autóhoz több jegy kapcsolódhat (`HasMany` kapcsolat).
+
+  - **`users`**: Az autók és felhasználók között sok-a-sok kapcsolat van, bérlési
+    részletekkel kiegészítve (`BelongsToMany` kapcsolat).
+
+
+## CarFactory
+
+A **CarFactory** felelős a járművek automatikus generálásáért. Ez különösen hasznos a tesztek és seed-ek során, ahol nagyszámú valósághű adatot kell az adatbázisba hatékonyan _- és redundancia mentesen -_ kell előállítani.
+
+### Generált Adatok
+
+#### **Flotta adatok** 
+ A járművek generálása során a flotta véletlenszerűen kerül kiválasztásra, de bizonyos arányok betartásával:
+
+  - **Flotta ID kiválasztás arányai**:
+    - **85%** - Gyakoribb flotta típusok (pl. VW e-up! vagy Skoda Citigo-e-iV).
+    - **10%** - Ritkább, vagy specifikusabb flotta típusok (pl. Opel Vivaro-e).
+    - **5%** - Exkluzív flotta típusok (pl. KIA Niro-EV).
+
+#### **Töltöttségi állapot (`toltes_szaz`) és kW érték (`toltes_kw`)**
+  - **Százalékos töltöttség (`toltes_szaz`)**:
+    - Véletlenszerűen generált érték 15% és 100% között, két tizedesjegy pontossággal.
+  - **Teljesítmény alapján számított töltöttség kW-ban (`toltes_kw`)**:
+    - Formula: `teljesitmeny * (toltes_szaz / 100)`, egy tizedesjegy pontossággal.
+  - **Vonatkozó kód részlete**:
+
+    ```php
+    $toltes_szazalek = fake()->randomFloat(2, 15, 100);
+    $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
+    ```
+
+#### - **Becsült hatótáv**:
+- A hatótáv a flottán belüli jármű hivatalosan meghatározott hatótáv és töltöttségi teljesítmény alapján számítódik:
+
+  - Számítás mechanikája: (`hatotav` / `teljesitmeny`) \* `toltes_kw`.
+  - **Egy tizedesjegy** pontossággal generálódik.
+
+  - **Kód részlete**:
+    ```php
+    $becsultHatotav = round(($flottaTipus->hatotav / $flottaTipus->teljesitmeny) * $toltes_kw, 1);
+    ```
+
+#### **Egyedi rendszám**:
+  A rendszámot a **magyar szabvány** szerint generálja beépített **regex** kód használatával. Erre építve véletlenszerűen **új** vagy **régi** formátumú rendszámok jönnek létre:
+
+  - **Új formátum**: `AA[A-C][A-O]-[0-9]{3}` _(pl. "AACO-123")_.
+  - **Régi formátum**: `(M|N|P|R|S|T)[A-Z]{2}-[0-9]{3}` _(pl. "SSA-456")_.
+
+  - **A generált rendszámok egyedisége biztosított**:
+    - Minden generált rendszámot egy tömbben tárolunk el, mely minden futási _(generálási)_ ciklusban ellenőrzi, hogy az adott rendszám legenerálása megtörtént-e.
+    - Amennyiben a generált rendszám korábban már létrejött, a ciklus újra generál egyet, ezzel megőrizve az ismétlődés elkerülését, az egyediség garanciáját.
+  - **Kód inspekció**:
+    ```php
+    <?php
+    private function rendszamGeneralasUjRegi(): string
+    {
+        static $generaltRendszamok = [];
+        do {
+            $rendszamUjRegi = random_int(0, 1);
+            $rendszam = $rendszamUjRegi > 0
+                ? strtoupper(fake()->regexify('AA[A-C][A-O]-[0-9]{3}'))
+                : strtoupper(fake()->regexify('(M|N|P|R|S|T)[A-Z]{2}-[0-9]{3}'));
+        } while (in_array($rendszam, $generaltRendszamok));
+        $generaltRendszamok[] = $rendszam;
+        return $rendszam;
+    }
+    ```
+
+- **Kilométeróra állás (`kilometerora`)**  
+   A gyártási év funkciójának magja, az évszám szerinti becsülés a már megtett futásteljesítmény megállapítására:
+
+  - **Például**:
+    - 2019: 50,000–60,000 km.
+    - 2023: 20,000–30,000 km.
+  - **Kód inspekció**:
+    ```php
+    private function kmOraAllasGeneralas(int $gyartasiEv): int
+    {
+        return match ($gyartasiEv) {
+            2019 => random_int(50000, 60000),
+            2020 => random_int(40000, 60000),
+            2021 => random_int(30000, 40000),
+            2022 => random_int(25000, 35000),
+            2023 => random_int(20000, 30000),
+            default => 0,
+        };
+    }
+    ```
+
+ ## CarSeeder
+
+- **Cél**: 500 autó generálása a `CarFactory`-ben deklarált egyedi mechanizmus segítségével.
+- A **CarFactory** a következőképpen használható a Seeder fájlban:
+  ```php
+  <?php
+  $cars = Car::factory(500)->make()->toArray();
+  DB::table('cars')->insert($cars);
+  ```
+
+---
+
+### Cars Modul Végpontok
+
+1. **GET /api/cars**
+
+   - **Leírás**: Az összes autó adatainak listázása, beleértve a hozzá tartozó `fleet` adatokat, illetve a `carstatus` értékét _(állapotát)_.
+
+   - **Controller metódus**: `CarController@index`
+
+   - **Válasz formátum**:
+     ```json
+     [
+       {
+         "car_id": 1,
+         "rendszam": "AAA-123",
+         "toltes_szaz": 85.0,
+         "toltes_kw": 30.5,
+         "becs_tav": 250,
+         "status": 1,
+         "kategoria": 3,
+         "felszereltseg": 2,
+         "kilometerora": 45000,
+         "gyartasi_ev": 2020,
+         "flotta_azon": 1,
+         "gyarto": "VW",
+         "tipus": "e-up!",
+         "teljesitmeny": 36,
+         "vegsebesseg": 130,
+         "gumimeret": "165|65-R15",
+         "hatotav": 265
+       }
+     ]
+     ```
+
+2. **POST /api/cars**
+
+   - **Leírás**: Új autó létrehozása, hozzáadása.
+
+   - **Validáció**: `StoreCarRequest`.
+
+   - **Reprezentatív kód**:
+     ```json
+     {
+       "rendszam": "BBB-456",
+       "kategoria": 2,
+       "felszereltseg": 1,
+       "flotta_azon": 1,
+       "kilometerora": 10000,
+       "gyartasi_ev": 2023,
+       "toltes_szaz": 90.5,
+       "toltes_kw": 35.0,
+       "becs_tav": 300,
+       "status": 1
+     }
+     ```
+
+3. **PUT /api/cars/{id}**
+
+   - **Leírás**: Már létező autó adatainak módosítása.
+   - **Validáció**: `UpdateCarRequest`.
+
+4. **DELETE /api/cars/{id}**
+   - **Leírás**: Már létező autó törlése az adatbázisból.
+
+---
+## Validáció
+### `StoreCarRequest`
+
+- **Szabályok**:
+  - `rendszam`: **Kötelező**, 7-10 karakter hosszú **szöveg**.
+  - `kategoria`: **Opcionális**, léteznie kell a `categories` táblában, 1-10 közötti értékkel.
+  - `felszereltseg`: **Opcionális**, léteznie kell az `equipments` táblában.
+  - `flotta_azon`: **Opcionális**, léteznie kell a `fleets` táblában.
+  - `kilometerora`: **Opcionális**, 0 és 300.000 közötti **egész** szám.
+  - `gyartasi_ev`: **Opcionális**, négy számjegyből álló **évszám**.
+  - `toltes_szaz`: **Kötelező**, 0-100 közötti **két** **tizedesjegyű** érték.
+  - `toltes_kw`: **Kötelező**, 0-500 közötti **egy** **tizedesjegyű** érték.
+  - `becs_tav`: **Kötelező**, 0-1000 közötti **egy** **tizedesjegyű** érték.
+  - `status`: **Opcionális**, léteznie kell a `carstatus` táblában.
+
+### `UpdateCarRequest`
+
+- Ugyanaz, mint a `StoreCarRequest`, azzal a különbséggel, hogy a frissítéshez az `id` mező szintén kötelező.
+
+---

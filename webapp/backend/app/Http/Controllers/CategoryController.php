@@ -35,6 +35,6 @@ class CategoryController extends Controller
 
     public function destroy(Category $category): Response
     {
-        return ($category->delete() ? response()->noContent() : abort(500));
+        return($category->delete()) ? response()->noContent() : abort(500);
     }
 }
