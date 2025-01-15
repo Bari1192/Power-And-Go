@@ -6,6 +6,7 @@ use App\Models\Person;
 use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 class UserFactory extends Factory
 {
@@ -29,6 +30,7 @@ class UserFactory extends Factory
             'jelszo_2_4' => $this->jelszoMasodikNegyedik($szemely->szemely_jelszo),
             'felh_nev' => $this->felhasznaloNevGenerator($szemely->v_nev),
             'elofiz_id' => $elofizetes->id,
+            'password'=>Hash::make($szemely->szemely_jelszo),
         ];
     }
     public function felhasznaloNevGenerator(string $V_nev): string

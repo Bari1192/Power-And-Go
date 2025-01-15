@@ -13,8 +13,8 @@ class PersonController extends Controller
 {
     public function index(): JsonResource
     {
-        $szemelyek = Person::all();
-        return PersonResource::collection($szemelyek);
+        $persons = Person::all();
+        return PersonResource::collection($persons);
     }
 
     public function store(StorePersonRequest $request)
@@ -24,9 +24,9 @@ class PersonController extends Controller
         return new PersonResource($szemely);
     }
 
-    public function show(Person $szemely)
+    public function show(Person $person)
     {
-        return new PersonResource($szemely);
+        return new PersonResource($person);
     }
 
     public function update(UpdatePersonRequest $request, Person $person)

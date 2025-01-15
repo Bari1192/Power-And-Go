@@ -11,14 +11,14 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $szemelyek = Person::whereNotNull('jogos_szam')
+        $persons = Person::whereNotNull('jogos_szam')
                             ->whereNotNull('jogos_erv_kezdete')
                             ->whereNotNull('jogos_erv_vege')
                             ->inRandomOrder()
                             ->limit(100)
                             ->get();
 
-        foreach ($szemelyek as $szemely) {
+        foreach ($persons as $szemely) {
             $randomElofizetes = Subscription::inRandomOrder()->first();
 
             User::factory()->create([

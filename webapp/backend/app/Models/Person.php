@@ -27,7 +27,7 @@ class Person extends Model
     ];
     public function user()
     {
-        return $this->hasOne(User::class, 'szemely_id', 'id');
+        return $this->hasOne(User::class);
     }
     public function dolgozo()
     {

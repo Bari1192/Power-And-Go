@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CarStatusController;
@@ -8,10 +9,15 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FleetController;
 use App\Http\Controllers\GoogleMapsController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
+Route::post("/register",[RegisterController::class,"store"])->name("register.store");
+Route::post("/authenticate",[AuthController::class,"authenticate"])->name("auth.authenticate");
+
 
 Route::get('bills/filter/{type}', [BillController::class, 'filter']);
 

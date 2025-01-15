@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
-            $table->string('szemely_jelszo',4);
+            $table->string('szemely_jelszo',8);
             $table->string('szig_szam')->unique();
             $table->string('jogos_szam')->unique()->nullable(); 
             $table->date('jogos_erv_kezdete')->nullable(); 

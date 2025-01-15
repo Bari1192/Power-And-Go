@@ -27,7 +27,7 @@ class PersonFactory extends Factory
             'jogos_szam' => strtoupper($this->egyediJogosSzam()),
             'jogos_erv_kezdete' => $jogsiKezdete->format('Y-m-d'),
             'jogos_erv_vege' => $jogsiVege->format('Y-m-d'),
-            'szemely_jelszo' => fake()->regexify('\[0-9]{4}'),
+            'szemely_jelszo' => fake()->regexify('\[0-9]{8}'),
         ];
     }
     private function egyediSzigSzam(): string

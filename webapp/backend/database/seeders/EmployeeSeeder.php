@@ -11,12 +11,12 @@ class EmployeeSeeder extends Seeder
 {
     public function run(): void
     {
-        $szemelyek = Person::inRandomOrder()->limit(300)->get();
+        $persons = Person::inRandomOrder()->limit(300)->get();
 
-        foreach ($szemelyek as $szemely) {
+        foreach ($persons as $person) {
             // Létrehozzuk a dolgozó adatait factory segítségével
             $dolgozo = Employee::factory()->make([
-                'szemely_azon' => $szemely->id,
+                'szemely_azon' => $person->id,
             ])->toArray();
 
             // Beszúrás az adatbázisba

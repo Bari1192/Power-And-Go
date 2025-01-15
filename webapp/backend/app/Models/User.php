@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Auth\Authenticatable;
 
-class User extends Model
+
+class User extends Model implements AuthenticatableContract
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens, Notifiable, Authenticatable;
 
     protected $table = 'users';
     protected $primaryKey = 'id';
@@ -23,11 +28,18 @@ class User extends Model
         'felh_nev',
         'jelszo_2_4',
         'elofiz_id',
+        'password',
+    ];
+
+    # JSON válaszból elrejtve!
+    protected $hidden = [
+        'password', 
+        'remember_token',
     ];
 
     public function person(): BelongsTo
     {
-        return $this->belongsTo(Person::class, 'szemely_id');
+        return $this->belongsTo(Person::class);
     }
 
     public function subscription(): BelongsTo
@@ -57,6 +69,6 @@ class User extends Model
                 'rentstatus',
                 'szamla_kelt',
             ])
-            ->as('rent_details'); 
+            ->as('rent_details');
     }
 }
