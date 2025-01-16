@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->enum('szamla_tipus', ['berles', 'baleset', 'karokozas', 'toltes_buntetes']);
             $table->foreignId('felh_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('szemely_id')->constrained('persons')->onDelete('cascade');
+            $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
             $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
 
             $table->integer('osszeg');

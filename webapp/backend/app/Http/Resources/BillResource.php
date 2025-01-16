@@ -13,7 +13,7 @@ class BillResource extends JsonResource
             "szamla_azon"=>$this->id,
             "felh_id" => $this->felh_id,
             "username"=>$this->whenLoaded('users')->felh_nev,
-            "szemely_id" => $this->szemely_id,
+            "person_id" => $this->person_id,
             "szemely"=>$this->whenLoaded('persons')->v_nev.' '.$this->whenLoaded('persons')->k_nev,
             "car_id" => $this->car_id,
             "berles_kezd_datum" => $this->berles_kezd_datum,

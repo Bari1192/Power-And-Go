@@ -37,6 +37,6 @@ class Bill extends Model
     }
     public function persons(): BelongsTo
     {
-        return $this->belongsTo(Person::class, 'szemely_id');
+        return $this->belongsTo(Person::class, 'person_id');
     }
 }

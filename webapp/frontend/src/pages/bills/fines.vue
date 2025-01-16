@@ -17,7 +17,7 @@
                     <tr v-for="fine in fines" :key="fine.szamla_id"
                         class="text-white cursor-pointer odd:hover:bg-sky-900 even:hover:bg-sky-800 odd:bg-sky-500 even:bg-sky-600">
                         <td class="text-center p-2">{{ fine.szamla_id }}</td>
-                        <td class="text-center p-2">{{ fine.szemely_id }}</td>
+                        <td class="text-center p-2">{{ fine.person_id }}</td>
                         <td class="text-center p-2">{{ fine.felh_id }}</td>
                         <td class="text-center p-2 italic text-lime-300 font-bold">{{ fine.szamla_status }}</td>
                         <td class="text-center p-2 font-semibold">{{ fine.szamla_tipus }}</td>

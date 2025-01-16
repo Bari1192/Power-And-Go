@@ -20,8 +20,8 @@ class RentinprocessFactory extends Factory
         $this->usedRendszamok[] = $car->rendszam;
 
         // Felhasználó lekérése
-        $felhasznalo = User::whereNotIn('szemely_id', $this->usedFelhasznalok)->inRandomOrder()->first();
-        $this->usedFelhasznalok[] = $felhasznalo->szemely_id;
+        $felhasznalo = User::whereNotIn('person_id', $this->usedFelhasznalok)->inRandomOrder()->first();
+        $this->usedFelhasznalok[] = $felhasznalo->person_id;
 
         // Bérlés kezdési idő generálása
         $veletlenSzam = random_int(1, 100);
@@ -46,7 +46,7 @@ class RentinprocessFactory extends Factory
         return [
             'car_id' => $car->id,
             'kategoria' => $car->kategoria,
-            'user_id' => $felhasznalo->szemely_id,
+            'user_id' => $felhasznalo->person_id,
             'berles_kezd_datum' => $berlesKezdete->format('Y-m-d'),
             'berles_kezd_ido' => $berlesKezdete->format('H:i:s'),
             'nyitas_szaz' => $nyitasToltesSzazalek,

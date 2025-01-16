@@ -15,7 +15,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             "felh_id" => ["required"],
-            "szemely_id" => ["required"],
+            "person_id" => ["required"],
             "felh_egyenleg" => ["required"],
             "jelszo_2_4" => ["required"],
             "felh_nev" => ["required"],

@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('szemely_id')->constrained('persons')->onDelete('cascade');
-            $table->foreignId('elofiz_id')->nullable()->constrained('subscriptions')->onDelete('cascade');
+            $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
+            $table->foreignId('elofiz_id')->constrained('subscriptions')->onDelete('cascade');
             $table->integer('felh_egyenleg')->default(0);
             $table->string('jelszo_2_4', 2);
 

@@ -29,6 +29,6 @@ class Rentinprocess extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'szemely_id', 'id');
+        return $this->belongsTo(User::class, 'person_id', 'id');
     }
 }

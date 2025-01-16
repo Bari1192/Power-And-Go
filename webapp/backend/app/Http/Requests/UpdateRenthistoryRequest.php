@@ -17,7 +17,7 @@ class UpdateRenthistoryRequest extends FormRequest
             "lezart_id" => ['required'],
             "auto_id" => ['required'],
             // "auto_kategoria" => ['required'],
-            // "szemely_id_fk" => ['required'],
+            // "person_id_fk" => ['required'],
             // "nyitas_toltes_szazalek" => ['required'],
             // "nyitas_toltes_kw" => ['required'],
             // "zaras_toltes_szazalek" => ['required'],

@@ -11,7 +11,7 @@ class ToltesBuntetesResource extends JsonResource
     {
         return [
             'szamla_id' => $this->id,
-            'szemely_id' => $this->szemely_id,
+            'person_id' => $this->person_id,
             'felh_id' => $this->felh_id,
             'szamla_status' => $this->szamla_status,
             'szamla_tipus' => "Minimum töltési ÁSZF megsértése.",

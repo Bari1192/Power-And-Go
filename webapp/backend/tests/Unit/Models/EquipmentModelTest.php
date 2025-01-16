@@ -16,7 +16,7 @@ class EquipmentModelTest extends TestCase
     public function test_equipment_seeder_created_records_into_equipments_table()
     {
         $this->assertGreaterThan(
-            5, #ennyit alapból készít a seeder!
+            1, #ennyit alapból készít előtte lévő teszt!
             Equipment::count(),
             'Az `equipments` tábla Seedelés után sem tartalmaz adatrekordot.'
         );

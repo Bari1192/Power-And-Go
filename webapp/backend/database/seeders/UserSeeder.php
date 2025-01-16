@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             $randomElofizetes = Subscription::inRandomOrder()->first();
 
             User::factory()->create([
-                'szemely_id' => $szemely->id,
+                'person_id' => $szemely->id,
                 'elofiz_id' => $randomElofizetes->id, // Az előfizetés ID-t kapcsoljuk
             ]);
         }

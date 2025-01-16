@@ -25,7 +25,7 @@ class UserFactory extends Factory
         $elofizetes = Subscription::inRandomOrder()->first();
 
         return [
-            'szemely_id' => $szemely->id,
+            'person_id' => $szemely->id,
             'felh_egyenleg' => 0,
             'jelszo_2_4' => $this->jelszoMasodikNegyedik($szemely->szemely_jelszo),
             'felh_nev' => $this->felhasznaloNevGenerator($szemely->v_nev),

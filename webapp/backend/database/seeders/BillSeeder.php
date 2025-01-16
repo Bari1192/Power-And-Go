@@ -46,7 +46,7 @@ class BillSeeder extends Seeder
             $szamlaAdatok[] = [
                 'szamla_tipus' => 'berles',
                 'felh_id' => $felhasznalo->id,
-                'szemely_id' => $felhasznalo->szemely_id,
+                'person_id' => $felhasznalo->person_id,
                 'car_id' => $auto->id,
                 'berles_kezd_datum' => $berles->berles_kezd_datum,
                 'berles_kezd_ido' => $berles->berles_kezd_ido,
@@ -76,7 +76,7 @@ class BillSeeder extends Seeder
                 $buntetesAdatok[] = [
                     'szamla_tipus' => 'toltes_buntetes',
                     'felh_id' => $felhasznalo->id,
-                    'szemely_id' => $felhasznalo->szemely_id,
+                    'person_id' => $felhasznalo->person_id,
                     'car_id' => $auto->id,
                     'berles_kezd_datum' => $berles->berles_kezd_datum,
                     'berles_kezd_ido' => $berles->berles_kezd_ido,
