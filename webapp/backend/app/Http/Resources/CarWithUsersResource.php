@@ -20,7 +20,7 @@ class CarWithUsersResource extends JsonResource
             'berlok' => $this->users->map(function ($user) {
                 return [
                     'berles_id' => $user->rent_details->id,
-                    'user' => $user->felh_nev,
+                    'user' => $user->user_name,
                     
                     // 'jelszo_2_4' => $user->jelszo_2_4,
                     // 'nev' => $user->person->v_nev . " " . $user->person->k_nev,

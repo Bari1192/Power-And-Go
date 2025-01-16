@@ -25,7 +25,7 @@ class User extends Model implements AuthenticatableContract
         'id',
         'person_id',
         'felh_egyenleg',
-        'felh_nev',
+        'user_name',
         'jelszo_2_4',
         'elofiz_id',
         'password',

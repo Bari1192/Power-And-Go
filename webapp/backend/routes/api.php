@@ -18,12 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/register", [RegisterController::class, "store"])->name("register.store");
 Route::post("/authenticate", [AuthController::class, "authenticate"])->name("auth.authenticate");
+
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-
-Route::get('bills/filter/{type}', [BillController::class, 'filter']);
+Route::get('bills/filter/{type}', [BillController::class, 'filter'])->middleware('auth:sanctum'); # Csak token-nel + jogosultsággal!
 
 Route::get('cars/{car}/bills', [CarController::class, 'filterCarFines']);
 Route::get('cars/{car}/description', [CarController::class, 'carLastTicketDescription']);

@@ -28,7 +28,7 @@ class UserFactory extends Factory
             'person_id' => $szemely->id,
             'felh_egyenleg' => 0,
             'jelszo_2_4' => $this->jelszoMasodikNegyedik($szemely->szemely_jelszo),
-            'felh_nev' => $this->felhasznaloNevGenerator($szemely->v_nev),
+            'user_name' => $this->felhasznaloNevGenerator($szemely->v_nev),
             'elofiz_id' => $elofizetes->id,
             'password'=>Hash::make($szemely->szemely_jelszo),
         ];
@@ -53,7 +53,7 @@ class UserFactory extends Factory
             # Speciális magyar karakterekre kell lecserélni a vezetéknevet!
             $keszFelhNev = strtr($keszFelhNev, 'áéíóöőúüűÁÉÍÓÖŐÚÜŰ', 'aeiooouuuAEIOOOUUU');
             # Vissza Ell. a DB-ben (UNIQE):
-            $foglaltFelhNev = User::where('felh_nev', '=', $keszFelhNev)->exists();
+            $foglaltFelhNev = User::where('user_name', '=', $keszFelhNev)->exists();
         } while ($foglaltFelhNev || in_array($keszFelhNev, $this->felhNevekEllTar));
 
         $this->felhNevekEllTar[] = $keszFelhNev;

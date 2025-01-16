@@ -13,12 +13,15 @@ class RegisterUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "person_id" => ["required", "exists:persons,id"],
-            "felh_nev" => ["required", "string", "max:50","unique:users,felh_nev"],
-            "password" => ["required","string", "min:8"],
-            "jelszo_2_4" =>["required","size:2"],
-            "felh_egyenleg" =>["integer","min:0"],
-            "elofiz_id" =>["required","min:1"],
+            "szig_szam" => ["required"],
+            "v_nev" => ["required"],
+            "k_nev" => ["required"],
+            "szul_datum" => ["required"],
+            "telefon" => ["required"],
+            "email" => ["required"],
+
+            "user_name" => ["required", "string", "max:50", "unique:users,user_name"],
+            'password' => ["required", "string", "min:8"],
         ];
     }
 }

@@ -12,8 +12,7 @@ class UserResource extends JsonResource
     {
             return [
                 'user_id' => $this->id,
-                'username' => $this->felh_nev,
-                'account_balance' => $this->felh_egyenleg,
+                'user_name' => $this->user_name,
             ];
     }
 }

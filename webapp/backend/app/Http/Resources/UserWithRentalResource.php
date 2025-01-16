@@ -11,7 +11,7 @@ class UserWithRentalResource extends JsonResource
     {
         return [
             'user_id' => $this->id,
-            'username' => $this->felh_nev,
+            'username' => $this->user_name,
             'rentals' => $this->cars->map(function ($car) {
                 return [
                     'car_id' => $car->id,

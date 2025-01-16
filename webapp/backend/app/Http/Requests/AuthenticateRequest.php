@@ -14,7 +14,7 @@ class AuthenticateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "felh_nev" => ["required","max:20","min:8"],
+            "user_name" => ["required","max:20","min:8"],
             "password" => ["required","string", "min:8"],
         ];
     }

@@ -14,14 +14,14 @@ return new class extends Migration {
             $table->integer('felh_egyenleg')->default(0);
             $table->string('jelszo_2_4', 2);
 
-            $table->string('felh_nev', 20)->unique();
+            $table->string('user_name', 45)->unique();
             $table->string('password', 60);
             $table->rememberToken();
 
             $table->timestamps();
         });
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('felh_nev')->primary();
+            $table->string('user_name')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });

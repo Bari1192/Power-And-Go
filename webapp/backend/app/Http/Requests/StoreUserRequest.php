@@ -14,12 +14,12 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "felh_id" => ["required"],
-            "person_id" => ["required"],
-            "felh_egyenleg" => ["required"],
-            "jelszo_2_4" => ["required"],
-            "felh_nev" => ["required"],
-            "elofiz_id" => ["required"],
+        'person_id' => ['required'],
+        'user_name' => ['required', 'string', 'max:50', 'unique:users,user_name'], 
+        'password' => ['required', 'string', 'min:8'],
+        'jelszo_2_4' => ['required'],
+        'felh_egyenleg' => ['required'],
+        'elofiz_id' => ['required'],
         ];
     }
 }

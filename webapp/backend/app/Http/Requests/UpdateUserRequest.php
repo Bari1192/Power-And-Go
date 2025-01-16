@@ -18,7 +18,7 @@ class UpdateUserRequest extends FormRequest
             "person_id" => ["required"],
             "felh_egyenleg" => ["required"],
             "jelszo_2_4" => ["required"],
-            "felh_nev" => ["required"],
+            "user_name" => ["required"],
             "elofiz_id" => ["required"],
         ];
     }
