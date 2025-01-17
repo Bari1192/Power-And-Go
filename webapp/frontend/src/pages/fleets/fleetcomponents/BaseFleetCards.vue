@@ -30,15 +30,15 @@
         <div class="flex flex-col space-y-2">
             <input v-model="editableData.title" type="text" class="border p-2 rounded" placeholder="Cím" />
             <p class="mt-3 font-normal text-gray-700 dark:text-gray-400">Teljesítmény:</p>
-            <input v-model="editableData.teljesitmeny" type="number" class="border p-2 rounded"
+            <input v-model="editableData.motor_power" type="number" class="border p-2 rounded"
                 placeholder="Teljesítmény (kW)" />
 
             <p class="mt-t font-normal text-gray-700 dark:text-gray-400">Hatótáv:</p>
-            <input v-model="editableData.vegsebesseg" type="number" class="border p-2 rounded"
+            <input v-model="editableData.top_speed" type="number" class="border p-2 rounded"
                 placeholder="Hatótáv (km/h)" />
 
             <p class="mt-3 font-normal text-gray-700 dark:text-gray-400">Végsebesség:</p>
-            <input v-model="editableData.hatotav" type="number" class="border p-2 rounded"
+            <input v-model="editableData.driving_range" type="number" class="border p-2 rounded"
                 placeholder="Végsebesség (km/h)" />
 
             <p class="mt-3 font-normal text-gray-700 dark:text-gray-400">Abroncsméret:</p>
@@ -63,9 +63,9 @@ export default {
         src: [String, Number],
         imgalt: [String, Number],
         title: [String, Number],
-        teljesitmeny: [Number],
-        vegsebesseg: [Number],
-        hatotav: [Number],
+        motor_power: [Number],
+        top_speed: [Number],
+        driving_range: [Number],
         abroncs: [String],
     },
     data() {
@@ -80,9 +80,9 @@ export default {
             if (this.isEditing) {
                 this.editableData = {
                     title: this.title,
-                    teljesitmeny: this.teljesitmeny,
-                    vegsebesseg: this.vegsebesseg,
-                    hatotav: this.hatotav,
+                    motor_power: this.motor_power,
+                    top_speed: this.top_speed,
+                    driving_range: this.driving_range,
                     abroncs: this.abroncs,
                 };
             }

@@ -10,10 +10,10 @@ class SubscriptionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "elofiz_id" => $this->id, 
-            "elofiz_nev" => $this->elofiz_nev,
-            "havi_dij" => $this->havi_dij,
-            "eves_dij" => $this->eves_dij,
+            "sub_id" => $this->id, 
+            "sub_name" => $this->sub_name,
+            "sub_monthly" => $this->sub_monthly,
+            "sub_annual" => $this->sub_annual,
         ];
     }
 }

@@ -34,22 +34,22 @@
 
             </div>
             <div class="col text-white col w-3/4  mx-auto text-justify">
-                <p class="my-3 text-xl text-lime-400 font-bold">Kedves {{ rent.felhasznalo.szemely.k_nev }}!</p>
+                <p class="my-3 text-xl text-lime-400 font-bold">Kedves {{ rent.felhasznalo.szemely.lastname }}!</p>
                 <p class="my-3 font-bold ">Köszönjük, hogy a PowerAndGo e-carsharinget választottad!</p>
 
                 <!-- "Keret" kezdete -->
                 <div class=" border-solid border border-lime-600 p-6 m-2">
-                    <p class="my-3"> A(z) <b>{{ rent.auto.rendszam }}</b> rendszámú PowerAndGo bérlését <b>{{
-                        rent.berles_kezd_datum }}</b>
+                    <p class="my-3"> A(z) <b>{{ rent.auto.plate }}</b> rendszámú PowerAndGo bérlését <b>{{
+                        rent.rent_start_date }}</b>
                         -kor kezdted
                         és
-                        <b>{{ rent.berles_veg_datum }}</b>
+                        <b>{{ rent.rent_end_date }}</b>
                         -kor
                         fejezted be.
                     </p>
                     <p class="my-3">A bérlésed során {.{"0h 00"}.} hosszabbítás volt a foglalásodon, <b>{{
                         rent.vezetesi_idotartam
-                            }}</b> , ami alatt <b> {{ rent.megtett_tavolsag }} km-t</b> tettél meg, és a vezetés mellett
+                            }}</b> , ami alatt <b> {{ rent.driving_distance }} km-t</b> tettél meg, és a vezetés mellett
                         <b> {{ rent.parkolasi_idotartam }}.</b> A bérléshez felhasznált
                         bónusz percek:
                         0h
@@ -57,7 +57,7 @@
                         A bérléshez az alábbi kuponokat váltottad be:
                     </p>
 
-                    <p>A bérlésed díját, <b>{{ rent.berles_osszeg }} </b> Ft-ot, hamarosan kiszámlázzuk neked. A
+                    <p>A bérlésed díját, <b>{{ rent.rental_cost }} </b> Ft-ot, hamarosan kiszámlázzuk neked. A
                         részletes
                         díjtételeket és az
                         autó

@@ -17,7 +17,7 @@
             }">
             <div class="flex flex-wrap my-5">
                 <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="gyarto" type="text" label="Gyártó neve" placeholder="például: VW, Skoda!"
+                    <FormKit name="manufacturer" type="text" label="Gyártó neve" placeholder="például: VW, Skoda!"
                         :validation="'required|alpha|length:2,40'" :validation-messages="{
                             alpha: 'Kizárólag betűket tartalmazhat!',
                             length: 'A szöveg 2-40 karakterig terjedhet!',
@@ -26,7 +26,7 @@
                         input-class="appearance-none block w-full bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                 </div>
                 <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="tipus" type="text" label="Modell Típusa" placeholder="például: E-up!"
+                    <FormKit name="carmodel" type="text" label="Modell Típusa" placeholder="például: E-up!"
                         :validation="'required|alpha|length:2,30'" :validation-messages="{
                             alpha: 'Kizárólag betűket tartalmazhat!',
                             length: 'A szöveg 2-40 karakter hosszú lehet!',
@@ -35,7 +35,7 @@
                         input-class="appearance-none block w-full bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                 </div>
                 <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="teljesitmeny" type="number" label="Teljesítmény (kW) értékben"
+                    <FormKit name="motor_power" type="number" label="Teljesítmény (kW) értékben"
                         placeholder="például: 18" :validation="'required|integer|min:18|max:500'" :validation-messages="{
                             required: 'Kötelező kitölteni!',
                             integer: 'Csak egész számot írhat be!',
@@ -47,7 +47,7 @@
             </div>
             <div class="flex flex-wrap my-5">
                 <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="vegsebesseg" type="number" label="Végsebesség (km/h)-ban" placeholder="például: 130"
+                    <FormKit name="top_speed" type="number" label="Végsebesség (km/h)-ban" placeholder="például: 130"
                         :validation="'required|integer|min:100|max:300'" :validation-messages="{
                             required: 'Kötelező kitölteni!',
                             integer: 'Csak egész számot írhat be!',
@@ -58,7 +58,7 @@
                         :help="'Csak a szám értékét írja be!'" help-class="text-gray-500 italic text-start my-1" />
                 </div>
                 <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="gumimeret" value="165|65-R15" type="text" label="Gumiméret"
+                    <FormKit name="tire_size" value="165|65-R15" type="text" label="Gumiméret"
                         placeholder="például: 165|65-R15" :validation="'length:8,30|required'" :validation-messages="{
                             required: 'Kötelező kitölteni!',
                             length: 'A szövegnek 8-30 karakter között kell lennie!',
@@ -68,7 +68,7 @@
                         input-class="appearance-none block w-full bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                 </div>
                 <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="hatotav" type="number" label="Hatótáv értéke (km)" placeholder="például: 235"
+                    <FormKit name="driving_range" type="number" label="Hatótáv értéke (km)" placeholder="például: 235"
                         :validation="'required|integer|min:100|max:1000'" :validation-messages="{
                             required: 'Kötelező kitölteni!',
                             integer: 'Csak egész számot írhat be!',
@@ -111,12 +111,12 @@ export default {
         async submitHandler(formValues) {
             try {
                 await http.post('fleets/', {
-                    gyarto: formValues.gyarto,
-                    tipus: formValues.tipus,
-                    teljesitmeny: formValues.teljesitmeny,
-                    vegsebesseg: formValues.vegsebesseg,
-                    gumimeret: formValues.gumimeret,
-                    hatotav: formValues.hatotav,
+                    manufacturer: formValues.manufacturer,
+                    carmodel: formValues.carmodel,
+                    motor_power: formValues.motor_power,
+                    top_speed: formValues.top_speed,
+                    tire_size: formValues.tire_size,
+                    driving_range: formValues.driving_range,
                 });
                 this.submitted = true;
             } catch (error) {

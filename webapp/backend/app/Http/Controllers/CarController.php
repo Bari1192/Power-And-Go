@@ -50,7 +50,7 @@ class CarController extends Controller
     {
         $szamlak = Bill::with(['users', 'persons'])
         ->where('car_id', $car->id)
-        ->where('szamla_tipus', 'toltes_buntetes')
+        ->where('bill_type', 'charging_penalty')
         ->get();
 
         return BillResource::collection($szamlak);

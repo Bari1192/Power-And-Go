@@ -21,7 +21,7 @@ class TicketController extends Controller
     public function store(StoreTicketRequest $request)
     {
         $data = $request->validated();
-        $data['bejelentve'] = now();
+        $data['created_at'] = now();
     
         $ticket = Ticket::create($data);
         return new TicketResource($ticket->load('status'));
@@ -36,7 +36,7 @@ class TicketController extends Controller
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
         $data = $request->validated();
-        $data['bejelentve'] = now();
+        $data['created_at'] = now();
         $ticket->load('status');
         $ticket->update($data);
 

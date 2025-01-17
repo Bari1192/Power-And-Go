@@ -24,24 +24,24 @@ class RegisterController extends Controller
 
         try {
             $person = Person::create([
-                "szemely_jelszo" => $data['password'], # Itt NO HASH!
-                "szig_szam" => $data['szig_szam'],
-                "jogos_szam" => $data['jogos_szam'] ?? null,
-                "jogos_erv_kezdete" => $data['jogos_erv_kezdete'] ?? null,
-                "jogos_erv_vege" => $data['jogos_erv_vege'] ?? null,
-                "v_nev" => $data['v_nev'],
-                "k_nev" => $data['k_nev'],
-                "szul_datum" => $data['szul_datum'],
-                "telefon" => $data['telefon'],
+                "person_password" => $data['password'], # Itt NO HASH!
+                "id_card" => $data['id_card'],
+                "driving_license" => $data['driving_license'] ?? null,
+                "license_start_date" => $data['license_start_date'] ?? null,
+                "license_end_date" => $data['license_end_date'] ?? null,
+                "firstname" => $data['firstname'],
+                "lastname" => $data['lastname'],
+                "birth_date" => $data['birth_date'],
+                "phone" => $data['phone'],
                 "email" => $data['email'],
             ]);
             $user = User::create([
                 'person_id' => $person->id, # Meg fogja kapni az ID-t, mert beszúrja a Person adatot. Max ha ez nem fut le -> rollBack()
                 'user_name' => $data['user_name'],
                 'password' => Hash::make($data['password']),
-                'jelszo_2_4' => $person->szemely_jelszo[0] . $person->szemely_jelszo[2],
-                'felh_egyenleg' => $data['felh_egyenleg'] ?? 0,
-                'elofiz_id' => 1,
+                'password_2_4' => $person->person_password[0] . $person->person_password[2],
+                'account_balance' => $data['account_balance'] ?? 0,
+                'sub_id' => 1,
             ]);
 
             DB::commit(); # NE FELEDD!
@@ -67,13 +67,13 @@ class RegisterController extends Controller
         // {
         //     "user_name": "Test1234",
         //     "password": "12345678",
-        //     "felh_egyenleg": 0,
-        //     "elofiz_id": "1",
-        //     "szig_szam": "XX823971",
-        //     "v_nev": "Teszt",
-        //     "k_nev": "Adat",
-        //     "szul_datum": "1990-01-01",
-        //     "telefon": "+36304447777",
+        //     "account_balance": 0,
+        //     "sub_id": "1",
+        //     "id_card": "XX823971",
+        //     "firstname": "Teszt",
+        //     "lastname": "Adat",
+        //     "birth_date": "1990-01-01",
+        //     "phone": "+36304447777",
         //     "email": "asdasd@gmail.com"
         //   }
 

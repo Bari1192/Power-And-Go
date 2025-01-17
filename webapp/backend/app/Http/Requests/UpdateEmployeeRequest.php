@@ -14,13 +14,13 @@ class UpdateEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "szemely_azon" => 'required',
-            "terulet" => 'required',
-            "munkakor" => 'required',
-            "beosztas" => 'required',
-            "munkaber_tipus" => 'required',
-            "fizetes" => 'required',
-            "belepes_datum" => 'required',
+            "person_id" => 'required',
+            "field" => 'required',
+            "role" => 'required',
+            "position" => 'required',
+            "salary_type" => 'required',
+            "salary" => 'required',
+            "start_date" => 'required',
         ];
     }
 }

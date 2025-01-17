@@ -73,7 +73,7 @@ class TicketControllerTest extends TestCase
         $response->assertStatus(200);
 
         $data = $response->json('data');
-        $response = $this->assertArrayHasKey('bejelentve', $data, 'a `bejelentve`rész nem töltődött be hozzá.');
+        $response = $this->assertArrayHasKey('created_at', $data, 'a `created_at`rész nem töltődött be hozzá.');
     }
 
     public function test_can_create_ticket_to_the_first_car()

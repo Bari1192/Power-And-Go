@@ -10,10 +10,10 @@
   - HTTP válasz státusz: `201 CREATED`.
   - Az adatbázisban megjelenik az új `Person` rekord.
   - A létrehozott rekord tartalmazza a következő mezőket:
-    - `szemely_jelszo`
-    - `v_nev`
-    - `k_nev`
-    - `telefon`
+    - `person_password`
+    - `firstname`
+    - `lastname`
+    - `phone`
     - `email`
 
 ---
@@ -29,9 +29,9 @@
     - `person_id` (kapcsolódik a korábban létrehozott `Person` rekordhoz)
     - `user_name` (egyedi érték)
     - `password` (hashelt jelszó)
-    - `jelszo_2_4`
-    - `felh_egyenleg`
-    - `elofiz_id`
+    - `password_2_4`
+    - `account_balance`
+    - `sub_id`
   - A válasz tartalmazza a `user_name` kulcsot.
 
 ---
@@ -71,11 +71,11 @@
 #### **Person tábla ellenőrzése**
 
 - **Elvárt rekord**:
-  - `szemely_jelszo`: `12345678`
+  - `person_password`: `12345678`
 
-  - `v_nev`: `Teszt`
-  - `k_nev`: `Felhasználó`
-  - `telefon`: `+36301234567`
+  - `firstname`: `Teszt`
+  - `lastname`: `Felhasználó`
+  - `phone`: `+36301234567`
   - `email`: `teszt@example.com`
 
 #### **User tábla ellenőrzése**
@@ -85,9 +85,9 @@
 
   - `user_name`: Egyedi érték, például: `Test123456789`.
   - `password`: Hashelt jelszó.
-  - `jelszo_2_4`: Az első és harmadik karakter az eredeti jelszóból (`12`).
-  - `felh_egyenleg`: `0`.
-  - `elofiz_id`: `1`.
+  - `password_2_4`: Az első és harmadik karakter az eredeti jelszóból (`12`).
+  - `account_balance`: `0`.
+  - `sub_id`: `1`.
 
 ---
 
@@ -156,7 +156,7 @@
 
 | **Lépés**                  | **Művelet**                                  | **Eredmény**                                              | **Státusz** |
 |----------------------------|----------------------------------------------|----------------------------------------------------------|-------------|
-| **1. Tesztadatok generálása** | `Person` adatok előállítása egyedi jelszóval | Az adatok helyesen generálódtak (`szemely_jelszo: 12345678`). | ✔️          |
+| **1. Tesztadatok generálása** | `Person` adatok előállítása egyedi jelszóval | Az adatok helyesen generálódtak (`person_password: 12345678`). | ✔️          |
 | **2. Person létrehozása**   | `POST /api/persons`                         | HTTP 201 válasz, új rekord az adatbázisban.              | ✔️          |
 | **3. Person adat lekérése** | `Person::latest('id')->first()`             | A legutóbb létrehozott `Person` rekord lekérve.          | ✔️          |
 | **4. User létrehozása**     | `POST /api/users`                           | HTTP 201 válasz, új `User` rekord az adatbázisban.       | ✔️          |

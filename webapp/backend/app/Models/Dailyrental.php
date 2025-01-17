@@ -16,10 +16,10 @@ class Dailyrental extends Model
 
     public function arazasok(): BelongsTo
     {
-        return $this->belongsTo(Price::class, 'arazas_id', 'id');
+        return $this->belongsTo(Price::class, 'prices_id', 'id');
     }
-    public function kategoria(): BelongsTo
+    public function category_id(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'auto_tipus', 'id');
+        return $this->belongsTo(Category::class, 'category_class', 'id');
     }
 }

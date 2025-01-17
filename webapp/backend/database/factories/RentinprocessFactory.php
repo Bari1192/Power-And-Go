@@ -16,8 +16,8 @@ class RentinprocessFactory extends Factory
     public function definition(): array
     {
         // Rendszám lekérése
-        $car = Car::whereNotIn('rendszam', $this->usedRendszamok)->inRandomOrder()->first();
-        $this->usedRendszamok[] = $car->rendszam;
+        $car = Car::whereNotIn('plate', $this->usedRendszamok)->inRandomOrder()->first();
+        $this->usedRendszamok[] = $car->plate;
 
         // Felhasználó lekérése
         $felhasznalo = User::whereNotIn('person_id', $this->usedFelhasznalok)->inRandomOrder()->first();
@@ -41,17 +41,17 @@ class RentinprocessFactory extends Factory
         }
         $berlesKezdete = now()->modify($idoKezdet);
 
-        $nyitasToltesSzazalek = $car->toltes_szaz;
-        $nyitasToltesKw = round($car->fleet->teljesitmeny * ($nyitasToltesSzazalek / 100), 1);
+        $nyitasToltesSzazalek = $car->power_percent;
+        $nyitasToltesKw = round($car->fleet->motor_power * ($nyitasToltesSzazalek / 100), 1);
         return [
             'car_id' => $car->id,
-            'kategoria' => $car->kategoria,
+            'category_id' => $car->category_id,
             'user_id' => $felhasznalo->person_id,
-            'berles_kezd_datum' => $berlesKezdete->format('Y-m-d'),
-            'berles_kezd_ido' => $berlesKezdete->format('H:i:s'),
-            'nyitas_szaz' => $nyitasToltesSzazalek,
-            'nyitas_kw' => $nyitasToltesKw,
-            'szamla_kelt'=>now(),
+            'rent_start_date' => $berlesKezdete->format('Y-m-d'),
+            'rent_start_time' => $berlesKezdete->format('H:i:s'),
+            'start_percent' => $nyitasToltesSzazalek,
+            'start_kw' => $nyitasToltesKw,
+            'invoice_date'=>now(),
             'rentstatus'=>3, // folyamatban -> carstatus alapján
         ];
     }

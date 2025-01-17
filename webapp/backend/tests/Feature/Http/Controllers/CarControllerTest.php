@@ -19,24 +19,24 @@ class CarControllerTest extends TestCase
     public function test_can_create_fake_car_data()
     {
         $carData = [
-            "rendszam" => "XyZ-090",
-            "toltes_szaz" => 13.06,
-            "toltes_kw" => 4.7,
-            "becs_tav" => 34.6,
+            "plate" => "XyZ-090",
+            "power_percent" => 13.06,
+            "power_kw" => 4.7,
+            "estimated_range" => 34.6,
             "status" => 6,
-            "kategoria" => 3,
+            "category_id" => 3,
             "felszereltseg" => 3,
             "flotta_azon" => 3,
-            "kilometerora" => 28252,
-            "gyartasi_ev" => "2023",
-            "tipus" => "e-up!"
+            "odometer" => 28252,
+            "manufacturing_year" => "2023",
+            "carmodel" => "e-up!"
         ];
 
         $response = $this->postJson('/api/cars', $carData);
 
         $response->assertStatus(201);
 
-        $this->assertDatabaseHas('cars', ["rendszam" => "XyZ-090"]);
+        $this->assertDatabaseHas('cars', ["plate" => "XyZ-090"]);
     }
 
 
@@ -46,16 +46,16 @@ class CarControllerTest extends TestCase
 
         $modifiedData = [
             "id" => $latestCardata->id,
-            "rendszam" => "XyZ-090",
-            "toltes_szaz" => 13.06,
-            "toltes_kw" => 4.7,
-            "becs_tav" => 34.6,
+            "plate" => "XyZ-090",
+            "power_percent" => 13.06,
+            "power_kw" => 4.7,
+            "estimated_range" => 34.6,
             "status" => 6,
-            "kategoria" => 3,
+            "category_id" => 3,
             "felszereltseg" => 3,
             "flotta_azon" => 3,
-            "kilometerora" => 28252,
-            "gyartasi_ev" => "2023",
+            "odometer" => 28252,
+            "manufacturing_year" => "2023",
         ];
 
         $response = $this->put("api/cars/{$latestCardata->id}", $modifiedData);
@@ -93,8 +93,8 @@ class CarControllerTest extends TestCase
             $this->assertTrue($data->isEmpty(), 'Ehhez az autóhoz nincs büntetés kiírva.');
         } else {
             $data->each(function ($entry) {
-                $this->assertArrayHasKey('szamla_tipus', $entry);
-                $this->assertEquals('toltes_buntetes', $entry['szamla_tipus']);
+                $this->assertArrayHasKey('bill_type', $entry);
+                $this->assertEquals('charging_penalty', $entry['bill_type']);
             });
         }
     }

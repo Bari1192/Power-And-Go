@@ -13,24 +13,24 @@ class SubscriptionSeeder extends Seeder
         DB::table('subscriptions')->insert([
 
             [
-                'elofiz_nev' => 'Power',
-                'havi_dij' => null,
-                'eves_dij' => null,
+                'sub_name' => 'Power',
+                'sub_monthly' => null,
+                'sub_annual' => null,
             ],
             [
-                'elofiz_nev' => 'Power-Plus',
-                'havi_dij' => 490,
-                'eves_dij' => null,
+                'sub_name' => 'Power-Plus',
+                'sub_monthly' => 490,
+                'sub_annual' => null,
             ],
             [
-                'elofiz_nev' => 'Power-Premium',
-                'havi_dij' => 1690,
-                'eves_dij' => null,
+                'sub_name' => 'Power-Premium',
+                'sub_monthly' => 1690,
+                'sub_annual' => null,
             ],
             [
-                'elofiz_nev' => 'Power-VIP',
-                'havi_dij' => 5990,
-                'eves_dij' => 59900,
+                'sub_name' => 'Power-VIP',
+                'sub_monthly' => 5990,
+                'sub_annual' => 59900,
             ],
         ]);
     }

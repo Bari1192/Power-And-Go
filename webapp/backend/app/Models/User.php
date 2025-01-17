@@ -24,10 +24,10 @@ class User extends Model implements AuthenticatableContract
     protected $fillable = [
         'id',
         'person_id',
-        'felh_egyenleg',
+        'account_balance',
         'user_name',
-        'jelszo_2_4',
-        'elofiz_id',
+        'password_2_4',
+        'sub_id',
         'password',
     ];
 
@@ -44,7 +44,7 @@ class User extends Model implements AuthenticatableContract
 
     public function subscription(): BelongsTo
     {
-        return $this->belongsTo(Subscription::class, 'elofiz_id');
+        return $this->belongsTo(Subscription::class, 'sub_id');
     }
 
     public function cars(): BelongsToMany
@@ -52,22 +52,22 @@ class User extends Model implements AuthenticatableContract
         return $this->belongsToMany(Car::class, 'car_user_rents', 'user_id', 'car_id')
             ->withPivot([
                 'id',
-                'nyitas_szaz',
-                'nyitas_kw',
-                'zaras_szaz',
-                'zaras_kw',
-                'berles_kezd_datum',
-                'berles_kezd_ido',
-                'berles_veg_datum',
-                'berles_veg_ido',
-                'megtett_tavolsag',
-                'parkolas_kezd',
-                'parkolas_veg',
-                'parkolasi_perc',
-                'vezetesi_perc',
-                'berles_osszeg',
+                'start_percent',
+                'start_kw',
+                'end_percent',
+                'end_kw',
+                'rent_start_date',
+                'rent_start_time',
+                'rent_end_date',
+                'rent_end_time',
+                'driving_distance',
+                'parking_start',
+                'parking_end',
+                'parking_minutes',
+                'driving_minutes',
+                'rental_cost',
                 'rentstatus',
-                'szamla_kelt',
+                'invoice_date',
             ])
             ->as('rent_details');
     }

@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->string('elofiz_nev', 50);
-            $table->integer('havi_dij')->nullable();
-            $table->integer('eves_dij')->nullable();
+            $table->string('sub_name', 50);
+            $table->integer('sub_monthly')->nullable();
+            $table->integer('sub_annual')->nullable();
             $table->timestamps();
         });
     }

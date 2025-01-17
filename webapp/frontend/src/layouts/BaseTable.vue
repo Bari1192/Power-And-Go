@@ -16,13 +16,13 @@
         <tr v-for="car in cars" :key="car.car_id" class="odd:bg-sky-800 even:bg-sky-950 text-center text-lg">
           <td class="py-2 text-lime-500 font-semibold ">
             <RouterLink class="hover:text-lime-300" :to="{ name: '/cars/[id]/', params: { id: car.car_id } }">
-              {{ car.rendszam }}
+              {{ car.plate }}
             </RouterLink>
           </td>
           <td class="py-2 text-sky-300 font-semibold">{{ car.car_id }}</td>
-          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.kilometerora }} km</td>
-          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.toltes_szaz }} %</td>
-          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.becs_tav }}</td>
+          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.odometer }} km</td>
+          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.power_percent }} %</td>
+          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.estimated_range }}</td>
           <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.status }}</td>
           <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.felszereltseg }} szintű</td>
         </tr>

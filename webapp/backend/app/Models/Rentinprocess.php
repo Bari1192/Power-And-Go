@@ -14,7 +14,7 @@ class Rentinprocess extends Model
     public $incrementing = true;
 
     protected $fillable = [
-        'rendszam',
+        'plate',
         'auto_kategoria',
     ];
     public function auto()
@@ -24,7 +24,7 @@ class Rentinprocess extends Model
 
     public function kategoriak()
     {
-        return $this->belongsTo(Category::class, 'kategoria', 'id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
     public function user()

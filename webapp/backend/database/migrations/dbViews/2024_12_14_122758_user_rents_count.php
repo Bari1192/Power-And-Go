@@ -16,8 +16,8 @@ return new class extends Migration
        SELECT 
             COUNT(`car_user_rents`.`user_id`) AS `rents_number`,
            `user_id` AS `person_id`,
-           `persons`.`v_nev` AS `first_name`,
-           `persons`.`k_nev` AS `last_name`
+           `persons`.`firstname` AS `first_name`,
+           `persons`.`lastname` AS `last_name`
        FROM 
            `car_user_rents`
        JOIN 
@@ -25,7 +25,7 @@ return new class extends Migration
        ON 
            `car_user_rents`.`user_id` = `persons`.`id`
         GROUP BY 
-            `car_user_rents`.`user_id`, `persons`.`v_nev`, `persons`.`k_nev`
+            `car_user_rents`.`user_id`, `persons`.`firstname`, `persons`.`lastname`
        ORDER BY `rents_number` DESC"
             );
         }

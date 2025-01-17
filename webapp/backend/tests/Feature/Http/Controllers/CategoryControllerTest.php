@@ -37,7 +37,7 @@ class CategoryControllerTest extends TestCase
         $response->assertStatus(200);
 
         $data = $response->json('data');
-        $response = $this->assertArrayHasKey('kat_besorolas', $data, 'a `kat_besorolas` nem töltődött be hozzá.');
+        $response = $this->assertArrayHasKey('category_class', $data, 'a `category_class` nem töltődött be hozzá.');
     }
 
     # Objektumon belül -> teljesítmény
@@ -49,15 +49,15 @@ class CategoryControllerTest extends TestCase
         $response->assertStatus(200);
 
         $data = $response->json('data');
-        $response = $this->assertArrayHasKey('teljesitmeny', $data, 'a `teljesitmeny` nem töltődött be hozzá.');
+        $response = $this->assertArrayHasKey('motor_power', $data, 'a `motor_power` nem töltődött be hozzá.');
     }
 
     # POST
     public function test_post_fake_category_type_into_db(): void
     {
         $data = [
-            "kat_besorolas" => "3",
-            "teljesitmeny" => 100,
+            "category_class" => "3",
+            "motor_power" => 100,
         ];
         $response = $this->post('api/categories', $data);
         $response->assertStatus(201);
@@ -65,8 +65,8 @@ class CategoryControllerTest extends TestCase
         $category=Category::latest('id')->first();
         $this->assertDatabaseHas('categories', [
             "id" => $category->id,
-            "kat_besorolas" => 3,
-            "teljesitmeny" => 100
+            "category_class" => 3,
+            "motor_power" => 100
         ]);
     }
     #DELETE

@@ -18,21 +18,21 @@ class Renthistory extends Model
         "id",
         "auto_azon",
         "auto_kat",
-        "szemely_azon",
-        "nyitas_szaz",
-        "nyitas_kw",
-        "zaras_szaz",
-        "zaras_kw",
-        "berles_kezd_datum",
-        "berles_kezd_ido",
-        "berles_veg_datum",
-        "berles_veg_ido",
-        "megtett_tavolsag",
-        "parkolas_kezd",
-        "parkolas_veg",
-        "parkolasi_perc",
-        "vezetesi_perc",
-        "berles_osszeg",
+        "person_id",
+        "start_percent",
+        "start_kw",
+        "end_percent",
+        "end_kw",
+        "rent_start_date",
+        "rent_start_time",
+        "rent_end_date",
+        "rent_end_time",
+        "driving_distance",
+        "parking_start",
+        "parking_end",
+        "parking_minutes",
+        "driving_minutes",
+        "rental_cost",
     ];
 
     public function auto()
@@ -47,6 +47,6 @@ class Renthistory extends Model
 
     public function person()
     {
-        return $this->belongsTo(Person::class, 'szemely_azon', 'id');
+        return $this->belongsTo(Person::class, 'person_id', 'id');
     }
 }

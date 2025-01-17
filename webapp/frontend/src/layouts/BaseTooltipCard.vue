@@ -15,7 +15,7 @@
             <li>Bérlés alatt</li>
           </ul>
           <ul v-else-if="text === 4">
-            <li>Baleset miatt kivonva.</li>
+            <li>accident miatt kivonva.</li>
           </ul>
           <ul v-else-if="text === 5">
             <li>Szervízre vár.</li>

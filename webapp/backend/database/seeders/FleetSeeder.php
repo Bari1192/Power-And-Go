@@ -12,12 +12,12 @@ class FleetSeeder extends Seeder
     {
         DB::table('fleets')->insert(
             [
-                ['gyarto' => 'VW', 'tipus' => 'e-up!', 'teljesitmeny' => 18, 'vegsebesseg' => 130, 'gumimeret' => '165|65-R15', 'hatotav' => 135],
-                ['gyarto' => 'Renault', 'tipus' => 'Kangoo-Z.E.', 'teljesitmeny' => 33, 'vegsebesseg' => 130, 'gumimeret' => '165|65-R15', 'hatotav' => 245],
-                ['gyarto' => 'VW', 'tipus' => 'e-up!', 'teljesitmeny' => 36, 'vegsebesseg' => 130, 'gumimeret' => '165|65-R15', 'hatotav' => 265],
-                ['gyarto' => 'Skoda', 'tipus' => 'Citigo-e-iV', 'teljesitmeny' => 36, 'vegsebesseg' => 130, 'gumimeret' => '165|65-R16', 'hatotav' => 265],
-                ['gyarto' => 'Opel', 'tipus' => 'Vivaro-e', 'teljesitmeny' => 75, 'vegsebesseg' => 192, 'gumimeret' => '165|65-R16', 'hatotav' => 340],
-                ['gyarto' => 'KIA', 'tipus' => 'Niro-EV', 'teljesitmeny' => 65, 'vegsebesseg' => 167, 'gumimeret' => '165|65-R17', 'hatotav' => 460],
+                ['manufacturer' => 'VW', 'carmodel' => 'e-up!', 'motor_power' => 18, 'top_speed' => 130, 'tire_size' => '165|65-R15', 'driving_range' => 135],
+                ['manufacturer' => 'Renault', 'carmodel' => 'Kangoo-Z.E.', 'motor_power' => 33, 'top_speed' => 130, 'tire_size' => '165|65-R15', 'driving_range' => 245],
+                ['manufacturer' => 'VW', 'carmodel' => 'e-up!', 'motor_power' => 36, 'top_speed' => 130, 'tire_size' => '165|65-R15', 'driving_range' => 265],
+                ['manufacturer' => 'Skoda', 'carmodel' => 'Citigo-e-iV', 'motor_power' => 36, 'top_speed' => 130, 'tire_size' => '165|65-R16', 'driving_range' => 265],
+                ['manufacturer' => 'Opel', 'carmodel' => 'Vivaro-e', 'motor_power' => 75, 'top_speed' => 192, 'tire_size' => '165|65-R16', 'driving_range' => 340],
+                ['manufacturer' => 'KIA', 'carmodel' => 'Niro-EV', 'motor_power' => 65, 'top_speed' => 167, 'tire_size' => '165|65-R17', 'driving_range' => 460],
             ]
         );
     }

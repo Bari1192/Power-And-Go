@@ -15,17 +15,17 @@ class Bill extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'szamla_tipus',
-        'osszeg',
-        'megtett_tavolsag',
-        'parkolasi_perc',
-        'vezetesi_perc',
-        'berles_kezd_datum',
-        'berles_kezd_ido',
-        'berles_veg_datum',
-        'berles_veg_ido',
-        'szamla_kelt',
-        'szamla_status',
+        'bill_type',
+        'total_cost',
+        'driving_distance',
+        'parking_minutes',
+        'driving_minutes',
+        'rent_start_date',
+        'rent_start_time',
+        'rent_end_date',
+        'rent_end_time',
+        'invoice_date',
+        'invoice_status',
     ];
     public function cars(): BelongsTo
     {
@@ -33,7 +33,7 @@ class Bill extends Model
     }
     public function users(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'felh_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function persons(): BelongsTo
     {

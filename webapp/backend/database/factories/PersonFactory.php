@@ -14,27 +14,27 @@ class PersonFactory extends Factory
         $jogsiKezdete = fake()->dateTimeBetween('-10 years', 'now');
         $jogsiVege = (clone $jogsiKezdete)->modify('+10 years');
 
-        $v_nev = fake()->lastName();
-        $k_nev = fake()->firstName();
+        $firstname = fake()->lastName();
+        $lastname = fake()->firstName();
 
         return [
-            'v_nev' => $v_nev,
-            'k_nev' => $k_nev,
-            'szul_datum' => $szulDatum->format('Y-m-d'),
-            'telefon' => fake()->regexify('\+36(20|30|70)[0-9]{3}[0-9]{4}'),
-            'email' => $this->emailGeneralas($v_nev, $k_nev),
-            'szig_szam' => strtoupper($this->egyediSzigSzam()),
-            'jogos_szam' => strtoupper($this->egyediJogosSzam()),
-            'jogos_erv_kezdete' => $jogsiKezdete->format('Y-m-d'),
-            'jogos_erv_vege' => $jogsiVege->format('Y-m-d'),
-            'szemely_jelszo' => fake()->regexify('\[0-9]{8}'),
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'birth_date' => $szulDatum->format('Y-m-d'),
+            'phone' => fake()->regexify('\+36(20|30|70)[0-9]{3}[0-9]{4}'),
+            'email' => $this->emailGeneralas($firstname, $lastname),
+            'id_card' => strtoupper($this->egyediSzigSzam()),
+            'driving_license' => strtoupper($this->egyediJogosSzam()),
+            'license_start_date' => $jogsiKezdete->format('Y-m-d'),
+            'license_end_date' => $jogsiVege->format('Y-m-d'),
+            'person_password' => fake()->regexify('\[0-9]{8}'),
         ];
     }
     private function egyediSzigSzam(): string
     {
         do {
             $szigSzam = fake()->unique()->bothify('??######');
-        } while (Person::where('szig_szam', $szigSzam)->exists());
+        } while (Person::where('id_card', $szigSzam)->exists());
 
         return $szigSzam;
     }
@@ -43,31 +43,31 @@ class PersonFactory extends Factory
     {
         do {
             $jogosSzam = fake()->unique()->bothify('??######');
-        } while (Person::where('jogos_szam', $jogosSzam)->exists());
+        } while (Person::where('driving_license', $jogosSzam)->exists());
 
         return $jogosSzam;
     }
 
-    public function emailGeneralas($v_nev, $k_nev): string
+    public function emailGeneralas($firstname, $lastname): string
     {
         $domainek = ['@gmail.com', '@yahoo.com', '@outlook.com'];
 
         // Ékezetek eltávolítása és kisbetűs átalakítás
-        $v_nev = strtolower($this->removeAccents($v_nev));
-        $k_nev = strtolower($this->removeAccents($k_nev));
+        $firstname = strtolower($this->removeAccents($firstname));
+        $lastname = strtolower($this->removeAccents($lastname));
 
         do {
-            $tipusValaszto = random_int(1, 3);
+            $carmodelValaszto = random_int(1, 3);
 
             // [rand.Szám + vnev + domain]
-            if ($tipusValaszto === 1) {
+            if ($carmodelValaszto === 1) {
                 $szamok = random_int(100, 999);
-                $email = $v_nev . $szamok . $domainek[array_rand($domainek)];
+                $email = $firstname . $szamok . $domainek[array_rand($domainek)];
             }
             // [vnev + knev + domain]
-            elseif ($tipusValaszto === 2) {
+            elseif ($carmodelValaszto === 2) {
                 $szamok = random_int(100, 999);
-                $email = $v_nev . $k_nev . $szamok . $domainek[array_rand($domainek)];
+                $email = $firstname . $lastname . $szamok . $domainek[array_rand($domainek)];
             }
             // [random szó + szám + domain]
             else {

@@ -9,12 +9,12 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        $teljesitmenyek = DB::table('fleets')->distinct()->pluck('teljesitmeny');
+        $motor_powerek = DB::table('fleets')->distinct()->pluck('motor_power');
 
-        foreach ($teljesitmenyek as $index => $teljesitmenyErteke) {
+        foreach ($motor_powerek as $index => $motor_powerErteke) {
             DB::table('categories')->insert([
-                'kat_besorolas' => $index + 1, // Az indexet használjuk kategória besorolásként
-                'teljesitmeny' => $teljesitmenyErteke,
+                'category_class' => $index + 1, // Az indexet használjuk kategória besorolásként
+                'motor_power' => $motor_powerErteke,
             ]);
         }
     }

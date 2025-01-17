@@ -14,7 +14,7 @@
         </div>
         <h1 class="text-5xl text-sky-800">
             {{
-                mode === "edit" ? `${car.rendszam} szerkesztése` : "Új névjegy létrehozása"
+                mode === "edit" ? `${car.plate} szerkesztése` : "Új névjegy létrehozása"
             }}
         </h1>
         <form @submit.prevent="submitForm">
@@ -29,7 +29,7 @@
                 <label for="telefonszam" class="block text-sm text-sky-800">Rendszám</label>
                 <input type="text" id="telefonszam"
                     class="border border-sky-500 text-sky-500 text-sm rounded-lg block w-full p-2.5"
-                    v-model="car.rendszam" required />
+                    v-model="car.plate" required />
             </div>
             <div class="mb-2">
                 <label for="email" class="block text-sm text-sky-800">Futásteljesítmény</label>
@@ -41,7 +41,7 @@
                 <label for="cim" class="block text-sm text-sky-800">Gyártási év</label>
                 <input type="text" id="cim"
                     class="border border-sky-500 text-sky-500 text-sm rounded-lg block w-full p-2.5" value="{{ ca }}"
-                    v-model="car.gyartasi_ev" required />
+                    v-model="car.manufacturing_year" required />
             </div>
             <div class="mb-2">
                 <label for="születésnap" class="block text-sm text-sky-800">Felszereltség</label>
@@ -89,9 +89,9 @@ export default {
             this.mode = mode;
             if (mode === "hozzaadas") {
                 this.car = {
-                    rendszam: "",
+                    plate: "",
                     km_ora_allas: "",
-                    gyartasi_ev: "",
+                    manufacturing_year: "",
                     felsz_id_fk: "",
                     flotta_id_fk: "",
                 };

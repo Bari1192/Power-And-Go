@@ -24,11 +24,11 @@ class SubscriptionControllerTest extends TestCase
         $this->assertNotEmpty($data);
 
         $randomObject = $data[array_rand($data)];
-        $this->assertArrayHasKey('elofiz_id', $randomObject);
+        $this->assertArrayHasKey('sub_id', $randomObject);
 
-        $response = $this->get("/api/subscriptions/{$randomObject['elofiz_id']}");
+        $response = $this->get("/api/subscriptions/{$randomObject['sub_id']}");
         $response->assertStatus(200);
-        $response->assertJsonFragment(['elofiz_id' => $randomObject['elofiz_id']]);
+        $response->assertJsonFragment(['sub_id' => $randomObject['sub_id']]);
     }
     public function test_array_has_every_key_in_random_subscription_data(): void
     {
@@ -40,16 +40,16 @@ class SubscriptionControllerTest extends TestCase
 
         $randomObject = $data[array_rand($data)];
 
-        foreach (['elofiz_id', 'elofiz_nev', 'havi_dij', 'eves_dij'] as $key) {
+        foreach (['sub_id', 'sub_name', 'sub_monthly', 'sub_annual'] as $key) {
             $this->assertArrayHasKey($key, $randomObject);
         }
     }
     public function test_post_test_subscription_data(): void
     {
         $sampleData = [
-            "elofiz_nev" => "teszt_" . uniqid(),
-            "havi_dij" => 8888,
-            "eves_dij" => 8888
+            "sub_name" => "teszt_" . uniqid(),
+            "sub_monthly" => 8888,
+            "sub_annual" => 8888
         ];
         $response = $this->postJson('/api/subscriptions', $sampleData);
         $response->assertStatus(201);
@@ -63,22 +63,22 @@ class SubscriptionControllerTest extends TestCase
 
         $this->assertDatabaseHas('subscriptions', [
             "id" => $subscription->id,
-            "elofiz_nev" => $subscription->elofiz_nev,
-            "havi_dij" => $subscription->havi_dij,
-            "eves_dij" => $subscription->eves_dij,
+            "sub_name" => $subscription->sub_name,
+            "sub_monthly" => $subscription->sub_monthly,
+            "sub_annual" => $subscription->sub_annual,
         ]);
 
         $updatedData = [
-            "elofiz_nev" => "Test1234_" . uniqid(),
-            "havi_dij" => 4444,
-            "eves_dij" => 8888,
+            "sub_name" => "Test1234_" . uniqid(),
+            "sub_monthly" => 4444,
+            "sub_annual" => 8888,
         ];
 
         $response = $this->putJson("/api/subscriptions/{$subscription->id}", $updatedData);
         $response->assertStatus(200);
 
         $response->assertJsonFragment(array_merge($updatedData, [
-            "elofiz_id" => $subscription->id,
+            "sub_id" => $subscription->id,
         ]));
 
         $this->assertDatabaseHas('subscriptions', array_merge($updatedData, [

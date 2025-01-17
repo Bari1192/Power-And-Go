@@ -14,12 +14,12 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "felh_id" => ["required"],
+            "user_id" => ["required"],
             "person_id" => ["required"],
-            "felh_egyenleg" => ["required"],
-            "jelszo_2_4" => ["required"],
+            "account_balance" => ["required"],
+            "password_2_4" => ["required"],
             "user_name" => ["required"],
-            "elofiz_id" => ["required"],
+            "sub_id" => ["required"],
         ];
     }
 }

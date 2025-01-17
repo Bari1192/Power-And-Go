@@ -37,27 +37,27 @@ class BillSeeder extends Seeder
         $szamlaAdatok = [];
         $buntetesAdatok = [];
 
-        foreach ($lezartBerlesek as $berles) {
+        foreach ($lezartBerlesek as $rental) {
             // Lekérjük a user és car adatokat a kapcsolatokból
-            $felhasznalo = User::find($berles->user_id);
-            $auto = Car::find($berles->car_id);
+            $felhasznalo = User::find($rental->user_id);
+            $auto = Car::find($rental->car_id);
 
             // Számla adatok generálása
             $szamlaAdatok[] = [
-                'szamla_tipus' => 'berles',
-                'felh_id' => $felhasznalo->id,
+                'bill_type' => 'rental',
+                'user_id' => $felhasznalo->id,
                 'person_id' => $felhasznalo->person_id,
                 'car_id' => $auto->id,
-                'berles_kezd_datum' => $berles->berles_kezd_datum,
-                'berles_kezd_ido' => $berles->berles_kezd_ido,
-                'berles_veg_datum' => $berles->berles_veg_datum,
-                'berles_veg_ido' => $berles->berles_veg_ido,
-                'megtett_tavolsag' => $berles->megtett_tavolsag,
-                'parkolasi_perc' => $berles->parkolasi_perc,
-                'vezetesi_perc' => $berles->vezetesi_perc,
-                'osszeg' => $berles->berles_osszeg,
-                'szamla_kelt' => now(),
-                'szamla_status' => 'pending',
+                'rent_start_date' => $rental->rent_start_date,
+                'rent_start_time' => $rental->rent_start_time,
+                'rent_end_date' => $rental->rent_end_date,
+                'rent_end_time' => $rental->rent_end_time,
+                'driving_distance' => $rental->driving_distance,
+                'parking_minutes' => $rental->parking_minutes,
+                'driving_minutes' => $rental->driving_minutes,
+                'total_cost' => $rental->rental_cost,
+                'invoice_date' => now(),
+                'invoice_status' => 'pending',
             ];
 
             // Büntetés generálása a töltöttségi szint alapján
@@ -69,25 +69,25 @@ class BillSeeder extends Seeder
                 5 => ['min_toltes' => 4.0, 'buntetes' => 50000],
             ];
 
-            $autoKategoria = $berles->kategoria;
-            $zarasToltesSzazalek = $berles->zaras_szaz;
+            $autoKategoria = $rental->category_id;
+            $zarasToltesSzazalek = $rental->end_percent;
 
             if (isset($kategoriak[$autoKategoria]) && $zarasToltesSzazalek < $kategoriak[$autoKategoria]['min_toltes']) {
                 $buntetesAdatok[] = [
-                    'szamla_tipus' => 'toltes_buntetes',
-                    'felh_id' => $felhasznalo->id,
+                    'bill_type' => 'charging_penalty',
+                    'user_id' => $felhasznalo->id,
                     'person_id' => $felhasznalo->person_id,
                     'car_id' => $auto->id,
-                    'berles_kezd_datum' => $berles->berles_kezd_datum,
-                    'berles_kezd_ido' => $berles->berles_kezd_ido,
-                    'berles_veg_datum' => $berles->berles_veg_datum,
-                    'berles_veg_ido' => $berles->berles_veg_ido,
-                    'megtett_tavolsag' => $berles->megtett_tavolsag,
-                    'parkolasi_perc' => $berles->parkolasi_perc,
-                    'vezetesi_perc' => $berles->vezetesi_perc,
-                    'osszeg' => $kategoriak[$autoKategoria]['buntetes'],
-                    'szamla_kelt' => now(),
-                    'szamla_status' => 'pending',
+                    'rent_start_date' => $rental->rent_start_date,
+                    'rent_start_time' => $rental->rent_start_time,
+                    'rent_end_date' => $rental->rent_end_date,
+                    'rent_end_time' => $rental->rent_end_time,
+                    'driving_distance' => $rental->driving_distance,
+                    'parking_minutes' => $rental->parking_minutes,
+                    'driving_minutes' => $rental->driving_minutes,
+                    'total_cost' => $kategoriak[$autoKategoria]['buntetes'],
+                    'invoice_date' => now(),
+                    'invoice_status' => 'pending',
                 ];
             }
         }

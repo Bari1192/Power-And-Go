@@ -12,24 +12,24 @@ class DailyrentalSeeder extends Seeder
     # Összes árazási kategória
     public function run(): void
     {
-        $arazasok = Price::all(['id', 'auto_besorolas', 'elofiz_azon']);
+        $arazasok = Price::all(['id', 'category_class', 'sub_id']);
 
         ### Tömeges beszúrás, a gyorsabb betöltés végett:
         ### ebbe bele az összes rekordot!
         $insertData = []; 
 
         foreach ($arazasok as $arazas) {
-            $autoTipusok = range(1, 5);
+            $autocarmodelok = range(1, 5);
 
-            foreach ($autoTipusok as $tipus) {
-                $prices = $this->napiBerlesAutokEsElofizAlapjan($arazas->elofiz_azon,$arazas->auto_besorolas);
+            foreach ($autocarmodelok as $carmodel) {
+                $prices = $this->napiBerlesAutokEsElofizAlapjan($arazas->sub_id,$arazas->category_class);
 
-                foreach ($prices as $nap => $ar) {
+                foreach ($prices as $nap => $price) {
                     $insertData[] = [
-                        'arazas_id' => $arazas->id,
-                        'auto_tipus' => $tipus,
-                        'napok' => $nap + 2, ## Csak a 2. naptól kellenek!
-                        'ar' => $ar,
+                        'prices_id' => $arazas->id,
+                        'category_class' => $carmodel,
+                        'days' => $nap + 2, ## Csak a 2. naptól kellenek!
+                        'price' => $price,
                     ];
                 }
             }
@@ -37,7 +37,7 @@ class DailyrentalSeeder extends Seeder
         Dailyrental::insert($insertData);
     }
     # Árak generálása az autókategória és előfizetési csoport alapján
-    private function napiBerlesAutokEsElofizAlapjan($elofiz_azon,$auto_besorolas)
+    private function napiBerlesAutokEsElofizAlapjan($sub_id,$category_class)
     {
         # MÁSODIK NAPTÓL VANNAK!
         $napiarak = [
@@ -79,6 +79,6 @@ class DailyrentalSeeder extends Seeder
                 5 => [37556, 55884, 73912, 91390, 108468, 125846, 143264, 160542, 177780, 195008, 212256, 229554, 246792, 264270, 281568, 298996, 316584, 334172, 351760],
             ],
         ];
-        return $napiarak[$elofiz_azon][$auto_besorolas];
+        return $napiarak[$sub_id][$category_class];
     }
 }

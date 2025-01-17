@@ -18,23 +18,23 @@ class FleetControllerTest extends TestCase
     public function test_post_fake_fleet_type_to_db(): void
     {
         $data = [
-            "gyarto" => "Renault",
-            "tipus" => "UI-UX-ULTRA",
-            "teljesitmeny" => 100,
-            "vegsebesseg" => 300,
-            "gumimeret" => "165|65-R15",
-            "hatotav" => 445
+            "manufacturer" => "Renault",
+            "carmodel" => "UI-UX-ULTRA",
+            "motor_power" => 100,
+            "top_speed" => 300,
+            "tire_size" => "165|65-R15",
+            "driving_range" => 445
         ];
         $response = $this->post('api/fleets', $data);
         $response->assertStatus(201);
 
         $this->assertDatabaseHas('fleets', [
-            "gyarto" => "Renault",
-            "tipus" => "UI-UX-ULTRA",
-            "teljesitmeny" => 100,
-            "vegsebesseg" => 300,
-            "gumimeret" => "165|65-R15",
-            "hatotav" => 445
+            "manufacturer" => "Renault",
+            "carmodel" => "UI-UX-ULTRA",
+            "motor_power" => 100,
+            "top_speed" => 300,
+            "tire_size" => "165|65-R15",
+            "driving_range" => 445
         ]);
     }
     public function test_put_previous_fake_fleet_modifing()
@@ -43,12 +43,12 @@ class FleetControllerTest extends TestCase
 
         $modifiedData = [
             "id"=>$latestFleet->id,
-            "gyarto" => "Renault",
-            "tipus" => "MODIFIED-ULTRA-SUPER",
-            "teljesitmeny" => 100,
-            "vegsebesseg" => 300,
-            "gumimeret" => "165|65-R15",
-            "hatotav" => 445
+            "manufacturer" => "Renault",
+            "carmodel" => "MODIFIED-ULTRA-SUPER",
+            "motor_power" => 100,
+            "top_speed" => 300,
+            "tire_size" => "165|65-R15",
+            "driving_range" => 445
         ];
 
         $response = $this->put("api/fleets/{$latestFleet->id}", $modifiedData);

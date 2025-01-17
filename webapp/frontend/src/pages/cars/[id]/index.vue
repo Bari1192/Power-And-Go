@@ -5,9 +5,9 @@
       <div
         class="m-auto w-4/5 py-6 d-flex justify-center my-10 sm:w-full border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
         <div class="text-center grid grid-cols-3">
-          <h1 class="text-3xl md:text-4xl xl:text-5xl text-sky-100 border-r-4 border-sky-500 italic"> {{ car.gyarto }} </h1>
-          <h1 class="text-3xl md:text-4xl xl:text-5xl text-lime-300 border-x-4 border-sky-500"> {{ car.rendszam }} </h1>
-          <h1 class="text-3xl md:text-4xl xl:text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.tipus }} </h1>
+          <h1 class="text-3xl md:text-4xl xl:text-5xl text-sky-100 border-r-4 border-sky-500 italic"> {{ car.manufacturer }} </h1>
+          <h1 class="text-3xl md:text-4xl xl:text-5xl text-lime-300 border-x-4 border-sky-500"> {{ car.plate }} </h1>
+          <h1 class="text-3xl md:text-4xl xl:text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.carmodel }} </h1>
         </div>
       </div>
 
@@ -24,7 +24,7 @@
         <component :is="currentModel" :car-id="car.car_id" @submit-success="submitHandler" />
       </div>
 
-      <!-- BALESET BEJELENTÉSI KOMPONENS -->
+      <!-- accident BEJELENTÉSI KOMPONENS -->
       <div v-if="accidentReport">
         <CarAccidentReport :lastRenter="carRentHistory.berlok[0].user" @submit="submitAccidentReport" />
       </div>
@@ -46,14 +46,14 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 lg:gap-6 gap-2" v-if="carOpen">
           <BaseCard :title="'Gépjármű aktuális állapota'" :text="latestTicket.status_descrip" />
 
-          <BaseCard :title="'Becsült megtehető távolság'" :text="car.becs_tav + ' km'" />
-          <BaseCard :title="'Akkumulátor töltöttsége'" :text="car.toltes_kw + ' kW'" />
-          <BaseCard :title="'Töltöttségi állapota'" :text="car.toltes_szaz + ' %'" />
-          <BaseCard :title="'Akkumulátor kapacitása'" :text="car.teljesitmeny + ' kW'" />
-          <BaseCard :title="'Végsebesség'" :text="car.vegsebesseg + ' km/h'" />
-          <BaseCard :title="'Maximális hatótáv egy töltéssel'" :text="car.hatotav + ' km'" />
-          <BaseCard :title="'Aktuális futásteljesítménye'" :text="car.kilometerora + ' km'" />
-          <BaseCard :title="'Gyártási éve'" :text="car.gyartasi_ev" />
+          <BaseCard :title="'Becsült megtehető távolság'" :text="car.estimated_range + ' km'" />
+          <BaseCard :title="'Akkumulátor töltöttsége'" :text="car.power_kw + ' kW'" />
+          <BaseCard :title="'Töltöttségi állapota'" :text="car.power_percent + ' %'" />
+          <BaseCard :title="'Akkumulátor kapacitása'" :text="car.motor_power + ' kW'" />
+          <BaseCard :title="'Végsebesség'" :text="car.top_speed + ' km/h'" />
+          <BaseCard :title="'Maximális hatótáv egy töltéssel'" :text="car.driving_range + ' km'" />
+          <BaseCard :title="'Aktuális futásteljesítménye'" :text="car.odometer + ' km'" />
+          <BaseCard :title="'Gyártási éve'" :text="car.manufacturing_year" />
         </div>
       </transition>
       <div ref="adatokAlja"></div>
@@ -84,7 +84,7 @@
 
                 <h2 class="font-semibold">Bejelentés ideje:</h2>
                 <div class="w-2/5 border-b-4 border-lime-400 rounded-xl opacity-50"></div>
-                <p class="mt-1 mb-3">{{ ticket.bejelentve }}</p>
+                <p class="mt-1 mb-3">{{ ticket.created_at }}</p>
               </div>
 
               <!--Második-->
@@ -129,13 +129,13 @@
                 <tr v-for="rent in carRentHistory.berlok" :key="rent.berles_id"
                   class="odd:bg-amber-50 even:bg-yellow-50 even:border-b-4 even:border-t-4 even:border-lime-400 text-center text-lg font-semibold text-sky-900">
                   <td class="mx-auto py-2"><router-link to=""> {{ rent.user }} </router-link></td>
-                  <td class="mx-auto py-2">{{ rent.berles_kezd_datum + " " + rent.berles_kezd_ido }}</td>
-                  <td class="mx-auto py-2">{{ rent.nyitas_szaz }} %</td>
-                  <td class="mx-auto py-2">{{ rent.berles_veg_datum + " " + rent.berles_veg_ido }}</td>
-                  <td class="mx-auto py-2">{{ rent.zaras_szaz }} %</td>
-                  <td class="mx-auto py-2">{{ rent.megtett_tavolsag }} km</td>
-                  <td class="mx-auto py-2">{{ rent.berles_osszeg }} Ft</td>
-                  <td class="mx-auto py-2">{{ rent.szamla_kelt }}</td>
+                  <td class="mx-auto py-2">{{ rent.rent_start_date + " " + rent.rent_start_time }}</td>
+                  <td class="mx-auto py-2">{{ rent.start_percent }} %</td>
+                  <td class="mx-auto py-2">{{ rent.rent_end_date + " " + rent.rent_end_time }}</td>
+                  <td class="mx-auto py-2">{{ rent.end_percent }} %</td>
+                  <td class="mx-auto py-2">{{ rent.driving_distance }} km</td>
+                  <td class="mx-auto py-2">{{ rent.rental_cost }} Ft</td>
+                  <td class="mx-auto py-2">{{ rent.invoice_date }}</td>
                 </tr>
               </tbody>
             </table>
@@ -167,26 +167,26 @@
         <div v-if="rentBillOpen">
           <div v-for="fine in rentBillFees" :key="fine.szamla_azon">
             <BaseCard class="cursor-pointer" :class="rentBillDetailsStates[fine.szamla_azon] ? 'min-h-full' : 'h-10 md:h-10 lg:h-14 xl:h-16'"
-              :title="fine.szamla_tipus === 'toltes_buntetes' ? 'Akkumulátor lemerítési & szállítási pótdíj - ' + fine.osszeg : fine.szamla_tipus"
+              :title="fine.bill_type === 'charging_penalty' ? 'Akkumulátor lemerítési & szállítási pótdíj - ' + fine.total_cost : fine.bill_type"
               @click="toggleBillDetails(fine.szamla_azon)">
               <div class="cursor-default grid grid-cols-3 gap-2 mx-1" v-if="rentBillDetailsStates[fine.szamla_azon]">
                 <p><b>Számla sorszáma: </b><br><i class="text-lime-500">{{ fine.szamla_azon }}</i></p>
-                <p class="text-center"> <b>Kiállítva:</b> <br><i class="text-lime-500">{{ fine.szamla_kelt }}</i></p>
-                <p class="text-right"><b>Bérlés kezdete:</b><br><i class="text-lime-500">{{ fine.berles_kezd_datum }}
-                    {{ fine.berles_kezd_ido }}</i></p>
-                <p><b>Összege:</b> <br><i class="text-lime-500">{{ fine.osszeg }} Ft</i></p>
-                <p class="text-center"><b>Levezetett út:</b><br> <i class="text-lime-500">{{ fine.megtett_tavolsag }}
+                <p class="text-center"> <b>Kiállítva:</b> <br><i class="text-lime-500">{{ fine.invoice_date }}</i></p>
+                <p class="text-right"><b>Bérlés kezdete:</b><br><i class="text-lime-500">{{ fine.rent_start_date }}
+                    {{ fine.rent_start_time }}</i></p>
+                <p><b>Összege:</b> <br><i class="text-lime-500">{{ fine.total_cost }} Ft</i></p>
+                <p class="text-center"><b>Levezetett út:</b><br> <i class="text-lime-500">{{ fine.driving_distance }}
                     km</i></p>
-                <p class="text-right"><b>Bérlés vége:</b> <br><i class="text-lime-500">{{ fine.berles_veg_datum }}
-                    {{ fine.berles_veg_ido }}</i></p>
-                <p><b>Parkolási idő:</b> <br><i class="text-lime-500">{{ fine.parkolasi_perc }} perc</i></p>
-                <p class="text-center"><b>Vezetési idő:</b> <br><i class="text-lime-500">{{ fine.vezetesi_perc }}
+                <p class="text-right"><b>Bérlés vége:</b> <br><i class="text-lime-500">{{ fine.rent_end_date }}
+                    {{ fine.rent_end_time }}</i></p>
+                <p><b>Parkolási idő:</b> <br><i class="text-lime-500">{{ fine.parking_minutes }} perc</i></p>
+                <p class="text-center"><b>Vezetési idő:</b> <br><i class="text-lime-500">{{ fine.driving_minutes }}
                     perc</i></p>
                 <p class="text-right">
                   <b>Számla állapota: </b>
                   <span
-                    :style="fine.szamla_status === 'pending' ? 'color:orange; font-weight:bold;font-style:italic;' : ''">
-                    <br>{{ fine.szamla_status }}
+                    :style="fine.invoice_status === 'pending' ? 'color:orange; font-weight:bold;font-style:italic;' : ''">
+                    <br>{{ fine.invoice_status }}
                   </span>
                 </p>
               </div>
@@ -310,15 +310,15 @@ export default {
         console.log('Bejelentés sikeres, frissítési payload érkezett:', data);
 
         const updatePayload = {
-          rendszam: this.car.rendszam,
-          kategoria: parseInt(this.car.kategoria, 10),
+          plate: this.car.plate,
+          category_id: parseInt(this.car.category_id, 10),
           felszereltseg: parseInt(this.car.felszereltseg, 10),
           flotta_azon: parseInt(this.car.flotta_azon, 10),
-          kilometerora: parseInt(this.car.kilometerora),
-          gyartasi_ev: parseInt(this.car.gyartasi_ev, 10),
-          toltes_szaz: parseFloat(this.car.toltes_szaz),
-          toltes_kw: parseFloat(this.car.toltes_kw),
-          becs_tav: parseFloat(this.car.becs_tav),
+          odometer: parseInt(this.car.odometer),
+          manufacturing_year: parseInt(this.car.manufacturing_year, 10),
+          power_percent: parseFloat(this.car.power_percent),
+          power_kw: parseFloat(this.car.power_kw),
+          estimated_range: parseFloat(this.car.estimated_range),
           status: data.status_id,
         };
         const response = await http.put(`/cars/${data.car_id}`, updatePayload);
@@ -331,7 +331,7 @@ export default {
       this.isSubmitting = true;
 
       const { description } = data; // gyermektől jön //
-      if (!confirm(`Balesetet fog bejelenteni a ${this.car.rendszam} ${this.car.tipus} tipusú autóra. Megerősíti?`)) {
+      if (!confirm(`Balesetet fog bejelenteni a ${this.car.plate} ${this.car.carmodel} carmodelú autóra. Megerősíti?`)) {
         this.isSubmitting = false;
         return;
       }
@@ -343,11 +343,11 @@ export default {
             status_id: 4,
           };
           const CarAccidentRefreshCarData = {
-            rendszam: this.car.rendszam,
-            toltes_szaz: parseFloat(this.car.toltes_szaz),
-            toltes_kw: parseFloat(this.car.toltes_kw),
-            becs_tav: parseFloat(this.car.becs_tav),
-            status: 4, // baleset //
+            plate: this.car.plate,
+            power_percent: parseFloat(this.car.power_percent),
+            power_kw: parseFloat(this.car.power_kw),
+            estimated_range: parseFloat(this.car.estimated_range),
+            status: 4, // accident //
           }
           await http.post('/tickets', CarAccidentData);
           await http.put(`/cars/${this.car.car_id}`, CarAccidentRefreshCarData)
@@ -361,7 +361,7 @@ export default {
   },
   computed: {
     currentModel() {
-      const gyartoAlapjanModel = {
+      const manufacturerAlapjanModel = {
         VW: "EupModel",
         Skoda: "CitigoModel",
         Renault: "KangooModel",
@@ -369,7 +369,7 @@ export default {
         KIA: "KiaNiroModel",
       };
 
-      return gyartoAlapjanModel[this.car.gyarto] || null;
+      return manufacturerAlapjanModel[this.car.manufacturer] || null;
     }
   },
 }

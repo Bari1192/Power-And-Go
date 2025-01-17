@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('dailyrentals', function (Blueprint $table) {
             $table->id();
             # Autókategórián belüli konkrét autó (pl. 1-es, 2-es, 3-as, 4-es, 5-ös)
-            $table->unsignedBigInteger('arazas_id');
-            $table->foreign('arazas_id')->references('id')->on('prices')->onDelete('cascade');
-            $table->unsignedBigInteger('auto_tipus');
-            $table->foreign('auto_tipus')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('prices_id');
+            $table->foreign('prices_id')->references('id')->on('prices')->onDelete('cascade');
+            $table->unsignedBigInteger('category_class');
+            $table->foreign('category_class')->references('id')->on('categories')->onDelete('cascade');
 
-            $table->integer('napok');
-            $table->integer('ar');
+            $table->integer('days');
+            $table->integer('price');
         });
     }
     public function down(): void

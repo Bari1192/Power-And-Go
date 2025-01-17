@@ -13,13 +13,12 @@ class Ticket extends Model
     protected $primaryKey = 'id';
     protected $table="tickets";
     public $incrementing = true;
-    public $timestamps = false; 
 
     public $fillable = [
         'car_id',
         'status_id',
         'description',
-        'bejelentve',
+        'created_at',
         'status_descrip',
     ];
     public function auto(): BelongsTo

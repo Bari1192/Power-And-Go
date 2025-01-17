@@ -10,9 +10,9 @@ return new class extends Migration {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
-            $table->foreignId('elofiz_id')->constrained('subscriptions')->onDelete('cascade');
-            $table->integer('felh_egyenleg')->default(0);
-            $table->string('jelszo_2_4', 2);
+            $table->foreignId('sub_id')->constrained('subscriptions')->onDelete('cascade');
+            $table->integer('account_balance')->default(0);
+            $table->string('password_2_4', 2);
 
             $table->string('user_name', 45)->unique();
             $table->string('password', 60);

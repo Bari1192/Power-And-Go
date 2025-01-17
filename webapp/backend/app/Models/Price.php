@@ -15,13 +15,13 @@ class Price extends Model
     public $incrementing = true;
 
     protected $fillable = [];
-    public function kategoria(): BelongsTo
+    public function category_id(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'auto_besorolas', 'kat_besorolas');
+        return $this->belongsTo(Category::class, 'category_class', 'category_class');
     }
 
     public function elofizetes(): BelongsTo
     {
-        return $this->belongsTo(Subscription::class, 'elofiz_azon', 'elofiz_id');
+        return $this->belongsTo(Subscription::class, 'sub_id', 'sub_id');
     }
 }

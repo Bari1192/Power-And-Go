@@ -18,11 +18,11 @@
                         class="text-white cursor-pointer odd:hover:bg-sky-900 even:hover:bg-sky-800 odd:bg-sky-500 even:bg-sky-600">
                         <td class="text-center p-2">{{ fine.szamla_id }}</td>
                         <td class="text-center p-2">{{ fine.person_id }}</td>
-                        <td class="text-center p-2">{{ fine.felh_id }}</td>
-                        <td class="text-center p-2 italic text-lime-300 font-bold">{{ fine.szamla_status }}</td>
-                        <td class="text-center p-2 font-semibold">{{ fine.szamla_tipus }}</td>
-                        <td class="text-center text-lime-300 font-bold p-2 italic">{{ fine.osszeg }} Ft</td>
-                        <td class="text-center p-2">{{ fine.szamla_kelt }}</td>
+                        <td class="text-center p-2">{{ fine.user_id }}</td>
+                        <td class="text-center p-2 italic text-lime-300 font-bold">{{ fine.invoice_status }}</td>
+                        <td class="text-center p-2 font-semibold">{{ fine.bill_type }}</td>
+                        <td class="text-center text-lime-300 font-bold p-2 italic">{{ fine.total_cost }} Ft</td>
+                        <td class="text-center p-2">{{ fine.invoice_date }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -45,7 +45,7 @@ export default {
     },
     async mounted() {
         try {
-            const resp = await http.get('/szamlak/filter/toltes_buntetes');
+            const resp = await http.get('/szamlak/filter/charging_penalty');
             this.fines = resp.data.data;
         } catch (error) {
             console.error('Hiba történt az API hívás során:', error);

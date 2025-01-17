@@ -42,7 +42,7 @@ class BillController extends Controller
     public function carFees(Bill $bills, Car $car): JsonResource
     {
         $bills = Bill::where("car_id", $car->id)
-            ->where('szamla_tipus', 'toltes_buntetes')
+            ->where('bill_type', 'charging_penalty')
             ->get();
         $bills->load(['persons','users']);
         return BillResource::collection($bills);

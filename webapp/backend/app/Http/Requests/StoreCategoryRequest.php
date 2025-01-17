@@ -13,8 +13,8 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "kat_besorolas" => ["required","integer","between:1,10"],
-            "teljesitmeny" => ["required","integer","between:18,200"],
+            "category_class" => ["required","integer","between:1,10"],
+            "motor_power" => ["required","integer","between:18,200"],
         ];
     }
 }

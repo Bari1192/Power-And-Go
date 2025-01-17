@@ -14,15 +14,15 @@ class Person extends Model
     public $incrementing = true;
 
     protected $fillable = [
-        'szemely_jelszo',
-        'szig_szam',
-        'jogos_szam',
-        'jogos_erv_kezdete',
-        'jogos_erv_vege',
-        'v_nev',
-        'k_nev',
-        'szul_datum',
-        'telefon',
+        'person_password',
+        'id_card',
+        'driving_license',
+        'license_start_date',
+        'license_end_date',
+        'firstname',
+        'lastname',
+        'birth_date',
+        'phone',
         'email',
     ];
     public function user()
@@ -31,6 +31,6 @@ class Person extends Model
     }
     public function dolgozo()
     {
-        return $this->hasOne(Employee::class, 'szemely_azon', 'id');
+        return $this->hasOne(Employee::class, 'person_id', 'id');
     }
 }

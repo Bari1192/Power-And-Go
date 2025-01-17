@@ -11,16 +11,15 @@ class Subscription extends Model
     use HasFactory;
     protected $table = 'subscriptions';
     protected $primaryKey = 'id';
-    public $timestamps = false;
     public $incrementing = true;
 
     protected $fillable = [
-        'elofiz_nev',
-        'havi_dij',
-        'eves_dij',
+        'sub_name',
+        'sub_monthly',
+        'sub_annual',
     ];
     public function user(): HasMany
     {
-        return $this->hasMany(User::class, 'elofiz_id', 'id');
+        return $this->hasMany(User::class);
     }
 }

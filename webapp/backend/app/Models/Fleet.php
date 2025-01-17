@@ -17,12 +17,12 @@ class Fleet extends Model
 
     protected $fillable = [
         "id",
-        "gyarto",
-        "tipus",
-        "hatotav",
-        "teljesitmeny",
-        "vegsebesseg",
-        "gumimeret",
+        "manufacturer",
+        "carmodel",
+        "driving_range",
+        "motor_power",
+        "top_speed",
+        "tire_size",
     ];
     public function cars(): HasMany
     {

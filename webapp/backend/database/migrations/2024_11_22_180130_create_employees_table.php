@@ -10,13 +10,13 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('szemely_azon')->constrained('persons','id')->onDelete('cascade'); 
-            $table->string('terulet',128);
-            $table->string('munkakor',45);
-            $table->string('beosztas',45);
-            $table->enum('munkaber_tipus',['fix','oradij']);
-            $table->integer('fizetes'); 
-            $table->date('belepes_datum');
+            $table->foreignId('person_id')->constrained('persons','id')->onDelete('cascade'); 
+            $table->string('field',128);
+            $table->string('role',45);
+            $table->string('position',45);
+            $table->enum('salary_type',['fix','hourly']);
+            $table->integer('salary'); 
+            $table->date('start_date');
         });
     }
     public function down(): void

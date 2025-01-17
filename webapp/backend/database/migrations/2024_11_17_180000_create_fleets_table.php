@@ -9,12 +9,12 @@ return new class extends Migration {
     {
         Schema::create('fleets', function (Blueprint $table) {
             $table->id();
-            $table->string('gyarto',30);
-            $table->string('tipus',30);
-            $table->integer('hatotav');
-            $table->integer('teljesitmeny');
-            $table->integer('vegsebesseg');
-            $table->string('gumimeret',30);
+            $table->string('manufacturer',30);
+            $table->string('carmodel',30);
+            $table->integer('driving_range');
+            $table->integer('motor_power');
+            $table->integer('top_speed');
+            $table->string('tire_size',30);
         });
     }
     public function down(): void

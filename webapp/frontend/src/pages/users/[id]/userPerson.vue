@@ -11,7 +11,7 @@
                         <th class="px-2 py-2 text-center">person_id</th>
                         <th class="px-2 py-2 text-center">Felsz. bes.</th>
                         <th class="px-2 py-2 text-center">flotta. bes.</th>
-                        <th class="px-2 py-2 text-center">kategoria</th>
+                        <th class="px-2 py-2 text-center">category_id</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,11 +20,11 @@
                         <td class="py-2 text-lime-500 font-semibold ">
                         </td>
                         <td class="py-2 text-sky-300 font-semibold">{{ car.car_id }}</td>
-                        <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.kilometerora }}</td>
-                        <td class="py-2 text-sky-300 font-semibold">{{ car.gyartasi_ev }}</td>
+                        <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.odometer }}</td>
+                        <td class="py-2 text-sky-300 font-semibold">{{ car.manufacturing_year }}</td>
                         <td class="py-2 text-sky-300 font-semibold">{{ car.felszereltseg }}</td>
                         <td class="py-2 text-sky-300 font-semibold">{{ car.flotta_adatok.flotta_id }}</td>
-                        <td class="py-2 text-sky-300 font-semibold">{{ car.kategoria }}</td>
+                        <td class="py-2 text-sky-300 font-semibold">{{ car.category_id }}</td>
                     </tr>
                 </tbody>
             </table>

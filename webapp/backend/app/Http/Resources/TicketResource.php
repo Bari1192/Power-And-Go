@@ -15,13 +15,13 @@ class TicketResource extends JsonResource
             'car_id' => $this->car_id,
             'status_id' => $this->status_id,
             'status_descrip' => $this->whenLoaded('status', fn() => $this->status->status_descrip),
-            'bejelentve' => $this->bejelentve,
+            'created_at' => $this->created_at,
             'car' => $this->whenLoaded('auto', function () {
                 return [
-                    'rendszam' => $this->auto->rendszam,
-                    'toltes_szaz' => $this->auto->toltes_szaz,
-                    'toltes_kw' => $this->auto->toltes_kw,
-                    'becs_tav' => $this->auto->becs_tav,
+                    'plate' => $this->auto->plate,
+                    'power_percent' => $this->auto->power_percent,
+                    'power_kw' => $this->auto->power_kw,
+                    'estimated_range' => $this->auto->estimated_range,
                 ];
             }),
         ];

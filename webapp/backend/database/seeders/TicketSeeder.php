@@ -56,7 +56,7 @@ class TicketSeeder extends Seeder
                 'car_id' => fake()->numberBetween(1, 50), ## első 50 kocsira random.
                 'status_id' => 6,
                 'description' => $randomTisztitasKomment[array_rand($randomTisztitasKomment)],
-                'bejelentve' => now()->format('Y-m-d H:i:s'),
+                'created_at' => now()->format('Y-m-d H:i:s'),
             ]);
         }
         for ($i = 0; $i < 50; $i++) {
@@ -64,7 +64,7 @@ class TicketSeeder extends Seeder
                 'car_id' => fake()->numberBetween(1, 50), ## első 50 kocsira random.
                 'status_id' => 5,
                 'description' => $randomMeghibasodasKomment[array_rand($randomMeghibasodasKomment)],
-                'bejelentve' => now()->format('Y-m-d H:i:s'),
+                'created_at' => now()->format('Y-m-d H:i:s'),
             ]);
         }
         for ($i = 0; $i < 50; $i++) {
@@ -72,7 +72,7 @@ class TicketSeeder extends Seeder
                 'car_id' => fake()->numberBetween(1, 50), ## első 50 kocsira random.
                 'status_id' => 5,
                 'description' => $randomRongalasKomment[array_rand($randomRongalasKomment)],
-                'bejelentve' => now()->format('Y-m-d H:i:s'),
+                'created_at' => now()->format('Y-m-d H:i:s'),
             ]);
         }
         for ($i = 0; $i < 50; $i++) {
@@ -80,7 +80,7 @@ class TicketSeeder extends Seeder
                 'car_id' => fake()->numberBetween(1, 50), ## első 50 kocsira random.
                 'status_id' => 4,
                 'description' => $randomBalesetKomment[array_rand($randomBalesetKomment)],
-                'bejelentve' => now()->format('Y-m-d H:i:s'),
+                'created_at' => now()->format('Y-m-d H:i:s'),
             ]);
         }
     }

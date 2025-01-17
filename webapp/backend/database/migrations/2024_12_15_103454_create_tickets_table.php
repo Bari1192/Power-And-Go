@@ -13,7 +13,7 @@ return new class extends Migration
             $table->foreignId('car_id')->references('id')->on('cars')->onDelete('cascade');
             $table->foreignId('status_id')->references('id')->on('carstatus')->onDelete('cascade');
             $table->string('description', 255);
-            $table->dateTime('bejelentve')->useCurrent();
+            $table->timestamps();
         });
     }
     public function down(): void

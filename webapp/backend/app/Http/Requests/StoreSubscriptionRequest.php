@@ -13,9 +13,9 @@ class StoreSubscriptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "elofiz_nev" => ["required", "string", "between:5,50","unique:subscriptions"],
-            "havi_dij" => ["required", "integer", "min:0", "max:10000"],
-            "eves_dij" => ["required", "integer", "min:0", "max:100000"],
+            "sub_name" => ["required", "string", "between:5,50","unique:subscriptions"],
+            "sub_monthly" => ["required", "integer", "min:0", "max:10000"],
+            "sub_annual" => ["required", "integer", "min:0", "max:100000"],
         ];
     }
 }

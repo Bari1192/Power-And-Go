@@ -9,19 +9,19 @@ return new class extends Migration {
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->string('rendszam', 10)->unique();
+            $table->string('plate', 10)->unique();
 
-            $table->float('toltes_szaz', 2)->default(100.0);
-            $table->float('toltes_kw', 1)->default(18.0);
-            $table->float('becs_tav', 1)->default(130);
+            $table->float('power_percent', 2)->default(100.0);
+            $table->float('power_kw', 1)->default(18.0);
+            $table->float('estimated_range', 1)->default(130);
 
             $table->foreignId('status')->constrained('carstatus','id')->onDelete('cascade');
-            $table->foreignId('kategoria')->constrained('categories', 'id')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories', 'id')->onDelete('cascade');
             $table->foreignId('felszereltseg')->nullable()->constrained('equipments', 'id')->onDelete('set null');
             $table->foreignId('flotta_azon')->nullable()->constrained('fleets', 'id')->onDelete('cascade');
 
-            $table->integer('kilometerora');
-            $table->year('gyartasi_ev');
+            $table->integer('odometer');
+            $table->year('manufacturing_year');
         });
     }
     public function down(): void

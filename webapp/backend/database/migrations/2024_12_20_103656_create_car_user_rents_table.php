@@ -14,26 +14,26 @@ return new class extends Migration
         Schema::create('car_user_rents', function (Blueprint $table) {
             $table->id();
             $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
-            $table->foreignId('kategoria')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('persons')->onDelete('cascade');
 
             // Specifikus mezők
-            $table->float('nyitas_szaz', 2)->nullable();
-            $table->float('nyitas_kw', 1)->nullable();
-            $table->float('zaras_szaz', 2)->nullable();
-            $table->float('zaras_kw', 1)->nullable();
+            $table->float('start_percent', 2)->nullable();
+            $table->float('start_kw', 1)->nullable();
+            $table->float('end_percent', 2)->nullable();
+            $table->float('end_kw', 1)->nullable();
 
-            $table->date('berles_kezd_datum')->nullable();
-            $table->time('berles_kezd_ido')->nullable();
-            $table->date('berles_veg_datum')->nullable();
-            $table->time('berles_veg_ido')->nullable();
-            $table->integer('megtett_tavolsag')->nullable();
-            $table->dateTime('parkolas_kezd')->nullable()->default(null);
-            $table->dateTime('parkolas_veg')->nullable()->default(null);
-            $table->integer('parkolasi_perc')->nullable();
-            $table->integer('vezetesi_perc')->nullable();
-            $table->integer('berles_osszeg')->nullable();
-            $table->timestamp('szamla_kelt')->now();
+            $table->date('rent_start_date')->nullable();
+            $table->time('rent_start_time')->nullable();
+            $table->date('rent_end_date')->nullable();
+            $table->time('rent_end_time')->nullable();
+            $table->integer('driving_distance')->nullable();
+            $table->dateTime('parking_start')->nullable()->default(null);
+            $table->dateTime('parking_end')->nullable()->default(null);
+            $table->integer('parking_minutes')->nullable();
+            $table->integer('driving_minutes')->nullable();
+            $table->integer('rental_cost')->nullable();
+            $table->timestamp('invoice_date')->now();
 
             // Státusz: folyamatban (0) vagy lezárt (1)
             $table->boolean('rentstatus')->default(0);

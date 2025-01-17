@@ -10,28 +10,28 @@
 
             <div class="flex flex-wrap my-12">
                 <div v-for="fleet in fleets" :key="fleet.flotta_id" class="w-1/2 px-3 mb-3 cursor-pointer">
-                    <BaseFleet :src="fleet.flotta_id" :imgalt="fleet.gyarto + fleet.tipus + 'képe'" :title="fleet.gyarto === 'VW' ? 'Volkswagen ' + fleet.tipus :
-                        fleet.gyarto === 'Renault' ? fleet.gyarto + ' Kangoo Z.E.'
-                            : fleet.gyarto + ' ' + fleet.tipus" @edit="editFleet" @delete="deleteFleet"
-                            :teljesitmeny="fleet.teljesitmeny"
-                            :vegsebesseg="fleet.vegsebesseg"
-                            :hatotav="fleet.hatotav"
-                            :abroncs="fleet.gumimeret"
+                    <BaseFleet :src="fleet.flotta_id" :imgalt="fleet.manufacturer + fleet.carmodel + 'képe'" :title="fleet.manufacturer === 'VW' ? 'Volkswagen ' + fleet.carmodel :
+                        fleet.manufacturer === 'Renault' ? fleet.manufacturer + ' Kangoo Z.E.'
+                            : fleet.manufacturer + ' ' + fleet.carmodel" @edit="editFleet" @delete="deleteFleet"
+                            :motor_power="fleet.motor_power"
+                            :top_speed="fleet.top_speed"
+                            :driving_range="fleet.driving_range"
+                            :abroncs="fleet.tire_size"
                             >
-                        <p>Teljesítmény: <b>{{ fleet.teljesitmeny }}</b> kW </p>
-                        <p>Végsebesség: {{ fleet.vegsebesseg }} </p>
-                        <p>Hatótáv: {{ fleet.hatotav }}</p>
-                        <p>Abroncs méret: {{ fleet.gumimeret }}</p>
+                        <p>Teljesítmény: <b>{{ fleet.motor_power }}</b> kW </p>
+                        <p>Végsebesség: {{ fleet.top_speed }} </p>
+                        <p>Hatótáv: {{ fleet.driving_range }}</p>
+                        <p>Abroncs méret: {{ fleet.tire_size }}</p>
                     </BaseFleet>
                 </div>
                 <div v-if="isEditing" class="flex flex-wrap my-12">
                     <div v-for="selectedfleet in fleet" :key="fleet.flotta_id" class="w-1/2 px-3 mb-3 cursor-pointer">
-                        <BaseFleet :src="selectedfleet.flotta_id" :imgalt="fleet.gyarto + fleet.tipus + ' képe'"
-                            :title="edita.gyarto + ' ' + selectedfleet.tipus"
-                            :teljesitmeny="selectedfleet.teljesitmeny" 
-                            :vegsebesseg="selectedfleet.vegsebesseg"
-                            :hatotav="selectedfleet.hatotav" 
-                            :abroncs="selectedfleet.gumimeret">
+                        <BaseFleet :src="selectedfleet.flotta_id" :imgalt="fleet.manufacturer + fleet.carmodel + ' képe'"
+                            :title="edita.manufacturer + ' ' + selectedfleet.carmodel"
+                            :motor_power="selectedfleet.motor_power" 
+                            :top_speed="selectedfleet.top_speed"
+                            :driving_range="selectedfleet.driving_range" 
+                            :abroncs="selectedfleet.tire_size">
                         
                         </BaseFleet>
                     </div>

@@ -16,12 +16,12 @@ class UpdateFleetRequest extends FormRequest
         return
             [
                 'id' => ["required"],
-                'gyarto' => ["required"],
-                'tipus' => ["required"],
-                'teljesitmeny' => ["required"],
-                'vegsebesseg' => ["required"],
-                'gumimeret' => ["required"],
-                'hatotav' => ["required"],
+                'manufacturer' => ["required"],
+                'carmodel' => ["required"],
+                'motor_power' => ["required"],
+                'top_speed' => ["required"],
+                'tire_size' => ["required"],
+                'driving_range' => ["required"],
             ];
     }
 }

@@ -10,21 +10,21 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->enum('szamla_tipus', ['berles', 'baleset', 'karokozas', 'toltes_buntetes']);
-            $table->foreignId('felh_id')->constrained('users')->onDelete('cascade');
+            $table->enum('bill_type', ['rental', 'accident', 'damage', 'charging_penalty']);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
             $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
 
-            $table->integer('osszeg');
-            $table->integer('megtett_tavolsag')->nullable();
-            $table->integer('parkolasi_perc')->nullable();
-            $table->integer('vezetesi_perc')->nullable();
-            $table->date('berles_kezd_datum')->nullable();
-            $table->time('berles_kezd_ido')->nullable();
-            $table->date('berles_veg_datum')->nullable();
-            $table->time('berles_veg_ido')->nullable();
-            $table->timestamp('szamla_kelt')->useCurrent();
-            $table->enum('szamla_status', ['active', 'pending', 'archiv'])->default('pending');
+            $table->integer('total_cost');
+            $table->integer('driving_distance')->nullable();
+            $table->integer('parking_minutes')->nullable();
+            $table->integer('driving_minutes')->nullable();
+            $table->date('rent_start_date')->nullable();
+            $table->time('rent_start_time')->nullable();
+            $table->date('rent_end_date')->nullable();
+            $table->time('rent_end_time')->nullable();
+            $table->timestamp('invoice_date')->useCurrent();
+            $table->enum('invoice_status', ['active', 'pending', 'archiv'])->default('pending');
         });
     }
 

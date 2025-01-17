@@ -13,11 +13,11 @@ class RegisterUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "szig_szam" => ["required"],
-            "v_nev" => ["required"],
-            "k_nev" => ["required"],
-            "szul_datum" => ["required"],
-            "telefon" => ["required"],
+            "id_card" => ["required"],
+            "firstname" => ["required"],
+            "lastname" => ["required"],
+            "birth_date" => ["required"],
+            "phone" => ["required"],
             "email" => ["required"],
 
             "user_name" => ["required", "string", "max:50", "unique:users,user_name"],

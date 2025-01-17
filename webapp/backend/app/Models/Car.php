@@ -19,24 +19,24 @@ class Car extends Model
 
     protected $fillable = [
         'id',
-        'rendszam',
-        'toltes_szaz',
-        'toltes_kw',
-        'becs_tav',
+        'plate',
+        'power_percent',
+        'power_kw',
+        'estimated_range',
         'status',
-        'kategoria',
+        'category_id',
         'felszereltseg',
         'flotta_azon',
-        'kilometerora',
-        'gyartasi_ev',
+        'odometer',
+        'manufacturing_year',
     ];
     public function fleet(): BelongsTo
     {
         return $this->belongsTo(Fleet::class, 'flotta_azon', 'id');
     }
-    public function kategoria(): BelongsTo
+    public function category_id(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'kategoria', 'kat_besorolas');
+        return $this->belongsTo(Category::class, 'category_id', 'category_class');
     }
 
     public function carstatus(): BelongsTo
@@ -62,22 +62,22 @@ class Car extends Model
         return $this->belongsToMany(User::class, 'car_user_rents', 'car_id', 'user_id')
             ->withPivot([
                 'id',
-                'nyitas_szaz',
-                'nyitas_kw',
-                'zaras_szaz',
-                'zaras_kw',
-                'berles_kezd_datum',
-                'berles_kezd_ido',
-                'berles_veg_datum',
-                'berles_veg_ido',
-                'megtett_tavolsag',
-                'parkolas_kezd',
-                'parkolas_veg',
-                'parkolasi_perc',
-                'vezetesi_perc',
-                'berles_osszeg',
+                'start_percent',
+                'start_kw',
+                'end_percent',
+                'end_kw',
+                'rent_start_date',
+                'rent_start_time',
+                'rent_end_date',
+                'rent_end_time',
+                'driving_distance',
+                'parking_start',
+                'parking_end',
+                'parking_minutes',
+                'driving_minutes',
+                'rental_cost',
                 'rentstatus',
-                'szamla_kelt',
+                'invoice_date',
             ])
             ->as('rent_details');
     }

@@ -16,9 +16,9 @@ class UserFactory extends Factory
     public function definition(): array
     {
         ### CSAK olyan személyek, AKIKNEK VAN jogosítványuk!!!
-        $szemely = Person::whereNotNull('jogos_szam')
-            ->whereNotNull('jogos_erv_kezdete')
-            ->whereNotNull('jogos_erv_vege')
+        $szemely = Person::whereNotNull('driving_license')
+            ->whereNotNull('license_start_date')
+            ->whereNotNull('license_end_date')
             ->inRandomOrder()
             ->first();
 
@@ -26,22 +26,22 @@ class UserFactory extends Factory
 
         return [
             'person_id' => $szemely->id,
-            'felh_egyenleg' => 0,
-            'jelszo_2_4' => $this->jelszoMasodikNegyedik($szemely->szemely_jelszo),
-            'user_name' => $this->felhasznaloNevGenerator($szemely->v_nev),
-            'elofiz_id' => $elofizetes->id,
-            'password'=>Hash::make($szemely->szemely_jelszo),
+            'account_balance' => 0,
+            'password_2_4' => $this->jelszoMasodikNegyedik($szemely->person_password),
+            'user_name' => $this->felhasznaloNevGenerator($szemely->firstname),
+            'sub_id' => $elofizetes->id,
+            'password'=>Hash::make($szemely->person_password),
         ];
     }
-    public function felhasznaloNevGenerator(string $V_nev): string
+    public function felhasznaloNevGenerator(string $firstname): string
     {
         do {
-            $tipusValaszto = random_int(0, 1);
+            $carmodelValaszto = random_int(0, 1);
 
             ### [Vezetéknév + Szám] ###
-            if ($tipusValaszto === 0) {
+            if ($carmodelValaszto === 0) {
                 $felhNev_vege = fake()->numberBetween(1000, 9999);
-                $keszFelhNev = $V_nev . $felhNev_vege;
+                $keszFelhNev = $firstname . $felhNev_vege;
 
                 ### [Random szó + Szám] ###
             } else {

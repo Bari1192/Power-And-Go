@@ -18,19 +18,19 @@ class RenthistoryFactory extends Factory
     {
         $auto = Car::with('fleet')->where('status', 1)->first(); // carstatus alapján SZABAD.
         do {
-            $autoKategoria = $auto->kategoria;
-            $flottaTipus = $auto->fleet;
+            $autoKategoria = $auto->category_id;
+            $flottacarmodel = $auto->fleet;
 
-            $nyitasToltesSzazalek = $auto->toltes_szaz;
-            $nyitasToltesKw = round($auto->fleet->teljesitmeny * ($nyitasToltesSzazalek / 100), 1);
+            $nyitasToltesSzazalek = $auto->power_percent;
+            $nyitasToltesKw = round($auto->fleet->motor_power * ($nyitasToltesSzazalek / 100), 1);
 
             $berlesIdotartam = $this->berlesIdotartama($autoKategoria); ## másodperc - rand_int-ből!!!
             $megtettTavolsag = $this->megtettTavolsag($berlesIdotartam, $auto);
 
-            $egyKwKilometerben = $flottaTipus->hatotav / $flottaTipus->teljesitmeny;
+            $egyKwKilometerben = $flottacarmodel->driving_range / $flottacarmodel->motor_power;
             $kwFogyasztas = round($megtettTavolsag / $egyKwKilometerben, 1);
             $zaraskoriToltesKw = max($nyitasToltesKw - $kwFogyasztas, 0);
-            $zarasToltesSzazalek = round(($zaraskoriToltesKw / $flottaTipus->teljesitmeny) * 100, 2);
+            $zarasToltesSzazalek = round(($zaraskoriToltesKw / $flottacarmodel->motor_power) * 100, 2);
 
             ## 1% alatt nem indulhat el a bérlés, ha valaki úgy zárta le az autót!
             if ($zarasToltesSzazalek >= 1.0) {
@@ -48,8 +48,8 @@ class RenthistoryFactory extends Factory
 
 
         $felhasznalo = User::inRandomOrder()->firstOrFail(); 
-        $arazas = Price::where('auto_besorolas', $auto->kategoria)
-            ->where('elofiz_azon', $felhasznalo->elofiz_id)
+        $arazas = Price::where('category_class', $auto->category_id)
+            ->where('sub_id', $felhasznalo->sub_id)
             ->first();
         $berlesKezdete = $this->berlesKezdete();
         $berlesVege = (clone $berlesKezdete)->modify("+{$berlesIdotartam} seconds");
@@ -65,43 +65,43 @@ class RenthistoryFactory extends Factory
         # Végösszeg számítása
         $berlesOsszeg = $this->berlesVegosszegSzamolas($arazas, $felhasznalo, $berlesIdotartam, $megtettTavolsag, $parkolasok, $autoKategoria, $berlesIdotartam);
 
-        # Adott autonak a flottaTipusának a hatótávja OSZTVA a teljesitményével ==> 1kw = 7.3768 km (pl.)
+        # Adott autonak a flottacarmodelának a hatótávja OSZTVA a teljesitményével ==> 1kw = 7.3768 km (pl.)
         $this->autoToltesFrissites($auto, $zarasToltesSzazalek, $zaraskoriToltesKw);
         $this->autoKmOraFrissites($auto, $megtettTavolsag);
 
         return [
             'car_id' => $auto->id,
-            'kategoria' => $auto->kategoria,
+            'category_id' => $auto->category_id,
             'user_id' => $felhasznalo->id,
-            'nyitas_szaz' => $nyitasToltesSzazalek,
-            'nyitas_kw' => $nyitasToltesKw,
-            'zaras_szaz' => $zarasToltesSzazalek,
-            'zaras_kw' => $zaraskoriToltesKw,
-            'berles_kezd_datum' => $berlesKezdete,
-            'berles_kezd_ido' => $berlesKezdete,
-            'berles_veg_datum' => $berlesVege,
-            'berles_veg_ido' => $berlesVege,
-            'megtett_tavolsag' => $megtettTavolsag,
-            'parkolas_kezd' => $parkKezdIdo,
-            'parkolas_veg' => $parkVegIdo,
-            'parkolasi_perc' => $teljesParkolasIdo,
-            'vezetesi_perc' => $vezetesIdo,
-            'berles_osszeg' => $berlesOsszeg,
-            'szamla_kelt'=>now(),
+            'start_percent' => $nyitasToltesSzazalek,
+            'start_kw' => $nyitasToltesKw,
+            'end_percent' => $zarasToltesSzazalek,
+            'end_kw' => $zaraskoriToltesKw,
+            'rent_start_date' => $berlesKezdete,
+            'rent_start_time' => $berlesKezdete,
+            'rent_end_date' => $berlesVege,
+            'rent_end_time' => $berlesVege,
+            'driving_distance' => $megtettTavolsag,
+            'parking_start' => $parkKezdIdo,
+            'parking_end' => $parkVegIdo,
+            'parking_minutes' => $teljesParkolasIdo,
+            'driving_minutes' => $vezetesIdo,
+            'rental_cost' => $berlesOsszeg,
+            'invoice_date'=>now(),
             'rentstatus' => 2,// Lezárt bérlés -> BillSeeder generáláshoz
         ];
     }
     private function autoKmOraFrissites(Car $auto, $megtettTavolsag): void
     {
-        $auto->kilometerora += $megtettTavolsag;
+        $auto->odometer += $megtettTavolsag;
         $auto->save();
     }
 
     private function autoToltesFrissites(Car $auto, float $zarasToltesSzazalek, float $zaraskoriToltesKw): void
     {
-        $auto->toltes_szaz = $zarasToltesSzazalek;
-        $auto->toltes_kw = max($zaraskoriToltesKw, 0);
-        $auto->becs_tav = round(($auto->fleet->hatotav / 100) * $auto->toltes_szaz, 1);
+        $auto->power_percent = $zarasToltesSzazalek;
+        $auto->power_kw = max($zaraskoriToltesKw, 0);
+        $auto->estimated_range = round(($auto->fleet->driving_range / 100) * $auto->power_percent, 1);
         $auto->save();
     }
 
@@ -127,23 +127,23 @@ class RenthistoryFactory extends Factory
 
     private function megtettTavolsag(int $idoKulonbseg, Car $auto): int
     {
-        $aktualisHatotav = round(($auto->fleet->hatotav / 100) * $auto->toltes_szaz);
+        $aktualisdriving_range = round(($auto->fleet->driving_range / 100) * $auto->power_percent);
         if ($idoKulonbseg <= 1800) {
-            return min(random_int(5, 10), $aktualisHatotav);
+            return min(random_int(5, 10), $aktualisdriving_range);
             ## A random gen. távot MINDIG összehasonlítjuk az aktuális hatótávval,
             ## A kisebb értéket választjuk, hogy ne "lépje túl" az akksi kapacitást.
         } elseif ($idoKulonbseg <= 3600) {
-            return min(random_int(10, 20), $aktualisHatotav);
+            return min(random_int(10, 20), $aktualisdriving_range);
         } elseif ($idoKulonbseg <= 7200) {
-            return min(random_int(10, 35), $aktualisHatotav);
+            return min(random_int(10, 35), $aktualisdriving_range);
         } elseif ($idoKulonbseg <= 14400) {
-            return min(random_int(25, 45), $aktualisHatotav);
+            return min(random_int(25, 45), $aktualisdriving_range);
         } elseif ($idoKulonbseg <= 28800) {
-            return min(random_int(35, 60), $aktualisHatotav);
+            return min(random_int(35, 60), $aktualisdriving_range);
         } elseif ($idoKulonbseg <= 86400) {
-            return min(random_int(40, 80), $aktualisHatotav);
+            return min(random_int(40, 80), $aktualisdriving_range);
         } else {
-            return min(random_int(100, 150), $aktualisHatotav);
+            return min(random_int(100, 150), $aktualisdriving_range);
         }
     }
 
@@ -202,19 +202,19 @@ class RenthistoryFactory extends Factory
     private function berlesVegosszegSzamolas(Price $arazas, $felhasznalo, int $idoKulonbseg, int $tavolsag, array $parkolasok, int $autoKategoria, $berlesIdotartam): float
     {
         $idoPerc = $idoKulonbseg / 60; ## Másodpercek átváltása percre
-        $napok = ceil($idoKulonbseg / 86400); ## Napok kiszámítása
+        $days = ceil($idoKulonbseg / 86400); ## days kiszámítása
 
-        $berlesInditasa = $arazas->berles_ind;
-        $vezPercDij = $arazas->vez_perc;
-        $parkolasPercDij = $arazas->parkolas_perc;
-        $napiKmLimit = $arazas->napi_km_limit;
-        $kmDij = $arazas->km_dij;
+        $berlesInditasa = $arazas->rental_start;
+        $vezPercDij = $arazas->driving_minutes;
+        $parkolasPercDij = $arazas->parking_minutes;
+        $napiKmLimit = $arazas->daily_km_limit;
+        $kmDij = $arazas->km_fee;
 
         $teljesParkolasIdo = array_sum(array_column($parkolasok, 'hossza_perc'));
         $vezetesPerc = max(0, $idoPerc - $teljesParkolasIdo);
 
         ## Km díj kiszámítása
-        $kmTobbseg = max(0, $tavolsag - ($napok * $napiKmLimit));
+        $kmTobbseg = max(0, $tavolsag - ($days * $napiKmLimit));
         $kmDijOsszeg = $kmTobbseg * $kmDij;
 
         ## Parkolási díj
@@ -251,7 +251,7 @@ class RenthistoryFactory extends Factory
         $alapOsszeg = $berlesInditasa + $vezetesOsszeg + $normalParkolasiOsszeg + $kmDijOsszeg;
 
         # Csak a 4-es VIP előfizetésre vonatkozzon ez!
-        if ($napok <= 1 && $felhasznalo->elofiz_id == 4) {
+        if ($days <= 1 && $felhasznalo->sub_id == 4) {
             $alapOsszeg = $alapOsszeg - $ejszakaiParkolasiOsszeg;
         } else {
             $alapOsszeg = $alapOsszeg;
@@ -259,47 +259,47 @@ class RenthistoryFactory extends Factory
 
 
         ## Ha 24 órán belüli bérlésről van szó a 2-es vagy 4-es kategóriában, legalább a napidíjat kell visszaadni
-        if ($napok <= 1 && in_array($autoKategoria, [1, 3])) {
+        if ($days <= 1 && in_array($autoKategoria, [1, 3])) {
             $minimumOsszeg = $alapOsszeg;
-            $maximumOsszeg = $arazas->napidij + $kmDijOsszeg + $berlesInditasa;
+            $maximumOsszeg = $arazas->daily_fee + $kmDijOsszeg + $berlesInditasa;
             return min($minimumOsszeg, $maximumOsszeg);
         }
-        if ($napok <= 1 && in_array($autoKategoria, [2, 4])) {
-            $minimumOsszeg = $arazas->napidij + $kmDijOsszeg + $berlesInditasa;
+        if ($days <= 1 && in_array($autoKategoria, [2, 4])) {
+            $minimumOsszeg = $arazas->daily_fee + $kmDijOsszeg + $berlesInditasa;
             return max($minimumOsszeg, $alapOsszeg);
         }
-        if (($berlesIdotartam / 60) <= 180 && $arazas->auto_besorolas == 5) {
-            $minimumOsszeg = $arazas->harom_ora_dij + $kmDijOsszeg + $berlesInditasa;
+        if (($berlesIdotartam / 60) <= 180 && $arazas->category_class == 5) {
+            $minimumOsszeg = $arazas->three_hour_fee + $kmDijOsszeg + $berlesInditasa;
             return max($minimumOsszeg, $alapOsszeg);
-        } elseif (($berlesIdotartam / 60) > 180 && $berlesIdotartam < 360 && $arazas->auto_besorolas == 5) {
-            $minimumOsszeg = $arazas->harom_ora_dij + $kmDijOsszeg + $berlesInditasa;
-            $maximumOsszeg = $arazas->hat_ora_dij + $kmDijOsszeg + $berlesInditasa;
+        } elseif (($berlesIdotartam / 60) > 180 && $berlesIdotartam < 360 && $arazas->category_class == 5) {
+            $minimumOsszeg = $arazas->three_hour_fee + $kmDijOsszeg + $berlesInditasa;
+            $maximumOsszeg = $arazas->six_hour_fee + $kmDijOsszeg + $berlesInditasa;
             return min($minimumOsszeg, $maximumOsszeg);
-        } elseif (($berlesIdotartam / 60) >= 360 && $berlesIdotartam < 720 && $arazas->auto_besorolas == 5) {
-            $minimumOsszeg = $arazas->hat_ora_dij + $kmDijOsszeg + $berlesInditasa;
-            $maximumOsszeg = $arazas->tizenketto_ora_dij + $kmDijOsszeg + $berlesInditasa;
+        } elseif (($berlesIdotartam / 60) >= 360 && $berlesIdotartam < 720 && $arazas->category_class == 5) {
+            $minimumOsszeg = $arazas->six_hour_fee + $kmDijOsszeg + $berlesInditasa;
+            $maximumOsszeg = $arazas->twelve_hour_fee + $kmDijOsszeg + $berlesInditasa;
             return min($minimumOsszeg, $maximumOsszeg);
-        } elseif (($berlesIdotartam / 60) >= 720 && $berlesIdotartam < 1440 && $arazas->auto_besorolas == 5) {
-            $minimumOsszeg = $arazas->tizenketto_ora_dij + $kmDijOsszeg + $berlesInditasa;
-            $maximumOsszeg = $arazas->napidij + $kmDijOsszeg + $berlesInditasa;
+        } elseif (($berlesIdotartam / 60) >= 720 && $berlesIdotartam < 1440 && $arazas->category_class == 5) {
+            $minimumOsszeg = $arazas->twelve_hour_fee + $kmDijOsszeg + $berlesInditasa;
+            $maximumOsszeg = $arazas->daily_fee + $kmDijOsszeg + $berlesInditasa;
             return min($minimumOsszeg, $maximumOsszeg);
         }
 
 
         ## Ha többnapos a bérlés ==> lekérjük a NapiBerles táblából annak az értékekét.
-        if ($napok > 1) {
-            $napiBerlesek = Dailyrental::where('arazas_id', $arazas->id)
-                ->where('auto_tipus', $autoKategoria)
-                ->orderBy('napok')
+        if ($days > 1) {
+            $napiBerlesek = Dailyrental::where('prices_id', $arazas->id)
+                ->where('category_class', $autoKategoria)
+                ->orderBy('days')
                 ->get();
 
             if ($napiBerlesek->isEmpty()) {
                 throw new \Exception("NapiBerles adatok nem találhatók!");
             }
 
-            $napiDijTomb = $napiBerlesek->pluck('ar')->toArray();
-            $tobbNaposDij = $napiDijTomb[$napok - 2] ?? end($napiDijTomb);
-            ## Mivel a napidíjak a 2. naptól indulnak, ezt figyelembevéve kell a $napok-2.
+            $napiDijTomb = $napiBerlesek->pluck('price')->toArray();
+            $tobbNaposDij = $napiDijTomb[$days - 2] ?? end($napiDijTomb);
+            ## Mivel a napidíjak a 2. naptól indulnak, ezt figyelembevéve kell a $days-2.
 
             ## Többnapos bérlés => alapösszeggel +napi díjas összeggel hasonlítunk
             return min($alapOsszeg, $tobbNaposDij + $kmDijOsszeg + $berlesInditasa);

@@ -16,7 +16,7 @@ class EmployeeSeeder extends Seeder
         foreach ($persons as $person) {
             // Létrehozzuk a dolgozó adatait factory segítségével
             $dolgozo = Employee::factory()->make([
-                'szemely_azon' => $person->id,
+                'person_id' => $person->id,
             ])->toArray();
 
             // Beszúrás az adatbázisba

@@ -11,13 +11,13 @@ class EmployeeResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "szemely_azon" => $this->szemely_azon,
-            "terulet" => $this->terulet,
-            "munkakor" => $this->munkakor,
-            "beosztas" => $this->beosztas,
-            "munkaber_tipus" => $this->munkaber_tipus,
-            "fizetes" => $this->fizetes,
-            "belepes_datum" => $this->belepes_datum,
+            "person_id" => $this->person_id,
+            "field" => $this->field,
+            "role" => $this->role,
+            "position" => $this->position,
+            "salary_type" => $this->salary_type,
+            "salary" => $this->salary,
+            "start_date" => $this->start_date,
         ];
     }
 }

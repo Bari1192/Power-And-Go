@@ -11,9 +11,9 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $persons = Person::whereNotNull('jogos_szam')
-                            ->whereNotNull('jogos_erv_kezdete')
-                            ->whereNotNull('jogos_erv_vege')
+        $persons = Person::whereNotNull('driving_license')
+                            ->whereNotNull('license_start_date')
+                            ->whereNotNull('license_end_date')
                             ->inRandomOrder()
                             ->limit(100)
                             ->get();
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
 
             User::factory()->create([
                 'person_id' => $szemely->id,
-                'elofiz_id' => $randomElofizetes->id, // Az előfizetés ID-t kapcsoljuk
+                'sub_id' => $randomElofizetes->id, // Az előfizetés ID-t kapcsoljuk
             ]);
         }
     }

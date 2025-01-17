@@ -13,12 +13,12 @@ return new class extends Migration
             DB::statement(
                 "CREATE OR REPLACE VIEW SzamlakCsoportositva AS
                 SELECT
-                    `bills`.`szamla_tipus` AS tipus,
+                    `bills`.`bill_type` AS carmodel,
                     COUNT(*) AS darabszam
                 FROM 
                     `bills`
                 GROUP BY 
-                    `szamla_tipus`
+                    `bill_type`
                 ORDER BY 
                     darabszam DESC"
             );

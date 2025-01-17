@@ -13,7 +13,7 @@ class RegisterControllerTest extends TestCase
     {
          # Egyedi jelszó a teszthez.
         $person = Person::factory()->make([
-            'szemely_jelszo' => '12345678',
+            'person_password' => '12345678',
         ])->toArray();
 
         # 2. Person létrehozása
@@ -25,10 +25,10 @@ class RegisterControllerTest extends TestCase
         $response = $this->post('/api/users/', [
             'person_id' => $getnewUser->id,
             'user_name' => 'Test' . fake()->regexify('[0-9]{9}'),
-            'password' => Hash::make($person['szemely_jelszo']),
-            'jelszo_2_4' => $person['szemely_jelszo'][0] . $person['szemely_jelszo'][2],
-            'felh_egyenleg' => 0,
-            'elofiz_id' => 1,
+            'password' => Hash::make($person['person_password']),
+            'password_2_4' => $person['person_password'][0] . $person['person_password'][2],
+            'account_balance' => 0,
+            'sub_id' => 1,
         ]);
         dump($response->json()); // Debugging
         $response->assertStatus(201);
@@ -40,7 +40,7 @@ class RegisterControllerTest extends TestCase
         # 4. Authentikáció
         $response = $this->postJson('/api/authenticate/', [
             "user_name" => $userData['user_name'], 
-            "password" => $person['szemely_jelszo'], # A fenti eredeti jelszó ide
+            "password" => $person['person_password'], # A fenti eredeti jelszó ide
         ]);
         $response->assertStatus(200);
         dump($response->json()); // Debugging

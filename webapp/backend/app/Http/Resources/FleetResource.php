@@ -12,12 +12,12 @@ class FleetResource extends JsonResource
         return
             [
                 'flotta_id' => $this->id,
-                'gyarto' => $this->gyarto,
-                'tipus' => $this->tipus,
-                'teljesitmeny' => $this->teljesitmeny,
-                'vegsebesseg' => $this->vegsebesseg,
-                'gumimeret' => $this->gumimeret,
-                'hatotav' => $this->hatotav,
+                'manufacturer' => $this->manufacturer,
+                'carmodel' => $this->carmodel,
+                'motor_power' => $this->motor_power,
+                'top_speed' => $this->top_speed,
+                'tire_size' => $this->tire_size,
+                'driving_range' => $this->driving_range,
             ];
     }
 }

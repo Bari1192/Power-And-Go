@@ -15,16 +15,16 @@ class Employee extends Model
     public $incrementing = true;
 
     protected $fillable = [
-        "szemely_azon",
-        "terulet",
-        "munkakor",
-        "beosztas",
-        "munkaber_tipus",
-        "fizetes",
-        "belepes_datum",
+        "person_id",
+        "field",
+        "role",
+        "position",
+        "salary_type",
+        "salary",
+        "start_date",
     ];
     public function szemely(): BelongsTo
     {
-        return $this->belongsTo(Person::class, 'szemely_azon');
+        return $this->belongsTo(Person::class, 'person_id');
     }
 }

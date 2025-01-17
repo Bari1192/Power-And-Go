@@ -12,11 +12,11 @@ class ToltesBuntetesResource extends JsonResource
         return [
             'szamla_id' => $this->id,
             'person_id' => $this->person_id,
-            'felh_id' => $this->felh_id,
-            'szamla_status' => $this->szamla_status,
-            'szamla_tipus' => "Minimum töltési ÁSZF megsértése.",
-            'osszeg' => number_format($this->osszeg, 0, '', ' '), 
-            'szamla_kelt' => date_format($this->szamla_kelt, "Y-m-d H:i:s"),
+            'user_id' => $this->user_id,
+            'invoice_status' => $this->invoice_status,
+            'bill_type' => "Minimum töltési ÁSZF megsértése.",
+            'total_cost' => number_format($this->total_cost, 0, '', ' '), 
+            'invoice_date' => date_format($this->invoice_date, "Y-m-d H:i:s"),
         ];
     }
 }

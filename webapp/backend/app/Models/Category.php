@@ -16,21 +16,21 @@ class Category extends Model
     public $timestamps = false;
     public $incrementing = true;
     protected $fillable = [
-        "kat_besorolas",
-        "teljesitmeny",
+        "category_class",
+        "motor_power",
     ];
 
 
     public function autok(): HasMany
     {
-        return $this->hasMany(Car::class, 'kategoria', 'kat_besorolas');
+        return $this->hasMany(Car::class, 'category_id', 'category_class');
     }
     public function arazasok(): HasMany
     {
-        return $this->hasMany(Price::class, 'auto_besorolas', 'id');
+        return $this->hasMany(Price::class, 'category_class', 'id');
     }
     public function napiBerlesek(): HasMany
     {
-        return $this->hasMany(Dailyrental::class, 'auto_tipus', 'id');
+        return $this->hasMany(Dailyrental::class, 'category_class', 'id');
     }
 }

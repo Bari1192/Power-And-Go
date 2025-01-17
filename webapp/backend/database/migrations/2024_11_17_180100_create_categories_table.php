@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedTinyInteger('kat_besorolas');
-            $table->unsignedTinyInteger('teljesitmeny');
+            $table->unsignedTinyInteger('category_class');
+            $table->unsignedTinyInteger('motor_power');
         });
     }
     public function down(): void

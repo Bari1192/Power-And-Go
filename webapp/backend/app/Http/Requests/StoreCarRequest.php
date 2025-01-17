@@ -13,15 +13,15 @@ class StoreCarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "rendszam" => ["required", "string", "between:7,10"],
-            "kategoria" => ["nullable", "integer", "exists:categories,kat_besorolas"],
+            "plate" => ["required", "string", "between:7,10"],
+            "category_id" => ["nullable", "integer", "exists:categories,category_class"],
             "felszereltseg" => ["nullable", "integer", "exists:equipments,id"],
             "flotta_azon" => ["nullable", "integer", "exists:fleets,id"],
-            "kilometerora" => ["nullable", "integer", "between:0,300000"],
-            "gyartasi_ev" => ["nullable", "integer", "regex:/^\d{4}$/"],
-            "toltes_szaz" => ["required", "decimal:2", "between:0,100"],
-            "toltes_kw" => ["required", "decimal:1", "between:0,500"],
-            "becs_tav" => ["required", "decimal:1", "between:0,1000"],
+            "odometer" => ["nullable", "integer", "between:0,300000"],
+            "manufacturing_year" => ["nullable", "integer", "regex:/^\d{4}$/"],
+            "power_percent" => ["required", "decimal:2", "between:0,100"],
+            "power_kw" => ["required", "decimal:1", "between:0,500"],
+            "estimated_range" => ["required", "decimal:1", "between:0,1000"],
             "status" => ["nullable", "integer", "exists:carstatus,id"],
         ];
     }

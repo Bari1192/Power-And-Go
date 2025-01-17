@@ -14,8 +14,8 @@ return new class extends Migration
                 "CREATE OR REPLACE VIEW toltes_buntetesek AS
        SELECT 
            `cars`.`id` AS `auto_azon`,
-           `cars`.`rendszam` AS `rendszam`,
-           `cars`.`toltes_szaz` AS `toltes_szazalek`,
+           `cars`.`plate` AS `plate`,
+           `cars`.`power_percent` AS `toltes_szazalek`,
            `cars`.`status` AS `allapot`
        FROM 
            `cars`
@@ -24,7 +24,7 @@ return new class extends Migration
        ON 
            `cars`.`id` = `bills`.`car_id`
        WHERE 
-           `bills`.`szamla_tipus` = 'toltes_buntetes'
+           `bills`.`bill_type` = 'charging_penalty'
        ORDER BY `cars`.`id` ASC"
             );
         }

@@ -14,21 +14,21 @@ class CarFactory extends Factory
         $gyartasiEv = fake()->numberBetween(2019, 2023);
         $flotta = $this->flottabolAutotIdAlapjan();
         $felszereltseg = Equipment::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
-        $flottaTipus = Fleet::find($flotta);
+        $flottacarmodel = Fleet::find($flotta);
         
         $toltes_szazalek = fake()->randomFloat(2, 15, 100);
-        $toltes_kw = round($flottaTipus->teljesitmeny * ($toltes_szazalek / 100), 1);
-        $becsultHatotav = round(($flottaTipus->hatotav / $flottaTipus->teljesitmeny) * $toltes_kw, 1);
+        $power_kw = round($flottacarmodel->motor_power * ($toltes_szazalek / 100), 1);
+        $becsultdriving_range = round(($flottacarmodel->driving_range / $flottacarmodel->motor_power) * $power_kw, 1);
         return [
-            'flotta_azon' => $flottaTipus->id,
-            'kategoria' => $this->katBesorolasAutomatan($flotta),
-            'rendszam' => $this->rendszamGeneralasUjRegi(),
-            'gyartasi_ev' => $gyartasiEv,
-            'kilometerora' => $this->kmOraAllasGeneralas($gyartasiEv),
+            'flotta_azon' => $flottacarmodel->id,
+            'category_id' => $this->katBesorolasAutomatan($flotta),
+            'plate' => $this->rendszamGeneralasUjRegi(),
+            'manufacturing_year' => $gyartasiEv,
+            'odometer' => $this->kmOraAllasGeneralas($gyartasiEv),
             'felszereltseg' => $felszereltseg ? $felszereltseg->id : 1,
-            'toltes_szaz' => $toltes_szazalek,
-            'toltes_kw' => $toltes_kw,
-            'becs_tav' => $becsultHatotav,
+            'power_percent' => $toltes_szazalek,
+            'power_kw' => $power_kw,
+            'estimated_range' => $becsultdriving_range,
             'status' => 1, 
         ];
     }
@@ -53,7 +53,7 @@ class CarFactory extends Factory
             throw new \Exception("Flotta nem található az ID alapján: $flotta");
         }
 
-        return match ($idAlapjanKatBesorolas->teljesitmeny) {
+        return match ($idAlapjanKatBesorolas->motor_power) {
             18 => 1,
             33 => 2,
             36 => 3,
@@ -68,13 +68,13 @@ class CarFactory extends Factory
         do {
             $rendszamUjRegi = random_int(0, 1);
             if ($rendszamUjRegi > 0) {
-                $rendszam = strtoupper(fake()->regexify('AA[A-C][A-O]-[0-9]{3}'));
+                $plate = strtoupper(fake()->regexify('AA[A-C][A-O]-[0-9]{3}'));
             } else {
-                $rendszam = strtoupper(fake()->regexify('(M|N|P|R|S|T)[A-Z]{2}-[0-9]{3}'));
+                $plate = strtoupper(fake()->regexify('(M|N|P|R|S|T)[A-Z]{2}-[0-9]{3}'));
             }
-        } while (in_array($rendszam, $generaltRendszamok));
-        $generaltRendszamok[] = $rendszam;
-        return $rendszam;
+        } while (in_array($plate, $generaltRendszamok));
+        $generaltRendszamok[] = $plate;
+        return $plate;
     }
     public function kmOraAllasGeneralas(int $gyartasiEv): int
     {

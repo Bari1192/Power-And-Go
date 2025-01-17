@@ -38,15 +38,15 @@
                 <tbody class="text-white text-lg">
                     <tr v-for="fine in fines" :key="fine.szamla_id"
                         class="text-white cursor-pointer odd:hover:bg-sky-900 even:hover:bg-sky-800 odd:bg-sky-500 even:bg-sky-600">
-                        <td class="text-center p-2 font-semibold">{{ fine.szamla_tipus }}</td>
-                        <td class="text-center p-2">{{ fine.szamla_kelt }}</td>
-                        <td class="text-center p-2 font-semibold">{{ fine.osszeg }} Ft</td>
-                        <td class="text-center text-lime-300 font-bold p-2 italic">{{ fine.szamla_status }}</td>
-                        <td class="text-center p-2">{{ fine.megtett_tavolsag }} km</td>
-                        <td class="text-center p-2">{{ timeFormat(fine.parkolasi_perc) }} </td>
-                        <td class="text-center p-2">{{ timeFormat(fine.vezetesi_perc) }} </td>
-                        <td class="text-center p-2">{{ fine.berles_kezd_datum }} <b>{{ fine.berles_kezd_ido }}</b></td>
-                        <td class="text-center p-2">{{ fine.berles_veg_datum }} <b>{{ fine.berles_veg_ido }}</b></td>
+                        <td class="text-center p-2 font-semibold">{{ fine.bill_type }}</td>
+                        <td class="text-center p-2">{{ fine.invoice_date }}</td>
+                        <td class="text-center p-2 font-semibold">{{ fine.total_cost }} Ft</td>
+                        <td class="text-center text-lime-300 font-bold p-2 italic">{{ fine.invoice_status }}</td>
+                        <td class="text-center p-2">{{ fine.driving_distance }} km</td>
+                        <td class="text-center p-2">{{ timeFormat(fine.parking_minutes) }} </td>
+                        <td class="text-center p-2">{{ timeFormat(fine.driving_minutes) }} </td>
+                        <td class="text-center p-2">{{ fine.rent_start_date }} <b>{{ fine.rent_start_time }}</b></td>
+                        <td class="text-center p-2">{{ fine.rent_end_date }} <b>{{ fine.rent_end_time }}</b></td>
                     </tr>
                 </tbody>
             </table>
