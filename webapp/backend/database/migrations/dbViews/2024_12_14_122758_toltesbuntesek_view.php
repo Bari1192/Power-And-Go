@@ -13,9 +13,9 @@ return new class extends Migration
             DB::statement(
                 "CREATE OR REPLACE VIEW toltes_buntetesek AS
        SELECT 
-           `cars`.`id` AS `auto_azon`,
+           `cars`.`id` AS `car_id`,
            `cars`.`plate` AS `plate`,
-           `cars`.`power_percent` AS `toltes_szazalek`,
+           `cars`.`power_percent` AS `toltes`,
            `cars`.`status` AS `allapot`
        FROM 
            `cars`

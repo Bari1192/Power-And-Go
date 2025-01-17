@@ -11,13 +11,11 @@ return new class extends Migration
 
         if (Schema::hasTable('car_user_rents')) {
             DB::statement(
-                "CREATE OR REPLACE 
-                VIEW user_rents_db AS
+                "CREATE OR REPLACE VIEW user_rents_db AS
        SELECT 
             COUNT(`car_user_rents`.`user_id`) AS `rents_number`,
            `user_id` AS `person_id`,
-           `persons`.`firstname` AS `first_name`,
-           `persons`.`lastname` AS `last_name`
+           CONCAT(`persons`.`firstname`,' ',`persons`.`lastname`) AS renter
        FROM 
            `car_user_rents`
        JOIN 
@@ -25,8 +23,9 @@ return new class extends Migration
        ON 
            `car_user_rents`.`user_id` = `persons`.`id`
         GROUP BY 
-            `car_user_rents`.`user_id`, `persons`.`firstname`, `persons`.`lastname`
-       ORDER BY `rents_number` DESC"
+            `car_user_rents`.`user_id`,
+            `persons`.`firstname`, `persons`.`lastname`
+       ORDER BY `rents_number` DESC;"
             );
         }
     }

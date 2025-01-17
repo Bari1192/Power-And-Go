@@ -35,14 +35,9 @@ return new class extends Migration
             $table->integer('rental_cost')->nullable();
             $table->timestamp('invoice_date')->now();
 
-            // Státusz: folyamatban (0) vagy lezárt (1)
-            $table->boolean('rentstatus')->default(0);
+            $table->unsignedTinyInteger('rentstatus')->default(1); #Alapból elérhető bérlésre.
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('car_user_rents');

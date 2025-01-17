@@ -312,8 +312,8 @@ export default {
         const updatePayload = {
           plate: this.car.plate,
           category_id: parseInt(this.car.category_id, 10),
-          felszereltseg: parseInt(this.car.felszereltseg, 10),
-          flotta_azon: parseInt(this.car.flotta_azon, 10),
+          equipment_class: parseInt(this.car.equipment_class, 10),
+          fleet_id: parseInt(this.car.fleet_id, 10),
           odometer: parseInt(this.car.odometer),
           manufacturing_year: parseInt(this.car.manufacturing_year, 10),
           power_percent: parseFloat(this.car.power_percent),

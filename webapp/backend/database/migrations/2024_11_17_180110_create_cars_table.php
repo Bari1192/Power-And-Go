@@ -17,8 +17,8 @@ return new class extends Migration {
 
             $table->foreignId('status')->constrained('carstatus','id')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('categories', 'id')->onDelete('cascade');
-            $table->foreignId('felszereltseg')->nullable()->constrained('equipments', 'id')->onDelete('set null');
-            $table->foreignId('flotta_azon')->nullable()->constrained('fleets', 'id')->onDelete('cascade');
+            $table->foreignId('equipment_class')->constrained('equipments', 'id')->onDelete('cascade');
+            $table->foreignId('fleet_id')->constrained('fleets', 'id')->onDelete('cascade');
 
             $table->integer('odometer');
             $table->year('manufacturing_year');

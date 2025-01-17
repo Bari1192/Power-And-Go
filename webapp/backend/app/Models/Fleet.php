@@ -26,6 +26,6 @@ class Fleet extends Model
     ];
     public function cars(): HasMany
     {
-        return $this->hasMany(Car::class, 'flotta_azon', 'id');
+        return $this->hasMany(Car::class, 'fleet_id', 'id');
     }
 }

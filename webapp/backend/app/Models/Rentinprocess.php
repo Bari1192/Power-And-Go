@@ -19,7 +19,7 @@ class Rentinprocess extends Model
     ];
     public function auto()
     {
-        return $this->belongsTo(Car::class, 'auto_azon');
+        return $this->belongsTo(Car::class, 'car_id');
     }
 
     public function kategoriak()

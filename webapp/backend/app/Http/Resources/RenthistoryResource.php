@@ -12,7 +12,7 @@ class RenthistoryResource extends JsonResource
         return
             [
                 "id" => $this->id,
-                "auto_azon" => $this->auto_azon,
+                "car_id" => $this->car_id,
                 "person_id" => $this->person_id,
                 "start_percent" => $this->start_percent,
                 "start_kw" => $this->start_kw,

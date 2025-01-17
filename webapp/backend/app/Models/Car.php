@@ -25,14 +25,14 @@ class Car extends Model
         'estimated_range',
         'status',
         'category_id',
-        'felszereltseg',
-        'flotta_azon',
+        'equipment_class',
+        'fleet_id',
         'odometer',
         'manufacturing_year',
     ];
     public function fleet(): BelongsTo
     {
-        return $this->belongsTo(Fleet::class, 'flotta_azon', 'id');
+        return $this->belongsTo(Fleet::class, 'fleet_id', 'id');
     }
     public function category_id(): BelongsTo
     {
@@ -50,7 +50,7 @@ class Car extends Model
     }
     public function szamlak(): HasMany
     {
-        return $this->hasMany(Bill::class, 'auto_azon', 'id');
+        return $this->hasMany(Bill::class, 'car_id', 'id');
     }
     public function tickets(): HasMany
     {

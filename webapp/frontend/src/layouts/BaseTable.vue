@@ -24,7 +24,7 @@
           <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.power_percent }} %</td>
           <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.estimated_range }}</td>
           <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.status }}</td>
-          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.felszereltseg }} szintű</td>
+          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.equipment_class }} szintű</td>
         </tr>
       </tbody>
     </table>

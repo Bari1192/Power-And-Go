@@ -16,7 +16,7 @@ class Renthistory extends Model
 
     protected $fillable = [
         "id",
-        "auto_azon",
+        "car_id",
         "auto_kat",
         "person_id",
         "start_percent",
@@ -37,7 +37,7 @@ class Renthistory extends Model
 
     public function auto()
     {
-        return $this->belongsTo(Car::class, 'auto_azon', 'id');
+        return $this->belongsTo(Car::class, 'car_id', 'id');
     }
 
     public function kategoriak()

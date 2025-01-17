@@ -13,19 +13,19 @@ class CarFactory extends Factory
     {
         $gyartasiEv = fake()->numberBetween(2019, 2023);
         $flotta = $this->flottabolAutotIdAlapjan();
-        $felszereltseg = Equipment::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
+        $equipment_class = Equipment::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
         $flottacarmodel = Fleet::find($flotta);
         
         $toltes_szazalek = fake()->randomFloat(2, 15, 100);
         $power_kw = round($flottacarmodel->motor_power * ($toltes_szazalek / 100), 1);
         $becsultdriving_range = round(($flottacarmodel->driving_range / $flottacarmodel->motor_power) * $power_kw, 1);
         return [
-            'flotta_azon' => $flottacarmodel->id,
+            'fleet_id' => $flottacarmodel->id,
             'category_id' => $this->katBesorolasAutomatan($flotta),
             'plate' => $this->rendszamGeneralasUjRegi(),
             'manufacturing_year' => $gyartasiEv,
             'odometer' => $this->kmOraAllasGeneralas($gyartasiEv),
-            'felszereltseg' => $felszereltseg ? $felszereltseg->id : 1,
+            'equipment_class' => $equipment_class ? $equipment_class->id : 1,
             'power_percent' => $toltes_szazalek,
             'power_kw' => $power_kw,
             'estimated_range' => $becsultdriving_range,

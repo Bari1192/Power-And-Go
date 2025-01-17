@@ -22,7 +22,7 @@
                         <td class="py-2 text-sky-300 font-semibold">{{ car.car_id }}</td>
                         <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.odometer }}</td>
                         <td class="py-2 text-sky-300 font-semibold">{{ car.manufacturing_year }}</td>
-                        <td class="py-2 text-sky-300 font-semibold">{{ car.felszereltseg }}</td>
+                        <td class="py-2 text-sky-300 font-semibold">{{ car.equipment_class }}</td>
                         <td class="py-2 text-sky-300 font-semibold">{{ car.flotta_adatok.flotta_id }}</td>
                         <td class="py-2 text-sky-300 font-semibold">{{ car.category_id }}</td>
                     </tr>

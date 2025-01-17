@@ -20,7 +20,7 @@ return new class extends Migration
                 GROUP BY 
                     `bill_type`
                 ORDER BY 
-                    darabszam DESC"
+                    darabszam DESC;"
             );
         }
     }

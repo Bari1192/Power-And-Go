@@ -25,8 +25,8 @@ class CarControllerTest extends TestCase
             "estimated_range" => 34.6,
             "status" => 6,
             "category_id" => 3,
-            "felszereltseg" => 3,
-            "flotta_azon" => 3,
+            "equipment_class" => 3,
+            "fleet_id" => 3,
             "odometer" => 28252,
             "manufacturing_year" => "2023",
             "carmodel" => "e-up!"
@@ -52,8 +52,8 @@ class CarControllerTest extends TestCase
             "estimated_range" => 34.6,
             "status" => 6,
             "category_id" => 3,
-            "felszereltseg" => 3,
-            "flotta_azon" => 3,
+            "equipment_class" => 3,
+            "fleet_id" => 3,
             "odometer" => 28252,
             "manufacturing_year" => "2023",
         ];

@@ -13,7 +13,7 @@ class CarWithUsersResource extends JsonResource
             'car_id' => $this->id,
             'plate' => $this->plate,
             'category_id' => $this->category_id,
-            'felszereltseg' => $this->felszereltseg,
+            'equipment_class' => $this->equipment_class,
             'odometer' => number_format($this->odometer, 0, '', ' '),
             'manufacturer' => $this->whenLoaded('fleet')->manufacturer,
             'carmodel' => $this->whenLoaded('fleet')->carmodel,
