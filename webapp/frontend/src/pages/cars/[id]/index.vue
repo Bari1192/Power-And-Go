@@ -15,7 +15,7 @@
 
       <!-- TISZTASÁG BEJELENTÉSI MODEL -->
       <div v-if="cleanreport" class="bg-sky-950 border-4 border-sky-700 rounded-lg mt-10 p-4">
-        <BaseReportCard :carId="car.car_id" :lastRenter="carRentHistory.berlok[0].user"
+        <BaseReportCard :carId="car.car_id" :lastRenter="carRentHistory.renters[0].user"
           @submit-success="handleFormSubmit" />
       </div>
 
@@ -26,7 +26,7 @@
 
       <!-- accident BEJELENTÉSI KOMPONENS -->
       <div v-if="accidentReport">
-        <CarAccidentReport :lastRenter="carRentHistory.berlok[0].user" @submit="submitAccidentReport" />
+        <CarAccidentReport :lastRenter="carRentHistory.renters[0].user" @submit="submitAccidentReport" />
       </div>
 
       <h1 class="text-5xl font-bold text-sky-100 italic mb-4" :style="{
@@ -126,7 +126,7 @@
                 </tr>
               </thead>
               <tbody class="p-8">
-                <tr v-for="rent in carRentHistory.berlok" :key="rent.berles_id"
+                <tr v-for="rent in carRentHistory.renters" :key="rent.rent_id"
                   class="odd:bg-amber-50 even:bg-yellow-50 even:border-b-4 even:border-t-4 even:border-lime-400 text-center text-lg font-semibold text-sky-900">
                   <td class="mx-auto py-2"><router-link to=""> {{ rent.user }} </router-link></td>
                   <td class="mx-auto py-2">{{ rent.rent_start_date + " " + rent.rent_start_time }}</td>
@@ -165,12 +165,12 @@
       </div>
       <transition name="fade-slide">
         <div v-if="rentBillOpen">
-          <div v-for="fine in rentBillFees" :key="fine.szamla_azon">
-            <BaseCard class="cursor-pointer" :class="rentBillDetailsStates[fine.szamla_azon] ? 'min-h-full' : 'h-10 md:h-10 lg:h-14 xl:h-16'"
+          <div v-for="fine in rentBillFees" :key="fine.id">
+            <BaseCard class="cursor-pointer" :class="rentBillDetailsStates[fine.id] ? 'min-h-full' : 'h-10 md:h-10 lg:h-14 xl:h-16'"
               :title="fine.bill_type === 'charging_penalty' ? 'Akkumulátor lemerítési & szállítási pótdíj - ' + fine.total_cost : fine.bill_type"
-              @click="toggleBillDetails(fine.szamla_azon)">
-              <div class="cursor-default grid grid-cols-3 gap-2 mx-1" v-if="rentBillDetailsStates[fine.szamla_azon]">
-                <p><b>Számla sorszáma: </b><br><i class="text-lime-500">{{ fine.szamla_azon }}</i></p>
+              @click="toggleBillDetails(fine.id)">
+              <div class="cursor-default grid grid-cols-3 gap-2 mx-1" v-if="rentBillDetailsStates[fine.id]">
+                <p><b>Számla sorszáma: </b><br><i class="text-lime-500">{{ fine.id }}</i></p>
                 <p class="text-center"> <b>Kiállítva:</b> <br><i class="text-lime-500">{{ fine.invoice_date }}</i></p>
                 <p class="text-right"><b>Bérlés kezdete:</b><br><i class="text-lime-500">{{ fine.rent_start_date }}
                     {{ fine.rent_start_time }}</i></p>
@@ -263,7 +263,7 @@ export default {
     const feesResponse = await http.get(`/bills/${this.$route.params.id}/fees`);
     this.rentBillFees = feesResponse.data.data;
     this.rentBillFees.forEach((fine) => {
-      this.$set(this.rentBillDetailsStates, fine.szamla_azon, false);
+      this.$set(this.rentBillDetailsStates, fine.id, false);
     });
 
   },
@@ -300,9 +300,9 @@ export default {
       this.rentBillOpen = !this.rentBillOpen;
     },
 
-    toggleBillDetails(szamla_azon) {
-      this.rentBillDetailsStates[szamla_azon] =
-        !this.rentBillDetailsStates[szamla_azon];
+    toggleBillDetails(id) {
+      this.rentBillDetailsStates[id] =
+        !this.rentBillDetailsStates[id];
     },
 
     async handleFormSubmit(data) {

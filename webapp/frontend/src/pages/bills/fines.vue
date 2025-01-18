@@ -14,9 +14,9 @@
                     </tr>
                 </thead>
                 <tbody class="text-white text-lg">
-                    <tr v-for="fine in fines" :key="fine.szamla_id"
+                    <tr v-for="fine in fines" :key="fine.id"
                         class="text-white cursor-pointer odd:hover:bg-sky-900 even:hover:bg-sky-800 odd:bg-sky-500 even:bg-sky-600">
-                        <td class="text-center p-2">{{ fine.szamla_id }}</td>
+                        <td class="text-center p-2">{{ fine.id }}</td>
                         <td class="text-center p-2">{{ fine.person_id }}</td>
                         <td class="text-center p-2">{{ fine.user_id }}</td>
                         <td class="text-center p-2 italic text-lime-300 font-bold">{{ fine.invoice_status }}</td>

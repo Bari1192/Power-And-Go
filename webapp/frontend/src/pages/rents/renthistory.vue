@@ -34,7 +34,7 @@
 
             </div>
             <div class="col text-white col w-3/4  mx-auto text-justify">
-                <p class="my-3 text-xl text-lime-400 font-bold">Kedves {{ rent.felhasznalo.szemely.lastname }}!</p>
+                <p class="my-3 text-xl text-lime-400 font-bold">Kedves {{ rent.user.person.lastname }}!</p>
                 <p class="my-3 font-bold ">Köszönjük, hogy a PowerAndGo e-carsharinget választottad!</p>
 
                 <!-- "Keret" kezdete -->

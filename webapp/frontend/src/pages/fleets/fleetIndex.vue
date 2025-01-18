@@ -9,8 +9,8 @@
             <div class="m-auto d-flex justify-center border-b-4 border-sky-300 w-2/3 "></div>
 
             <div class="flex flex-wrap my-12">
-                <div v-for="fleet in fleets" :key="fleet.flotta_id" class="w-1/2 px-3 mb-3 cursor-pointer">
-                    <BaseFleet :src="fleet.flotta_id" :imgalt="fleet.manufacturer + fleet.carmodel + 'képe'" :title="fleet.manufacturer === 'VW' ? 'Volkswagen ' + fleet.carmodel :
+                <div v-for="fleet in fleets" :key="fleet.id" class="w-1/2 px-3 mb-3 cursor-pointer">
+                    <BaseFleet :src="fleet.id" :imgalt="fleet.manufacturer + fleet.carmodel + 'képe'" :title="fleet.manufacturer === 'VW' ? 'Volkswagen ' + fleet.carmodel :
                         fleet.manufacturer === 'Renault' ? fleet.manufacturer + ' Kangoo Z.E.'
                             : fleet.manufacturer + ' ' + fleet.carmodel" @edit="editFleet" @delete="deleteFleet"
                             :motor_power="fleet.motor_power"
@@ -25,8 +25,8 @@
                     </BaseFleet>
                 </div>
                 <div v-if="isEditing" class="flex flex-wrap my-12">
-                    <div v-for="selectedfleet in fleet" :key="fleet.flotta_id" class="w-1/2 px-3 mb-3 cursor-pointer">
-                        <BaseFleet :src="selectedfleet.flotta_id" :imgalt="fleet.manufacturer + fleet.carmodel + ' képe'"
+                    <div v-for="selectedfleet in fleet" :key="fleet.id" class="w-1/2 px-3 mb-3 cursor-pointer">
+                        <BaseFleet :src="selectedfleet.id" :imgalt="fleet.manufacturer + fleet.carmodel + ' képe'"
                             :title="edita.manufacturer + ' ' + selectedfleet.carmodel"
                             :motor_power="selectedfleet.motor_power" 
                             :top_speed="selectedfleet.top_speed"
@@ -65,9 +65,9 @@ export default {
         this.fleets = resp.data.data;
     },
     methods: {
-        async updateFleet(flotta_id, updatedData) {
+        async updateFleet(id, updatedData) {
             try {
-                const response = await http.put(`/fleets/${flotta_id}`, updatedData);
+                const response = await http.put(`/fleets/${id}`, updatedData);
                 if (response.status === 200) {
                     alert('A módosítás sikeres!');
                     this.fetchFleets();
@@ -76,13 +76,13 @@ export default {
                 alert('Hiba történt a mentés során: ' + error.response.data.message);
             }
         },
-        async deleteFleet(flotta_id) {
+        async deleteFleet(id) {
             if (confirm('Biztosan törölni szeretné?')) {
                 try {
-                    const response = await http.delete(`/fleets/${flotta_id}`);
+                    const response = await http.delete(`/fleets/${id}`);
                     if (response.status === 200) {
                         alert('A törlés sikeres!');
-                        this.fleets = this.fleets.filter(fleet => fleet.flotta_id !== flotta_id);
+                        this.fleets = this.fleets.filter(fleet => fleet.id !== id);
                     }
                 } catch (error) {
                     alert('Törlési hiba: ' + error.response.data.message);

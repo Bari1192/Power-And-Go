@@ -10,11 +10,11 @@ class BillResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "szamla_azon"=>$this->id,
+            "id"=>$this->id,
             "user_id" => $this->user_id,
             "username"=>$this->whenLoaded('users')->user_name,
             "person_id" => $this->person_id,
-            "szemely"=>$this->whenLoaded('persons')->firstname.' '.$this->whenLoaded('persons')->lastname,
+            "person"=>$this->whenLoaded('persons')->firstname.' '.$this->whenLoaded('persons')->lastname,
             "car_id" => $this->car_id,
             "rent_start_date" => $this->rent_start_date,
             "rent_start_time" => $this->rent_start_time,

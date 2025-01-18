@@ -16,10 +16,10 @@ class EmployeeFactory extends Factory
         $munkaido = $role === 'Alvállalkozói flottakezelő' ? 'hourly' : 'fix';
         $salary = $this->fizetesGeneralas($position, $munkaido);
 
-        $szemely = Person::inRandomOrder()->first();
+        $person = Person::inRandomOrder()->first();
 
         return [
-            'person_id' => $szemely->id,
+            'person_id' => $person->id,
             'field' => $field,
             'role' => $role,
             'position' => $position,

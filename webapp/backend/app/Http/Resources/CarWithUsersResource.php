@@ -17,9 +17,9 @@ class CarWithUsersResource extends JsonResource
             'odometer' => number_format($this->odometer, 0, '', ' '),
             'manufacturer' => $this->whenLoaded('fleet')->manufacturer,
             'carmodel' => $this->whenLoaded('fleet')->carmodel,
-            'berlok' => $this->users->map(function ($user) {
+            'renters' => $this->users->map(function ($user) {
                 return [
-                    'berles_id' => $user->rent_details->id,
+                    'rent_id' => $user->rent_details->id,
                     'user' => $user->user_name,
                     
                     // 'password_2_4' => $user->password_2_4,
@@ -36,7 +36,7 @@ class CarWithUsersResource extends JsonResource
                     'end_kw' => $user->rent_details->end_kw,
                     'driving_distance' => $user->rent_details->driving_distance,
                     'rental_cost' => number_format($user->rent_details->rental_cost, 0, '', ' '),
-                    'parkolas' => $user->rent_details->parking_minutes,
+                    'parking' => $user->rent_details->parking_minutes,
                     'invoice_date' => $user->rent_details->invoice_date,
                 ];
             }),

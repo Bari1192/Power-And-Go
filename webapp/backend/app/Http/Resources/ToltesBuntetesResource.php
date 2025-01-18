@@ -10,7 +10,7 @@ class ToltesBuntetesResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'szamla_id' => $this->id,
+            'id' => $this->id,
             'person_id' => $this->person_id,
             'user_id' => $this->user_id,
             'invoice_status' => $this->invoice_status,

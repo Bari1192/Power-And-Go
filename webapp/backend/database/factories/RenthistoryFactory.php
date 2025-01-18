@@ -47,9 +47,9 @@ class RenthistoryFactory extends Factory
         } while (true);
 
 
-        $felhasznalo = User::inRandomOrder()->firstOrFail(); 
+        $user = User::inRandomOrder()->firstOrFail(); 
         $arazas = Price::where('category_class', $auto->category_id)
-            ->where('sub_id', $felhasznalo->sub_id)
+            ->where('sub_id', $user->sub_id)
             ->first();
         $berlesKezdete = $this->berlesKezdete();
         $berlesVege = (clone $berlesKezdete)->modify("+{$berlesIdotartam} seconds");
@@ -63,7 +63,7 @@ class RenthistoryFactory extends Factory
         $parkVegIdo = !empty($parkolasok) ? end($parkolasok)['veg'] : null;
 
         # Végösszeg számítása
-        $berlesOsszeg = $this->berlesVegosszegSzamolas($arazas, $felhasznalo, $berlesIdotartam, $megtettTavolsag, $parkolasok, $autoKategoria, $berlesIdotartam);
+        $berlesOsszeg = $this->berlesVegosszegSzamolas($arazas, $user, $berlesIdotartam, $megtettTavolsag, $parkolasok, $autoKategoria, $berlesIdotartam);
 
         # Adott autonak a flottacarmodelának a hatótávja OSZTVA a teljesitményével ==> 1kw = 7.3768 km (pl.)
         $this->autoToltesFrissites($auto, $zarasToltesSzazalek, $zaraskoriToltesKw);
@@ -72,7 +72,7 @@ class RenthistoryFactory extends Factory
         return [
             'car_id' => $auto->id,
             'category_id' => $auto->category_id,
-            'user_id' => $felhasznalo->id,
+            'user_id' => $user->id,
             'start_percent' => $nyitasToltesSzazalek,
             'start_kw' => $nyitasToltesKw,
             'end_percent' => $zarasToltesSzazalek,
@@ -199,7 +199,7 @@ class RenthistoryFactory extends Factory
         return $parkolasok;
     }
 
-    private function berlesVegosszegSzamolas(Price $arazas, $felhasznalo, int $idoKulonbseg, int $tavolsag, array $parkolasok, int $autoKategoria, $berlesIdotartam): float
+    private function berlesVegosszegSzamolas(Price $arazas, $user, int $idoKulonbseg, int $tavolsag, array $parkolasok, int $autoKategoria, $berlesIdotartam): float
     {
         $idoPerc = $idoKulonbseg / 60; ## Másodpercek átváltása percre
         $days = ceil($idoKulonbseg / 86400); ## days kiszámítása
@@ -220,9 +220,9 @@ class RenthistoryFactory extends Factory
         ## Parkolási díj
         $ejszakaiParkolasIdeje = 0;
         $normalParkolasIdeje = 0;
-        foreach ($parkolasok as $parkolas) {
-            $kezdIdo = new DateTime($parkolas['kezd']);
-            $vegIdo = new DateTime($parkolas['veg']);
+        foreach ($parkolasok as $parking) {
+            $kezdIdo = new DateTime($parking['kezd']);
+            $vegIdo = new DateTime($parking['veg']);
 
             $ejszakaiParkKezd = new DateTime($kezdIdo->format('Y-m-d') . ' 22:00:00');
             $ejszakaiParkVeg = new DateTime($vegIdo->format('Y-m-d') . ' 07:00:00');
@@ -251,7 +251,7 @@ class RenthistoryFactory extends Factory
         $alapOsszeg = $berlesInditasa + $vezetesOsszeg + $normalParkolasiOsszeg + $kmDijOsszeg;
 
         # Csak a 4-es VIP előfizetésre vonatkozzon ez!
-        if ($days <= 1 && $felhasznalo->sub_id == 4) {
+        if ($days <= 1 && $user->sub_id == 4) {
             $alapOsszeg = $alapOsszeg - $ejszakaiParkolasiOsszeg;
         } else {
             $alapOsszeg = $alapOsszeg;

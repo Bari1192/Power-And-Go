@@ -39,14 +39,14 @@ class BillSeeder extends Seeder
 
         foreach ($lezartBerlesek as $rental) {
             // Lekérjük a user és car adatokat a kapcsolatokból
-            $felhasznalo = User::find($rental->user_id);
+            $user = User::find($rental->user_id);
             $auto = Car::find($rental->car_id);
 
             // Számla adatok generálása
             $szamlaAdatok[] = [
                 'bill_type' => 'rental',
-                'user_id' => $felhasznalo->id,
-                'person_id' => $felhasznalo->person_id,
+                'user_id' => $user->id,
+                'person_id' => $user->person_id,
                 'car_id' => $auto->id,
                 'rent_start_date' => $rental->rent_start_date,
                 'rent_start_time' => $rental->rent_start_time,
@@ -75,8 +75,8 @@ class BillSeeder extends Seeder
             if (isset($kategoriak[$autoKategoria]) && $zarasToltesSzazalek < $kategoriak[$autoKategoria]['min_toltes']) {
                 $buntetesAdatok[] = [
                     'bill_type' => 'charging_penalty',
-                    'user_id' => $felhasznalo->id,
-                    'person_id' => $felhasznalo->person_id,
+                    'user_id' => $user->id,
+                    'person_id' => $user->person_id,
                     'car_id' => $auto->id,
                     'rent_start_date' => $rental->rent_start_date,
                     'rent_start_time' => $rental->rent_start_time,

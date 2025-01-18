@@ -16,7 +16,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         ### CSAK olyan személyek, AKIKNEK VAN jogosítványuk!!!
-        $szemely = Person::whereNotNull('driving_license')
+        $person = Person::whereNotNull('driving_license')
             ->whereNotNull('license_start_date')
             ->whereNotNull('license_end_date')
             ->inRandomOrder()
@@ -25,12 +25,12 @@ class UserFactory extends Factory
         $elofizetes = Subscription::inRandomOrder()->first();
 
         return [
-            'person_id' => $szemely->id,
+            'person_id' => $person->id,
             'account_balance' => 0,
-            'password_2_4' => $this->jelszoMasodikNegyedik($szemely->person_password),
-            'user_name' => $this->felhasznaloNevGenerator($szemely->firstname),
+            'password_2_4' => $this->jelszoMasodikNegyedik($person->person_password),
+            'user_name' => $this->felhasznaloNevGenerator($person->firstname),
             'sub_id' => $elofizetes->id,
-            'password'=>Hash::make($szemely->person_password),
+            'password'=>Hash::make($person->person_password),
         ];
     }
     public function felhasznaloNevGenerator(string $firstname): string

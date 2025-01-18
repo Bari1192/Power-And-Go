@@ -131,7 +131,7 @@ class CarControllerTest extends TestCase
         $data=$response->json('data');
 
         $this->assertNotEmpty($data,"Nem érkezett adat a végpontról / üres!");
-        $this->assertArrayHasKey('berlok',$data,'A bérlők nem töltődtek be!');
-        $this->assertNotEmpty($data['berlok'], 'a `berlok` tömb üresen érkezett vissza!. ');
+        $this->assertArrayHasKey('renters',$data,'A bérlők nem töltődtek be!');
+        $this->assertNotEmpty($data['renters'], 'a `renters` tömb üresen érkezett vissza!. ');
     }
 }

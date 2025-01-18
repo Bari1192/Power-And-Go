@@ -6,6 +6,7 @@ use App\Http\Requests\StorePersonRequest;
 use App\Http\Requests\UpdatePersonRequest;
 use App\Http\Resources\PersonResource;
 use App\Models\Person;
+use App\Rules\TenYearsDifferenceInDrivingLicence;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
@@ -20,8 +21,8 @@ class PersonController extends Controller
     public function store(StorePersonRequest $request)
     {
         $data = $request->validated();
-        $szemely = Person::create($data);
-        return new PersonResource($szemely);
+        $person = Person::create($data);
+        return new PersonResource($person);
     }
 
     public function show(Person $person)
@@ -31,12 +32,12 @@ class PersonController extends Controller
 
     public function update(UpdatePersonRequest $request, Person $person)
     {
-        $data=$request->validated();
+        $data = $request->validated();
         $person->update($data);
         return new PersonResource($person);
     }
 
-    public function destroy(Person $person):Response
+    public function destroy(Person $person): Response
     {
         return ($person->delete()) ? response()->noContent() : abort(500);
     }

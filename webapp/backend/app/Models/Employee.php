@@ -23,7 +23,7 @@ class Employee extends Model
         "salary",
         "start_date",
     ];
-    public function szemely(): BelongsTo
+    public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class, 'person_id');
     }

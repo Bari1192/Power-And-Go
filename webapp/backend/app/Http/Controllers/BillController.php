@@ -10,11 +10,13 @@ use App\Models\Car;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
+use function PHPSTORM_META\map;
+
 class BillController extends Controller
 {
     public function index(): JsonResource
     {
-        $bills = Bill::with("cars")->get();
+        $bills = Bill::with(['cars', 'users', 'persons'])->get();
         return BillResource::collection($bills);
     }
     public function store(StoreBillRequest $request)
@@ -25,7 +27,7 @@ class BillController extends Controller
     }
     public function show(Bill $bill): JsonResource
     {
-        $bill->load('cars');
+        $bill->load(['cars', 'users', 'persons']);
         return new BillResource($bill);
     }
     public function update(UpdateBillRequest $request, Bill $bill)
@@ -39,12 +41,13 @@ class BillController extends Controller
     {
         return ($bill->delete()) ? response()->noContent() : abort(500);
     }
+
     public function carFees(Bill $bills, Car $car): JsonResource
     {
         $bills = Bill::where("car_id", $car->id)
             ->where('bill_type', 'charging_penalty')
-            ->get();
-        $bills->load(['persons','users']);
+            ->get()
+            ->load(['persons', 'users']);
         return BillResource::collection($bills);
     }
 }
