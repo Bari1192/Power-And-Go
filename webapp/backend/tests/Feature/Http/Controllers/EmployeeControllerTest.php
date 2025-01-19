@@ -5,8 +5,6 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Employee;
 use Tests\TestCase;
 
-use function PHPUnit\Framework\assertNotEmpty;
-
 class EmployeeControllerTest extends TestCase
 {
     public function test_can_get_all_employee_data()

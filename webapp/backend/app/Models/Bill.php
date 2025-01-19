@@ -15,17 +15,21 @@ class Bill extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'bill_type',
-        'total_cost',
-        'driving_distance',
-        'parking_minutes',
-        'driving_minutes',
-        'rent_start_date',
-        'rent_start_time',
-        'rent_end_date',
-        'rent_end_time',
-        'invoice_date',
-        'invoice_status',
+        "id",
+        "user_id",
+        "person_id",
+        "car_id",
+        "rent_start_date",
+        "rent_start_time",
+        "rent_end_date",
+        "rent_end_time",
+        "driving_distance",
+        "parking_minutes",
+        "driving_minutes",
+        "total_cost",
+        "bill_type",
+        "invoice_date",
+        "invoice_status",
     ];
     public function cars(): BelongsTo
     {

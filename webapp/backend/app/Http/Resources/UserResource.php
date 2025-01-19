@@ -12,6 +12,7 @@ class UserResource extends JsonResource
     {
             return [
                 'user_id' => $this->id,
+                'person_id'=>$this->whenLoaded('person',$this->person_id),
                 'user_name' => $this->user_name,
             ];
     }
