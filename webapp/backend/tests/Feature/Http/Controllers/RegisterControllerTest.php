@@ -26,7 +26,7 @@ class RegisterControllerTest extends TestCase
             'person_id' => $getnewUser->id,
             'user_name' => 'Test' . fake()->regexify('[0-9]{9}'),
             'password' => Hash::make($person['person_password']),
-            'password_2_4' => $person['person_password'][0] . $person['person_password'][2],
+            'password_2_4' => $person['person_password'][1] . $person['person_password'][3],
             'account_balance' => 0,
             'sub_id' => 1,
         ]);

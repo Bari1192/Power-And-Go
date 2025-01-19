@@ -24,7 +24,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('bills/filter/{type}', [BillController::class, 'filter']); # Csak token-nel + jogosultsággal!
 // Route::get('bills/filter/{type}', [BillController::class, 'filter'])->middleware('auth:sanctum'); # Csak token-nel + jogosultsággal!
 
 Route::get('cars/{car}/bills', [CarController::class, 'filterCarFines']);
@@ -37,16 +36,16 @@ Route::get('/googlemapsapi', [GoogleMapsController::class, 'getApiUrl']);   ## E
 Route::get('/geocode', [GoogleMapsController::class, 'getGeocode']);        ## Ez a térképet inicializálja és jeleníti meg rajta.
 
 Route::apiResource('cars', CarController::class);
+Route::apiResource('carstatus', CarStatusController::class);
+Route::apiResource('categories', CategoryController::class);
 Route::apiResource('fleets', FleetController::class);
 Route::apiResource('subscriptions', SubscriptionController::class);
-
 Route::apiResource('tickets', TicketController::class);
-Route::apiResource('categories', CategoryController::class);
-Route::apiResource('bills', BillController::class);
-Route::apiResource('carstatus', CarStatusController::class);
+
 Route::apiResource('persons', PersonController::class);
 Route::apiResource('users', UserController::class);
+Route::apiResource('employees', EmployeeController::class);
+Route::apiResource('bills', BillController::class);
 
 # Dinamikusság kell, hogy ha létrejön a dolgozó, akkor 
 # dolgozói kedvezményben legyen (pl: 50% fix).
-Route::apiResource('employees', EmployeeController::class);

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('position',45);
             $table->enum('salary_type',['fix','hourly']);
             $table->integer('salary'); 
-            $table->date('start_date');
+            $table->date('start_date')->default(now());
+            $table->timestamps();
         });
     }
     public function down(): void

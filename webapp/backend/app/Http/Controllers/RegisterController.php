@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
+
 class RegisterController extends Controller
 {
     public function store(RegisterUserRequest $request): JsonResponse
@@ -55,32 +56,16 @@ class RegisterController extends Controller
             DB::rollBack();  # PLÁNE NE FELEDD!
 
             return response()->json([
-                "error" =>"A regisztráció sikertelen volt.". $exception->getMessage(),
+                "error" => "A regisztráció sikertelen volt." . $exception->getMessage(),
             ], 500);
         }
     }
+    public function destroy(User $user)
+    {
+        DB::transaction(function () use ($user) {
+            $user->person->delete(); 
+            $user->delete();
+        });
+        return response()->json(['message' => 'Felhasználó és adatai törölve lettek.'], 204);
+    }
 }
-
-        # PÉLDA REGISZTRÁCIÓ 
-            ##  http://backend.vm1.test/api/register
-        # PÉLDA REGISZTRÁCIÓ 
-        // {
-        //     "user_name": "Test1234",
-        //     "password": "12345678",
-        //     "account_balance": 0,
-        //     "sub_id": "1",
-        //     "id_card": "XX823971",
-        //     "firstname": "Teszt",
-        //     "lastname": "Adat",
-        //     "birth_date": "1990-01-01",
-        //     "phone": "+36304447777",
-        //     "email": "asdasd@gmail.com"
-        //   }
-
-        ## Authenticate-re => Token-t kapni.
-        ## http://backend.vm1.test/api/authenticate
-
-        // {
-            // "user_name": "Test1234",
-            // "password": "12345678"
-        // }
