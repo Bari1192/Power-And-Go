@@ -24,8 +24,11 @@ docker compose exec backend php artisan migrate:fresh --seed
 
 docker compose exec backend php artisan migrate --path=database/migrations/dbViews
 
-docker compose exec backend php artisan test 
-
+if [ -f "backend/tests/test-run-order.sh" ]; then
+    bash backend/tests/test-run-order.sh
+else
+    echo "test-run-order.sh fájl nem található."
+fi
 docker compose exec backend php artisan storage:link
 
 echo "A konténerek elindultak, a migrációk lefutottak."
