@@ -16,4 +16,5 @@ docker compose exec backend php artisan test --filter=Step11_RegisterControllerT
 docker compose exec backend php artisan test --filter=Step12_GoogleApiControllerTest
 docker compose exec backend php artisan test --filter=EquipmentDatabaseTest
 docker compose exec backend php artisan test --filter=EquipmentModelTest
+docker compose exec backend php artisan test --filter=CarIntegrationTest
 

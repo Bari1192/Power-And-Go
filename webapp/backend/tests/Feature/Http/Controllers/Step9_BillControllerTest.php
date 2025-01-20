@@ -61,6 +61,9 @@ class Step9_BillControllerTest extends TestCase
         $this->assertArrayHasKey('user_id', $first, 'The `user_id` key is missing from the first person data.');
         $this->assertArrayHasKey('person_id', $first, 'The `person_id` key is missing from the first person data.');
 
+        $fixedTime = now()->format('H:i:s');
+        $fixedDate = now()->format('Y-m-d');
+        $fixedDateTime = now()->format('Y-m-d H:i:s');
         $createChargingBill = [
             "bill_type" => "charging_penalty",
             "user_id" => $first['user_id'],
@@ -70,11 +73,11 @@ class Step9_BillControllerTest extends TestCase
             "driving_distance" => 10,
             "parking_minutes" => 10,
             "driving_minutes" => 10,
-            "rent_start_date" => now()->format('Y-m-d'),
-            "rent_start_time" => now()->format('H:i:s'),
-            "rent_end_date" => now()->format('Y-m-d'),
-            "rent_end_time" => now()->format('H:i:s'),
-            "invoice_date" => now()->format('Y-m-d H:i:s'),
+            "rent_start_date" => $fixedDate,
+            "rent_start_time" => $fixedTime,
+            "rent_end_date" => $fixedDate,
+            "rent_end_time" => $fixedTime,
+            "invoice_date" => $fixedDateTime,
             "invoice_status" => "pending",
         ];
 
@@ -90,6 +93,7 @@ class Step9_BillControllerTest extends TestCase
 
         $this->assertNotEmpty($feesData, 'Fees data cannot be empty.');
 
+
         // Adatbázis ellenőrzése
         $this->assertDatabaseHas('bills', [
             "id" => $latestBill->id,
@@ -101,12 +105,11 @@ class Step9_BillControllerTest extends TestCase
             "driving_distance" => 10,
             "parking_minutes" => 10,
             "driving_minutes" => 10,
-            "rent_start_date" => now()->format('Y-m-d'),
-            "rent_start_time" => now()->format('H:i:s'),
-            "rent_end_date" => now()->format('Y-m-d'),
-            "rent_end_time" => now()->format('H:i:s'),
-            "invoice_date" => now()->format('Y-m-d H:i:s'),
-            "invoice_status" => "pending",
+            "rent_start_date" => $fixedDate,
+            "rent_start_time" => $fixedTime,
+            "rent_end_date" => $fixedDate,
+            "rent_end_time" => $fixedTime,
+            "invoice_date" => $fixedDateTime,
         ]);
     }
     public function test_can_get_random_bills_data_with_using_api()

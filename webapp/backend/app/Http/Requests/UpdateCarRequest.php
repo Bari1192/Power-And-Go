@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateCarRequest extends FormRequest
 {
@@ -13,16 +14,16 @@ class UpdateCarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "plate" => ["required", "string", "between:7,10"],
+            "fleet_id" => ["nullable", "integer", "exists:fleets,id"],
             "category_id" => ["nullable", "integer", "exists:categories,category_class"],
             "equipment_class" => ["nullable", "integer", "exists:equipments,id"],
-            "fleet_id" => ["nullable", "integer", "exists:fleets,id"],
+            "status" => ["nullable", "integer", "exists:carstatus,id"],
+            "plate" => ["required", "string", "between:7,10",Rule::unique('cars', 'plate')->ignore($this->route('car'))],
             "odometer" => ["nullable", "integer", "between:0,300000"],
-            "manufacturing_year" => ["nullable", "integer", "regex:/^\d{4}$/"],
+            "manufacturing_year" => ["nullable", "integer", "min:2014", "max:" . date('Y')],
             "power_percent" => ["required", "decimal:2", "between:0,100"],
             "power_kw" => ["required", "decimal:1", "between:0,500"],
             "estimated_range" => ["required", "decimal:1", "between:0,1000"],
-            "status" => ["nullable", "integer", "exists:carstatus,id"],
         ];
     }
 }

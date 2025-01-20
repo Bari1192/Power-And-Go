@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Requests;
-
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateEmployeeRequest extends FormRequest
@@ -10,7 +9,6 @@ class UpdateEmployeeRequest extends FormRequest
     {
         return true;
     }
-
     public function rules(): array
     {
         return [

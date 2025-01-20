@@ -17,7 +17,7 @@ class StoreFleetRequest extends FormRequest
             "carmodel" => ['required', 'string', 'between:2,30'],
             "motor_power" => ['required', 'integer', 'min:18', 'max:500'],
             "top_speed" => ['required', 'integer', 'min:100', 'max:300'],
-            "tire_size" => ['required','between:8,30'],
+            "tire_size" => ['required', 'string', 'regex:/^\d{3}\|\d{2}-R\d{2}$/'],
             "driving_range" => ['required', 'integer', 'min:100', 'max:1000'],
         ];
     }
