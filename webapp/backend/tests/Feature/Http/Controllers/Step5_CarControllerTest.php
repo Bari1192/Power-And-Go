@@ -5,7 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Car;
 use Tests\TestCase;
 
-class CarControllerTest extends TestCase
+class Step5_CarControllerTest extends TestCase
 {
     public function test_can_get_all_cars(): void
     {
@@ -75,17 +75,13 @@ class CarControllerTest extends TestCase
             ]
         );
     }
-    public function test_one_car_all_tickets(): void
+    public function test_one_car_all_charging_penalty_bills(): void
     {
-        ## Arrange 
-        ## DB már fel van töltve
         $car = Car::firstOrFail();
 
-        ## Act
         $response = $this->get("/api/cars/{$car->id}/bills");
 
-        ## Assert
-        $response->assertStatus(200); ## NYÍLRA FIGYELJ!
+        $response->assertStatus(200); 
 
         $data = collect($response->json('data'));
 
@@ -102,31 +98,24 @@ class CarControllerTest extends TestCase
     public function test_car_latest_ticket_description_text(): void
     {
 
-        // Arrange
         $car = Car::FirstOrFail();
-        // Act
         $response = $this->get("/api/cars/{$car->id}/description");
-        // Assert
+
         $response->assertStatus(200);
         $data = $response->json('data');
 
-        ## Ellenőrizzük, hogy van-e `data` mező és nem üres
         $this->assertNotEmpty($data, 'Az adat nem érkezett meg vagy üres.');
 
-        ## Ellenőrizzük, hogy a `description` kulcs létezik és nem üres
-        $this->assertArrayHasKey('description', $data, 'A leírás hiányzik.');
-        $this->assertIsString($data['description'], 'A description nem szöveg.');
-        $this->assertNotEmpty($data['description'], 'A description mező üres.');
+        $this->assertArrayHasKey('admin_description', $data, 'A leírás hiányzik.');
+        $this->assertIsString($data['admin_description'], 'A(z) admin_description nem szöveg.');
+        $this->assertNotEmpty($data['admin_description'], 'A(z) admin_description mező üres.');
     }
 
     public function test_car_all_rent_history():void{
-        ## Arrange
         $car = Car::FirstOrFail();
         
-        ## Act
         $response=$this->get("api/cars/{$car->id}/renthistory");
 
-        ## Assert
         $response->assertStatus(200);
         $data=$response->json('data');
 

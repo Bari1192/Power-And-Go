@@ -5,7 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Category;
 use Tests\TestCase;
 
-class CategoryControllerTest extends TestCase
+class Step2_CategoryControllerTest extends TestCase
 {
     public function test_can_get_all_categories(): void
     {
@@ -29,7 +29,6 @@ class CategoryControllerTest extends TestCase
         $response = $this->assertArrayHasKey('id', $data, 'az `id` nem töltődött be hozzá.');
     }
 
-    # Objektumon belül -> kat.besorolása
     public function test_can_get_category_category_type(): void
     {
         $category = Category::FirstOrFail();
@@ -40,7 +39,6 @@ class CategoryControllerTest extends TestCase
         $response = $this->assertArrayHasKey('category_class', $data, 'a `category_class` nem töltődött be hozzá.');
     }
 
-    # Objektumon belül -> teljesítmény
     public function test_can_get_category_with_power(): void
     {
         $category = Category::FirstOrFail();
@@ -52,7 +50,6 @@ class CategoryControllerTest extends TestCase
         $response = $this->assertArrayHasKey('motor_power', $data, 'a `motor_power` nem töltődött be hozzá.');
     }
 
-    # POST
     public function test_post_fake_category_type_into_db(): void
     {
         $data = [
@@ -69,7 +66,6 @@ class CategoryControllerTest extends TestCase
             "motor_power" => 100
         ]);
     }
-    #DELETE
     public function test_delete_previous_category_type_from_db(): void
     {
         $category = Category::latest('id')->first();

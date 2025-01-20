@@ -20,7 +20,7 @@ class Ticket extends Model
         'created_at',
         'status_descrip',
     ];
-    public function auto(): BelongsTo
+    public function car(): BelongsTo
     {
         return $this->belongsTo(Car::class, 'car_id');
     }

@@ -6,7 +6,7 @@ use App\Models\Car;
 use App\Models\Ticket;
 use Tests\TestCase;
 
-class TicketControllerTest extends TestCase
+class Step10_TicketControllerTest extends TestCase
 {
     public function test_can_get_all_tickets(): void
     {
@@ -33,7 +33,7 @@ class TicketControllerTest extends TestCase
         $response->assertStatus(200);
 
         $data = $response->json('data');
-        $response = $this->assertArrayHasKey('description', $data, 'a `description` nem töltődött be hozzá.');
+        $response = $this->assertArrayHasKey('admin_description', $data, 'a(z) `admin_description` nem töltődött be hozzá.');
     }
     public function test_can_get_ticket_with_car_id(): void
     {

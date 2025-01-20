@@ -6,7 +6,7 @@ use App\Models\Person;
 use App\Models\User;
 use Tests\TestCase;
 
-class UserControllerTest extends TestCase
+class Step7_UserControllerTest extends TestCase
 {
     public function test_can_get_all_user_data()
     {
@@ -58,7 +58,6 @@ class UserControllerTest extends TestCase
     }
     public function test_can_delete_user_and_associated_person_from_database()
     {
-        // `Person` létrehozása
         $person = Person::create([
             "person_password" => fake()->regexify('[0-9]{8}'),
             "id_card" => fake()->unique()->regexify('[V-Z]{2}[1-9]{1}[0-9]{5}'),
@@ -69,7 +68,6 @@ class UserControllerTest extends TestCase
             "email" => fake()->unique()->lexify('??????????@gmail.com'),
         ]);
 
-        // `User` létrehozása
         $user = User::create([
             "person_id" => $person->id,
             "user_name" => fake()->userName(),
@@ -79,15 +77,12 @@ class UserControllerTest extends TestCase
             "sub_id" => 1,
         ]);
 
-        // DELETE kérés
         $response = $this->deleteJson("/api/deleteregister/{$user->id}");
         $response = $this->deleteJson("/api/persons/{$person->id}");
         $response->assertStatus(204);
 
-        // Ellenőrizd, hogy a User törlődött
         $this->assertDatabaseMissing('users', ['id' => $user->id]);
 
-        // Ellenőrizd, hogy a Person is törlődött
         $this->assertDatabaseMissing('persons', ['id' => $person->id]);
     }
 }

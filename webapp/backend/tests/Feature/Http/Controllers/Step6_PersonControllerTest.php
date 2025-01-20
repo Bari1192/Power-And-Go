@@ -5,7 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Person;
 use Tests\TestCase;
 
-class PersonControllerTest extends TestCase
+class Step6_PersonControllerTest extends TestCase
 {
     public function test_can_get_all_person_data(): void
     {
@@ -30,19 +30,15 @@ class PersonControllerTest extends TestCase
 
     public function test_can_get_random_person_all_keys_from_database()
     {
-        // Lekérdezzük az összes személyt
         $response = $this->get('/api/persons');
-        $response->assertJsonStructure(['data']); // Ellenőrizzük, hogy a 'data' kulcs létezik
+        $response->assertJsonStructure(['data']);
         $response->assertStatus(200);
 
-        // A 'data' tömböt kinyerjük
         $data = $response->json('data');
         $this->assertNotEmpty($data, 'Az adatbázisban nincsenek elérhető személyek.');
 
-        // Véletlenszerű személy kiválasztása
         $person = fake()->randomElement($data);
 
-        // Ellenőrizzük, hogy az összes kulcs jelen van-e a kiválasztott személyben
         $expectedDataKeys = [
             'person_id',
             'person_password',
@@ -64,7 +60,7 @@ class PersonControllerTest extends TestCase
     public function test_can_create_new_person_into_database_with_driving_license_data()
     {
 
-        $password = "12345678"; // Teszt jelszó
+        $password = "12345678"; 
 
         $response = $this->postJson('/api/persons', [
             "person_password" => $password,
@@ -81,8 +77,6 @@ class PersonControllerTest extends TestCase
         $response->assertStatus(201);
         $responseData = $response->json('data');
 
-
-        // Ellenőrizd az adatbázis többi mezőjét
         $this->assertDatabaseHas('persons', [
             'id_card' => $responseData['id_card'],
             'driving_license' => $responseData['driving_license'],

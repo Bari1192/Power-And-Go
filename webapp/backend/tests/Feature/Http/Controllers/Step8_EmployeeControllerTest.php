@@ -5,7 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Employee;
 use Tests\TestCase;
 
-class EmployeeControllerTest extends TestCase
+class Step8_EmployeeControllerTest extends TestCase
 {
     public function test_can_get_all_employee_data()
     {
@@ -103,7 +103,7 @@ class EmployeeControllerTest extends TestCase
         $employee = $response->json('data');
 
         $updatetedData=[
-            "id"=>$randomNumber,
+            "id"=>$employee['id'],
             "person_id"=>$employee['person_id'],
             "field" => "Ügyfélszolgálat",
             "role" => 'Panaszkezelés',
@@ -112,7 +112,7 @@ class EmployeeControllerTest extends TestCase
             "salary" => 400000,
         ];
         $response=$this->putJson("/api/employees/{$randomNumber}",$updatetedData);
-
+        $response->assertStatus(200);
     }
     public function test_can_delete_random_employee_from_database_table() 
     {

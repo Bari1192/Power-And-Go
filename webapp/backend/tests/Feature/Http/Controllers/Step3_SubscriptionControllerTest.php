@@ -5,7 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Subscription;
 use Tests\TestCase;
 
-class SubscriptionControllerTest extends TestCase
+class Step3_SubscriptionControllerTest extends TestCase
 {
     public function test_get_all_subscription_data(): void
     {

@@ -3,11 +3,9 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Bill;
-use App\Models\Employee;
-use App\Models\User;
 use Tests\TestCase;
 
-class BillControllerTest extends TestCase
+class Step9_BillControllerTest extends TestCase
 {
     public function test_can_get_all_bills_data()
     {
@@ -53,9 +51,7 @@ class BillControllerTest extends TestCase
         $randNumber = fake()->numberBetween(1, $length);
         $response = $this->get("/api/cars/{$randNumber}");
         $response->assertStatus(200);
-        $pickedData = $response->json('data');
 
-        // Személyek lekérdezése
         $response = $this->get("/api/users");
         $response->assertStatus(200);
         $userData = $response->json('data');
@@ -84,7 +80,6 @@ class BillControllerTest extends TestCase
 
         $response = $this->postJson('/api/bills', $createChargingBill);
         $response->assertStatus(201);
-        $billData = $response->json('data');
 
         $latestBill = Bill::latest('id')->first();
 
@@ -336,7 +331,7 @@ class BillControllerTest extends TestCase
         $response->assertStatus(204);
 
         $response = $this->assertDatabaseMissing('bills', [
-            "id" => $randomNumber,
+            "id" => $bill['id'],
             "bill_type" => $bill["bill_type"],
             "user_id" => $bill['user_id'],
             "person_id" => $bill['person_id'],

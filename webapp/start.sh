@@ -26,6 +26,8 @@ docker compose exec backend php artisan migrate --path=database/migrations/dbVie
 
 docker compose exec backend php artisan test 
 
+docker compose exec backend php artisan storage:link
+
 echo "A konténerek elindultak, a migrációk lefutottak."
 
 if [ -z "${APP_KEY}" ]; then

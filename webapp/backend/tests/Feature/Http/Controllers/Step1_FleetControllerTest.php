@@ -5,7 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\Fleet;
 use Tests\TestCase;
 
-class FleetControllerTest extends TestCase
+class Step1_FleetControllerTest extends TestCase
 {
     public function test_get_all_fleet_types(): void
     {
@@ -58,7 +58,6 @@ class FleetControllerTest extends TestCase
 
     public function test_delete_fake_fleet_type_from_db(): void
     {
-        ### Most az előző kamu adatot töröljük is ki!
         $latestFleet = Fleet::latest('id')->first();
 
         $response = $this->delete("api/fleets/{$latestFleet->id}");

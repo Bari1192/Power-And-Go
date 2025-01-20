@@ -5,7 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\CarStatus;
 use Tests\TestCase;
 
-class CarStatusControllerTest extends TestCase
+class Step4_CarStatusControllerTest extends TestCase
 {
     public function test_get_all_carstatus_data(): void
     {
