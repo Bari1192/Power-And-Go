@@ -7,6 +7,18 @@ use Tests\TestCase;
 
 class Step9_BillControllerTest extends TestCase
 {
+    public $fixedTime;
+    public $fixedDate;
+    public $fixedDateTime;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->fixedTime = now()->format('H:i:s');
+        $this->fixedDate = now()->format('Y-m-d');
+        $this->fixedDateTime = now()->format('Y-m-d H:i:s');
+    }
     public function test_can_get_all_bills_data()
     {
         $response = $this->get('/api/bills');
@@ -43,6 +55,8 @@ class Step9_BillControllerTest extends TestCase
     }
     public function test_can_create_charging_penalty_bill()
     {
+        
+
         $response = $this->get('/api/cars');
         $response->assertStatus(200);
         $data = $response->json('data');
@@ -61,9 +75,7 @@ class Step9_BillControllerTest extends TestCase
         $this->assertArrayHasKey('user_id', $first, 'The `user_id` key is missing from the first person data.');
         $this->assertArrayHasKey('person_id', $first, 'The `person_id` key is missing from the first person data.');
 
-        $fixedTime = now()->format('H:i:s');
-        $fixedDate = now()->format('Y-m-d');
-        $fixedDateTime = now()->format('Y-m-d H:i:s');
+
         $createChargingBill = [
             "bill_type" => "charging_penalty",
             "user_id" => $first['user_id'],
@@ -73,11 +85,11 @@ class Step9_BillControllerTest extends TestCase
             "driving_distance" => 10,
             "parking_minutes" => 10,
             "driving_minutes" => 10,
-            "rent_start_date" => $fixedDate,
-            "rent_start_time" => $fixedTime,
-            "rent_end_date" => $fixedDate,
-            "rent_end_time" => $fixedTime,
-            "invoice_date" => $fixedDateTime,
+            "rent_start_date" => $this->fixedDate,
+            "rent_start_time" => $this->fixedTime,
+            "rent_end_date" => $this->fixedDate,
+            "rent_end_time" => $this->fixedTime,
+            "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending",
         ];
 
@@ -105,15 +117,17 @@ class Step9_BillControllerTest extends TestCase
             "driving_distance" => 10,
             "parking_minutes" => 10,
             "driving_minutes" => 10,
-            "rent_start_date" => $fixedDate,
-            "rent_start_time" => $fixedTime,
-            "rent_end_date" => $fixedDate,
-            "rent_end_time" => $fixedTime,
-            "invoice_date" => $fixedDateTime,
+            "rent_start_date" => $this->fixedDate,
+            "rent_start_time" => $this->fixedTime,
+            "rent_end_date" => $this->fixedDate,
+            "rent_end_time" => $this->fixedTime,
+            "invoice_date" => $this->fixedDateTime,
         ]);
     }
     public function test_can_get_random_bills_data_with_using_api()
     {
+     
+
         $response = $this->get('/api/bills');
         $response->assertStatus(200);
         $data = $response->json('data');
@@ -158,11 +172,11 @@ class Step9_BillControllerTest extends TestCase
             "driving_distance" => 10,
             "parking_minutes" => 0,
             "driving_minutes" => 14,
-            "rent_start_date" => "2024-07-30",
-            "rent_start_time" => "01:44:55",
-            "rent_end_date" => "2024-07-30",
-            "rent_end_time" => "01:58:49",
-            "invoice_date" => "2025-01-19 16:34:49",
+            "rent_start_date" => $this->fixedDate,
+            "rent_start_time" => $this->fixedTime,
+            "rent_end_date" => $this->fixedDate,
+            "rent_end_time" => $this->fixedTime,
+            "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
         $response = $this->postJson('/api/bills', $billData);
@@ -179,11 +193,11 @@ class Step9_BillControllerTest extends TestCase
             "driving_distance" => 10,
             "parking_minutes" => 0,
             "driving_minutes" => 14,
-            "rent_start_date" => "2024-07-30",
-            "rent_start_time" => "01:44:55",
-            "rent_end_date" => "2024-07-30",
-            "rent_end_time" => "01:58:49",
-            "invoice_date" => "2025-01-19 16:34:49",
+            "rent_start_date" => $this->fixedDate,
+            "rent_start_time" => $this->fixedTime,
+            "rent_end_date" => $this->fixedDate,
+            "rent_end_time" => $this->fixedTime,
+            "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
         $response = $this->postJson('/api/bills', $billData);
@@ -201,11 +215,11 @@ class Step9_BillControllerTest extends TestCase
             "driving_distance" => 10,
             "parking_minutes" => 0,
             "driving_minutes" => 14,
-            "rent_start_date" => "2024-07-30",
-            "rent_start_time" => "01:44:55",
-            "rent_end_date" => "2024-07-30",
-            "rent_end_time" => "01:58:49",
-            "invoice_date" => "2025-01-19 16:34:49",
+            "rent_start_date" => $this->fixedDate,
+            "rent_start_time" => $this->fixedTime,
+            "rent_end_date" => $this->fixedDate,
+            "rent_end_time" => $this->fixedTime,
+            "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
         $response = $this->postJson('/api/bills', $billData);
@@ -222,11 +236,11 @@ class Step9_BillControllerTest extends TestCase
             "driving_distance" => 10,
             "parking_minutes" => 0,
             "driving_minutes" => 14,
-            "rent_start_date" => "2024-07-30",
-            "rent_start_time" => "01:44:55",
-            "rent_end_date" => "2024-07-30",
-            "rent_end_time" => "01:58:49",
-            "invoice_date" => "2025-01-19 16:34:49",
+            "rent_start_date" => $this->fixedDate,
+            "rent_start_time" => $this->fixedTime,
+            "rent_end_date" => $this->fixedDate,
+            "rent_end_time" => $this->fixedTime,
+            "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
         $response = $this->postJson('/api/bills', $billData);
@@ -253,11 +267,11 @@ class Step9_BillControllerTest extends TestCase
             "driving_distance" => 66,
             "parking_minutes" => 6,
             "driving_minutes" => 666,
-            "rent_start_date" => "2024-07-30",
-            "rent_start_time" => "01:44:55",
-            "rent_end_date" => "2024-07-30",
-            "rent_end_time" => "01:58:49",
-            "invoice_date" => "2025-01-19 16:34:49",
+            "rent_start_date" => $this->fixedDate,
+            "rent_start_time" => $this->fixedTime,
+            "rent_end_date" => $this->fixedDate,
+            "rent_end_time" => $this->fixedTime,
+            "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
         $response = $this->postJson('/api/bills', $billData);
@@ -289,11 +303,11 @@ class Step9_BillControllerTest extends TestCase
             "driving_distance" => 88,
             "parking_minutes" => 66,
             "driving_minutes" => 666,
-            "rent_start_date" => "2024-08-30",
-            "rent_start_time" => "01:44:55",
-            "rent_end_date" => "2024-08-31",
-            "rent_end_time" => "01:58:49",
-            "invoice_date" => now()->format('Y-m-d H:i:s'),
+            "rent_start_date" => $this->fixedDate,
+            "rent_start_time" => $this->fixedTime,
+            "rent_end_date" => $this->fixedDate,
+            "rent_end_time" => $this->fixedTime,
+            "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
 
@@ -310,11 +324,11 @@ class Step9_BillControllerTest extends TestCase
             "driving_distance" => 88,
             "parking_minutes" => 66,
             "driving_minutes" => 666,
-            "rent_start_date" => "2024-08-30",
-            "rent_start_time" => "01:44:55",
-            "rent_end_date" => "2024-08-31",
-            "rent_end_time" => "01:58:49",
-            "invoice_date" => now()->format('Y-m-d H:i:s'),
+            "rent_start_date" => $this->fixedDate,
+            "rent_start_time" => $this->fixedTime,
+            "rent_end_date" => $this->fixedDate,
+            "rent_end_time" => $this->fixedTime,
+            "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending",
         ]);
     }
