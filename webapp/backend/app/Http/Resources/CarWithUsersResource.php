@@ -21,11 +21,6 @@ class CarWithUsersResource extends JsonResource
                 return [
                     'rent_id' => $user->rent_details->id,
                     'user' => $user->user_name,
-                    
-                    // 'password_2_4' => $user->password_2_4,
-                    // 'nev' => $user->person->firstname . " " . $user->person->lastname,
-                    // 'phone' => $user->person->phone,
-                    // 'szul_dat' => $user->person->birth_date,
                     'rent_start_date' => $user->rent_details->rent_start_date,
                     'rent_start_time' => $user->rent_details->rent_start_time,
                     'start_percent' => $user->rent_details->start_percent,

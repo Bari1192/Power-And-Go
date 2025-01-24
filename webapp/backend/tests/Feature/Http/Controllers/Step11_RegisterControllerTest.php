@@ -13,6 +13,7 @@ class Step11_RegisterControllerTest extends TestCase
     {
         $person = Person::factory()->make([
             'person_password' => '12345678',
+            'email' => fake()->regexify('[a-z]{18}').'@gmail.com',
         ])->toArray();
 
         $response = $this->post('/api/persons', $person);
@@ -34,11 +35,11 @@ class Step11_RegisterControllerTest extends TestCase
         $this->assertArrayHasKey('user_name', $userData, 'A válasz nem tartalmazza a `user_name` kulcsot.');
 
         $response = $this->postJson('/api/authenticate/', [
-            "user_name" => $userData['user_name'], 
-            "password" => $person['person_password'], 
+            "user_name" => $userData['user_name'],
+            "password" => $person['person_password'],
         ]);
         $response->assertStatus(200);
-        dump($response->json()); 
+        dump($response->json());
 
         $gotTokenData = $response->json("data");
         $this->assertArrayHasKey('token', $gotTokenData, 'Sikertelen authentikáció. Tokent nem kapott.');

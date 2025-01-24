@@ -11,7 +11,6 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Auth\Authenticatable;
 
-
 class User extends Model implements AuthenticatableContract
 {
     use HasFactory, HasApiTokens, Notifiable, Authenticatable;

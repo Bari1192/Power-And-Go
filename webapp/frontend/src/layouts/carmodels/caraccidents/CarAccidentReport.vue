@@ -1,7 +1,7 @@
 <template>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 font-semibold">
         <div>
-            <label for="location" class="text-2xl  my-4 text-white block">accident helyszíne:</label>
+            <label for="location" class="text-2xl  my-4 text-white block">Baleset pontos helyszíne:</label>
             <input id="location" type="text" class="border rounded-lg px-3 py-2 w-4/5"
                 placeholder="Kezdje el beírni a címet..." ref="autocompleteInput" />
             <div class="mt-4 space-y-2 text-white ">
@@ -23,9 +23,9 @@
                     </div>
 
                     <div class="w-full px-3">
-                        <FormKit type="datetime-local" v-model="formattedDateTime" label="Mikor történt a accident?"
+                        <FormKit type="datetime-local" v-model="formattedDateTime" label="Mikor történt??"
                             validation="required|date_before" :validation-messages="{
-                                date_before: 'Nem lehet a accident későbbi időpontban!',
+                                date_before: 'Nem lehet a baleset későbbi időpontban!',
                                 required: 'Kötelező megadni!'
                             }" validation-visibility="live" input-class="text-sky-900 py-2 pr-4 rounded-xl text-center"
                             inner-class="py-2" label-class="text-xl mt-4 text-white block" />
@@ -36,7 +36,7 @@
                             :options="['Igen', 'Nem']" label="Személyi sérülés történt?" />
                     </div>
                     <div class="w-full my-2 px-3">
-                        <FormKit name="AccidentDescription" type="textarea" label="accident rövid leírása"
+                        <FormKit name="AccidentDescription" type="textarea" label="Baleset tömör leírása"
                             placeholder="Mennyire sérült az autó? Forgalmat zavarja? Le tudta állítani?"
                             v-model="description" :validation="'required|length:10,255'" :validation-messages="{
                                 length: 'A bejelentés szövege min 20, maximum 255 karakter hosszú lehet!',

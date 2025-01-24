@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->integer('driving_range');
             $table->integer('motor_power');
             $table->integer('top_speed');
-            $table->string('tire_size',30);
+            $table->string('tire_size',10);
         });
     }
     public function down(): void

@@ -2,12 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Car;
 use App\Models\Category;
 use App\Models\Equipment;
 use App\Models\Fleet;
-use Illuminate\Support\Facades\DB;
-use Ramsey\Uuid\Type\Decimal;
 use Tests\TestCase;
 
 class CarIntegrationTest extends TestCase

@@ -32,7 +32,7 @@ class Car extends Model
     ];
     public function fleet(): BelongsTo
     {
-        return $this->belongsTo(Fleet::class, 'fleet_id', 'id');
+        return $this->belongsTo(Fleet::class, 'fleet_id');
     }
     public function category_id(): BelongsTo
     {
@@ -46,15 +46,15 @@ class Car extends Model
 
     public function lezartberlesek(): HasMany
     {
-        return $this->hasMany(Renthistory::class, 'auto_azonosito', 'id');
+        return $this->hasMany(Renthistory::class, 'car_id');
     }
     public function szamlak(): HasMany
     {
-        return $this->hasMany(Bill::class, 'car_id', 'id');
+        return $this->hasMany(Bill::class, 'car_id');
     }
     public function tickets(): HasMany
     {
-        return $this->hasMany(Ticket::class, 'car_id', 'id');
+        return $this->hasMany(Ticket::class, 'car_id');
     }
 
     public function users(): BelongsToMany

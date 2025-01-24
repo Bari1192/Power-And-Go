@@ -53,7 +53,7 @@ class Step4_CarStatusControllerTest extends TestCase
         $data = $response->json('data');
         $this->assertNotEmpty($data);
 
-        $response->assertJsonPath('data.3.status_name', 'accident miatt kivonva');
+        $response->assertJsonPath('data.3.status_name', 'Baleset miatt kivonva');
     }
     public function test_can_get_second_object_with_waiting_for_mechanic_status(): void
     {

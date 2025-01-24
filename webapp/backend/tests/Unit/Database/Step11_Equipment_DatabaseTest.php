@@ -6,21 +6,30 @@ use App\Models\Equipment;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
-class EquipmentDatabaseTest extends TestCase
+class Step11_Equipment_DatabaseTest extends TestCase
 {
-    public function equipments_table_exists_in_database()
+    public function test_equipments_table_exists_in_database()
     {
         $this->assertTrue(Schema::hasTable('equipments'), 
         'Az `Equipments` tábla nem jött létre az adatbázisban.');
     }
-    public function equipments_table_has_correct_columns_and_types()
+    public function test_equipments_table_is_not_empty_after_seeding()
+    {
+        $this->assertGreaterThan(
+            0,
+            Equipment::count(),
+            'Az `equipments` tábla Seedelés után sem tartalmaz adatrekordot.'
+        );
+    }
+    public function test_equipments_table_has_correct_columns_and_types()
     {
         $columns = [
-            'reversing_camera' => 'boolean',
-            'lane_keep_assist' => 'boolean',
-            'adaptive_cruise_control' => 'boolean',
-            'parking_sensors' => 'boolean',
-            'multifunction_wheel' => 'boolean',
+            'id'=>'bigint',
+            'reversing_camera' => 'tinyint',
+            'lane_keep_assist' => 'tinyint',
+            'adaptive_cruise_control' => 'tinyint',
+            'parking_sensors' => 'tinyint',
+            'multifunction_wheel' => 'tinyint',
         ]; 
         foreach ($columns as $column => $type) {
             $this->assertTrue(
@@ -47,12 +56,5 @@ class EquipmentDatabaseTest extends TestCase
             'multifunction_wheel'
         ]));
     }
-    public function equipments_table_is_not_empty_after_seeding()
-    {
-        $this->assertGreaterThan(
-            0,
-            Equipment::count(),
-            'Az `equipments` tábla Seedelés után sem tartalmaz adatrekordot.'
-        );
-    }
+   
 }

@@ -16,18 +16,14 @@ class CarResource extends JsonResource
             'power_kw' => $this->power_kw,
             'estimated_range' => $this->estimated_range,
             'status' => $this->status,
+            'status_name' => $this->carstatus->status_name,
             'category_id' => $this->category_id,
             'equipment_class' => $this->equipment_class,
             'odometer' => number_format($this->odometer, 0, '', ' '),
             'manufacturing_year' => $this->manufacturing_year,
-            'fleet_id' => $this->fleet_id,
-            'carmodel' => optional($this->fleet)->carmodel,
-            'manufacturer' => optional($this->fleet)->manufacturer,
-            'motor_power' => optional($this->fleet)->motor_power,
-            'top_speed' => optional($this->fleet)->top_speed,
-            'tire_size' => optional($this->fleet)->tire_size,
-            'driving_range' => optional($this->fleet)->driving_range,
-
+            'car_data' => $this->whenLoaded('fleet', function () {
+                return collect($this->fleet)->except('id');
+            }),
         ];
     }
 }

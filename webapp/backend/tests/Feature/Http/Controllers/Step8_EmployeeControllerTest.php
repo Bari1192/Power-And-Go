@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Person;
 use Tests\TestCase;
 
 class Step8_EmployeeControllerTest extends TestCase
@@ -30,7 +31,7 @@ class Step8_EmployeeControllerTest extends TestCase
         $response = $this->assertArrayHasKey('position', $oneEmployee, 'Az `position` érték nem sikerült lekérni.');
         $response = $this->assertArrayHasKey('salary_type', $oneEmployee, 'Az `salary_type` érték nem sikerült lekérni.');
         $response = $this->assertArrayHasKey('salary', $oneEmployee, 'Az `salary` érték nem sikerült lekérni.');
-        $response = $this->assertArrayHasKey('start_date', $oneEmployee, 'Az `start_date` érték nem sikerült lekérni.');
+        $response = $this->assertArrayHasKey('hire_date', $oneEmployee, 'Az `hire_date` érték nem sikerült lekérni.');
     }
     public function test_can_get_random_employee_data_with_api()
     {
@@ -51,84 +52,127 @@ class Step8_EmployeeControllerTest extends TestCase
         $response = $this->assertArrayHasKey('position', $oneEmployee, 'Az `position` érték nem sikerült lekérni.');
         $response = $this->assertArrayHasKey('salary_type', $oneEmployee, 'Az `salary_type` érték nem sikerült lekérni.');
         $response = $this->assertArrayHasKey('salary', $oneEmployee, 'Az `salary` érték nem sikerült lekérni.');
-        $response = $this->assertArrayHasKey('start_date', $oneEmployee, 'Az `start_date` érték nem sikerült lekérni.');
+        $response = $this->assertArrayHasKey('hire_date', $oneEmployee, 'Az `hire_date` érték nem sikerült lekérni.');
     }
     public function test_cannot_create_employee_without_existing_person_data()
     {
+        $response = $this->postJson('/api/persons', [
+            "person_password" => "12345678",
+            "id_card" => fake()->unique()->regexify('[V-Z]{2}[1-9]{1}[0-9]{5}'),
+            "firstname" => fake()->firstName(),
+            "lastname" => fake()->lastName(),
+            "birth_date" => fake()->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d'),
+            "phone" => "+3630" . fake()->regexify('[0-9]{7}'),
+            "email" => fake()->regexify('[a-z0-9]{18}') . '@gmail.com'
+        ]);
+        $response->assertStatus(201);
+
+        $lastInsertedID = Person::latest('id')->first()->id;
+        $response = $this->get("/api/persons/{$lastInsertedID}");
+        $response->assertStatus(200);
+
+        $response->assertJsonPath('data.driving_license', null);
+        $response->assertJsonPath('data.license_start_date', null);
+        $response->assertJsonPath('data.license_end_date', null);
+
+
         $employee = [
             "field" => "Marketing",
             "role" => 'Social Media kezelő',
-            "position" => array_rand(["Munkatárs", "Supervisor", "Főosztályvezető", "Felsővezető",]),
+            "position" => "Munkatárs",
             "salary" => fake()->numberBetween(200_000, 500_000),
             "salary_type" => "fix",
-            "start_date" => now(),
+            "hire_date" => now()->format("Y-m-d"),
         ];
         $response = $this->postJson('/api/employees', $employee);
         $response->assertStatus(422);
     }
     public function test_can_create_new_employee_into_database()
     {
-        $response = $this->postJson('/api/employees', [
-            "person_id" => 500,
+        // Step 1: Create a new person using the API
+        $personResponse = $this->postJson('/api/persons', [
+            "person_password" => "12345678",
+            "id_card" => fake()->unique()->regexify('[V-Z]{2}[1-9]{1}[0-9]{5}'),
+            "firstname" => fake()->firstName(),
+            "lastname" => fake()->lastName(),
+            "birth_date" => fake()->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d'),
+            "phone" => "+3630" . fake()->regexify('[0-9]{7}'),
+            "email" => fake()->regexify('[a-z0-9]{18}') . '@gmail.com'
+        ]);
+
+        $personResponse->assertStatus(201);
+
+        // Retrieve person data from the response
+        $personData = $personResponse->json('data');
+        $this->assertNotNull($personData, 'Person data not found in response.');
+
+        // Step 2: Create a new employee for the created person
+        $newEmployeeData = [
+            "person_id" => $personData['person_id'],
             "field" => "Marketing",
-            "role" => 'Social Media kezelő',
+            "role" => "Social Media kezelő",
             "position" => "Munkatárs",
             "salary_type" => "fix",
             "salary" => fake()->numberBetween(200000, 500000),
-        ]);
-        $response->assertStatus(201);
-    
-        $latestEmployee = Employee::latest('id')->first();
-        $response=$this->get("/api/employees/{$latestEmployee->id}");
-        $response->assertStatus(200);
-        $response = $response->json('data');
+            "hire_date" => now()->format('Y-m-d'),
+        ];
 
+        $employeeResponse = $this->postJson('/api/employees', $newEmployeeData);
+
+        // Ensure the employee creation request was successful
+        $employeeResponse->assertStatus(201);
+
+        // Step 3: Validate employee data in the database
         $this->assertDatabaseHas('employees', [
-            "id"=>$latestEmployee->id,
-            "person_id" => 500,
-            "field" => "Marketing",
-            "role" => 'Social Media kezelő',
+            'person_id' => $newEmployeeData['person_id'],
+            'field' => $newEmployeeData['field'],
+            'role' => $newEmployeeData['role'],
+            'position' => $newEmployeeData['position'],
+            'salary_type' => $newEmployeeData['salary_type'],
+            'salary' => $newEmployeeData['salary'],
+            'hire_date' => $newEmployeeData['hire_date'],
         ]);
     }
-    public function test_can_modify_random_employee_from_database() 
+    public function test_can_modify_random_employee_from_database()
     {
-        $response=$this->get("/api/employees");
+        $response = $this->get("/api/employees");
         $response->assertStatus(200);
         $data = $response->json('data');
 
         $lenght = count($data);
         $randomNumber = random_int(1, $lenght);
-        $response=$this->get("/api/employees/{$randomNumber}");
+        $response = $this->get("/api/employees/{$randomNumber}");
         $response->assertStatus(200);
         $employee = $response->json('data');
 
-        $updatetedData=[
-            "id"=>$employee['id'],
-            "person_id"=>$employee['person_id'],
+        $updatetedData = [
+            "id" => $employee['id'],
+            "person_id" => $employee['person_id'],
             "field" => "Ügyfélszolgálat",
             "role" => 'Panaszkezelés',
             "position" => "Munkatárs",
             "salary_type" => "fix",
             "salary" => 400000,
+            "hire_date" => now()->format("Y-m-d"),
         ];
-        $response=$this->putJson("/api/employees/{$randomNumber}",$updatetedData);
+        $response = $this->putJson("/api/employees/{$randomNumber}", $updatetedData);
         $response->assertStatus(200);
     }
-    public function test_can_delete_random_employee_from_database_table() 
+    public function test_can_delete_random_employee_from_database_table()
     {
-        $response=$this->get("/api/employees");
+        $response = $this->get("/api/employees");
         $response->assertStatus(200);
         $data = $response->json('data');
 
         $lenght = count($data);
-        $randomNumber = random_int(1, $lenght);
-        $response=$this->get("/api/employees/{$randomNumber}");
+        $randomNumber = fake()->numberBetween(1, $lenght);
+        $response = $this->get("/api/employees/{$randomNumber}");
         $response->assertStatus(200);
         $employee = $response->json('data');
 
-        $response=$this->delete("/api/employees/{$randomNumber}");
+        $response = $this->delete("/api/employees/{$randomNumber}");
         $response->assertStatus(204);
 
-        $response=$this->assertDatabaseMissing('employees',$employee);
+        $response = $this->assertDatabaseMissing('employees', $employee);
     }
 }

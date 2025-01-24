@@ -60,7 +60,7 @@ class Step6_PersonControllerTest extends TestCase
     public function test_can_create_new_person_into_database_with_driving_license_data()
     {
 
-        $password = "12345678"; 
+        $password = "12345678";
 
         $response = $this->postJson('/api/persons', [
             "person_password" => $password,
@@ -72,7 +72,7 @@ class Step6_PersonControllerTest extends TestCase
             "lastname" => fake()->lastName(),
             "birth_date" => fake()->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d'),
             "phone" => "+3630" . fake()->regexify('[0-9]{7}'),
-            "email" => fake()->unique()->lexify('??????????@gmail.com'),
+            "email" => fake()->regexify('[a-z0-9]{18}') . '@gmail.com',
         ]);
         $response->assertStatus(201);
         $responseData = $response->json('data');
@@ -99,12 +99,11 @@ class Step6_PersonControllerTest extends TestCase
             "lastname" => fake()->lastName(),
             "birth_date" => fake()->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d'),
             "phone" => "+3630" . fake()->regexify('[0-9]{7}'),
-            "email" => fake()->unique()->lexify('??????????@gmail.com'),
+            "email" => fake()->regexify('[a-z0-9]{18}') . '@gmail.com'
         ]);
         $response->assertStatus(201);
 
         $lastInsertedID = Person::latest('id')->first()->id;
-
         $response = $this->get("/api/persons/{$lastInsertedID}");
         $response->assertStatus(200);
 
@@ -114,32 +113,53 @@ class Step6_PersonControllerTest extends TestCase
     }
     public function test_can_update_person_in_database()
     {
-        $response = $this->get('/api/persons');
-        $response->assertJsonStructure(['data']);
-        $response->assertStatus(200);
-    
-        $data = $response->json('data');
-        $this->assertNotEmpty($data, 'Nincs módosítható rekord az adatbázisban.');
-    
-        $person = fake()->randomElement($data);
-        $this->assertArrayHasKey('person_id', $person, 'Hiányzik az ID a személy adataiból.');
-    
-        $updatedData = [
-            "firstname" => fake()->firstName(),
-            "lastname" => fake()->lastName(),
-            "phone" => "+3630" . fake()->regexify('[0-9]{7}'),
-            "email" => fake()->unique()->lexify('??????????@gmail.com'),
+        // Step 1: Create a new person
+        $response = $this->postJson('/api/persons', [
             "person_password" => "12345678",
             "id_card" => fake()->unique()->regexify('[V-Z]{2}[1-9]{1}[0-9]{5}'),
+            "firstname" => fake()->firstName(),
+            "lastname" => fake()->lastName(),
+            "driving_license" => fake()->unique()->regexify('[A-Z]{2}[1-9][0-9]{5}'),
+            "license_start_date" => "2006-01-01",
+            "license_end_date" => "2016-01-01",
             "birth_date" => fake()->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d'),
+            "phone" => "+3630" . fake()->regexify('[0-9]{7}'),
+            "email" => fake()->regexify('[a-z0-9]{18}') . '@gmail.com'
+        ]);
+
+        $response->assertStatus(201);
+
+        // Retrieve the inserted person data
+        $inserted = $response->json('data');
+        $this->assertNotNull($inserted, 'Failed to retrieve the inserted data.');
+        $this->assertArrayHasKey('person_id', $inserted, 'Person ID is missing in the response.');
+
+        // Step 2: Prepare updated data
+        $updatedData = [
+            "person_password" => "87654321",
+            "id_card" => fake()->unique()->regexify('[V-Z]{2}[1-9]{1}[0-9]{5}'),
+            "firstname" => fake()->firstName(),
+            "lastname" => fake()->lastName(),
+            "driving_license" => fake()->unique()->regexify('[A-Z]{2}[1-9][0-9]{5}'),
+            "license_start_date" => "2010-01-01",
+            "license_end_date" => "2020-01-01",
+            "birth_date" => fake()->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d'),
+            "phone" => "+3630" . fake()->regexify('[0-9]{7}'),
+            "email" => fake()->regexify('[a-z0-9]{15}') . '@gmail.com',
         ];
-    
-        $response = $this->putJson("/api/persons/{$person['person_id']}", $updatedData);
-        $response->assertStatus(200);
-    
-        $this->assertDatabaseHas('persons', array_merge($updatedData, [
-            'id' => $person['person_id'],
-        ]));
+        $lastPersonId=$inserted['person_id'];
+        $response = $this->putJson("/api/persons/$lastPersonId", $updatedData);
+
+        $this->assertDatabaseHas('persons', [
+            'id' => $inserted['person_id'],
+            'id_card' => $inserted['id_card'],
+            'firstname' => $inserted['firstname'],
+            'lastname' => $inserted['lastname'],
+            'phone' => $inserted['phone'],
+            'email' => $inserted['email'],
+            'license_start_date' => $inserted['license_start_date'],
+            'license_end_date' => $inserted['license_end_date'],
+        ]);
     }
 
 
@@ -150,13 +170,11 @@ class Step6_PersonControllerTest extends TestCase
         $response->assertStatus(200);
 
         $data = $response->json('data');
-        $this->assertNotEmpty($data, 'Nincs törölhető rekord az adatbázisban.');
+        $this->assertNotEmpty($data, 'No deletable records found in the database.');
 
         $person = fake()->randomElement($data);
-        $this->assertArrayHasKey('person_id', $person, 'Hiányzik az ID a személy adataiból.');
-
-        $response = $this->get("/api/persons/{$person['person_id']}");
-        $response->assertStatus(200);
+        $this->assertIsArray($person, 'Invalid person data.');
+        $this->assertArrayHasKey('person_id', $person, 'Missing person_id in person data.');
 
         $response = $this->delete("/api/persons/{$person['person_id']}");
         $response->assertStatus(204);

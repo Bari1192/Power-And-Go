@@ -10,12 +10,11 @@ class AuthenticateRequest extends FormRequest
     {
         return true;
     }
-
     public function rules(): array
     {
         return [
-            "user_name" => ["required","max:20","min:8"],
-            "password" => ["required","string", "min:8"],
+            "user_name" => ["required", "min:8", "max:20"],
+            "password" => ["required", "string", "min:8"],
         ];
     }
 }

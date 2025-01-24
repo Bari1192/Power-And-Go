@@ -14,13 +14,20 @@ class StorePersonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "person_password" => ["required", "string", "min:8"],
+            "person_password" => ["required", "string", "size:8"],
             "id_card" => ["required", "string", "min:8", "max:12", "unique:persons,id_card"],
-            "driving_license" => ["nullable", "string", "size:8", "unique:persons,driving_license","required_with:license_start_date"],
-            "firstname" => ["required", "string", "max:50"],
-            "lastname" => ["required", "string", "max:25"],
+            "driving_license" => ["string", "size:8", "unique:persons,driving_license", "required_with:license_start_date"],
+            "firstname" => ["required", "string", "min:3", "max:50"],
+            "lastname" => ["required", "string", "min:3", "max:25"],
             "phone" => ["required", "string", "starts_with:+36,0036", "min:12", "max:15", "unique:persons,phone"],
-            "email" => ["required", "string", "email", "max:80", "unique:persons,email"],
+            "email" => [
+                "required",
+                "string",
+                "min:21",
+                "max:80",
+                "unique:persons,email",
+                "regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$/"
+            ],
             "birth_date" => [
                 "required",
                 "date",

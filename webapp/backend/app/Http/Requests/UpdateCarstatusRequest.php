@@ -12,8 +12,8 @@ class UpdateCarstatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status_name' => ['required', 'min:8','max:50','alpha'],
-            'status_descrip' => 'required|regex:/^[a-zA-Z\s]+$/|max:255',
+            'status_name' => ['required', 'min:8','max:50','alpha', 'exists:carstatus'],
+            'status_descrip' => ['required','regex:/^[a-zA-Z\s]+$/','max:255'], 
         ];
     }
 }

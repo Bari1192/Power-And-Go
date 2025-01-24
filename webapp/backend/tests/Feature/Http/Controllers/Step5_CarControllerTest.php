@@ -11,8 +11,8 @@ class Step5_CarControllerTest extends TestCase
     {
         $response = $this->getJson('/api/cars');
         $response->assertStatus(200);
-        $data = $response->json('data');
 
+        $data = $response->json('data');
         $response = $this->assertNotEmpty($data);
     }
 

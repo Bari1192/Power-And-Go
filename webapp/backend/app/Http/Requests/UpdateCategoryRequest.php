@@ -13,8 +13,8 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             "id" => ["required", "exists:categories,id"],
-            "category_class" => ["required", "integer", "between:1,20"],
-            "motor_power" => ["required", "integer", "between:18,200"],
+            "category_class" => ["required", "integer", "between:1,50"],
+            "motor_power" => ["required", "integer", "between:18,500"],
         ];
     }
 }

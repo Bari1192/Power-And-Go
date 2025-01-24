@@ -14,13 +14,10 @@ class EmployeeSeeder extends Seeder
         $persons = Person::inRandomOrder()->limit(300)->get();
 
         foreach ($persons as $person) {
-            // Létrehozzuk a dolgozó adatait factory segítségével
-            $dolgozo = Employee::factory()->make([
+            $employee = Employee::factory()->make([
                 'person_id' => $person->id,
             ])->toArray();
-
-            // Beszúrás az adatbázisba
-            DB::table('employees')->insert($dolgozo);
+            DB::table('employees')->insert($employee);
         }
     }
 }

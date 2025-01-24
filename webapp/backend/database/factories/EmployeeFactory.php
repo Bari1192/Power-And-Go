@@ -25,7 +25,7 @@ class EmployeeFactory extends Factory
             'position' => $position,
             'salary_type' => $munkaido,
             'salary' => $salary,
-            'start_date' => fake()->dateTimeBetween('-5 years', 'now')->format('Y-m-d'),
+            'hire_date' => fake()->dateTimeBetween('-5 years', 'now')->format('Y-m-d'),
         ];
     }
     private function teruletGeneralas(): string
@@ -48,10 +48,10 @@ class EmployeeFactory extends Factory
         $munkakorok = [
             'Marketing' => ['Social Media kezelő', 'Social Media Menedzser', 'Kampány-tervező', 'Kampánymenedzser'],
             'Adminisztráció' => ['Foglalásrögzítő', 'Irodai adminisztrátor'],
-            'Ügyfélszolgálat' => ['Baleseti-Callcenter', 'Vállalati-Callcenter', 'English-helpdesk', 'Panaszkezelés'],
+            'Ügyfélszolgálat' => ['Baleseti-Callcenteres', 'Vállalati-Callcenteres', 'English-helpdeskes', 'Panaszkezelő'],
             'Humánerőforrás' => ['Toborzó', 'HR adminisztrátor'],
             'Flottakezelés' => ['Flottamenedzser', 'Logisztikai ügyintéző', 'Kárbejelentő', 'Alvállalkozói flottakezelő'],
-            'IT' => ['Adatbázis Fejlesztő', 'Alkalmazás Fejlesztő', 'Webapplikáció-Fejlesztő', 'Tesztelő', 'Backend-Fejlesztő', 'Rendszermérnök', 'Termékmenedzser'],
+            'IT' => ['Adatbázisfejlesztő', 'Alkalmazásfejlesztő', 'Web-applikáció fejlesztő', 'Tesztelő', 'Backend Fejlesztő', 'Rendszermérnök', 'Termékmenedzser'],
             'Menedzsment' => [
                 'Projektvezető',
                 'Üzletfejlesztési menedzser',
@@ -61,11 +61,11 @@ class EmployeeFactory extends Factory
                 'IT menedzser',
             ],
             'Pénzügy' => [
-                'Értékesítés',
-                'Könyvelés',
+                'Értékesítő',
+                'Könyvelő',
                 'Vállalati szerződés-kezelő',
-                'Bérszámfejtés',
-                'Szerződés-kezelés',
+                'Bérszámfejtő',
+                'Szerződés-kezelő',
             ],
             'Jog' => ['Jogi tanácsadó', 'Ügyvéd'],
         ];
@@ -77,6 +77,20 @@ class EmployeeFactory extends Factory
 
     private function beosztasGeneralas(string $role): string
     {
+        ## Külön az Alvállalkozói flottakezelőkre
+        if ($role === 'Alvállalkozói flottakezelő') {
+            $eloszlas = [
+                'Csoportvezető' => 30,
+                'Munkatárs' => 70,
+            ];
+
+            return fake()->randomElement(array_merge(
+                array_fill(0, $eloszlas['Csoportvezető'], 'Csoportvezető'),
+                array_fill(0, $eloszlas['Munkatárs'], 'Munkatárs')
+            ));
+        }
+
+        ## Összes többi
         $eloszlas = [
             'Munkatárs' => 60,
             'Supervisor' => 15,
@@ -84,14 +98,12 @@ class EmployeeFactory extends Factory
             'Felsővezető' => 10,
         ];
 
-        $eloszlasMunkatars = $role === 'Alvállalkozói flottakezelő' ? 40 : $eloszlas['Munkatárs'];
-        $position = fake()->randomElement(array_merge(
-            array_fill(0, $eloszlasMunkatars, 'Munkatárs'),
+        return fake()->randomElement(array_merge(
+            array_fill(0, $eloszlas['Munkatárs'], 'Munkatárs'),
             array_fill(0, $eloszlas['Supervisor'], 'Supervisor'),
             array_fill(0, $eloszlas['Főosztályvezető'], 'Főosztályvezető'),
-            array_fill(0, $eloszlas['Felsővezető'], 'Felsővezető'),
+            array_fill(0, $eloszlas['Felsővezető'], 'Felsővezető')
         ));
-        return $position;
     }
 
     private function fizetesGeneralas(string $position, string $munkaido): int
