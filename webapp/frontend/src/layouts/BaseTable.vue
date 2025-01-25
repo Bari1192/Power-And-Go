@@ -5,10 +5,10 @@
         <tr class="text-white bg-sky-500 ">
           <th class="px-4 py-2 text-center">Rendszám</th>
           <th class="p-0 m-0 w-1 text-center">Autó ID (segédoszlop)</th>
-          <th class="px-4 py-2 text-center">Futásteljesítménye</th>
-          <th class="px-4 py-2 text-center">Töltöttségi szint</th>
-          <th class="px-4 py-2 text-center">Töltési hatótáv</th>
-          <th class="px-4 py-2 text-center">Állapotjelölése</th>
+          <th class="px-4 py-2 text-center">Kilométeróra</th>
+          <th class="px-4 py-2 text-center">Töltöttség</th>
+          <th class="px-4 py-2 text-center">Hatótáv (km)</th>
+          <th class="px-4 py-2 text-center">Státusz</th>
           <th class="px-4 py-2 text-center">Felszereltség</th>
         </tr>
       </thead>
@@ -22,8 +22,8 @@
           <td class="py-2 text-sky-300 font-semibold">{{ car.car_id }}</td>
           <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.odometer }} km</td>
           <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.power_percent }} %</td>
-          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.estimated_range }}</td>
-          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.status }}</td>
+          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.estimated_range }} km</td>
+          <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.status_name }}</td>
           <td class="p-0 m-0 text-sky-300 font-semibold">{{ car.equipment_class }} szintű</td>
         </tr>
       </tbody>

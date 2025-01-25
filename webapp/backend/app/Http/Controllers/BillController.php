@@ -9,9 +9,6 @@ use App\Models\Bill;
 use App\Models\Car;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
-
-use function PHPSTORM_META\map;
-
 class BillController extends Controller
 {
     public function index(): JsonResource

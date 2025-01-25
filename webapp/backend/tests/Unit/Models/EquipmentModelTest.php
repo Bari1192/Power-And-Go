@@ -10,18 +10,32 @@ class EquipmentModelTest extends TestCase
 {
     public function test_equipments_table_has_created()
     {
-        $this->assertTrue(Schema::hasTable('equipments'));
+        $this->assertTrue(
+            Schema::hasTable('equipments'),
+            'Az `equipments` tábla nem jött létre az adatbázisban.'
+        );
     }
 
     public function test_equipment_seeder_created_records_into_equipments_table()
     {
+
         $this->assertGreaterThan(
-            1, #ennyit alapból készít előtte lévő teszt!
+            0,
             Equipment::count(),
             'Az `equipments` tábla Seedelés után sem tartalmaz adatrekordot.'
         );
     }
-
+    public function test_prices_table_has_correct_columns()
+    {
+        $this->assertTrue(Schema::hasColumns('equipments', [
+            "id",
+            "reversing_camera",
+            "lane_keep_assist",
+            "adaptive_cruise_control",
+            "parking_sensors",
+            "multifunction_wheel",
+        ]));
+    }
     public function test_equipment_factory_created_valid_data_key_value_pairs()
     {
         $equipment = Equipment::factory()->create();

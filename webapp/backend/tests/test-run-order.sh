@@ -1,7 +1,7 @@
 ## Összesítésként egyben ##
 docker compose exec backend php artisan test
 
-### Sorrendben, teszt-osztályokban ###
+### Sorrendben | [teszt] | Controller osztályokban ###
 docker compose exec backend php artisan test --filter=Step1_FleetControllerTest
 docker compose exec backend php artisan test --filter=Step2_CategoryControllerTest
 docker compose exec backend php artisan test --filter=Step3_SubscriptionControllerTest
@@ -15,6 +15,7 @@ docker compose exec backend php artisan test --filter=Step10_TicketControllerTes
 docker compose exec backend php artisan test --filter=Step11_RegisterControllerTest
 docker compose exec backend php artisan test --filter=Step12_GoogleApiControllerTest
 
+### Sorrendben | [teszt] | Adatbázis osztályokban ###
 docker compose exec backend php artisan test --filter=Step1_Fleets_DatabaseTest
 docker compose exec backend php artisan test --filter=Step2_Categories_DatabaseTest
 docker compose exec backend php artisan test --filter=Step3_Subscription_DatabaseTest
@@ -30,4 +31,5 @@ docker compose exec backend php artisan test --filter=Step12_Prices_DatabaseTest
 docker compose exec backend php artisan test --filter=Step13_DailyRentals_DatabaseTest
 
 docker compose exec backend php artisan test --filter=CarIntegrationTest
+docker compose exec backend php artisan test --filter=EquipmentModelTest
 

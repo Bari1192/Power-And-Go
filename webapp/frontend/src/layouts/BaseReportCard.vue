@@ -1,6 +1,7 @@
 <template>
     <FormKit type="form" id="cleanreport" :form-class="submitted ? 'hide' : 'show'" submit-label="Küldés"
-        @submit="submitHandler" :actions="false" #default="{ value }" :config="customConfig" :validation="'required'" :validation-messages="{
+        @submit="submitHandler" :actions="false" #default="{ value }" :config="customConfig" :validation="'required'"
+        :validation-messages="{
             required: 'Kérjük minden adatot töltsön ki!'
         }">
         <div class="flex flex-wrap my-5">
@@ -38,6 +39,7 @@
                     length: 'A bejelentés szövege min 10, maximum 255 karakter hosszú lehet!',
                     required: 'Kötelező kitölteni!'
                 }" validation-messages-class="custom-validation-message"
+                :validation-visibility="submitted ? 'live' : 'dirty'"
                 label-class="text-sky-400 text-lg font-semibold mb-2"
                 input-class="max-h-28 w-full align-top appearance-none bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 focus:outline-none focus:bg-white focus:border-gray-500" />
         </div>
@@ -57,12 +59,14 @@
 
 import { http } from '@utils/http'
 import { generateClasses } from "@formkit/themes";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 export default {
     data() {
         return {
+            submitted: false,
             selectedStatus: '',
-            description: '',
             formLocation: this.selectedLocation,
             customConfig: {
                 classes: generateClasses({
@@ -104,24 +108,45 @@ export default {
                     description: this.description.trim(),
                 };
                 const response = await http.post('/tickets', payload);
-                this.$emit('submit-success', payload);
+                this.submitted = true;
+                this.$emit('submit-success', response.data);
+
+                // Toast-os értesítés POPUP
+                toast.success("Bejelentés sikeresen elküldve!", {
+                    position: "bottom-center",
+                    autoClose: 6000,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "dark",
+                });
+
             } catch (error) {
-                alert('Hiba történt a bejelentés során!');
+                toast.error("Hiba történt a bejelentés során!", {
+                    position: "top-right",
+                    autoClose: 6000,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "dark",
+                });
             }
         }
     },
     watch: {
         selectedStatus(statusNumber) {
-            if (statusNumber === 5) {
-                this.description = 'Az autót tisztításra ki kell vonni a forgalomból.';
-            } else if (statusNumber === 1) {
-                this.description = 'Az autó elérhető és bérlésre kész.';
-            } else {
-                this.description = '';
+            if (this.description === '' || this.description === 'Az autó elérhető és bérlésre kész.') {
+                if (statusNumber === 5) {
+                    this.description = 'Az autót tisztításra ki kell vonni a forgalomból.';
+                } else if (statusNumber === 1) {
+                    this.description = 'Az autó elérhető és bérlésre kész.';
+                } else {
+                    this.description = '';
+                }
             }
-        },
-    },
-};
+        }
+    }
+}
 </script>
 
 <style>

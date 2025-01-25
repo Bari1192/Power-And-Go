@@ -5,14 +5,8 @@
             <input id="location" type="text" class="border rounded-lg px-3 py-2 w-4/5"
                 placeholder="Kezdje el beírni a címet..." ref="autocompleteInput" />
             <div class="mt-4 space-y-2 text-white ">
-                <FormKit 
-                    type="form" 
-                    id="demageReport"
-                    :form-class="submitted ? 'hide' : 'show'"
-                    submit-label="Bejelentés"
-                    @submit="onSubmit" 
-                    :actions="false" 
-                    :validation="'required'"
+                <FormKit type="form" id="demageReport" :form-class="submitted ? 'hide' : 'show'"
+                    submit-label="Bejelentés" @submit="onSubmit" :actions="false" :validation="'required'"
                     :validation-messages="{
                         required: 'Kérjük minden adatot töltsön ki!'
                     }">
@@ -46,7 +40,7 @@
                             @input="value => description = value" />
                     </div>
                     <div
-                        class="flex justify-center mx-auto mt-5 bg-red-600 py-2 px-5 w-1/4 text-xl  border-2 rounded-xl hover:bg-red-800 hover:border-yellow-600">
+                        class="flex justify-center mx-auto mt-5 bg-red-600 py-2 px-5 w-2/5 text-xl  border-2 rounded-xl hover:bg-red-800 hover:border-sky-300">
                         <FormKit type="submit" label="Bejelentés" id="button" />
                     </div>
                 </FormKit>
@@ -64,8 +58,8 @@ import { http } from '@utils/http.mjs';
 export default {
     data() {
         return {
-            map :null,
-            marker : null,
+            map: null,
+            marker: null,
         }
     },
     props: {
@@ -75,87 +69,87 @@ export default {
         },
     },
     setup(props, { emit }) {
+        const map = ref(null);
+        const marker = ref(null);
         const formattedDateTime = ref('');
-        const autocompleteInput = ref(null);
-
         const submitted = ref(false);
         const description = ref('');
 
         const onSubmit = () => {
-          if (description.value.trim().length < 10) {
-            alert('A leírás túl rövid!');
-            return;
-          }
-          emit('submit', { description: description.value });
-          submitted.value = true;
+            if (description.value.trim().length < 10) {
+                alert('A leírás túl rövid!');
+                return;
+            }
+            emit('submit', { description: description.value });
+            submitted.value = true;
         };
 
         const updateDateTime = () => {
             const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            formattedDateTime.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+            formattedDateTime.value = now.toISOString().slice(0, 16);
         };
 
         const loadGoogleMaps = async () => {
-            if (typeof google !== 'undefined' && google.maps) {
-                initMap();
-                return;
-            }
-
             try {
                 const response = await http.get('/googlemapsapi');
-                const scriptUrl = response.data.url;
+                const { url, mapId } = response.data;
+
+                if (!url || !mapId) {
+                    console.error('Hiányzó URL vagy Map ID:', response.data);
+                    return;
+                }
 
                 const script = document.createElement('script');
-                script.src = scriptUrl;
+                script.src = url;
                 script.async = true;
                 script.defer = true;
                 script.onload = () => {
-                    initMap();
+                    console.log('Google Maps script betöltve.');
+                    initMap(mapId);
                     initAutocomplete();
                 };
 
                 document.head.appendChild(script);
             } catch (error) {
+                console.error('Google Maps betöltési hiba:', error);
             }
         };
+        const initMap = (mapId) => {
+            const defaultLocation = { lat: 47.497913, lng: 19.040236 }; 
+            const mapElement = document.getElementById('map');
 
-        const initMap = () => {
-            if (typeof google === 'undefined' || !google.maps) {
+            if (!mapElement) {
+                console.error('A térkép elem nem található.');
                 return;
             }
 
-            const defaultLocation = { lat: 47.497913, lng: 19.040236 }; // Budapest az alap.
-            map = new google.maps.Map(document.getElementById('map'), {
+            map.value = new google.maps.Map(mapElement, {
                 zoom: 12,
                 center: defaultLocation,
-                mapId: '<MAP_ID>', // Backendről jön a MAP-ID!
+                mapId: mapId,
             });
 
-            marker = new google.maps.marker.AdvancedMarkerElement({
-                map,
+            marker.value = new google.maps.Marker({
+                map: map.value,
                 position: defaultLocation,
                 title: 'Alapértelmezett helyszín',
-                content: createCustomIcon(), //Az egyedi ikont itt behívni!
+                icon: {
+                    url: "http://backend.vm1.test/storage/googleMapsIcon/otvenes.png",
+                    scaledSize: new google.maps.Size(40, 40), 
+                    origin: new google.maps.Point(0, 0), 
+                    anchor: new google.maps.Point(20, 20),
+                },
             });
 
-            // Ikon személyre szabása
-            function createCustomIcon() {
-                const div = document.createElement('div');
-                div.style.width = '40px';
-                div.style.height = '40px';
-                div.style.backgroundImage = 'url("http://backend.vm1.test/storage/googleMapsIcon/otvenes.png")';
-                div.style.backgroundSize = 'cover';
-                return div;
-            }
+            console.log('Térkép sikeresen inicializálva egyedi ikonnal.');
         };
-
         const initAutocomplete = () => {
             const inputElement = document.getElementById('location');
+            if (!inputElement) {
+                console.error('Az autocomplete input nem található.');
+                return;
+            }
+
             const autocomplete = new google.maps.places.Autocomplete(inputElement, {
                 types: ['geocode'],
                 componentRestrictions: { country: 'hu' },
@@ -166,26 +160,26 @@ export default {
                 if (place && place.geometry) {
                     const location = place.geometry.location;
 
-                    map.setCenter(location);
-                    map.setZoom(14);
+                    map.value.setCenter(location);
+                    map.value.setZoom(15);
 
-                    marker.position = location;
-                    marker.title = place.formatted_address;
+                    if (marker.value) {
+                        marker.value.setPosition(location);
+                    } else {
+                        console.error('A marker nem inicializált.');
+                    }
+                    console.log('Hely kiválasztva:', place.formatted_address);
                 } else {
-                    console.error('Hely nem található.');
+                    console.error('Hely nem található vagy nincs megfelelő adat.');
                 }
             });
         };
-
         onMounted(() => {
             updateDateTime();
             loadGoogleMaps();
         });
-
         return {
             formattedDateTime,
-            autocompleteInput,
-
             submitted,
             description,
             onSubmit,
@@ -193,3 +187,31 @@ export default {
     },
 };
 </script>
+
+<style>
+.pac-container {
+    z-index: 10000; /* Mindig felül legyen */
+    border: 3px solid rgb(62, 137, 167); /* Zöld keret */
+    border-radius: 12px; /* Lekerekített sarkok */
+    font-family: Arial, sans-serif; /* Arial betűtípus */
+    background-color: rgb(235, 240, 243); /* Fehér háttér */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Finom árnyék */
+}
+
+.pac-item {
+    cursor: pointer; 
+    padding: 5px 5px;
+    font-size: 12px;
+    color: #333; 
+    border-bottom: 1px solid #e0e0e0;
+    font-weight:600;
+
+}
+.pac-item:hover {
+    background-color: #f1f8e9; 
+    color: rgb(30, 90, 33); 
+}
+.pac-item:last-child {
+    border-bottom: none;
+}
+</style>

@@ -5,9 +5,11 @@
       <div
         class="m-auto w-4/5 py-6 d-flex justify-center my-10 sm:w-full border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
         <div class="text-center grid grid-cols-3">
-          <h1 class="text-3xl md:text-4xl xl:text-5xl text-sky-100 border-r-4 border-sky-500 italic"> {{ car.manufacturer }} </h1>
+          <h1 class="text-3xl md:text-4xl xl:text-5xl text-sky-100 border-r-4 border-sky-500 italic"> {{
+            car.manufacturer }} </h1>
           <h1 class="text-3xl md:text-4xl xl:text-5xl text-lime-300 border-x-4 border-sky-500"> {{ car.plate }} </h1>
-          <h1 class="text-3xl md:text-4xl xl:text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.carmodel }} </h1>
+          <h1 class="text-3xl md:text-4xl xl:text-5xl text-sky-100 border-l-4 border-sky-500 italic"> {{ car.carmodel }}
+          </h1>
         </div>
       </div>
 
@@ -74,7 +76,7 @@
       <transition name="fade-slide">
         <div v-if="noteOpen">
           <BaseCard v-for="ticket in rentFees" :key="ticket.id" class="min-h-fit text-5xl mb-8"
-            :title="'Bejegyzés azonosítója: ' +  ticket.id">
+            :title="'Bejegyzés azonosítója: ' + ticket.id">
             <div class="grid grid-cols-3 gap-4 my-4">
               <!--Első oszlop-->
               <div class="col-span-1 text-white">
@@ -89,8 +91,10 @@
 
               <!--Második-->
               <div class="col-span-2 text-white bg-slate-700 rounded-2xl p-4">
-                <h2 class="font-semibold text-lime-400">Bejelentés tartalma:</h2>
-                <p class="mt-1 mb-3">{{ ticket.description }}</p>
+                <h2 class="font-semibold text-lime-400 underline underline-offset-2">A bejelentés tárgya:</h2>
+                <p class="mt-1 mb-3">{{ ticket.status_descrip }}</p>
+                <h2 class="font-semibold text-lime-400 underline underline-offset-2">A bejelentés részletei:</h2>
+                <p class="mt-1 mb-3">{{ ticket.admin_description }}</p>
               </div>
             </div>
           </BaseCard>
@@ -166,7 +170,8 @@
       <transition name="fade-slide">
         <div v-if="rentBillOpen">
           <div v-for="fine in rentBillFees" :key="fine.id">
-            <BaseCard class="cursor-pointer" :class="rentBillDetailsStates[fine.id] ? 'min-h-full' : 'h-10 md:h-10 lg:h-14 xl:h-16'"
+            <BaseCard class="cursor-pointer"
+              :class="rentBillDetailsStates[fine.id] ? 'min-h-full' : 'h-10 md:h-10 lg:h-14 xl:h-16'"
               :title="fine.bill_type === 'charging_penalty' ? 'Akkumulátor lemerítési & szállítási pótdíj - ' + fine.total_cost : fine.bill_type"
               @click="toggleBillDetails(fine.id)">
               <div class="cursor-default grid grid-cols-3 gap-2 mx-1" v-if="rentBillDetailsStates[fine.id]">
@@ -322,7 +327,6 @@ export default {
           status: data.status_id,
         };
         const response = await http.put(`/cars/${data.car_id}`, updatePayload);
-        window.location.reload();
       } catch (error) {
       }
     },
@@ -352,7 +356,6 @@ export default {
           await http.post('/tickets', CarAccidentData);
           await http.put(`/cars/${this.car.car_id}`, CarAccidentRefreshCarData)
           alert("A baleseti bejelentés elküldve, a jármű adatai frissültek!");
-          window.location.reload();
         }
         catch (error) {
         }

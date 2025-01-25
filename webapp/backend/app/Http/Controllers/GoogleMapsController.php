@@ -13,7 +13,14 @@ class GoogleMapsController extends Controller
         $mapId = env('GOOGLE_MAPS_MAP_ID');
         $url = "https://maps.googleapis.com/maps/api/js?key={$apiKulcs}&libraries=places,marker&map_ids={$mapId}";
 
-        return response()->json(['url' => $url]);
+        if (!$apiKulcs || !$mapId) {
+            return response()->json(['error' => 'API Key vagy Map ID hiányzik az env-ben.'], 500);
+        }
+
+        return response()->json([
+            'url' => $url,
+            'mapId' => $mapId,
+        ]);
     }
 
 
