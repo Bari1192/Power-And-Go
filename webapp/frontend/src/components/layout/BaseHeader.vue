@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-white dark:bg-gray-800 dark:text-white">
+  <nav class="bg-white text-black dark:bg-[#00204a] dark:text-white border-b-4 border-sky-800">
     <div class="flex justify-between align-middle p-3 border-b-2 flex-wrap dark:border-none">
       <RouterLink to="/" class="flex items-center space-x-3 mx-auto" active-class="font-bold text-lime-500">
         <img src="../../assets/img/BaseEmail/logo_small.png" class="h-24 w-full" alt="Power And Go Logo" />
@@ -60,12 +60,13 @@ function toggleMenu() {
 }
 
 .menuitem {
-  @apply block py-2 px-3 text-gray-500;
+  @apply block py-2 px-3 text-lime-500;
   @apply hover:bg-blue-400 hover:text-sky-100 rounded p-2;
 }
 
 .menuitem:has(.active) {
-  @apply text-blue-500;
+  @apply text-sky-300;
+  @apply font-semibold;
   @apply hover:text-sky-100;
 }
 </style>

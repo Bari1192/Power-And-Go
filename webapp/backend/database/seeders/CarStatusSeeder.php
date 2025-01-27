@@ -18,6 +18,7 @@ class CarStatusSeeder extends Seeder
             ["status_name" => "Szervízre vár", 'status_descrip' => "Az autó meghibásodott és javításra vár.","created_at"=> now(),"updated_at"=> now()],
             ["status_name" => "Tisztításra vár", 'status_descrip' => "Az autót tisztításra ki kell vonni a forgalomból.","created_at"=> now(),"updated_at"=> now()],
             ["status_name" => "Kritikus töltés", 'status_descrip' => "Az autó akkumulátora rendkívül alacsony szinten van, nem használható.","created_at"=> now(),"updated_at"=> now()],
+            ["status_name" => "Előrendelésre lefoglalva", 'status_descrip' => "A jármű előrendelésre és szállításra előzetesen lefoglalva.","created_at"=> now(),"updated_at"=> now()],
         ]);
     }
 }
