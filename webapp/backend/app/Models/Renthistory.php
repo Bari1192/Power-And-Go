@@ -9,7 +9,7 @@ class Renthistory extends Model
 {
     use HasFactory;
 
-    protected $table = 'renthistories';
+    protected $table = 'car_user_rents';
     protected $primaryKey = 'id';
     public $timestamps = false;
     public $incrementing = true;
@@ -23,24 +23,20 @@ class Renthistory extends Model
         "start_kw",
         "end_percent",
         "end_kw",
-        "rent_start_date",
-        "rent_start_time",
-        "rent_end_date",
-        "rent_end_time",
-        "driving_distance",
-        "parking_start",
-        "parking_end",
+        "rent_start",
+        "rent_close",
+        "distance",
         "parking_minutes",
         "driving_minutes",
         "rental_cost",
     ];
 
-    public function auto()
+    public function car()
     {
         return $this->belongsTo(Car::class, 'car_id', 'id');
     }
 
-    public function kategoriak()
+    public function category()
     {
         return $this->belongsTo(Category::class, 'auto_kat', 'id');
     }

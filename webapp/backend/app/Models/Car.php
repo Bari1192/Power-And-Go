@@ -28,7 +28,7 @@ class Car extends Model
         'equipment_class',
         'fleet_id',
         'odometer',
-        'manufacturing_year',
+        'manufactured',
     ];
     public function fleet(): BelongsTo
     {
@@ -66,13 +66,9 @@ class Car extends Model
                 'start_kw',
                 'end_percent',
                 'end_kw',
-                'rent_start_date',
-                'rent_start_time',
-                'rent_end_date',
-                'rent_end_time',
-                'driving_distance',
-                'parking_start',
-                'parking_end',
+                'rent_start',
+                'rent_close',
+                'distance',
                 'parking_minutes',
                 'driving_minutes',
                 'rental_cost',

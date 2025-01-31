@@ -8,14 +8,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
-class car_user_rent_charges_Integrantion_Test extends TestCase
+class car_user_rent_parkings_Integrantion_Test extends TestCase
 {
     # Step 1 - Check table
     public function test_can_get_the_correct_table_in_database()
     {
 
         $this->assertTrue(
-            Schema::hasTable('car_user_rent_charges'),
+            Schema::hasTable('car_user_rent_parkings'),
             'A bérlésekhez generálandó töltési tábla nem jött létre.'
         );
     }
@@ -25,19 +25,16 @@ class car_user_rent_charges_Integrantion_Test extends TestCase
     {
         $this->assertTrue(
             Schema::hasColumns(
-                'car_user_rent_charges',
-                'id',
-                'rent_id',
-                'charging_start',
-                'charging_end',
-                'start_kw',
-                'end_kw',
-                'charged_kwh',
-                'credited_amount',
-                'created_at',
-                'updated_at',
+                'car_user_rent_parkings',
+                [
+                    'id',
+                    'rent_id',
+                    'parking_start',
+                    'parking_end',
+                    'parking_minutes',
+                ]
             ),
-            "Az elvárt mezőnevek nem jöttek létre a töltési kapcsolótáblában."
+            "Az elvárt mezőnevek nem jöttek létre a parkolási kapcsolótáblában."
         );
     }
 
@@ -47,20 +44,17 @@ class car_user_rent_charges_Integrantion_Test extends TestCase
         $assertColumnTypes = [
             'id' => 'bigint',
             'rent_id' => 'bigint',
-            'charging_start' => 'datetime',
-            'charging_end' => 'datetime',
-            'start_kw' => 'float',
-            'end_kw' => 'float',
-            'charged_kwh' => 'float',
-            'credited_amount' => 'integer',
-            'created_at' => 'timestamp',
-            'updated_at' => 'timestamp',
+            'parking_start' => 'datetime',
+            'parking_end' => 'datetime',
+            'parking_minutes' => 'int',
         ];
-
-        $this->assertEquals(
-            Schema::getColumnType('car_user_rent_charges', $assertColumnTypes),
-            'Nem a megfelelő típusbeállításokat kaptuk meg a táblából.'
-        );
+        foreach ($assertColumnTypes as $column => $expectedType) {
+            $this->assertEquals(
+                $expectedType,
+                Schema::getColumnType('car_user_rent_parkings', $column),
+                "Nem a megfelelő típusbeállításokat kaptuk a(z) {$column} oszlopnál."
+            );
+        }
     }
     public function test_can_setup_a_car_with_person_and_user_for_rent()
     {
@@ -71,7 +65,7 @@ class car_user_rent_charges_Integrantion_Test extends TestCase
             "fleet_id" => $car->fleet_id,
             "category_id" => $car->category_id,
             "plate" => $car->plate,
-            "manufacturing_year" => $car->manufacturing_year,
+            "manufactured" => $car->manufactured,
             "odometer" => $car->odometer,
             "equipment_class" => $car->equipment_class,
             "power_percent" =>  $car->power_percent,
@@ -83,7 +77,7 @@ class car_user_rent_charges_Integrantion_Test extends TestCase
             "fleet_id",
             "category_id",
             "plate",
-            "manufacturing_year",
+            "manufactured",
             "odometer",
             "equipment_class",
             "power_percent",
@@ -142,6 +136,5 @@ class car_user_rent_charges_Integrantion_Test extends TestCase
             'account_balance',
             'sub_id',
         ]));
-        
     }
 }

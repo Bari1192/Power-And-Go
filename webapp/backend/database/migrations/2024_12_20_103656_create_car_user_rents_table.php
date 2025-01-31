@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('car_user_rents', function (Blueprint $table) {
@@ -23,19 +20,15 @@ return new class extends Migration
             $table->float('end_percent', 2)->nullable();
             $table->float('end_kw', 1)->nullable();
 
-            $table->date('rent_start_date')->nullable();
-            $table->time('rent_start_time')->nullable();
-            $table->date('rent_end_date')->nullable();
-            $table->time('rent_end_time')->nullable();
-            $table->integer('driving_distance')->nullable();
-            $table->dateTime('parking_start')->nullable()->default(null);
-            $table->dateTime('parking_end')->nullable()->default(null);
+            $table->dateTime('rent_start')->nullable();
+            $table->dateTime('rent_close')->nullable();
+            $table->integer('distance')->nullable();
             $table->integer('parking_minutes')->nullable();
             $table->integer('driving_minutes')->nullable();
             $table->integer('rental_cost')->nullable();
             $table->timestamp('invoice_date')->now();
 
-            $table->unsignedTinyInteger('rentstatus')->default(1); #Alapból elérhető bérlésre.
+            $table->unsignedTinyInteger('rentstatus')->default(1);
         });
     }
     public function down(): void

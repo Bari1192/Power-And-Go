@@ -35,7 +35,7 @@ class Step5_Cars_DatabaseTest extends TestCase
             'equipment_class',
             'fleet_id',
             'odometer',
-            'manufacturing_year',
+            'manufactured',
         ]));
     }
     public function test_cars_table_has_correct_columns_and_types()
@@ -50,7 +50,7 @@ class Step5_Cars_DatabaseTest extends TestCase
             'equipment_class' => 'bigint',
             'fleet_id' => 'bigint',
             'odometer' => 'int',
-            'manufacturing_year' => 'year',
+            'manufactured' => 'year',
         ];
         foreach ($columns as $column => $type) {
             $this->assertTrue(

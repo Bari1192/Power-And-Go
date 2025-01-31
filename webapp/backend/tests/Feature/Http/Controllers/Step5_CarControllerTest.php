@@ -28,7 +28,7 @@ class Step5_CarControllerTest extends TestCase
             "equipment_class" => 3,
             "fleet_id" => 3,
             "odometer" => 28252,
-            "manufacturing_year" => "2023",
+            "manufactured" => "2023",
             "carmodel" => "e-up!"
         ];
 
@@ -55,7 +55,7 @@ class Step5_CarControllerTest extends TestCase
             "equipment_class" => 3,
             "fleet_id" => 3,
             "odometer" => 28252,
-            "manufacturing_year" => "2023",
+            "manufactured" => "2023",
         ];
 
         $response = $this->put("api/cars/{$latestCardata->id}", $modifiedData);

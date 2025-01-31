@@ -41,7 +41,7 @@
                 <label for="cim" class="block text-sm text-sky-800">Gyártási év</label>
                 <input type="text" id="cim"
                     class="border border-sky-500 text-sky-500 text-sm rounded-lg block w-full p-2.5" value="{{ ca }}"
-                    v-model="car.manufacturing_year" required />
+                    v-model="car.manufactured" required />
             </div>
             <div class="mb-2">
                 <label for="születésnap" class="block text-sm text-sky-800">Felszereltség</label>
@@ -91,7 +91,7 @@ export default {
                 this.car = {
                     plate: "",
                     km_ora_allas: "",
-                    manufacturing_year: "",
+                    manufactured: "",
                     felsz_id_fk: "",
                     flotta_id_fk: "",
                 };

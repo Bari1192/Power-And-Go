@@ -17,7 +17,7 @@ class BillSeeder extends Seeder
     public function run(): void
     {
         ## [ SZABÁLYZAT ] ##
-        $kategoriak = [
+        $category = [
             1 => ['min_toltes' => 9.0, 'buntetes' => 30000],
             2 => ['min_toltes' => 6.0, 'buntetes' => 50000],
             3 => ['min_toltes' => 4.5, 'buntetes' => 30000],
@@ -48,11 +48,9 @@ class BillSeeder extends Seeder
                 'user_id' => $user->id,
                 'person_id' => $user->person_id,
                 'car_id' => $auto->id,
-                'rent_start_date' => $rental->rent_start_date,
-                'rent_start_time' => $rental->rent_start_time,
-                'rent_end_date' => $rental->rent_end_date,
-                'rent_end_time' => $rental->rent_end_time,
-                'driving_distance' => $rental->driving_distance,
+                'rent_start' => $rental->rent_start,
+                'rent_close' => $rental->rent_close,
+                'distance' => $rental->distance,
                 'parking_minutes' => $rental->parking_minutes,
                 'driving_minutes' => $rental->driving_minutes,
                 'total_cost' => $rental->rental_cost,
@@ -61,7 +59,7 @@ class BillSeeder extends Seeder
             ];
 
             // Büntetés generálása a töltöttségi szint alapján
-            $kategoriak = [
+            $category = [
                 1 => ['min_toltes' => 9.0, 'buntetes' => 30000],
                 2 => ['min_toltes' => 6.0, 'buntetes' => 50000],
                 3 => ['min_toltes' => 4.5, 'buntetes' => 30000],
@@ -72,20 +70,18 @@ class BillSeeder extends Seeder
             $autoKategoria = $rental->category_id;
             $zarasToltesSzazalek = $rental->end_percent;
 
-            if (isset($kategoriak[$autoKategoria]) && $zarasToltesSzazalek < $kategoriak[$autoKategoria]['min_toltes']) {
+            if (isset($category[$autoKategoria]) && $zarasToltesSzazalek < $category[$autoKategoria]['min_toltes']) {
                 $buntetesAdatok[] = [
                     'bill_type' => 'charging_penalty',
                     'user_id' => $user->id,
                     'person_id' => $user->person_id,
                     'car_id' => $auto->id,
-                    'rent_start_date' => $rental->rent_start_date,
-                    'rent_start_time' => $rental->rent_start_time,
-                    'rent_end_date' => $rental->rent_end_date,
-                    'rent_end_time' => $rental->rent_end_time,
-                    'driving_distance' => $rental->driving_distance,
+                    'rent_start' => $rental->rent_start,
+                    'rent_close' => $rental->rent_close,
+                    'distance' => $rental->distance,
                     'parking_minutes' => $rental->parking_minutes,
                     'driving_minutes' => $rental->driving_minutes,
-                    'total_cost' => $kategoriak[$autoKategoria]['buntetes'],
+                    'total_cost' => $category[$autoKategoria]['buntetes'],
                     'invoice_date' => now(),
                     'invoice_status' => 'pending',
                 ];

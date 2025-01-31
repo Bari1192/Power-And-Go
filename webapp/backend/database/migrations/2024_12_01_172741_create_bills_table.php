@@ -16,13 +16,11 @@ return new class extends Migration
             $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
 
             $table->integer('total_cost');
-            $table->integer('driving_distance')->nullable();
+            $table->integer('distance')->nullable();
             $table->integer('parking_minutes')->nullable();
             $table->integer('driving_minutes')->nullable();
-            $table->date('rent_start_date')->nullable();
-            $table->time('rent_start_time')->nullable();
-            $table->date('rent_end_date')->nullable();
-            $table->time('rent_end_time')->nullable();
+            $table->datetime('rent_start')->nullable();
+            $table->datetime('rent_close')->nullable();
             $table->timestamp('invoice_date')->useCurrent();
             $table->enum('invoice_status', ['active', 'pending', 'archiv'])->default('pending');
         });

@@ -42,11 +42,11 @@
                         <td class="text-center p-2">{{ fine.invoice_date }}</td>
                         <td class="text-center p-2 font-semibold">{{ fine.total_cost }} Ft</td>
                         <td class="text-center text-lime-300 font-bold p-2 italic">{{ fine.invoice_status }}</td>
-                        <td class="text-center p-2">{{ fine.driving_distance }} km</td>
+                        <td class="text-center p-2">{{ fine.distance }} km</td>
                         <td class="text-center p-2">{{ timeFormat(fine.parking_minutes) }} </td>
                         <td class="text-center p-2">{{ timeFormat(fine.driving_minutes) }} </td>
-                        <td class="text-center p-2">{{ fine.rent_start_date }} <b>{{ fine.rent_start_time }}</b></td>
-                        <td class="text-center p-2">{{ fine.rent_end_date }} <b>{{ fine.rent_end_time }}</b></td>
+                        <td class="text-center p-2">{{ fine.rent_start }} <b>{{ fine.rent_start }}</b></td>
+                        <td class="text-center p-2">{{ fine.rent_close }} <b>{{ fine.rent_end_time }}</b></td>
                     </tr>
                 </tbody>
             </table>

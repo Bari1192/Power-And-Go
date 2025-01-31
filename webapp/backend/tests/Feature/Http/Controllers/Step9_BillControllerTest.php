@@ -7,16 +7,10 @@ use Tests\TestCase;
 
 class Step9_BillControllerTest extends TestCase
 {
-    public $fixedTime;
-    public $fixedDate;
     public $fixedDateTime;
-
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->fixedTime = now()->format('H:i:s');
-        $this->fixedDate = now()->format('Y-m-d');
         $this->fixedDateTime = now()->format('Y-m-d H:i:s');
     }
     public function test_can_get_all_bills_data()
@@ -41,11 +35,9 @@ class Step9_BillControllerTest extends TestCase
         $response = $this->assertArrayHasKey('person_id', $oneBill, 'Az `person_id` érték nem sikerült lekérni.');
         $response = $this->assertArrayHasKey('person', $oneBill, 'Az `person` érték nem sikerült lekérni.');
         $response = $this->assertArrayHasKey('car_id', $oneBill, 'Az `car_id` érték nem sikerült lekérni.');
-        $response = $this->assertArrayHasKey('rent_start_date', $oneBill, 'Az `rent_start_date` érték nem sikerült lekérni.');
-        $response = $this->assertArrayHasKey('rent_start_time', $oneBill, 'Az `rent_start_time` érték nem sikerült lekérni.');
-        $response = $this->assertArrayHasKey('rent_end_date', $oneBill, 'Az `rent_end_date` érték nem sikerült lekérni.');
-        $response = $this->assertArrayHasKey('rent_end_time', $oneBill, 'Az `rent_end_time` érték nem sikerült lekérni.');
-        $response = $this->assertArrayHasKey('driving_distance', $oneBill, 'Az `driving_distance` érték nem sikerült lekérni.');
+        $response = $this->assertArrayHasKey('rent_start', $oneBill, 'Az `rent_start` érték nem sikerült lekérni.');
+        $response = $this->assertArrayHasKey('rent_close', $oneBill, 'Az `rent_close` érték nem sikerült lekérni.');
+        $response = $this->assertArrayHasKey('distance', $oneBill, 'Az `distance` érték nem sikerült lekérni.');
         $response = $this->assertArrayHasKey('parking_minutes', $oneBill, 'Az `parking_minutes` érték nem sikerült lekérni.');
         $response = $this->assertArrayHasKey('driving_minutes', $oneBill, 'Az `driving_minutes` érték nem sikerült lekérni.');
         $response = $this->assertArrayHasKey('total_cost', $oneBill, 'Az `total_cost` érték nem sikerült lekérni.');
@@ -55,8 +47,6 @@ class Step9_BillControllerTest extends TestCase
     }
     public function test_can_create_charging_penalty_bill()
     {
-        
-
         $response = $this->get('/api/cars');
         $response->assertStatus(200);
         $data = $response->json('data');
@@ -82,13 +72,11 @@ class Step9_BillControllerTest extends TestCase
             "person_id" => $first['person_id'],
             "car_id" => $randNumber,
             "total_cost" => 30000,
-            "driving_distance" => 10,
+            "distance" => 10,
             "parking_minutes" => 10,
             "driving_minutes" => 10,
-            "rent_start_date" => $this->fixedDate,
-            "rent_start_time" => $this->fixedTime,
-            "rent_end_date" => $this->fixedDate,
-            "rent_end_time" => $this->fixedTime,
+            "rent_start" => $this->fixedDateTime,
+            "rent_close" => $this->fixedDateTime,
             "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending",
         ];
@@ -114,13 +102,11 @@ class Step9_BillControllerTest extends TestCase
             "person_id" => $first['person_id'],
             "car_id" => $randNumber,
             "total_cost" => 30000,
-            "driving_distance" => 10,
+            "distance" => 10,
             "parking_minutes" => 10,
             "driving_minutes" => 10,
-            "rent_start_date" => $this->fixedDate,
-            "rent_start_time" => $this->fixedTime,
-            "rent_end_date" => $this->fixedDate,
-            "rent_end_time" => $this->fixedTime,
+            "rent_start" => $this->fixedDateTime,
+            "rent_close" => $this->fixedDateTime,
             "invoice_date" => $this->fixedDateTime,
         ]);
     }
@@ -145,11 +131,9 @@ class Step9_BillControllerTest extends TestCase
             "person_id",
             "person",
             "car_id",
-            "rent_start_date",
-            "rent_start_time",
-            "rent_end_date",
-            "rent_end_time",
-            "driving_distance",
+            "rent_start",
+            "rent_close",
+            "distance",
             "parking_minutes",
             "driving_minutes",
             "total_cost",
@@ -169,13 +153,11 @@ class Step9_BillControllerTest extends TestCase
             "person_id" => 237,
             "car_id" => 1,
             "total_cost" => 5000,
-            "driving_distance" => 10,
+            "distance" => 10,
             "parking_minutes" => 0,
             "driving_minutes" => 14,
-            "rent_start_date" => $this->fixedDate,
-            "rent_start_time" => $this->fixedTime,
-            "rent_end_date" => $this->fixedDate,
-            "rent_end_time" => $this->fixedTime,
+            "rent_start" => $this->fixedDateTime,
+            "rent_close" => $this->fixedDateTime,
             "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
@@ -190,13 +172,11 @@ class Step9_BillControllerTest extends TestCase
             "person_id" => null,
             "car_id" => 1,
             "total_cost" => 5000,
-            "driving_distance" => 10,
+            "distance" => 10,
             "parking_minutes" => 0,
             "driving_minutes" => 14,
-            "rent_start_date" => $this->fixedDate,
-            "rent_start_time" => $this->fixedTime,
-            "rent_end_date" => $this->fixedDate,
-            "rent_end_time" => $this->fixedTime,
+            "rent_start" => $this->fixedDateTime,
+            "rent_close" => $this->fixedDateTime,
             "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
@@ -212,13 +192,11 @@ class Step9_BillControllerTest extends TestCase
             "person_id" => 237,
             "car_id" => null,
             "total_cost" => 5000,
-            "driving_distance" => 10,
+            "distance" => 10,
             "parking_minutes" => 0,
             "driving_minutes" => 14,
-            "rent_start_date" => $this->fixedDate,
-            "rent_start_time" => $this->fixedTime,
-            "rent_end_date" => $this->fixedDate,
-            "rent_end_time" => $this->fixedTime,
+            "rent_start" => $this->fixedDateTime,
+            "rent_close" => $this->fixedDateTime,
             "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
@@ -233,13 +211,11 @@ class Step9_BillControllerTest extends TestCase
             "person_id" => 237,
             "car_id" => 1,
             "total_cost" => 5000,
-            "driving_distance" => 10,
+            "distance" => 10,
             "parking_minutes" => 0,
             "driving_minutes" => 14,
-            "rent_start_date" => $this->fixedDate,
-            "rent_start_time" => $this->fixedTime,
-            "rent_end_date" => $this->fixedDate,
-            "rent_end_time" => $this->fixedTime,
+            "rent_start" => $this->fixedDateTime,
+            "rent_close" => $this->fixedDateTime,
             "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
@@ -264,13 +240,11 @@ class Step9_BillControllerTest extends TestCase
             "person_id" => 237,
             "car_id" => 1,
             "total_cost" => 666,
-            "driving_distance" => 66,
+            "distance" => 66,
             "parking_minutes" => 6,
             "driving_minutes" => 666,
-            "rent_start_date" => $this->fixedDate,
-            "rent_start_time" => $this->fixedTime,
-            "rent_end_date" => $this->fixedDate,
-            "rent_end_time" => $this->fixedTime,
+            "rent_start" => $this->fixedDateTime,
+            "rent_close" => $this->fixedDateTime,
             "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
@@ -300,13 +274,11 @@ class Step9_BillControllerTest extends TestCase
             "person_id" => $oneBill['person_id'],
             "car_id" => $oneBill['car_id'],
             "total_cost" => 8888,
-            "driving_distance" => 88,
+            "distance" => 88,
             "parking_minutes" => 66,
             "driving_minutes" => 666,
-            "rent_start_date" => $this->fixedDate,
-            "rent_start_time" => $this->fixedTime,
-            "rent_end_date" => $this->fixedDate,
-            "rent_end_time" => $this->fixedTime,
+            "rent_start" => $this->fixedDateTime,
+            "rent_close" => $this->fixedDateTime,
             "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending"
         ];
@@ -321,13 +293,11 @@ class Step9_BillControllerTest extends TestCase
             "person_id" => $oneBill['person_id'],
             "car_id" => $oneBill['car_id'],
             "total_cost" => 8888,
-            "driving_distance" => 88,
+            "distance" => 88,
             "parking_minutes" => 66,
             "driving_minutes" => 666,
-            "rent_start_date" => $this->fixedDate,
-            "rent_start_time" => $this->fixedTime,
-            "rent_end_date" => $this->fixedDate,
-            "rent_end_time" => $this->fixedTime,
+            "rent_start" => $this->fixedDateTime,
+            "rent_close" => $this->fixedDateTime,
             "invoice_date" => $this->fixedDateTime,
             "invoice_status" => "pending",
         ]);
@@ -354,13 +324,11 @@ class Step9_BillControllerTest extends TestCase
             "person_id" => $bill['person_id'],
             "car_id" => $bill['car_id'],
             "total_cost" => $bill["total_cost"],
-            "driving_distance" => $bill["driving_distance"],
+            "distance" => $bill["distance"],
             "parking_minutes" => $bill["parking_minutes"],
             "driving_minutes" => $bill["driving_minutes"],
-            "rent_start_date" => $bill["rent_start_date"],
-            "rent_start_time" => $bill["rent_start_time"],
-            "rent_end_date" => $bill["rent_end_date"],
-            "rent_end_time" => $bill["rent_end_time"],
+            "rent_start" => $bill["rent_start"],
+            "rent_close" => $bill["rent_close"],
             "invoice_date" => $bill["invoice_date"],
             "invoice_status" => $bill["invoice_status"],
         ]);

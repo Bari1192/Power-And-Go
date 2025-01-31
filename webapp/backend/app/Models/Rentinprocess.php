@@ -8,21 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Rentinprocess extends Model
 {
     use HasFactory;
-    protected $table = 'rentsinprocess';
+    protected $table = 'car_user_rents';
     protected $primaryKey = 'id';
     public $timestamps = false; 
     public $incrementing = true;
 
     protected $fillable = [
         'plate',
-        'auto_kategoria',
+        'category_id',
     ];
     public function auto()
     {
         return $this->belongsTo(Car::class, 'car_id');
     }
 
-    public function kategoriak()
+    public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }

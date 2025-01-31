@@ -19,7 +19,7 @@ class StoreCarRequest extends FormRequest
             "status" => ["integer", "exists:carstatus,id"],
             "plate" => ["required", "string", "between:7,10", "unique:cars,plate"],
             "odometer" => ["nullable", "integer", "between:0,300000"],
-            "manufacturing_year" => ["required", "integer", "min:2014", "max:" . date('Y')],
+            "manufactured" => ["required", "integer", "min:2014", "max:" . date('Y')],
             "power_kw" => ["required", "numeric", "regex:/^\d+(\.\d)?$/", "between:0,500"],
             "power_percent" => ["required", "numeric", "regex:/^\d+(\.\d{1,2})?$/", "between:0,100"],
             "estimated_range" => ["required", "numeric", "regex:/^\d+(\.\d)?$/", "between:0,1000"],

@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->foreignId('fleet_id')->constrained('fleets', 'id')->onDelete('cascade');
 
             $table->integer('odometer');
-            $table->year('manufacturing_year');
+            $table->year('manufactured');
         });
     }
     public function down(): void

@@ -71,7 +71,7 @@ class CarIntegrationTest extends TestCase
             "equipment_class" => $newEquipmentGet->id,
             "fleet_id" => $newFleetType['id'],
             "odometer" => 0,
-            "manufacturing_year" => date('Y'),
+            "manufactured" => date('Y'),
         ];
 
         $response = $this->postJson('/api/cars', $newCarType);

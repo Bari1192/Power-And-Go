@@ -23,7 +23,7 @@ class CarFactory extends Factory
             'fleet_id' => $flottacarmodel->id,
             'category_id' => $this->katBesorolasAutomatan($flotta),
             'plate' => $this->rendszamGeneralasUjRegi(),
-            'manufacturing_year' => $gyartasiEv,
+            'manufactured' => $gyartasiEv,
             'odometer' => $this->kmOraAllasGeneralas($gyartasiEv),
             'equipment_class' => $equipment_class ? $equipment_class->id : 1,
             'power_percent' => $toltes_szazalek,

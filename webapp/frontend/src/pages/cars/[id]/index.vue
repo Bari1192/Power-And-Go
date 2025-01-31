@@ -58,7 +58,7 @@
           <BaseCard :title="'Végsebesség'" :text="car.top_speed + ' km/h'" />
           <BaseCard :title="'Maximális hatótáv egy töltéssel'" :text="car.driving_range + ' km'" />
           <BaseCard :title="'Aktuális futásteljesítménye'" :text="car.odometer + ' km'" />
-          <BaseCard :title="'Gyártási éve'" :text="car.manufacturing_year" />
+          <BaseCard :title="'Gyártási éve'" :text="car.manufactured" />
         </div>
       </transition>
       <div ref="adatokAlja"></div>
@@ -136,11 +136,11 @@
                 <tr v-for="rent in carRentHistory.renters" :key="rent.rent_id"
                   class="odd:bg-amber-50 even:bg-yellow-50 even:border-b-4 even:border-t-4 even:border-lime-400 text-center text-lg font-semibold text-sky-900">
                   <td class="mx-auto py-2"><router-link to=""> {{ rent.user }} </router-link></td>
-                  <td class="mx-auto py-2">{{ rent.rent_start_date + " " + rent.rent_start_time }}</td>
+                  <td class="mx-auto py-2">{{ rent.rent_start + " " + rent.rent_start }}</td>
                   <td class="mx-auto py-2">{{ rent.start_percent }} %</td>
-                  <td class="mx-auto py-2">{{ rent.rent_end_date + " " + rent.rent_end_time }}</td>
+                  <td class="mx-auto py-2">{{ rent.rent_close + " " + rent.rent_end_time }}</td>
                   <td class="mx-auto py-2">{{ rent.end_percent }} %</td>
-                  <td class="mx-auto py-2">{{ rent.driving_distance }} km</td>
+                  <td class="mx-auto py-2">{{ rent.distance }} km</td>
                   <td class="mx-auto py-2">{{ rent.rental_cost }} Ft</td>
                   <td class="mx-auto py-2">{{ rent.invoice_date }}</td>
                 </tr>
@@ -180,12 +180,12 @@
               <div class="cursor-default grid grid-cols-3 gap-2 mx-1" v-if="rentBillDetailsStates[fine.id]">
                 <p><b>Számla sorszáma: </b><br><i class="text-lime-500">{{ fine.id }}</i></p>
                 <p class="text-center"> <b>Kiállítva:</b> <br><i class="text-lime-500">{{ fine.invoice_date }}</i></p>
-                <p class="text-right"><b>Bérlés kezdete:</b><br><i class="text-lime-500">{{ fine.rent_start_date }}
-                    {{ fine.rent_start_time }}</i></p>
+                <p class="text-right"><b>Bérlés kezdete:</b><br><i class="text-lime-500">{{ fine.rent_start }}
+                    {{ fine.rent_start }}</i></p>
                 <p><b>Összege:</b> <br><i class="text-lime-500">{{ fine.total_cost }} Ft</i></p>
-                <p class="text-center"><b>Levezetett út:</b><br> <i class="text-lime-500">{{ fine.driving_distance }}
+                <p class="text-center"><b>Levezetett út:</b><br> <i class="text-lime-500">{{ fine.distance }}
                     km</i></p>
-                <p class="text-right"><b>Bérlés vége:</b> <br><i class="text-lime-500">{{ fine.rent_end_date }}
+                <p class="text-right"><b>Bérlés vége:</b> <br><i class="text-lime-500">{{ fine.rent_close }}
                     {{ fine.rent_end_time }}</i></p>
                 <p><b>Parkolási idő:</b> <br><i class="text-lime-500">{{ fine.parking_minutes }} perc</i></p>
                 <p class="text-center"><b>Vezetési idő:</b> <br><i class="text-lime-500">{{ fine.driving_minutes }}
@@ -329,7 +329,7 @@ export default {
           equipment_class: parseInt(this.car.equipment_class, 10),
           fleet_id: parseInt(this.car.fleet_id, 10),
           odometer: parseInt(this.car.odometer),
-          manufacturing_year: parseInt(this.car.manufacturing_year, 10),
+          manufactured: parseInt(this.car.manufactured, 10),
           power_percent: parseFloat(this.car.power_percent),
           power_kw: parseFloat(this.car.power_kw),
           estimated_range: parseFloat(this.car.estimated_range),

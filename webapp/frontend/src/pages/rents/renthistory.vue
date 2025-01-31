@@ -40,16 +40,16 @@
                 <!-- "Keret" kezdete -->
                 <div class=" border-solid border border-lime-600 p-6 m-2">
                     <p class="my-3"> A(z) <b>{{ rent.auto.plate }}</b> rendszámú PowerAndGo bérlését <b>{{
-                        rent.rent_start_date }}</b>
+                        rent.rent_start }}</b>
                         -kor kezdted
                         és
-                        <b>{{ rent.rent_end_date }}</b>
+                        <b>{{ rent.rent_close }}</b>
                         -kor
                         fejezted be.
                     </p>
                     <p class="my-3">A bérlésed során {.{"0h 00"}.} hosszabbítás volt a foglalásodon, <b>{{
                         rent.vezetesi_idotartam
-                            }}</b> , ami alatt <b> {{ rent.driving_distance }} km-t</b> tettél meg, és a vezetés mellett
+                            }}</b> , ami alatt <b> {{ rent.distance }} km-t</b> tettél meg, és a vezetés mellett
                         <b> {{ rent.parkolasi_idotartam }}.</b> A bérléshez felhasznált
                         bónusz percek:
                         0h
