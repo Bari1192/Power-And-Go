@@ -1,6 +1,9 @@
 <template>
   <BaseLayout>
-    <div class="container mt-20 mb-20 w-full sm:w-11/12 lg:w-2/3 mx-auto">
+    <div v-if="loading" class="container mt-20 mb-20 w-full sm:w-11/12 lg:w-2/3 mx-auto">
+      <h1></h1>
+    </div>
+    <div v-else class="container mt-20 mb-40 w-full sm:w-11/12 lg:w-2/3 mx-auto">
 
       <div
         class="m-auto w-4/5 py-6 d-flex justify-center my-10 sm:w-full border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
@@ -17,7 +20,7 @@
 
       <!-- TISZTASÁG BEJELENTÉSI MODEL -->
       <div v-if="cleanreport" class="bg-sky-950 border-4 border-sky-700 rounded-lg mt-10 p-4">
-        <BaseReportCard :carId="car.car_id" :lastRenter="carRentHistory.renters[0].user"
+        <BaseReportCard :carId="car.car_id" :lastRenter="carRentHistory.renters[0]?.user"
           @submit-success="handleFormSubmit" />
       </div>
 
@@ -224,7 +227,6 @@ export default {
     EupModel,
     CarReportButtons,
     BaseReportCard,
-    // BaseTooltipCard,
     BaseCard,
     BaseLayout,
     EupModel,
@@ -250,26 +252,34 @@ export default {
       demageReport: false,
       accidentReport: false,
       latestTicket: [],
+      loading: true,
     }
   },
   async mounted() {
-    const response = await http.get(`/cars/${this.$route.params.id}`);
-    this.car = response.data.data;
+    try {
+      const response = await http.get(`/cars/${this.$route.params.id}`);
+      this.car = response.data.data;
 
-    const ticketresponse = await http.get(`/cars/${this.$route.params.id}/tickets`);
-    this.rentFees = ticketresponse.data.data;
+      const ticketresponse = await http.get(`/cars/${this.$route.params.id}/tickets`);
+      this.rentFees = ticketresponse.data.data;
 
-    const resp = await http.get(`/cars/${this.$route.params.id}/description`);
-    this.latestTicket = resp.data.data;
+      const resp = await http.get(`/cars/${this.$route.params.id}/description`);
+      this.latestTicket = resp.data.data;
 
-    const rentResponse = await http.get(`/cars/${this.$route.params.id}/renthistory`);
-    this.carRentHistory = rentResponse.data.data;
+      const rentResponse = await http.get(`/cars/${this.$route.params.id}/renthistory`);
+      this.carRentHistory = rentResponse.data.data;
 
-    const feesResponse = await http.get(`/bills/${this.$route.params.id}/fees`);
-    this.rentBillFees = feesResponse.data.data;
-    this.rentBillFees.forEach((fine) => {
-      this.$set(this.rentBillDetailsStates, fine.id, false);
-    });
+      const feesResponse = await http.get(`/bills/${this.$route.params.id}/fees`);
+      this.rentBillFees = feesResponse.data.data;
+      this.rentBillFees.forEach((fine) => {
+        this.$set(this.rentBillDetailsStates, fine.id, false);
+      });
+
+      this.loading = false;
+    } catch (error) {
+      console.error("Adatbetöltési hiba:", error);
+      this.loading = false; // Hiba esetén is állítsuk át a státuszt
+    }
 
   },
   methods: {
@@ -312,9 +322,8 @@ export default {
 
     async handleFormSubmit(data) {
       try {
-        console.log('Bejelentés sikeres, frissítési payload érkezett:', data);
-
-        const updatePayload = {
+        updatePayload = {
+          car_id: this.carId,
           plate: this.car.plate,
           category_id: parseInt(this.car.category_id, 10),
           equipment_class: parseInt(this.car.equipment_class, 10),
@@ -324,9 +333,12 @@ export default {
           power_percent: parseFloat(this.car.power_percent),
           power_kw: parseFloat(this.car.power_kw),
           estimated_range: parseFloat(this.car.estimated_range),
-          status: data.status_id,
+          status_id: parseInt(this.selectedStatus, 10),
+          description: this.description.trim(),
         };
-        const response = await http.put(`/cars/${data.car_id}`, updatePayload);
+        const response = await http.post('/tickets', payload);
+        this.submitted = true;
+        this.$emit('submit-success', response.data);
       } catch (error) {
       }
     },

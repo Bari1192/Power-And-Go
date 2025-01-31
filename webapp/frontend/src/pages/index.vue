@@ -1,18 +1,19 @@
 <template>
-  <BaseLayout>
-    <MainPage />
-  </BaseLayout>
+
+    <BaseLayout>
+        <Slider />
+    </BaseLayout>
 
 </template>
 
 <script>
 import BaseLayout from '@layouts/BaseLayout.vue';
-import MainPage from './mainpage.vue';
+import Slider from '@layouts/sliders/Slider.vue';
 
 export default {
-  components: {
-    BaseLayout,
-    MainPage,
-  },
+    components: {
+        BaseLayout,
+        Slider,
+    },
 };
 </script>

@@ -67,6 +67,7 @@ export default {
         return {
             submitted: false,
             selectedStatus: '',
+            description: '', 
             formLocation: this.selectedLocation,
             customConfig: {
                 classes: generateClasses({
@@ -86,10 +87,6 @@ export default {
         lastRenter: {
             type: [String, null],
             required: true,
-        },
-        submitted: {
-            type: Boolean,
-            default: false,
         },
     },
     async mounted() {

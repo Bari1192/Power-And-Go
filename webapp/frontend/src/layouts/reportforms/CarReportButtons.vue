@@ -25,13 +25,14 @@
         </button>
         <button label="hiba"
             class="bg-emerald-600 rounded-full px-4 py-3 border-4 border-sky-600 hover:bg-emerald-700 text-sky-100 font-semibold">
-            Visszaállítás🚘
+            Távoli Hozzáférés🚘
         </button>
     </div>
 </template>
 
 <script>
 export default {
+    emits: ["toggle"],
     name: "CarReportButtons",
 }
 </script>

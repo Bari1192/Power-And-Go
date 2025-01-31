@@ -2,7 +2,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 font-semibold">
         <div>
             <label for="location" class="text-2xl  my-4 text-white block">Baleset pontos helyszíne:</label>
-            <input id="location" type="text" class="border rounded-lg px-3 py-2 w-4/5"
+            <input id="location" type="text" class="border text-sky-900 font-semibold rounded-lg px-3 py-2 w-4/5"
                 placeholder="Kezdje el beírni a címet..." ref="autocompleteInput" />
             <div class="mt-4 space-y-2 text-white ">
                 <FormKit type="form" id="demageReport" :form-class="submitted ? 'hide' : 'show'"
@@ -25,7 +25,7 @@
                             inner-class="py-2" label-class="text-xl mt-4 text-white block" />
                     </div>
 
-                    <div class="w-full px-3">
+                    <div class="w-full px-3 mb-2">
                         <FormKit formtKit-class="text-xl my-4 py-4 text-white block" type="radio" name="someOneInjured"
                             :options="['Igen', 'Nem']" label="Személyi sérülés történt?" />
                     </div>
@@ -36,7 +36,7 @@
                                 length: 'A bejelentés szövege min 20, maximum 255 karakter hosszú lehet!',
                                 required: 'Kötelező kitölteni!'
                             }" label-class="text-white text-lg mt-4 font-semibold mb-2"
-                            input-class="max-h-28 min-h-16 w-full align-top appearance-none bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded-md py-3 px-4 focus:outline-none focus:bg-white focus:border-gray-500"
+                            input-class="mt-2 max-h-28 min-h-16 w-full align-top appearance-none bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded-md py-3 px-4 focus:outline-none focus:bg-white focus:border-gray-500"
                             @input="value => description = value" />
                     </div>
                     <div
@@ -189,6 +189,14 @@ export default {
 </script>
 
 <style>
+#input_2-option-nem{
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+}
+ #input_2-option-igen{
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+}
 .pac-container {
     z-index: 10000; /* Mindig felül legyen */
     border: 3px solid rgb(62, 137, 167); /* Zöld keret */
