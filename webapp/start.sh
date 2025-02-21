@@ -12,28 +12,24 @@ else
     ln -s backend/.env
 fi
 
-if ! [ -d "frontend/node_modules" ]; then
-    docker run --rm  -v "$(pwd)/frontend:/app" --entrypoint npm idomi27/vue install
-fi
+docker run --rm  -v "$(pwd)/frontend:/app" --entrypoint npm idomi27/vue install
 
 docker compose up -d
 
 docker compose exec backend composer install
 
-docker compose exec backend php artisan migrate:fresh --seed
-
-if [ -f "backend/tests/test-run-order.sh" ]; then
-    bash backend/tests/test-run-order.sh
-else
-    echo "test-run-order.sh fájl nem található."
-fi
-docker compose exec backend php artisan migrate:fresh --seed
-
-docker compose exec backend php artisan migrate --path=database/migrations/dbViews
-
 docker compose exec backend php artisan storage:link
 
-echo "A konténerek elindultak, a migrációk lefutottak."
+docker compose exec backend php artisan migrate:fresh --seed
+
+# if [ -f "backend/tests/test-run-order.sh" ]; then
+#     bash backend/tests/test-run-order.sh
+# else
+#     echo "test-run-order.sh fájl nem található."
+# fi
+docker compose exec backend php artisan migrate --path=database/migrations/dbViews
+
+echo "A konténerek elindultak, a migrációk, nézetek, tesztek lefutottak."
 
 if [ -z "${APP_KEY}" ]; then
     docker compose exec backend php artisan key:generate

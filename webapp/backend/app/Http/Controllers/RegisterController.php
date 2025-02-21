@@ -18,11 +18,6 @@ class RegisterController extends Controller
         $data = $request->validated();
 
         DB::beginTransaction();
-        ## Adatbázisban Transaction műveletet csináljon, azaz
-        ## Csak akkor jöjjön létre a regisztráció, HA
-        ## A PERSON és a USER létrehozása is sikeresen megtörtént.
-        ## Nem fog konzisztenciát okozni / duplikálásokat.
-
         try {
             $person = Person::create([
                 "person_password" => $data['password'], # Itt NO HASH!

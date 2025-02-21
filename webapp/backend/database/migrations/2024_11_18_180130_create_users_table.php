@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
+            $table->foreignId('person_id')->constrained('persons')->onDelete('cascade'); 
             $table->foreignId('sub_id')->constrained('subscriptions')->onDelete('cascade');
             $table->integer('account_balance')->default(0);
             $table->string('password_2_4', 2);

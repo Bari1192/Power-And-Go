@@ -3,11 +3,13 @@
 namespace Tests\Unit\Database;
 
 use App\Models\Person;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class Step6_Persons_DatabaseTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_persons_table_exists_in_database()
     {
         $this->assertTrue(

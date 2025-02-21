@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-white text-black dark:bg-[#00204a] dark:text-white border-b-4 border-sky-800">
+  <nav class="text-white bg-sky-950 border-b-4 border-sky-800">
     <div class="flex justify-between align-middle p-3 border-b-2 flex-wrap dark:border-none">
       <RouterLink to="/" class="flex items-center space-x-3 mx-auto" active-class="font-bold text-lime-500">
         <img src="../../assets/img/BaseEmail/logo_small.png" class="h-24 w-full" alt="Power And Go Logo" />

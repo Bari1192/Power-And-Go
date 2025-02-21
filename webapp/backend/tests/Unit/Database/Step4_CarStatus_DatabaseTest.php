@@ -3,11 +3,13 @@
 namespace Tests\Unit\Database;
 
 use App\Models\CarStatus;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class Step4_CarStatus_DatabaseTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_carstatus_table_exists_in_database()
     {
         $this->assertTrue(

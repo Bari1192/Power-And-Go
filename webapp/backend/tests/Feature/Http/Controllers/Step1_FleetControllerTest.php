@@ -3,10 +3,12 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Fleet;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class Step1_FleetControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_get_all_fleet_types(): void
     {
         $response = $this->get('api/fleets');
@@ -42,7 +44,7 @@ class Step1_FleetControllerTest extends TestCase
         $latestFleet = Fleet::latest('id')->first();
 
         $modifiedData = [
-            "id"=>$latestFleet->id,
+            "id" => $latestFleet->id,
             "manufacturer" => "Renault",
             "carmodel" => "MODIFIED-ULTRA-SUPER",
             "motor_power" => 100,

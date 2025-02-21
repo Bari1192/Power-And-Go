@@ -27,7 +27,7 @@ class Hello extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Hello',
+            subject: 'Bérlés Összesítő',
         );
     }
 
@@ -37,7 +37,8 @@ class Hello extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.hello',
+            view: 'emails.rental-summary',
+            
         );
     }
 

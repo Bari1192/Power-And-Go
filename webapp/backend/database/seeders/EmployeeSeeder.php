@@ -11,7 +11,7 @@ class EmployeeSeeder extends Seeder
 {
     public function run(): void
     {
-        $persons = Person::inRandomOrder()->limit(300)->get();
+        $persons = Person::inRandomOrder()->limit(100)->get();
 
         foreach ($persons as $person) {
             $employee = Employee::factory()->make([

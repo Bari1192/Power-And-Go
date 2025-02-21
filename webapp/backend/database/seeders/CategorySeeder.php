@@ -13,7 +13,7 @@ class CategorySeeder extends Seeder
 
         foreach ($motor_powerek as $index => $motor_powerErteke) {
             DB::table('categories')->insert([
-                'category_class' => $index + 1, // Az indexet használjuk kategória besorolásként
+                'category_class' => $index + 1,
                 'motor_power' => $motor_powerErteke,
             ]);
         }

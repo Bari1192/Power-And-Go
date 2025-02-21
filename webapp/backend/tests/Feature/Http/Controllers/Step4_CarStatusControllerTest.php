@@ -3,10 +3,12 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\CarStatus;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class Step4_CarStatusControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_get_all_carstatus_data(): void
     {
         $response = $this->get('/api/carstatus');

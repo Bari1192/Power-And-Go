@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
 
             $table->integer('total_cost');
+            $table->integer('credits')->nullable();
+            $table->integer('charged_kw')->nullable();
             $table->integer('distance')->nullable();
             $table->integer('parking_minutes')->nullable();
             $table->integer('driving_minutes')->nullable();

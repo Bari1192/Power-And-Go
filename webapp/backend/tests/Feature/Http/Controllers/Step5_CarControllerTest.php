@@ -3,10 +3,13 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class Step5_CarControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_can_get_all_cars(): void
     {
         $response = $this->getJson('/api/cars');
@@ -81,7 +84,7 @@ class Step5_CarControllerTest extends TestCase
 
         $response = $this->get("/api/cars/{$car->id}/bills");
 
-        $response->assertStatus(200); 
+        $response->assertStatus(200);
 
         $data = collect($response->json('data'));
 
@@ -97,7 +100,6 @@ class Step5_CarControllerTest extends TestCase
 
     public function test_car_latest_ticket_description_text(): void
     {
-
         $car = Car::FirstOrFail();
         $response = $this->get("/api/cars/{$car->id}/description");
 
@@ -111,16 +113,69 @@ class Step5_CarControllerTest extends TestCase
         $this->assertNotEmpty($data['admin_description'], 'A(z) admin_description mező üres.');
     }
 
-    public function test_car_all_rent_history():void{
-        $car = Car::FirstOrFail();
-        
-        $response=$this->get("api/cars/{$car->id}/renthistory");
+    public function test_car_all_rent_history(): void
+    {
+        ## Első autó létrehozása egyedi rendszámmal
+        $car = Car::factory()->create([
+            'plate' => 'TEST' . rand(1000, 9999),
+            'status' => 1
+        ]);
+        $user = User::factory()->create([
+            'user_name' => 'TestUser_' . uniqid() 
+        ]);
+        ## Kapcsolat a pivot táblában
+        $car->users()->attach($user->id, [
+            'start_percent' => 70.28,
+            'start_kw' => 25.3,
+            'end_percent' => 64.17,
+            'end_kw' => 23.1,
+            'rent_start' => now()->subDays(5),
+            'rent_close' => now()->subDays(4),
+            'distance' => 50,
+            'parking_minutes' => 60,
+            'driving_minutes' => 120,
+            'rental_cost' => 15000,
+            'category_id' => $car->category_id,
+            'rentstatus' => 2,
+            'invoice_date' => now()
+        ]);
+
+        $response = $this->get("api/cars/{$car->id}/renthistory");
 
         $response->assertStatus(200);
-        $data=$response->json('data');
+        $data = $response->json('data');
 
-        $this->assertNotEmpty($data,"Nem érkezett adat a végpontról / üres!");
-        $this->assertArrayHasKey('renters',$data,'A bérlők nem töltődtek be!');
-        $this->assertNotEmpty($data['renters'], 'a `renters` tömb üresen érkezett vissza!. ');
+        $this->assertNotEmpty($data, "Nem érkezett adat a végpontról / üres!");
+        $this->assertArrayHasKey('renters', $data, 'A bérlők nem töltődtek be!');
+        $this->assertNotEmpty($data['renters'], 'A `renters` tömb üresen érkezett vissza!');
+
+        ## Ellenőrizzük a válasz struktúrát
+        $renters = $data['renters'];
+        $this->assertIsArray($renters);
+
+        foreach ($renters as $renter) {
+            $this->assertArrayHasKey('rent_id', $renter);
+            $this->assertArrayHasKey('user', $renter);
+            $this->assertArrayHasKey('rent_start', $renter);
+            $this->assertArrayHasKey('start_percent', $renter);
+            $this->assertArrayHasKey('start_kw', $renter);
+            $this->assertArrayHasKey('rent_close', $renter);
+            $this->assertArrayHasKey('end_percent', $renter);
+            $this->assertArrayHasKey('end_kw', $renter);
+            $this->assertArrayHasKey('distance', $renter);
+            $this->assertArrayHasKey('rental_cost', $renter);
+            $this->assertArrayHasKey('parking', $renter);
+            $this->assertArrayHasKey('invoice_date', $renter);
+
+            ## Ellenőrizzük a konkrét értékeket, de most a user_name-t dinamikusan
+            $this->assertEquals($user->user_name, $renter['user']);
+            $this->assertEquals(70.28, $renter['start_percent']);
+            $this->assertEquals(25.3, $renter['start_kw']);
+            $this->assertEquals(64.17, $renter['end_percent']);
+            $this->assertEquals(23.1, $renter['end_kw']);
+            $this->assertEquals(50, $renter['distance']);
+            $this->assertEquals('15 000', $renter['rental_cost']);
+            $this->assertEquals(60, $renter['parking']);
+        }
     }
 }

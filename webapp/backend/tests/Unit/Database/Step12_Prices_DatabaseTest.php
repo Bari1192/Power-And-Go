@@ -3,11 +3,13 @@
 namespace Tests\Unit\Database;
 
 use App\Models\Price;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class Step12_Prices_DatabaseTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_prices_table_exists_in_database()
     {
         $this->assertTrue(

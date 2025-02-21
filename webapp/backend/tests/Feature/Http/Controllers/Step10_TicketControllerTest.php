@@ -4,10 +4,12 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\Ticket;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class Step10_TicketControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_can_get_all_tickets(): void
     {
         $response = $this->get('/api/tickets');

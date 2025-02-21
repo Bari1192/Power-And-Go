@@ -50,7 +50,6 @@ class User extends Model implements AuthenticatableContract
     {
         return $this->belongsToMany(Car::class, 'car_user_rents', 'user_id', 'car_id')
             ->withPivot([
-                'id',
                 'start_percent',
                 'start_kw',
                 'end_percent',

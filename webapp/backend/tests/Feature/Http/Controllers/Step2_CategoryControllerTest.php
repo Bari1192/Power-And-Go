@@ -3,10 +3,12 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class Step2_CategoryControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_can_get_all_categories(): void
     {
         $response = $this->get('/api/categories');

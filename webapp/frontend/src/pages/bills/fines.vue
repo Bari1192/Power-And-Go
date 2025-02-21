@@ -45,7 +45,7 @@ export default {
     },
     async mounted() {
         try {
-            const resp = await http.get('/szamlak/filter/charging_penalty');
+            const resp = await http.get('/bills/filter/charging_penalty');
             this.fines = resp.data.data;
         } catch (error) {
             console.error('Hiba történt az API hívás során:', error);

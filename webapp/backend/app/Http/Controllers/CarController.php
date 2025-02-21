@@ -18,7 +18,7 @@ class CarController extends Controller
 {
     public function index(): JsonResource
     {
-        $cars = Car::with(['fleet', 'tickets','carstatus'])->get();
+        $cars = Car::with(['fleet', 'tickets', 'carstatus'])->get();
         return CarResource::collection($cars);
     }
 
@@ -48,12 +48,12 @@ class CarController extends Controller
     }
     public function filterCarFines(Car $car): JsonResource
     {
-        $szamlak = Bill::with(['users', 'persons'])
-        ->where('car_id', $car->id)
-        ->where('bill_type', 'charging_penalty')
-        ->get();
+        $bills = Bill::with(['users', 'persons'])
+            ->where('car_id', $car->id)
+            ->where('bill_type', 'charging_penalty')
+            ->get();
 
-        return BillResource::collection($szamlak);
+        return BillResource::collection($bills);
     }
     public function carTickets(Car $car): JsonResource
     {
@@ -68,7 +68,6 @@ class CarController extends Controller
         $car = Car::with(['users', 'fleet', 'users.person'])->find($car->id);
         return new CarWithUsersResource($car);
     }
-
     ## Utolsó ticket lekérjük az autó ID alapján, státusz szöveggel.
     public function carLastTicketDescription(Car $car): JsonResource
     {

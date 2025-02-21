@@ -2,11 +2,13 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class Step12_GoogleApiControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_can_get_google_api_url_with_api_key_and_map_id()
     {
         $apiKulcs = env('VITE_GOOGLE_MAPS_API_KEY');

@@ -4,11 +4,13 @@ namespace Tests\Unit\Database;
 
 use App\Models\Person;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class Step7_Users_DatabaseTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_users_table_exists_in_database()
     {
         $this->assertTrue(
@@ -102,8 +104,8 @@ class Step7_Users_DatabaseTest extends TestCase
     public function test_users_columns_cannot_allows_out_of_maximum_and_minimum_migration_lenght_and_format()
     {
         $data = [
-            'person_id' => 999,
-            'sub_id' => 999,
+            'person_id' => 999999,
+            'sub_id' => 9999999,
             'account_balance' => -1,
             'password_2_4' => '123',
             'user_name' => '',

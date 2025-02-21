@@ -12,7 +12,14 @@ class Dailyrental extends Model
     protected $table = 'dailyrentals';
     protected $primaryKey = 'id';
     public $incrementing = true;
-    protected $fillable = [];
+    public $timestamps = false;
+
+    protected $fillable = [
+        'prices_id',
+        'category_class',
+        'days',
+        'price',
+    ];
 
     public function arazasok(): BelongsTo
     {

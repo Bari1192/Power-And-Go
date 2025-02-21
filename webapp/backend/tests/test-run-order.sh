@@ -1,5 +1,3 @@
-## Összesítésként egyben ##
-docker compose exec backend php artisan test
 
 ### Sorrendben | [teszt] | Controller osztályokban ###
 docker compose exec backend php artisan test --filter=Step1_FleetControllerTest
@@ -25,11 +23,19 @@ docker compose exec backend php artisan test --filter=Step6_Persons_DatabaseTest
 docker compose exec backend php artisan test --filter=Step7_Users_DatabaseTest
 docker compose exec backend php artisan test --filter=Step8_Employees_DatabaseTest
 docker compose exec backend php artisan test --filter=Step9_Bills_DatabaseTest
-docker compose exec backend php artisan test --filter=Step10_Tickets_DatabaseTest
-docker compose exec backend php artisan test --filter=Step11_Equipment_DatabaseTest
+docker compose exec backend php artisan test --filter=Step10_Tickets_DatabaseTest 
+docker compose exec backend php artisan test --filter=Step11_Equipment_DatabaseTest 
 docker compose exec backend php artisan test --filter=Step12_Prices_DatabaseTest
 docker compose exec backend php artisan test --filter=Step13_DailyRentals_DatabaseTest
 
-docker compose exec backend php artisan test --filter=CarIntegrationTest
 docker compose exec backend php artisan test --filter=EquipmentModelTest
+
+### Sorrendben | [teszt] | [Modul-Functions] osztályokban ###
+docker compose exec backend php artisan test --filter=ChargeFactoryTest
+docker compose exec backend php artisan test --filter=ParkingFactoryTest
+
+## Összesítésként egyben ##
+docker compose exec backend php artisan test
+
+
 

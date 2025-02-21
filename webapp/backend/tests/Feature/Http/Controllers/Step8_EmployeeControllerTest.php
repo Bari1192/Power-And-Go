@@ -2,12 +2,13 @@
 
 namespace Tests\Feature\Http\Controllers;
 
-use App\Models\Employee;
 use App\Models\Person;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class Step8_EmployeeControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_can_get_all_employee_data()
     {
         $response = $this->get('/api/employees');
@@ -89,7 +90,6 @@ class Step8_EmployeeControllerTest extends TestCase
     }
     public function test_can_create_new_employee_into_database()
     {
-        // Step 1: Create a new person using the API
         $personResponse = $this->postJson('/api/persons', [
             "person_password" => "12345678",
             "id_card" => fake()->unique()->regexify('[V-Z]{2}[1-9]{1}[0-9]{5}'),
@@ -101,12 +101,9 @@ class Step8_EmployeeControllerTest extends TestCase
         ]);
 
         $personResponse->assertStatus(201);
-
-        // Retrieve person data from the response
         $personData = $personResponse->json('data');
         $this->assertNotNull($personData, 'Person data not found in response.');
 
-        // Step 2: Create a new employee for the created person
         $newEmployeeData = [
             "person_id" => $personData['person_id'],
             "field" => "Marketing",
@@ -118,11 +115,8 @@ class Step8_EmployeeControllerTest extends TestCase
         ];
 
         $employeeResponse = $this->postJson('/api/employees', $newEmployeeData);
-
-        // Ensure the employee creation request was successful
         $employeeResponse->assertStatus(201);
 
-        // Step 3: Validate employee data in the database
         $this->assertDatabaseHas('employees', [
             'person_id' => $newEmployeeData['person_id'],
             'field' => $newEmployeeData['field'],
@@ -139,13 +133,16 @@ class Step8_EmployeeControllerTest extends TestCase
         $response->assertStatus(200);
         $data = $response->json('data');
 
-        $lenght = count($data);
-        $randomNumber = random_int(1, $lenght);
-        $response = $this->get("/api/employees/{$randomNumber}");
+        $this->assertNotEmpty($data, 'Nincs elérhető dolgozó az adatbázisban.');
+
+        $randomEmployee = fake()->randomElement($data);
+        $employeeId = $randomEmployee['id'];
+
+        $response = $this->get("/api/employees/{$employeeId}");
         $response->assertStatus(200);
         $employee = $response->json('data');
 
-        $updatetedData = [
+        $updatedData = [
             "id" => $employee['id'],
             "person_id" => $employee['person_id'],
             "field" => "Ügyfélszolgálat",
@@ -155,7 +152,8 @@ class Step8_EmployeeControllerTest extends TestCase
             "salary" => 400000,
             "hire_date" => now()->format("Y-m-d"),
         ];
-        $response = $this->putJson("/api/employees/{$randomNumber}", $updatetedData);
+
+        $response = $this->putJson("/api/employees/{$employeeId}", $updatedData);
         $response->assertStatus(200);
     }
     public function test_can_delete_random_employee_from_database_table()
@@ -163,16 +161,19 @@ class Step8_EmployeeControllerTest extends TestCase
         $response = $this->get("/api/employees");
         $response->assertStatus(200);
         $data = $response->json('data');
-
-        $lenght = count($data);
-        $randomNumber = fake()->numberBetween(1, $lenght);
-        $response = $this->get("/api/employees/{$randomNumber}");
+    
+        $this->assertNotEmpty($data, 'Nincs elérhető dolgozó az adatbázisban.');
+    
+        $randomEmployee = fake()->randomElement($data);
+        $employeeId = $randomEmployee['id'];
+    
+        $response = $this->get("/api/employees/{$employeeId}");
         $response->assertStatus(200);
         $employee = $response->json('data');
-
-        $response = $this->delete("/api/employees/{$randomNumber}");
+    
+        $response = $this->delete("/api/employees/{$employeeId}");
         $response->assertStatus(204);
-
+    
         $response = $this->assertDatabaseMissing('employees', $employee);
     }
 }

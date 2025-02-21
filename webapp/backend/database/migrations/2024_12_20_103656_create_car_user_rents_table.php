@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('persons')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users','id')->onDelete('cascade');
 
             // Specifikus mezők
             $table->float('start_percent', 2)->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('parking_minutes')->nullable();
             $table->integer('driving_minutes')->nullable();
             $table->integer('rental_cost')->nullable();
-            $table->timestamp('invoice_date')->now();
+            $table->timestamp('invoice_date')->useCurrent();
 
             $table->unsignedTinyInteger('rentstatus')->default(1);
         });

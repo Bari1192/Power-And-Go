@@ -3,10 +3,12 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Bill;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class Step9_BillControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     public $fixedDateTime;
     protected function setUp(): void
     {
@@ -86,15 +88,14 @@ class Step9_BillControllerTest extends TestCase
 
         $latestBill = Bill::latest('id')->first();
 
-        // Díjak ellenőrzése
+        ## Díjak ellenőrzése
         $response = $this->get("/api/bills/{$randNumber}/fees");
         $response->assertStatus(200);
         $feesData = $response->json('data');
 
         $this->assertNotEmpty($feesData, 'Fees data cannot be empty.');
 
-
-        // Adatbázis ellenőrzése
+        ## Adatbázis ellenőrzése
         $this->assertDatabaseHas('bills', [
             "id" => $latestBill->id,
             "bill_type" => "charging_penalty",

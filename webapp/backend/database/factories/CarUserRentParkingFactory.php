@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\Car;
 use App\Models\CarUserRentParking;
 use App\Models\Price;
+use App\Models\User;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,109 +17,175 @@ class CarUserRentParkingFactory extends Factory
     {
         return [];
     }
-    public function generaltParkolasok(\DateTime $berlesKezdete, \DateTime $berlesVege, int $categoryId, int $subId): array
-    {
+    public function generaltParkolasok(
+        DateTime $berlesKezdete,
+        DateTime $berlesVege,
+        Price $arazas,
+        User $user,
+        Car $auto,
+        array $parkolasokAranyok
+    ): array {
         $parkolasok = [];
-
-        $berlesIdoMasodperc = $berlesVege->getTimestamp() - $berlesKezdete->getTimestamp();
-        $berlesIdotartam = $berlesIdoMasodperc / 3600;
-
-        $parkolasokSzama = 0;
-        if ($berlesIdotartam > 1 && $berlesIdotartam <= 3) {
-            $parkolasokSzama = random_int(1, 2);
-        } elseif ($berlesIdotartam >= 6 && $berlesIdotartam <= 16) {
-            $parkolasokSzama = random_int(2, 5);
-        } elseif ($berlesIdotartam > 16) {
-            $parkolasokSzama = random_int(3, 6);
-        }
-
-        $parkolasArany = rand(10, 50) / 100;
-        $maxParkolasPerc = (int)(($berlesIdoMasodperc / 60) * $parkolasArany);
-        $minParkolas = 5;
-        $maxParkolas = max($minParkolas, $maxParkolasPerc);
-
-        $price = Price::where('category_class', $categoryId)
-            ->where('sub_id', $subId)
-            ->first();
-            $parkolasPercDij = $price->parking_minutes;
-
-        for ($i = 0; $i < $parkolasokSzama; $i++) {
-            $randomKezdIdo = $this->veletlenszeruIdo($berlesKezdete, $berlesVege);
-
-            $randomHossz = $minParkolas;
-            if ($maxParkolas > $minParkolas) {
-                $randomHossz = random_int($minParkolas, $maxParkolas);
-            }
-
-            $randomVegeIdo = (clone $randomKezdIdo)->modify("+{$randomHossz} minutes");
-            if ($randomVegeIdo > $berlesVege) {
-                $randomVegeIdo = $berlesVege;
-            }
-
-            $parkolasHosszaPerc = max(0, ($randomVegeIdo->getTimestamp() - $randomKezdIdo->getTimestamp()) / 60);
-
-            $price = Price::where('category_class', $categoryId)
-                ->where('sub_id', $subId)
-                ->first();
-
-            $parkolasDijAdatok = $this->parkolasiKoltsegek([[
-                'kezd' => $randomKezdIdo->format('Y-m-d H:i:s'),
-                'veg' => $randomVegeIdo->format('Y-m-d H:i:s'),
-                'hossza_perc' => $parkolasHosszaPerc,
-            ]], $parkolasPercDij, $subId);
-
-            $totalCost = $parkolasDijAdatok['ejszakaiParkolasiOsszeg'] + $parkolasDijAdatok['normalParkolasiOsszeg'];
-
+        foreach ($parkolasokAranyok as $percek) {
+            if ($percek < 5) continue;
+            $kezd = fake()->dateTimeBetween(
+                $berlesKezdete,
+                (clone $berlesVege)->modify('-' . ($percek + 5) . ' minutes')
+            );
+            $veg = (clone $kezd)->modify('+' . $percek . ' minutes');
             $parkolasok[] = [
-                'kezd' => $randomKezdIdo->format('Y-m-d H:i:s'),
-                'veg' => $randomVegeIdo->format('Y-m-d H:i:s'),
-                'hossza_perc' => $parkolasHosszaPerc,
-                'total_cost' => intval($totalCost),
+                'kezd' => $kezd->format('Y-m-d H:i:s'),
+                'veg' => $veg->format('Y-m-d H:i:s'),
+                'parking_minutes' => $percek,
+                'total_cost' => $this->parkolasiKoltsegek($user, $auto, $arazas, [['kezd' => $kezd, 'veg' => $veg, 'parking_minutes' => $percek]])
             ];
         }
         return $parkolasok;
     }
-
-    private function veletlenszeruIdo(\DateTime $start, \DateTime $end): \DateTime
+    /**
+     * PARKOLÁS & ÉJSZAKAI PARKOLÁSÉRT FELELŐS FÜGGVÉNY!
+     */
+    public function parkolasiKoltsegek(User $user, Car $auto, Price $arazas, array $parkolasok): int
     {
-        $idoTartam = $end->getTimestamp() - $start->getTimestamp();
-        $veletlenOffset = random_int(0, $idoTartam);
-        return (clone $start)->modify("+{$veletlenOffset} seconds");
-    }
+        if (empty($parkolasok)) {
+            return 0;
+        }
+        $arazas = Price::where('category_class', $auto->category_id)
+            ->where('sub_id', $user->sub_id)
+            ->first();
 
-    public function parkolasiKoltsegek(array $parkolasok, $parkolasPercDij, int $userSubId,): array
-    {
-        $ejszakaiParkolasIdeje = 0;
-        $normalParkolasIdeje = 0;
+        $percDij = $arazas->parking_minutes ?? 90;
+        $totalCost = 0;
 
         foreach ($parkolasok as $parking) {
-            $kezdIdo = new DateTime($parking['kezd']);
-            $vegIdo = new DateTime($parking['veg']);
+            $kezdIdo = $parking['kezd'] instanceof DateTime ? $parking['kezd'] : new DateTime($parking['kezd']);
+            $vegIdo = $parking['veg'] instanceof DateTime ? $parking['veg'] : new DateTime($parking['veg']);
 
-            # Éjszakai intervallum: 22:00 – 07:00
-            $ejszakaiParkKezd = new DateTime($kezdIdo->format('Y-m-d') . ' 22:00:00');
-            $ejszakaiParkVeg  = new DateTime($vegIdo->format('Y-m-d') . ' 07:00:00');
-
-            if ($kezdIdo >= $ejszakaiParkKezd || $vegIdo <= $ejszakaiParkVeg) {
-                if ($kezdIdo >= $ejszakaiParkKezd && $vegIdo <= $ejszakaiParkVeg) {
-                    $ejszakaiParkolasIdeje += ($vegIdo->getTimestamp() - $kezdIdo->getTimestamp()) / 60;
-                } elseif ($kezdIdo >= $ejszakaiParkKezd) {
-                    $ejszakaiParkolasIdeje += ($vegIdo->getTimestamp() - $ejszakaiParkKezd->getTimestamp()) / 60;
-                } elseif ($vegIdo <= $ejszakaiParkVeg) {
-                    $ejszakaiParkolasIdeje += ($ejszakaiParkVeg->getTimestamp() - $kezdIdo->getTimestamp()) / 60;
-                }
-            } else {
-                $normalParkolasIdeje += ($vegIdo->getTimestamp() - $kezdIdo->getTimestamp()) / 60;
+            $split = $this->calculateDayNightMinutes($kezdIdo, $vegIdo);
+            if (!($user->sub_id === 4 && in_array($auto->category_id, [1, 2, 3]))) {
+                $totalCost += $split['night'] * $percDij;
             }
+            $totalCost += $split['day'] * $percDij;
         }
-        $ejszakaiParkolasiOsszeg = $ejszakaiParkolasIdeje * $parkolasPercDij;
-        $normalParkolasiOsszeg  = $normalParkolasIdeje * $parkolasPercDij;
+
+        return max(0, (int) round($totalCost));
+    }
+
+    /**
+     * Felbontja a (start–end) intervallumot napokra,
+     * és kiszámolja, hány perc esik 07:00–22:00 (day) és 22:00–07:00 (night) közé.
+     * Többnapos intervallumokat is kezel.
+     */
+    public function calculateDayNightMinutes(DateTime $start, DateTime $end): array
+    {
+        if ($end <= $start) {
+            return ['day' => 0, 'night' => 0];
+        }
+        $dayMinutes = 0;
+        $nightMinutes = 0;
+        $current = clone $start;
+
+        while ($current < $end) {
+            ## Az adott nap nappali sávja
+            $dayStart = (clone $current)->setTime(7, 0);
+            $dayEnd   = (clone $current)->setTime(22, 0);
+
+            ## Nap vége = holnap 00:00
+            $midnight = (clone $current)->modify('tomorrow')->setTime(0, 0);
+            ## Meddig tart ez a "rész-nap"?
+            $todayEnd = min($midnight, $end);
+
+            ## Kiszámoljuk, mennyi perc az átfedés a [current–todayEnd] és a [dayStart–dayEnd] között
+            $dayOverlap = $this->overlapInMinutes($current, $todayEnd, $dayStart, $dayEnd);
+
+            ## A [current–todayEnd] összes perc
+            $todayTotal = max(0, (int) floor(($todayEnd->getTimestamp() - $current->getTimestamp()) / 60));
+
+            ## Éjszaka = total - nappali overlap
+            $nightOverlap = max(0, $todayTotal - $dayOverlap);
+
+            $dayMinutes   += $dayOverlap;
+            $nightMinutes += $nightOverlap;
+
+            ## Következő napra ugrunk
+            $current = $midnight;
+        }
 
         return [
-            'ejszakaiParkolasIdeje'    => $ejszakaiParkolasIdeje,
-            'normalParkolasIdeje'     => $normalParkolasIdeje,
-            'ejszakaiParkolasiOsszeg' => $ejszakaiParkolasiOsszeg,
-            'normalParkolasiOsszeg'   => $normalParkolasiOsszeg,
+            'day'   => $dayMinutes,
+            'night' => $nightMinutes,
+        ];
+    }
+    /**
+     * Két intervallum (A=[startA,endA], B=[startB,endB]) átfedésének hossza percben.
+     */
+    private function overlapInMinutes(
+        DateTime $startA,
+        DateTime $endA,
+        DateTime $startB,
+        DateTime $endB
+    ): int {
+        $startMax = max($startA->getTimestamp(), $startB->getTimestamp());
+        $endMin   = min($endA->getTimestamp(), $endB->getTimestamp());
+
+        if ($endMin <= $startMax) {
+            return 0;
+        }
+
+        return (int) floor(($endMin - $startMax) / 60);
+    }
+    public function userFullTimeRentValidation(
+        DateTime $berlesKezdete,
+        Car $auto,
+        DateTime $berlesVege,
+        Price $arazas,
+        ?int &$vezetesIdo,
+        array $parkolasok,
+        User $user
+    ): array {
+        $totalSeconds = $berlesVege->getTimestamp() - $berlesKezdete->getTimestamp();
+        $totalMinutes = round($totalSeconds / 60);
+        $vezetesIdo = round($vezetesIdo ?? 0);
+
+        $osszesParkolasIdo = array_sum(array_column($parkolasok, 'parking_minutes'));
+        $maxParkingMinutes = round($totalMinutes * 0.6);
+
+        ## max parkolási idő túllépésére
+        if ($osszesParkolasIdo > $maxParkingMinutes) {
+            $excessParking = $osszesParkolasIdo - $maxParkingMinutes;
+            $vezetesIdo += $excessParking;
+
+            if (!empty($parkolasok)) {
+                $lastIndex = count($parkolasok) - 1;
+                $parkolasok[$lastIndex]['parking_minutes'] = max(
+                    5,
+                    $parkolasok[$lastIndex]['parking_minutes'] - $excessParking
+                );
+
+                ## Frissíteni a végső időpontot
+                $kezdIdo = new DateTime($parkolasok[$lastIndex]['kezd']);
+                $vegIdo = (clone $kezdIdo)->modify(
+                    '+' . $parkolasok[$lastIndex]['parking_minutes'] . ' minutes'
+                );
+                $parkolasok[$lastIndex]['veg'] = $vegIdo->format('Y-m-d H:i:s');
+
+                ## Újraszámolni a költséget
+                $parkolasok[$lastIndex]['total_cost'] = $this->parkolasiKoltsegek(
+                    $user,
+                    $auto,
+                    $arazas,
+                    [$parkolasok[$lastIndex]]
+                );
+            }
+        }
+
+        ## Végső vezetési idő kalkulálás
+        $osszesParkolasIdo = array_sum(array_column($parkolasok, 'parking_minutes'));
+        $vezetesIdo = $totalMinutes - round($osszesParkolasIdo);
+
+        return [
+            'parking' => $parkolasok,
+            'driving' => max(0, $vezetesIdo),
         ];
     }
 }

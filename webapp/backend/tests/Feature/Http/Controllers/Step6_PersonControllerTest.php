@@ -3,10 +3,12 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Person;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class Step6_PersonControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_can_get_all_person_data(): void
     {
 
@@ -113,7 +115,6 @@ class Step6_PersonControllerTest extends TestCase
     }
     public function test_can_update_person_in_database()
     {
-        // Step 1: Create a new person
         $response = $this->postJson('/api/persons', [
             "person_password" => "12345678",
             "id_card" => fake()->unique()->regexify('[V-Z]{2}[1-9]{1}[0-9]{5}'),
@@ -129,12 +130,10 @@ class Step6_PersonControllerTest extends TestCase
 
         $response->assertStatus(201);
 
-        // Retrieve the inserted person data
         $inserted = $response->json('data');
         $this->assertNotNull($inserted, 'Failed to retrieve the inserted data.');
         $this->assertArrayHasKey('person_id', $inserted, 'Person ID is missing in the response.');
 
-        // Step 2: Prepare updated data
         $updatedData = [
             "person_password" => "87654321",
             "id_card" => fake()->unique()->regexify('[V-Z]{2}[1-9]{1}[0-9]{5}'),

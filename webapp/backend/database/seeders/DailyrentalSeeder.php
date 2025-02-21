@@ -4,18 +4,14 @@ namespace Database\Seeders;
 
 use App\Models\Dailyrental;
 use App\Models\Price;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DailyrentalSeeder extends Seeder
 {
-    # Összes árazási kategória
     public function run(): void
     {
         $arazasok = Price::all(['id', 'category_class', 'sub_id']);
 
-        ### Tömeges beszúrás, a gyorsabb betöltés végett:
-        ### ebbe bele az összes rekordot!
         $insertData = []; 
 
         foreach ($arazasok as $arazas) {

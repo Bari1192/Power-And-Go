@@ -15,7 +15,7 @@ class CarFactory extends Factory
         $flotta = $this->flottabolAutotIdAlapjan();
         $equipment_class = Equipment::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
         $flottacarmodel = Fleet::find($flotta);
-        
+
         $toltes_szazalek = fake()->randomFloat(2, 15, 100);
         $power_kw = round($flottacarmodel->motor_power * ($toltes_szazalek / 100), 1);
         $becsultdriving_range = round(($flottacarmodel->driving_range / $flottacarmodel->motor_power) * $power_kw, 1);
@@ -29,7 +29,7 @@ class CarFactory extends Factory
             'power_percent' => $toltes_szazalek,
             'power_kw' => $power_kw,
             'estimated_range' => $becsultdriving_range,
-            'status' => 1, 
+            'status' => 1,
         ];
     }
     private function flottabolAutotIdAlapjan(): int
@@ -66,13 +66,21 @@ class CarFactory extends Factory
     {
         static $generaltRendszamok = [];
         do {
-            $rendszamUjRegi = random_int(0, 1);
-            if ($rendszamUjRegi > 0) {
-                $plate = strtoupper(fake()->regexify('AA[A-C][A-O]-[0-9]{3}'));
+            if (random_int(0, 1) === 1) {
+                ## Új típusú rendszám (pl.: ABC-123)
+                $betuk = chr(rand(65, 65 + 2)); ## A-C
+                $masodikBetuk = chr(rand(65, 65 + 14)); ## A-O
+                $plate = 'AA' . $betuk . $masodikBetuk . '-' . str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
             } else {
-                $plate = strtoupper(fake()->regexify('(M|N|P|R|S|T)[A-Z]{2}-[0-9]{3}'));
+                ## Régi típusú rendszám
+                $elsoBetuK = ['M', 'N', 'P', 'R', 'S', 'T'];
+                $elsoBetu = $elsoBetuK[array_rand($elsoBetuK)];
+                $masodikBetu = chr(rand(65, 90)); ## A-Z
+                $harmadikBetu = chr(rand(65, 90)); ## A-Z
+                $plate = $elsoBetu . $masodikBetu . $harmadikBetu . '-' . str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
             }
         } while (in_array($plate, $generaltRendszamok));
+
         $generaltRendszamok[] = $plate;
         return $plate;
     }

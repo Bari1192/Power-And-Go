@@ -17,8 +17,6 @@ class PriceSeeder extends Seeder
             # Kia Niro          65 kW       4-es besorolas
             # Opel Vivaro       75 kW       5-ös besorolas
 
-            # null -> nem elérhető ≠ 0!
-
             ## [Power] árak * [5 category_id]
             # E-up | 18 kW | 1-es besorolas |
             [

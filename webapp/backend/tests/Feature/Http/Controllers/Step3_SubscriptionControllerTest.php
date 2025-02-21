@@ -3,10 +3,12 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Subscription;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class Step3_SubscriptionControllerTest extends TestCase
-{
+{    
+    use DatabaseTransactions;
     public function test_get_all_subscription_data(): void
     {
         $response = $this->get('/api/subscriptions');

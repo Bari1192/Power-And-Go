@@ -9,24 +9,24 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (Schema::hasTable('bills') && Schema::hasTable('car_user_rents')) {
-            DB::statement(
-                "CREATE OR REPLACE VIEW SzamlakCsoportositva AS
-                SELECT
-                    `bills`.`bill_type` AS carmodel,
-                    COUNT(*) AS darabszam
-                FROM 
-                    `bills`
-                GROUP BY 
-                    `bill_type`
-                ORDER BY 
-                    darabszam DESC;"
-            );
-        }
+        // if (Schema::hasTable('bills') && Schema::hasTable('car_user_rents')) {
+        //     DB::statement(
+        //         "CREATE OR REPLACE VIEW bills_stats_view AS
+        //         SELECT 
+        //             `powerandgo`.`bills`.`bill_type` AS `carmodel`,
+        //             COUNT(`powerandgo`.`bills`.`id`) AS `darabszam`,
+        //             (SELECT COUNT(0) FROM `powerandgo`.`cars` WHERE `powerandgo`.`cars`.`status` = 7) AS `status_7`,
+        //         FROM 
+        //             `powerandgo`.`bills`
+        //         GROUP BY 
+        //             `powerandgo`.`bills`.`bill_type`
+        //         ORDER BY 
+        //             `darabszam` DESC;"
+        //     );
+        // }
     }
-
     public function down(): void
     {
-        DB::statement("DROP VIEW IF EXISTS SzamlakCsoportositva");
+        DB::statement("DROP VIEW IF EXISTS billsEsAutoStatus");
     }
 };

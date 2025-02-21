@@ -36,10 +36,10 @@ class UserFactory extends Factory
     public function felhasznaloNevGenerator(string $firstname): string
     {
         do {
-            $carmodelValaszto = random_int(0, 1);
+            $whichType = random_int(0, 1);
 
             ### [Vezetéknév + Szám] ###
-            if ($carmodelValaszto === 0) {
+            if ($whichType === 0) {
                 $felhNev_vege = fake()->numberBetween(1000, 9999);
                 $keszFelhNev = $firstname . $felhNev_vege;
 

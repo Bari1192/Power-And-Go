@@ -15,30 +15,22 @@ class EmployeeController extends Controller
         $employees=Employee::all();
         return EmployeeResource::collection($employees);
     }
-    /**
-     */
     public function store(StoreEmployeeRequest $request)
     {
         $data=$request->validated();
         $employee=Employee::create($data);
         return new EmployeeResource($employee);
     }
-    /**
-     */
     public function show(Employee $employee)
     {
         return new EmployeeResource($employee);
     }
-    /**
-     */
     public function update(StoreEmployeeRequest $request, Employee $employee)
     {
         $data=$request->validated();
         $employee->update($data);
         return new EmployeeResource($employee);
     }
-    /**
-     */
     public function destroy(Employee $employee):Response
     {
         return ($employee->delete()? response()->noContent() : abort(500));

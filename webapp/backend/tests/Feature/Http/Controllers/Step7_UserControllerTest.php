@@ -4,10 +4,12 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Person;
 use App\Models\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
 class Step7_UserControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_can_get_all_user_data()
     {
         $response = $this->get('/api/users');

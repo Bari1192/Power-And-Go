@@ -13,7 +13,7 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'person_id' => ['required', 'integer', 'exists:person,id'],
+            'person_id' => ['required', 'integer', 'exists:persons,id'],
             'user_name' => ['required', 'string', 'max:45', 'exists:users,user_name'],
             'password' => ['required', 'string', 'min:8', 'max:60'],
             'password_2_4' => ['required', 'size:2'],

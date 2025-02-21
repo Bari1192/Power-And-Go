@@ -3,12 +3,13 @@
 namespace Tests\Unit\Database;
 
 use App\Models\Ticket;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class Step10_Tickets_DatabaseTest extends TestCase
 {
-
+    use DatabaseTransactions;
     public function test_tickets_table_exists_in_database()
     {
         $this->assertTrue(

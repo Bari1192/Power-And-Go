@@ -3,12 +3,13 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Person;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class Step11_RegisterControllerTest extends TestCase
 {
-
+    use DatabaseTransactions;
     public function test_can_regist_user_to_database_with_its_all_keys()
     {
         $person = Person::factory()->make([

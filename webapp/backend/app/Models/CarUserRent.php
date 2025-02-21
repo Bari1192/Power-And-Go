@@ -12,6 +12,10 @@ class CarUserRent extends Model
 
     public function parkings(): HasMany
     {
-        return $this->hasMany(CarUserRentParking::class,'rent_id','id');
+        return $this->hasMany(CarUserRentParking::class, 'rent_id', 'id');
+    }
+    public function charges(): HasMany
+    {
+        return $this->hasMany(CarUserrentCharge::class, 'rent_id', 'id');
     }
 }

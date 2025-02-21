@@ -3,11 +3,13 @@
 namespace Tests\Unit\Models;
 
 use App\Models\Equipment;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class EquipmentModelTest extends TestCase
 {
+    use DatabaseTransactions;
     public function test_equipments_table_has_created()
     {
         $this->assertTrue(

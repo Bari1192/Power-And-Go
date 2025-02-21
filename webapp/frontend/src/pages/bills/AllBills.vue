@@ -89,7 +89,7 @@ export default {
 
         async loadFines(page = 1) {
             try {
-                const resp = await http.get(`/szamlak?page=${page}`);
+                const resp = await http.get(`/bills?page=${page}`);
                 this.fines = resp.data.data;
                 this.currentPage = resp.data.meta.current_page;  // Metaadatok alapján
                 this.links = resp.data.links;

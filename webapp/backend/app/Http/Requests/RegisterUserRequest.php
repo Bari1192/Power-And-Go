@@ -13,15 +13,12 @@ class RegisterUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "id_card" => ["required"],
-            "firstname" => ["required"],
-            "lastname" => ["required"],
-            "birth_date" => ["required"],
-            "phone" => ["required"],
-            "email" => ["required"],
-
-            "user_name" => ["required", "string", "max:50", "unique:users,user_name"],
-            'password' => ["required", "string", "min:8"],
+            'person_id' => ['required', 'integer', 'exists:persons,id'],
+            'user_name' => ['required', 'string', 'max:45', 'unique:users,user_name'],
+            'password' => ['required', 'string', 'min:8', 'max:60'],
+            'password_2_4' => ['required', 'string', 'size:2'],
+            'account_balance' => ['required', 'integer', 'min:0', 'max:1000000'],
+            'sub_id' => ['required', 'exists:subscriptions,id'],
         ];
     }
 }

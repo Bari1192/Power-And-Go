@@ -48,7 +48,7 @@ class Car extends Model
     {
         return $this->hasMany(Renthistory::class, 'car_id');
     }
-    public function szamlak(): HasMany
+    public function bills(): HasMany
     {
         return $this->hasMany(Bill::class, 'car_id');
     }

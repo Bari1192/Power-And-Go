@@ -1,135 +1,2048 @@
 openapi: 3.0.0
 info:
-  title: Swagger Petstore
+  title: PowerAndGo API
   description: |
-    This is a sample server Petstore server. You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/). For this sample, you can use the api key `special-key` to test the authorization filters.
-  version: 1.0.7
-  termsOfService: http://swagger.io/terms/
-  contact:
-    email: apiteam@swagger.io
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    API for PowerAndGo electric car sharing system. 
+    This API provides endpoints for managing cars, fleets, users, rentals, and all related functionality.
+  version: 1.0.0
+
 servers:
-  - url: https://petstore.swagger.io/v2
-  - url: http://petstore.swagger.io/v2
-tags:
-  - name: pet
-    description: Everything about your Pets
-    externalDocs:
-      description: Find out more
-      url: http://swagger.io
-  - name: store
-    description: Access to Petstore orders
-  - name: user
-    description: Operations about user
-    externalDocs:
-      description: Find out more about our store
-      url: http://swagger.io
-paths:
-  /pet/{petId}/uploadImage:
-    post:
-      tags:
-        - pet
-      summary: Uploads an image
-      operationId: uploadFile
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                additionalMetadata:
-                  type: string
-                  description: Additional data to pass to server
-                file:
-                  type: string
-                  format: binary
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponse'
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
-  /pet:
-    post:
-      tags:
-        - pet
-      summary: Add a new pet to the store
-      operationId: addPet
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Pet'
-      responses:
-        '405':
-          description: Invalid input
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+  - url: http://backend.vm1.test/api
+    description: Local development server
+
 components:
   securitySchemes:
-    api_key:
-      type: apiKey
-      in: header
-      name: api_key
-    petstore_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: https://petstore.swagger.io/oauth/authorize
-          scopes:
-            read:pets: read your pets
-            write:pets: modify pets in your account
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
   schemas:
-    ApiResponse:
+    Fleet:
       type: object
       properties:
-        code:
+        id:
           type: integer
-          format: int32
-        type:
+          description: Unique identifier for the fleet
+        manufacturer:
+          type: string
+          maxLength: 30
+          description: Vehicle manufacturer name
+        carmodel:
+          type: string
+          maxLength: 30
+          description: Vehicle model name
+        driving_range:
+          type: integer
+          description: Vehicle driving range in kilometers
+        motor_power:
+          type: integer
+          description: Motor power in kilowatts
+        top_speed:
+          type: integer
+          description: Maximum speed in km/h
+        tire_size:
+          type: string
+          maxLength: 10
+          description: Tire size specification
+      required:
+        - manufacturer
+        - carmodel
+        - driving_range
+        - motor_power
+        - top_speed
+        - tire_size
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the ticket
+        car_id:
+          type: integer
+          description: Reference to the associated car
+        status_id:
+          type: integer
+          description: Reference to the ticket status
+        description:
+          type: string
+          maxLength: 255
+          description: Detailed description of the ticket
+        created_at:
+          type: string
+          format: date-time
+          description: Ticket creation timestamp
+        status:
+          type: object
+          description: Related status information
+          properties:
+            id:
+              type: integer
+            status_name:
+              type: string
+            status_descrip:
+              type: string
+      required:
+        - car_id
+        - status_id
+        - description
+    Person:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the person
+        person_password:
+          type: string
+          maxLength: 8
+          description: Person's password
+        id_card:
+          type: string
+          maxLength: 12
+          description: Identification card number
+        driving_license:
+          type: string
+          maxLength: 8
+          nullable: true
+          description: Driving license number
+        license_start_date:
+          type: string
+          format: date
+          nullable: true
+          description: Driving license start date
+        license_end_date:
+          type: string
+          format: date
+          nullable: true
+          description: Driving license end date
+        firstname:
+          type: string
+          maxLength: 50
+          description: First name
+        lastname:
+          type: string
+          maxLength: 25
+          description: Last name
+        birth_date:
+          type: string
+          format: date
+          description: Date of birth
+        phone:
+          type: string
+          maxLength: 15
+          description: Phone number
+        email:
+          type: string
+          maxLength: 80
+          description: Email address
+      required:
+        - person_password
+        - id_card
+        - firstname
+        - lastname
+        - birth_date
+        - phone
+        - email
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the subscription
+        sub_name:
+          type: string
+          maxLength: 50
+          description: Name of the subscription plan
+        sub_monthly:
+          type: integer
+          nullable: true
+          description: Monthly subscription fee
+        sub_annual:
+          type: integer
+          nullable: true
+          description: Annual subscription fee
+        created_at:
+          type: string
+          format: date-time
+          description: Subscription creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Subscription last update timestamp
+      required:
+        - sub_name
+    Car:
+      type: object
+      properties:
+        id:
+          type: integer
+        plate:
+          type: string
+        power_percent:
+          type: number
+          format: float
+        power_kw:
+          type: number
+          format: float
+        estimated_range:
+          type: number
+          format: float
+        status:
+          type: integer
+        category_id:
+          type: integer
+        equipment_class:
+          type: integer
+        fleet_id:
+          type: integer
+        odometer:
+          type: integer
+        manufactured:
+          type: integer
+          format: year
+    
+    CarStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the car status
+        status_name:
+          type: string
+          maxLength: 50
+          description: Name of the status
+        status_descrip:
+          type: string
+          maxLength: 255
+          description: Detailed description of the status
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp of creation
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of last update
+      required:
+        - status_name
+        - status_descrip
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the category
+        category_class:
+          type: integer
+          description: Class identifier of the category
+          minimum: 1
+          maximum: 50
+        motor_power:
+          type: integer
+          description: Motor power in kW
+          minimum: 18
+          maximum: 500
+      required:
+        - category_class
+        - motor_power
+      
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the user
+        person_id:
+          type: integer
+          description: Reference to the associated person
+        sub_id:
+          type: integer
+          description: Reference to the subscription type
+        account_balance:
+          type: integer
+          description: User's account balance
+          default: 0
+        password_2_4:
+          type: integer
+          maxLength: 2
+          description: Second and fourth number (characters) of the password
+        user_name:
+          type: string
+          maxLength: 45
+          description: Unique username
+        password:
+          type: string
+          maxLength: 60
+          description: Hashed password
+        remember_token:
+          type: string
+          nullable: true
+          description: Remember me token
+        created_at:
+          type: string
+          format: date-time
+          description: Account creation timestamp
+        updated_at:
+          type: string
+          format: date-time
+          description: Account last update timestamp
+        person:
+          type: object
+          description: Related person information
+          properties:
+            id:
+              type: integer
+            firstname:
+              type: string
+            lastname:
+              type: string
+            email:
+              type: string
+      cars:
+        type: array
+        description: Related fleet information for rental history
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+            fleet:
+              type: object
+      required:
+        - person_id
+        - user_name
+        - password
+        - password_2_4
+        - sub_id
+
+    Employee:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the employee
+        person_id:
+          type: integer
+          description: Reference to the associated person
+        field:
+          type: string
+          maxLength: 128
+          description: Employee's field of work
+        role:
+          type: string
+          maxLength: 45
+          description: Employee's role
+        position:
+          type: string
+          maxLength: 45
+          description: Employee's position
+        salary_type:
+          type: string
+          enum: [fix, hourly]
+          description: Type of salary calculation
+        salary:
+          type: integer
+          description: Employee's salary amount
+        hire_date:
+          type: string
+          format: date
+          description: Employee's hire date
+      required:
+        - person_id
+        - field
+        - role
+        - position
+        - salary_type
+        - salary
+        - hire_date
+        
+
+    Error:
+      type: object
+      properties:
+        error:
           type: string
         message:
           type: string
-    Pet:
+    SuccessResponse:
       type: object
-      required:
-        - name
-        - photoUrls
       properties:
-        id:
-          type: integer
-          format: int64
-        name:
+        data:
+          type: object
+        message:
           type: string
-        photoUrls:
-          type: array
-          items:
-            type: string
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
         status:
           type: string
-          description: pet status in the store
-          enum:
-            - available
-            - pending
-            - sold
-    Tag:
-      type: object
-      properties:
-        id:
+
+paths:
+  /fleets:
+    get:
+      tags:
+        - Fleets
+      summary: List all fleets
+      description: Retrieves a list of all available vehicle fleets
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of fleets retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Fleet"
+        "401":
+          description: Unauthorized access
+        "500":
+          description: Server error
+
+    post:
+      tags:
+        - Fleets
+      summary: Create a new fleet
+      description: Creates a new vehicle fleet entry
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Fleet"
+      responses:
+        "201":
+          description: Fleet created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Fleet"
+        "422":
+          description: Validation error
+        "500":
+          description: Server error
+
+  /fleets/{id}:
+    get:
+      tags:
+        - Fleets
+      summary: Get fleet by ID
+      description: Retrieves details of a specific fleet
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Fleet identifier
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Fleet details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Fleet"
+        "404":
+          description: Fleet not found
+        "500":
+          description: Server error
+
+    put:
+      tags:
+        - Fleets
+      summary: Update fleet
+      description: Updates an existing fleet's information
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Fleet identifier
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Fleet"
+      responses:
+        "200":
+          description: Fleet updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Fleet"
+        "404":
+          description: Fleet not found
+        "422":
+          description: Validation error
+        "500":
+          description: Server error
+
+    delete:
+      tags:
+        - Fleets
+      summary: Delete fleet
+      description: Deletes a specific fleet
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Fleet identifier
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Fleet deleted successfully
+        "404":
+          description: Fleet not found
+        "500":
+          description: Server error
+  /tickets:
+    get:
+      tags:
+        - Tickets
+      summary: List all tickets
+      description: Retrieves a list of all tickets with their associated status information
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of tickets retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Ticket"
+        "401":
+          description: Unauthorized access
+        "500":
+          description: Server error
+
+    post:
+      tags:
+        - Tickets
+      summary: Create a new ticket
+      description: Creates a new ticket with status information
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ticket"
+      responses:
+        "201":
+          description: Ticket created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Ticket"
+        "422":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+        "500":
+          description: Server error
+
+  /tickets/{id}:
+    get:
+      tags:
+        - Tickets
+      summary: Get ticket by ID
+      description: Retrieves details of a specific ticket including its status
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Ticket identifier
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Ticket details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Ticket"
+        "404":
+          description: Ticket not found
+        "500":
+          description: Server error
+
+    put:
+      tags:
+        - Tickets
+      summary: Update ticket
+      description: Updates an existing ticket and its related information
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Ticket identifier
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ticket"
+      responses:
+        "200":
+          description: Ticket updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Ticket"
+        "404":
+          description: Ticket not found
+        "422":
+          description: Validation error
+        "500":
+          description: Server error
+
+    delete:
+      tags:
+        - Tickets
+      summary: Delete ticket
+      description: Deletes a specific ticket
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Ticket identifier
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Ticket deleted successfully
+        "404":
+          description: Ticket not found
+        "500":
+          description: Server error
+
+  /persons:
+    get:
+      tags:
+        - Persons
+      summary: List all persons
+      description: Retrieves a list of all registered persons
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of persons retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Person"
+        "401":
+          description: Unauthorized access
+        "500":
+          description: Server error
+
+    post:
+      tags:
+        - Persons
+      summary: Create a new person
+      description: Creates a new person record
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Person"
+      responses:
+        "201":
+          description: Person created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Person"
+        "422":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+        "500":
+          description: Server error
+
+  /persons/{id}:
+    get:
+      tags:
+        - Persons
+      summary: Get person by ID
+      description: Retrieves details of a specific person
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Person identifier
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Person details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Person"
+        "404":
+          description: Person not found
+        "500":
+          description: Server error
+
+    put:
+      tags:
+        - Persons
+      summary: Update person
+      description: Updates an existing person's information
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Person identifier
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Person"
+      responses:
+        "200":
+          description: Person updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Person"
+        "404":
+          description: Person not found
+        "422":
+          description: Validation error
+        "500":
+          description: Server error
+
+    delete:
+      tags:
+        - Persons
+      summary: Delete person
+      description: Deletes a specific person
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Person identifier
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Person deleted successfully
+        "404":
+          description: Person not found
+        "500":
+          description: Server error
+
+  /subscriptions:
+    get:
+      tags:
+        - Subscriptions
+      summary: List all subscriptions
+      description: Retrieves a list of all available subscription plans
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of subscriptions retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Subscription"
+        "401":
+          description: Unauthorized access
+        "500":
+          description: Server error
+
+    post:
+      tags:
+        - Subscriptions
+      summary: Create a new subscription
+      description: Creates a new subscription plan
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Subscription"
+      responses:
+        "201":
+          description: Subscription created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Subscription"
+        "422":
+          description: Validation error
+        "500":
+          description: Server error
+
+  /subscriptions/{id}:
+    get:
+      tags:
+        - Subscriptions
+      summary: Get subscription by ID
+      description: Retrieves details of a specific subscription plan
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Subscription identifier
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Subscription details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Subscription"
+        "404":
+          description: Subscription not found
+        "500":
+          description: Server error
+
+    put:
+      tags:
+        - Subscriptions
+      summary: Update subscription
+      description: Updates an existing subscription plan
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Subscription identifier
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Subscription"
+      responses:
+        "200":
+          description: Subscription updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Subscription"
+        "404":
+          description: Subscription not found
+        "422":
+          description: Validation error
+        "500":
+          description: Server error
+
+    delete:
+      tags:
+        - Subscriptions
+      summary: Delete subscription
+      description: Deletes a specific subscription plan
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Subscription identifier
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Subscription deleted successfully
+        "404":
+          description: Subscription not found
+        "500":
+          description: Server error
+
+  /carstatus:
+    get:
+      tags:
+        - Car Status
+      summary: Get all car statuses
+      description: Retrieves a list of all available car statuses
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of car statuses
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/CarStatus"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Server error
+
+    post:
+      tags:
+        - Car Status
+      summary: Create a new car status
+      description: Creates a new car status record
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status_name:
+                  type: string
+                  maxLength: 50
+                status_descrip:
+                  type: string
+                  maxLength: 255
+              required:
+                - status_name
+                - status_descrip
+      responses:
+        "201":
+          description: Car status created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/CarStatus"
+        "422":
+          description: Validation error
+        "500":
+          description: Server error
+
+  /carstatus/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
           type: integer
-          format: int64
-        name:
-          type: string
+        description: Car status identifier
+
+    get:
+      tags:
+        - Car Status
+      summary: Get car status by ID
+      description: Retrieves a specific car status by its ID
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Car status details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/CarStatus"
+        "404":
+          description: Car status not found
+        "500":
+          description: Server error
+
+    put:
+      tags:
+        - Car Status
+      summary: Update car status
+      description: Updates an existing car status record
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status_name:
+                  type: string
+                  maxLength: 50
+                status_descrip:
+                  type: string
+                  maxLength: 255
+              required:
+                - status_name
+                - status_descrip
+      responses:
+        "200":
+          description: Car status updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/CarStatus"
+        "404":
+          description: Car status not found
+        "422":
+          description: Validation error
+        "500":
+          description: Server error
+
+    delete:
+      tags:
+        - Car Status
+      summary: Delete car status
+      description: Deletes a car status record
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Car status deleted successfully
+        "404":
+          description: Car status not found
+        "500":
+          description: Server error
+
+  /categories:
+    get:
+      tags:
+        - Categories
+      summary: Get all categories
+      description: Retrieves a list of all available categories
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of categories
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Category"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Server error
+
+    post:
+      tags:
+        - Categories
+      summary: Create a new category
+      description: Creates a new category record
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_class:
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                motor_power:
+                  type: integer
+                  minimum: 18
+                  maximum: 500
+              required:
+                - category_class
+                - motor_power
+      responses:
+        "201":
+          description: Category created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Category"
+        "422":
+          description: Validation error
+        "500":
+          description: Server error
+
+  /categories/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Category identifier
+
+    get:
+      tags:
+        - Categories
+      summary: Get category by ID
+      description: Retrieves a specific category by its ID
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Category details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Category"
+        "404":
+          description: Category not found
+        "500":
+          description: Server error
+
+    put:
+      tags:
+        - Categories
+      summary: Update category
+      description: Updates an existing category record
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_class:
+                  type: integer
+                  minimum: 1
+                  maximum: 50
+                motor_power:
+                  type: integer
+                  minimum: 18
+                  maximum: 500
+              required:
+                - category_class
+                - motor_power
+      responses:
+        "200":
+          description: Category updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Category"
+        "404":
+          description: Category not found
+        "422":
+          description: Validation error
+        "500":
+          description: Server error
+
+    delete:
+      tags:
+        - Categories
+      summary: Delete category
+      description: Deletes a category record
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Category deleted successfully
+        "404":
+          description: Category not found
+        "500":
+          description: Server error
+
+  /authenticate:
+    post:
+      tags:
+        - Authentication
+      summary: Authenticate user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_name
+                - password
+              properties:
+                user_name:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+        "401":
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: "Sikeretelen belépés"
+  /bills:
+    get:
+      tags:
+        - Bills
+      summary: List all bills
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of bills
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Bill"
+
+    post:
+      tags:
+        - Bills
+      summary: Create new bill
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bill"
+      responses:
+        "201":
+          description: Bill created successfully
+
+  /bills/{id}:
+    get:
+      tags:
+        - Bills
+      summary: Get bill by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Bill details
+
+    put:
+      tags:
+        - Bills
+      summary: Update bill
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Bill"
+      responses:
+        "200":
+          description: Bill updated successfully
+
+    delete:
+      tags:
+        - Bills
+      summary: Delete bill
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Bill deleted successfully
+
+  /bills/closedrentsbills:
+    get:
+      tags:
+        - Bills
+      summary: Get closed rentals
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of closed rentals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Bill"
+
+  /bills/{car}/fees:
+    get:
+      tags:
+        - Bills
+      summary: Get car fees
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: car
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Car fees
+
+  /bills/send-rent-summary:
+    post:
+      tags:
+        - Bills - Rental Summary Email
+      summary: Send rental summary email
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - rentId
+                - emailHtml
+              properties:
+                rentId:
+                  type: integer
+                emailHtml:
+                  type: string
+      responses:
+        "200":
+          description: Email sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /cars:
+    get:
+      tags:
+        - Cars
+      summary: List all cars
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of cars
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Car"
+
+    post:
+      tags:
+        - Cars
+      summary: Create new car
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Car"
+      responses:
+        "201":
+          description: Car created successfully
+
+  /cars/{id}:
+    get:
+      tags:
+        - Cars
+      summary: Get car by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Car details
+
+    put:
+      tags:
+        - Cars
+      summary: Update car
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Car"
+      responses:
+        "200":
+          description: Car updated successfully
+
+    delete:
+      tags:
+        - Cars
+      summary: Delete car
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Car deleted successfully
+
+  /cars/{car}/bills:
+    get:
+      tags:
+        - Cars
+      summary: Get car fines
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: car
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of car fines
+
+  /cars/{car}/description:
+    get:
+      tags:
+        - Cars
+      summary: Get car's last ticket description
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: car
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Last ticket details
+
+  /cars/{car}/tickets:
+    get:
+      tags:
+        - Cars
+      summary: Get car tickets
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: car
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of car tickets
+
+  /cars/{car}/renthistory:
+    get:
+      tags:
+        - Cars
+      summary: Get car rental history
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: car
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Car rental history
+  /users:
+    get:
+      tags:
+        - Users
+      summary: List all users
+      description: Retrieves a list of all users with their associated person information
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized access
+        '500':
+          description: Server error
+
+    post:
+      tags:
+        - Users
+      summary: Create a new user
+      description: Creates a new user account
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+        '422':
+          description: Validation error
+        '500':
+          description: Server error
+
+  /users/{id}:
+    get:
+      tags:
+        - Users
+      summary: Get user by ID
+      description: Retrieves details of a specific user including rental history with fleet information
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: User identifier
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User details with rental history retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+
+    put:
+      tags:
+        - Users
+      summary: Update user
+      description: Updates an existing user's information
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: User identifier
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+        '422':
+          description: Validation error
+        '500':
+          description: Server error
+
+    delete:
+      tags:
+        - Users
+      summary: Delete user
+      description: Deletes a specific user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: User identifier
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: User deleted successfully
+        '404':
+          description: User not found
+        '500':
+          description: Server error
+
+  /employees:
+    get:
+      tags:
+        - Employees
+      summary: List all employees
+      description: Retrieves a list of all employees
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of employees retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Employee'
+        '401':
+          description: Unauthorized access
+        '500':
+          description: Server error
+
+    post:
+      tags:
+        - Employees
+      summary: Create a new employee
+      description: Creates a new employee record
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+      responses:
+        '201':
+          description: Employee created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Employee'
+        '422':
+          description: Validation error
+        '500':
+          description: Server error
+
+  /employees/{id}:
+    get:
+      tags:
+        - Employees
+      summary: Get employee by ID
+      description: Retrieves details of a specific employee
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Employee identifier
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Employee details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Employee'
+        '404':
+          description: Employee not found
+        '500':
+          description: Server error
+
+    put:
+      tags:
+        - Employees
+      summary: Update employee
+      description: Updates an existing employee's information
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Employee identifier
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+      responses:
+        '200':
+          description: Employee updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Employee'
+        '404':
+          description: Employee not found
+        '422':
+          description: Validation error
+        '500':
+          description: Server error
+
+    delete:
+      tags:
+        - Employees
+      summary: Delete employee
+      description: Deletes a specific employee
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Employee identifier
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Employee deleted successfully
+        '404':
+          description: Employee not found
+        '500':
+          description: Server error
+
+  /register:
+    post:
+      tags:
+        - Registration
+      summary: Register new user
+      description: |
+        Creates both a Person and User record in a single transaction. 
+        The process includes:
+        1. Creating a Person record with personal information
+        2. Creating a User record linked to the Person
+        3. Setting up initial account settings
+        
+        The operation will roll back if either step fails to maintain data consistency.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '201':
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistrationResponse'
+              example:
+                data:
+                  message: "A(z) testuser123 sikeresen regisztrált."
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+              example:
+                message: "The given data was invalid."
+                errors:
+                  email: ["The email must be a valid email address."]
+                  password: ["The password must be 8 characters."]
+        '500':
+          description: Registration failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistrationError'
+              example:
+                error: "A regisztráció sikertelen volt."
+
+  /register/{user}:
+    delete:
+      tags:
+        - Registration
+      summary: Delete user and associated person record
+      description: |
+        Deletes both the User and associated Person record in a single transaction.
+        This operation cannot be undone.
+      parameters:
+        - name: user
+          in: path
+          required: true
+          description: User identifier
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: User and associated data deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Felhasználó és adatai törölve lettek."
+        '404':
+          description: User not found
+        '500':
+          description: Deletion failed
+
+  /googlemapsapi:
+    get:
+      tags:
+        - Google Maps
+      summary: Get Google Maps API configuration
+      responses:
+        "200":
+          description: API configuration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                  mapId:
+                    type: string
+        "500":
+          description: Configuration error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /geocode:
+    get:
+      tags:
+        - Google Maps
+      summary: Get geocoding data
+      parameters:
+        - name: address
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Geocoding results
+          content:
+            application/json:
+              schema:
+                type: object
+
+

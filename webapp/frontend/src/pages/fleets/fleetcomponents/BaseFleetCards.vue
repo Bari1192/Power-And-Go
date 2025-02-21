@@ -24,41 +24,24 @@
         </button>
     </div>
 
-    <!-- Szerkesztési Űrlap -->
-    <div v-if="isEditing" class="bg-gray-100 border-4 border-sky-800 rounded-lg mt-2 p-4">
-        <h5 class="mb-2 text-xl font-bold text-sky-700">Adatmódosítás: {{ editableData.title }} </h5>
-        <div class="flex flex-col space-y-2">
-            <input v-model="editableData.title" type="text" class="border p-2 rounded" placeholder="Cím" />
-            <p class="mt-3 font-normal text-gray-700 dark:text-gray-400">Teljesítmény:</p>
-            <input v-model="editableData.motor_power" type="number" class="border p-2 rounded"
-                placeholder="Teljesítmény (kW)" />
-
-            <p class="mt-t font-normal text-gray-700 dark:text-gray-400">Hatótáv:</p>
-            <input v-model="editableData.top_speed" type="number" class="border p-2 rounded"
-                placeholder="Hatótáv (km/h)" />
-
-            <p class="mt-3 font-normal text-gray-700 dark:text-gray-400">Végsebesség:</p>
-            <input v-model="editableData.driving_range" type="number" class="border p-2 rounded"
-                placeholder="Végsebesség (km/h)" />
-
-            <p class="mt-3 font-normal text-gray-700 dark:text-gray-400">Abroncsméret:</p>
-            <input v-model="editableData.abroncs" type="number" class="border p-2 rounded"
-                placeholder="pl: 165|65-R15"/>
-        </div>
-        <div class="flex justify-end space-x-2 mt-4">
-            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" @click="saveChanges">
-                Mentés
-            </button>
-            <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" @click="cancelEdit">
-                Mégse
-            </button>
-        </div>
-    </div>
+    <!-- Szerkesztési Űrlap Komponens -->
+    <EditFleetCar 
+        :isEditing="isEditing"
+        :carData="editableData"
+        :carId="src"
+        @save="saveChanges"
+        @cancel="cancelEdit"
+    />
 </template>
 
 
 <script>
+import EditFleetCar from '@layouts/fleet/EditFleetCar.vue';
+
 export default {
+    components: {
+        EditFleetCar
+    },
     props: {
         src: [String, Number],
         imgalt: [String, Number],
@@ -70,25 +53,29 @@ export default {
     },
     data() {
         return {
-            isEditing: false, // Szerkesztési állapot
-            editableData: [], // Lokálisan szerkesztett adatok
+            isEditing: false,
+            editableData: {
+                title: '',
+                motor_power: 0,
+                top_speed: 0,
+                driving_range: 0,
+                abroncs: ''
+            }
         };
     },
     methods: {
         editFleet() {
-            this.isEditing = !this.isEditing;
-            if (this.isEditing) {
-                this.editableData = {
-                    title: this.title,
-                    motor_power: this.motor_power,
-                    top_speed: this.top_speed,
-                    driving_range: this.driving_range,
-                    abroncs: this.abroncs,
-                };
-            }
+            this.editableData = {
+                title: this.title,
+                motor_power: this.motor_power,
+                top_speed: this.top_speed,
+                driving_range: this.driving_range,
+                abroncs: this.abroncs,
+            };
+            this.isEditing = true;
         },
-        saveChanges() {
-            this.$emit('update', this.src, this.editableData);
+        saveChanges(id, data) {
+            this.$emit('update', id, data);
             this.isEditing = false;
         },
         cancelEdit() {

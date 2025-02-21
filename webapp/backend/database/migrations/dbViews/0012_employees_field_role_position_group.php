@@ -31,6 +31,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        DB::statement("DROP VIEW IF EXISTS SzamlakCsoportositva");
+        DB::statement("DROP VIEW IF EXISTS billsCsoportositva");
     }
 };
