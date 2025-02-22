@@ -14,6 +14,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
             $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
+            $table->foreignId('rent_id')->constrained('car_user_rents','id')->onDelete('cascade');
 
             $table->integer('total_cost');
             $table->integer('credits')->nullable();
@@ -27,10 +28,6 @@ return new class extends Migration
             $table->enum('invoice_status', ['active', 'pending', 'archiv'])->default('pending');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('bills');

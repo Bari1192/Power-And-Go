@@ -32,7 +32,7 @@ class CarUserRentsSeeder extends Seeder
     {
         try {
             DB::beginTransaction();
-            foreach (range(1, 1000) as $i) {
+            foreach (range(1, 100) as $i) {
                 $rentHistory = Renthistory::factory()->make();
                 $rentData = $rentHistory->toArray();
 

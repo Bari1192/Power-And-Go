@@ -6,7 +6,6 @@ use App\Http\Requests\StorePersonRequest;
 use App\Http\Requests\UpdatePersonRequest;
 use App\Http\Resources\PersonResource;
 use App\Models\Person;
-use App\Rules\TenYearsDifferenceInDrivingLicence;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 

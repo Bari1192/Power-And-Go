@@ -19,6 +19,7 @@ class StoreBillRequest extends FormRequest
             "user_id" => ["required","integer","exists:users,id"],
             "person_id" => ["required","integer","exists:persons,id"],
             "car_id" => ["required","integer","exists:cars,id"],
+            "rent_id"=>["required","integer","exists:car_user_rents,id"],
             "total_cost" => ["required", "integer", "min:0"],
             "distance" => ["nullable", "integer", "min:0"],
             "parking_minutes" => ["nullable", "integer", "min:0"],

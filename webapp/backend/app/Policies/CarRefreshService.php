@@ -7,11 +7,11 @@ use App\Models\Car;
 class CarRefreshService
 {
     public array $chargingCategories = [
-        1 => ['min_toltes' => 9.0, 'buntetes' => 30000],
-        2 => ['min_toltes' => 6.0, 'buntetes' => 50000],
-        3 => ['min_toltes' => 4.5, 'buntetes' => 30000],
-        4 => ['min_toltes' => 4.0, 'buntetes' => 50000],
-        5 => ['min_toltes' => 4.0, 'buntetes' => 50000],
+        1 => ['min_toltes' => 9.0],
+        2 => ['min_toltes' => 6.0],
+        3 => ['min_toltes' => 4.5],
+        4 => ['min_toltes' => 4.0],
+        5 => ['min_toltes' => 4.0],
     ];
     ## ZÁRÁS UTÁNI töltöttségi állapot vizsgálata
     public function ellenorizToltottseg(Car $car, float $toltesSzazalek): array
@@ -28,7 +28,6 @@ class CarRefreshService
             $car->save();
             return [
                 'buntetendo' => true,
-                'buntetes_osszeg' => $this->chargingCategories[$car->category_id]['buntetes'],
                 'aktualis_toltes' => $toltesSzazalek,
             ];
         }

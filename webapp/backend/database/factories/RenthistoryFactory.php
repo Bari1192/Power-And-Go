@@ -7,6 +7,7 @@ use App\Models\Dailyrental;
 use App\Models\Price;
 use App\Models\Renthistory;
 use App\Models\User;
+use App\Policies\BillService;
 use App\Policies\CarRefreshService;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;

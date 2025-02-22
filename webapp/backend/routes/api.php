@@ -29,6 +29,7 @@ Route::get('cars/{car}/description', [CarController::class, 'carLastTicketDescri
 Route::get('cars/{car}/tickets', [CarController::class, 'carTickets']);
 Route::get('cars/{car}/renthistory', [CarController::class, 'carWithRentHistory']); # Csak 1 autó history
 Route::get('/bills/closedrentsbills', [BillController::class, 'closedRents']);          # Lezárt státuszú autók.
+Route::get('/bills/fees', [BillController::class, 'feesCollection']);          # Lezárt státuszú autók.
 Route::get('/bills/{car}/fees', [BillController::class, 'carFees']);
 
 Route::get('/googlemapsapi', [GoogleMapsController::class, 'getApiUrl']);   ## Ez az input alapján a címet adja meg
@@ -48,7 +49,4 @@ Route::apiResource('bills', BillController::class);
 
 # Dinamikusság kell, hogy ha létrejön a dolgozó, akkor 
 # dolgozói kedvezményben legyen (pl: 50% fix).
-
-Route::post('/send-rent-summary', [BillController::class, 'sendRentSummaryEmail']);
-
 

@@ -3,7 +3,11 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Bill;
+use App\Models\Car;
+use App\Models\User;
+use App\Policies\BillService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class Step9_BillControllerTest extends TestCase
@@ -14,6 +18,26 @@ class Step9_BillControllerTest extends TestCase
     {
         parent::setUp();
         $this->fixedDateTime = now()->format('Y-m-d H:i:s');
+    }
+    private function setupTestBill()
+    {
+        // Get a completed rental
+        $rental = DB::table('car_user_rents')
+            ->where('rentstatus', 2)
+            ->first();
+
+        if (!$rental) {
+            $this->markTestSkipped('No completed rental found');
+        }
+
+        $car = Car::find($rental->car_id);
+        $user = User::find($rental->user_id);
+
+        return [
+            'rental' => $rental,
+            'car' => $car,
+            'user' => $user
+        ];
     }
     public function test_can_get_all_bills_data()
     {
@@ -49,71 +73,40 @@ class Step9_BillControllerTest extends TestCase
     }
     public function test_can_create_charging_penalty_bill()
     {
-        $response = $this->get('/api/cars');
-        $response->assertStatus(200);
-        $data = $response->json('data');
+        $car = Car::where('status', 7)->first();
+        if (!$car) {
+            $car = Car::first();
+            $car->status = 7;
+            $car->save();
+        }
 
-        $length = count($data);
-        $randNumber = fake()->numberBetween(1, $length);
-        $response = $this->get("/api/cars/{$randNumber}");
-        $response->assertStatus(200);
+        // Get a completed rental for this car
+        $rental = DB::table('car_user_rents')
+            ->where('car_id', $car->id)
+            ->where('rentstatus', 2)
+            ->first();
 
-        $response = $this->get("/api/users");
-        $response->assertStatus(200);
-        $userData = $response->json('data');
+        if (!$rental) {
+            $this->markTestSkipped('No suitable rental found for testing');
+        }
 
-        $first = $userData[0] ?? null;
-        $this->assertNotNull($first, 'The person data array is empty.');
-        $this->assertArrayHasKey('user_id', $first, 'The `user_id` key is missing from the first person data.');
-        $this->assertArrayHasKey('person_id', $first, 'The `person_id` key is missing from the first person data.');
+        $user = User::find($rental->user_id);
 
+        // Create charging penalty through BillService
+        $billService = new BillService();
+        $billService->createChargingFine($car, $user, $rental);
 
-        $createChargingBill = [
-            "bill_type" => "charging_penalty",
-            "user_id" => $first['user_id'],
-            "person_id" => $first['person_id'],
-            "car_id" => $randNumber,
-            "total_cost" => 30000,
-            "distance" => 10,
-            "parking_minutes" => 10,
-            "driving_minutes" => 10,
-            "rent_start" => $this->fixedDateTime,
-            "rent_close" => $this->fixedDateTime,
-            "invoice_date" => $this->fixedDateTime,
-            "invoice_status" => "pending",
-        ];
-
-        $response = $this->postJson('/api/bills', $createChargingBill);
-        $response->assertStatus(201);
-
-        $latestBill = Bill::latest('id')->first();
-
-        ## Díjak ellenőrzése
-        $response = $this->get("/api/bills/{$randNumber}/fees");
-        $response->assertStatus(200);
-        $feesData = $response->json('data');
-
-        $this->assertNotEmpty($feesData, 'Fees data cannot be empty.');
-
-        ## Adatbázis ellenőrzése
+        // Verify bill was created
         $this->assertDatabaseHas('bills', [
-            "id" => $latestBill->id,
-            "bill_type" => "charging_penalty",
-            "user_id" => $first['user_id'],
-            "person_id" => $first['person_id'],
-            "car_id" => $randNumber,
-            "total_cost" => 30000,
-            "distance" => 10,
-            "parking_minutes" => 10,
-            "driving_minutes" => 10,
-            "rent_start" => $this->fixedDateTime,
-            "rent_close" => $this->fixedDateTime,
-            "invoice_date" => $this->fixedDateTime,
+            'bill_type' => 'charging_penalty',
+            'user_id' => $user->id,
+            'car_id' => $car->id,
+            'invoice_status' => 'pending'
         ]);
     }
     public function test_can_get_random_bills_data_with_using_api()
     {
-     
+
 
         $response = $this->get('/api/bills');
         $response->assertStatus(200);
@@ -206,74 +199,61 @@ class Step9_BillControllerTest extends TestCase
     }
     public function test_can_get_username_and_person_full_name_without_posting_them_directly()
     {
-        $billData = [
-            "bill_type" => "rental",
-            "user_id" => 46,
-            "person_id" => 237,
-            "car_id" => 1,
-            "total_cost" => 5000,
-            "distance" => 10,
-            "parking_minutes" => 0,
-            "driving_minutes" => 14,
-            "rent_start" => $this->fixedDateTime,
-            "rent_close" => $this->fixedDateTime,
-            "invoice_date" => $this->fixedDateTime,
-            "invoice_status" => "pending"
-        ];
-        $response = $this->postJson('/api/bills', $billData);
-        $response->assertStatus(201);
+        $data = $this->setupTestBill();
 
-        $latestData = Bill::latest('id')->first();
-        $response = $this->get("/api/bills/{$latestData->id}");
-        $data = $response->json('data');
+        $billService = new BillService();
+        $billService->createRentBill($data['car'], $data['user'], $data['rental']);
 
-        $this->assertArrayHasKey('username', $data, "Nem kaptuk meg a `username` kulcsot.");
-        $this->assertNotNull($data['username'], "A `username` kulcs értéke üresen jött vissza.");
+        $latestBill = Bill::latest('id')->first();
+        $response = $this->get("/api/bills/{$latestBill->id}");
+        $responseData = $response->json('data');
 
-        $this->assertArrayHasKey('person', $data, "Nem kaptuk meg a `person` kulcsot.");
-        $this->assertNotNull($data['person'], "A `person` kulcs értéke üresen jött vissza.");
+        $this->assertArrayHasKey('username', $responseData, "Nem kaptuk meg a `username` kulcsot.");
+        $this->assertNotNull($responseData['username'], "A `username` kulcs értéke üresen jött vissza.");
+        $this->assertArrayHasKey('person', $responseData, "Nem kaptuk meg a `person` kulcsot.");
+        $this->assertNotNull($responseData['person'], "A `person` kulcs értéke üresen jött vissza.");
     }
     public function test_can_create_new_bill_into_database()
     {
-        $billData = [
-            "bill_type" => "rental",
-            "user_id" => 46,
-            "person_id" => 237,
-            "car_id" => 1,
-            "total_cost" => 666,
-            "distance" => 66,
-            "parking_minutes" => 6,
-            "driving_minutes" => 666,
-            "rent_start" => $this->fixedDateTime,
-            "rent_close" => $this->fixedDateTime,
-            "invoice_date" => $this->fixedDateTime,
-            "invoice_status" => "pending"
-        ];
-        $response = $this->postJson('/api/bills', $billData);
-        $response->assertStatus(201);
+        $rental = DB::table('car_user_rents')
+            ->where('rentstatus', 2)
+            ->first();
 
-        $latestData = Bill::latest('id')->first();
-        $response = $this->get("/api/bills/{$latestData->id}");
-        $response->json('data');
+        if (!$rental) {
+            $this->markTestSkipped('No completed rental found');
+        }
+
+        $car = Car::find($rental->car_id);
+        $user = User::find($rental->user_id);
+
+        // Create bill through service
+        $billService = new BillService();
+        $billService->createRentBill($car, $user, $rental);
+
+        // Verify
+        $this->assertDatabaseHas('bills', [
+            'bill_type' => 'rental',
+            'user_id' => $user->id,
+            'car_id' => $car->id,
+            'rent_id' => $rental->id
+        ]);
     }
     public function test_can_modify_random_bill_data_in_database()
     {
-        $response = $this->get('/api/bills');
-        $response->assertStatus(200);
-        $data = $response->json('data');
+        $data = $this->setupTestBill();
 
-        $length = count($data);
-        $randomNumber = random_int(1, $length);
+        $billService = new BillService();
+        $billService->createRentBill($data['car'], $data['user'], $data['rental']);
 
-        $response = $this->get("/api/bills/{$randomNumber}");
-        $oneBill = $response->json('data');
+        $latestBill = Bill::latest('id')->first();
 
         $modifiedData = [
-            "id" => $randomNumber,
+            "id" => $latestBill->id,  // Add the required ID field
             "bill_type" => "rental",
-            "user_id" => $oneBill['user_id'],
-            "person_id" => $oneBill['person_id'],
-            "car_id" => $oneBill['car_id'],
+            "user_id" => $data['user']->id,
+            "person_id" => $data['user']->person_id,
+            "car_id" => $data['car']->id,
+            "rent_id" => $data['rental']->id,
             "total_cost" => 8888,
             "distance" => 88,
             "parking_minutes" => 66,
@@ -284,24 +264,11 @@ class Step9_BillControllerTest extends TestCase
             "invoice_status" => "pending"
         ];
 
-        $this->putJson("/api/bills/{$randomNumber}", $modifiedData)
+        $this->putJson("/api/bills/{$latestBill->id}", $modifiedData)
             ->assertStatus(200);
 
-        $this->assertDatabaseHas('bills', [
-            "id" => $randomNumber,
-            "bill_type" => "rental",
-            "user_id" => $oneBill['user_id'],
-            "person_id" => $oneBill['person_id'],
-            "car_id" => $oneBill['car_id'],
-            "total_cost" => 8888,
-            "distance" => 88,
-            "parking_minutes" => 66,
-            "driving_minutes" => 666,
-            "rent_start" => $this->fixedDateTime,
-            "rent_close" => $this->fixedDateTime,
-            "invoice_date" => $this->fixedDateTime,
-            "invoice_status" => "pending",
-        ]);
+        unset($modifiedData['id']); 
+        $this->assertDatabaseHas('bills', $modifiedData);
     }
     public function test_can_delete_random_bill_from_database_bills_table()
     {

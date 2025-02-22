@@ -10,6 +10,7 @@ use App\Models\Fleet;
 use App\Models\Person;
 use App\Models\Price;
 use App\Models\User;
+use App\Policies\BillService;
 use App\Policies\CarRefreshService;
 use Carbon\Carbon;
 use Database\Factories\CarUserrentChargeFactory;
@@ -880,59 +881,76 @@ class ChargeFactoryTest extends TestCase
     {
         $testData = $this->mockTestData();
         $testCar = $testData['testCar'];
+        $billService = new BillService();
+
 
         $tesztEsetek = [
-            # [category_id, töltés%, elvárt_büntetés, elvárt_status] | 15% a rendszer limit!
+            # [category_id, töltés%, elvárt_status, buntetendo]
             # [1-es, E-up! 18kw]
-            [1, 8.9, 30000, 7],
-            [1, 9.0, false, 7],
-            [1, 14.0, false, 7],
-            [1, 15.1, false, 1],
-            [1, 40.0, false, 1],
+            [1, 8.9, 7, true],
+            [1, 9.0, 7, false],
+            [1, 14.0, 7, false],
+            [1, 15.1, 1, false],
+            [1, 40.0, 1, false],
 
             # [2-es Kangoo | 33kw]
-            [2, 5.9, 50000, 7],
-            [2, 6.0, false, 7],
-            [2, 14.9, false, 7],
-            [2, 15.1, false, 1],
-            [2, 40.0, false, 1],
+            [2, 5.9, 7, true],
+            [2, 6.0, 7, false],
+            [2, 14.9, 7, false],
+            [2, 15.1, 1, false],
+            [2, 40.0, 1, false],
 
             # [3-as Citigo & E-up! | 36kw]
-            [3, 4.4, 30000, 7],
-            [3, 4.5, false, 7],
-            [3, 14.9, false, 7],
-            [3, 15.1, false, 1],
-            [3, 40.0, false, 1],
+            [3, 4.4, 7, true],
+            [3, 4.5, 7, false],
+            [3, 14.9, 7, false],
+            [3, 15.1, 1, false],
+            [3, 40.0, 1, false],
 
             # [4-es, Vivaro | 75kw]
-            [4, 3.9, 50000, 7],
-            [4, 4.0, false, 7],
-            [4, 14.9, false, 7],
-            [4, 15.1, false, 1],
-            [4, 40.0, false, 1],
+            [4, 3.9, 7, true],
+            [4, 4.0, 7, false],
+            [4, 14.9, 7, false],
+            [4, 15.1, 1, false],
+            [4, 40.0, 1, false],
 
             # [5-ös, Niro | 65kw]
-            [5, 3.9, 50000, 7],
-            [5, 4.0, false, 7],
-            [5, 14.9, false, 7],
-            [5, 15.1, false, 1],
-            [5, 40.0, false, 1],
+            [5, 3.9, 7, true],
+            [5, 4.0, 7, false],
+            [5, 14.9, 7, false],
+            [5, 15.1, 1, false],
+            [5, 40.0, 1, false],
         ];
-        foreach ($tesztEsetek as [$category, $toltes, $vartBuntetes, $vartStatus]) {
+
+        foreach ($tesztEsetek as [$category, $toltes, $vartStatus, $buntetendo]) {
             $testCar->category_id = $category;
             $testCar->power_percent = $toltes;
             $testCar->status = 1;
+
             $result = $this->testCarRefreshService->ellenorizToltottseg($testCar, $toltes);
 
-            # Büntetés
-            if ($vartBuntetes !== false) {
-                $this->assertTrue($result['buntetendo'], "Kategória {$category}: {$toltes}% töltés esetén büntetésnek kell lennie!");
-                $this->assertEquals($vartBuntetes, $result['buntetes_osszeg'], "Kategória {$category}: Hibás büntetési összeg!");
-            } else {
-                $this->assertFalse($result['buntetendo'], "Kategória {$category}: {$toltes}% töltés esetén nem kellene büntetésnek lennie!");
+            // Státusz ellenőrzése
+            $this->assertEquals(
+                $vartStatus,
+                $testCar->status,
+                "Kategória {$category}: Hibás státusz érték ({$testCar->status})!"
+            );
+
+            // Büntetendő státusz ellenőrzése
+            $this->assertEquals(
+                $buntetendo,
+                $result['buntetendo'],
+                "Kategória {$category}: Hibás büntetendő státusz!"
+            );
+
+            // Ha büntetendő, ellenőrizzük a büntetés összegét a BillService-ben
+            if ($buntetendo && ($category === 1 || $category === 3)) {
+                $this->assertEquals(30000, BillService::$chargingFines[$category]['buntetes'], 
+                    "Kategória {$category}: Hibás büntetési összeg!");
+            } else if ($buntetendo) {
+                $this->assertEquals(50000, BillService::$chargingFines[$category]['buntetes'], 
+                    "Kategória {$category}: Hibás büntetési összeg!");
             }
-            # Státusz
-            $this->assertEquals($vartStatus, $testCar->status, "Kategória {$category}: Hibás státusz érték ({$testCar->status})!");
         }
     }
     public function test_GeneraljToltest_function_test(): void
