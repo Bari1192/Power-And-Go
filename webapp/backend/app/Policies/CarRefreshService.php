@@ -20,28 +20,32 @@ class CarRefreshService
         if (!isset($this->chargingCategories[$car->category_id]) || $car->status == 3) {
             return ['buntetendo' => false];
         }
-        $minToltes = round($this->chargingCategories[$car->category_id]['min_toltes'], 1);
-
         ## BÜNTETÉS
-        if ($toltesSzazalek < $minToltes) {
+        if ($toltesSzazalek < $this->chargingCategories[$car->category_id]['min_toltes']) {
             $car->status = 7;
             $car->save();
             return [
                 'buntetendo' => true,
                 'aktualis_toltes' => $toltesSzazalek,
             ];
-        }
-        if ($toltesSzazalek >= $minToltes && $toltesSzazalek <= 15.0) {
+
+            ## Rendszer kivét
+        } elseif ($toltesSzazalek >= $this->chargingCategories[$car->category_id]['min_toltes'] && $toltesSzazalek <= 15.0) {
             $car->status = 7;
             $car->save();
             return [
                 'buntetendo' => false,
                 'aktualis_toltes' => $toltesSzazalek,
             ];
+            ## Visszadob
+        } else {
+            $car->status = 1;
+            $car->save();
+            return [
+                'buntetendo' => false,
+                'aktualis_toltes' => $toltesSzazalek,
+            ];
         }
-        $car->status = 1;
-        $car->save();
-        return ['buntetendo' => false];
     }
     ## Töltés utáni autó adatok frissítése.
     public function frissitesToltesUtan(Car $car, float $ujToltesSzazalek, float $ujToltesKw): void
@@ -56,10 +60,16 @@ class CarRefreshService
         $egyKwKilometerben = $car->fleet->driving_range / $car->fleet->motor_power;
         $kwFogyasztas = round($megtettTavolsag / $egyKwKilometerben, 1);
 
-        $minKw = round($car->fleet->motor_power * 0.1, 1); // 1% minimum
-        $ujToltesKw = round(max($minKw, $car->power_kw - $kwFogyasztas), 1);
-        $ujToltesSzazalek = round(($ujToltesKw / $car->fleet->motor_power) * 100, 2);
+         ## Random minimum érték | 1-15% között | a töltöttséghez
+        $minPercent = mt_rand(1, 15) / 100; 
+        $minKw = round($car->fleet->motor_power * $minPercent, 2);
 
+        ## Korlátozások és frissítések!
+        $ujToltesKw = round(max($minKw, $car->power_kw - $kwFogyasztas), 2);
+        $ujToltesKw = min($car->fleet->motor_power, $ujToltesKw);
+        $ujToltesSzazalek = round(($ujToltesKw / $car->fleet->motor_power) * 100, 2);
+        $ujToltesSzazalek = min(100, max(0, $ujToltesSzazalek));
+        
         $car->power_kw = $ujToltesKw;
         $car->power_percent = $ujToltesSzazalek;
         $car->estimated_range = round(($car->fleet->driving_range / 100) * $ujToltesSzazalek, 1);

@@ -31,7 +31,8 @@ class Bill extends Model
         'credits',
         'charged_kw',
         'invoice_date',
-        'invoice_status'
+        'invoice_status',
+        'email_sent',
     ];
     public function cars(): BelongsTo
     {

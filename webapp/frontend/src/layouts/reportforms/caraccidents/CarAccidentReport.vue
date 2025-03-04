@@ -198,12 +198,12 @@ export default {
     margin-bottom: 0.5rem;
 }
 .pac-container {
-    z-index: 10000; /* Mindig felül legyen */
-    border: 3px solid rgb(62, 137, 167); /* Zöld keret */
-    border-radius: 12px; /* Lekerekített sarkok */
-    font-family: Arial, sans-serif; /* Arial betűtípus */
-    background-color: rgb(235, 240, 243); /* Fehér háttér */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Finom árnyék */
+    z-index: 10000; 
+    border: 3px solid rgb(62, 137, 167);
+    border-radius: 12px; 
+    font-family: Arial, sans-serif;
+    background-color: rgb(235, 240, 243);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .pac-item {

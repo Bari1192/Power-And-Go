@@ -1,8 +1,8 @@
 <template>
-    <section class="slider_section mx-auto min-w-full cursor-pointer">
+    <section class="slider_section text-white mx-auto min-w-full cursor-pointer">
         <Swiper :space-between="50" :slides-per-view="1" :navigation="true" :pagination="{ clickable: true }"
-            @swiper="onSwiper" @slideChange="onSlideChange"
-            :autoplay="{ delay: 3000, disableOnInteraction: true }" class="min-w-full">
+            @swiper="onSwiper" @slideChange="onSlideChange" :autoplay="{ delay: 3000, disableOnInteraction: true }"
+            class="min-w-full">
             <!-- Slide 1 -->
             <SwiperSlide>
                 <div class="mx-auto w-2/3 flex flex-col md:flex-row items-center justify-between py-8">
@@ -14,9 +14,10 @@
                             mobilitás előnyeit!
                         </p>
                         <div class="mt-6 flex space-x-4">
-                            <a href="#"
-                                class="bg-sky-500 hover:bg-sky-600 border-2 border-sky-800 hover:text-lime-300 text-white font-semibold px-4 py-2 rounded-xl hover:bg-primary1">
-                                Lefoglalom
+                            <a href="#" class="bg-sky-600 border-sky-700 hover:bg-sky-700 text-white border-2
+                             hover:border-sky-500 hover:text-lime-300 text-xl font-semibold  px-6 py-2 rounded-xl 
+                                transition-all duration-300 ease-in-out active:translate-y-[2px] ">
+                                Megnézem
                             </a>
                         </div>
                     </div>
@@ -37,9 +38,10 @@
                             Fedezd fel a vezetés új élményét és élvezd az elektromos autózás kényelmét már ma!
                         </p>
                         <div class="mt-6 flex space-x-4">
-                            <a href="#"
-                                class="bg-sky-500 hover:bg-sky-600 border-2 border-sky-800 hover:text-lime-300 text-white font-semibold px-4 py-2 rounded-xl hover:bg-primary1">
-                                Lefoglalom
+                            <a href="#" class="bg-sky-600 border-sky-700 hover:bg-sky-700 text-white border-2
+                             hover:border-sky-500 hover:text-lime-300 text-xl font-semibold  px-6 py-2 rounded-xl 
+                                transition-all duration-300 ease-in-out active:translate-y-[2px] ">
+                                Megnézem
                             </a>
                         </div>
                     </div>
@@ -61,9 +63,10 @@
                             vezetés örömét!
                         </p>
                         <div class="mt-6 flex space-x-4">
-                            <a href="#"
-                                class="bg-sky-500 hover:bg-sky-600 border-2 border-sky-800 hover:text-lime-300 text-white font-semibold px-4 py-2 rounded-xl hover:bg-primary1">
-                                Lefoglalom
+                            <a href="#" class="bg-sky-600 border-sky-700 hover:bg-sky-700 text-white border-2
+                             hover:border-sky-500 hover:text-lime-300 text-xl font-semibold  px-6 py-2 rounded-xl 
+                                transition-all duration-300 ease-in-out active:translate-y-[2px] ">
+                                Megnézem
                             </a>
                         </div>
                     </div>

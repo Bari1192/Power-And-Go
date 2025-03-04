@@ -22,6 +22,7 @@
                     :options="[
                         { value: '', label: 'Kérem válasszon!' },
                         { value: 6, label: 'Tisztasági takarítást igényel' },
+                        { value: 5, label: 'Kerékbilincs / Tilosban parkolás' },
                         { value: 1, label: 'Tisztítva, forgalomba visszaállítása' },
                     ]" v-model="selectedStatus" />
             </div>
@@ -30,6 +31,36 @@
                     label-class="block  tracking-wider text-sky-400 text-lg font-semibold mb-2" :value="lastRenter"
                     disabled
                     input-class="appearance-none block w-full bg-gray-300 bg-opacity-90 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+            </div>
+        </div>
+        <div class="w-full flex justify-left md:w-1/3 px-3">
+            <p
+                class="block  tracking-wider bg-slate-100 rounded-md border-2 border-rose-600 px-4 py-2 text-sky-700 text-lg font-semibold mb-2">
+                Ügyfél-Azonosítás</p>
+        </div>
+        <div class="flex flex-wrap my-5">
+            <div class="w-full md:w-1/3 px-3">
+                <FormKit name="person_birth" type="text" label="Ügyfél Születési Dátuma" :validation="'required|date'"
+                    placeholder="1990.01.01" :validation-messages="{
+                        required: 'Kötelező megadni!'
+                    }" label-class="block tracking-wider text-sky-400 text-lg font-semibold mb-2"
+                    input-class="appearance-none block w-full text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-sky-100 focus:border-sky-500" />
+            </div>
+
+            <div class="w-full md:w-1/3 px-3">
+                <FormKit name="passIdentify" type="text" label="Jelszó 2. és utolsó számjegye"
+                    :validation="'required|integer'" :validation-messages="{
+                        required: 'Kötelező megadni!'
+                    }" label-class="block tracking-wider text-sky-400 text-lg font-semibold mb-2"
+                    input-class="appearance-none block w-full text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-sky-100 focus:border-sky-500" />
+            </div>
+
+            <div class="w-full md:w-1/3 px-3">
+                <FormKit name="person_name" type="text" label="Ügyfél Neve:"
+                :validation="'required|length:10,128'" :validation-messages="{
+                        required: 'Kötelező megadni!'}"
+                    label-class="block  tracking-wider text-sky-400 text-lg font-semibold mb-2"
+                    input-class="appearance-none block w-full text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-sky-100 focus:border-sky-500" />
             </div>
         </div>
         <div class="w-full px-3">
@@ -43,6 +74,7 @@
                 label-class="text-sky-400 text-lg font-semibold mb-2"
                 input-class="max-h-28 w-full align-top appearance-none bg-gray-100 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 focus:outline-none focus:bg-white focus:border-gray-500" />
         </div>
+
         <div class="flex justify-center my-5">
             <FormKit type="submit" label="Bejelentés" id="button">
             </FormKit>
@@ -67,7 +99,7 @@ export default {
         return {
             submitted: false,
             selectedStatus: '',
-            description: '', 
+            description: '',
             formLocation: this.selectedLocation,
             customConfig: {
                 classes: generateClasses({
@@ -133,10 +165,12 @@ export default {
     watch: {
         selectedStatus(statusNumber) {
             if (this.description === '' || this.description === 'Az autó elérhető és bérlésre kész.') {
-                if (statusNumber === 5) {
+                if (statusNumber === 6) {
                     this.description = 'Az autót tisztításra ki kell vonni a forgalomból.';
                 } else if (statusNumber === 1) {
                     this.description = 'Az autó elérhető és bérlésre kész.';
+                } else if (statusNumber === 5) {
+                    this.description = 'A gépjmármű helyetelen lezárását követően kerékbilincsel látták el az autót.';
                 } else {
                     this.description = '';
                 }

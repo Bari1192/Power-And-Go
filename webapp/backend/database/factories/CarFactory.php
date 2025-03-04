@@ -9,41 +9,52 @@ use Illuminate\Support\Facades\DB;
 
 class CarFactory extends Factory
 {
+    private static array $generaltRendszamok = [];
+
     public function definition(): array
     {
         $gyartasiEv = fake()->numberBetween(2019, 2023);
-        $flotta = $this->flottabolAutotIdAlapjan();
-        $equipment_class = Equipment::inRandomOrder()->first(); # Véletlenszerű felszereltség "belegenerálás"
-        $flottacarmodel = Fleet::find($flotta);
+        $flottaId = $this->attributes['fleet_id'] ?? $this->flottabolAutotIdAlapjan();
+        $categoryId = $this->attributes['category_id'] ?? null;
+        $flottacarmodel = Fleet::find($flottaId);
 
-        $toltes_szazalek = fake()->randomFloat(2, 15, 100);
+        if ($categoryId === null) {
+            $categoryId = $this->katBesorolasAutomatan($flottaId);
+        }
+
+        $equipment_class = Equipment::inRandomOrder()->first();
+
+        $toltes_szazalek = fake()->numberBetween(35, 100);
         $power_kw = round($flottacarmodel->motor_power * ($toltes_szazalek / 100), 1);
-        $becsultdriving_range = round(($flottacarmodel->driving_range / $flottacarmodel->motor_power) * $power_kw, 1);
+        $becsultdriving_range = round(($flottacarmodel->driving_range * $toltes_szazalek) / 100, 1);
+
         return [
-            'fleet_id' => $flottacarmodel->id,
-            'category_id' => $this->katBesorolasAutomatan($flotta),
             'plate' => $this->rendszamGeneralasUjRegi(),
-            'manufactured' => $gyartasiEv,
-            'odometer' => $this->kmOraAllasGeneralas($gyartasiEv),
-            'equipment_class' => $equipment_class ? $equipment_class->id : 1,
             'power_percent' => $toltes_szazalek,
             'power_kw' => $power_kw,
             'estimated_range' => $becsultdriving_range,
+            'fleet_id' => $flottacarmodel->id,
+            'category_id' => $categoryId,
+            'manufactured' => $gyartasiEv,
+            'odometer' => $this->kmOraAllasGeneralas($gyartasiEv),
+            'equipment_class' => $equipment_class ? $equipment_class->id : 1,
             'status' => 1,
         ];
     }
     private function flottabolAutotIdAlapjan(): int
     {
-        $autokAranyszama = rand(1, 100);
+        $random = mt_rand(1, 100);
 
-        if ($autokAranyszama <= 85) {
-            return rand(1, 2) === 1 ? 1 : 3;
-        } elseif ($autokAranyszama > 85 && $autokAranyszama <= 90) {
+        if ($random <= 50) {
+            return 1;
+        } elseif ($random <= 93) {
+            return 3;
+        } elseif ($random <= 96) {
             return 4;
-        } elseif ($autokAranyszama > 90 && $autokAranyszama <= 95) {
+        } elseif ($random <= 98) {
             return 5;
         } else {
-            return 6;
+            return 2;
         }
     }
     private function katBesorolasAutomatan(int $flotta): int
@@ -62,14 +73,17 @@ class CarFactory extends Factory
             default => 5,
         };
     }
+
     private function rendszamGeneralasUjRegi(): string
     {
-        static $generaltRendszamok = [];
+        $maxAttempts = 10;
+        $attempt = 0;
         do {
+            $attempt++;
             if (random_int(0, 1) === 1) {
                 ## Új típusú rendszám (pl.: ABC-123)
-                $betuk = chr(rand(65, 65 + 2)); ## A-C
-                $masodikBetuk = chr(rand(65, 65 + 14)); ## A-O
+                $betuk = chr(rand(65, 65 + 25)); ## A-Z
+                $masodikBetuk = chr(rand(65, 65 + 25)); ## A-Z
                 $plate = 'AA' . $betuk . $masodikBetuk . '-' . str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
             } else {
                 ## Régi típusú rendszám
@@ -79,11 +93,14 @@ class CarFactory extends Factory
                 $harmadikBetu = chr(rand(65, 90)); ## A-Z
                 $plate = $elsoBetu . $masodikBetu . $harmadikBetu . '-' . str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);
             }
-        } while (in_array($plate, $generaltRendszamok));
-
-        $generaltRendszamok[] = $plate;
+            if ($attempt >= $maxAttempts) {
+                $plate .= '-' . uniqid();
+            }
+        } while (isset(self::$generaltRendszamok[$plate]) && $attempt < $maxAttempts);
+        self::$generaltRendszamok[$plate] = true;
         return $plate;
     }
+
     public function kmOraAllasGeneralas(int $gyartasiEv): int
     {
         return match ($gyartasiEv) {
@@ -92,8 +109,7 @@ class CarFactory extends Factory
             2021 => random_int(30000, 40000),
             2022 => random_int(25000, 35000),
             2023 => random_int(20000, 30000),
-            default => 0,
-            # Szalonból hozott autó
+            default => 0, # Szalonból hozott autó
         };
     }
 }

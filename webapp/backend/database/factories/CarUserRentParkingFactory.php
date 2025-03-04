@@ -17,34 +17,47 @@ class CarUserRentParkingFactory extends Factory
     {
         return [];
     }
+    
     public function generaltParkolasok(
         DateTime $berlesKezdete,
         DateTime $berlesVege,
         Price $arazas,
         User $user,
         Car $auto,
-        array $parkolasokAranyok
+        ?array $parkolasokAranyok
     ): array {
+        if (empty($parkolasokAranyok)) {
+            return [];
+        }
         $parkolasok = [];
-        foreach ($parkolasokAranyok as $percek) {
-            if ($percek < 5) continue;
-            $kezd = fake()->dateTimeBetween(
-                $berlesKezdete,
+        foreach ($parkolasokAranyok as $key => $percek) {
+            if ($percek < 5) continue; ## Túl rövid parkolásokat kihagyjuk
+            $kezdIdo = fake()->dateTimeBetween(
+                $berlesKezdete, 
                 (clone $berlesVege)->modify('-' . ($percek + 5) . ' minutes')
             );
-            $veg = (clone $kezd)->modify('+' . $percek . ' minutes');
+            $vegIdo = (clone $kezdIdo)->modify('+' . $percek . ' minutes');
+            if ($vegIdo > $berlesVege) {
+                $vegIdo = clone $berlesVege;
+                $percek = floor(($vegIdo->getTimestamp() - $kezdIdo->getTimestamp()) / 60);
+                if ($percek < 5) continue; ## Ha túl rövid lenne, akkor kihagyjuk
+            }
+            
             $parkolasok[] = [
-                'kezd' => $kezd->format('Y-m-d H:i:s'),
-                'veg' => $veg->format('Y-m-d H:i:s'),
+                'kezd' => $kezdIdo->format('Y-m-d H:i:s'),
+                'veg' => $vegIdo->format('Y-m-d H:i:s'),
                 'parking_minutes' => $percek,
-                'total_cost' => $this->parkolasiKoltsegek($user, $auto, $arazas, [['kezd' => $kezd, 'veg' => $veg, 'parking_minutes' => $percek]])
+                'total_cost' => $this->parkolasiKoltsegek(
+                    $user, 
+                    $auto, 
+                    $arazas, 
+                    [['kezd' => $kezdIdo, 'veg' => $vegIdo, 'parking_minutes' => $percek]]
+                )
             ];
         }
         return $parkolasok;
     }
-    /**
-     * PARKOLÁS & ÉJSZAKAI PARKOLÁSÉRT FELELŐS FÜGGVÉNY!
-     */
+    
     public function parkolasiKoltsegek(User $user, Car $auto, Price $arazas, array $parkolasok): int
     {
         if (empty($parkolasok)) {
@@ -53,72 +66,54 @@ class CarUserRentParkingFactory extends Factory
         $arazas = Price::where('category_class', $auto->category_id)
             ->where('sub_id', $user->sub_id)
             ->first();
-
+        if (!$arazas) {
+            return 0;
+        }
         $percDij = $arazas->parking_minutes ?? 90;
         $totalCost = 0;
-
         foreach ($parkolasok as $parking) {
             $kezdIdo = $parking['kezd'] instanceof DateTime ? $parking['kezd'] : new DateTime($parking['kezd']);
             $vegIdo = $parking['veg'] instanceof DateTime ? $parking['veg'] : new DateTime($parking['veg']);
-
             $split = $this->calculateDayNightMinutes($kezdIdo, $vegIdo);
-            if (!($user->sub_id === 4 && in_array($auto->category_id, [1, 2, 3]))) {
-                $totalCost += $split['night'] * $percDij;
+            $nightCost = 0;
+            if (!(in_array($user->sub_id, [2, 4]) || in_array($auto->category_id, [2, 4, 5]))) {
+                $nightCost = $split['night'] * $percDij;
             }
-            $totalCost += $split['day'] * $percDij;
+            $dayCost = $split['day'] * $percDij;
+            $totalCost += $dayCost + $nightCost;
         }
-
         return max(0, (int) round($totalCost));
     }
-
-    /**
-     * Felbontja a (start–end) intervallumot napokra,
-     * és kiszámolja, hány perc esik 07:00–22:00 (day) és 22:00–07:00 (night) közé.
-     * Többnapos intervallumokat is kezel.
-     */
+    
     public function calculateDayNightMinutes(DateTime $start, DateTime $end): array
     {
         if ($end <= $start) {
             return ['day' => 0, 'night' => 0];
         }
+        
         $dayMinutes = 0;
         $nightMinutes = 0;
         $current = clone $start;
 
         while ($current < $end) {
-            ## Az adott nap nappali sávja
+            ## Nappali időszak: 7:00 - 22:00
             $dayStart = (clone $current)->setTime(7, 0);
             $dayEnd   = (clone $current)->setTime(22, 0);
-
-            ## Nap vége = holnap 00:00
             $midnight = (clone $current)->modify('tomorrow')->setTime(0, 0);
-            ## Meddig tart ez a "rész-nap"?
             $todayEnd = min($midnight, $end);
-
-            ## Kiszámoljuk, mennyi perc az átfedés a [current–todayEnd] és a [dayStart–dayEnd] között
             $dayOverlap = $this->overlapInMinutes($current, $todayEnd, $dayStart, $dayEnd);
-
-            ## A [current–todayEnd] összes perc
             $todayTotal = max(0, (int) floor(($todayEnd->getTimestamp() - $current->getTimestamp()) / 60));
-
-            ## Éjszaka = total - nappali overlap
             $nightOverlap = max(0, $todayTotal - $dayOverlap);
-
             $dayMinutes   += $dayOverlap;
             $nightMinutes += $nightOverlap;
-
-            ## Következő napra ugrunk
             $current = $midnight;
         }
-
         return [
             'day'   => $dayMinutes,
             'night' => $nightMinutes,
         ];
     }
-    /**
-     * Két intervallum (A=[startA,endA], B=[startB,endB]) átfedésének hossza percben.
-     */
+    
     private function overlapInMinutes(
         DateTime $startA,
         DateTime $endA,
@@ -127,49 +122,63 @@ class CarUserRentParkingFactory extends Factory
     ): int {
         $startMax = max($startA->getTimestamp(), $startB->getTimestamp());
         $endMin   = min($endA->getTimestamp(), $endB->getTimestamp());
-
+        
         if ($endMin <= $startMax) {
             return 0;
         }
-
+        
         return (int) floor(($endMin - $startMax) / 60);
     }
+    
     public function userFullTimeRentValidation(
         DateTime $berlesKezdete,
         Car $auto,
         DateTime $berlesVege,
         Price $arazas,
         ?int &$vezetesIdo,
-        array $parkolasok,
+        ?array $parkolasok,
         User $user
     ): array {
+        // Teljes bérlés időtartama percben
         $totalSeconds = $berlesVege->getTimestamp() - $berlesKezdete->getTimestamp();
-        $totalMinutes = round($totalSeconds / 60);
-        $vezetesIdo = round($vezetesIdo ?? 0);
-
-        $osszesParkolasIdo = array_sum(array_column($parkolasok, 'parking_minutes'));
-        $maxParkingMinutes = round($totalMinutes * 0.6);
-
-        ## max parkolási idő túllépésére
+        $totalMinutes = floor($totalSeconds / 60);
+        
+        // Vezetési idő validálása - biztosítjuk, hogy szám legyen
+        $vezetesIdo = floor($vezetesIdo ?? 0);
+        
+        // Összes parkolási idő kiszámítása
+        $osszesParkolasIdo = 0;
+        if (is_array($parkolasok)) {
+            foreach ($parkolasok as $parkolas) {
+                $osszesParkolasIdo += $parkolas['parking_minutes'] ?? 0;
+            }
+        }
+        
+        // Maximum parkolási idő korlátozása a teljes idő 60%-ára
+        $maxParkingMinutes = floor($totalMinutes * 0.6);
+        
+        // Ha a parkolási idő túllépi a maximumot, korrigáljuk
         if ($osszesParkolasIdo > $maxParkingMinutes) {
             $excessParking = $osszesParkolasIdo - $maxParkingMinutes;
             $vezetesIdo += $excessParking;
-
+            $osszesParkolasIdo = $maxParkingMinutes;
+            
+            // Az utolsó parkolás idejének csökkentése
             if (!empty($parkolasok)) {
                 $lastIndex = count($parkolasok) - 1;
                 $parkolasok[$lastIndex]['parking_minutes'] = max(
                     5,
                     $parkolasok[$lastIndex]['parking_minutes'] - $excessParking
                 );
-
-                ## Frissíteni a végső időpontot
+                
+                // Parkolás vég időpontjának frissítése
                 $kezdIdo = new DateTime($parkolasok[$lastIndex]['kezd']);
                 $vegIdo = (clone $kezdIdo)->modify(
                     '+' . $parkolasok[$lastIndex]['parking_minutes'] . ' minutes'
                 );
                 $parkolasok[$lastIndex]['veg'] = $vegIdo->format('Y-m-d H:i:s');
-
-                ## Újraszámolni a költséget
+                
+                // Költség újraszámítása
                 $parkolasok[$lastIndex]['total_cost'] = $this->parkolasiKoltsegek(
                     $user,
                     $auto,
@@ -178,13 +187,16 @@ class CarUserRentParkingFactory extends Factory
                 );
             }
         }
-
-        ## Végső vezetési idő kalkulálás
-        $osszesParkolasIdo = array_sum(array_column($parkolasok, 'parking_minutes'));
-        $vezetesIdo = $totalMinutes - round($osszesParkolasIdo);
-
+        
+        // Ellenőrizzük, hogy a vezetési idő + parkolási idő = teljes bérlési idő
+        $osszesIdo = $osszesParkolasIdo + $vezetesIdo;
+        if ($osszesIdo != $totalMinutes) {
+            // Korrigáljuk a vezetési időt, hogy kijöjjön a teljes idő
+            $vezetesIdo = $totalMinutes - $osszesParkolasIdo;
+        }
+        
         return [
-            'parking' => $parkolasok,
+            'parking' => $osszesParkolasIdo,
             'driving' => max(0, $vezetesIdo),
         ];
     }

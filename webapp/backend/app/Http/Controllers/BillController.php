@@ -40,15 +40,7 @@ class BillController extends Controller
     {
         return ($bill->delete()) ? response()->noContent() : abort(500);
     }
-
-    public function carFees(Bill $bills, Car $car): JsonResource
-    {
-        $bills = Bill::where("car_id", $car->id)
-            ->where('bill_type', 'charging_penalty')
-            ->get()
-            ->load(['persons', 'users']);
-        return BillResource::collection($bills);
-    }
+  
     public function closedRents(): JsonResource
     {
         $bills = Bill::with(['users', 'cars.users', 'persons'])

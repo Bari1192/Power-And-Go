@@ -10,6 +10,8 @@ class EquipmentSeeder  extends Seeder
 {
     public function run(): void
     {
-        Equipment::factory(5)->create();
+        $amount = 5;
+        Equipment::factory($amount)->create();
+        $this->command->info("\t$amount db felszereltség osztály készült el.");
     }
 }

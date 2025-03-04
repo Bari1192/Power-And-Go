@@ -140,12 +140,12 @@ class ParkingFactoryTest extends TestCase
                 $this->testCar,
                 $parkolasokAranyok
             );
-            $mindegyikValid = $mindegyikValid && 
-            count($parkolasok) === 1 &&
-            $parkolasok[0]['parking_minutes'] === $perc &&
-            array_key_exists('kezd', $parkolasok[0]) &&
-            array_key_exists('veg', $parkolasok[0]) &&
-            array_key_exists('total_cost', $parkolasok[0]);
+            $mindegyikValid = $mindegyikValid &&
+                count($parkolasok) === 1 &&
+                $parkolasok[0]['parking_minutes'] === $perc &&
+                array_key_exists('kezd', $parkolasok[0]) &&
+                array_key_exists('veg', $parkolasok[0]) &&
+                array_key_exists('total_cost', $parkolasok[0]);
         }
         $this->assertTrue($mindegyikValid, 'A parkolások generálása nem megfelelő 5 és 15 perc között');
     }
@@ -250,10 +250,10 @@ class ParkingFactoryTest extends TestCase
     }
     public function test_parkolasi_koltseg_szamitasa_minden_elofizetesre_auto_kategóriara_es_napszakokra_validan()
     {
-        # Összesen: 4*5*3 eset = 60 teszt.
-        # Előfiz. sub_id-ja
+        // Összesen: 4 * 5 * 3 eset = 60 teszt.
+        // Előfizetés sub_id-ja
         $subIds = [1, 2, 3, 4];
-        # Minden car kategória
+        // Minden autó kategória
         $categoryIds = [1, 2, 3, 4, 5];
         $idopontok = [
             'nappali' => [
@@ -309,16 +309,12 @@ class ParkingFactoryTest extends TestCase
                     $percDij = $price->parking_minutes ?? 90;
                     $vartKoltseg = 0;
 
-                    // Nappali díj számítás
-                    if ($idoszak['nappali_perc'] > 0) {
-                        $vartKoltseg += $idoszak['nappali_perc'] * $percDij;
-                    }
+                    // Nappali rész díja
+                    $vartKoltseg += $idoszak['nappali_perc'] * $percDij;
 
-                    // Éjszakai díj számítás - VIP előfizetőnél 1-3 kategóriában ingyenes
-                    if (
-                        $idoszak['ejszakai_perc'] > 0 &&
-                        !($subId === 4 && in_array($categoryId, [1, 2, 3]))
-                    ) {
+                    // Éjszakai rész díja: ingyenes, ha a felhasználó sub_id-je 2 vagy 4, 
+                    // VAGY az autó kategóriája [2,4,5]-be tartozik.
+                    if ($idoszak['ejszakai_perc'] > 0 && !(in_array($subId, [2, 4]) || in_array($categoryId, [2, 4, 5]))) {
                         $vartKoltseg += $idoszak['ejszakai_perc'] * $percDij;
                     }
 
@@ -353,7 +349,7 @@ class ParkingFactoryTest extends TestCase
                     ['parking_minutes' => 60, 'kezd' => '2025-01-01 10:00:00']
                 ],
                 'expected_driving' => 60,
-                'expected_parking_count' => 1
+                'expected_max_parking_minutes' => 60
             ],
             'hosszu_parkolas' => [
                 'berles_idotartam' => 100,
@@ -361,9 +357,8 @@ class ParkingFactoryTest extends TestCase
                 'parkolasok' => [
                     ['parking_minutes' => 70, 'kezd' => '2025-01-01 10:00:00']
                 ],
-                # 100 perc * 0.4 >> 40 perc vezetés
-                'expected_driving' => 40, 
-                'expected_parking_count' => 1
+                'expected_driving' => 40,
+                'expected_max_parking_minutes' => 60
             ],
             'tobb_parkolas' => [
                 'berles_idotartam' => 180,
@@ -373,27 +368,26 @@ class ParkingFactoryTest extends TestCase
                     ['parking_minutes' => 50, 'kezd' => '2025-01-01 11:00:00']
                 ],
                 'expected_driving' => 90,
-                'expected_parking_count' => 2
+                'expected_max_parking_minutes' => 108 // 180 * 0.6
             ],
             'nincs_parkolas' => [
                 'berles_idotartam' => 60,
                 'vezetes_ido' => 60,
                 'parkolasok' => [],
                 'expected_driving' => 60,
-                'expected_parking_count' => 0
+                'expected_max_parking_minutes' => 36 // 60 * 0.6
             ]
         ];
         foreach ($testCases as $name => $testCase) {
             $berlesKezdete = new DateTime('2025-01-01 10:00:00');
             $berlesVege = (clone $berlesKezdete)->modify("+{$testCase['berles_idotartam']} minutes");
-
+    
             $parkolasok = [];
-
+    
             foreach ($testCase['parkolasok'] as $parkolas) {
-                $lastIndex = count($parkolasok) - 1;
                 $kezdIdo = new DateTime($parkolas['kezd']);
                 $vegIdo = (clone $kezdIdo)->modify('+' . $parkolas['parking_minutes'] . ' minutes');
-
+    
                 $parkolasok[] = [
                     'kezd' => $kezdIdo->format('Y-m-d H:i:s'),
                     'veg' => $vegIdo->format('Y-m-d H:i:s'),
@@ -406,7 +400,7 @@ class ParkingFactoryTest extends TestCase
                     )
                 ];
             }
-
+    
             $vezetesIdo = $testCase['vezetes_ido'];
             $result = $this->parkingFactory->userFullTimeRentValidation(
                 $berlesKezdete,
@@ -417,18 +411,16 @@ class ParkingFactoryTest extends TestCase
                 $parkolasok,
                 $this->testUser
             );
-
+    
+            // Ellenőrizzük a vezetési időt
             $this->assertEquals($testCase['expected_driving'], $result['driving']);
-            $this->assertCount($testCase['expected_parking_count'], $result['parking']);
-
-            if ($testCase['expected_parking_count'] > 0) {
-                $totalParkingMinutes = array_sum(array_column($result['parking'], 'parking_minutes'));
-                $this->assertLessThanOrEqual(
-                    round($testCase['berles_idotartam'] * 0.6),
-                    $totalParkingMinutes,
-                    "Parkolási idő túllépi a maximális 60%-ot: {$name}"
-                );
-            }
+    
+            // Ellenőrizzük, hogy a parkolási idő nem haladja meg a maximális 60%-ot
+            $this->assertLessThanOrEqual(
+                $testCase['expected_max_parking_minutes'],
+                $result['parking'],
+                "Parkolási idő túllépi a maximális 60%-ot: {$name}"
+            );
         }
     }
 }

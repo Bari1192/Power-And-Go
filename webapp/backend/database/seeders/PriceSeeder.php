@@ -491,7 +491,7 @@ class PriceSeeder extends Seeder
                 'parking_minutes' => null,
                 'reserv_minutes' => null,
                 'disc_parking_minutes' => null,
-                'daily_fee' => 20128,
+                'daily_fee' => 19278,
                 'daily_km_limit' => 15,
                 'km_fee' => 48,
                 'airport_out_fee' => null,
@@ -503,7 +503,7 @@ class PriceSeeder extends Seeder
                 'three_hour_fee' => 10603,
                 'six_hour_fee' => 13495,
                 'weekend_daily_fee' => null,
-                'twelve_hour_fee' => null,
+                'twelve_hour_fee' => 16386,
             ],
         ]);
     }

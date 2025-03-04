@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Ticket;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TicketFactory extends Factory
@@ -66,7 +67,7 @@ class TicketFactory extends Factory
             'car_id' => fake()->numberBetween(1, 50),
             'status_id' => self::TICKET_TYPES[$type],
             'description' => fake()->randomElement($this->commentsByType[$type]),
-            'created_at' => now()
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s') 
         ];
     }
     public function cleaning()

@@ -14,7 +14,7 @@ class Step11_RegisterControllerTest extends TestCase
     {
         $person = Person::factory()->make([
             'person_password' => '12345678',
-            'email' => fake()->regexify('[a-z]{18}').'@gmail.com',
+            'email' => fake()->regexify('[a-z]{18}') . '@gmail.com',
         ])->toArray();
 
         $response = $this->post('/api/persons', $person);
@@ -28,6 +28,12 @@ class Step11_RegisterControllerTest extends TestCase
             'password_2_4' => $person['person_password'][1] . $person['person_password'][3],
             'account_balance' => 0,
             'sub_id' => 1,
+            'plant_tree' => 1,
+            'vip_discount' => 1,
+            'bonus_min_exp' => now()->format('Y-m-d'),
+            'bonus_minutes' => 0,
+            'driving_minutes' => 0,
+            'contributions' => 0,
         ]);
         dump($response->json());
         $response->assertStatus(201);

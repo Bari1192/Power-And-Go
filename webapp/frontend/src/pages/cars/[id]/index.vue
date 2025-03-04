@@ -1,10 +1,7 @@
 <template>
   <BaseLayout>
-    <div v-if="loading" class="container mt-20 mb-20 w-full sm:w-11/12 lg:w-2/3 mx-auto">
-      <h1></h1>
-    </div>
-    <div v-else class="container mt-20 mb-40 w-full sm:w-11/12 lg:w-2/3 mx-auto">
-
+    
+    <div class="container mt-20 mb-40 w-full sm:w-11/12 lg:w-2/3 mx-auto">
       <div
         class="m-auto w-4/5 py-6 d-flex justify-center my-10 sm:w-full border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
         <div class="text-center grid grid-cols-3">
@@ -20,7 +17,7 @@
 
       <!-- TISZTASÁG BEJELENTÉSI MODEL -->
       <div v-if="cleanreport" class="bg-sky-950 border-4 border-sky-700 rounded-lg mt-10 p-4">
-        <BaseReportCard :carId="car.car_id" :lastRenter="carRentHistory.renters[0]?.user"
+        <CleanReportCard :carId="car.car_id" :lastRenter="carRentHistory.renters[0]?.user"
           @submit-success="handleFormSubmit" />
       </div>
 
@@ -29,9 +26,14 @@
         <component :is="currentModel" :car-id="car.car_id" @submit-success="submitHandler" />
       </div>
 
-      <!-- accident BEJELENTÉSI KOMPONENS -->
+      <!-- ACCIDENT BEJELENTÉSI KOMPONENS -->
       <div v-if="accidentReport">
         <CarAccidentReport :lastRenter="carRentHistory.renters[0].user" @submit="submitAccidentReport" />
+      </div>
+
+      <!-- BÜNTETÉS KÉSZÍTÉSI KOMPONENS -->
+      <div v-if="carManualFines">
+        <ManualFines :carRentHistory="carRentHistory" @submit="submitManualFines" />
       </div>
 
       <h1 class="text-5xl font-bold text-sky-100 italic mb-4" :style="{
@@ -47,15 +49,14 @@
         </button>
       </h1>
       <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
-      <transition name="fade-slide">
+      <transition name="fade-slide transition-all ease-in-out duration-300 ">
         <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 lg:gap-6 gap-2" v-if="carOpen">
-          <BaseCard :title="'Gépjármű aktuális állapota'" :text="latestTicket.status_descrip" />
-
-          <BaseCard :title="'Becsült megtehető távolság'" :text="car.estimated_range + ' km'" />
+          <BaseCard :title="'Utolsó rögzített bejegyzés'" :text="latestTicket.status_descrip" />
+          <BaseCard :title="'Becsült megtehető távolság'" :text="car.estimated_range + ' km-re elegendő töltés.'" />
           <BaseCard :title="'Akkumulátor töltöttsége'" :text="car.power_kw + ' kW'" />
           <BaseCard :title="'Töltöttségi állapota'" :text="car.power_percent + ' %'" />
           <BaseCard :title="'Akkumulátor kapacitása'" :text="car.motor_power + ' kW'" />
-          <BaseCard :title="'Végsebesség'" :text="car.top_speed + ' km/h'" />
+          <BaseCard :title="'Utoljára bérelve'" :text="formattedLastRent" />
           <BaseCard :title="'Maximális hatótáv egy töltéssel'" :text="car.driving_range + ' km'" />
           <BaseCard :title="'Aktuális futásteljesítménye'" :text="car.odometer + ' km'" />
           <BaseCard :title="'Gyártási éve'" :text="car.manufactured" />
@@ -120,10 +121,8 @@
           <div class=" mx-auto border-4 border-indigo-900 rounded-3xl overflow-hidden">
             <table class="w-full">
               <thead>
-                <tr class="text-lime-600 font-semibold bg-amber-50 border-b-8 border-lime-600">
+                <tr class="text-indigo-600 font-semibold bg-indigo-50 border-b-8 border-indigo-600 text-lg">
                   <th class="py-2 text-center">Bérlő</th>
-                  <th class="py-2 text-center">Nyitás</th>
-                  <th class="py-2 text-center">Nyitás töltés</th>
                   <th class="py-2 text-center">Zárás</th>
                   <th class="py-2 text-center">Zárás töltés</th>
                   <th class="py-2 text-center">Megtett táv</th>
@@ -134,11 +133,9 @@
               </thead>
               <tbody class="p-8">
                 <tr v-for="rent in carRentHistory.renters" :key="rent.rent_id"
-                  class="odd:bg-amber-50 even:bg-yellow-50 even:border-b-4 even:border-t-4 even:border-lime-400 text-center text-lg font-semibold text-sky-900">
+                  class="odd:bg-indigo-50 even:bg-indigo-100 bg-opacity-10 even:border-b-4 even:border-t-4 even:border-indigo-400 text-center text-lg font-semibold text-sky-900">
                   <td class="mx-auto py-2"><router-link to=""> {{ rent.user }} </router-link></td>
-                  <td class="mx-auto py-2">{{ rent.rent_start + " " + rent.rent_start }}</td>
-                  <td class="mx-auto py-2">{{ rent.start_percent }} %</td>
-                  <td class="mx-auto py-2">{{ rent.rent_close + " " + rent.rent_end_time }}</td>
+                  <td class="mx-auto py-2">{{ rent.rent_close }}</td>
                   <td class="mx-auto py-2">{{ rent.end_percent }} %</td>
                   <td class="mx-auto py-2">{{ rent.distance }} km</td>
                   <td class="mx-auto py-2">{{ rent.rental_cost }} Ft</td>
@@ -180,16 +177,10 @@
               <div class="cursor-default grid grid-cols-3 gap-2 mx-1" v-if="rentBillDetailsStates[fine.id]">
                 <p><b>Számla sorszáma: </b><br><i class="text-lime-500">{{ fine.id }}</i></p>
                 <p class="text-center"> <b>Kiállítva:</b> <br><i class="text-lime-500">{{ fine.invoice_date }}</i></p>
-                <p class="text-right"><b>Bérlés kezdete:</b><br><i class="text-lime-500">{{ fine.rent_start }}
-                    {{ fine.rent_start }}</i></p>
+                <p class="text-right"><b>Bérlés kezdete:</b><br><i class="text-lime-500">{{ fine.rent_start }}</i></p>
                 <p><b>Összege:</b> <br><i class="text-lime-500">{{ fine.total_cost }} Ft</i></p>
-                <p class="text-center"><b>Levezetett út:</b><br> <i class="text-lime-500">{{ fine.distance }}
-                    km</i></p>
-                <p class="text-right"><b>Bérlés vége:</b> <br><i class="text-lime-500">{{ fine.rent_close }}
+                <p class="text-center"><b>Bérlés vége:</b> <br><i class="text-lime-500">{{ fine.rent_close }}
                     {{ fine.rent_end_time }}</i></p>
-                <p><b>Parkolási idő:</b> <br><i class="text-lime-500">{{ fine.parking_minutes }} perc</i></p>
-                <p class="text-center"><b>Vezetési idő:</b> <br><i class="text-lime-500">{{ fine.driving_minutes }}
-                    perc</i></p>
                 <p class="text-right">
                   <b>Számla állapota: </b>
                   <span
@@ -213,20 +204,39 @@
 import { http } from '@utils/http'
 import BaseCard from '@layouts/BaseCard.vue'
 import BaseLayout from "@layouts/BaseLayout.vue";
-import BaseReportCard from '@layouts/BaseReportCard.vue';
 import EupModel from "@layouts/carmodels/EupModel.vue";
 import CitigoModel from "@layouts/carmodels/CitigoModel.vue";
 import KangooModel from "@layouts/carmodels/KangooModel.vue";
 import VivaroModel from "@layouts/carmodels/VivaroModel.vue";
 import KiaNiroModel from "@layouts/carmodels/KiaNiroModel.vue";
-import CarAccidentReport from '@layouts/carmodels/caraccidents/CarAccidentReport.vue';
+import CleanReportCard from '@layouts/reportforms/fastReport/CleanReportCard.vue';
+import CarAccidentReport from '@layouts/reportforms/caraccidents/CarAccidentReport.vue';
+import ManualFines from '@layouts/reportforms/CarManualFines/ManualFines.vue';
 import CarReportButtons from '@layouts/reportforms/CarReportButtons.vue';
+import { toast } from 'vue3-toastify';
+
+import BaseSpinner from '@layouts/sliders/BaseSpinner.vue';
+import { h } from 'vue';
+
+const loadingToast = () => {
+  return toast(
+    () => h('div', { class: 'flex items-center gap-3' }, [
+      h(BaseSpinner),
+      h('span', 'Adatok betöltése...')
+    ]),
+    {
+      position: "top-right",
+      autoClose: false,
+      closeButton: false
+    }
+  );
+};
 
 export default {
   components: {
     EupModel,
     CarReportButtons,
-    BaseReportCard,
+    CleanReportCard,
     BaseCard,
     BaseLayout,
     EupModel,
@@ -235,6 +245,7 @@ export default {
     KiaNiroModel,
     VivaroModel,
     CarAccidentReport,
+    ManualFines,
   },
   data() {
     return {
@@ -251,11 +262,14 @@ export default {
       cleanreport: false,
       demageReport: false,
       accidentReport: false,
+      carManualFines: false,
       latestTicket: [],
       loading: true,
     }
   },
+
   async mounted() {
+    const toastId = loadingToast();
     try {
       const response = await http.get(`/cars/${this.$route.params.id}`);
       this.car = response.data.data;
@@ -269,23 +283,30 @@ export default {
       const rentResponse = await http.get(`/cars/${this.$route.params.id}/renthistory`);
       this.carRentHistory = rentResponse.data.data;
 
-      const feesResponse = await http.get(`/bills/${this.$route.params.id}/fees`);
+      const feesResponse = await http.get(`/cars/${this.$route.params.id}/fees`);
       this.rentBillFees = feesResponse.data.data;
       this.rentBillFees.forEach((fine) => {
         this.$set(this.rentBillDetailsStates, fine.id, false);
       });
 
-      this.loading = false;
+      toast.update(toastId, {
+        render: "Sikeres betöltés",
+        type: "success",
+        autoClose: 2000
+      });
     } catch (error) {
-      console.error("Adatbetöltési hiba:", error);
-      this.loading = false; // Hiba esetén is állítsuk át a státuszt
+      toast.dismiss(toastId);
+      toast.error("Hiba történt");
     }
-
   },
   methods: {
     toggleSection(section) {
-      const sections = ['cleanreport', 'demageReport', 'accidentReport'];
+      const sections = ['cleanreport', 'demageReport', 'accidentReport', 'carManualFines'];
       sections.forEach(s => this[s] = s === section ? !this[s] : false);
+    },
+    submitManualFines(data) {
+      console.log('Manual fines adatok:', data);
+      // Itt dolgozd fel a ManualFines űrlap adatait, pl. elküldheted a backend felé
     },
     cardetails() {
       this.carOpen = !this.carOpen;
@@ -385,21 +406,26 @@ export default {
       };
 
       return manufacturerAlapjanModel[this.car.manufacturer] || null;
+    },
+    formattedLastRent() {
+      const rentClose = this.carRentHistory.renters[0].rent_close; // Legfrissebb bérlés
+      if (!rentClose) return 'Nincs dátum';
+
+      const dateObj = new Date(rentClose);
+
+      const formattedDate = dateObj.toLocaleDateString('hu-HU', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
+
+      const formattedTime = dateObj.toLocaleTimeString('hu-HU', {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+
+      return `${formattedDate} ${formattedTime}`;
     }
   },
 }
 </script>
-
-<style scoped>
-.fade-slide-enter-active,
-.fade-slide-leave-active {
-  transition: all 3s ease-in-out;
-}
-
-.fade-slide-enter,
-.fade-slide-leave-to {
-  transform: translateY(-30px);
-  opacity: 0;
-  transition: all 1s ease-in-out;
-}
-</style>

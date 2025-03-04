@@ -32,7 +32,7 @@ class CarWithUsersResource extends JsonResource
                     'parking' => $user->rent_details->parking_minutes,
                     'invoice_date' => $user->rent_details->invoice_date,
                 ];
-            }),
+            })->sortByDesc('rent_close')->values(),
         ];
     }
 }

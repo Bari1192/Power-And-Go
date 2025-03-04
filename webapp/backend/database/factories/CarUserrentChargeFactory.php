@@ -7,6 +7,7 @@ use App\Models\CarUserrentCharge;
 use App\Models\User;
 use App\Policies\CarRefreshService;
 use DateTime;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CarUserrentChargeFactory extends Factory
@@ -23,7 +24,7 @@ class CarUserrentChargeFactory extends Factory
     {
         return [];
     }
-    private function calculateTimes(DateTime $start, DateTime $end): array
+    public function calculateTimes(DateTime $start, DateTime $end): array
     {
         $totalSeconds = abs($end->getTimestamp() - $start->getTimestamp());
         return [
@@ -35,43 +36,24 @@ class CarUserrentChargeFactory extends Factory
             'remainingMinutes' => floor(($totalSeconds % 3600) / 60)
         ];
     }
-    /**
-     *###########################################################################################
-     *########################## LOGIKAI SZABÁLYZAT #############################################
-     *###########################################################################################
 
-     *                  >> [22 kW-os töltő esetén 0-ról 100%-ra] <<
-     *########### Adott autókra lebontva átlagosan megmutatja a töltési időket ###########
-     * [1] [18 kWh]-> 45-60p => 100%            || 0.3-0.4 kwH / perc
-     * [2] [33 kWh | Kangoo]-> 90-120p 100%     || 0.3-0.4 kwH / perc
-     * [3] [36 kWh]-> 90-120p 100%              || 0.3-0.4 kwH / perc
-     * [4] [75 kWh | Vivaro]-> 90-120p 100%     || 0.37-0.4 kwH / perc
-     * [5] [65 kWh | Niro]-> 120-130p 100%      || 0.5-0.6 kwH / perc
-     
-     
-     *                  >> [50 kW-os töltő esetén 0-ról 100%-ra] <<
-     *########### Adott autókra lebontva átlagosan megmutatja a töltési időket ###########
-     * [1] [18 kWh]| >> 43p 100%                || 0.40-0.43 kw / perc
-     * [2] [33 kWh | >> 40p 100%                || 0.8-0.83 kw / perc
-     * [3] [36 kWh]| >> 43p 100%                || 0.8-0.83 kw / perc
-     * [4] [75 kWh | >> 90p 100%                || 0.8-0.83 kw / perc
-     * [5] [65 kWh | >> 78-80p 100%             || 0.8-0.83 kw / perc
-     *###########################################################################################
-     */
     public function kellHozzaTolteniAutot(int $berlesIdotartam, int $megtettTavolsag, Car $car): bool
     {
-        if ($car->power_percent > 60 || $berlesIdotartam < 20) {
+        // Ha az autó töltöttsége már eleve magas vagy rövid bérlés, nincs szükség töltésre
+        if ($car->power_percent > 70 || $berlesIdotartam < 30) {
             return false;
         }
+
         $egyKwKilometerben = round(($car->fleet->driving_range / $car->fleet->motor_power), 2);
         $jelenlegiToltesKw = $car->power_kw;
         $jelenlegiToltesSzazalek = round(($jelenlegiToltesKw / $car->fleet->motor_power) * 100, 2);
 
-        ## Max megt. táv, perc, fogyasztás a jelenlegi töltöttséggel.
+        // Max megtehető táv, perc, fogyasztás a jelenlegi töltöttséggel
         $maxtavJelenlegiToltessel = $egyKwKilometerben * $jelenlegiToltesKw;
         $maxTavoPercekreValtva = $maxtavJelenlegiToltessel * 2;
         $fogyasztas = $megtettTavolsag / $egyKwKilometerben;
 
+        // Az alábbi feltételek bármelyikének teljesülése esetén töltésre van szükség
         if (($megtettTavolsag > $maxtavJelenlegiToltessel || $berlesIdotartam > $maxTavoPercekreValtva &&
                 $fogyasztas > $jelenlegiToltesKw) ||
             ($berlesIdotartam > 60 && $jelenlegiToltesSzazalek <= 35.0) ||
@@ -79,71 +61,94 @@ class CarUserrentChargeFactory extends Factory
         ) {
             return true;
         }
+
+        // Ha egyik feltétel sem teljesül, alapértelmezetten nincs szükség töltésre
         return false;
     }
 
-    public function generaljToltest(Car $car, User $user, DateTime $berlesKezdete, DateTime $berlesVege, int $berlesIdoTartam): array
+    /**
+     * Töltési esemény generálása
+     */
+    public function generaljToltest(Car $car, User $user, DateTime $berlesKezdete, array $times): array
     {
-        # 1. Töltési sebesség 
-        $toltesSebesseg = match ($car->category_id) {
-            1, 2, 3 => fake()->randomFloat(2, 0.32, 0.37),
-            4 => fake()->randomFloat(2, 0.37, 0.40),
-            5 => fake()->randomFloat(2, 0.51, 0.61),
-            default => fake()->randomFloat(2, 0.35, 0.40),
-        };
-        $start_percent = $car->power_percent;
-        $start_kw = $car->power_kw;
-        $chargingStart = (clone $berlesKezdete)->modify('+5 minutes');
+        try {
+            # 1. Töltési sebesség meghatározása kategória alapján
+            $toltesSebesseg = match ($car->category_id) {
+                1, 2, 3 => fake()->randomFloat(2, 0.32, 0.37),
+                4 => fake()->randomFloat(2, 0.37, 0.40),
+                5 => fake()->randomFloat(2, 0.51, 0.61),
+                default => fake()->randomFloat(2, 0.35, 0.40),
+            };
 
-        $times = $this->calculateTimes($berlesKezdete, $berlesVege);
-        $berlesIdoTartam = $times['minutes'];
+            // Kezdeti értékek rögzítése
+            $start_percent = $car->power_percent;
+            $start_kw = $car->power_kw;
+            $chargingStart = (clone $berlesKezdete)->modify('+5 minutes');
 
-        # 2. Min. töltési idő
-        $minimumToltesIdo = 5;
+            // Bérlés idő és vége
+            $berlesIdoTartam = $times['minutes'];
+            $berlesVege = (clone $berlesKezdete)->modify("+{$times['minutes']} minutes");
 
-        # 3. Max. töltési idő
-        $maxToltesIdoSzazSzazalekra = floor(($car->fleet->motor_power - $car->power_kw) / $toltesSebesseg);
-        # 4. Korlátozások 
-        $maxLehetségesToltesiIdo = min($berlesIdoTartam - 10, $maxToltesIdoSzazSzazalekra);
-        # 5. Fix töltési idő generálása
-        $toltesiIdo = fake()->numberBetween($minimumToltesIdo, $maxLehetségesToltesiIdo);
-        $validaltToltesVege = (clone $chargingStart)->modify('+' . $toltesiIdo . ' minutes');
+            # 2. Min. töltési idő
+            $minimumToltesIdo = 5;
 
-        if ($validaltToltesVege > $berlesVege) {
+            # 3. Max. töltési idő számítása
+            $maxToltesIdoSzazSzazalekra = floor(($car->fleet->motor_power - $car->power_kw) / $toltesSebesseg);
+
+            # 4. Korlátozások a bérlési időtartam alapján
+            $maxLehetségesToltesiIdo = min($berlesIdoTartam - 10, $maxToltesIdoSzazSzazalekra);
+
+            // Nem lehet negatív vagy túl kicsi a max töltési idő
+            if ($maxLehetségesToltesiIdo <= $minimumToltesIdo) {
+                $maxLehetségesToltesiIdo = $minimumToltesIdo + 1;
+            }
+
+            # 5. Töltési idő generálása
+            $toltesiIdo = fake()->numberBetween($minimumToltesIdo, $maxLehetségesToltesiIdo);
+            $validaltToltesVege = (clone $chargingStart)->modify('+' . $toltesiIdo . ' minutes');
+
+
+            # 6. Töltés kalkuláció
+            $toltottKilowatt = max(0, $toltesiIdo * $toltesSebesseg);
+            $ujToltesKw = min($car->fleet->motor_power, $car->power_kw + round($toltottKilowatt, 1));
+            $ujToltesSzazalek = round(($ujToltesKw / $car->fleet->motor_power) * 100, 2);
+
+            # 7. Kreditek számítása és autó frissítése
+            $credits = $this->chargingCreditsReturn($user, $toltottKilowatt);
+            $this->carRefreshService->frissitesToltesUtan($car, $ujToltesSzazalek, $ujToltesKw);
+
+            return [
+                'charging_start_date' => $chargingStart,
+                'charging_end_date' => $validaltToltesVege,
+                'charging_time' => $toltesiIdo,
+                'start_percent' => $start_percent,
+                'end_percent' => $ujToltesSzazalek,
+                'start_kw' => $start_kw,
+                'end_kw' => $ujToltesKw,
+                'charged_kw' => floor($toltottKilowatt),
+                'credits' => $credits,
+            ];
+        } catch (Exception $e) {
             return [];
         }
-        # 5. Töltés kalkuláció & korrekció 
-        $toltottKilowatt = max(0, $toltesiIdo * $toltesSebesseg);
-        $ujToltesKw = min($car->fleet->motor_power, $car->power_kw + round($toltottKilowatt, 1));
-        $ujToltesSzazalek = round(($ujToltesKw / $car->fleet->motor_power) * 100, 2);
-
-        $credits = $this->chargingCreditsReturn($user, $toltottKilowatt);
-        $this->carRefreshService->frissitesToltesUtan($car, $ujToltesSzazalek, $ujToltesKw);
-
-        return [
-            'charging_start_date' => $chargingStart,
-            'charging_end_date' => $validaltToltesVege,
-            'charging_time' => $toltesiIdo,
-            'start_percent' => $start_percent,
-            'end_percent' => $ujToltesSzazalek,
-            'start_kw' => $start_kw,
-            'end_kw' => $ujToltesKw,
-            'charged_kw' => floor($toltottKilowatt), # nincs "túlszámlázás"
-            'credits' => $credits,
-        ];
     }
-    public function chargingCreditsReturn(User $user, int $toltottKilowatt): int
+    public function chargingCreditsReturn(User $user, float $toltottKilowatt): int
     {
+        // 6 kW alatt: 400 kredit/kW
+        // 6 kW felett: 2000 kredit alapdíj + 200 kredit/kW a 6 kW felett
+        $toltottKilowatt = round($toltottKilowatt);
         if ($toltottKilowatt < 6.0) {
             $credits = $toltottKilowatt * 400;
         } else {
-            $credits = 2000 + ($toltottKilowatt-5) * 200;
+            $credits = 2000 + ($toltottKilowatt - 5) * 200;
         }
-        $credits = max(0, $credits);
 
-        # Felh. egyenleg frissítése
+        $credits = max(0, floor($credits));
+
+        # Felhasználói egyenleg frissítése
         $user->account_balance += $credits;
         $user->save();
+
         return $credits;
     }
 }

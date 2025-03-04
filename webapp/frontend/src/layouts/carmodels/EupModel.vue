@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import DemageForm from './DemageForm.vue';
+import DemageForm from '@layouts/reportforms/vandalism/DemageForm.vue';
 
 export default {
     components: {

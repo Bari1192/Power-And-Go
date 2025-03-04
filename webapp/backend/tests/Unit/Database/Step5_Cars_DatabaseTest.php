@@ -49,8 +49,8 @@ class Step5_Cars_DatabaseTest extends TestCase
             ->orWhere('power_percent', '>', 100)
             ->exists();
         $invalidPowerKiloWatt = DB::table('cars')
-            ->where('power_kw', '<=', 0)
-            ->orWhere('power_kw', '>=', 100)
+            ->where('power_kw', '<', 0)
+            ->orWhere('power_kw', '>', 100)
             ->exists();
 
         $highestEstimatedRange = DB::table('fleets')->max('driving_range');

@@ -11,13 +11,14 @@ class EmployeeSeeder extends Seeder
 {
     public function run(): void
     {
-        $persons = Person::inRandomOrder()->limit(100)->get();
-
+        $amount = 50;
+        $persons = Person::inRandomOrder()->limit($amount)->get();
         foreach ($persons as $person) {
             $employee = Employee::factory()->make([
                 'person_id' => $person->id,
             ])->toArray();
             DB::table('employees')->insert($employee);
         }
+        $this->command->info("\t$amount fő munkavállaló lett létre hozva.");
     }
 }

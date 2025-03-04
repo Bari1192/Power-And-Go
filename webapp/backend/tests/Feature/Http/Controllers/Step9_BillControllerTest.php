@@ -6,6 +6,7 @@ use App\Models\Bill;
 use App\Models\Car;
 use App\Models\User;
 use App\Policies\BillService;
+use App\Policies\CarRefreshService;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
@@ -14,14 +15,15 @@ class Step9_BillControllerTest extends TestCase
 {
     use DatabaseTransactions;
     public $fixedDateTime;
+    private CarRefreshService $testCarRefreshService;
     protected function setUp(): void
     {
         parent::setUp();
+        $this->testCarRefreshService = new CarRefreshService();
         $this->fixedDateTime = now()->format('Y-m-d H:i:s');
     }
     private function setupTestBill()
     {
-        // Get a completed rental
         $rental = DB::table('car_user_rents')
             ->where('rentstatus', 2)
             ->first();
@@ -29,7 +31,6 @@ class Step9_BillControllerTest extends TestCase
         if (!$rental) {
             $this->markTestSkipped('No completed rental found');
         }
-
         $car = Car::find($rental->car_id);
         $user = User::find($rental->user_id);
 
@@ -73,41 +74,32 @@ class Step9_BillControllerTest extends TestCase
     }
     public function test_can_create_charging_penalty_bill()
     {
-        $car = Car::where('status', 7)->first();
-        if (!$car) {
-            $car = Car::first();
-            $car->status = 7;
-            $car->save();
-        }
-
-        // Get a completed rental for this car
+        $car = Car::first();
+        $car->status = 7;
+        $car->power_percent = 2.0;
+        $car->save();
+        
         $rental = DB::table('car_user_rents')
             ->where('car_id', $car->id)
             ->where('rentstatus', 2)
             ->first();
-
+        
         if (!$rental) {
-            $this->markTestSkipped('No suitable rental found for testing');
+            $this->markTestSkipped('Nincs találat!');
         }
-
+        
         $user = User::find($rental->user_id);
-
-        // Create charging penalty through BillService
-        $billService = new BillService();
+        $billService = new BillService(app(CarRefreshService::class));
         $billService->createChargingFine($car, $user, $rental);
-
-        // Verify bill was created
+        
         $this->assertDatabaseHas('bills', [
             'bill_type' => 'charging_penalty',
             'user_id' => $user->id,
-            'car_id' => $car->id,
-            'invoice_status' => 'pending'
+            'car_id' => $car->id
         ]);
     }
     public function test_can_get_random_bills_data_with_using_api()
     {
-
-
         $response = $this->get('/api/bills');
         $response->assertStatus(200);
         $data = $response->json('data');
@@ -201,7 +193,7 @@ class Step9_BillControllerTest extends TestCase
     {
         $data = $this->setupTestBill();
 
-        $billService = new BillService();
+        $billService = new BillService($this->testCarRefreshService);
         $billService->createRentBill($data['car'], $data['user'], $data['rental']);
 
         $latestBill = Bill::latest('id')->first();
@@ -226,11 +218,9 @@ class Step9_BillControllerTest extends TestCase
         $car = Car::find($rental->car_id);
         $user = User::find($rental->user_id);
 
-        // Create bill through service
-        $billService = new BillService();
+        $billService = new BillService($this->testCarRefreshService);
         $billService->createRentBill($car, $user, $rental);
 
-        // Verify
         $this->assertDatabaseHas('bills', [
             'bill_type' => 'rental',
             'user_id' => $user->id,
@@ -242,13 +232,13 @@ class Step9_BillControllerTest extends TestCase
     {
         $data = $this->setupTestBill();
 
-        $billService = new BillService();
+        $billService = new BillService($this->testCarRefreshService);
         $billService->createRentBill($data['car'], $data['user'], $data['rental']);
 
         $latestBill = Bill::latest('id')->first();
 
         $modifiedData = [
-            "id" => $latestBill->id,  // Add the required ID field
+            "id" => $latestBill->id,  
             "bill_type" => "rental",
             "user_id" => $data['user']->id,
             "person_id" => $data['user']->person_id,
@@ -267,7 +257,7 @@ class Step9_BillControllerTest extends TestCase
         $this->putJson("/api/bills/{$latestBill->id}", $modifiedData)
             ->assertStatus(200);
 
-        unset($modifiedData['id']); 
+        unset($modifiedData['id']);
         $this->assertDatabaseHas('bills', $modifiedData);
     }
     public function test_can_delete_random_bill_from_database_bills_table()

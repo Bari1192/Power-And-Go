@@ -82,7 +82,7 @@ class Step5_CarControllerTest extends TestCase
     {
         $car = Car::firstOrFail();
 
-        $response = $this->get("/api/cars/{$car->id}/bills");
+        $response = $this->get("/api/cars/{$car->id}/fees");
 
         $response->assertStatus(200);
 

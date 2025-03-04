@@ -1,12 +1,15 @@
 <template>
-    <div
-        class="m-auto d-flex justify-center my-10 w-3/4 border-2 rounded-2xl border-sky-300 dark:text-red-600 dark:italic dark:font-semibold ">
-        <p class="text-center tracking-wide text-4xl font-semibold text-sky-100 my-5 capitalize">
-            új flotta modell hozzáadása
-        </p>
-        <div class="m-auto d-flex justify-center border-b-4 border-sky-300 w-2/3 mb-20"></div>
+    <div class="m-auto d-flex justify-center my-10 w-3/4 border-2 rounded-2xl border-sky-300 italic font-semibold ">
+        <div class="flex justify-center bg-sky-300 bg-opacity-20 my-5 rounded-t-sm rounded-b-sm">
+            <p
+                class="text-center tracking-wide text-4xl font-semibold text-white my-5 outline-orange-400 drop-shadow-2xl capitalize">
+                új flotta modell hozzáadása
+            </p>
+        </div>
+        <div class="m-auto d-flex justify-center border-b-4 border-sky-300 w-2/3 mb-20 rounded-md"></div>
         <div v-if="submitted" class="flex justify-center mb-10 mx-auto">
-            <h2 class="text-green-600 italic w-fit bg-amber-50 font-semibold text-3xl">Az adatok sikeresen beküldésre kerültek!</h2>
+            <h2 class="text-green-600 italic w-fit bg-amber-50 font-semibold text-3xl">Az adatok sikeresen beküldésre
+                kerültek!</h2>
         </div>
         <p
             class=" ml-2 text-red-600 rounded-md  bg-amber-100 bg-opacity-95 max-w-fit  font-semibold text-3xl italic py-2 px-4">
@@ -79,10 +82,9 @@
                 </div>
             </div>
 
-            <div class="flex justify-center my-5 ">
-                <FormKit type="submit" label="Hozzáadás"
-                    class="bg-blue-500 hover:bg-blue-400 text-white font-semiboldpy-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
-                </FormKit>
+            <div class="flex justify-center items-center align-middle bg-sky-300 bg-opacity-20 my-12 min-h-20 ">
+                <FormKit type="submit" label="Hozzáadás" id="addFleet" wrapper-class="w-full"
+                    input-class="tracking-[0.10em] text-lg bg-lime-600 text-white font-semibold py-2 px-12 border-b-4 rounded-lg transition-all duration-150 ease-in-out hover:bg-lime-700 active:translate-y-[2px] active:border-b-2" />
             </div>
         </FormKit>
     </div>
@@ -128,3 +130,19 @@ export default {
 }
 
 </script>
+
+<style scoped>
+:deep(.formkit-message[data-message-type="validation"]) {
+    color: rgb(157, 2, 2);
+    letter-spacing: 1px;
+    padding-left: 5px;
+    margin-top: 5px;
+    font-weight: bolder;
+}
+:deep(.formkit-message[data-message-type="ui"]){
+    display: none ;
+}
+:deep(.formkit-wrapper[formkit-help="help-input_3"]){
+    display: none ;
+}
+</style>

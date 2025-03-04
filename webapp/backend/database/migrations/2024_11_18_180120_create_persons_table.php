@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
-            $table->string('person_password',8);
+            $table->string('person_password',255);
             $table->string('id_card',12)->unique();
             $table->string('driving_license',8)->unique()->nullable(); 
             $table->date('license_start_date')->nullable(); 

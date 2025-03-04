@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Model implements AuthenticatableContract
 {
@@ -23,22 +24,29 @@ class User extends Model implements AuthenticatableContract
     protected $fillable = [
         'id',
         'person_id',
-        'account_balance',
-        'user_name',
-        'password_2_4',
         'sub_id',
+        'account_balance',
+        'password_2_4',
+        'user_name',
         'password',
+        'plant_tree',
+        'vip_discount',
+        'bonus_min_exp',
+        'bonus_minutes',
+        'driving_minutes',
+        'contributions',
+        'created_at',
+        'updated_at',
     ];
 
     # JSON válaszból elrejtve!
     protected $hidden = [
-        'password', 
         'remember_token',
     ];
 
     public function person(): BelongsTo
     {
-        return $this->belongsTo(Person::class,'person_id');
+        return $this->belongsTo(Person::class, 'person_id');
     }
 
     public function subscription(): BelongsTo
@@ -64,5 +72,9 @@ class User extends Model implements AuthenticatableContract
                 'invoice_date',
             ])
             ->as('rent_details');
+    }
+    public function bonusminutes(): HasMany
+    {
+        return $this->hasMany(BonusMinutesTransaction::class, 'user_id', 'id');
     }
 }

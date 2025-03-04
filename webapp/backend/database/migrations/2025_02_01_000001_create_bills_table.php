@@ -14,7 +14,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
             $table->foreignId('car_id')->constrained('cars')->onDelete('cascade');
-            $table->foreignId('rent_id')->constrained('car_user_rents','id')->onDelete('cascade');
+            $table->foreignId('rent_id')->constrained('car_user_rents', 'id')->onDelete('cascade');
 
             $table->integer('total_cost');
             $table->integer('credits')->nullable();
@@ -26,6 +26,8 @@ return new class extends Migration
             $table->datetime('rent_close')->nullable();
             $table->timestamp('invoice_date')->useCurrent();
             $table->enum('invoice_status', ['active', 'pending', 'archiv'])->default('pending');
+
+            $table->boolean('email_sent')->default(false);
         });
     }
     public function down(): void

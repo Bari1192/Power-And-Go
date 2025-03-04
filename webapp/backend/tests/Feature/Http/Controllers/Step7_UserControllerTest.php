@@ -27,6 +27,13 @@ class Step7_UserControllerTest extends TestCase
             "password_2_4" => fake()->regexify('[0-9]{2}'),
             "account_balance" => 0,
             "sub_id" => 1,
+            'vip_discount' => 1,
+            'bonus_minutes' => 0,
+            'plant_tree' => 1,
+            'bonus_min_exp' => now()->format('Y-m-d'),
+            'driving_minutes' => 0,
+            'account_balance' => 0,
+            'contributions' => 0,
         ];
 
         $response = $this->postJson('/api/users', $user);
@@ -51,11 +58,25 @@ class Step7_UserControllerTest extends TestCase
             'password_2_4' => $pwd[1] . $pwd[3],
             'account_balance' => 0,
             'sub_id' => 1,
+            'vip_discount' => 1,
+            'bonus_minutes' => 0,
+            'plant_tree' => 1,
+            'bonus_min_exp' => now()->format('Y-m-d'),
+            'driving_minutes' => 0,
+            'account_balance' => 0,
+            'contributions' => 0,
         ]);
         $response->assertStatus(201);
         $this->assertDatabaseHas('users', [
             'person_id' => $person->id,
             'password_2_4' => $pwd[1] . $pwd[3],
+            'vip_discount' => 1,
+            'bonus_minutes' => 0,
+            'plant_tree' => 1,
+            'bonus_min_exp' => now()->format('Y-m-d'),
+            'driving_minutes' => 0,
+            'account_balance' => 0,
+            'contributions' => 0,
         ]);
     }
     public function test_can_delete_user_and_associated_person_from_database()
@@ -77,6 +98,13 @@ class Step7_UserControllerTest extends TestCase
             "password_2_4" => $person->person_password[0] . $person->person_password[2],
             "account_balance" => fake()->numberBetween(1000, 100000),
             "sub_id" => 1,
+            'vip_discount' => 1,
+            'bonus_minutes' => 0,
+            'plant_tree' => 1,
+            'bonus_min_exp' => now()->format('Y-m-d'),
+            'driving_minutes' => 0,
+            'account_balance' => 0,
+            'contributions' => 0,
         ]);
 
         $response = $this->deleteJson("/api/deleteregister/{$user->id}");

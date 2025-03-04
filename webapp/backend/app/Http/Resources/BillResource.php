@@ -15,8 +15,11 @@ class BillResource extends JsonResource
             "user_id" => $this->user_id,
             "person_id" => $this->person_id,
             "car_id" => $this->car_id,
-            "rent_id"=>$this->rent_id,
+            "rent_id" => $this->rent_id,
             "plate" => $this->cars->plate,
+            "end_percent" => $this->cars->power_percent,
+            "plate" => $this->cars->plate,
+            "category" => $this->cars->category_id,
             "total_cost" => $this->total_cost,
             "credits" => $this->credits,
             "charged_kw" => $this->charged_kw,
@@ -29,6 +32,7 @@ class BillResource extends JsonResource
             "invoice_status" => $this->invoice_status,
             "username" => $this->users->user_name,
             "person" => $this->whenLoaded('persons', $this->persons->firstname . ' ' . $this->persons->lastname),
+            "email_sent" => $this->email_sent,
         ];
     }
 }
