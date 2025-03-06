@@ -24,14 +24,15 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('cars/{car}/bills', [CarController::class, 'filterCarFines']);
+
+Route::get('cars/{car}/fees', [CarController::class, 'filterCarFees']);             # 1 
 Route::get('cars/{car}/description', [CarController::class, 'carLastTicketDescription']);
 Route::get('cars/{car}/tickets', [CarController::class, 'carTickets']);
 Route::get('cars/{car}/renthistory', [CarController::class, 'carWithRentHistory']); # Csak 1 autó history
+
+
 Route::get('/bills/closedrentsbills', [BillController::class, 'closedRents']);          # Lezárt státuszú autók.
 Route::get('/bills/fees', [BillController::class, 'feesCollection']);          # Lezárt státuszú autók.
-Route::get('/bills/{car}/fees', [BillController::class, 'carFees']);
-
 Route::get('/googlemapsapi', [GoogleMapsController::class, 'getApiUrl']);   ## Ez az input alapján a címet adja meg
 Route::get('/geocode', [GoogleMapsController::class, 'getGeocode']);        ## Ez a térképet inicializálja és jeleníti meg rajta.
 

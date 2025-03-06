@@ -6,13 +6,17 @@ use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use App\Http\Resources\BillResource;
 use App\Http\Resources\CarResource;
+use App\Http\Resources\CarWithFinesResource;
 use App\Http\Resources\CarWithUsersResource;
 use App\Http\Resources\TicketResource;
 use App\Models\Bill;
 use App\Models\Car;
 use App\Models\Ticket;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
+
+use function PHPUnit\Framework\isEmpty;
 
 class CarController extends Controller
 {
@@ -46,15 +50,16 @@ class CarController extends Controller
     {
         return ($car->delete()) ? response()->noContent() : abort(500);
     }
-    public function filterCarFees(Car $car): JsonResource
+
+    ###     Egyedi kérések     ###
+
+
+    public function filterCarFees(Car $car): CarWithFinesResource
     {
-        $bills = Bill::where("car_id", $car->id)
-            ->where('bill_type', 'charging_penalty')
-            ->orderBy('invoice_date', 'desc')
-            ->get()
-            ->load(['persons','users', 'cars.users']);
-        return BillResource::collection($bills);
+        $car->load(['bills' => function ($query) {$query->where('bill_type', 'charging_penalty');},'bills.users.person']);
+        return new CarWithFinesResource($car);
     }
+
     public function carTickets(Car $car): JsonResource
     {
         $tickets = Ticket::with('status')
@@ -65,18 +70,20 @@ class CarController extends Controller
     }
     public function carWithRentHistory(Car $car): JsonResource
     {
-        $car = Car::with(['users', 'fleet', 'users.person','bills'])
-        ->orderBy('id', 'desc')
-        ->find($car->id);
+        $car = Car::with(['users', 'fleet', 'users.person', 'bills'])
+            ->orderBy('id', 'desc')
+            ->find($car->id);
         return new CarWithUsersResource($car);
     }
     ## Utolsó ticket lekérjük az autó ID alapján, státusz szöveggel.
-    public function carLastTicketDescription(Car $car): JsonResource
+    public function carLastTicketDescription(Car $car)
     {
-        $tickets = Ticket::with('status')
+        $ticket = Ticket::with('status')
             ->where('car_id', $car->id)
-            ->orderBy('id', 'desc')
-            ->First();
-        return new TicketResource($tickets);
+            ->firstOrFail();
+        if (!empty($ticket)) {
+            return new TicketResource($ticket);
+        }
+        return response()->json(["message" => 'Ticket Description not found.']);
     }
 }

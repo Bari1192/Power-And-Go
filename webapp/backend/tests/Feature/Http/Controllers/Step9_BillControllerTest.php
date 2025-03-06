@@ -78,20 +78,20 @@ class Step9_BillControllerTest extends TestCase
         $car->status = 7;
         $car->power_percent = 2.0;
         $car->save();
-        
+
         $rental = DB::table('car_user_rents')
             ->where('car_id', $car->id)
             ->where('rentstatus', 2)
             ->first();
-        
+
         if (!$rental) {
             $this->markTestSkipped('Nincs találat!');
         }
-        
+
         $user = User::find($rental->user_id);
         $billService = new BillService(app(CarRefreshService::class));
         $billService->createChargingFine($car, $user, $rental);
-        
+
         $this->assertDatabaseHas('bills', [
             'bill_type' => 'charging_penalty',
             'user_id' => $user->id,
@@ -238,7 +238,7 @@ class Step9_BillControllerTest extends TestCase
         $latestBill = Bill::latest('id')->first();
 
         $modifiedData = [
-            "id" => $latestBill->id,  
+            "id" => $latestBill->id,
             "bill_type" => "rental",
             "user_id" => $data['user']->id,
             "person_id" => $data['user']->person_id,
@@ -251,7 +251,8 @@ class Step9_BillControllerTest extends TestCase
             "rent_start" => $this->fixedDateTime,
             "rent_close" => $this->fixedDateTime,
             "invoice_date" => $this->fixedDateTime,
-            "invoice_status" => "pending"
+            "invoice_status" => "pending",
+            "email_sent" => 1,
         ];
 
         $this->putJson("/api/bills/{$latestBill->id}", $modifiedData)

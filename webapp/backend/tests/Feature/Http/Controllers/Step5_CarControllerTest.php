@@ -88,14 +88,22 @@ class Step5_CarControllerTest extends TestCase
 
         $data = collect($response->json('data'));
 
-        if ($data->isEmpty()) {
-            $this->assertTrue($data->isEmpty(), 'Ehhez az autóhoz nincs büntetés kiírva.');
-        } else {
-            $data->each(function ($entry) {
-                $this->assertArrayHasKey('bill_type', $entry);
-                $this->assertEquals('charging_penalty', $entry['bill_type']);
-            });
+        $car = Car::firstOrFail();
+
+        $response = $this->get("/api/cars/{$car->id}/fees");
+        $response->assertStatus(200);
+
+        $data = $response->json('data');
+
+        if (isset($data['error'])) {
+            $this->assertEquals(
+                'Fine has not found for this car',
+                $data['error']
+            );
+            return;
         }
+        $this->assertArrayHasKey('fine_types', $data);
+        $this->assertEquals('charging_penalty', $data['fine_types']);
     }
 
     public function test_car_latest_ticket_description_text(): void
@@ -121,7 +129,7 @@ class Step5_CarControllerTest extends TestCase
             'status' => 1
         ]);
         $user = User::factory()->create([
-            'user_name' => 'TestUser_' . uniqid() 
+            'user_name' => 'TestUser_' . uniqid()
         ]);
         ## Kapcsolat a pivot táblában
         $car->users()->attach($user->id, [

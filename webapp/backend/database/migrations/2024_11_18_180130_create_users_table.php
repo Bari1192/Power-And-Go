@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->unsignedInteger('contributions')->nullable();
 
             $table->string('user_name', 45)->unique();
-            $table->string('password', 8);
+            $table->string('password', 255);
             $table->rememberToken();
 
             $table->timestamps();

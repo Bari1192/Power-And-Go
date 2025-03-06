@@ -1,6 +1,6 @@
 <template>
   <BaseLayout>
-    
+
     <div class="container mt-20 mb-40 w-full sm:w-11/12 lg:w-2/3 mx-auto">
       <div
         class="m-auto w-4/5 py-6 d-flex justify-center my-10 sm:w-full border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
@@ -214,23 +214,8 @@ import CarAccidentReport from '@layouts/reportforms/caraccidents/CarAccidentRepo
 import ManualFines from '@layouts/reportforms/CarManualFines/ManualFines.vue';
 import CarReportButtons from '@layouts/reportforms/CarReportButtons.vue';
 import { toast } from 'vue3-toastify';
-
-import BaseSpinner from '@layouts/sliders/BaseSpinner.vue';
 import { h } from 'vue';
-
-const loadingToast = () => {
-  return toast(
-    () => h('div', { class: 'flex items-center gap-3' }, [
-      h(BaseSpinner),
-      h('span', 'Adatok betöltése...')
-    ]),
-    {
-      position: "top-right",
-      autoClose: false,
-      closeButton: false
-    }
-  );
-};
+import BaseSpinner from '@layouts/sliders/BaseSpinner.vue';
 
 export default {
   components: {
@@ -246,67 +231,88 @@ export default {
     VivaroModel,
     CarAccidentReport,
     ManualFines,
+    BaseSpinner,
   },
   data() {
     return {
-      car: {},
+      car: [],
+      latestTicket: [],
       rentFees: [],
       carRentHistory: [],
       rentBillFees: [],
+      rentBillDetailsStates: {},
       carOpen: false,
       noteOpen: false,
       rentHistoryOpen: false,
       rentBillOpen: false,
-      rentBillDetailsStates: {},
       isTooltipVisible: false,
       cleanreport: false,
       demageReport: false,
       accidentReport: false,
       carManualFines: false,
-      latestTicket: [],
-      loading: true,
+      toastId: null,
+      isLoading: false
     }
   },
 
   async mounted() {
-    const toastId = loadingToast();
+
     try {
-      const response = await http.get(`/cars/${this.$route.params.id}`);
-      this.car = response.data.data;
-
-      const ticketresponse = await http.get(`/cars/${this.$route.params.id}/tickets`);
-      this.rentFees = ticketresponse.data.data;
-
-      const resp = await http.get(`/cars/${this.$route.params.id}/description`);
-      this.latestTicket = resp.data.data;
-
-      const rentResponse = await http.get(`/cars/${this.$route.params.id}/renthistory`);
-      this.carRentHistory = rentResponse.data.data;
-
-      const feesResponse = await http.get(`/cars/${this.$route.params.id}/fees`);
-      this.rentBillFees = feesResponse.data.data;
-      this.rentBillFees.forEach((fine) => {
-        this.$set(this.rentBillDetailsStates, fine.id, false);
-      });
-
-      toast.update(toastId, {
-        render: "Sikeres betöltés",
-        type: "success",
-        autoClose: 2000
-      });
+      this.showLoadingToast()
+      const [carRes, ticketsRes, descRes, rentRes, feesRes] = await Promise.all([
+        http.get(`/cars/${this.$route.params.id}`),
+        http.get(`/cars/${this.$route.params.id}/tickets`),
+        http.get(`/cars/${this.$route.params.id}/description`),
+        http.get(`/cars/${this.$route.params.id}/renthistory`),
+        http.get(`/cars/${this.$route.params.id}/fees`)
+      ]);
+      [this.car, this.rentFees, this.latestTicket, this.carRentHistory, this.rentBillFees] =
+        [carRes, ticketsRes, descRes, rentRes, feesRes].map(r => r.data.data)
     } catch (error) {
-      toast.dismiss(toastId);
-      toast.error("Hiba történt");
+      // Hibaüzenet 3D animációval
+      toast.update(this.toastId, {
+        render: () => h('div', { class: 'flex items-center gap-3 text-sky-700' }, [
+          h('div', { class: 'text-red-700' }),
+          h('span', { class: 'font-semibold' }, error.response?.data.message || 'Váratlan hiba!')
+        ]),
+        type: 'error',
+      })
+
+    } finally {
+      setTimeout(() => {
+        if (this.toastId) {
+          if ('dismiss' in toast) {
+            toast.dismiss(this.toastId)
+          }
+          this.toastId = null
+        }
+      }, 1000)
     }
   },
   methods: {
+    showLoadingToast() {
+      if (!this.isLoading && !this.toastId) {
+        this.isLoading = true
+        this.toastId = toast(
+          () => h('div', { class: 'flex items-center gap-3 text-sky-700 font-semibold' }, [
+            h(BaseSpinner),
+            h('span', 'Adatok szinkronizálása...')
+          ]),
+          {
+            position: "top-right",
+            autoClose: 3000,
+            draggable: false,
+            progressStyle: { background: 'linear-gradient(to right, #012a01,#014602,#017f03, #02b805, #04ec07, #00ff03)' },
+          }
+        )
+      }
+    },
     toggleSection(section) {
       const sections = ['cleanreport', 'demageReport', 'accidentReport', 'carManualFines'];
       sections.forEach(s => this[s] = s === section ? !this[s] : false);
     },
     submitManualFines(data) {
       console.log('Manual fines adatok:', data);
-      // Itt dolgozd fel a ManualFines űrlap adatait, pl. elküldheted a backend felé
     },
     cardetails() {
       this.carOpen = !this.carOpen;
@@ -364,7 +370,7 @@ export default {
       }
     },
     async submitAccidentReport(data) {
-      if (this.isSubmitting) return; // Ha már folyamatban van, ne fusson újra
+      if (this.isSubmitting) return;
       this.isSubmitting = true;
 
       const { description } = data; // gyermektől jön //
@@ -384,7 +390,7 @@ export default {
             power_percent: parseFloat(this.car.power_percent),
             power_kw: parseFloat(this.car.power_kw),
             estimated_range: parseFloat(this.car.estimated_range),
-            status: 4, // accident //
+            status: 4,
           }
           await http.post('/tickets', CarAccidentData);
           await http.put(`/cars/${this.car.car_id}`, CarAccidentRefreshCarData)
@@ -408,7 +414,7 @@ export default {
       return manufacturerAlapjanModel[this.car.manufacturer] || null;
     },
     formattedLastRent() {
-      const rentClose = this.carRentHistory.renters[0].rent_close; // Legfrissebb bérlés
+      const rentClose = this.carRentHistory.renters[0].rent_close;
       if (!rentClose) return 'Nincs dátum';
 
       const dateObj = new Date(rentClose);

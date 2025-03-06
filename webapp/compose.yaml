@@ -62,8 +62,10 @@ services:
       - "mysql:/var/lib/mysql:rw"
     networks:
       - fullstack
+    ports:
+      - 3306:3306
     healthcheck:
-      test: "/usr/bin/mysql --user=root --password=$DB_ROOT_PASSWORD --execute \"SHOW DATABASES;\""
+      test: '/usr/bin/mysql --user=root --password=$DB_ROOT_PASSWORD --execute "SHOW DATABASES;"'
       timeout: 20s
       retries: 10
 
@@ -79,7 +81,7 @@ services:
       - UPLOAD_LIMIT=300M
     networks:
       - fullstack
-  
+
   docs:
     image: idomi27/nuxt-content:3.11.2
     volumes:
@@ -92,7 +94,7 @@ services:
     volumes:
       - ./swagger/openapi.yaml:/docs/openapi.yaml
     environment:
-        - SWAGGER_JSON=/docs/openapi.yaml
+      - SWAGGER_JSON=/docs/openapi.yaml
     networks:
       - fullstack
 
@@ -106,7 +108,7 @@ services:
     volumes:
       - ./jsonserver:/app
       - /app/node_modules
-  
+
   mailcatcher:
     image: dockage/mailcatcher:0.9.0
     networks:
