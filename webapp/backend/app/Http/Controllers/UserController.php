@@ -7,6 +7,7 @@ use App\Http\Resources\UserResource;
 use App\Http\Resources\UserWithRentalResource;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -19,6 +20,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $data = $request->validated();
+        $data['pin'] = Hash::make($data['pin']);
         $user = User::Create($data);
         return new UserResource($user);
     }

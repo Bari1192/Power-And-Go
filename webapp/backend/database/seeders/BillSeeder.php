@@ -32,7 +32,7 @@ class BillSeeder extends Seeder
 
     public function run(): void
     {
-        $chunkSize = 50;
+        $chunkSize = 100;
         $processedCount = 0;
         $totalBills = 0;
 
@@ -48,8 +48,6 @@ class BillSeeder extends Seeder
 
             ## Összes feldolgozandó bérlés számának lekérése a folyamatjelzőhöz
             $totalRentals = DB::table('car_user_rents')->where('rentstatus', 2)->count();
-            echo "Összesen feldolgozandó bérlések: $totalRentals\n";
-
             ## Bérlések feldolgozása chunk-okban
             DB::table('car_user_rents')
                 ->where('rentstatus', 2)
@@ -97,15 +95,14 @@ class BillSeeder extends Seeder
 
                     $processedCount += count($rentals);
                     $percentage = round(($processedCount / $totalRentals) * 100, 1);
-                    echo "Feldolgozva: $processedCount / $totalRentals bérlés ($percentage%)\n";
+                    info("Feldolgozva: $processedCount / $totalRentals bérlés ($percentage%");
                 });
 
             DB::commit();
-            echo "Összes számla sikeresen létrehozva: $totalBills db.\n\n";
+            $this->command->info("$totalBills db számla kiállítva.");
 
             $billsToProcess = Bill::where('email_sent', false)->pluck('id')->toArray();
             $totalEmails = count($billsToProcess);
-            echo "Összesen küldendő e-mail: $totalEmails db.\n";
 
             $emailBatchSize = 10;
             $batches = array_chunk($billsToProcess, $emailBatchSize);
@@ -114,8 +111,6 @@ class BillSeeder extends Seeder
                 ProcessBillEmailsJob::dispatch([$batch]);
                 $processedBatches++;
             }
-
-            echo "E-mail feldolgozás beütemezve.\n";
         } catch (Exception $e) {
             DB::rollBack();
             echo "Kritikus hiba történt: " . $e->getMessage() . "\n";
@@ -123,7 +118,9 @@ class BillSeeder extends Seeder
                 'trace' => $e->getTraceAsString()
             ]);
         }
-        $this->command->info("E-mail küldési parancs végrehajtása az e-mailekre...\n");
-        \Illuminate\Support\Facades\Artisan::call('app:send-bill-emails-command', ['--verbose' => true]);
+        $this->command->info("\tE-mailek kézbesítése folyamatban...");
+       
+        ## Egyelőre kiszedve, hogy gyorsabb legyen!
+        // \Illuminate\Support\Facades\Artisan::call('app:send-bill-emails-command', ['--verbose' => true]);
     }
 }

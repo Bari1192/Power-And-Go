@@ -56,16 +56,23 @@ class CarController extends Controller
 
     public function filterCarFees(Car $car): CarWithFinesResource
     {
-        $car->load(['bills' => function ($query) {$query->where('bill_type', 'charging_penalty');},'bills.users.person']);
+        $car->load(['bills' => function ($query) {
+            $query->where('bill_type', 'charging_penalty');
+        }, 'bills.users.person']);
         return new CarWithFinesResource($car);
     }
 
-    public function carTickets(Car $car): JsonResource
+    public function carTickets(Car $car)
     {
         $tickets = Ticket::with('status')
             ->where('car_id', $car->id)
             ->get();
 
+        if ($tickets->count() === 0) {
+            return response()->json([
+                "message" => "Tickets not found."
+            ], 404);
+        }
         return TicketResource::collection($tickets);
     }
     public function carWithRentHistory(Car $car): JsonResource
@@ -73,6 +80,7 @@ class CarController extends Controller
         $car = Car::with(['users', 'fleet', 'users.person', 'bills'])
             ->orderBy('id', 'desc')
             ->find($car->id);
+           
         return new CarWithUsersResource($car);
     }
     ## Utolsó ticket lekérjük az autó ID alapján, státusz szöveggel.
@@ -80,10 +88,13 @@ class CarController extends Controller
     {
         $ticket = Ticket::with('status')
             ->where('car_id', $car->id)
-            ->firstOrFail();
-        if (!empty($ticket)) {
-            return new TicketResource($ticket);
+            ->latest()
+            ->first();
+        if (!$ticket) {
+            return response()->json([
+                "message" => "Ticket Description not found."
+            ], 404);  // 404-es státuszkód
         }
-        return response()->json(["message" => 'Ticket Description not found.']);
+        return new TicketResource($ticket);
     }
 }

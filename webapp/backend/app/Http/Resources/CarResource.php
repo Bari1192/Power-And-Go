@@ -19,7 +19,7 @@ class CarResource extends JsonResource
             'status_name' => $this->carstatus->status_name,
             'category_id' => $this->category_id,
             'equipment_class' => $this->equipment_class,
-            'odometer' => number_format($this->odometer, 0, '', ' '),
+            'odometer' => $this->odometer,
             'manufactured' => $this->manufactured,
             "manufacturer" => $this->fleet->manufacturer,
             "carmodel" => $this->fleet->carmodel,

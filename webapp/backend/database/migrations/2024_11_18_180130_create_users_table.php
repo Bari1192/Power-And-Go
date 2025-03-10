@@ -12,16 +12,16 @@ return new class extends Migration {
             $table->foreignId('person_id')->constrained('persons')->onDelete('cascade');
             $table->foreignId('sub_id')->constrained('subscriptions')->onDelete('cascade');
             $table->integer('account_balance')->default(0);
-            $table->string('password_2_4', 2);
             $table->boolean('plant_tree')->default(0);
             $table->boolean('vip_discount')->default(0);
             $table->date('bonus_min_exp')->nullable();
             $table->unsignedInteger('bonus_minutes')->default(0);
             $table->unsignedInteger('driving_minutes')->nullable();
             $table->unsignedInteger('contributions')->nullable();
-
+            
             $table->string('user_name', 45)->unique();
-            $table->string('password', 255);
+            $table->string('pin', 255);
+            $table->string('password_2_4', 2);
             $table->rememberToken();
 
             $table->timestamps();

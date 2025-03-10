@@ -15,7 +15,7 @@ class TicketResource extends JsonResource
             'car_id' => $this->car_id,
             'status_id' => $this->status_id,
             'status_descrip' => $this->whenLoaded('status', fn() => $this->status->status_descrip),
-            'created_at' =>date_format($this->created_at,'Y-m-d H:i:s'),
+            'created_at' => date_format($this->created_at, 'Y-m-d H:i:s'),
             'car' => $this->whenLoaded('car', function () {
                 return [
                     'plate' => $this->auto->plate,

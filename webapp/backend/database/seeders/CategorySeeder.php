@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -17,5 +18,6 @@ class CategorySeeder extends Seeder
                 'motor_power' => $motor_powerErteke,
             ]);
         }
+        $this->command->info("\t" . Category::count() . " db kategória-csoport létrehozva.");
     }
 }

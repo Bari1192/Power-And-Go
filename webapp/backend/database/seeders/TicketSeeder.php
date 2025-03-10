@@ -11,9 +11,9 @@ class TicketSeeder extends Seeder
     public function run(): void
     {
         $types = ['cleaning', 'malfunction', 'damage', 'accident'];
-        $count = 50;
+        $count = 100;
         $chunkSize = 100;
-
+        $total = 0;
         $formatted_date = Carbon::now()->format('Y-m-d H:i:s');
 
         foreach ($types as $type) {
@@ -26,7 +26,9 @@ class TicketSeeder extends Seeder
             }
             foreach (array_chunk($tickets, $chunkSize) as $chunk) {
                 Ticket::insert($chunk);
+                $total += count($chunk); # Tuti, ami biztos alapon.
             }
         }
+        $this->command->info("\tÖsszesen $total db 'ticket-history' létrehozva.");
     }
 }

@@ -44,7 +44,7 @@ class UserFactory extends Factory
 
             'plant_tree' => $this->plantTreeCampaignSubscribe(),
             'bonus_min_exp' => null, //Carbon::now()->addDays(30)->format('Y-m-d'),
-            'password' => $pw,
+            'pin' => $pw,
             'bonus_minutes' => 0,
             'driving_minutes' => $this->plantTreeCampaignSubscribe() ? 0 : null,
             'contributions' => $this->plantTreeCampaignSubscribe() ? 0 : null,
@@ -96,9 +96,6 @@ class UserFactory extends Factory
 
     private function jelszoMasodikNegyedik($pw): string
     {
-        if (strlen($pw) >= 4) {
-            return ($pw[1] . $pw[3]);
-        }
-        return '00'; // Fallback érték
+        return ($pw[1] . $pw[3]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,13 +16,13 @@ return new class extends Migration {
             $table->float('power_kw', 1)->default(18.0);
             $table->float('estimated_range', 1)->default(130);
 
-            $table->foreignId('status')->constrained('carstatus','id')->onDelete('cascade');
-            $table->foreignId('category_id')->constrained('categories', 'id')->onDelete('cascade');
-            $table->foreignId('equipment_class')->constrained('equipments', 'id')->onDelete('cascade');
-            $table->foreignId('fleet_id')->constrained('fleets', 'id')->onDelete('cascade');
+            $table->foreignId('status')->default(8)->constrained('carstatus', 'id')->onDelete('cascade');
+            $table->foreignId('category_id')->default(1)->constrained('categories', 'id')->onDelete('cascade');
+            $table->foreignId('equipment_class')->default(1)->constrained('equipments', 'id')->onDelete('cascade');
+            $table->foreignId('fleet_id')->default(1)->constrained('fleets', 'id')->onDelete('cascade');
 
-            $table->integer('odometer');
-            $table->year('manufactured');
+            $table->integer('odometer')->default(0);
+            $table->year('manufactured')->default(Carbon::now()->year);
         });
     }
     public function down(): void

@@ -10,7 +10,6 @@ class Person extends Model
     use HasFactory;
     protected $table = 'persons';
     protected $primaryKey = 'id';
-    public $timestamps = false;
     public $incrementing = true;
 
     protected $fillable = [
@@ -24,6 +23,8 @@ class Person extends Model
         'birth_date',
         'phone',
         'email',
+        'created_at',
+        'updated_at',
     ];
     public function user()
     {

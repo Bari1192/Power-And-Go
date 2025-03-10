@@ -17,7 +17,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post("/register", [RegisterController::class, "store"])->name("register.store");
-Route::post("/authenticate", [AuthController::class, "authenticate"])->name("auth.authenticate");
+Route::post("/authenticatelogin", [AuthController::class, "authenticatePerson"]);
+Route::post("/authenticateuserpin", [AuthController::class, "authenticateUserPIN"]);
 
 
 Route::get('/user', function (Request $request) {
@@ -25,10 +26,10 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::get('cars/{car}/fees', [CarController::class, 'filterCarFees']);             # 1 
-Route::get('cars/{car}/description', [CarController::class, 'carLastTicketDescription']);
-Route::get('cars/{car}/tickets', [CarController::class, 'carTickets']);
-Route::get('cars/{car}/renthistory', [CarController::class, 'carWithRentHistory']); # Csak 1 autó history
+Route::get('/cars/{car}/fees', [CarController::class, 'filterCarFees']);             # 1 
+Route::get('/cars/{car}/description', [CarController::class, 'carLastTicketDescription']);
+Route::get('/cars/{car}/tickets', [CarController::class, 'carTickets']);
+Route::get('/cars/{car}/renthistory', [CarController::class, 'carWithRentHistory']); # Csak 1 autó history
 
 
 Route::get('/bills/closedrentsbills', [BillController::class, 'closedRents']);          # Lezárt státuszú autók.
@@ -50,4 +51,3 @@ Route::apiResource('bills', BillController::class);
 
 # Dinamikusság kell, hogy ha létrejön a dolgozó, akkor 
 # dolgozói kedvezményben legyen (pl: 50% fix).
-

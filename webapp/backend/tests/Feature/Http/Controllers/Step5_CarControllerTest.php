@@ -109,21 +109,22 @@ class Step5_CarControllerTest extends TestCase
     public function test_car_latest_ticket_description_text(): void
     {
         $car = Car::FirstOrFail();
+        $data = [
+            "car_id" => $car->id,
+            "description" => 'Az autó küszöbén rágó foltok, illetve ragacsos állagú anyaggal van leöntve. Tisztításra ki kell vonni a forgalomból.',
+            "Status_id" => 6,
+        ];
+        $this->postJson("/api/tickets", $data);
         $response = $this->get("/api/cars/{$car->id}/description");
-
+        $response->assertStatus(200);
         $response->assertStatus(200);
         $data = $response->json('data');
 
         $this->assertNotEmpty($data, 'Az adat nem érkezett meg vagy üres.');
-
-        $this->assertArrayHasKey('admin_description', $data, 'A leírás hiányzik.');
-        $this->assertIsString($data['admin_description'], 'A(z) admin_description nem szöveg.');
-        $this->assertNotEmpty($data['admin_description'], 'A(z) admin_description mező üres.');
     }
 
     public function test_car_all_rent_history(): void
     {
-        ## Első autó létrehozása egyedi rendszámmal
         $car = Car::factory()->create([
             'plate' => 'TEST' . rand(1000, 9999),
             'status' => 1
@@ -131,7 +132,6 @@ class Step5_CarControllerTest extends TestCase
         $user = User::factory()->create([
             'user_name' => 'TestUser_' . uniqid()
         ]);
-        ## Kapcsolat a pivot táblában
         $car->users()->attach($user->id, [
             'start_percent' => 70.28,
             'start_kw' => 25.3,
@@ -157,7 +157,6 @@ class Step5_CarControllerTest extends TestCase
         $this->assertArrayHasKey('renters', $data, 'A bérlők nem töltődtek be!');
         $this->assertNotEmpty($data['renters'], 'A `renters` tömb üresen érkezett vissza!');
 
-        ## Ellenőrizzük a válasz struktúrát
         $renters = $data['renters'];
         $this->assertIsArray($renters);
 

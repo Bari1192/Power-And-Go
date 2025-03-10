@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Car;
 use App\Models\Ticket;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class TicketFactory extends Factory
 {
     protected $model = Ticket::class;
+    protected $carCount=Car::class;
     private const TICKET_TYPES = [
         'cleaning' => 6,
         'malfunction' => 5,
@@ -63,8 +65,9 @@ class TicketFactory extends Factory
     public function definition(): array
     {
         $type = fake()->randomElement(array_keys(self::TICKET_TYPES));
+        $carCount=Car::count();
         return [
-            'car_id' => fake()->numberBetween(1, 50),
+            'car_id' => fake()->numberBetween(1, $carCount),
             'status_id' => self::TICKET_TYPES[$type],
             'description' => fake()->randomElement($this->commentsByType[$type]),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s') 

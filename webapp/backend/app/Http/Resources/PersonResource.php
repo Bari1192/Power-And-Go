@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Hash;
 
 class PersonResource extends JsonResource
 {
@@ -11,7 +12,7 @@ class PersonResource extends JsonResource
     {
         return [
             "person_id" => $this->id,
-            "person_password" => $this->person_password,
+            "person_password" => Hash::make($this->person_password),
             "id_card" => $this->id_card,
             "driving_license" => $this->driving_license,
             "license_start_date" => $this->license_start_date,

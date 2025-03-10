@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Dailyrental;
 use App\Models\Price;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DailyrentalSeeder extends Seeder
 {
@@ -12,13 +13,13 @@ class DailyrentalSeeder extends Seeder
     {
         $arazasok = Price::all(['id', 'category_class', 'sub_id']);
 
-        $insertData = []; 
+        $insertData = [];
 
         foreach ($arazasok as $arazas) {
             $autocarmodelok = range(1, 5);
 
             foreach ($autocarmodelok as $carmodel) {
-                $prices = $this->napiBerlesAutokEsElofizAlapjan($arazas->sub_id,$arazas->category_class);
+                $prices = $this->napiBerlesAutokEsElofizAlapjan($arazas->sub_id, $arazas->category_class);
 
                 foreach ($prices as $nap => $price) {
                     $insertData[] = [
@@ -31,9 +32,18 @@ class DailyrentalSeeder extends Seeder
             }
         }
         Dailyrental::insert($insertData);
+
+        $classes = Dailyrental::distinct('category_class')->count('prices_id');
+        $pricesInCategories = Dailyrental::where('category_class', $classes)->count();
+        $subs = Price::distinct('sub_id')->count();
+
+
+        $this->command->info("\t" . $subs . " féle előfizetési csomagba osztva,");
+        $this->command->info("\t$classes különböző autó-kategória szerint,");
+        $this->command->info("\tElőfizetésenként és autó-kategóriánként " . ($pricesInCategories / $subs) / $classes . " db napi árazással létrehozva.");
     }
     # Árak generálása az autókategória és előfizetési csoport alapján
-    private function napiBerlesAutokEsElofizAlapjan($sub_id,$category_class)
+    private function napiBerlesAutokEsElofizAlapjan($sub_id, $category_class)
     {
         # MÁSODIK NAPTÓL VANNAK!
         $napiarak = [

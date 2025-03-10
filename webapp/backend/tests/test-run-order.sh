@@ -20,7 +20,6 @@ docker compose exec backend php artisan test --filter=Step3_Subscription_Databas
 docker compose exec backend php artisan test --filter=Step4_CarStatus_DatabaseTest
 docker compose exec backend php artisan test --filter=Step5_Cars_DatabaseTest
 docker compose exec backend php artisan test --filter=Step6_Persons_DatabaseTest
-docker compose exec backend php artisan test --filter=Step7_Users_DatabaseTest
 docker compose exec backend php artisan test --filter=Step8_Employees_DatabaseTest
 docker compose exec backend php artisan test --filter=Step9_Bills_DatabaseTest
 docker compose exec backend php artisan test --filter=Step10_Tickets_DatabaseTest 

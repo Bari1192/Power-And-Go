@@ -16,7 +16,7 @@ class UpdateUserRequest extends FormRequest
             'person_id' => ['required', 'integer', 'exists:persons,id'],
             'sub_id' => ['required', 'exists:subscriptions,id'],
             'user_name' => ['required', 'string', 'max:45', 'exists:users,user_name'],
-            'password' => ['required', 'string', 'min:8', 'max:60'],
+            'pin' => ['required', 'string', "max:255", "min:4"],
             'password_2_4' => ['required', 'size:2'],
             'vip_discount' => ['required', 'boolean'],
             'bonus_minutes' => ['required', 'integer', 'min:0'],

@@ -87,11 +87,12 @@ class ParkingFactoryTest extends TestCase
             "email"           => fake()->unique()->lexify('??????????@gmail.com'),
         ]);
 
+        $pin = fake()->regexify('[0-9]{4}');
         $this->testUser = User::factory()->create([
             'person_id'       => $testPerson->id,
             'user_name'       => 'TestUserName' . fake()->regexify('[0-9]{5}'),
-            'password'        => $testPerson->person_password,
-            'password_2_4'    => $testPerson->person_password[1] . $testPerson->person_password[3],
+            'pin'             => $pin,
+            'password_2_4'    => $pin[1] . $pin[3],
             'account_balance' => 0,
             'sub_id'          => 1,
 
@@ -381,13 +382,13 @@ class ParkingFactoryTest extends TestCase
         foreach ($testCases as $name => $testCase) {
             $berlesKezdete = new DateTime('2025-01-01 10:00:00');
             $berlesVege = (clone $berlesKezdete)->modify("+{$testCase['berles_idotartam']} minutes");
-    
+
             $parkolasok = [];
-    
+
             foreach ($testCase['parkolasok'] as $parkolas) {
                 $kezdIdo = new DateTime($parkolas['kezd']);
                 $vegIdo = (clone $kezdIdo)->modify('+' . $parkolas['parking_minutes'] . ' minutes');
-    
+
                 $parkolasok[] = [
                     'kezd' => $kezdIdo->format('Y-m-d H:i:s'),
                     'veg' => $vegIdo->format('Y-m-d H:i:s'),
@@ -400,7 +401,7 @@ class ParkingFactoryTest extends TestCase
                     )
                 ];
             }
-    
+
             $vezetesIdo = $testCase['vezetes_ido'];
             $result = $this->parkingFactory->userFullTimeRentValidation(
                 $berlesKezdete,
@@ -411,10 +412,10 @@ class ParkingFactoryTest extends TestCase
                 $parkolasok,
                 $this->testUser
             );
-    
+
             // Ellenőrizzük a vezetési időt
             $this->assertEquals($testCase['expected_driving'], $result['driving']);
-    
+
             // Ellenőrizzük, hogy a parkolási idő nem haladja meg a maximális 60%-ot
             $this->assertLessThanOrEqual(
                 $testCase['expected_max_parking_minutes'],

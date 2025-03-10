@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AuthenticateRequest extends FormRequest
+class AuthenticateUserPinRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -13,8 +13,8 @@ class AuthenticateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "email" => ["required", "email", "exists:persons,email"],
-            "password" => ["required", "string","Max:255"],
+            "user_name" => ["required", "string", "exists:users,user_name"],
+            "pin" => ["required", "string","Max:255"],
         ];
     }
 }

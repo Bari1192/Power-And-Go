@@ -190,12 +190,12 @@ class ChargeFactoryTest extends TestCase
             "phone"           => "+3630" . fake()->regexify('[0-9]{7}'),
             "email"           => fake()->unique()->lexify('??????????@gmail.com'),
         ]);
-
+        $pin = fake()->regexify('[0-9]{4}');
         $testUser = User::factory()->create([
             'person_id'       => $testPerson->id,
             'user_name'       => 'TestUserName' . fake()->regexify('[0-9]{5}'),
-            'password'        => $testPerson->person_password,
-            'password_2_4'    => $testPerson->person_password[1] . $testPerson->person_password[3],
+            'pin'             => $pin,
+            'password_2_4'    => $pin[1] . $pin[3],
             'account_balance' => 0,
             'sub_id'          => 1,
         ]);
@@ -745,7 +745,7 @@ class ChargeFactoryTest extends TestCase
     {
         $data = $this->mockTestData();
         $testCar = $data['testCar'];
-    
+
         $times = [
             'seconds' => 1800,
             'minutes' => 30,
@@ -754,22 +754,24 @@ class ChargeFactoryTest extends TestCase
             'remainingHours' => 0,
             'remainingMinutes' => 30
         ];
-    
+
         $validResults = 0;
         $maxIterations = 10;
-    
+
         for ($i = 0; $i < $maxIterations; $i++) {
             $result = RenthistoryFactory::new()->megtettTavolsag($testCar, $times);
-    
+
             // Ha a parkolásokDarabszáma 1 és a parkolasMaxIdo nem null
             if ($result['parkolasokDarabszam'] === 1 && $result['parkolasMaxIdo'] !== null) {
                 $validResults++;
                 break; // Kilépünk, amint találunk egy megfelelő eredményt
             }
         }
-    
+
         // Legalább egy érvényes eredménynek kell lennie
-        $this->assertGreaterThan(0, $validResults, 
+        $this->assertGreaterThan(
+            0,
+            $validResults,
             '16-30 perc között legalább egyszer 1 parkolásnak kell lennie!'
         );
     }

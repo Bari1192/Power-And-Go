@@ -18,7 +18,7 @@ class UpdateCarRequest extends FormRequest
             "category_id" => ["nullable", "integer", "exists:categories,category_class"],
             "equipment_class" => ["nullable", "integer", "exists:equipments,id"],
             "status" => ["nullable", "integer", "exists:carstatus,id"],
-            "plate" => ["required", "string", "between:7,10",Rule::unique('cars', 'plate')->ignore($this->route('car'))],
+            "plate" => ["required", "string", "min:5", "max:8", "unique:cars,plate"],
             "odometer" => ["nullable", "integer", "between:0,300000"],
             "manufactured" => ["nullable", "integer", "min:2014", "max:" . date('Y')],
             "power_percent" => ["required", "decimal:2", "between:0,100"],

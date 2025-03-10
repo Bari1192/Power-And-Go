@@ -51,11 +51,12 @@ class Step7_UserControllerTest extends TestCase
             "phone" => "+3630" . fake()->regexify('[0-9]{7}'),
             "email" => fake()->unique()->lexify('??????????@gmail.com'),
         ]);
+        $pin = "9876";
         $response = $this->postJson('/api/users', [
             'person_id' => $person->id,
             'user_name' => $person['firstname'] . $person['lastname'],
-            'password' => $pwd,
-            'password_2_4' => $pwd[1] . $pwd[3],
+            'pin' => $pin,
+            'password_2_4' => $pin[1] . $pin[3],
             'account_balance' => 0,
             'sub_id' => 1,
             'vip_discount' => 1,
@@ -69,7 +70,7 @@ class Step7_UserControllerTest extends TestCase
         $response->assertStatus(201);
         $this->assertDatabaseHas('users', [
             'person_id' => $person->id,
-            'password_2_4' => $pwd[1] . $pwd[3],
+            'password_2_4' => $pin[1] . $pin[3],
             'vip_discount' => 1,
             'bonus_minutes' => 0,
             'plant_tree' => 1,
@@ -94,8 +95,8 @@ class Step7_UserControllerTest extends TestCase
         $user = User::create([
             "person_id" => $person->id,
             "user_name" => fake()->userName(),
-            "password" => fake()->password(),
-            "password_2_4" => $person->person_password[0] . $person->person_password[2],
+            "pin" => fake()->regexify('[0-9]{4}'),
+            "password_2_4" => $person->person_password[1] . $person->person_password[3],
             "account_balance" => fake()->numberBetween(1000, 100000),
             "sub_id" => 1,
             'vip_discount' => 1,

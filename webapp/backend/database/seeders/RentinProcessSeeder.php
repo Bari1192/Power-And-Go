@@ -12,6 +12,7 @@ class RentinProcessSeeder extends Seeder
     public function run(): void
     {
         $folyamatbanLevok = [];
+        $total = 0;
         for ($i = 0; $i < 35; $i++) {
             $auto = Car::where('status', 1)->inRandomOrder()->first();
             if (!$auto) {
@@ -31,10 +32,12 @@ class RentinProcessSeeder extends Seeder
             ## Az autó státusza módosuljon "folyamatban" (3) -ra!
             $auto->status = 3;
             $auto->save();
+            $total++;
         }
 
         if (!empty($folyamatbanLevok)) {
             DB::table('car_user_rents')->insert($folyamatbanLevok);
         }
+        $this->command->info("\t Összesen" . $total . " db bérlés van folyamatban.");
     }
 }

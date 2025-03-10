@@ -14,7 +14,7 @@ class UpdatePersonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "person_password" => ["required", "string", "size:8"],
+            "person_password" => ["required", "string"],
             "id_card" => [
                 "required",
                 "string",

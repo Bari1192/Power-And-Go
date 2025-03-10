@@ -14,7 +14,7 @@ class StorePersonRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "person_password" => ["required", "string", "size:8"],
+            "person_password" => ["required", "string"],
             "id_card" => ["required", "string", "min:8", "max:12", "unique:persons,id_card"],
             "driving_license" => ["string", "size:8", "unique:persons,driving_license", "required_with:license_start_date"],
             "firstname" => ["required", "string", "min:3", "max:50"],
