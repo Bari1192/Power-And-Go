@@ -121,6 +121,10 @@ class BillSeeder extends Seeder
         $this->command->info("\tE-mailek kézbesítése folyamatban...");
        
         ## Egyelőre kiszedve, hogy gyorsabb legyen!
-        // \Illuminate\Support\Facades\Artisan::call('app:send-bill-emails-command', ['--verbose' => true]);
+        \Illuminate\Support\Facades\Artisan::call('app:send-bill-emails-command', ['--verbose' => true]);
+
+        ## Terminálból ezt:
+        // php artisan app:send-bill-emails-command --verbose
+
     }
 }

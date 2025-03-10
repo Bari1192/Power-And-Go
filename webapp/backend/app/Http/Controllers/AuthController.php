@@ -41,17 +41,18 @@ class AuthController extends Controller
     }
     public function authenticateUserPIN(AuthenticateUserPinRequest $request)
     {
-        $credentials = $request->validate([
-            'user_name' => ["required", "string", "between:8,45", "exists:users,user_name"],
-            'pin' => ['required', 'string', 'size:4', 'exists:users,pin']
-        ]);
+        $credentials = $request->validated();
         $user = User::where('user_name', $credentials['user_name'])->first();
 
-        if ($user && $user->pin === $credentials['pin']) {
+        $credentials = $request->validated();
+        $user = User::where('user_name', $credentials['user_name'])->first();
+
+        if ($user && Hash::check($credentials['pin'], $user->pin)) {
             return response()->json([
                 "message" => "PIN hitelesítve. Autó nyitása folyamatban..."
             ]);
         }
+
         return response()->json([
             "error" => "A PIN Érvénytelen. Hozzáférés megtagadva!"
         ], 401);

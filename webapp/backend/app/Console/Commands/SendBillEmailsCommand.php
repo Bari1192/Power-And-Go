@@ -23,7 +23,7 @@ class SendBillEmailsCommand extends Command
             $bills = Bill::where('email_sent', false)->get();
             (int)$feldolgozott = 0;
             $teljes = count($bills);
-            $this->info('Feldolgozandó e-mailek száma bills count: ' . $teljes);
+            $this->info('Feldolgozandó e-mailek száma: ' . $teljes);
 
             ## Állapotsáv / Progress Bár
             $bar = $this->output->createProgressBar($teljes);

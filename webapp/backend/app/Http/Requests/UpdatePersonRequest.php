@@ -20,7 +20,7 @@ class UpdatePersonRequest extends FormRequest
                 "string",
                 "min:8",
                 "max:12",
-                "unique:persons,id_card," . $this->route('person'),
+                "unique:persons,id_card,",
             ],
             "driving_license" => ["string", "size:8", "exists:persons,driving_license", "required_with:license_start_date"],
             "firstname" => ["required", "string", "min:3", "max:50"],
@@ -31,14 +31,14 @@ class UpdatePersonRequest extends FormRequest
                 "starts_with:+36,0036",
                 "min:12",
                 "max:15",
-                "unique:persons,phone," . $this->route('person'),
+                "unique:persons,phone,",
             ],
             "email" => [
                 "required",
                 "string",
                 "min:21",
                 "max:80",
-                "unique:persons,email," . $this->route('person'),
+                "unique:persons,email,",
                 "regex:/^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$/"
             ],
             "birth_date" => [
