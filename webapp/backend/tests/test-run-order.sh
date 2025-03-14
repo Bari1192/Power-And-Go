@@ -32,6 +32,8 @@ docker compose exec backend php artisan test --filter=EquipmentModelTest
 ### Sorrendben | [teszt] | [Modul-Functions] osztályokban ###
 docker compose exec backend php artisan test --filter=ChargeFactoryTest
 docker compose exec backend php artisan test --filter=ParkingFactoryTest
+docker compose exec backend php artisan test --filter=BonusMinutes_PlantTreeCampaign_Test
+docker compose exec backend php artisan test --filter=BonusMinutes_DailyRentalChargeCampaign_Test
 
 ## Összesítésként egyben ##
 docker compose exec backend php artisan test

@@ -5,15 +5,19 @@ namespace App\Services;
 use App\Interfaces\BonusRuleInterface;
 use App\Models\User;
 use App\Rules\AdminBonusRule;
+use App\Rules\DailyRentalBonusRule;
 
 class BonusRuleService
 {
     private $bonusMinutesService;
+    private $dailyRentalBonusRule;
     private $rules = [];
 
-    public function __construct(BonusMinutesService $bonusMinutesService)
+    public function __construct(BonusMinutesService $bonusMinutesService, DailyRentalBonusRule $dailyRentalBonusRule)
     {
         $this->bonusMinutesService = $bonusMinutesService;
+        $this->dailyRentalBonusRule = $dailyRentalBonusRule;
+        $this->registerRule($dailyRentalBonusRule, $bonusMinutesService);
     }
 
     public function registerRule(BonusRuleInterface $rule): void
@@ -51,16 +55,16 @@ class BonusRuleService
         return $appliedRules;
     }
 
-    public function applyAdminBonus(User $user, int $adminId, int $minutes, string $reason = null): void
-    {
-        $rule = new AdminBonusRule($adminId, $minutes, $reason);
+    // public function applyAdminBonus(User $user, int $adminId, int $minutes, string $reason = null): void
+    // {
+    //     $rule = new AdminBonusRule($adminId, $minutes, $reason);
 
-        $this->bonusMinutesService->addBonusMinutes(
-            $user,
-            $minutes,
-            $rule->getSource(),
-            $rule->getType(),
-            $rule->getReason($user, [])
-        );
-    }
+    //     $this->bonusMinutesService->addBonusMinutes(
+    //         $user,
+    //         $minutes,
+    //         $rule->getSource(),
+    //         $rule->getType(),
+    //         $rule->getReason($user, [])
+    //     );
+    // }
 }

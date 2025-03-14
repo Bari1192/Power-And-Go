@@ -30,6 +30,7 @@ class ChargeFactoryTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        
         $this->testCarRefreshService = new CarRefreshService();
         $this->testChargeFactory = new CarUserrentChargeFactory();
         $this->mockTestData();

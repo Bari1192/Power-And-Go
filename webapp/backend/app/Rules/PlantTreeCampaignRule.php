@@ -6,17 +6,15 @@ use App\Interfaces\BonusRuleInterface;
 
 class PlantTreeCampaignRule implements BonusRuleInterface
 {
-    public function isEligible($user,$context): bool
+    public function isEligible($user, $context): bool
     {
-        // Csak akkor jogosult, ha részt vesz a programban
         if (!$user->plant_tree) {
             return false;
         }
-        return $user->driving_minutes >= 200;
+        return true;
     }
     public function calculateBonusMinutes($user, array $context): int
     {
-        ## Mindig 20 perc bónusz jár
         return 20;
     }
 

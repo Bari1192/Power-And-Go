@@ -85,7 +85,8 @@ services:
   docs:
     image: idomi27/nuxt-content:3.11.2
     volumes:
-      - ./docs:/app/content:ro
+    - ./docs/content:/app/content:ro
+    - ./docs/public:/app/public:ro
     networks:
       - fullstack
 

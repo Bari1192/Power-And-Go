@@ -2,30 +2,35 @@
     <BaseLayout>
         <div class="m-auto my-8 d-flex justify-center border-4 rounded-2xl border-sky-300 w-1/3 mb-20">
             <p
-                class="text-center tracking-wide text-4xl font-semibold text-white bg-sky-400 border-lime-400 border-t-2 border-b-2 rounded-md py-3 my-8 ">
+                class="text-center tracking-wide text-4xl font-semibold text-white bg-sky-500 border-lime-500 border-t-4 border-b-4 rounded-md py-3 my-8 ">
                 Login Panel
             </p>
 
-            <div class="w-full text-sky-300 font-semibold text-2xl d-flex m-auto text-center justify-center my-8">
-                <FormKit type="form" id="login" @submit="submitHandler" :actions="false">
+            <div
+                class="w-full text-sky-300 bg-sky-900 pt-4 font-semibold text-2xl rounded-lg d-flex m-auto text-center justify-center my-8">
+                <FormKit type="form" id="login" :actions="false" @submit="submitHandler" v-slot="{ state }">
 
-                    <FormKit name="user" label="Felhasználónév" label-class="text-sky-300" id="userinput"
-                        :validation="[['required'], ['matches', /^\d{10,20}$/]]" :validation-messages="{
+                    <FormKit name="user" label="E-mail cím" label-class="text-lime-500 py-4" id="userinput"
+                        :validation="'required'" :validation-messages="{
                             matches: 'Hibás a felhasználónév megadása!',
                             required: 'Kötelező megadni!',
                         }" />
 
-                    <FormKit name="password" type="password" id="userpw" label="Jelszó"
-                        :validation="[['required'], ['matches', /^\d{4,8}$/]]" :validation-messages="{
+                    <FormKit name="password" type="password" id="userpw" label="Jelszó" label-class="text-lime-500"
+                        :validation="'required'" :validation-messages="{
                             matches: 'A jelszónak 4-8 számból kell állnia.',
                             required: 'Kötelező megadni!',
                         }" />
-                    <div class="flex justify-center my-12">
-                        <FormKit type="submit" label="Bejelentkezés"
-                            class="bg-blue-500 hover:bg-blue-400 text-lime-300 text-2xl font-semibold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" />
+                    <FormKit type="submit" label="Bejelentkezés"
+                        input-class="tracking-[0.10em] text-lg bg-lime-600 my-6 text-white font-semibold py-3 px-12 border-b-4 rounded-2xl transition-all duration-300 ease-in-out hover:bg-lime-700 active:translate-y-[2px] active:border-b-2" />
+
+
+                    <!-- Új betöltési indikátor -->
+                    <div v-if="isLoading" class="loading-container">
+                        <div class="hourglass">⏳</div>
                     </div>
                     <div v-if="submitted">
-                        <h2 class="text-xl text-green-500">Bejelentkezés sikeres!</h2>
+                        <h2 class="text-green-500">Bejelentkezés sikeres!</h2>
                     </div>
                 </FormKit>
             </div>
@@ -33,42 +38,88 @@
     </BaseLayout>
 </template>
 
-
 <script>
 import { http } from '@utils/http.mjs';
-import BaseLayout from '@layouts/BaseLayout.vue'
+import BaseLayout from '@layouts/BaseLayout.vue';
+import { toast } from 'vue3-toastify';
+
 
 
 export default {
+    components: {
+        BaseLayout,
+    },
     data() {
         return {
-            username: '', // Felhasználónév tárolása
-            password: '', // Jelszó tárolása
-            submitted: false
+            submitted: false,
+            loginError: null,
+            state: {},
+            isLoading: false,
         }
     },
-    components: {
-        BaseLayout
-    },
-    watch: {
-        // Felhasználónév figyelése
-        username(newValue) {
-            this.validateUsername(newValue);
-        },
-        // Jelszó figyelése
-        password(newValue) {
-            this.validatePassword(newValue);
-        }
-    },
-    methods() {
-        submitHandler(values);
-        {
-            this.submitted = true;
+    methods: {
+        async submitHandler(formData) {
+            this.isLoading = true;
+            this.loginError = null;
+
+            try {
+                // Mesterséges késleltetés
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                const response = await http.post('/authenticatelogin', {
+                    email: formData.user,
+                    password: formData.password
+                });
+
+                localStorage.setItem('token', response.data.data.token);
+                localStorage.setItem('user', JSON.stringify(response.data.data.user));
+
+                this.isLoading = false; // Betöltés befejezése
+                this.submitted = true;
+
+                setTimeout(() => {
+                    this.$router.push('/');
+                }, 2000);
+
+            } catch (error) {
+                this.isLoading = false;
+                this.submitted = false;
+
+                const errorMessage = error.response?.data.message || "Ismeretlen hiba történt";
+
+                // Különböző hibaüzenetek kezelése
+                if (errorMessage.includes("email field must be a valid email")) {
+                    toast.error("Hibás az e-mail cím megadása!", {
+                        autoClose: 3000,
+                        position: toast.POSITION.TOP_CENTER,
+                        transition: toast.TRANSITIONS.BOUNCE,
+                    });
+                } else if (errorMessage.includes("password") || errorMessage.includes("jelszó")) {
+                    toast.error("Hibás jelszó!", {
+                        autoClose: 3000,
+                        position: toast.POSITION.TOP_CENTER,
+                        transition: toast.TRANSITIONS.BOUNCE
+                    });
+                } else if (error.response?.status === 401) {
+                    toast.error("Sikertelen bejelentkezés: Hibás felhasználónév vagy jelszó", {
+                        autoClose: 3000,
+                        position: toast.POSITION.TOP_CENTER,
+                        transition: toast.TRANSITIONS.BOUNCE
+                    });
+                } else {
+                    // Általános hibaüzenet
+                    toast.error(errorMessage, {
+                        autoClose: 3000,
+                        position: toast.POSITION.TOP_CENTER,
+                        transition: toast.TRANSITIONS.BOUNCE
+                    });
+                }
+            }
         }
     }
 }
-
 </script>
+
 
 <style>
 #userinput,
@@ -79,21 +130,74 @@ export default {
     border-radius: 1rem;
     border-color: rgb(1, 133, 185);
     border-width: 2px;
-    margin-top: 0.5rem;
+    margin-top: 0.7rem;
+}
+
+#userinput {
+    margin-bottom: 1rem;
 }
 
 [data-invalid] .formkit-message {
     color: red;
     font-size: 16px;
+    font-style: italic;
 }
 
-[data-valid] .formkit-inner {
+li#login-incomplete.formkit-message {
+    display: none;
+}
+
+[data-invalid] input#userinput.formkit-input,
+[data-invalid] input#userpw.formkit-input {
+    border: 2px solid red;
+    margin: 0;
+    padding: 0;
+}
+
+.formkit-submit {
+    background-color: bisque;
+}
+
+[data-valid] input#userinput.formkit-input,
+[data-valid] input#userpw.formkit-input {
     border: 2px solid green;
 }
 
-[data-loading] .formkit-inner::after {
-    content: '⏳';
-    display: inline-block;
-    margin-left: 5px;
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem auto;
+}
+
+.hourglass {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    animation: flip-hourglass 1s infinite alternate,
+        color-hourglass 3s ease-in-out infinite;
+}
+
+@keyframes flip-hourglass {
+    0% {
+        transform: rotateX(0deg);
+    }
+
+    100% {
+        transform: rotateX(180deg);
+    }
+}
+
+@keyframes color-hourglass {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        filter: hue-rotate(180deg);
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+    }
 }
 </style>

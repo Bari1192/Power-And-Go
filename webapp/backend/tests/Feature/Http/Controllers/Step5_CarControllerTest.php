@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -108,19 +109,19 @@ class Step5_CarControllerTest extends TestCase
 
     public function test_car_latest_ticket_description_text(): void
     {
-        $car = Car::FirstOrFail();
-        $data = [
+        $car = Car::firstOrFail();
+        $ticketData = [
             "car_id" => $car->id,
-            "description" => 'Az autó küszöbén rágó foltok, illetve ragacsos állagú anyaggal van leöntve. Tisztításra ki kell vonni a forgalomból.',
-            "Status_id" => 6,
+            "description" => "valahol ikszdé",
+            "status_id" => 6
         ];
-        $this->postJson("/api/tickets", $data);
-        $response = $this->get("/api/cars/{$car->id}/description");
+        $this->postJson("/api/tickets", $ticketData)
+            ->assertStatus(201);
+        $response = $this->getJson("/api/cars/{$car->id}/description");
         $response->assertStatus(200);
-        $response->assertStatus(200);
-        $data = $response->json('data');
-
-        $this->assertNotEmpty($data, 'Az adat nem érkezett meg vagy üres.');
+        $response->assertJsonStructure(['data']);
+        $responseData = $response->json('data');
+        $this->assertEquals("valahol ikszdé", $responseData['admin_description']);
     }
 
     public function test_car_all_rent_history(): void

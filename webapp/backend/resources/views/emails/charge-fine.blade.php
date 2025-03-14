@@ -1,5 +1,9 @@
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
 <div
-    style="font-family:cursive;margin:auto;font-weight: 300;min-height: 100vh; width: 100%; background-color: rgb(0, 32, 74); padding: 4rem 0;">
+    style="font-family:'Funnel Sans', Arial, sans-serif;margin:auto;font-weight: 400;min-height: 100vh; width: 100%; background-color: rgb(0, 32, 74); padding: 4rem 0;">
     <div style="width: 100%; max-width: 1200px; margin: auto; position: relative; padding: 0 20px;">
         <div
             style="width: 100%; margin-bottom: -80px; margin-right:auto;margin-left:auto; position: relative; z-index: 5;">

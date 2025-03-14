@@ -23,18 +23,21 @@ class RenthistoryFactory extends Factory
     private CarRefreshService $carRefreshService;
     private BonusRuleService $bonusRuleService;
     private BonusMinutesService $bonusMinutesService;
+    private DailyRentalBonusRule $dailyRentalBonusRule;
+    protected PlantTreeCampaignRule $plantTreeCampaignRule;
 
     public function __construct()
     {
         parent::__construct();
-        $this->carRefreshService = new CarRefreshService();
+        parent::__construct();
         $this->carRefreshService = new CarRefreshService();
         $this->bonusMinutesService = new BonusMinutesService();
-        $this->bonusRuleService = new BonusRuleService($this->bonusMinutesService);
+        $this->dailyRentalBonusRule = new DailyRentalBonusRule();
+        $this->bonusRuleService = new BonusRuleService($this->bonusMinutesService, $this->dailyRentalBonusRule);
+        $this->plantTreeCampaignRule = new PlantTreeCampaignRule();
 
         ## Szabályok regisztrálása
-        $this->bonusRuleService->registerRule(new PlantTreeCampaignRule());
-        $this->bonusRuleService->registerRule(new DailyRentalBonusRule());
+        $this->bonusRuleService->registerRule($this->plantTreeCampaignRule);
         $this->states = collect();
     }
     public function definition(): array
@@ -152,14 +155,14 @@ class RenthistoryFactory extends Factory
             $endKw = round($vegsoAllapot['uj_toltes_kw'] ?? $nyitasToltesKw, 1);
 
             $fizetendoVezetesiIdo = $vezetesIdo;
-            if ($user->plant_tree && $user->bonus_minutes > 0 && $vezetesIdo < 240) { ## cirka 4 óránál már a VIP-nek is napidíj lesz
+            if ($this->plantTreeCampaignRule->isEligible($user, []) && $user->bonus_minutes > 0 && $vezetesIdo < 240) { ## cirka 4 óránál már a VIP-nek is napidíj lesz
                 ## 10% esély a bónusz percek felhasználására
                 if (random_int(1, 10) < 2) {
                     $felhasznaltPercek = $this->bonusMinutesService->useBonusMinutes($user, $vezetesIdo);
                     $fizetendoVezetesiIdo = $vezetesIdo - $felhasznaltPercek;
                 }
             }
-            if ($user->plant_tree) {
+            if ($this->plantTreeCampaignRule->isEligible($user, [])) {
                 $rental_cost = $this->berlesVegosszegSzamolas(
                     $arazas,
                     $user,
@@ -185,11 +188,11 @@ class RenthistoryFactory extends Factory
                 );
             }
             $isDailyRental = $rental_cost['napidijas'] ?? false;
-            if ($user->plant_tree) {
+            if ($this->plantTreeCampaignRule->isEligible($user, $isDailyRental)) {
                 $this->bonusMinutesService->addDrivingMinutes($user, $vezetesIdo);
             }
             ## Bónuszok (szabályok) alkalmazása a [bérlés lezárása után]!!
-            if ($user->plant_tree || $isDailyRental) {
+            if ($this->plantTreeCampaignRule->isEligible($user, $isDailyRental) || $isDailyRental) {
                 $context = [
                     'is_daily_rental' => $isDailyRental,
                     'end_percent' => $endPercent,
@@ -398,7 +401,7 @@ class RenthistoryFactory extends Factory
         ## Parkolási díj minden kategóriára egységesen
         $parkolasiDij = $parkolasok * $arazas->parking_minutes;
         ## 2-es és 4-es kategória speciális kezelése
-        if ($autoKategoria== 5) {
+        if ($autoKategoria == 5) {
             if ($berlesIdotartam <= 180) {
                 return min($arazas->three_hour_fee + $berlesInditasa, $arazas->daily_fee + $berlesInditasa)
                     + $napiKmLimitTullepes + $parkolasiDij;
