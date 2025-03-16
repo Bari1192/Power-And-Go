@@ -1,0 +1,61 @@
+.custom-next-button,
+.custom-prev-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.9) !important;
+    padding: 20px;
+    background-size: 200% 200%;
+    background-image: linear-gradient(
+        145deg,
+        rgba(139, 194, 36, 0.8) 0%,
+        rgba(217, 138, 2, 0.6) 50%,
+        rgba(139, 194, 36, 0.9) 50%,
+        rgba(217, 138, 2, 0.8) 100%
+    );
+    background-position: 0 0;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: all 1s ease;
+}
+
+.custom-next-button:hover,
+.custom-prev-button:hover {
+    background-position: 100% 100%;
+    transform: translateY(-50%) translateX(2px);
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.animate-up-down {
+    animation: up-down 2s ease-in-out infinite alternate-reverse both;
+}
+
+@keyframes up-down {
+    0% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(10px);
+    }
+}
+
+.background-img {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('@img/Welcome/leaf75WithTrunk.png');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: auto;
+    z-index: 0;
+    overflow: hidden;
+}

@@ -37,7 +37,7 @@ class RegisterController extends Controller
                 'pin' => Hash::make($data['pin']),
                 'password_2_4' => $data['pin'][1] . $data['pin'][3],
                 'account_balance' => $data['account_balance'] ?? 0,
-                'sub_id' => 1,
+                'sub_id' => $data['sub_id'] ?? 1,
             ]);
             DB::commit(); # NE FELEDD!
 

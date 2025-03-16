@@ -1,30 +1,31 @@
 <template>
   <nav class="text-white bg-sky-950 border-b-4 border-sky-800">
     <div class="flex justify-between align-middle p-3 border-b-2 flex-wrap dark:border-none">
-      <RouterLink to="/" class="flex items-center space-x-3 mx-auto" active-class="font-bold text-lime-500">
+      <RouterLink to="/" class="flex items-center  mx-auto" active-class="font-bold text-lime-500">
         <img src="../../assets/img/BaseEmail/logo_small.png" class="h-24 w-full" alt="Power And Go Logo" />
         <span class="self-center text-2xl font-semibold whitespace-nowrap  dark:hover:text-lime-500">Power
           And Go</span>
       </RouterLink>
-      <RouterLink to="/rents/renthistory" class="flex mx-auto space-x-3" active-class="text-lime-500"
+      <RouterLink to="/rents/renthistory" class="flex mx-auto " active-class="text-lime-500"
         exact-active-class="text-lime-500">
         <span class="self-center text-2xl font-semibold dark:hover:text-lime-500">Lezárt
           Bérlések</span>
       </RouterLink>
-      <RouterLink to="/bills/AllBills" class="flex mx-auto space-x-3" active-class="font-bold text-lime-500">
+      <RouterLink to="/bills/AllBills" class="flex mx-auto " active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold dark:hover:text-lime-500">Számlák</span>
       </RouterLink>
-      <RouterLink to="/bills/fines" class="flex mx-auto space-x-3" active-class="font-bold text-lime-500">
+      <RouterLink to="/bills/fines" class="flex mx-auto " active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold dark:hover:text-lime-500">Bírságok</span>
       </RouterLink>
-      <RouterLink to="/cars/cars" class="flex mx-auto space-x-3" active-class="font-bold text-lime-500">
+      <RouterLink to="/cars/cars" class="flex mx-auto " active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold  dark:hover:text-lime-500">Autok</span>
       </RouterLink>
-      <RouterLink to="/fleets/fleetIndex" class="flex mx-auto space-x-3" active-class="font-bold text-lime-500">
+      <RouterLink to="/fleets/fleetIndex" class="flex mx-auto " active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold  dark:hover:text-lime-500">Flotta</span>
       </RouterLink>
-      <RouterLink to="/logins/adminPage" class="flex mx-auto space-x-3" active-class="font-bold text-lime-500">
-        <span class="self-center text-2xl font-semibold  dark:hover:text-lime-500">Bejelentkezés</span>
+      <RouterLink to="/logins/adminPage" class="flex mx-auto " active-class="font-bold text-lime-500">
+        <span class="self-center text-2xl font-semibold  dark:hover:text-lime-500"><i
+            class="fa-solid fa-user text-2xl"></i> Bejelentkezés</span>
       </RouterLink>
       <button class="block md:hidden" @click="toggleMenu">
         <svg class="w-5 h-5 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -35,7 +36,7 @@
       <div class="w-full md:block md:w-auto" :class="{ hidden: !menuOpen }">
         <ul class="menu">
           <li class="menuitem">
-            <RouterLink to="#">1. oldal</RouterLink>
+            <!-- <RouterLink to="#">1. oldal</RouterLink> -->
           </li>
         </ul>
       </div>

@@ -24,9 +24,7 @@
                     <FormKit type="submit" label="Bejelentkezés"
                         input-class="tracking-[0.10em] text-lg bg-lime-600 my-6 text-white font-semibold py-3 px-12 border-b-4 rounded-2xl transition-all duration-300 ease-in-out hover:bg-lime-700 active:translate-y-[2px] active:border-b-2" />
 
-
-                    <!-- Új betöltési indikátor -->
-                    <div v-if="isLoading" class="loading-container">
+                        <div v-if="isLoading" class="loading-container">
                         <div class="hourglass">⏳</div>
                     </div>
                     <div v-if="submitted">

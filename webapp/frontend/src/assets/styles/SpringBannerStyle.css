@@ -1,0 +1,151 @@
+.swiper-container{
+    max-width: 1200px;
+}
+.spring-banner {
+    background: linear-gradient(135deg, rgba(236, 252, 203, 0.6), rgba(255, 255, 255, 0.6));
+    position: relative;
+    overflow: hidden;
+    padding: 3rem 2rem;
+
+}
+
+.spring-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.banner-container {
+    background: linear-gradient(135deg, rgba(101, 163, 13, 0.85), rgba(132, 204, 22, 0.85));
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+    max-height: 400px;
+    margin: 0 auto;
+    position: relative;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+    border: 4px solid yellow;
+}
+
+.banner-container:hover {
+    transform: translateY(-5px);
+}
+
+.banner-content {
+    padding: 2rem 2.5rem;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+.banner-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: .5rem;
+    font-family: 'Playfair Display', serif;
+    animation: fadeInDown 1s ease-out;
+}
+
+.banner-description {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    margin-top: .5rem;
+    font-family: 'Roboto', sans-serif;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.banner-cta {
+    display: inline-block;
+    background: #ef4444;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+    border: 3px solid rgba(255, 255, 0,0.7);
+    animation: fadeIn 1s ease-out 0.6s both;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.banner-cta:hover {
+    background: #dc2626;
+    transform: scale(1.02);
+    box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.15);
+}
+
+.flower-decoration {
+    animation: float 3s ease-in-out infinite;
+    display: inline-block;
+    text-shadow: 3px 3px 1px  rgb(184, 38, 84);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .spring-banner {
+        padding: 2rem 1rem;
+    }
+
+    .banner-container {
+        width: 95%;
+    }
+
+    .banner-title {
+        font-size: 2rem;
+    }
+
+    .banner-description {
+        font-size: 1.25rem;
+    }
+}

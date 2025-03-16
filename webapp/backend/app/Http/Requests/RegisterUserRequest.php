@@ -25,7 +25,6 @@ class RegisterUserRequest extends FormRequest
             "email" => ["required", "string", "unique:persons,email"],
             'id_card' => ['required', 'unique:persons,id_card'],
             "person_password" => ["required", "string", "min:8"],
-            'sub_id' => ['required', 'exists:subscriptions,id'],
             'user_name' => ['required', 'string', 'unique:users,user_name'],
             'pin' => ['required', 'string','Max:255'],
             'vip_discount' => ['boolean'],
