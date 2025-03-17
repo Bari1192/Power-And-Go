@@ -1,13 +1,13 @@
 <template>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-    <section class="info_section py-8 text-white border-t-4 border-lime-500 bg-teal-700">
+    <section class="info_section py-8 text-white border-t-4 border-lime-500 bg-teal-600">
         <div class="container mx-auto ">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Contact Info -->
                 <div class="info_col">
                     <div class="info_contact">
                         <h4 class="text-2xl font-bold mb-4">Elérhetőség</h4>
-                        <div class="contact_link_box space-y-3">
+                        <div class="contact_link_box space-y-3 ">
                             <a href="#" class="flex items-center space-x-2">
                                 <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
                                 <span>Cím</span>
@@ -22,17 +22,17 @@
                             </a>
                         </div>
                     </div>
-                    <div class="info_social space-x-6 mt-6">
-                        <a href="" class="text-sky-300 hover:text-lime-500">
+                    <div class="info_social space-x-6 mt-6 py-4 border-y-2 max-w-fit border-gray-100 border-dashed border-opacity-20">
+                        <a href="" class="text-sky-400 hover:text-sky-500">
                             <i class="fab fa-facebook fa-2x " aria-hidden="true"></i>
                         </a>
-                        <a href="" class="text-sky-300 w-4 h-4 hover:text-lime-500">
-                            <i class="fab fa-twitter fa-2x" aria-hidden="true"></i>
+                        <a href="" class="text-yellow-200 w-4 h-4 hover:text-white">
+                            <i class="fab fa-twitter fa-2x " aria-hidden="true"></i>
                         </a>
-                        <a href="" class="text-sky-300 w-4 h-4 hover:text-lime-500">
+                        <a href="" class="text-sky-400 w-4 h-4 bg-white hover:text-sky-500">
                             <i class="fab fa-linkedin fa-2x" aria-hidden="true"></i>
                         </a>
-                        <a href="" class="text-sky-300 w-4 h-4 hover:text-lime-500">
+                        <a href="" class="text-lime-400 w-4 h-4 hover:text-pink-500">
                             <i class="fab fa-instagram fa-2x" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -43,12 +43,11 @@
                 <div class="info_col">
                     <div class="info_detail">
                         <h4 class="text-2xl font-bold mb-4">Információk</h4>
-                        <p class="mb-1">
+                        <p class="py-2 font-semibold border-t-2 border-gray-100 border-opacity-10">
                             Fenntarthatóság és a megújulás a fő erényünk. Ezért tartjuk kiemelten fontosnak, hogy
                             flottánkban kizárólag elektromos autók alkossák.
                         </p>
-                        <div class="border-t-2 border-gray-100 opacity-10 my-2 rounded-2xl"> </div>
-                        <p>Mindezekkel hozzájárulsz az élhető városi levegő kialakításához, a kényelmes és gyors
+                        <p class="border-t-2 border-gray-100 border-opacity-10 py-2 font-semibold">Mindezekkel hozzájárulsz az élhető városi levegő kialakításához, a kényelmes és gyors
                             utazások során.</p>
                     </div>
                 </div>
@@ -57,7 +56,7 @@
                     <div class="info_link_box">
                         <h4 class="text-2xl text-start font-bold mb-4">Hasznos Linkek</h4>
 
-                        <div class="flex flex-row justify-between">
+                        <div class="flex flex-row justify-between ">
                             <div class="info_links flex flex-col space-y-2 font-semibold">
                                 <Router-link to="../">
                                     <span class="self-center hover:text-lime-500"> Főoldal </span></Router-link>

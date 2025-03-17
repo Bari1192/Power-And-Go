@@ -59,3 +59,12 @@
     z-index: 0;
     overflow: hidden;
 }
+/* .swiper-container{
+    background: linear-gradient(
+        0deg,
+        rgba(217, 249, 157, 0.75) 0%,
+        rgba(226, 250, 180, 0.7) 30%,
+        rgba(236, 252, 203, 0.6) 60%,
+        rgba(255, 255, 255, 0.6) 100%
+    );
+} */

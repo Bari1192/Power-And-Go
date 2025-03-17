@@ -1,6 +1,6 @@
 <template>
     <BaseLayout>
-        <div class="container mb-20">
+        <div class="container mx-auto mb-20">
             <div class="col">
                 <div class="row">
                     <p class="text-5xl text-center mt-10 text-sky-100 font-semibold">Autók Megjelenítése</p>

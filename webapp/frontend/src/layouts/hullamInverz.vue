@@ -3,12 +3,14 @@
         <defs>
             <mask id="carMask">
                 <rect width="100%" height="100%" fill="lime" />
-                <image href="@assets/img/Welcome/eup.png" x="700" y="255" width="150" height="80" fill=""
+                <image href="@img/Models/eup.png" x="225" y="189" width="250" height="180" fill="white"
                     class="car-image car-1" />
-                <image href="@assets/img/Welcome/kianiro.png" x="700" y="251" width="150" height="100" fill=""
+                <image href="@img/Models/kianiro.png" x="547" y="209" width="240" height="160" fill="black"
                     class="car-image car-2" />
-                <image href="@assets/img/Welcome/skodacitigo.webp" x="700" y="268" width="150" height="70" fill=""
-                    class="car-image car-3" />
+                 <image href="@img/Models/skodacitigo.webp" x="925" y="207" width="160" height="180" fill="black"
+                    class="car-image car-3" /> 
+                 <image href="@img/Models/vivaroE.png" x="1230" y="201" width="160" height="180" fill="white"
+                    class="car-image car-4" /> 
             </mask>
         </defs>
 
@@ -19,41 +21,19 @@
 </template>
 
 <style>
-@keyframes moveCar {
-    0% {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-    5% {
-        opacity: 1;
-        transform: translateX(90%);
-    }
-    95% {
-        opacity: 1;
-        transform: translateX(-90%);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-}
-
 .car-image {
-    opacity: 0; /* Kezdeti állapotban láthatatlan */
-    animation: moveCar 25s linear infinite;
-    will-change: transform;
-    animation-play-state: running;
+    /*  */
 }
 
 .car-1 {
-    animation-delay: 0s;
+    /*  */
 }
 
 .car-2 {
-    animation-delay: 10s; /* Növeltem a késleltetést */
+    /*  */
 }
 
 .car-3 {
-    animation-delay: 20s; /* Növeltem a késleltetést */
+    /*  */
 }
 </style>

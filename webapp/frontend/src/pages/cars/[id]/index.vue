@@ -1,7 +1,7 @@
 <template>
   <BaseLayout>
 
-    <div class="container mt-20 mb-40 w-full sm:w-11/12 lg:w-2/3 mx-auto">
+    <div class="container p-5 rounded-2xl bg-sky-700 mt-20 mb-40 w-full sm:w-11/12 lg:w-2/3 mx-auto">
       <div
         class="m-auto w-4/5 py-6 d-flex justify-center my-10 sm:w-full border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
         <div class="text-center grid grid-cols-3">
