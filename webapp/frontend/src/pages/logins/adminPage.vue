@@ -1,22 +1,22 @@
 <template>
     <BaseLayout>
-        <div class="m-auto my-8 d-flex justify-center border-4 rounded-2xl border-sky-300 w-1/3 mb-20">
+        <div class="m-auto my-8 d-flex justify-center border-4 rounded-2xl bg-slate-200 border-lime-800 border-opacity-80 w-1/3 mb-20 shadow-xl">
             <p
-                class="text-center tracking-wide text-4xl font-semibold text-white bg-sky-500 border-lime-500 border-t-4 border-b-4 rounded-md py-3 my-8 ">
+                id="logintitle" class="text-center tracking-wide text-4xl text-white bg-yellow-600 bg-opacity-75  border-lime-500  border-t-4 border-b-4 rounded-md py-3 my-8 ">
                 Login Panel
             </p>
 
             <div
-                class="w-full text-sky-300 bg-sky-900 pt-4 font-semibold text-2xl rounded-lg d-flex m-auto text-center justify-center my-8">
+                class="w-full bg-lime-900 bg-opacity-45  pt-4 font-semibold text-2xl rounded-t-md rounde-b-md d-flex m-auto text-center justify-center my-8">
                 <FormKit type="form" id="login" :actions="false" @submit="submitHandler" v-slot="{ state }">
 
-                    <FormKit name="user" label="E-mail cím" label-class="text-lime-500 py-4" id="userinput"
+                    <FormKit name="user" label="E-mail cím" label-class="text-white py-4" id="userinput"
                         :validation="'required'" :validation-messages="{
                             matches: 'Hibás a felhasználónév megadása!',
                             required: 'Kötelező megadni!',
                         }" />
 
-                    <FormKit name="password" type="password" id="userpw" label="Jelszó" label-class="text-lime-500"
+                    <FormKit name="password" type="password" id="userpw" label="Jelszó" label-class="text-white"
                         :validation="'required'" :validation-messages="{
                             matches: 'A jelszónak 4-8 számból kell állnia.',
                             required: 'Kötelező megadni!',
@@ -61,7 +61,7 @@ export default {
             this.loginError = null;
 
             try {
-                // Mesterséges késleltetés
+                // Mesterségesen generáltatom a késleltetést itt.
                 await new Promise(resolve => setTimeout(resolve, 2000));
 
                 const response = await http.post('/authenticatelogin', {
@@ -72,7 +72,7 @@ export default {
                 localStorage.setItem('token', response.data.data.token);
                 localStorage.setItem('user', JSON.stringify(response.data.data.user));
 
-                this.isLoading = false; // Betöltés befejezése
+                this.isLoading = false; 
                 this.submitted = true;
 
                 setTimeout(() => {
@@ -120,13 +120,19 @@ export default {
 
 
 <style>
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css");
+#logintitle{
+    font-family: 'Playfair Display', serif;
+    font-weight:600;
+}
+
 #userinput,
 #userpw {
-    color: rgb(3, 74, 103);
+    color: rgb(5, 80, 3);
     padding-inline: 0.5rem;
     text-align: center;
     border-radius: 1rem;
-    border-color: rgb(1, 133, 185);
+    border-color: rgba(202, 245, 123,0.5);
     border-width: 2px;
     margin-top: 0.7rem;
 }

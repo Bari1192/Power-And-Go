@@ -74,11 +74,11 @@
 
       </h1>
       <div class=" w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
-      <div v-if="!rentFees.length">
+      <div v-if="rentFees && Object.entries(rentFees).length === 0">
         <p class="text-gray-200 font-semibold italic px-2 text-lg">Ehhez az autóhoz nem tartozik bejegyzés.</p>
       </div>
       <transition name="fade-slide">
-        <div v-if="noteOpen">
+        <div v-if="noteOpen && rentFees && Object.entries(rentFees).length !== 0">
           <BaseCard v-for="ticket in rentFees" :key="ticket.id" class="min-h-fit text-5xl mb-8"
             :title="'Bejegyzés azonosítója: ' + ticket.id">
             <div class="grid grid-cols-3 gap-4 my-4">
@@ -257,36 +257,89 @@ export default {
 
   async mounted() {
 
+    this.showLoadingToast();
     try {
-      this.showLoadingToast()
-      const [carRes, ticketsRes, descRes, rentRes, feesRes] = await Promise.all([
-        http.get(`/cars/${this.$route.params.id}`),
-        http.get(`/cars/${this.$route.params.id}/tickets`),
-        http.get(`/cars/${this.$route.params.id}/description`),
-        http.get(`/cars/${this.$route.params.id}/renthistory`),
-        http.get(`/cars/${this.$route.params.id}/fees`)
-      ]);
-      [this.car, this.rentFees, this.latestTicket, this.carRentHistory, this.rentBillFees] =
-        [carRes, ticketsRes, descRes, rentRes, feesRes].map(r => r.data.data)
+      const response = await axios.get(`/api/cars/${this.$route.params.id}/fees`);
+      // Ellenőrizd, hogy a response.data tartalmaz-e adatokat
+      console.log('Betöltött rentFees:', response.data); // Hibaelhárításhoz
+      if (response.data && Object.entries(response.data).length !== 0) {
+        this.rentFees = response.data;
+      } else {
+        console.warn('A rentFees üres választ adott vissza');
+      }
     } catch (error) {
-      // Hibaüzenet 3D animációval
+      console.error('Hiba a rentFees betöltésekor:', error);
+    }
+
+    const endpoints = [
+      { key: 'car', url: `/cars/${this.$route.params.id}` },
+      { key: 'tickets', url: `/cars/${this.$route.params.id}/tickets` },
+      { key: 'description', url: `/cars/${this.$route.params.id}/description` },
+      { key: 'rentHistory', url: `/cars/${this.$route.params.id}/renthistory` },
+      { key: 'fees', url: `/cars/${this.$route.params.id}/fees` }
+    ];
+
+    try {
+      const results = await Promise.allSettled(
+        endpoints.map(endpoint =>
+          http.get(endpoint.url)
+            .then(response => ({
+              key: endpoint.key,
+              data: response.data.data,
+              status: 'fulfilled'
+            }))
+            .catch(error => {
+              const message = error.response?.data.message;
+              if (message === "Ticket Description not found." || message === "Tickets not found.") {
+                return {
+                  key: endpoint.key,
+                  data: message, // Nem hiba, inkább visszaadjuk a szöveget.
+                  status: 'fulfilled_non_error'
+                };
+              }
+              return {
+                key: endpoint.key,
+                error: message || 'Hiba történt az adatok betöltésekor',
+                status: 'rejected'
+              };
+            })
+        )
+      );
+
+      results.forEach(result => {
+        if (result.value.status === 'fulfilled' || result.value.status === 'fulfilled_non_error') {
+          let dataOrMessage = result.value.data; // Adat vagy üzenet visszaadása.
+          switch (result.value.key) {
+            case 'car':
+              this.car = dataOrMessage;
+              break;
+            case 'tickets':
+              this.rentFees = dataOrMessage; // Simán legyen "Tickets not found.", ha az üzenet volt.
+              break;
+            case 'description':
+              this.latestTicket = dataOrMessage; // Visszaadjuk "Ticket Description not found.", ha az üzenet volt.
+              break;
+            case 'rentHistory':
+              this.carRentHistory = dataOrMessage;
+              break;
+            case 'fees':
+              this.rentBillFees = dataOrMessage;
+              break;
+          }
+        } else {
+          console.error(`Hiba a ${result.value.key} betöltésekor:`, result.value.error);
+          toast.error(`${result.value.key} betöltése sikertelen: ${result.value.error}`);
+        }
+      });
+
+    } catch (error) {
       toast.update(this.toastId, {
         render: () => h('div', { class: 'flex items-center gap-3 text-sky-700' }, [
           h('div', { class: 'text-red-700' }),
-          h('span', { class: 'font-semibold' }, error.response?.data.message || 'Váratlan hiba!')
+          h('span', { class: 'font-semibold' }, 'Váratlan hiba történt az adatok betöltésekor!')
         ]),
         type: 'error',
-      })
-
-    } finally {
-      setTimeout(() => {
-        if (this.toastId) {
-          if ('dismiss' in toast) {
-            toast.dismiss(this.toastId)
-          }
-          this.toastId = null
-        }
-      }, 1000)
+      });
     }
   },
   methods: {
