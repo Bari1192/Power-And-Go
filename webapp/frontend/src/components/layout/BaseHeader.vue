@@ -3,29 +3,34 @@
     <div class="flex justify-between align-middle p-3 border-b-2 flex-wrap dark:border-none">
       <RouterLink to="/" class="flex items-center  mx-auto" active-class="font-bold text-lime-500">
         <img src="../../assets/img/BaseEmail/logo_small.png" class="h-24 w-full" alt="Power And Go Logo" />
-        <span class="self-center text-2xl font-semibold whitespace-nowrap  dark:hover:text-lime-500">Power
+        <span class="self-center text-2xl font-semibold whitespace-nowrap  hover:text-lime-400">Power
           And Go</span>
       </RouterLink>
       <RouterLink to="/rents/renthistory" class="flex mx-auto " active-class="text-lime-500"
         exact-active-class="text-lime-500">
-        <span class="self-center text-2xl font-semibold dark:hover:text-lime-500">Lezárt
+        <span class="self-center text-2xl font-semibold hover:text-lime-400">Lezárt
           Bérlések</span>
       </RouterLink>
       <RouterLink to="/bills/AllBills" class="flex mx-auto " active-class="font-bold text-lime-500">
-        <span class="self-center text-2xl font-semibold dark:hover:text-lime-500">Számlák</span>
+        <span class="self-center text-2xl font-semibold hover:text-lime-400">Számlák</span>
       </RouterLink>
       <RouterLink to="/bills/fines" class="flex mx-auto " active-class="font-bold text-lime-500">
-        <span class="self-center text-2xl font-semibold dark:hover:text-lime-500">Bírságok</span>
+        <span class="self-center text-2xl font-semibold hover:text-lime-400">Bírságok</span>
       </RouterLink>
       <RouterLink to="/cars/cars" class="flex mx-auto " active-class="font-bold text-lime-500">
-        <span class="self-center text-2xl font-semibold  dark:hover:text-lime-500">Autok</span>
+        <span class="self-center text-2xl font-semibold  hover:text-lime-400">Autok</span>
       </RouterLink>
       <RouterLink to="/fleets/fleetIndex" class="flex mx-auto " active-class="font-bold text-lime-500">
-        <span class="self-center text-2xl font-semibold  dark:hover:text-lime-500">Flotta</span>
+        <span class="self-center text-2xl font-semibold  hover:text-lime-400">Flotta</span>
       </RouterLink>
       <RouterLink to="/logins/adminPage" class="flex mx-auto " active-class="font-bold text-lime-500">
-        <span class="self-center text-2xl font-semibold  dark:hover:text-lime-500"><i
-            class="fa-solid fa-user text-2xl"></i> Bejelentkezés</span>
+        <span class="self-center text-2xl font-semibold  hover:text-lime-500">
+          <i
+            class="fa-solid fa-arrow-right-to-bracket">
+          </i> Bejelentkezés</span>
+      </RouterLink>
+      <RouterLink to="/registers/registerPage" class="flex mx-auto " active-class="font-bold text-lime-500">
+        <span class="self-center text-2xl font-semibold  hover:text-lime-400"><i class="fa-solid fa-user text-2xl"></i> Regisztráció</span>
       </RouterLink>
       <button class="block md:hidden" @click="toggleMenu">
         <svg class="w-5 h-5 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">

@@ -24,6 +24,7 @@ class RentinProcessSeeder extends Seeder
                 'category_id'  => $auto->category_id,
                 'start_percent' => $auto->power_percent,
                 'start_kw'     => $auto->power_kw,
+                'invoice_date' => null,
                 'rentstatus'   => 3,
             ])->toArray();
 

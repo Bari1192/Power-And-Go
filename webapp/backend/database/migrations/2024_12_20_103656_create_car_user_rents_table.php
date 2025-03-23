@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('parking_minutes')->nullable();
             $table->integer('driving_minutes')->nullable();
             $table->integer('rental_cost')->nullable();
-            $table->timestamp('invoice_date')->useCurrent();
+            $table->timestamp('invoice_date')->nullable();
 
             $table->unsignedTinyInteger('rentstatus')->default(1);
         });
