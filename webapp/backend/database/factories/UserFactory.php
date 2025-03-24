@@ -38,12 +38,12 @@ class UserFactory extends Factory
         return [
             'person_id' => $person->id,
             'sub_id' => $subid,
-            'account_balance' => 20_000,
+            'account_balance' => 1_490,
             'user_name' => $this->felhasznaloNevGenerator($person->firstname),
             'vip_discount' => $this->isPowerVipDiscontAvaliable($subid),
 
             'plant_tree' => $this->plantTreeCampaignSubscribe(),
-            'bonus_min_exp' => null, //Carbon::now()->addDays(30)->format('Y-m-d'),
+            'bonus_min_exp' => Carbon::now()->addDays(30)->format('Y-m-d'),
             'pin' => $pw,
             'bonus_minutes' => 0,
             'driving_minutes' => $this->plantTreeCampaignSubscribe() ? 0 : null,

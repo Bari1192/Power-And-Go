@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Console\Commands\BonusMinutesExpirationManager;
 use App\Models\Bill;
+use App\Models\Person;
 use App\Models\User;
 use App\Observers\BillObserver;
 use Illuminate\Database\Eloquent\Model;
@@ -33,21 +34,6 @@ class AppServiceProvider extends ServiceProvider
                 ->at('02:30')
                 ->appendOutputTo(storage_path('logs/bonus-minutes-expiration.log'));
         }
-
-        Gate::define("create-user", function (User $user) {
-            # Az admin hozhat létre csak a User-t
-            return "Admin" == $user->name;
-        });
-        Gate::define("update-user", function (User $user) {
-            # Az admin módosíthatja csak a User-t
-            return "Admin" == $user->name;
-            // return "Admin" == $user->name || $car->owner == $user->id;
-        });
-        Gate::define("delete-user", function (User $user) {
-            # Az admin törölhet csak a User-t
-            return "Admin" == $user->name;
-        });
-
         ## Az E-mail Blade-hez a time formatter function miatt
         Blade::directive('formatDuration', function ($minutes) {
             return "<?php echo TimeFormatHelper::formatDuration($minutes); ?>";

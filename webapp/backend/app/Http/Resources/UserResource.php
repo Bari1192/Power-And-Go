@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             'driving_minutes' => $this->driving_minutes,
             'sub_id' => $this->sub_id,
             'pin' => $this->pin,
+            'role'=>$this->role,
         ], function ($value) {
             return ($value != null || $value != 0);
         });

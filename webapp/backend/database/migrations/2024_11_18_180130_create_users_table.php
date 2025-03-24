@@ -18,13 +18,15 @@ return new class extends Migration {
             $table->unsignedInteger('bonus_minutes')->default(0);
             $table->unsignedInteger('driving_minutes')->nullable();
             $table->unsignedInteger('contributions')->nullable();
-            
+
             $table->string('user_name', 45)->unique();
             $table->string('pin', 255);
             $table->string('password_2_4', 2);
+            $table->enum('role', ['user', 'admin', 'developer'])->default('user');
             $table->rememberToken();
 
             $table->timestamps();
+            $table->softDeletes();
         });
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('user_name')->primary();

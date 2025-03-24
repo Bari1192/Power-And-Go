@@ -45,7 +45,11 @@ Route::apiResource('subscriptions', SubscriptionController::class);
 Route::apiResource('tickets', TicketController::class);
 
 Route::apiResource('persons', PersonController::class);
-Route::apiResource('users', UserController::class);
+
+Route::apiResource('users', UserController::class)->except(['store'])->middleware('auth:sanctum');
+## Bárki számára elérhető végpontok:
+Route::post('users', [UserController::class, 'store']);
+
 Route::apiResource('employees', EmployeeController::class);
 Route::apiResource('bills', BillController::class);
 
