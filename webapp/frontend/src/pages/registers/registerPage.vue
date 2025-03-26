@@ -1,11 +1,11 @@
 <template>
     <BaseLayout>
-        <div class="h-10/12 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 mb-24"
-            style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.50), 
+        <div class="h-10/12 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 mb-24" style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.50), 
             rgba(255, 255, 255, .40),
             rgba(255, 255, 255, .01));">
 
-            <div id="headerbg" class="max-w-4xl w-full space-y-8  p-8 rounded-2xl shadow-2xl border-x-8 border-lime-900 border-opacity-85">
+            <div id="headerbg" class="max-w-4xl w-full space-y-8  p-8 rounded-2xl shadow-2xl border-x-8 border-x-lime-900 border-x-opacity-85
+                border-y-4 border-y-lime-800/85">
                 <!-- Fejléc -->
                 <div id="companyname" class="text-center">
                     <h2 class="text-4xl pt-5 pr-4 italic text-right font-extrabold text-white tracking-wider">
@@ -14,7 +14,8 @@
                 </div>
 
                 <!-- Léptető -->
-                <div class="flex justify-center space-x-6">
+                <div
+                    class="max-w-fit pb-2 mx-auto flex justify-center space-x-6 border-b-2 border-b-slate-200/20 border-dashed">
                     <div v-for="(step, index) in steps" :key="index" class="flex flex-col items-center">
                         <div :class="[
                             'w-10 h-10 rounded-full flex items-center justify-center mb-2 transition-all duration-1000',
@@ -52,6 +53,8 @@
                                     matches: 'Érvénytelen telefonszám formátum'
                                 }" :classes="formClasses" />
                         </div>
+
+
                         <div class="flex justify-center space-x-4 pt-6">
                             <button v-if="currentStep < 3" @click.prevent="nextStep"
                                 class="px-8 py-3 bg-yellow-500 text-lime-900 rounded-lg hover:bg-yellow-600 transform hover:-translate-y-1 transition-all duration-200 shadow-lg hover:shadow-yellow-500/50">
@@ -61,8 +64,23 @@
                     </div>
                 </div>
 
-                <!-- Második lépés-->
                 <div v-if="currentStep === 2" class="space-y-6 transition-all duration-1000">
+                    <BaseUpload v-model="uploadedDocuments" @document-uploaded="handleDocumentUpload"
+                        @all-documents-uploaded="handleAllDocumentsUploaded" />
+
+                    <div class="flex justify-center space-x-4 pt-6">
+                        <button v-if="currentStep > 1 && areAllDocumentsUploaded" @click.prevent="prevStep"
+                            class="px-8 py-3 bg-lime-800 text-lime-100 rounded-lg hover:bg-lime-900 transform hover:-translate-y-1 transition-all duration-200 shadow-lg hover:shadow-lime-900/50">
+                            Vissza
+                        </button>
+                        <button v-if="areAllDocumentsUploaded" @click.prevent="nextStep"
+                            class="px-8 py-3 bg-yellow-500 text-lime-900 rounded-lg hover:bg-yellow-600 transform hover:-translate-y-1 transition-all duration-200 shadow-lg hover:shadow-yellow-500/50">
+                            Következő
+                        </button>
+                    </div>
+                </div>
+                <!-- Második lépés-->
+                <div v-if="currentStep === 3" class="space-y-6 transition-all duration-1000">
                     <div class="bg-gradient-to-r from-lime-800/40 to-transparent p-4 rounded-lg backdrop-blur-sm">
                         <h3 class="text-2xl font-bold text-lime-100 mb-6 border-l-4 border-yellow-400 pl-4">
                             Dokumentum adatok
@@ -90,7 +108,7 @@
                                 class="px-8 py-3 bg-lime-800 text-lime-100 rounded-lg hover:bg-lime-900 transform hover:-translate-y-1 transition-all duration-200 shadow-lg hover:shadow-lime-900/50">
                                 Vissza
                             </button>
-                            <button v-if="currentStep < 3" @click.prevent="nextStep"
+                            <button v-if="currentStep < 4" @click.prevent="nextStep"
                                 class="px-8 py-3 bg-yellow-500 text-lime-900 rounded-lg hover:bg-yellow-600 transform hover:-translate-y-1 transition-all duration-200 shadow-lg hover:shadow-yellow-500/50">
                                 Következő
                             </button>
@@ -99,7 +117,7 @@
                 </div>
 
                 <!-- Harmadik lépés-->
-                <div v-if="currentStep === 3" class="space-y-6 transition-all duration-1000">
+                <div v-if="currentStep === 4" class="space-y-6 transition-all duration-1000">
                     <div class="bg-gradient-to-r from-lime-800/40 to-transparent p-4 rounded-lg backdrop-blur-sm">
                         <h3 class="text-2xl font-bold text-lime-100 mb-6 border-l-4 border-yellow-400 pl-4">
                             Felhasználói fiók
@@ -152,7 +170,7 @@
                             Vissza
                         </button>
                         <!-- Véglegesítés -->
-                        <button v-if="currentStep === 3" type="submit" @click="submitRegistration"
+                        <button v-if="currentStep >=4" type="submit" @click="submitRegistration"
                             class="px-8 py-3 bg-yellow-500 text-lime-900 rounded-lg hover:bg-yellow-600 transform hover:-translate-y-1 transition-all duration-200 shadow-lg hover:shadow-yellow-500/50">
                             Regisztráció véglegesítése
                         </button>
@@ -172,8 +190,9 @@
 
 #headerbg {
     background: linear-gradient(to bottom,
-            rgba(84, 139, 10, .9),
-            rgba(84, 139, 10, .7),
+            rgba(25, 126, 0, 0.8) 0%,
+            rgba(57, 154, 33, 0.7) 25%,
+            rgba(91, 185, 68, 0.7) 50%,
             rgba(101, 163, 13, .3)),
         url('@assets/styles/grass.webp');
 
@@ -249,12 +268,14 @@ input:focus {
 </style>
 <script setup>
 import BaseLayout from '@/layouts/BaseLayout.vue';
-import { ref, reactive } from 'vue';
+import BaseUpload from '@/layouts/uploadfiles/BaseUpload.vue';
+import { ref, reactive, computed } from 'vue';
 import { http } from '@/utils/http.mjs';
 import { toast } from 'vue3-toastify';
 
-const steps = ['Személyes adatok', 'Felhasználói profil', 'Véglegesítés'];
+const steps = ['Személyes adatok', 'Okmány fényképek', 'Okmányadatok','Profil', 'Véglegesítés'];
 const currentStep = ref(1);
+const showNextButton = ref(false);
 
 const formData = reactive({
     lastname: '',
@@ -267,8 +288,16 @@ const formData = reactive({
     license_start_date: '',
     license_end_date: '',
     user_name: '',
-    pin: ''
+    pin: '',
+    documents: new Map()
+
 });
+const areAllDocumentsUploaded = ref(false);
+
+const handleAllDocumentsUploaded = (status) => {
+    areAllDocumentsUploaded.value = status;
+    showNextButton.value = status;
+};
 const formClasses = {
     input: 'w-full text-lime-700 font-semibold px-4 py-3 rounded-lg bg-lime-100/90 border border-lime-300/30 placeholder-lime-700/50 focus:ring-2 focus:ring-yellow-400/50 focus:border-transparent transition duration-200',
     label: 'block text-lime-100 text-lg font-semibold pl-2 mb-2',
@@ -276,16 +305,18 @@ const formClasses = {
 };
 const validateStep = (step) => {
     switch (step) {
-
         case 1:
             setTimeout(() => { }, 1000);
             return formData.lastname && formData.firstname &&
                 formData.birth_date && formData.phone;
         case 2:
             setTimeout(() => { }, 1000);
+            return true;
+        case 3:
+            setTimeout(() => { }, 1000);
             return formData.id_card && formData.driving_license &&
                 formData.license_start_date && formData.license_end_date;
-        case 3:
+        case 4:
             setTimeout(() => { }, 1000);
             return formData.user_name && formData.person_password &&
                 formData.pin;

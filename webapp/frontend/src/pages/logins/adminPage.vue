@@ -1,6 +1,6 @@
 <template>
     <BaseLayout>
-        <div class="m-auto my-8 d-flex justify-center border-4 rounded-2xl bg-slate-200 border-lime-800 border-opacity-80 w-1/3 mb-20 shadow-xl">
+        <div class="mx-auto mb-40 my-8 d-flex justify-center border-4 rounded-2xl bg-slate-200 border-lime-800 border-opacity-80 w-1/4 shadow-xl">
             <p
                 id="logintitle" class="text-center tracking-wide text-4xl text-white bg-yellow-600 bg-opacity-75  border-lime-500  border-t-4 border-b-4 rounded-md py-3 my-8 ">
                 Login Panel

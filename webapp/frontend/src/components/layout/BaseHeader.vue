@@ -23,15 +23,30 @@
       <RouterLink to="/fleets/fleetIndex" class="flex mx-auto " active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold  hover:text-lime-400">Flotta</span>
       </RouterLink>
-      <RouterLink to="/logins/adminPage" class="flex mx-auto " active-class="font-bold text-lime-500">
+      <RouterLink v-if="!isLoggedIn" to="/logins/adminPage" class="flex mx-auto "
+        active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold  hover:text-lime-500">
-          <i
-            class="fa-solid fa-arrow-right-to-bracket">
+          <i class="fa-solid fa-arrow-right-to-bracket">
           </i> Bejelentkezés</span>
       </RouterLink>
-      <RouterLink to="/registers/registerPage" class="flex mx-auto " active-class="font-bold text-lime-500">
-        <span class="self-center text-2xl font-semibold  hover:text-lime-400"><i class="fa-solid fa-user text-2xl"></i> Regisztráció</span>
+      <router-link v-else to="/" class="flex mx-auto" active-class="font-bold text-lime-500">
+        <span class="self-center text-2xl font-semibold hover:text-lime-400">
+          <i class="fa-solid fa-user-gear text-2xl"></i> Profilom
+        </span>
+      </router-link>
+
+      
+
+      <RouterLink v-if="!isLoggedIn" to="/registers/registerPage" class="flex mx-auto "
+        active-class="font-bold text-lime-500">
+        <span class="self-center text-2xl font-semibold  hover:text-lime-400"><i class="fa-solid fa-user text-2xl"></i>
+          Regisztráció</span>
       </RouterLink>
+      <router-link v-else @click="handleLogout" class="flex mx-auto cursor-pointer" to="/">
+        <span class="self-center text-2xl font-semibold hover:text-lime-500">
+          <i class="fa-solid fa-right-from-bracket"></i> Kijelentkezés
+        </span>
+      </router-link>
       <button class="block md:hidden" @click="toggleMenu">
         <svg class="w-5 h-5 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -51,11 +66,74 @@
 
 <script setup>
 import { ref } from 'vue'
+import { toast } from 'vue3-toastify'
 
 const menuOpen = ref(false)
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
+}
+</script>
+<script>
+export default {
+  data() {
+    return {
+      isLoggedIn: false,
+      userData: null
+    }
+  },
+
+  created() {
+    //Bejelentkezéskor
+    this.checkAuthStatus();
+
+    //LocalStorage változás (böngészőablak között)
+    window.addEventListener('storage', this.checkAuthStatus);
+  },
+  beforeUnmount() {
+    // Eltávolítjuk utána
+    window.removeEventListener('storage', this.checkAuthStatus);
+  },
+
+  methods: {
+    checkAuthStatus() {
+      const token = localStorage.getItem('token');
+      const user = localStorage.getItem('user');
+
+      this.isLoggedIn = !!token;
+      this.userData = user ? JSON.parse(user) : null;
+    },
+
+    handleLogout() {
+      // Töröljük a bejelentkezési adatokat
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+
+      // Frissítjük a komponens állapotát
+      this.isLoggedIn = false;
+      this.userData = null;
+
+      // Értesítjük a felhasználót
+      toast.success('Sikeres kijelentkezés!', {
+        autoClose: 2000,
+        position: toast.POSITION.TOP_CENTER,
+        transition: toast.TRANSITIONS.BOUNCE,
+      });
+    }
+  },
+  mounted() {
+    if (this.$eventBus) {
+      this.$eventBus.on('login-success', this.checkAuthStatus);
+      this.$eventBus.on('logout', this.checkAuthStatus);
+    }
+  },
+
+  unmounted() {
+    if (this.$eventBus) {
+      this.$eventBus.off('login-success', this.checkAuthStatus);
+      this.$eventBus.off('logout', this.checkAuthStatus);
+    }
+  }
 }
 </script>
 
