@@ -170,7 +170,7 @@
                             Vissza
                         </button>
                         <!-- Véglegesítés -->
-                        <button v-if="currentStep >=4" type="submit" @click="submitRegistration"
+                        <button v-if="currentStep >= 4" type="submit" @click="submitRegistration"
                             class="px-8 py-3 bg-yellow-500 text-lime-900 rounded-lg hover:bg-yellow-600 transform hover:-translate-y-1 transition-all duration-200 shadow-lg hover:shadow-yellow-500/50">
                             Regisztráció véglegesítése
                         </button>
@@ -185,7 +185,7 @@
 #bglayer {
     background: linear-gradient(rgba(255, 255, 255, 0.5),
             rgba(255, 255, 255, 0.5),
-            rgba(101, 163, 13, .3)),
+            rgba(101, 163, 13, .3));
 }
 
 #headerbg {

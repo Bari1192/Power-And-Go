@@ -1,25 +1,28 @@
 <template>
-    <!-- Megjelenítjük a kártyát -->
     <div
-        class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl transition-all duration-150 ease-in-out active:translate-y-[2px] active:border-b-2 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        class="flex flex-col items-center bg-lime-500/85 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl 
+        transition-all duration-150 ease-in-out active:translate-y-[2px] 
+        active:border-b-2  hover:bg-lime-500">
+        <!-- Képek -->
         <img class="object-cover w-64 h-32 ml-3 rounded-md"
             :src="`http://backend.vm1.test/storage/carsImages/${id}.png`"
             :alt="manufacturer + ' ' + carmodel + ' képe'">
-        <div class="flex flex-col justify-between p-4 leading-normal">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <!-- Leírások -->
+        <div class="flex flex-col justify-between p-4 leading-normal ">
+            <h5 class="mb-2 text-2xl  tracking-tight text-white">
                 {{ manufacturer + ' ' + carmodel }}
             </h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            <p class="mb-3 font-base font-thin text-lime-800/80 ">
                 <slot />
             </p>
         </div>
     </div>
     <div class="flex justify-end ml-4">
-        <button class="w-1/4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 my-2 mx-4 rounded"
+        <button class="w-1/4 bg-yellow-400 hover:bg-yellow-500/90 text-white font-bold py-2 my-2 rounded-xl border-2 border-orange-500/50"
             @click.stop="editFleet" :disabled="isEditing">
             Módosítás
         </button>
-        <button class="w-1/4 bg-red-500 hover:bg-red-700 text-white font-bold p-1 my-2 rounded"
+        <button class="w-1/4 bg-red-500 hover:bg-red-600/90 text-white font-bold py-2 my-2 ml-2 rounded-xl border-2 border-red-800/50"
             @click.stop="deleteFleet" :disabled="isEditing">
             Törlés
         </button>
@@ -30,7 +33,7 @@
 </template>
 
 <script>
-import EditFleetCar from '@layouts/fleet/EditFleetCar.vue';
+import EditFleetCar from '@pages/fleets/fleetcomponents/EditFleetCar.vue';
 
 export default {
     name: 'BaseFleetCards',
