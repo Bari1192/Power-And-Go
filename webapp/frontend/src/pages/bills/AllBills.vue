@@ -1,7 +1,7 @@
 <template>
     <BaseLayout>
-        <div class="mx-auto w-fit my-10 border-2 p-5 rounded-2xl border-lime-500 bg-orange-100/90">
-            <div class="m-auto w-fit mx-auto px-auto py-3 border-b-2 flex-wrap dark:border-none">
+        <div class="mx-auto w-fit my-10 border-2 p-5 rounded-2xl border-lime-600 shadow-xl border-dashed bg-orange-100/90">
+            <div class="m-auto w-fit mx-auto px-auto py-3 flex-wrap">
                 <button @click="loadFines(pagination.currentPage = 1)" :disabled="pagination.current_page === 1"
                     class="bg-lime-500 hover:bg-lime-600/90 text-white font-bold py-2 px-4 border-2 border-lime-700 rounded mx-3 disabled:cursor-not-allowed disabled:bg-slate-400">
                     1. oldal
@@ -21,7 +21,7 @@
                 </button>
             </div>
         </div>
-        <div class="mx-auto w-3/4 my-10 border-2 rounded-2xl border-emerald-600">
+        <div class="mx-auto w-3/4 my-10 border-2 rounded-2xl border-emerald-600 mb-40">
             <table class="w-full border-collapse rounded-2xl overflow-hidden">
                 <thead>
                     <tr class="text-white text-xl bg-amber-500 border-b-8 border-emerald-800">

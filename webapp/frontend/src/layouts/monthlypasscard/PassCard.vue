@@ -1,6 +1,7 @@
 <template>
   <div
-    class="price-item lg:gap-4 bg-teal-700 rounded-2xl shadow-lg shadow-green-800 price-border-primary border-t-8 border-r-4 border-lime-500 ">
+    class="price-item lg:gap-4 bg-teal-700 rounded-2xl shadow-lg shadow-green-800 price-border-primary border-t-8 border-r-4 border-lime-500 
+    transition-transform duration-200 hover:scale-[1.02] origin-bottom">
     <div class="icon-circle-container">
       <div class="icon-circle">
         <i :class="iconType"></i>
@@ -33,7 +34,7 @@
         </li>
         <li class="flex items-center">
           <i class="fa fa-check mr-6"></i>
-          <span><b>Napi bérlés</b> már {{ dailyPrice }}Ft-tól</span>
+          <span><b>Napi bérlés</b> már {{ dailyPrice }} Ft-tól</span>
         </li>
         <li class="flex items-center">
           <i class="fa fa-check mr-6"></i>

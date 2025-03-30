@@ -4,7 +4,7 @@
       <thead>
         <tr class="text-white bg-sky-500">
           <th class="px-4 py-2 text-center whitespace-nowrap">Rendszám</th>
-          <th class="px-4 py-2 text-center whitespace-nowrap">Autó ID (segédoszlop)</th>
+          <th class="px-4 py-2 text-center">Autó ID (segédoszlop)</th>
           <th class="px-4 py-2 text-center whitespace-nowrap">Model</th>
           <th class="px-4 py-2 text-center whitespace-nowrap">Kilométeróra</th>
           <th class="px-4 py-2 text-center whitespace-nowrap">Töltöttség</th>
@@ -33,10 +33,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    cars: Array,
-  },
-};
+<script setup>
+const props = defineProps({
+  cars: Array
+});
 </script>

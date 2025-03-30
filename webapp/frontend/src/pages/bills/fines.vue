@@ -1,10 +1,10 @@
 <template>
     <BaseLayout>
-        <div class="mx-auto mt-16 mb-32 border-2 rounded-2xl border-sky-300">
-            <table class="w-full border-collapse rounded-2xl overflow-hidden ">
+        < <div class="mx-auto w-3/4 my-10 border-2 rounded-2xl border-emerald-600 mb-40">
+            <table class="w-full border-collapse rounded-2xl overflow-hidden">
                 <thead>
-                    <tr class="text-white text-xl bg-sky-600 border-b-purple-900 border-b-8">
-                        <th class="p-2">Bérlés Azon.</th>
+                    <tr class="text-white text-xl bg-amber-500 border-b-8 border-emerald-800">
+                        <th class="px-2 py-4">Bérlés Azon.</th>
                         <th class="p-2">Rendszám</th>
                         <th class="p-2">Bérlő</th>
                         <th class="p-2">Felh. Név</th>
@@ -16,15 +16,15 @@
                 </thead>
                 <tbody class="text-white text-lg">
                     <tr v-for="fine in fines" :key="fine.id"
-                        class="text-white cursor-pointer odd:hover:bg-sky-900 even:hover:bg-sky-800 odd:bg-sky-500 even:bg-sky-600">
-                        <td class="text-center p-2">{{ fine.rent_id }}</td>
+                    class="text-lime-700/90 cursor-pointer hover:bg-amber-400 odd:bg-amber-100 even:bg-amber-200 transition-transform duration-200 hover:scale-[1.02] origin-bottom">
+                    <td class="text-center p-2">{{ fine.rent_id }}</td>
                         <td class="text-center p-2">{{ fine.plate }}</td>
                         <td class="text-center p-2">{{ fine.person }}</td>
                         <td class="text-center p-2">{{ fine.username }}</td>
-                        <td class="text-center p-2 italic text-lime-300 font-bold">{{ fine.invoice_status }}</td>
-                        <td v-if="fine.bill_type === 'charging_penalty'" class="text-pink-900 text-opacity-90"><b>ÁSZF - Töltési mulasztás</b></td>
+                        <td class="text-center text-emerald-500 font-bold p-2 italic">{{ fine.invoice_status }}</td>
+                        <td v-if="fine.bill_type === 'charging_penalty'" class="text-red-700 text-opacity-90"><b>ÁSZF - Töltési mulasztás</b></td>
                         <td v-else>Ismeretlen</td>
-                        <td class="text-center text-lime-300 font-bold p-2 italic">{{ fine.total_cost }} Ft</td>
+                        <td class="text-center text-emerald-500 font-bold p-2 italic"> {{ fine.total_cost }} Ft</td>
                         <td class="text-center p-2">{{ fine.invoice_date }}</td>
                     </tr>
                 </tbody>
