@@ -218,7 +218,8 @@ const finalizeUpload = () => {
             return {
                 index,
                 file,
-                documentName: documents.value[index].name
+                documentName: documents.value[index].name,
+                currentStep:3
             };
         });
 
@@ -320,7 +321,9 @@ onMounted(() => {
     min-height: 200px;
     @apply border-2 border-dashed border-lime-100/40;
 }
-
+.transition-all {
+    animation: fadeIn 1s ease-in-out;
+}
 @media (max-width: 640px) {
     .document-upload-wizard {
         @apply px-2;

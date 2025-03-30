@@ -1,7 +1,6 @@
 <template>
     <div class="text-2xl text-center font-semibold mb-6 text-amber-50 underline underline-offset-4">
-        {{ document.name }} feltöltése
-    </div>
+        {{ document.name }} </div>
 
     <div class="flex flex-col md:flex-row gap-4">
         <!-- Előnézeti kiskép [] rész -->
@@ -193,11 +192,9 @@ const uploadFile = (file) => {
             uploadId: Math.random().toString(36).substring(2)
           }
         };
-
-        // Esemény kibocsátása
         emit('file-uploaded', fileData);
 
-        // Ha ez volt az utolsó dokumentum
+        // Ha ez volt az utolsó doksi
         if (props.currentIndex === props.totalDocuments - 1) {
           emit('all-documents-uploaded');
         }
@@ -208,7 +205,6 @@ const uploadFile = (file) => {
   setTimeout(simulateUpload, 300);
 };
 
-// Új függvény a feltöltés törlésére/újrakezdésére
 const resetUpload = () => {
   uploadComplete.value = false;
   uploadProgress.value = 0;
@@ -219,7 +215,7 @@ const checkForExistingUpload = () => {
     const existingFile = props.uploadedFiles.find(file => file.index === props.currentIndex);
     
     if (existingFile && existingFile.file) {
-      // Ha van már feltöltött fájl, beállítjuk annak adatait
+      // Ha van már feltöltött fájl, beállítjuk azt
       selectedFile.value = {
         name: existingFile.file.name,
         size: existingFile.file.size,
@@ -229,7 +225,7 @@ const checkForExistingUpload = () => {
       uploadComplete.value = true;
       uploadProgress.value = 100;
     } else {
-      // Ha nincs, alaphelyzetbe állítjuk a komponenst
+      // Ha nincs, alaphelyzetbe 
       resetState();
     }
   } else {
@@ -248,8 +244,6 @@ const resetState = () => {
 
 onMounted(() => {
   checkForExistingUpload();
-  
-  // Drag és drop kezelése az egész komponensre
   const component = document.querySelector('.upload-area');
   if (component) {
     component.addEventListener('dragover', (e) => {
@@ -267,8 +261,6 @@ onMounted(() => {
     });
   }
 });
-
-// Módosítottuk a watcher-t, hogy kezelje a dokumentum váltásokat
 watch(() => props.currentIndex, (newIndex) => {
   checkForExistingUpload();
 });
@@ -310,5 +302,8 @@ watch(() => props.currentIndex, (newIndex) => {
 .preview-container {
     min-height: 200px;
     @apply border-2 border-dashed border-lime-100/40;
+}
+.transition-all {
+    animation: fadeIn 1s ease-in-out;
 }
 </style>

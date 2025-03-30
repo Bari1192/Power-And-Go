@@ -114,7 +114,6 @@ export default {
 </script>
 
 <style scoped>
-/* Alap kinézet: a radio input úgy fog kinézni, mint egy checkbox */
 .custom-radio {
     appearance: none;
     -webkit-appearance: none;
@@ -130,7 +129,6 @@ export default {
     cursor: pointer;
 }
 
-/* Bejelölt állapot */
 .custom-radio:checked::after {
     width: 20px;
     height: 20px;

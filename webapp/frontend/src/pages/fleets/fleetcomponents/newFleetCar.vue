@@ -1,19 +1,21 @@
 <template>
     <div id="bgcolor"
         class="m-auto d-flex justify-center my-10 lg:max-w-[1100px] border-4 rounded-2xl border-green-500/50 italic shadow-2xl font-semibold ">
-        <div class="flex justify-center bg-amber-50/35 my-5 rounded-t-sm rounded-b-sm">
+        <div class="flex justify-center bg-yellow-100/55 my-5 rounded-t-sm rounded-b-sm">
             <p
                 class="text-center tracking-wide text-4xl font-semibold text-white my-5 outline-orange-400 drop-shadow-2xl capitalize">
                 új flotta modell hozzáadása
             </p>
         </div>
-        <div class="m-auto d-flex justify-center border-b-4 border-green-100 w-2/3 mb-20 rounded-md"></div>
+        <div class="m-auto d-flex justify-center border-b-4 border-green-100 w-2/3 mb-2 rounded-md"></div>
+        <div class="flex mx-auto justify-center mt-4 mb-16">
+            <p class=" ml-2 text-red-600 rounded-md  bg-yellow-50/85 max-w-fit font-semibold text-xl italic py-1 px-2">
+                Kérjük fokozott figyelemmel töltse ki!</p>
+        </div>
         <div v-if="submitted" class="flex justify-center mb-10 mx-auto">
             <h2 class="text-green-600 italic w-fit bg-amber-50 font-semibold text-3xl">Az adatok sikeresen beküldésre
                 kerültek!</h2>
         </div>
-        <p class=" ml-2 text-red-600 rounded-md  bg-amber-50/85 max-w-fit  font-semibold text-3xl italic py-2 px-4">
-            Kérjük fokozott figyelemmel töltse ki!</p>
         <FormKit type="form" id="registration-example" :form-class="submitted ? 'hide' : 'show'" submit-label="Küldés"
             @submit="submitHandler" :actions="false" #default="{ value }" :validation="'required'" :validation-messages="{
                 required: 'Kérjük minden adatot töltsön ki!'
@@ -58,7 +60,6 @@
                             max: 'Maximum 300 km/h-ás értéket írhatbe!'
                         }" label-class="block tracking-wider text-white text-lg font-semibold mb-2"
                         input-class="appearance-none block w-full bg-gray-100 text-lime-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                        :help="'Csak a szám értékét írja be!'"
                         help-class="text-slate-600 italic text-start my-1 pl-2 text-sm" />
                 </div>
                 <div class="w-full md:w-1/3 px-3">
@@ -67,7 +68,6 @@
                             required: 'Kötelező kitölteni!',
                             length: 'A szövegnek 8-30 karakter között kell lennie!',
                         }" label-class="block tracking-wider text-white text-lg font-semibold mb-2"
-                        :help="'A szervízelési folyamat végett kérjük pontosan kitölteni!'"
                         help-class="text-slate-600 italic text-start my-1 pl-2 text-sm"
                         input-class="appearance-none block w-full bg-gray-100 text-lime-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                 </div>
@@ -83,9 +83,11 @@
                 </div>
             </div>
 
-            <div class="flex justify-center items-center align-middle bg-amber-50/35 my-12 min-h-20 ">
+            <div class="flex justify-center items-center align-middle bg-yellow-100/55 my-12 min-h-20 ">
                 <FormKit type="submit" label="Hozzáadás" id="addFleet" wrapper-class="w-full"
-                    input-class="tracking-[0.10em] text-lg bg-lime-600 text-white font-semibold py-2 px-12 border-b-4 rounded-lg transition-all duration-150 ease-in-out hover:bg-lime-700 active:translate-y-[2px] active:border-b-2" />
+                    input-class="tracking-[0.10em] text-lg bg-yellow-500 text-white font-semibold py-2
+                    px-12 border-b-4 border-b-yellow-50 rounded-lg transition-all duration-150 ease-in-out 
+                    hover:bg-yellow-600 active:translate-y-[2px] active:border-b-2" />
             </div>
         </FormKit>
     </div>
@@ -144,11 +146,13 @@ export default {
 }
 
 :deep(.formkit-message[data-message-type="validation"]) {
-    color: rgb(157, 2, 2);
+    color: red;
+    background-color: yellow;
+    max-width:fit-content ;
     letter-spacing: 1px;
-    padding-left: 5px;
+    padding:0 5px;
+    border-radius: 5px;
     margin-top: 5px;
-    font-weight: bolder;
 }
 
 :deep(.formkit-message[data-message-type="ui"]) {

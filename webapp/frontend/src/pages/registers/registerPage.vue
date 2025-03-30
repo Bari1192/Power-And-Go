@@ -29,6 +29,7 @@
                     </div>
                 </div>
 
+                <!-- Személyes adatok rész -->
                 <div v-if="currentStep === 1" class="space-y-6 transition-all  duration-1000">
                     <p class="text-white text-3xl ml-2 tracking-wide font-semibold">Regisztráció</p>
                     <div
@@ -64,6 +65,7 @@
                     </div>
                 </div>
 
+                <!-- Okmány fényképek szekció -->
                 <div v-if="currentStep === 2" class="space-y-6 transition-all duration-1000">
                     <BaseUpload v-model="uploadedDocuments" @document-uploaded="handleDocumentUpload"
                         @all-documents-uploaded="handleAllDocumentsUploaded" />
@@ -79,7 +81,7 @@
                         </button>
                     </div>
                 </div>
-                <!-- Második lépés-->
+                <!-- Okmányadatok lépés-->
                 <div v-if="currentStep === 3" class="space-y-6 transition-all duration-1000">
                     <div class="bg-gradient-to-r from-lime-800/40 to-transparent p-4 rounded-lg backdrop-blur-sm">
                         <h3 class="text-2xl font-bold text-lime-100 mb-6 border-l-4 border-yellow-400 pl-4">
@@ -116,7 +118,7 @@
                     </div>
                 </div>
 
-                <!-- Harmadik lépés-->
+                <!-- Profil lépés-->
                 <div v-if="currentStep === 4" class="space-y-6 transition-all duration-1000">
                     <div class="bg-gradient-to-r from-lime-800/40 to-transparent p-4 rounded-lg backdrop-blur-sm">
                         <h3 class="text-2xl font-bold text-lime-100 mb-6 border-l-4 border-yellow-400 pl-4">
