@@ -1,11 +1,11 @@
 <template>
-    <div class="container mx-auto">
+    <div class="container mx-auto w-4/5">
         <div class="col w-3/4 -mb-10 z-5 mx-auto">
-            <img src="@assets/img/BaseEmail/email_logo_PWG.png" class="opacity-80">
+            <img src="@assets/img/BaseEmail/email_logo_PWG.png" class="opacity-80 w-full">
         </div>
         <div
             class="col text-white bg-sky-800 bg-opacity-50 border-8 rounded-xl border-sky-900 py-6 px-10 w-3/4 mx-auto text-justify">
-            <p class="mb-3 text-xl text-lime-400 font-bold">Kedves {{ fee.person }}!</p>
+            <p class="mb-3 text-2xl text-white font-bold italic">Kedves {{ fee.person }}!</p>
             <div class="border-solid border-4 rounded-md border-lime-600 p-5 my-4">
                 <p class="my-3 leading-7">
                     <b>Tájékoztatunk</b>, hogy a(z) <b>{{ fee.plate }}</b> rendszámú <b>{{ fee.rent_start }}</b>-kor
@@ -89,3 +89,15 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.container {
+    background: linear-gradient(to bottom,
+            rgba(25, 126, 0, .8) 0%,
+            rgba(57, 154, 33, .75) 35%,
+            rgba(91, 185, 68, .7) 70%,
+            rgba(101, 163, 13, .65) 100%);
+    padding: 2rem 0;
+    border-radius: 1rem;
+}
+</style>

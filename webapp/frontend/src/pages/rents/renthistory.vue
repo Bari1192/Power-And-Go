@@ -1,12 +1,12 @@
 <template>
     <BaseLayout>
-        <div class="py-20">
-            <div class="mx-auto space-x-8 text-center mb-6">
+        <div class="container mx-auto py-20 min-h-screen">
+            <div class="mx-auto space-x-8 text-center mb-6 ">
                 <button @click="ChargeFines" class="switch-button">Töltési Büntetések</button>
                 <button @click="RentSummary" class="switch-button">Bérlés Összesítők</button>
             </div>
 
-            <div v-if="showChargeFines">
+            <div v-if="showChargeFines" class="pt-8">
                 <Lapozo :items="fees" :itemsPerPage="5" ref="lapozo">
                     <template v-slot:default="{ items }">
                         <transition-group :name="lapozo?.transitionDirection" tag="div">
@@ -83,8 +83,10 @@ export default {
 </script>
 
 <style scoped>
+
 .switch-button {
-    @apply cursor-pointer mx-2 text-lg focus:outline-none text-white focus:ring-4 focus:ring-sky-700 font-medium rounded-lg px-5 py-2.5 bg-sky-600 hover:bg-sky-700;
+    @apply cursor-pointer mx-2 text-lg text-lime-50 font-medium rounded-lg px-5 
+    py-2.5 bg-lime-600 hover:bg-lime-700/90 border-2 border-lime-800 transition-colors ease-in-out duration-200;
 }
 
 .forward-enter-active,

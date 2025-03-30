@@ -1,10 +1,11 @@
 <template>
-    <div class="container mx-auto">
+    <div class="container mx-auto w-4/5">
         <div class="col w-3/4 -mb-10 z-5 mx-auto">
             <img src="@assets/img/BaseEmail/email_logo_PWG.png" class="opacity-80">
         </div>
-        <div class="col text-white bg-sky-800 bg-opacity-50 border-8 rounded-xl border-sky-900 py-6 px-10 w-3/4 mx-auto text-justify">
-            <p class="mb-3 text-xl text-lime-400 font-bold">Kedves {{ rent.person }}!</p>
+        <div
+            class="col text-white bg-sky-800 bg-opacity-50 border-8 rounded-xl border-sky-900 py-6 px-10 w-3/4 mx-auto text-justify">
+            <p class="mb-3 text-2xl text-white font-bold italic">Kedves {{ rent.person }}!</p>
             <p class="my-3 font-bold">Köszönjük, hogy a PowerAndGo e-carsharinget választottad!</p>
 
             <div class="border-solid border-4 rounded-md border-lime-600 p-3 my-4">
@@ -18,7 +19,7 @@
                     és
                     <b>{{ formatTime(rent.driving_minutes) }}</b> vezettél, illetve
                     <b> {{ formatTime(rent.parking_minutes) }}</b> parkoltál.
-                
+
                 <p v-if="rent.usedCredits">
                     <br>A bérléshez az alábbi kuponokat, krediteket váltottad be:
                 </p>
@@ -49,7 +50,7 @@
                     tudsz tájékozódni.
                 </p>
             </div>
-            <div v-else> 
+            <div v-else>
                 <p>
                     Bérlésed alatt <b>{{ rent.charged_kw }} kWh-t</b> töltöttél az autóba más szolgáltató
                     töltőoszlopán,
@@ -97,3 +98,14 @@ export default {
     }
 }
 </script>
+<style scoped>
+.container {
+    background: linear-gradient(to bottom,
+            rgba(25, 126, 0, .8) 0%,
+            rgba(57, 154, 33, .75) 35%,
+            rgba(91, 185, 68, .7) 70%,
+            rgba(101, 163, 13, .65) 100%);
+    padding: 2rem 0;
+    border-radius: 1rem;
+}
+</style>
