@@ -26,6 +26,7 @@ class StoreUserRequest extends FormRequest
             'bonus_minutes' => ['required', 'integer', 'min:0'],
             'driving_minutes' => ['required', 'integer', 'min:0'],
             'contributions' => ['required', 'integer', 'min:0', 'max:100000'],
+            'role' => [],
         ];
     }
 }

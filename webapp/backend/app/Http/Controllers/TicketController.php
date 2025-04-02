@@ -5,20 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Http\Resources\TicketResource;
-use App\Models\CarStatus;
 use App\Models\Ticket;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
-use function PHPUnit\Framework\isEmpty;
 
 class TicketController extends Controller
 {
     public function index(): JsonResource
     {
-        $tickets = Ticket::with('status')->get();
+        $tickets = Ticket::with('status')->orderBy('car_id')->get();
         return TicketResource::collection($tickets);
     }
 

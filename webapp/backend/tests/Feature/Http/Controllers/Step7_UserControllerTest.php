@@ -10,13 +10,40 @@ use Tests\TestCase;
 class Step7_UserControllerTest extends TestCase
 {
     use DatabaseTransactions;
+
     public function test_can_get_all_user_data()
     {
-        $response = $this->get('/api/users');
-        $response->assertStatus(200);
+        $registerResponse = $this->post('/api/register', [
+            "person_password" => "12345678",
+            "id_card" => "XXX99999CD",
+            "driving_license" => "DXR99999",
+            "license_start_date" => "2024-01-01",
+            "license_end_date" => "2034-01-01",
+            "firstname" => "asd",
+            "lastname" => "asd",
+            "birth_date" => "1990-01-01",
+            "phone" => "+36999888999",
+            "email" => "valami123@gmail.com",
+            "user_name" => "tesztesetKetto",
+            "pin" => "1234",
+            "role" => "admin",
+            "sub_id" => 1
+        ]);
+        $loginResponse = $this->post('/api/authenticatelogin', [
+            'email' => "valami123@gmail.com",
+            'password' => "12345678"
+        ]);
+        $token = $loginResponse->json('data.token');
 
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json'
+        ])->get('/api/users');
+    
+        $response->assertStatus(200);
+        
         $data = $response->json('data');
-        $response = $this->assertNotEmpty($data);
+        $this->assertNotEmpty($data);
     }
 
     public function test_cannot_create_user_without_existing_person()

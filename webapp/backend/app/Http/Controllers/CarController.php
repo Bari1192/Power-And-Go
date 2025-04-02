@@ -4,19 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
-use App\Http\Resources\BillResource;
 use App\Http\Resources\CarResource;
 use App\Http\Resources\CarWithFinesResource;
 use App\Http\Resources\CarWithUsersResource;
 use App\Http\Resources\TicketResource;
-use App\Models\Bill;
 use App\Models\Car;
 use App\Models\Ticket;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
-
-use function PHPUnit\Framework\isEmpty;
 
 class CarController extends Controller
 {
@@ -51,9 +46,9 @@ class CarController extends Controller
         return ($car->delete()) ? response()->noContent() : abort(500);
     }
 
+    
+    
     ###     Egyedi kérések     ###
-
-
     public function filterCarFees(Car $car): CarWithFinesResource
     {
         $car->load(['bills' => function ($query) {
@@ -66,13 +61,8 @@ class CarController extends Controller
     {
         $tickets = Ticket::with('status')
             ->where('car_id', $car->id)
+            ->orderByDesc('id')
             ->get();
-
-        if ($tickets->count() === 0) {
-            return response()->json([
-                "message" => "Tickets not found."
-            ], 404);
-        }
         return TicketResource::collection($tickets);
     }
     public function carWithRentHistory(Car $car): JsonResource
@@ -83,18 +73,15 @@ class CarController extends Controller
            
         return new CarWithUsersResource($car);
     }
+    
     ## Utolsó ticket lekérjük az autó ID alapján, státusz szöveggel.
     public function carLastTicketDescription(Car $car)
     {
-        $ticket = Ticket::with('status')
-            ->where('car_id', $car->id)
-            ->latest()
-            ->first();
-        if (!$ticket) {
-            return response()->json([
-                "message" => "Ticket Description not found."
-            ], 404);  // 404-es státuszkód
-        }
-        return new TicketResource($ticket);
+        $tickets = Ticket::with('status')
+        ->where('car_id', $car->id)
+        ->orderByDesc('id')
+        ->take(1)
+        ->get();
+    return TicketResource::collection($tickets);
     }
 }

@@ -39,18 +39,22 @@
                         </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <FormKit type="text" name="lastname" v-model="formData.lastname" label="Vezetéknév"
-                                placeholder="Adja meg vezetéknevét" validation="" :validation-messages="{}"
-                                :classes="formClasses" />
+                                placeholder="Adja meg vezetéknevét" validation="requiered" :classes="formClasses" />
 
                             <FormKit type="text" name="firstname" v-model="formData.firstname" label="Keresztnév"
-                                placeholder="Adja meg keresztnevét" validation="" :validation-messages="{}"
-                                :classes="formClasses" />
+                                placeholder="Adja meg keresztnevét" validation="requiered" :classes="formClasses" />
 
-                            <FormKit type="date" name="birth_date" v-model="formData.birth_date" label="Születési dátum"
-                                validation="" :validation-messages="{}" :classes="formClasses" />
+                            <div class="space-y-2">
+                                <label class="block text-lime-100 text-lg font-semibold pl-2 mb-2">Születési
+                                    dátum</label>
+                                <input type="date" id="birthdate" :value="formData.birth_date"
+                                    @change="handleDateChange"
+                                    class="w-full text-lime-700 font-semibold px-4 py-3 rounded-lg bg-lime-100/90 border border-lime-300/30 placeholder-lime-700/50 focus:ring-2 focus:ring-yellow-400/50 focus:border-transparent transition duration-200"
+                                    required />
+                            </div>
 
                             <FormKit type="tel" name="phone" v-model="formData.phone" label="Telefonszám"
-                                placeholder="+36301234567" validation="" :validation-messages="{
+                                placeholder="+36301234567" validation="requiered" :validation-messages="{
                                     matches: 'Érvénytelen telefonszám formátum'
                                 }" :classes="formClasses" />
                         </div>
@@ -71,11 +75,11 @@
                         @all-documents-uploaded="handleAllDocumentsUploaded" />
 
                     <div class="flex justify-center space-x-4 pt-6">
-                        <button v-if="currentStep > 1 && areAllDocumentsUploaded" @click.prevent="prevStep"
+                        <button v-if="currentStep > 1 && areAllDocumentsUploaded" @click="prevStep()"
                             class="px-8 py-3 bg-lime-800 text-lime-100 rounded-lg hover:bg-lime-900 transform hover:-translate-y-1 transition-all duration-200 shadow-lg hover:shadow-lime-900/50">
                             Vissza
                         </button>
-                        <button v-if="areAllDocumentsUploaded" @click.prevent="nextStep"
+                        <button v-if="areAllDocumentsUploaded" @click="nextStep()"
                             class="px-8 py-3 bg-yellow-500 text-lime-900 rounded-lg hover:bg-yellow-600 transform hover:-translate-y-1 transition-all duration-200 shadow-lg hover:shadow-yellow-500/50">
                             Következő
                         </button>
@@ -271,11 +275,11 @@ input:focus {
 <script setup>
 import BaseLayout from '@/layouts/BaseLayout.vue';
 import BaseUpload from '@/layouts/uploadfiles/BaseUpload.vue';
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, watch, computed } from 'vue';
 import { http } from '@/utils/http.mjs';
 import { toast } from 'vue3-toastify';
 
-const steps = ['Személyes adatok', 'Okmány fényképek', 'Okmányadatok','Profil', 'Véglegesítés'];
+const steps = ['Személyes adatok', 'Okmány fényképek', 'Okmányadatok', 'Profil', 'Véglegesítés'];
 const currentStep = ref(1);
 const showNextButton = ref(false);
 
@@ -305,12 +309,25 @@ const formClasses = {
     label: 'block text-lime-100 text-lg font-semibold pl-2 mb-2',
     message: 'text-yellow-300 text-sm mt-1'
 };
+const handleDateChange = (event) => {
+    const value = event.target.value;
+    console.log('Selected date before update:', value);
+    formData.birth_date = value;
+    console.log('formData after update:', formData.birth_date);
+};
+watch(() => formData.birth_date, (newValue, oldValue) => {
+    console.log('Birth date changed:', {newValue, oldValue});
+});
 const validateStep = (step) => {
     switch (step) {
         case 1:
-            setTimeout(() => { }, 1000);
-            return formData.lastname && formData.firstname &&
-                formData.birth_date && formData.phone;
+        const isValid = Boolean(
+                formData.lastname &&
+                formData.firstname &&
+                formData.birth_date &&
+                formData.phone
+            );
+            return isValid;
         case 2:
             setTimeout(() => { }, 1000);
             return true;
@@ -330,10 +347,16 @@ const validateStep = (step) => {
 const nextStep = () => {
     if (validateStep(currentStep.value)) {
         currentStep.value++;
-        setTimeout(() => { }, 5000);
-
+        return currentStep.value;
     } else {
-        toast.error('Kérem töltse ki az összes kötelező mezőt!');
+        toast.error('Kérem töltse ki megfelelően az összes mezőt!', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+        });
     }
 };
 const prevStep = () => {

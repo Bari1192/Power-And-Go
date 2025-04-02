@@ -23,6 +23,7 @@ class SystemDefaultTest extends TestCase
             "email" => "asd@gmail.com",
             "user_name" => "teszteset",
             "pin" => "1234",
+            "role"=>"admin",
             "sub_id" => 1
         ]);
         $response->assertStatus(200);

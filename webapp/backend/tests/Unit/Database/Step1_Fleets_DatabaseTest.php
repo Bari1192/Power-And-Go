@@ -75,9 +75,9 @@ class Step1_Fleets_DatabaseTest extends TestCase
         $dataMinLenght = [
             'manufacturer' => str_repeat('L', 2),
             'carmodel' => str_repeat('C', 2),
-            'driving_range' => 100,
+            'driving_range' => 125,
             'motor_power' => 18,
-            'top_speed' => 100,
+            'top_speed' => 130,
             'tire_size' => '165|65-R10',
         ];
 

@@ -26,6 +26,7 @@ export const ToastService = {
       autoClose: false,
       closeOnClick: false,
       draggable: false,
+      type:toast.TYPE.INFO,
     });
   },
   updateToast(toastId, options) {

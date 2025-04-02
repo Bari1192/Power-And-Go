@@ -29,6 +29,7 @@ class User extends Model implements AuthenticatableContract
         'pin',
         'password_2_4',
         'user_name',
+        'role',
         'plant_tree',
         'vip_discount',
         'bonus_min_exp',

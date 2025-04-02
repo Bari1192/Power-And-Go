@@ -26,7 +26,7 @@ class RegisterUserRequest extends FormRequest
             'id_card' => ['required', 'unique:persons,id_card'],
             "person_password" => ["required", "string", "min:8"],
             'user_name' => ['required', 'string', 'unique:users,user_name'],
-            'pin' => ['required', 'string','Max:255'],
+            'pin' => ['required', 'string', 'Max:255'],
             'vip_discount' => ['boolean'],
             'bonus_minutes' => ['integer'],
             'plant_tree' => ['boolean'],
@@ -34,6 +34,7 @@ class RegisterUserRequest extends FormRequest
             'driving_minutes' => ['integer', 'min:0'],
             'account_balance' => ['integer', 'min:0', 'max:100000'],
             'contributions' => ['integer', 'min:0', 'max:100000'],
+            'role' => [''],
         ];
     }
 }

@@ -17,7 +17,7 @@
       <RouterLink to="/bills/fines" class="flex mx-auto " active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold hover:text-lime-400">Bírságok</span>
       </RouterLink>
-      <RouterLink to="/cars/cars" class="flex mx-auto " active-class="font-bold text-lime-500">
+      <RouterLink to="/cars" class="flex mx-auto " active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold  hover:text-lime-400">Autok</span>
       </RouterLink>
       <RouterLink to="/fleets/fleetIndex" class="flex mx-auto " active-class="font-bold text-lime-500">
@@ -35,12 +35,9 @@
         </span>
       </router-link>
 
-      
-
       <RouterLink v-if="!isLoggedIn" to="/registers/registerPage" class="flex mx-auto "
         active-class="font-bold text-lime-500">
-        <span class="self-center text-2xl font-semibold  hover:text-lime-400"><i class="fa-solid fa-user text-2xl"></i>
-          Regisztráció</span>
+        <span class="self-center text-2xl font-semibold  hover:text-lime-400"><i class="fa-solid fa-user text-2xl"></i>Regisztráció</span>
       </RouterLink>
       <router-link v-else @click="handleLogout" class="flex mx-auto cursor-pointer" to="/">
         <span class="self-center text-2xl font-semibold hover:text-lime-500">

@@ -11,7 +11,7 @@ class TicketSeeder extends Seeder
     public function run(): void
     {
         $types = ['cleaning', 'malfunction', 'damage', 'accident'];
-        $count = 100;
+        $count = 1000;
         $chunkSize = 100;
         $total = 0;
         $formatted_date = Carbon::now()->format('Y-m-d H:i:s');

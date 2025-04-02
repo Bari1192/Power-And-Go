@@ -1,15 +1,14 @@
 <template>
-    <BaseHeader />
-    <div class="custom-background-third bg-opacity-25">
-
-        <main class="container min-w-full h-h-full mx-auto ">
-            <slot />
-        </main>
-
-        <hullamInverz />
-
+    <div>
+        <BaseHeader />
+        <div class="custom-background-third bg-opacity-25">
+            <main class="container min-w-full h-h-full mx-auto ">
+                <slot />
+            </main>
+            <hullamInverz />
+        </div>
+        <BaseFooter />
     </div>
-    <BaseFooter />
 </template>
 
 <script>

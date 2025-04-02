@@ -38,6 +38,7 @@ class RegisterController extends Controller
                 'password_2_4' => $data['pin'][1] . $data['pin'][3],
                 'account_balance' => $data['account_balance'] ?? 0,
                 'sub_id' => $data['sub_id'] ?? 1,
+                'role'=>$data['role'],  // Ezt majd ki kell venni, mert így mindenki ADMIN lesz! [Tesztre van!]
             ]);
             DB::commit(); # NE FELEDD!
 
