@@ -1,6 +1,7 @@
 <template>
   <BaseLayout>
-    <div v-if="car" class="container p-5 rounded-2xl bg-sky-700 mt-20 mb-40 w-full sm:w-11/12 lg:w-3/5 mx-auto">
+    <div v-if="car" class="container p-8 rounded-2xl bg-sky-700 shadow-2xl shadow-lime-800 mt-20 mb-40 w-full sm:w-11/12 
+    lg:w-3/5 mx-auto border-4 border-lime-200 border-opacity-35">
       <!-- Fejléc rész -->
       <div
         class="m-auto w-4/5 py-6 d-flex justify-center my-10 sm:w-full border-4 rounded-2xl border-sky-300 dark:font-semibold shadow-md shadow-sky-400">
@@ -41,7 +42,7 @@
       </div>
 
       <!-- Jármű adatok -->
-      <h1 class="text-5xl font-bold text-sky-100 italic mb-4" :style="{
+      <h1 class="text-5xl font-bold text-sky-50 italic mb-4" :style="{
         marginTop: accidentReport ? '6rem' : (demageReport ? '6rem' : '3rem')
       }">
         Jármű adatai
@@ -57,7 +58,7 @@
       <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
 
       <!-- Jármű adatok részletek -->
-      <transition name="fade-slide transition-all ease-in-out duration-300">
+      <transition name="fade-slide">
         <div v-if="carOpen" class="grid grid-cols-1 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 lg:gap-6 gap-2">
           <BaseCard :title="'Utolsó rögzített bejegyzés'" :text="latestTicket?.status_descrip" />
           <BaseCard :title="'Becsült megtehető távolság'" :text="`${car.estimated_range} km-re elegendő töltés.`" />
@@ -73,7 +74,7 @@
       <div ref="adatokAlja"></div>
 
       <!-- Bejegyzések -->
-      <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4">
+      <h1 class="text-5xl font-bold text-sky-50 italic mt-10 mb-4">
         Bejegyzések
         <button @click="noteDetails" class="flex items-center justify-center font-bold rounded-full"
           style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;"
@@ -91,38 +92,42 @@
       </div>
 
       <transition name="fade-slide">
-        <div v-if="noteOpen && rentFees?.length">
-          <BaseCard v-for="ticket in rentFees" :key="ticket.id" class="min-h-fit text-5xl mb-8"
+        <div v-if="noteOpen && rentFees?.length" class="lg:w-9/12 lg:mx-auto">
+          <BaseCarTicketCard v-for="ticket in rentFees" :key="ticket.id" class="text-5xl mb-8"
             :title="`Bejegyzés azonosítója: ${ticket.id}`">
             <div class="grid grid-cols-3 gap-4 my-4">
               <!-- Első oszlop -->
               <div class="col-span-1 text-white">
                 <h2 class="font-semibold">Bejelentés kódja:</h2>
-                <div class="w-2/5 border-b-4 border-lime-400 rounded-xl opacity-50"></div>
-                <p class="mt-1 mb-3">{{ ticket.status_id }}</p>
+                <div class="w-[160px] border-b-4 border-lime-400/90 rounded-xl mr-20"></div>
+                <div class="bg-amber-100 w-fit h-fit px-2 rounded-full">
+                  <p class="my-2 mb-3 text-red-600">{{ ticket.status_id }}</p>
+                </div>
 
                 <h2 class="font-semibold">Bejelentés ideje:</h2>
-                <div class="w-2/5 border-b-4 border-lime-400 rounded-xl opacity-50"></div>
-                <p class="mt-1 mb-3">{{ ticket.created_at }}</p>
+                <div class="w-[150px] border-b-4 border-lime-400 rounded-xl"></div>
+                <div class="bg-amber-200 w-fit h-fit rounded-md">
+                  <p class="m-3 text-red-700/85">{{ ticket.created_at }}</p>
+                </div>
               </div>
               <!--Második-->
               <div class="col-span-2 text-white bg-slate-700 rounded-2xl p-4">
-                <h2 class="font-semibold text-lime-400 underline underline-offset-2">
+                <h2 class="font-semibold text-lime-400 underline underline-offset-4">
                   A bejelentés tárgya:
                 </h2>
-                <p class="mt-1 mb-3">{{ ticket.status_descrip }}</p>
-                <h2 class="font-semibold text-lime-400 underline underline-offset-2">
+                <p class="mt-1 pl-1 mb-3">{{ ticket.status_descrip }}</p>
+                <h2 class="font-semibold text-lime-400 underline underline-offset-4">
                   A bejelentés részletei:
                 </h2>
-                <p class="mt-1 mb-3">{{ ticket.admin_description }}</p>
+                <p class="mt-1 pl-1 mb-3">{{ ticket.admin_description }}</p>
               </div>
             </div>
-          </BaseCard>
+          </BaseCarTicketCard>
         </div>
       </transition>
       <div ref="noteBottom"></div>
 
-      <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4">
+      <h1 class="text-5xl font-bold text-sky-50 italic mt-10 mb-4">
         Bérlési előzmények
         <button @click="rentHistoryDetails"
           class="flex items-center justify-center bg-indigo-500 text-white font-bold rounded-full hover:bg-indigo-700"
@@ -166,56 +171,86 @@
       </transition>
       <div ref="rentHistoryBottom"></div>
 
-      <h1 class="text-5xl font-bold text-sky-100 italic mt-10 mb-4">
-        Büntetések
-        <button @click="rentBillDetails" :disabled="!rentBillFees?.length"
-          class="flex items-center justify-center font-bold rounded-full"
-          :class="rentBillFees?.length ? 'bg-indigo-500 hover:bg-indigo-700 text-white' : 'bg-gray-500 text-gray-400 cursor-not-allowed'"
-          :style="{
-            transform: rentBillOpen ? 'rotate(90deg)' : 'rotate(-90deg)',
-            backgroundColor: rentBillFees?.length ? '#4F46E5' : '#6B7280',
-            color: rentBillFees?.length ? 'white' : '#a3a3a3',
-            cursor: rentBillFees?.length ? 'pointer' : 'default'
-          }"
-          style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;">
-          +
-        </button>
-      </h1>
-      <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
-
-      <!-- Büntetések lista -->
-      <div v-if="!rentBillFees?.length">
-        <p class="text-gray-200 font-semibold italic px-2 text-lg">
-          Ehhez az autóhoz nem tartozik egyetlen bírság sem
-        </p>
+      <div v-if="!rentBillFees || rentBillFees.length === 0 || !rentBillFees.some(fine => fine.id && fine.total_cost)"
+        class="text-gray-200 font-semibold italic px-2 text-lg">
+        <h1 class="text-5xl font-bold text-sky-50 italic mt-10 mb-4">
+          Büntetések
+          <button disabled
+            class="flex items-center justify-center font-bold rounded-full bg-indigo-600  text-gray-400 cursor-not-allowed"
+            style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center;">
+            +
+          </button>
+        </h1>
+        <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
       </div>
 
-      <transition name="fade-slide">
-        <div v-if="rentBillOpen">
-          <div v-for="fine in rentBillFees" :key="fine.id">
-            <BaseCard class="cursor-pointer"
-              :class="rentBillDetailsStates[fine.id] ? 'min-h-full' : 'h-10 md:h-10 lg:h-14 xl:h-16'"
-              :title="fine.bill_type === 'charging_penalty' ? `Akkumulátor lemerítési & szállítási pótdíj - ${fine.total_cost}` : fine.bill_type"
-              @click="toggleBillDetails(fine.id)">
-              <div class="cursor-default grid grid-cols-3 gap-2 mx-1" v-if="rentBillDetailsStates[fine.id]">
-                <p><b>Számla sorszáma: </b><br><i class="text-lime-500">{{ fine.id }}</i></p>
-                <p class="text-center"><b>Kiállítva:</b><br><i class="text-lime-500">{{ fine.invoice_date }}</i></p>
-                <p class="text-right"><b>Bérlés kezdete:</b><br><i class="text-lime-500">{{ fine.rent_start }}</i></p>
-                <p><b>Összege:</b><br><i class="text-lime-500">{{ fine.total_cost }} Ft</i></p>
-                <p class="text-center"><b>Bérlés vége:</b><br><i class="text-lime-500">{{ fine.rent_close }} {{
-                  fine.rent_end_time }}</i></p>
-                <p class="text-right">
-                  <b>Számla állapota: </b>
-                  <span
-                    :style="fine.invoice_status === 'pending' ? 'color:orange; font-weight:bold;font-style:italic;' : ''">
-                    <br>{{ fine.invoice_status }}
-                  </span>
-                </p>
-              </div>
-            </BaseCard>
+      <div v-else>
+        <h1 class="text-5xl font-bold text-sky-50 italic mt-10 mb-4">
+          Büntetések
+          <button @click="rentBillDetails"
+            class="flex items-center justify-center font-bold rounded-full bg-indigo-500 hover:bg-indigo-700 text-white"
+            :style="{
+              transform: rentBillOpen ? 'rotate(90deg)' : 'rotate(-90deg)'
+            }"
+          style="width: 34px; height: 36px; font-size: 2.5rem; line-height: 100px; padding-bottom: 10px; border: none; display: inline-flex; align-items: center; justify-content: center; transition: transform 1s;">
+          +
+          </button>
+        </h1>
+
+        <div class="w-full mx-auto border-b-8 border-indigo-800 rounded-xl mb-6 opacity-60"></div>
+
+        <transition name="fade-slide">
+          <div v-if="rentBillOpen && rentBillFees?.length">
+            <div v-for="fine in rentBillFees" :key="fine.id">
+              <BaseFineCard class="cursor-pointer"
+                :title="fine.fine_types === 'charging_penalty' ? `Akkumulátor lemerítési & szállítási pótdíj - ${fine.total_cost}` : fine.bill_type"
+                @click="toggleBillDetails(fine.id)">
+                <template v-if="rentBillDetailsStates[fine.id]">
+                  <div class="grid grid-cols-4 gap-4 min-h-[200px]">
+                    <div>
+                      <p class="pt-2 font-semibold">Számla sorszáma:</p>
+                      <i class="text-lime-400">{{ fine.id }}</i>
+                    </div>
+                    <div class="text-center">
+                      <p class="pt-2 font-semibold ">Kiállítva:</p>
+                      <i class="text-lime-400">{{ fine.invoice_date }}</i>
+                    </div>
+                    <div class="text-center">
+                      <p class="pt-2 font-semibold">Bérlés kezdete:</p>
+                      <i class="text-lime-400">{{ fine.rent_start }}</i>
+                    </div>
+                    <div class="text-center">
+                      <p class="pt-2 font-semibold">Összege:</p>
+                      <i class="text-lime-400">{{ fine.total_cost }} Ft</i>
+                    </div>
+                    <div>
+                      <p class="pt-2 font-semibold">Bérlés vége:</p>
+                      <i class="text-lime-400">{{ fine.rent_close }}</i>
+                    </div>
+                    <div class="text-center">
+                      <p class="pt-2 font-semibold">Értesítő email állapota:</p>
+                      <span :class="{
+                        'bg-amber-50 text-red-600 font-bold italic px-2 rounded-2xl': fine.email_sent === 'no',
+                        'bg-amber-50 text-lime-700 font-bold italic px-2 rounded-2xl': fine.email_sent === 'yes'
+                      }">
+                        {{ fine.email_sent === 'no' ? 'Nem lett elküldve' : 'Elküldve' }}
+                      </span>
+                    </div>
+                    <div class="text-center">
+                      <p class="pt-2 font-semibold">Személy neve:</p>
+                      <i class="text-lime-400">{{ fine.person }}</i>
+                    </div>
+                    <div class="text-center">
+                      <p class="pt-2 font-semibold">Felhasználó email:</p>
+                      <i class="text-lime-400">{{ fine.email }}</i>
+                    </div>
+                  </div>
+                </template>
+              </BaseFineCard>
+            </div>
           </div>
-        </div>
-      </transition>
+        </transition>
+      </div>
       <div ref="rentBillsBottom"></div>
     </div>
 
@@ -227,7 +262,9 @@
 </template>
 
 <script setup>
-import BaseCard from '@layouts/BaseCard.vue'
+import BaseCard from '@layouts/BaseCard.vue';
+import BaseCarTicketCard from '@layouts/BaseCarTicketCard.vue';
+import BaseFineCard from '@layouts/BaseFineCard.vue';
 import BaseLayout from "@layouts/BaseLayout.vue";
 import EupModel from "@layouts/carmodels/EupModel.vue";
 import CitigoModel from "@layouts/carmodels/CitigoModel.vue";
@@ -267,6 +304,7 @@ const carManualFines = ref(false);
 const rentBillDetailsStates = ref({});
 const isSubmitting = ref(false);
 
+
 const currentModel = computed(() => {
   const manufacturerAlapjanModel = {
     'VW': EupModel,
@@ -277,6 +315,7 @@ const currentModel = computed(() => {
   };
   return manufacturerAlapjanModel[car.value?.manufacturer] || null;
 });
+
 
 const formattedLastRent = computed(() => {
   const rentClose = carRentHistory.value?.renters?.[0]?.rent_close;
@@ -371,7 +410,6 @@ const rentHistoryDetails = () => {
 const rentBillDetails = () => {
   rentBillOpen.value = !rentBillOpen.value
 };
-
 onMounted(async () => {
   const carId = route.params.id
   if (carId) {

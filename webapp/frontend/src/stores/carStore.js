@@ -10,7 +10,7 @@ export const useCarStore = defineStore("cars", () => {
   const carAllTickets = ref([]);
   const carLatestTicket = ref(null);
   const carRentHistory = ref([]);
-  const carFees = ref([]);
+  const carFees = ref([null]);
   const isLoading = ref(false);
   const error = ref(null);
 
@@ -129,42 +129,31 @@ export const useCarStore = defineStore("cars", () => {
       isLoading.value = false;
     }
   }
-
-  async function getCarFees(id) {
-    isLoading.value = true;
-    error.value = null;
-    const toastId = ToastService.showLoading("Betöltés folyamatban...");
-
-    try {
-      const resp = await http.get(`/cars/${id}/fees`);
-      carFees.value = resp.data.data;
-      ToastService.updateToSuccess(toastId, "Sikeres betöltés!");
-    } catch (error) {
-      error.value = error.message;
-      ToastService.updateToError(toastId, "Hiba a lekérés közben!", error);
-    } finally {
-      isLoading.value = false;
-    }
-  }
   async function getCarDetails(id) {
     isLoading.value = true;
     error.value = null;
-    const toastId = ToastService.showLoading("Adatok szinkronizálása folyamatban...");
-    
+    const toastId = ToastService.showLoading(
+      "Adatok szinkronizálása folyamatban..."
+    );
+
     try {
       const responses = await Promise.all([
         http.get(`/cars/${id}`),
         http.get(`/cars/${id}/tickets`),
         http.get(`/cars/${id}/renthistory`),
-        http.get(`/cars/${id}/fees`)
+        http.get(`/cars/${id}/fees`),
       ]);
-      
+
       car.value = responses[0].data.data;
       carAllTickets.value = responses[1].data.data;
       carLatestTicket.value = carAllTickets.value[0] ?? null;
       carRentHistory.value = responses[2].data.data;
-      carFees.value = responses[3].data.data;
-      
+
+      const feesData = responses[3].data.data;
+      carFees.value = feesData ? Array.isArray(feesData) ? feesData : [feesData] : [];
+
+      console.log("Betöltött büntetések:", carFees.value);
+
       ToastService.updateToSuccess(toastId, "Sikeres szinkronizáció!");
     } catch (err) {
       console.error("Hiba adatok lekérése közben:", err);
@@ -175,7 +164,7 @@ export const useCarStore = defineStore("cars", () => {
     }
   }
 
-  // AD1 >> Return 
+  // AD1 >> Return
   return {
     // AD2 >> State
     cars,
@@ -186,7 +175,7 @@ export const useCarStore = defineStore("cars", () => {
     carFees,
     isLoading,
     error,
-    
+
     // AD3 >> Actions
     getCars,
     getCar,
@@ -195,7 +184,7 @@ export const useCarStore = defineStore("cars", () => {
     deleteCar,
     getCarTickets,
     getRenthistory,
-    getCarFees,
-    getCarDetails
+    // getCarFees,
+    getCarDetails,
   };
 });
