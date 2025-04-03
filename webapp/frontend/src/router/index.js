@@ -5,6 +5,7 @@ const routes = [
     path: '/cars',
     name: 'cars',
     component: () => import('@/pages/cars/cars.vue'),
+    props: true
   },
   {
     path: '/cars/:id',

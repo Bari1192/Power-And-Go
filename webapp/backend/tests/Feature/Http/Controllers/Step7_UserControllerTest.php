@@ -81,7 +81,7 @@ class Step7_UserControllerTest extends TestCase
         $pin = "9876";
         $response = $this->postJson('/api/users', [
             'person_id' => $person->id,
-            'user_name' => $person['firstname'] . $person['lastname'],
+            'user_name' => $person['firstname'] . $person['lastname']. fake()->regexify('[0-9]{5}'),
             'pin' => $pin,
             'password_2_4' => $pin[1] . $pin[3],
             'account_balance' => 0,

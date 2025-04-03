@@ -110,18 +110,38 @@ class Step5_CarControllerTest extends TestCase
     public function test_car_latest_ticket_description_text(): void
     {
         $car = Car::firstOrFail();
+
         $ticketData = [
             "car_id" => $car->id,
             "description" => "valahol ikszdé",
             "status_id" => 6
         ];
+
         $this->postJson("/api/tickets", $ticketData)
             ->assertStatus(201);
-        $response = $this->getJson("/api/cars/{$car->id}/description");
-        $response->assertStatus(200);
-        $response->assertJsonStructure(['data']);
-        $responseData = $response->json('data');
-        $this->assertEquals("valahol ikszdé", $responseData['admin_description']);
+
+        $response = $this->get("/api/cars/{$car->id}/description");
+
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [  // Ez jelzi, hogy a data egy tömb elemeket tartalmaz
+                    'id',
+                    'car_id',
+                    'status_id',
+                    'status_descrip',
+                    'created_at',
+                ]
+            ]
+        ]);
+
+        // A tömb első eleméből (data)
+        // abban lévő 'admin_desc kell!
+        $responseData = $response->json('data.0'); 
+
+        $this->assertEquals(
+            "Az autót tisztításra ki kell vonni a forgalomból.",
+            $responseData['status_descrip']
+        );
     }
 
     public function test_car_all_rent_history(): void
