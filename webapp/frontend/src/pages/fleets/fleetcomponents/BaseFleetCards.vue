@@ -37,31 +37,31 @@ import EditFleetCar from '@pages/fleets/fleetcomponents/EditFleetCar.vue';
 
 const props = defineProps({
     id: {
-        type: Number,
+        type: [String,Number],
         required: true
     },
     manufacturer: {
-        type: String,
+        type: [String,Number],
         required: true
     },
     carmodel: {
-        type: String,
+        type: [String,Number],
         required: true,
     },
     motor_power: {
-        type: Number,
+        type: [String,Number],
         required: true
     },
     top_speed: {
-        type: Number,
+        type: [String,Number],
         required: true
     },
     driving_range: {
-        type: Number,
+        type: [String,Number],
         required: true
     },
     tire_size: {
-        type: String,
+        type: [String,Number],
         required: true
     }
 });
@@ -96,7 +96,7 @@ const editFleet = () => {
 // funkció gombok (összes) || Módosítás, Törlés és Mentés 
 const saveChanges = (id, data) => {
     emit('update', id, data);
-    isEditing.value = true;
+    isEditing.value = false;
 }
 const cancelEdit = () => {
     isEditing.value = false;

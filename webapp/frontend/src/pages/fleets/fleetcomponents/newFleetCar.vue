@@ -23,7 +23,7 @@
             <div class="flex flex-wrap my-5">
                 <div class="w-full md:w-1/3 px-3">
                     <FormKit name="manufacturer" type="text" label="Gyártó neve" placeholder="például: VW, Skoda!"
-                        :validation="'required|alpha|length:2,40'" :validation-messages="{
+                        :validation="'required|length:2,40'" :validation-messages="{
                             alpha: 'Kizárólag betűket tartalmazhat!',
                             length: 'A szöveg 2-40 karakterig terjedhet!',
                             required: 'Kötelező kitölteni!'
@@ -32,7 +32,7 @@
                 </div>
                 <div class="w-full md:w-1/3 px-3">
                     <FormKit name="carmodel" type="text" label="Modell Típusa" placeholder="például: E-up!"
-                        :validation="'required|alpha|length:2,30'" :validation-messages="{
+                        :validation="'required|length:2,30'" :validation-messages="{
                             alpha: 'Kizárólag betűket tartalmazhat!',
                             length: 'A szöveg 2-40 karakter hosszú lehet!',
                             required: 'Kötelező kitölteni!'
@@ -56,7 +56,7 @@
                         :validation="'required|integer|min:100|max:300'" :validation-messages="{
                             required: 'Kötelező kitölteni!',
                             integer: 'Csak egész számot írhat be!',
-                            min: 'Minimum 100km/h-ás érték megadása szükséges!',
+                            min: 'Minimum 130km/h-ás érték megadása szükséges!',
                             max: 'Maximum 300 km/h-ás értéket írhatbe!'
                         }" label-class="block tracking-wider text-white text-lg font-semibold mb-2"
                         input-class="appearance-none block w-full bg-gray-100 text-lime-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
@@ -84,8 +84,7 @@
             </div>
 
             <div class="flex justify-center items-center align-middle bg-yellow-100/55 my-12 min-h-20 ">
-                <FormKit type="submit" label="Hozzáadás" id="addFleet" wrapper-class="w-full"
-                    input-class="tracking-[0.10em] text-lg bg-yellow-500 text-white font-semibold py-2
+                <FormKit type="submit" label="Hozzáadás" id="addFleet" wrapper-class="w-full" input-class="tracking-[0.10em] text-lg bg-yellow-500 text-white font-semibold py-2
                     px-12 border-b-4 border-b-yellow-50 rounded-lg transition-all duration-150 ease-in-out 
                     hover:bg-yellow-600 active:translate-y-[2px] active:border-b-2" />
             </div>
@@ -93,51 +92,49 @@
     </div>
 </template>
 
+<script setup>
 
-<script>
-import { http } from '@utils/http.mjs';
+import { ref } from 'vue';
+import { useFleetStore } from '@stores/FleetStore';
+import { storeToRefs } from 'pinia';
 
-export default {
-    data() {
-        return {
-            fleets: [],
-            submitted: false,
-        }
-    },
-    async mounted() {
-        try {
-            const resp = await http.get('/fleets');
-            this.fleets = resp.data.data;
-        } catch (error) {
-            console.error('Hiba történt az API hívás során:', error);
-        }
-    },
-    methods: {
-        async submitHandler(formValues) {
-            try {
-                await http.post('fleets/', {
-                    manufacturer: formValues.manufacturer,
-                    carmodel: formValues.carmodel,
-                    motor_power: formValues.motor_power,
-                    top_speed: formValues.top_speed,
-                    tire_size: formValues.tire_size,
-                    driving_range: formValues.driving_range,
-                });
-                this.submitted = true;
-            } catch (error) {
-                alert("Hiba! Nem sikerült elküldeni. Próbálja újra később!")
-            }
-        },
+const fleetStore = useFleetStore();
+const { fleets } = storeToRefs(fleetStore);
+const submitted = ref(false);
+
+
+const submitHandler = async (values) => {
+  try {
+    if (!values.manufacturer || !values.carmodel || !values.motor_power || 
+        !values.top_speed || !values.tire_size || !values.driving_range) {
+      console.error("Hiányzó mezők:", values);
+      return;
     }
+    
+    // Számszerű értékek átalakítása
+    const formattedValues = {
+      manufacturer: values.manufacturer,
+      carmodel: values.carmodel,
+      motor_power: Number(values.motor_power),
+      top_speed: Number(values.top_speed),
+      tire_size: values.tire_size,
+      driving_range: Number(values.driving_range),
+    };
+    await fleetStore.createFleet(formattedValues);
 
-}
-
+    submitted.value = true;
+    await fleetStore.getFleets();
+    setTimeout(() => {
+      submitted.value = false;
+    }, 3000);
+  } catch (error) {
+    console.error("Hiba történt az adatok mentése közben:", error);
+  }
+};
 </script>
 
 <style scoped>
-
 #bgcolor {
-    /* background-color: white; */
     background: linear-gradient(to bottom,
             rgba(25, 126, 0, .9) 0%,
             rgba(57, 154, 33, .85) 35%,
@@ -148,9 +145,9 @@ export default {
 :deep(.formkit-message[data-message-type="validation"]) {
     color: red;
     background-color: yellow;
-    max-width:fit-content ;
+    max-width: fit-content;
     letter-spacing: 1px;
-    padding:0 5px;
+    padding: 0 5px;
     border-radius: 5px;
     margin-top: 5px;
 }

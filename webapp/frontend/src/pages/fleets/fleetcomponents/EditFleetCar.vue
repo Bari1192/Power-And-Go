@@ -22,7 +22,7 @@
       </div>
       <div class="flex flex-col mt-4">
         <FormKit name="carmodel" type="text" label="Modell:" v-model=localData.carmodel
-          :validation="'required|alpha|length:2,30'" :validation-messages="{
+          :validation="'required|string|length:2,30'" :validation-messages="{
             alpha: 'Kizárólag betűket tartalmazhat!',
             length: 'A model neve 2 és 30 karakter között lehet!',
             required: 'Kötelező kitölteni!'
@@ -90,6 +90,7 @@ import BaseAcceptButton from '@layout/BaseAcceptButton.vue'
 import BaseDeclineButton from '@layout/BaseDeclineButton.vue'
 
 const localData = ref({});
+const submitted = ref(false);
 
 // mivel visszavárjuk a gyermek komponenstől a választ:
 const emit = defineEmits(['save', 'cancel']);
@@ -122,6 +123,15 @@ const onSave = () => {
 };
 const onCancel = () => {
   emit('cancel');
+};
+const submitHandler = (formData) => {
+  submitted.value = true;
+  emit('save', props.carId, formData);
+  
+  // 3 másodperc után visszaállítjuk a submitted értékét
+  setTimeout(() => {
+    submitted.value = false;
+  }, 3000);
 };
 </script>
 
