@@ -3,7 +3,7 @@
         transition-all duration-150 ease-in-out active:translate-y-[2px] 
         active:border-b-2  hover:bg-lime-500">
         <!-- Képek -->
-        <img class="object-cover w-64 h-32 ml-3 rounded-md"
+        <img class="object-cover max-w-[250px] max-h-[180px] ml-3 rounded-md"
             :src="`http://backend.vm1.test/storage/carsImages/${id}.png`"
             :alt="manufacturer + ' ' + carmodel + ' képe'">
         <!-- Leírások -->

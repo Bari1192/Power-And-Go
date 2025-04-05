@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { http } from "@utils/http.mjs";
 import { ToastService } from "@layouts/toasts/ToastService.js";
 
@@ -13,6 +13,10 @@ export const useCarStore = defineStore("cars", () => {
   const carFees = ref([null]);
   const isLoading = ref(false);
   const error = ref(null);
+
+  const getCarGroupCountByMotorPower = (motorpower) => {
+    return cars.value.filter((car) => car.motor_power === motorpower).length;
+  };
 
   async function getCars() {
     isLoading.value = true;
@@ -150,7 +154,11 @@ export const useCarStore = defineStore("cars", () => {
       carRentHistory.value = responses[2].data.data;
 
       const feesData = responses[3].data.data;
-      carFees.value = feesData ? Array.isArray(feesData) ? feesData : [feesData] : [];
+      carFees.value = feesData
+        ? Array.isArray(feesData)
+          ? feesData
+          : [feesData]
+        : [];
 
       console.log("Betöltött büntetések:", carFees.value);
 
@@ -184,7 +192,8 @@ export const useCarStore = defineStore("cars", () => {
     deleteCar,
     getCarTickets,
     getRenthistory,
-    // getCarFees,
     getCarDetails,
+
+    getCarGroupCountByMotorPower,
   };
 });

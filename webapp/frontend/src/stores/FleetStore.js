@@ -65,7 +65,7 @@ export const useFleetStore = defineStore("fleets", () => {
   async function deleteFleet(id) {
     error.value = null;
     try {
-      const resp = await http.delete(`/fleets/${id}`);
+      await http.delete(`/fleets/${id}`);
       const idX = this.fleets.findIndex((d) => d.id === id);
       this.fleets.splice(idX, 1);
       ToastService.updateToSuccess("Sikeres törlés!");
