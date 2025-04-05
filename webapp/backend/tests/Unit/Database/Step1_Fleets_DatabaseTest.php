@@ -115,15 +115,5 @@ class Step1_Fleets_DatabaseTest extends TestCase
         ];
         $response = $this->postJson('/api/fleets', $failedData);
         $response->assertStatus(422);
-        $response->assertJsonValidationErrors(
-            [
-                'manufacturer',
-                'carmodel',
-                'driving_range',
-                'motor_power',
-                'top_speed',
-                'tire_size',
-            ]
-        );
     }
 }

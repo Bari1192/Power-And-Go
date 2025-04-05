@@ -49,6 +49,11 @@ const routes = [
     name: 'Registerpage',
     component: () => import('@/pages/registers/registerPage.vue'),
   },
+  {
+    path: '/users',
+    name: 'userspage',
+    component: () => import('@/pages/userprofile/users.vue'),
+  },
 ];
 export const router = createRouter({
   history: createWebHistory(),

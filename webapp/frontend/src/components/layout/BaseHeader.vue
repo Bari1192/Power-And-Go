@@ -23,6 +23,9 @@
       <RouterLink to="/fleets/fleetIndex" class="flex mx-auto " active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold  hover:text-lime-400">Flotta</span>
       </RouterLink>
+      <RouterLink to="/users" class="flex mx-auto " active-class="font-bold text-lime-500">
+        <span class="self-center text-2xl font-semibold  hover:text-lime-400">Felhasználók</span>
+      </RouterLink>
       <RouterLink v-if="!isLoggedIn" to="/logins/adminPage" class="flex mx-auto "
         active-class="font-bold text-lime-500">
         <span class="self-center text-2xl font-semibold  hover:text-lime-500">
@@ -53,6 +56,7 @@
       <div class="w-full md:block md:w-auto" :class="{ hidden: !menuOpen }">
         <ul class="menu">
           <li class="menuitem">
+            <!-- Ide majd a telefonos NAVBAR -->
             <!-- <RouterLink to="#">1. oldal</RouterLink> -->
           </li>
         </ul>
