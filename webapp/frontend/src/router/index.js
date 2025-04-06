@@ -50,9 +50,9 @@ const routes = [
     component: () => import("@pages/registers/registerPage.vue"),
   },
   {
-    path: "/users",
-    name: "userspage",
-    component: () => import("@pages/userprofile/users.vue"),
+    path: "/orders",
+    name: "orders",
+    component: () => import("@pages/preorders/OrderIndex.vue"),
   },
 ];
 export const router = createRouter({

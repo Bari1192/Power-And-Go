@@ -7,12 +7,12 @@ export const useUserStore = defineStore("users", () => {
   const users = ref([]);
   const user = ref(null);
   const error = ref(null);
+  const userSearch = ref([]);
+  const basedOnSearchLetters = ref(null);
 
   async function getUsers() {
     error.value = null;
-    const toastId = ToastService.showLoading(
-      "Felhasználók lekérdezése..."
-    );
+    const toastId = ToastService.showLoading("Felhasználók lekérdezése...");
     try {
       const resp = await http.get("/users");
       users.value = resp.data.data;
@@ -37,11 +37,32 @@ export const useUserStore = defineStore("users", () => {
     }
   }
 
+  const startSearchBy = (parameters) => {
+    basedOnSearchLetters.value = parameters;
+    applyFilter();
+  };
+
+  const applyFilter = () => {
+    if (!basedOnSearchLetters) {
+      userSearch.value = users.value;
+      return;
+    }
+    const userTypedStringSetToLowerCase = basedOnSearchLetters.value.toLowerCase();
+    userSearch.value = users.value.filter((user) => {
+      const username = user.user_name.toLowerCase();
+      return username.includes(userTypedStringSetToLowerCase);
+    });
+  };
+
   return {
     users,
     user,
+    userSearch,
+    basedOnSearchLetters,
 
     getUsers,
     getUser,
+    startSearchBy,
+    applyFilter,
   };
 });

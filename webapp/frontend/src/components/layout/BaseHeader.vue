@@ -36,8 +36,8 @@
           <span class="self-center text-xl font-semibold hover:text-lime-400">Flotta</span>
         </RouterLink>
 
-        <RouterLink to="/users" class="px-3 py-2" :class="getActiveClass('/users')">
-          <span class="self-center text-xl font-semibold hover:text-lime-400">Felhasználók</span>
+        <RouterLink to="/orders" class="px-3 py-2" :class="getActiveClass('/users')">
+          <span class="self-center text-xl font-semibold hover:text-lime-400">Előrendelés</span>
         </RouterLink>
       </div>
 
@@ -113,9 +113,9 @@
         </li>
 
         <li>
-          <RouterLink to="/users" class="block py-2 px-3 w-full hover:bg-sky-800 rounded"
+          <RouterLink to="/orders" class="block py-2 px-3 w-full hover:bg-sky-800 rounded"
             :class="getActiveClass('/users')">
-            <span class="font-semibold">Felhasználók</span>
+            <span class="font-semibold">Előrendelés</span>
           </RouterLink>
         </li>
 
