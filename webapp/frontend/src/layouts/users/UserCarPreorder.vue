@@ -1,6 +1,6 @@
 <template>
     <div class="hover:transition-transform hover:ease-in hover:scale-105 hover:duration-200">
-        <div class="flex flex-col sm:flex-row bg-lime-500/80 border border-gray-200 rounded-xl shadow-lg 
+        <div class="flex flex-col sm:flex-row bg-lime-500/80 border-2 border-gray-500/40 border-dotted rounded-xl shadow-xl 
       transition-all duration-200 ease-in-out hover:bg-emerald-300/70 active:translate-y-[2px] active:border-b-2
       min-h-[200px] sm:h-[170px] w-full overflow-hidden cursor-pointer">
 
@@ -13,7 +13,7 @@
             </div>
 
             <!-- Leírások - 2/3 szélesség nagy képernyőn -->
-            <div class="w-full sm:w-1/2 p-2 flex flex-col justify-between">
+            <div class="w-full sm:w-1/2 p-2 flex flex-col justify-between  ">
                 <div>
                     <h5 class="text-lg xl:text-xl tracking-tight text-white text-center font-medium">
                         {{ manufacturer + ' ' + carmodel }}
@@ -21,7 +21,7 @@
                     <ul class="my-2 font-base text-sm text-nowrap lg:text-wrap text-lime-800/80">
                         <li class="mx-auto pb-2">
                             <i class="fa-solid fa-road xl:pl-3 xl:pr-1 text-lime-800/90"></i> Akár <b>{{ driving_range
-                                }}</b> km
+                            }}</b> km
                             hatótáv.
                         </li>
                         <li class="mx-auto pb-2">
@@ -39,10 +39,9 @@
                 </div>
 
                 <!-- Gomb -->
-                <div class=" flex justify-center items-center mx-auto sm:justify-start">
-                    <button @click="getAvaliableCars(id)" class="bg-amber-100 mb-1 border-green-700
-                 hover:border-green-800 hover:bg-white border-2 px-4 py-1 lg:py-2 text-teal-600 hover:text-green-600
-          tracking-wider font-medium rounded-lg transition-all duration-200 ease-in-out">
+                <div class="flex justify-center items-center mx-auto sm:justify-start">
+                    <button @click="carTypeSelected"
+                        class="bg-amber-100 mb-1 border-green-700 hover:border-green-800 hover:bg-white border-2 px-4 py-1 lg:py-2 text-teal-600 hover:text-green-600 tracking-wider font-medium rounded-lg transition-all duration-200 ease-in-out">
                         Kiválasztás
                     </button>
                 </div>
@@ -78,8 +77,8 @@ const props = defineProps({
         required: true,
     },
 });
-
-const emits = defineEmits({
-
-})
+const emit = defineEmits(['carSelected']);
+const carTypeSelected = () => {
+    emit('carSelected', props.id);
+};
 </script>

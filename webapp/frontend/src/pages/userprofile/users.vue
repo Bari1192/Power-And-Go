@@ -6,7 +6,7 @@
         <div class="w-2/12 grid grid-rows-6 h-[800px] max-h-full">
             <div class="grid min-w-full h-full ">
                 <div class="arrow-container min-w-[200px] min-h-[100px] lg:w-full h-full"
-                    :class="{ 'active': activeIndexe === 1 }" @click="toggleContent">
+                     @click="toggleContent">
                     <button class="arrow-button w-full active h-full 3xl:text-nowrap text-lg lg:text-xl">
                         Előfoglalás rögzítése
                     </button>
@@ -14,7 +14,7 @@
             </div>
             <div class="grid min-w-full min-h-full">
                 <div class="arrow-container min-w-[200px] min-h-[100px] lg:w-full h-full"
-                    :class="{ 'active': activeIndexe === 2 }" @click="showThisContent(index)"> <button
+                    > <button
                         class="arrow-button w-full h-full 3xl:text-nowrap text-lg lg:text-xl">
                         Autó kiválasztása
                     </button>
@@ -22,33 +22,33 @@
             </div>
             <div class="grid min-w-full min-h-full">
                 <div class="arrow-container min-w-[200px] min-h-[100px] lg:w-full h-full"
-                    :class="{ 'active': activeIndexe === index }" @click="showThisContent(index)"> <button
+                    > <button
                         class="arrow-button w-full h-full 3xl:text-nowrap text-lg lg:text-xl">
-                        Harmadik opció
+                        Felhasználó kiválasztása
                     </button>
                 </div>
             </div>
             <div class="grid min-w-full min-h-full">
                 <div class="arrow-container min-w-[200px] min-h-[100px] lg:w-full h-full"
-                    :class="{ 'active': activeIndexe === index }" @click="showThisContent(index)"> <button
+                    > <button
                         class="arrow-button w-full h-full 3xl:text-nowrap text-lg lg:text-xl">
-                        Negyedik opció
+                        Helyszín kiválasztása
                     </button>
                 </div>
             </div>
             <div class="grid min-w-full min-h-full">
                 <div class="arrow-container min-w-[200px] min-h-[100px] lg:w-full h-full"
-                    :class="{ 'active': activeIndexe === index }" @click="showThisContent(index)"> <button
+                    > <button
                         class="arrow-button w-full h-full 3xl:text-nowrap text-lg lg:text-xl">
-                        Ötödik opció
+                        Időpont kiválasztása
                     </button>
                 </div>
             </div>
             <div class="grid min-w-full min-h-full">
                 <div class="arrow-container min-w-[200px] min-h-[100px] lg:w-full h-full"
-                    :class="{ 'active': activeIndexe === index }" @click="showThisContent(index)"> <button
+                    > <button
                         class="arrow-button w-full h-full 3xl:text-nowrap text-lg lg:text-xl">
-                        Hatodik opció
+                        Foglalás véglegesítése
                     </button>
                 </div>
             </div>
@@ -64,7 +64,9 @@
                 <div v-for="fleet in fleets" :key="fleet.id" class="w-full">
                     <UserCarPreorder :manufacturer="fleet.manufacturer" :id="fleet.id" :carmodel="fleet.carmodel"
                         :driving_range="fleet.driving_range" :motor_power="fleet.motor_power"
-                        :avaliableCarCount="carStore.getCarGroupCountByMotorPower(fleet.motor_power)" />
+                        :avaliableCarCount="carStore.getCarGroupCountByMotorPower(fleet.motor_power)"
+                        @carSelected="handleCarSelected"
+                        />
                 </div>
             </div>
         </div>
@@ -95,6 +97,13 @@ const isContentVisible = ref(false);
 const toggleContent = () => {
     isContentVisible.value = !isContentVisible.value;
 }
+const selectedCarId = ref(null);
+
+// Ez a függvény kapja meg a kiválasztott autó ID-jét
+const handleCarSelected = (carId) => {
+  selectedCarId.value = carId;
+  console.log(`A kiválasztott autó ID-je: ${carId}`);
+};
 
 onMounted(async () => {
     isLoading.value = true;
