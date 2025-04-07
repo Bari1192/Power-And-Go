@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="w-full px-3">
-                        <FormKit type="datetime-local" v-model="formattedDateTime" label="Mikor történt??"
+                        <FormKit type="datetime-local" v-model="formattedDateTime" label="Mikor történt?"
                             validation="required|date_before" :validation-messages="{
                                 date_before: 'Nem lehet a baleset későbbi időpontban!',
                                 required: 'Kötelező megadni!'

@@ -3,7 +3,8 @@
         <SpringBanner />
 
         <div class="keret px-4">
-            <div class="keret-kartya w-full bg-yellow-800 bg-opacity-60 rounded-2xl shadow-md shadow-yellow-500 py-5 mx-auto">
+            <div
+                class="keret-kartya w-full bg-yellow-800 bg-opacity-60 rounded-2xl shadow-md shadow-yellow-500 py-5 mx-auto">
                 <div class="w-8/12 mx-auto justify-center align-middle pb-6 items-center ">
 
                     <!-- Slider ITT -->
@@ -17,20 +18,21 @@
     </BaseLayout>
 </template>
 
-<script>
+<script setup>
 import BaseLayout from '@layouts/BaseLayout.vue';
 import PricesComponent from '@pages/indexpage/PricesComponent.vue';
 import SpringBanner from '@pages/indexpage/SpringBanner.vue'
 import Slider from '@layouts/sliders/Slider.vue';
+import { useAuthStore } from '@stores/AuthenticationStore';
+import { onMounted } from 'vue';
 
-export default {
-    components: {
-        BaseLayout,
-        PricesComponent,
-        SpringBanner,
-        Slider
-    },
-};
+const authStore = useAuthStore();
+onMounted(async () => {
+    await authStore.initializeFromStorage();
+})
+
+
+
 </script>
 
 <style>
@@ -41,5 +43,4 @@ export default {
             rgba(236, 252, 203, 0.6) 60%,
             rgba(255, 255, 255, 0.6) 100%);
 }
-
 </style>

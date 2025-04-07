@@ -35,10 +35,10 @@
 
             <div class="grid min-w-full min-h-full">
                 <div class="arrow-container min-w-[200px] min-h-[100px] lg:w-full h-full">
-                    <button @click="setActiveArrow('selectLocation')"
+                    <button @click="toggleSelectLocationContent(); setActiveArrow('selectLocation')"
                         :class="{ 'active': activeArrow === 'selectLocation', }"
                         class="arrow-button w-full h-full 3xl:text-nowrap text-lg lg:text-xl">
-                        Helyszín kiválasztása
+                        Helyszín és Időpont kiválasztása
                     </button>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                 <div class="arrow-container min-w-[200px] min-h-[100px] lg:w-full h-full">
                     <button @click="setActiveArrow('selectDate')" :class="{ 'active': activeArrow === 'selectDate' }"
                         class="arrow-button w-full h-full 3xl:text-nowrap text-lg lg:text-xl">
-                        Időpont kiválasztása
+                        Összesítés áttekintése
                     </button>
                 </div>
             </div>
@@ -63,14 +63,19 @@
             </div>
         </div>
 
+
+
+
         <!-- Ez lesz a "content rész" -->
         <div v-if="isContentVisible" class="w-3/5 px-4 lg:w-4/5 text-slate-700 mx-auto ml-32 lg:ml-20 lg:mr-4">
             <div class="my-6">
-                <h1 class="text-2xl font-bold">Kérem válassza ki a modelt!</h1>
+                <p class=" bg-emerald-700 mx-auto py-2 rounded-lg mb-4 px-8 w-fit">
+                <h1 class="text-3xl text-white font-bold">Kérem válassza ki a modelt!</h1>
+                </p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-6">
                 <div v-for="fleet in fleets" :key="fleet.id" class="w-full">
-                    <UserCarPreorder :manufacturer="fleet.manufacturer" :id="fleet.id" :carmodel="fleet.carmodel"
+                    <CarSelect :manufacturer="fleet.manufacturer" :id="fleet.id" :carmodel="fleet.carmodel"
                         :driving_range="fleet.driving_range" :motor_power="fleet.motor_power"
                         :avaliableCarCount="carStore.getCarGroupCountByMotorPower(fleet.motor_power)"
                         @carSelected="handleCarSelected" />
@@ -79,10 +84,15 @@
         </div>
 
         <div v-if="isUserSelectVisible && userStore.users && userStore.users.length > 0 && selectedCarId != null"
-            class=" w-3/5 lg:w-4/5 min-h-[100svh] min-w-[600px] flex flex-col mx-auto justify-start items-center text-slate-700 ml-32 lg:ml-20 lg:mr-4">
+            class="flex-grow mx-auto overflow-x-hidden sm:ml-[200px] md:ml-[150px] px-4 py-6 w-auto min-w-0">
             <UserSelect :users="userStore.users" @selectedUser="handleSelectedUser" />
         </div>
+
+        <div v-if="isLocationVisible" class="w-full max-w-[1200px] mx-auto">
+            <LocationSelect />
+        </div>
     </div>
+
     <BaseFooter />
 </template>
 
@@ -94,9 +104,11 @@ import { useUserStore } from '@stores/UserStore';
 import { useFleetStore } from '@stores/FleetStore';
 import { useCarStore } from '@stores/carStore';
 import { storeToRefs } from 'pinia';
-import UserCarPreorder from './orderSteps/CarSelect.vue';
-import UserSelect from './orderSteps/UserSelect.vue';
+import CarSelect from './ordersteps/CarSelect.vue';
+import UserSelect from './ordersteps/UserSelect.vue';
 import { useAuthStore } from '@stores/AuthenticationStore';
+
+import LocationSelect from './ordersteps/LocationSelect.vue';
 
 const fleetStore = useFleetStore();
 const carStore = useCarStore();
@@ -109,28 +121,36 @@ const { fleets } = storeToRefs(fleetStore);
 const isLoading = ref(false);
 const selectedCarId = ref(null);
 const selectedUser = ref(null);
+const isContentVisible = ref(false);
+const isLocationVisible = ref(false);
 
 const setActiveArrow = (arrowName) => {
     activeArrow.value = arrowName;
 };
 
-const isContentVisible = ref(false);
 const toggleContent = () => {
     isContentVisible.value = !isContentVisible.value;
     isUserSelectVisible.value = false;
 };
+const toggleSelectLocationContent = () => {
+    isLocationVisible.value = !isLocationVisible.value;
+    isContentVisible.value = false;
+    isUserSelectVisible.value = false;
+}
 
 const handleFirstButtonClick = () => {
     // Ha a "Foglalás rögzítése" gombra kattintunk, aktiváljuk az "Autó kiválasztása" gombot
     setActiveArrow('SelectCar');
     isContentVisible.value = true;
     isUserSelectVisible.value = false;
+    isLocationVisible.value = false;
 };
 
 const isUserSelectVisible = ref(false);
 const toggleUserSelectContent = () => {
     isUserSelectVisible.value = !isUserSelectVisible.value;
     isContentVisible.value = false;
+    isLocationVisible.value = false;
 };
 
 // Ez a függvény kapja meg a kiválasztott autó ID-jét
@@ -141,9 +161,12 @@ const handleCarSelected = (carId) => {
     setActiveArrow('toggleUserSelectConten');
     toggleUserSelectContent();
 };
-const handleSelectedUser=(userId)=>{
-    selectedUser.value=userId;
+const handleSelectedUser = (userId) => {
+    selectedUser.value = userId;
     console.log(`A kiválasztott user ID-ja: ${userId}`);
+
+    setActiveArrow('selectLocation');
+    toggleSelectLocationContent();
 }
 
 onMounted(async () => {
