@@ -11,18 +11,10 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import BaseHeader from '@components/layout/BaseHeader.vue'
 import BaseFooter from '@components/layout/BaseFooter.vue'
 import hullamInverz from '@layouts/hullamInverz.vue';
-
-export default {
-    components: {
-        BaseHeader,
-        BaseFooter,
-        hullamInverz,
-    }
-}
 </script>
 
 <style>

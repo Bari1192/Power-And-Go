@@ -1,6 +1,6 @@
 <template>
     <div
-        class="row rounded-tl-2xl w-2/5 h-16 flex flex-col md:flex-row items-center justify-between rounded-br-xl bg-lime-500 shadow-2xl border-r-4 border-b-4 border-white border-opacity-75">
+        class="row rounded-tl-2xl w-2/5 p-2 h-16 flex flex-col md:flex-row items-center justify-between rounded-br-xl bg-lime-500 shadow-2xl border-r-4 border-b-4 border-white border-opacity-75">
         <p class="col flex mx-auto align-bottom font-semibold text-yellow-100 text-2xl">{{ newsBanner }}</p>
     </div>
 

@@ -7,8 +7,6 @@ COPY ./package.json /app/package.json
 RUN npm cache add autoprefixer@10.4.19
 RUN npm cache add axios@1.7.2
 RUN npm cache add date-fns@3.6.0
-RUN npm cache add eslint@9.8.0
-RUN npm cache add eslint-plugin-vue@9.27.0
 RUN npm cache add pinia@2.2.0
 RUN npm cache add pinia-plugin-persistedstate@3.2.1
 RUN npm cache add postcss@8.4.40
@@ -37,9 +35,10 @@ RUN npm cache add @vitejs/plugin-vue@5.0.5
 RUN npm cache add @vueuse/core@10.11.0
 RUN npm cache add @vueuse/head@2.0.0
 RUN npm cache add @vueuse/components@10.11.0
-RUN npm cache add fast-deep-equal@latest
 RUN npm cache add vue3-toastify@latest
 RUN npm cache add install swiper@latest
+RUN npm cache add @googlemaps/markerclusterer
+RUN npm cache add fast-deep-equal@latest
 
 
 RUN npm i

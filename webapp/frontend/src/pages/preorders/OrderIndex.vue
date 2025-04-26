@@ -45,7 +45,8 @@
 
             <div class="grid min-w-full min-h-full">
                 <div class="arrow-container min-w-[200px] min-h-[100px] lg:w-full h-full">
-                    <button @click="setActiveArrow('selectDate')" :class="{ 'active': activeArrow === 'selectDate' }"
+                    <button @click="setActiveArrow('selectSummarize'); toggleSelectSummarizeContent();"
+                        :class="{ 'active': activeArrow === 'selectSummarize' }"
                         class="arrow-button w-full h-full 3xl:text-nowrap text-lg lg:text-xl">
                         Összesítés áttekintése
                     </button>
@@ -91,6 +92,10 @@
         <div v-if="isLocationVisible" class="w-full max-w-[1200px] mx-auto">
             <LocationSelect />
         </div>
+
+        <div v-if="isSummarizeVisible && fleetStore.fleet && userStore.user">
+            <SummarizeSelect :fleet="fleetStore.fleet" :user="userStore.user" />
+        </div>
     </div>
 
     <BaseFooter />
@@ -99,16 +104,17 @@
 <script setup>
 import BaseHeader from '@components/layout/BaseHeader.vue';
 import BaseFooter from '@components/layout/BaseFooter.vue';
-import { onMounted, ref } from 'vue';
+import CarSelect from './ordersteps/CarSelect.vue';
+import UserSelect from './ordersteps/UserSelect.vue';
+import LocationSelect from './ordersteps/LocationSelect.vue';
+import SummarizeSelect from './ordersteps/SummarizeSelect.vue';
+import { onMounted, ref, watch } from 'vue';
 import { useUserStore } from '@stores/UserStore';
 import { useFleetStore } from '@stores/FleetStore';
 import { useCarStore } from '@stores/carStore';
 import { storeToRefs } from 'pinia';
-import CarSelect from './ordersteps/CarSelect.vue';
-import UserSelect from './ordersteps/UserSelect.vue';
 import { useAuthStore } from '@stores/AuthenticationStore';
 
-import LocationSelect from './ordersteps/LocationSelect.vue';
 
 const fleetStore = useFleetStore();
 const carStore = useCarStore();
@@ -122,7 +128,9 @@ const isLoading = ref(false);
 const selectedCarId = ref(null);
 const selectedUser = ref(null);
 const isContentVisible = ref(false);
+const isUserSelectVisible = ref(false);
 const isLocationVisible = ref(false);
+const isSummarizeVisible = ref(false);
 
 const setActiveArrow = (arrowName) => {
     activeArrow.value = arrowName;
@@ -144,37 +152,46 @@ const handleFirstButtonClick = () => {
     isContentVisible.value = true;
     isUserSelectVisible.value = false;
     isLocationVisible.value = false;
+    isSummarizeVisible.value = false;
 };
 
-const isUserSelectVisible = ref(false);
 const toggleUserSelectContent = () => {
     isUserSelectVisible.value = !isUserSelectVisible.value;
     isContentVisible.value = false;
     isLocationVisible.value = false;
+    isSummarizeVisible.value = false;
 };
+const toggleSelectSummarizeContent = () => {
+    isSummarizeVisible.value = !isSummarizeVisible.value;
+    isContentVisible.value = false;
+    isUserSelectVisible.value = false;
+    isLocationVisible.value = false;
+}
 
 // Ez a függvény kapja meg a kiválasztott autó ID-jét
-const handleCarSelected = (carId) => {
+const handleCarSelected = async (carId) => {
     selectedCarId.value = carId;
+    await fleetStore.getFleet(carId);
     console.log(`A kiválasztott autó ID-ja: ${carId}`);
 
     setActiveArrow('toggleUserSelectConten');
     toggleUserSelectContent();
 };
-const handleSelectedUser = (userId) => {
+const handleSelectedUser = async (userId) => {
     selectedUser.value = userId;
+    await userStore.getUser(userId);
     console.log(`A kiválasztott user ID-ja: ${userId}`);
 
     setActiveArrow('selectLocation');
     toggleSelectLocationContent();
 }
 
+
 onMounted(async () => {
     isLoading.value = true;
-    authStore.initializeFromStorage(); // Ha nem rakod bele, nem is fogja látni, hogy loginolt már.
     await fleetStore.getFleets();
-    await carStore.getCars();
     await userStore.getUsers();
+    await carStore.getCars();
     isLoading.value = false;
     activeArrow.value = 'selectStartOrder';
 });

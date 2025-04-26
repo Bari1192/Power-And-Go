@@ -22,7 +22,7 @@
                         <FormKit name="lastRenter" type="text" label="Munkatárs hozzárendelése"
                             label-class="text-xl my-2 text-slate-700 block"
                             input-class=" rounded-lg appearance-none block w-3/5 bg-gray-300 bg-opacity-90 text-sky-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            placeholder="Opcionális" />
+                            placeholder="(Opcionális)" />
 
                     </div>
 

@@ -30,9 +30,10 @@ class UserController extends Controller
 
     public function show(User $user): JsonResource
     {
-        $user->load(['cars.fleet', 'person']);
+        $user->load(['cars.fleet', 'person','subscription.prices']);
         Gate::authorize("view", $user);
-        return new UserWithRentalResource($user);
+        return new UserResource($user);
+        // return new UserWithRentalResource($user);
     }
 
     public function update(StoreUserRequest $request, User $user)

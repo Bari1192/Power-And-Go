@@ -1,6 +1,6 @@
 <template>
-  <div class="container mb-20 lg:w-8/12 h-full mx-auto bg-white rounded-2xl mt-8 shadow-2xl">
-    <div class="pb-6 bg-lime-600 bg-opacity-30 rounded-2xl mt-6 border-4 border-yellow-100">
+  <div class="container mb-20 lg:w-8/12 h-full mx-auto bg-white rounded-2xl mt-2 shadow-2xl">
+    <div class="pb-6 bg-lime-600 bg-opacity-30 rounded-2xl border-4 border-yellow-100">
 
       <div class="title w-full mb-12 text-center bg-lime-600 bg-opacity-75 text-white py-8 rounded-2xl rounded-b-none">
         <h1 class="text-4xl font-bold pt-4 mb-4">Power & Go csomagok, ahogy <b class="ahogyteszereted">Te</b> szereted!
@@ -72,11 +72,7 @@ const getSubs = async () => {
 onMounted(() => {
   getSubs();
 })
-
 </script>
-
-
-
 
 <style>
 .title {

@@ -27,6 +27,7 @@ export const useCarStore = defineStore("cars", () => {
       const resp = await http.get("/cars");
       cars.value = resp.data.data;
       ToastService.updateToSuccess(toastId, "Autók sikeresen betöltve!");
+      return cars.value;
     } catch (error) {
       error.value = error.message;
       ToastService.updateToError(
@@ -47,6 +48,7 @@ export const useCarStore = defineStore("cars", () => {
       const resp = await http.get(`/cars/${id}`);
       car.value = resp.data.data;
       ToastService.updateToSuccess(toastId, "Autó szinkronizálva!");
+      return car.value;
     } catch (error) {
       console.error("Hiba az autó lekérdezésekor", error.value);
       ToastService.updateToError(

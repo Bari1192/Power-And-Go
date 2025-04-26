@@ -42,8 +42,8 @@ class Price extends Model
         return $this->belongsTo(Category::class, 'category_class', 'category_class');
     }
 
-    public function elofizetes(): BelongsTo
+    public function subscription(): BelongsTo
     {
-        return $this->belongsTo(Subscription::class, 'sub_id', 'sub_id');
+        return $this->belongsTo(Subscription::class, 'sub_id', 'id');
     }
 }

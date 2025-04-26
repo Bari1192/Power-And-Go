@@ -38,7 +38,7 @@ export const ToastService = {
       render: message,
       type: toast.TYPE.SUCCESS,
       icon: "✅",
-      autoClose: 3000,
+      autoClose: 1000,
       isLoading: false,
     });
   },

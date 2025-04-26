@@ -46,13 +46,15 @@
           <div>
             <RouterLink to="/logins/loginPage" class="block py-2 px-3 w-fullrounded"
               :class="getActiveClass('/logins/adminPage')">
-              <span class="self-center text-xl font-semibold hover:text-lime-400"><i class="fa-solid fa-arrow-right-to-bracket mr-1"></i>Bejelentkezés</span>
+              <span class="self-center text-xl font-semibold hover:text-lime-400"><i
+                  class="fa-solid fa-arrow-right-to-bracket mr-1"></i>Bejelentkezés</span>
             </RouterLink>
           </div>
           <div>
             <RouterLink to="/registers/registerPage" class="block py-2 px-3 w-full rounded"
               :class="getActiveClass('/registers/registerPage')">
-              <span class="self-center text-xl font-semibold hover:text-lime-400"><i class="fa-solid fa-user mr-1"></i>Regisztráció</span>
+              <span class="self-center text-xl font-semibold hover:text-lime-400"><i
+                  class="fa-solid fa-user mr-1"></i>Regisztráció</span>
             </RouterLink>
           </div>
         </template>
@@ -142,8 +144,7 @@
 
         <template v-else>
           <li>
-            <RouterLink to="/" class="block py-2 px-3 w-full rounded"
-              :class="getActiveClass('/profile')">
+            <RouterLink to="/" class="block py-2 px-3 w-full rounded" :class="getActiveClass('/profile')">
               <span class="self-center text-xl font-semibold hover:text-lime-500">
                 <i class="fa-solid fa-user-gear mr-1"></i>Profilom
               </span>
@@ -151,8 +152,7 @@
           </li>
 
           <li>
-            <RouterLink to="/" @click="handleLogout"
-              class="block py-2 px-3 w-full rounded cursor-pointer">
+            <RouterLink to="/" @click="handleLogout" class="block py-2 px-3 w-full rounded cursor-pointer">
               <span class="self-center text-xl font-semibold hover:text-lime-500">
                 <i class="fa-solid fa-right-from-bracket mr-1"></i>Kijelentkezés
               </span>
@@ -165,15 +165,19 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, watch, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import { useAuthStore } from '@stores/AuthenticationStore';
 
 const authStore = useAuthStore();
 const menuOpen = ref(false);
-const route = useRoute();
+const router = useRouter();
 
-const isAuthenticated = computed(() => authStore.isAuthenticated);
+const isAuthenticated = ref(authStore.isAuthenticated);
+
+watch(() => authStore.isAuthenticated, (newValue) => {
+  isAuthenticated.value = newValue;
+});
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value;
@@ -181,25 +185,24 @@ function toggleMenu() {
 
 function getActiveClass(path) {
   return {
-    'font-bold text-lime-500': route.path === path,
-    'text-white': route.path !== path
+    'font-bold text-lime-500': router.path === path,
+    'text-white': router.path !== path
   };
 }
 
-// Javított kijelentkezés kezelés
-function handleLogout() {
+async function handleLogout() {
   try {
-    authStore.logout();
+    await authStore.logout();
     menuOpen.value = false;
-    // Opcionális: átirányítás a főoldalra
+
+    isAuthenticated.value = false;
+
     router.push('/');
   } catch (error) {
     console.error('Hiba történt a kijelentkezés során:', error);
-    // Itt értesítheted a felhasználót a hibáról
   }
 }
-
 onMounted(() => {
-  authStore.checkAuth && authStore.checkAuth(); // Csak akkor futtasd, ha létezik
+  isAuthenticated.value = authStore.isAuthenticated;
 });
 </script>

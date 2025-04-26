@@ -14,6 +14,7 @@ class Subscription extends Model
     public $incrementing = true;
 
     protected $fillable = [
+        'id',
         'sub_name',
         'sub_monthly',
         'sub_annual',
@@ -21,5 +22,9 @@ class Subscription extends Model
     public function user(): HasMany
     {
         return $this->hasMany(User::class);
+    }
+    public function prices(): HasMany
+    {
+        return $this->hasMany(Price::class, 'sub_id', 'id');
     }
 }

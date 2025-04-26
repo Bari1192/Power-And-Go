@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <PricesComponent />
+            <PricesComponent />
     </BaseLayout>
 </template>
 
