@@ -1,42 +1,82 @@
-# Adatgeneráló Projekt – PowerAndGo - Útmutató
+# Power-And-Go Electric Vehicle Fleet Management
 
-Ez a projekt egy autómegosztó alkalmazás háttér-adatbázisát generálja le. Az adatok generálása Docker Compose segítségével történik és az elkészült fájlokat [alapértelmezetten] CSV formátumban menti el.
-A PHP szkriptek automatikusan végrehajtják az adatgenerálást a megfelelő sorrendben.
+## Overview
+An comprehensive electric vehicle fleet management system with dashboard and admin interface for managing vehicle fleets, rentals, and user permissions.
 
-**Futtatás**
-   Futtasd a következő parancsot (terminal-ban):
-   docker compose up --build
-Ez létrehozza a szükséges környezetet és fájlokat, majd a komponenseket a megfelelő sorrendben futtatja.
+## Key Features
+- 🚗 Vehicle Fleet Management
+- 📊 Detailed Vehicle Equipment Tracking
+- 🔄 Dynamic Category Grouping
+- 📝 Rental & Issue Management
+- 👥 User & Staff Administration
+- 💰 Automated Billing System
+- 🎫 Customer Subscription Management
+- 📈 Real-time Statistics & Reports
 
-## A projekt a következő fájlokat/rekordokat hozza létre:
+## Technical Stack
+- Backend: RESTful API
+- Frontend: React Dashboard
+- Database: MySQL
+- Containerization: Docker
 
-1. ***auto_generator.php***: 450 rekord a szkript alapján:
-    - **_Autok_**: Gyarto, Tipus, Teljesitmeny, Vegsebesseg, Gumimeret, Hatótav, Rendszam, Gyartasi_ev, Km_ora_allas fejléccel és hozzá tartozó adatsorokkal.
-    - **_Felszereltsegek_**: Rendszam, Tolatokamera, Tolatoradar, Multifunkcionalis_Kormany, Savtarto, Tempomat fejléccel és hozzá tartozó adatsorokkal.
-    - **_Kategoriak_**: Rendszam, Tipus, Besorolas fejléccel és hozzá tartozó adatsorokkal. 
+## Installation Guide
 
-2. ***szemely_generator.php***: 1000 rekord a szkript alapján:
-    - **_Szemelyek_**: ID, V_nev, K_nev, Szul_datum, Tel, E-mail, Szig_szam, Jogos_szam, Jogos_erv_kezdete, jogos_erv_vege, Felh_jelszo fejléccel és hozzá tartozó adatsorokkal.
-    - **_Felhasznalok_**: ID, Felh_nev, Jelszo, Elofizetesi_Kat fejléccel és hozzá tartozó adatsorokkal.
+### Prerequisites
+- Docker
+- Git
+- Linux-based environment (recommended)
 
-3. ***lezart_berlesek_generator.php***: 2750 rekord a  szkript alapján.
-    - **_Lezart_berlesek_**: Berles_id, Rendszam, Kat_besorolas, Berles_kezd_ev_ho_nap, Berles_kezd_ora_perc_mp, Berles_vege_ev_ho_nap, Berles_vege_ora_perc_mp,Felh_nev fejléccel és hozzá tartozó adatsorokkal.
+### Quick Start
+```bash
+# Clone the repository
+git clone https://github.com/Bari1192/Power-And-Go
+cd Power-And-Go
 
-Az adatok a(z) src/output mappába kerülnek!
+# Initialize the project
+sh start.sh
+```
 
-## Hogyan módosítd a generált adatok mennyiségét / fájlkiterjesztését:
+### Local Access Points
+- Backend: http://backend.vm1.test
+- Frontend: http://frontend.vm1.test
+- JSON Server: http://jsonserver.vm1.test
+- API Documentation: http://swagger.vm1.test
+- Documentation: http://docs.vm1.test
 
-A ***docker-compose.yml*** fájlban változtathatod meg az egyes parancssorok végén lévő szám módosításával, a ***command*** részben, az alábbiak szerint:
-   -  **Autók számának módosítása:** php auto_generator.php [mennyiség] [csv / json]
-   - **Személyek számának módosítása:** php szemely_generator.php [mennyiség] [csv / json]
-   - **Lezárt bérlések számának módosítása:** php lezart_berlesek_generator.php  [mennyiség] [csv / json]
-   - **FIGYELEM!** Az adatmennyiség **megváltoztatásakor is** a program **hozzáfűzi** az új adatmennyiséget a meglévő adatsorokhoz, függetlenül a fájlkiterjesztés módosításától!
+## Testing
 
+### Running Tests
+```bash
+# Access the backend container
+docker compose exec backend fish
 
-## Licenc és Felhasználási feltételek
-Ez a projekt az MIT licenc alatt érhető el. Ha a kódot nyilvánosan felhasználod vagy kereskedelmi célra értékesíted, kérjük, tüntesd fel az eredeti készítőt. További részletekért lásd a [LICENSE] fájlt.
+# Run tests
+php artisan test
+```
 
-Továbbá a program által generált adatsorokban Primary Key és Foreign Key alapú összeköttetésekből áll. Mindebből eredően az adott kulcsok egyediek, így adatbázis felhasználásra optimalizált a használatuk.
+### Reset & Rebuild
+```bash
+sh start.sh
+```
 
-**[További fejlesztések várhatóak.]**
+## Development Guidelines
 
+### Data Generation
+- Modify factories in the `backend/database/factories` directory
+- Adjust seeder quantities in `backend/database/seeders`
+- Always verify relationships before modifying data structures
+
+## Contributors
+
+### [@rcsnjszg](https://github.com/rcsnjszg)
+- Core backend functionality
+- System architecture
+- Debug support
+
+### [@ignaczdominik](https://github.com/ignaczdominik)
+- Frontend development
+- UI/UX implementation
+- System optimization
+
+## License
+This project is proprietary software. All rights reserved.
