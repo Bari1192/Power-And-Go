@@ -9,7 +9,6 @@
         </p>
       </div>
 
-
       <div class="flex flex-col lg:flex-row lg:px-24 lg:gap-16 justify-center gap-12 px-6 mt-12 p-16">
         <div class="flex-1 transform lg:translate-y-2 order-2 lg:order-1">
           <PassCard 
