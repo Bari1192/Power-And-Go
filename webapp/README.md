@@ -1,31 +1,82 @@
-# Power And Go - Dashboard
+# Power-And-Go Electric Vehicle Fleet Management
 
-Figyelem! Az `.env.example` fájl a `backend` mappában található, és a `.env` fájl is ott lesz, mert a backend szerves része. Mivel ezt a többi container is használja, így egy hivatkozás jön létre indításkor a projektmappában.
+## Overview
+An comprehensive electric vehicle fleet management system with dashboard and admin interface for managing vehicle fleets, rentals, and user permissions.
 
-## Indítás
+## Key Features
+- 🚗 Vehicle Fleet Management
+- 📊 Detailed Vehicle Equipment Tracking
+- 🔄 Dynamic Category Grouping
+- 📝 Rental & Issue Management
+- 👥 User & Staff Administration
+- 💰 Automated Billing System
+- 🎫 Customer Subscription Management
+- 📈 Real-time Statistics & Reports
 
-A rendszer inicializálását és az első indítását a `start.sh` végzi.
+## Technical Stack
+- Backend: RESTful API
+- Frontend: React Dashboard
+- Database: MySQL
+- Containerization: Docker
 
- A `migráció`, `seedelés` és a `tesztesetek` egyetemlegesen, automatikusan futnak le.
+## Installation Guide
+
+### Prerequisites
+- Docker
+- Git
+- Linux-based environment (recommended)
+
+### Quick Start
+```bash
+# Clone the repository
+git clone https://github.com/Bari1192/Power-And-Go
+cd Power-And-Go
+
+# Initialize the project
+sh start.sh
+```
+
+### Local Access Points
+- Backend: http://backend.vm1.test
+- Frontend: http://frontend.vm1.test
+- JSON Server: http://jsonserver.vm1.test
+- API Documentation: http://swagger.vm1.test
+- Documentation: http://docs.vm1.test
+
+## Testing
+
+### Running Tests
+```bash
+# Access the backend container
+docker compose exec backend fish
+
+# Run tests
+php artisan test
+```
+
+### Reset & Rebuild
 ```bash
 sh start.sh
 ```
-parancs futtatásával.
-## Leállítás
 
-```bash
-docker compose stop
-```
-## Újraindítás / Újragenerálás
-Futtatás után a teljes program újraindításával `megváltoztatott adatokkal`, ugyanakkor azonos struktúra felépítéssel a `terminálban` egy paranccsal:
+## Development Guidelines
 
-```bash
-sh start.sh
-```
+### Data Generation
+- Modify factories in the `backend/database/factories` directory
+- Adjust seeder quantities in `backend/database/seeders`
+- Always verify relationships before modifying data structures
 
-## Eltávolítás
-```bash
-docker compose down -v
-```
+## Contributors
 
- - A `-v` hatására a köteteket is törli, így az adatbázisban tárolt adatok is megszűnnek.
+### [@rcsnjszg](https://github.com/rcsnjszg)
+- Core backend functionality
+- System architecture
+- Debug support
+
+### [@ignaczdominik](https://github.com/ignaczdominik)
+- Frontend development
+- UI/UX implementation
+- System optimization
+
+## License
+This project is proprietary software. All rights reserved.
