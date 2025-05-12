@@ -1,208 +1,196 @@
 <template>
-  <nav class="text-white bg-sky-950 border-b-4 border-sky-800">
-    <div class="flex justify-between items-center p-3 border-b-2 flex-wrap dark:border-none">
-      <RouterLink to="/" class="flex items-center mx-4" active-class="font-bold text-lime-500">
-        <img src="../../assets/img/BaseEmail/logo_small.png" class="h-24 w-auto" alt="PowerAndGo Logo" />
-        <span class="self-center text-2xl font-semibold whitespace-nowrap hover:text-lime-400">PowerAndGo</span>
-      </RouterLink>
+  <nav class="relative backdrop-blur-sm border-b border-emerald-800/30 text-bold md:text-xl z-50"
+    style="font-family: 'Nunito', 'Arial';">
+    <!-- Háttér effektek -->
+    <div class="absolute inset-0">
+      <div class="absolute w-full h-full bg-slate-900/95"></div>
+      <div class="absolute right-0 w-1/3 h-full bg-emerald-600/5 blur-3xl"></div>
+      <div class="absolute -left-1/4 w-1/2 h-full bg-emerald-400/5 blur-3xl"></div>
+    </div>
 
-      <!-- Hamburger mobilon -->
-      <button class="block lg:hidden text-white bg-sky-800 hover:bg-sky-700 p-2 rounded mx-4" @click="toggleMenu">
-        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M1 1h15M1 7h15M1 13h15" />
-        </svg>
-      </button>
+    <div class="relative container mx-auto px-4">
+      <div class="flex justify-between items-center h-24">
+        <!-- Logo -->
+        <RouterLink to="/" class="flex items-center gap-4" active-class="font-bold text-lime-500">
+          <img src="../../assets/img/Models/eup.png" alt="Logo" class="h-24 w-auto" />
+          <p class="text-emerald-500 md:text-3xl font-extrabold w-fit ">Power And Go</p>
+          <div class="fixed left-0 w-1/12 top-1/2 h-1/6 bg-emerald-400 blur-3xl"></div>
 
-      <!-- asztali nézet -->
-      <div class="hidden lg:flex lg:items-center lg:space-x-6 lg:flex-grow lg:justify-center">
-        <RouterLink to="/rents/renthistory" class="px-3 py-2" :class="getActiveClass('/rents/renthistory')">
-          <span class="self-center text-xl font-semibold hover:text-lime-400">Lezárt Bérlések</span>
         </RouterLink>
 
-        <RouterLink to="/bills/AllBills" class="px-3 py-2" :class="getActiveClass('/bills/AllBills')">
-          <span class="self-center text-xl font-semibold hover:text-lime-400">Számlák</span>
-        </RouterLink>
+        <!-- Hamburger mobil nézeten -->
+        <button
+          class="block lg:hidden bg-emerald-600/80 hover:bg-emerald-500 p-2 rounded-lg transition-colors duration-200"
+          @click="toggleMenu">
+          <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M1 1h15M1 7h15M1 13h15" />
+          </svg>
+        </button>
 
-        <RouterLink to="/bills/fines" class="px-3 py-2" :class="getActiveClass('/bills/fines')">
-          <span class="self-center text-xl font-semibold hover:text-lime-400">Bírságok</span>
-        </RouterLink>
+        <!-- Asztali menü -->
+        <div class="hidden lg:flex lg:items-center lg:space-x-4">
+          <!-- Számlák Dropdown -->
+          <div class="relative" @click.stop>
+            <button @click="toggleBillsMenu"
+              class="px-4 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600/20 flex items-center">
+              <span class="font-medium lg:text-xl text-slate-100 hover:text-emerald-400 mr-2">Számlák</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-100"
+                :class="{ 'transform rotate-180': isBillsMenuOpen }"></i>
+            </button>
 
-        <RouterLink to="/cars" class="px-3 py-2" :class="getActiveClass('/cars')">
-          <span class="self-center text-xl font-semibold hover:text-lime-400">Autok</span>
-        </RouterLink>
-
-        <RouterLink to="/fleets/fleetIndex" class="px-3 py-2" :class="getActiveClass('/fleets/fleetIndex')">
-          <span class="self-center text-xl font-semibold hover:text-lime-400">Flotta</span>
-        </RouterLink>
-
-        <RouterLink to="/orders" class="px-3 py-2" :class="getActiveClass('/users')">
-          <span class="self-center text-xl font-semibold hover:text-lime-400">Előrendelés</span>
-        </RouterLink>
-      </div>
-
-      <div class="hidden lg:flex lg:items-center">
-        <template v-if="!isAuthenticated">
-          <div>
-            <RouterLink to="/logins/loginPage" class="block py-2 px-3 w-fullrounded"
-              :class="getActiveClass('/logins/adminPage')">
-              <span class="self-center text-xl font-semibold hover:text-lime-400"><i
-                  class="fa-solid fa-arrow-right-to-bracket mr-1"></i>Bejelentkezés</span>
-            </RouterLink>
+            <div v-if="isBillsMenuOpen"
+              class="fixed mt-2 w-48 bg-slate-800/95 backdrop-blur-sm rounded-xl border border-emerald-500/20 shadow-lg overflow-hidden"
+              style="transform: translateX(0); top: 4rem;">
+              <div class="relative">
+                <RouterLink to="/bills/AllBills" @click="isBillsMenuOpen = false"
+                  class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
+                  :class="getActiveClass('/bills/AllBills')">
+                  <span class="font-medium text-slate-100">Számlák</span>
+                </RouterLink>
+                <RouterLink to="/rents/renthistory" @click="isBillsMenuOpen = false"
+                  class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
+                  :class="getActiveClass('/rents/renthistory')">
+                  <span class="font-medium text-slate-100">Lezárt Bérlések</span>
+                </RouterLink>
+                <RouterLink to="/bills/fines" @click="isBillsMenuOpen = false"
+                  class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
+                  :class="getActiveClass('/bills/fines')">
+                  <span class="font-medium text-slate-100">Bírságok</span>
+                </RouterLink>
+              </div>
+            </div>
           </div>
-          <div>
-            <RouterLink to="/registers/registerPage" class="block py-2 px-3 w-full rounded"
-              :class="getActiveClass('/registers/registerPage')">
-              <span class="self-center text-xl font-semibold hover:text-lime-400"><i
-                  class="fa-solid fa-user mr-1"></i>Regisztráció</span>
-            </RouterLink>
+
+          <!-- Autók Dropdown -->
+          <div class="relative" @click.stop>
+            <button @click="toggleCarsMenu"
+              class="px-4 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600/20 flex items-center">
+              <span class="font-medium text-slate-100 hover:text-emerald-400 mr-2">Autók</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-100"
+                :class="{ 'transform rotate-180': isCarsMenuOpen }"></i>
+            </button>
+
+            <div v-if="isCarsMenuOpen"
+              class="fixed mt-2 w-48 bg-slate-800/95 backdrop-blur-sm rounded-xl border border-emerald-500/20 shadow-lg overflow-hidden"
+              style="transform: translateX(0); top: 4rem;">
+              <div class="relative">
+                <RouterLink to="/cars" @click="isCarsMenuOpen = false"
+                  class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
+                  :class="getActiveClass('/cars')">
+                  <span class="font-medium text-slate-100">Autók</span>
+                </RouterLink>
+                <RouterLink to="/fleets/fleetIndex" @click="isCarsMenuOpen = false"
+                  class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
+                  :class="getActiveClass('/fleets/fleetIndex')">
+                  <span class="font-medium text-slate-100">Flotta</span>
+                </RouterLink>
+                <RouterLink to="/orders" @click="isCarsMenuOpen = false"
+                  class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
+                  :class="getActiveClass('/orders')">
+                  <span class="font-medium text-slate-100">Előrendelés</span>
+                </RouterLink>
+              </div>
+            </div>
           </div>
-        </template>
-
-        <template v-else>
-          <RouterLink to="/" class="px-3 py-2" :class="getActiveClass('/profile')">
-            <span class="self-center text-xl font-semibold hover:text-lime-400">
-              <i class="fa-solid fa-user-gear text-xl mr-1"></i>Profilom
-            </span>
-          </RouterLink>
-
-          <RouterLink to="/" @click="handleLogout" class="px-3 py-2 cursor-pointer">
-            <span class="self-center text-xl font-semibold hover:text-lime-500">
-              <i class="fa-solid fa-right-from-bracket mr-1"></i>Kijelentkezés
-            </span>
-          </RouterLink>
-        </template>
+        </div>
       </div>
     </div>
 
     <!-- Mobil menü -->
-    <div class="w-full bg-opacity-0 rounded-b overflow-hidden transition-all duration-300 ease-in-out"
-      :class="menuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'">
-      <ul class="flex flex-col p-4 space-y-3">
-        <li>
-          <RouterLink to="/rents/renthistory" class="block py-2 px-3 w-full hover:bg-sky-800 rounded"
-            :class="getActiveClass('/rents/renthistory')">
-            <span class="font-semibold">Lezárt Bérlések</span>
-          </RouterLink>
-        </li>
-
-        <li>
-          <RouterLink to="/bills/AllBills" class="block py-2 px-3 w-full hover:bg-sky-800 rounded"
-            :class="getActiveClass('/bills/AllBills')">
-            <span class="font-semibold">Számlák</span>
-          </RouterLink>
-        </li>
-
-        <li>
-          <RouterLink to="/bills/fines" class="block py-2 px-3 w-full hover:bg-sky-800 rounded"
-            :class="getActiveClass('/bills/fines')">
-            <span class="font-semibold">Bírságok</span>
-          </RouterLink>
-        </li>
-
-        <li>
-          <RouterLink to="/cars" class="block py-2 px-3 w-full hover:bg-sky-800 rounded"
-            :class="getActiveClass('/cars')">
-            <span class="font-semibold">Autok</span>
-          </RouterLink>
-        </li>
-
-        <li>
-          <RouterLink to="/fleets/fleetIndex" class="block py-2 px-3 w-full hover:bg-sky-800 rounded"
-            :class="getActiveClass('/fleets/fleetIndex')">
-            <span class="font-semibold">Flotta</span>
-          </RouterLink>
-        </li>
-
-        <li>
-          <RouterLink to="/orders" class="block py-2 px-3 w-full hover:bg-sky-800 rounded"
-            :class="getActiveClass('/users')">
-            <span class="font-semibold">Előrendelés</span>
-          </RouterLink>
-        </li>
-
-        <!-- Bejelentkezés/Regisztráció vagy Profil/Kijelentkezés -->
-        <template v-if="!isAuthenticated">
-          <li>
-            <RouterLink to="/logins/loginPage" class="block py-2 px-3 w-full hover:bg-sky-800 rounded"
-              :class="getActiveClass('/logins/adminPage')">
-              <span class="self-center text-xl font-semibold hover:text-lime-500">
-                <i class="fa-solid fa-arrow-right-to-bracket mr-1"></i>Bejelentkezés
-              </span>
+    <div v-if="menuOpen"
+      class="lg:hidden fixed top-24 left-0 right-0 bg-slate-900/95 border-t border-emerald-500/30 z-50">
+      <div class="w-full mx-auto px-4 py-4 space-y-4">
+        <!-- Számlák Szekció -->
+        <div class="space-y-2">
+          <div class="px-4 py-2 font-medium text-slate-100 bg-emerald-700/30 w-fit rounded-lg italic">Számlák</div>
+          <div class="space-y-1 pl-2">
+            <RouterLink to="/bills/AllBills" @click="menuOpen = false"
+              class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
+              <span class="font-medium text-slate-100">Számlák</span>
             </RouterLink>
-          </li>
-
-          <li>
-            <RouterLink to="/registers/registerPage" class="block py-2 px-3 w-full hover:bg-sky-800 rounded"
-              :class="getActiveClass('/registers/registerPage')">
-              <span class="self-center text-xl font-semibold hover:text-lime-500">
-                <i class="fa-solid fa-user mr-1"></i>Regisztráció
-              </span>
+            <RouterLink to="/rents/renthistory" @click="menuOpen = false"
+              class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
+              <span class="font-medium text-slate-100">Lezárt Bérlések</span>
             </RouterLink>
-          </li>
-        </template>
-
-        <template v-else>
-          <li>
-            <RouterLink to="/" class="block py-2 px-3 w-full rounded" :class="getActiveClass('/profile')">
-              <span class="self-center text-xl font-semibold hover:text-lime-500">
-                <i class="fa-solid fa-user-gear mr-1"></i>Profilom
-              </span>
+            <RouterLink to="/bills/fines" @click="menuOpen = false"
+              class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
+              <span class="font-medium text-slate-100">Bírságok</span>
             </RouterLink>
-          </li>
+          </div>
+        </div>
 
-          <li>
-            <RouterLink to="/" @click="handleLogout" class="block py-2 px-3 w-full rounded cursor-pointer">
-              <span class="self-center text-xl font-semibold hover:text-lime-500">
-                <i class="fa-solid fa-right-from-bracket mr-1"></i>Kijelentkezés
-              </span>
+        <!-- Autók Szekció -->
+        <div class="space-y-2">
+          <div class="px-4 py-2 font-medium text-slate-100 bg-emerald-700/30 w-fit rounded-lg italic">Autók</div>
+          <div class="space-y-1 pl-2">
+            <RouterLink to="/cars" @click="menuOpen = false"
+              class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
+              <span class="font-medium text-slate-100">Autók</span>
             </RouterLink>
-          </li>
-        </template>
-      </ul>
+            <RouterLink to="/fleets/fleetIndex" @click="menuOpen = false"
+              class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
+              <span class="font-medium text-slate-100">Flotta</span>
+            </RouterLink>
+            <RouterLink to="/orders" @click="menuOpen = false"
+              class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
+              <span class="font-medium text-slate-100">Előrendelés</span>
+            </RouterLink>
+          </div>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@stores/AuthenticationStore';
 
 const authStore = useAuthStore();
 const menuOpen = ref(false);
+const isBillsMenuOpen = ref(false);
+const isCarsMenuOpen = ref(false);
 const router = useRouter();
-
-const isAuthenticated = ref(authStore.isAuthenticated);
-
-watch(() => authStore.isAuthenticated, (newValue) => {
-  isAuthenticated.value = newValue;
-});
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value;
 }
 
+function toggleBillsMenu() {
+  isBillsMenuOpen.value = !isBillsMenuOpen.value;
+  if (isBillsMenuOpen.value) {
+    isCarsMenuOpen.value = false;
+  }
+}
+
+function toggleCarsMenu() {
+  isCarsMenuOpen.value = !isCarsMenuOpen.value;
+  if (isCarsMenuOpen.value) {
+    isBillsMenuOpen.value = false;
+  }
+}
+
 function getActiveClass(path) {
   return {
-    'font-bold text-lime-500': router.path === path,
-    'text-white': router.path !== path
+    'bg-emerald-600/30 text-emerald-400': router.currentRoute.value.path === path,
   };
 }
 
-async function handleLogout() {
-  try {
-    await authStore.logout();
-    menuOpen.value = false;
-
-    isAuthenticated.value = false;
-
-    router.push('/');
-  } catch (error) {
-    console.error('Hiba történt a kijelentkezés során:', error);
+// Kattintás figyelése a dokumentumon
+function handleClickOutside(event) {
+  if (!event.target.closest('.relative')) {
+    isBillsMenuOpen.value = false;
+    isCarsMenuOpen.value = false;
   }
 }
+
 onMounted(() => {
-  isAuthenticated.value = authStore.isAuthenticated;
+  document.addEventListener('click', handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside);
 });
 </script>

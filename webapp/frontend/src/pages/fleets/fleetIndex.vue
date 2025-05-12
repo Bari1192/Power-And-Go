@@ -60,7 +60,3 @@ const torles = (id) => {
   }
 };
 </script>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playwrite+HU:wght@100..400&display=swap');
-</style>

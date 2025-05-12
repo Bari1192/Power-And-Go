@@ -1,8 +1,8 @@
 <template>
     <div>
         <BaseHeader />
-        <div class="custom-background-third bg-opacity-25">
-            <main class="container min-w-full h-h-full mx-auto ">
+        <div class="background bg-opacity-25 w-full min-h-[screen]">
+            <main class="container w-full h-full mx-auto ">
                 <slot />
             </main>
             <hullamInverz />
@@ -18,11 +18,10 @@ import hullamInverz from '@layouts/hullamInverz.vue';
 </script>
 
 <style>
-.custom-background-third {
-    background:
-        url('@img/Welcome/leaf1.png');
-    background-position: right;
-    background-repeat: round;
-    overflow: hidden;
+.background {
+    background: url('@img/Welcome/blocks3.webp'); 
+    background-position: center;
+    background-repeat:repeat-y;
+    background-size: contain;
 }
 </style>
