@@ -87,7 +87,7 @@ class CarUserrentChargeFactory extends Factory
 
             // Bérlés idő és vége
             $berlesIdoTartam = $times['minutes'];
-            $berlesVege = (clone $berlesKezdete)->modify("+{$times['minutes']} minutes");
+            // $berlesVege = (clone $berlesKezdete)->modify("+{$times['minutes']} minutes");
 
             # 2. Min. töltési idő
             $minimumToltesIdo = 5;
@@ -125,16 +125,16 @@ class CarUserrentChargeFactory extends Factory
                 'end_percent' => $ujToltesSzazalek,
                 'start_kw' => $start_kw,
                 'end_kw' => $ujToltesKw,
-                'charged_kw' => floor($toltottKilowatt),
+                'charged_kw' => round($toltottKilowatt),
                 'credits' => $credits,
             ];
         } catch (Exception $e) {
             return [];
         }
     }
-    public function chargingCreditsReturn(User $user, float $toltottKilowatt): int
+    public function chargingCreditsReturn(User $user, int $toltottKilowatt): int
     {
-        // 6 kW alatt: 400 kredit/kW
+        // 6 kW alatt: 400 "kredit"/ kW
         // 6 kW felett: 2000 kredit alapdíj + 200 kredit/kW a 6 kW felett
         $toltottKilowatt = round($toltottKilowatt);
         if ($toltottKilowatt < 6.0) {

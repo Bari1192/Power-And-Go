@@ -1,39 +1,63 @@
 <template>
     <BaseLayout>
-        <div class="container mx-auto py-20 min-h-screen">
-            <div class="mx-auto space-x-8 text-center mb-6 ">
-                <button @click="ChargeFines" class="switch-button">Töltési Büntetések</button>
-                <button @click="RentSummary" class="switch-button">Bérlés Összesítők</button>
-            </div>
+        <div class="min-h-screen bg-slate-900 px-4 py-8">
+            <div class="max-w-7xl mx-auto">
+                <!-- Header & Navigation -->
+                <div
+                    class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 mb-8 border border-emerald-500/20">
+                    <h1 class="text-3xl font-bold text-white mb-6 text-center">Bérlési Előzmények</h1>
 
-            <div v-if="showChargeFines" class="pt-8">
-                <Lapozo :items="fees" :itemsPerPage="5" ref="lapozo">
-                    <template v-slot:default="{ items }">
-                        <transition-group :name="lapozo?.transitionDirection" tag="div">
-                            <div v-for="fee in items" :key="fee.id" class="container mx-auto mb-10">
-                                <ChargeFineEmail :fee="fee" />
-                            </div>
-                        </transition-group>
-                    </template>
-                </Lapozo>
-            </div>
+                    <!-- Navigation Tabs -->
+                    <div class="flex justify-center gap-4">
+                        <button @click="ChargeFines"
+                            :class="{ 'bg-emerald-600': showChargeFines, 'bg-slate-700': !showChargeFines }"
+                            class="px-6 py-3 rounded-xl text-white font-medium flex items-center gap-2">
+                            <i class="fas fa-exclamation-circle text-rose-500 bg-white rounded-full"></i>
+                            Töltési Büntetések
+                        </button>
+                        <button @click="RentSummary"
+                            :class="{ 'bg-emerald-600': showRentSummary, 'bg-slate-700': !showRentSummary }"
+                            class="px-6 py-3 rounded-xl text-white font-medium flex items-center gap-2">
+                            <i class="fas fa-history text-amber-400"></i>
+                            Bérlés Összesítők
+                        </button>
+                    </div>
+                </div>
 
-            <div v-if="showRentSummary">
-                <Lapozo :items="rents" :itemsPerPage="5" ref="lapozo">
-                    <template v-slot:default="{ items }">
-                        <transition-group :name="lapozo?.transitionDirection" tag="div">
-                            <div v-for="rent in items" :key="rent.id" class="container mx-auto mb-10">
-                                <RentSummaryEmail :rent="rent" />
-                            </div>
-                        </transition-group>
-                    </template>
-                </Lapozo>
+                <!-- Content Area -->
+                <div class="space-y-6">
+                    <!-- Töltési Büntetések -->
+                    <div v-if="showChargeFines" class="space-y-6">
+                        <Lapozo :items="fees" :itemsPerPage="5" ref="lapozo" class="space-y-6">
+                            <template v-slot:default="{ items }">
+                                <transition-group :name="lapozo?.transitionDirection" tag="div" class="space-y-6">
+                                    <div v-for="fee in items" :key="fee.id">
+                                        <ChargeFineEmail :fee="fee" />
+                                    </div>
+                                </transition-group>
+                            </template>
+                        </Lapozo>
+                    </div>
+
+                    <!-- Bérlés Összesítők -->
+                    <div v-if="showRentSummary" class="space-y-6">
+                        <Lapozo :items="rents" :itemsPerPage="5" ref="lapozo" class="space-y-6">
+                            <template v-slot:default="{ items }">
+                                <transition-group :name="lapozo?.transitionDirection" tag="div" class="space-y-20">
+                                    <div v-for="rent in items" :key="rent.id">
+                                        <RentSummaryEmail :rent="rent" />
+                                    </div>
+                                </transition-group>
+                            </template>
+                        </Lapozo>
+                    </div>
+                </div>
             </div>
         </div>
     </BaseLayout>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
 import BaseLayout from '@layouts/BaseLayout.vue';
 import ChargeFineEmail from '@pages/rents/emails/ChargeFineEmail.vue';
@@ -41,78 +65,55 @@ import RentSummaryEmail from '@pages/rents/emails/RentSummaryEmail.vue';
 import Lapozo from '@layouts/sliders/Lapozo.vue';
 import { http } from '@utils/http.mjs';
 
-export default {
-    components: { BaseLayout, ChargeFineEmail, RentSummaryEmail, Lapozo },
-    setup() {
-        const rents = ref([]);
-        const fees = ref([]);
-        const showChargeFines = ref(false);
-        const showRentSummary = ref(false);
-        const lapozo = ref(null);
+const rents = ref([]);
+const fees = ref([]);
+const showChargeFines = ref(false);
+const showRentSummary = ref(false);
+const lapozo = ref(null);
 
-        async function fetchData() {
-            try {
-                const resp = await http.get('/bills/closedrentsbills');
-                rents.value = resp.data.data;
-            } catch (error) {
-                console.error('Hiba történt az API hívás során:', error);
-            }
-            try {
-                const resp = await http.get('/bills/fees');
-                fees.value = resp.data.data;
-            } catch (error) {
-                console.error('Hiba történt az API hívás során:', error);
-            }
-        }
-
-        function ChargeFines() {
-            showChargeFines.value = !showChargeFines.value;
-            if (showChargeFines.value) showRentSummary.value = false;
-        }
-
-        function RentSummary() {
-            showRentSummary.value = !showRentSummary.value;
-            if (showRentSummary.value) showChargeFines.value = false;
-        }
-
-        fetchData();
-
-        return { rents, fees, showChargeFines, showRentSummary, ChargeFines, RentSummary, lapozo };
+const fetchData = async () => {
+    try {
+        const [rentsResp, feesResp] = await Promise.all([
+            http.get('/bills/closedrentsbills'),
+            http.get('/bills/fees')
+        ]);
+        rents.value = rentsResp.data.data;
+        fees.value = feesResp.data.data;
+    } catch (error) {
+        console.error('Hiba történt az API hívás során:', error);
     }
 };
+
+const ChargeFines = () => {
+    showChargeFines.value = !showChargeFines.value;
+    if (showChargeFines.value) showRentSummary.value = false;
+};
+
+const RentSummary = () => {
+    showRentSummary.value = !showRentSummary.value;
+    if (showRentSummary.value) showChargeFines.value = false;
+};
+
+fetchData();
 </script>
 
 <style scoped>
-
-.switch-button {
-    @apply cursor-pointer mx-2 text-lg text-lime-50 font-medium rounded-lg px-5 
-    py-2.5 bg-lime-600 hover:bg-lime-700/90 border-2 border-lime-800 transition-colors ease-in-out duration-200;
-}
-
 .forward-enter-active,
 .forward-leave-active,
 .backward-enter-active,
 .backward-leave-active {
-    transition: all 1s ease-in-out;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.forward-enter-from {
-    opacity: 0;
-    transform: translateX(50px);
-}
-
-.forward-leave-to {
-    opacity: 0;
-    transform: translateX(-50px);
-}
-
+.forward-enter-from,
 .backward-enter-from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateY(20px);
 }
 
+.forward-leave-to,
 .backward-leave-to {
     opacity: 0;
-    transform: translateX(50px);
+    transform: translateY(-20px);
 }
 </style>

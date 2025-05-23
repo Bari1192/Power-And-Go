@@ -32,9 +32,31 @@
         <div class="hidden lg:flex lg:items-center lg:space-x-4">
           <!-- Számlák Dropdown -->
           <div class="relative" @click.stop>
+
+            <button @click="toggleMailSystemMenu" :class="isMailSystemMenuOpen ? 'bg-emerald-600/20' : 'bg-inherit'"
+              class="px-4 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600/20 text-slate-100 flex items-center">
+              <span class="font-medium lg:text-xl mr-2">Rendszer
+                értesítések</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-100"
+                :class="{ 'transform rotate-180': isMailSystemMenuOpen }"></i>
+            </button>
+
+            <div v-if="isMailSystemMenuOpen" class="fixed mt-4 mx-auto w-56 bg-slate-600/95 backdrop-blur-sm rounded-xl border border-emerald-500/20 shadow-lg 
+              overflow-hidden" style="transform: translateX(0); top: 4rem;">
+              <div class="relative">
+                <RouterLink to="/rents/renthistory" @click="isMailSystemMenuOpen = false"
+                  class="block px-4 py-3 hover:bg-emerald-800/60 transition-colors duration-200">
+                  <span class="font-medium text-slate-100">Összes értesítő</span>
+                </RouterLink>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative" @click.stop>
             <button @click="toggleBillsMenu"
               class="px-4 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600/20 flex items-center">
-              <span class="font-medium lg:text-xl text-slate-100 hover:text-emerald-400 mr-2">Számlák</span>
+              <span class="font-medium lg:text-xl text-slate-100 hover:text-emerald-400 mr-2">Kiállított
+                Számlák</span>
               <i class="fa-solid fa-chevron-down text-xs text-slate-100"
                 :class="{ 'transform rotate-180': isBillsMenuOpen }"></i>
             </button>
@@ -46,17 +68,17 @@
                 <RouterLink to="/bills/AllBills" @click="isBillsMenuOpen = false"
                   class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
                   :class="getActiveClass('/bills/AllBills')">
-                  <span class="font-medium text-slate-100">Számlák</span>
-                </RouterLink>
-                <RouterLink to="/rents/renthistory" @click="isBillsMenuOpen = false"
-                  class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
-                  :class="getActiveClass('/rents/renthistory')">
-                  <span class="font-medium text-slate-100">Lezárt Bérlések</span>
+                  <span class="font-medium text-slate-100">Összes Számla</span>
                 </RouterLink>
                 <RouterLink to="/bills/fines" @click="isBillsMenuOpen = false"
                   class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
                   :class="getActiveClass('/bills/fines')">
                   <span class="font-medium text-slate-100">Bírságok</span>
+                </RouterLink>
+                <RouterLink to="/rents/renthistory" @click="isBillsMenuOpen = false"
+                  class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
+                  :class="getActiveClass('/rents/renthistory')">
+                  <span class="font-medium text-slate-100">Lezárt Bérlések</span>
                 </RouterLink>
               </div>
             </div>
@@ -66,7 +88,7 @@
           <div class="relative" @click.stop>
             <button @click="toggleCarsMenu"
               class="px-4 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600/20 flex items-center">
-              <span class="font-medium text-slate-100 hover:text-emerald-400 mr-2">Autók</span>
+              <span class="font-medium text-slate-100 hover:text-emerald-400 mr-2">Jármű Kezelések </span>
               <i class="fa-solid fa-chevron-down text-xs text-slate-100"
                 :class="{ 'transform rotate-180': isCarsMenuOpen }"></i>
             </button>
@@ -78,17 +100,17 @@
                 <RouterLink to="/cars" @click="isCarsMenuOpen = false"
                   class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
                   :class="getActiveClass('/cars')">
-                  <span class="font-medium text-slate-100">Autók</span>
+                  <span class="font-medium text-slate-100">Flotta nyilvántartó</span>
                 </RouterLink>
                 <RouterLink to="/fleets/fleetIndex" @click="isCarsMenuOpen = false"
                   class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
                   :class="getActiveClass('/fleets/fleetIndex')">
-                  <span class="font-medium text-slate-100">Flotta</span>
+                  <span class="font-medium text-slate-100">Flottakezelés</span>
                 </RouterLink>
                 <RouterLink to="/orders" @click="isCarsMenuOpen = false"
                   class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
                   :class="getActiveClass('/orders')">
-                  <span class="font-medium text-slate-100">Előrendelés</span>
+                  <span class="font-medium text-slate-100">Előrendelések</span>
                 </RouterLink>
               </div>
             </div>
@@ -103,38 +125,38 @@
       <div class="w-full mx-auto px-4 py-4 space-y-4">
         <!-- Számlák Szekció -->
         <div class="space-y-2">
-          <div class="px-4 py-2 font-medium text-slate-100 bg-emerald-700/30 w-fit rounded-lg italic">Számlák</div>
+          <div class="px-4 py-2 font-medium text-slate-100 bg-emerald-700/30 w-fit rounded-lg">Kiállított Számlák</div>
           <div class="space-y-1 pl-2">
             <RouterLink to="/bills/AllBills" @click="menuOpen = false"
               class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
-              <span class="font-medium text-slate-100">Számlák</span>
-            </RouterLink>
-            <RouterLink to="/rents/renthistory" @click="menuOpen = false"
-              class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
-              <span class="font-medium text-slate-100">Lezárt Bérlések</span>
+              <span class="font-medium text-slate-100">Összes Számla</span>
             </RouterLink>
             <RouterLink to="/bills/fines" @click="menuOpen = false"
               class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
               <span class="font-medium text-slate-100">Bírságok</span>
+            </RouterLink>
+            <RouterLink to="/rents/renthistory" @click="menuOpen = false"
+              class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
+              <span class="font-medium text-slate-100">Lezárt Bérlések</span>
             </RouterLink>
           </div>
         </div>
 
         <!-- Autók Szekció -->
         <div class="space-y-2">
-          <div class="px-4 py-2 font-medium text-slate-100 bg-emerald-700/30 w-fit rounded-lg italic">Autók</div>
+          <div class="px-4 py-2 font-medium text-slate-100 bg-emerald-700/30 w-fit rounded-lg">Autók</div>
           <div class="space-y-1 pl-2">
             <RouterLink to="/cars" @click="menuOpen = false"
               class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
-              <span class="font-medium text-slate-100">Autók</span>
+              <span class="font-medium text-slate-100">Jármű lekérdezés</span>
             </RouterLink>
             <RouterLink to="/fleets/fleetIndex" @click="menuOpen = false"
               class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
-              <span class="font-medium text-slate-100">Flotta</span>
+              <span class="font-medium text-slate-100">Flottakezelés</span>
             </RouterLink>
             <RouterLink to="/orders" @click="menuOpen = false"
               class="block px-4 py-2 rounded-lg hover:bg-emerald-600/20 transition-colors duration-200">
-              <span class="font-medium text-slate-100">Előrendelés</span>
+              <span class="font-medium text-slate-100">Előrendelések</span>
             </RouterLink>
           </div>
         </div>
@@ -152,6 +174,7 @@ const authStore = useAuthStore();
 const menuOpen = ref(false);
 const isBillsMenuOpen = ref(false);
 const isCarsMenuOpen = ref(false);
+const isMailSystemMenuOpen = ref(false);
 const router = useRouter();
 
 function toggleMenu() {
@@ -162,6 +185,14 @@ function toggleBillsMenu() {
   isBillsMenuOpen.value = !isBillsMenuOpen.value;
   if (isBillsMenuOpen.value) {
     isCarsMenuOpen.value = false;
+    isMailSystemMenuOpen.value = false;
+  }
+}
+function toggleMailSystemMenu() {
+  isMailSystemMenuOpen.value = !isMailSystemMenuOpen.value;
+  if (isMailSystemMenuOpen.value) {
+    isCarsMenuOpen.value = false;
+    isBillsMenuOpen.value = false;
   }
 }
 
@@ -169,6 +200,7 @@ function toggleCarsMenu() {
   isCarsMenuOpen.value = !isCarsMenuOpen.value;
   if (isCarsMenuOpen.value) {
     isBillsMenuOpen.value = false;
+    isMailSystemMenuOpen.value = false;
   }
 }
 

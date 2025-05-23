@@ -1,7 +1,7 @@
 <template>
     <BaseHeader />
 
-    <Slider />
+    <NewInspiration />
     <Sustainable />
     <ZeroEmissionSection />
     <CompanyOfferSection />
@@ -13,7 +13,7 @@
 <script setup>
 import BaseHeader from '@layout/BaseHeader.vue';
 import BaseFooter from '@layout/BaseFooter.vue';
-import Slider from '@/pages/indexpage/Slider.vue';
+import NewInspiration from '@/pages/indexpage/NewInspiration.vue';
 import { useAuthStore } from '@stores/AuthenticationStore';
 import { onMounted } from 'vue';
 import Sustainable from '@/pages/indexpage/Sustainable.vue';

@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 max-w-[1440px] xl:max-w-[1920px] mx-auto
     mt-12" style="font-family: 'Nunito','Arial';">
             <!-- Miért? -->
-            <div class="group flex flex-col bg-slate-900/70 backdrop-blur-sm rounded-xl p-6 min-h-[200px]">
+            <div class="group flex flex-col bg-slate-900/70 backdrop-blur-sm rounded-xl p-6 min-h-[200px] border-2 border-slate-300/40">
                 <div class="flex items-center gap-3 mb-3">
                     <i class="fa-solid fa-leaf text-xl text-emerald-400"></i>
                     <h3 class="text-lg font-bold text-white">Miért?</h3>
@@ -19,7 +19,7 @@
             </div>
 
             <!-- Mennyiért? -->
-            <div class="group flex flex-col bg-slate-900/70 backdrop-blur-sm rounded-xl p-6 min-h-[200px]">
+            <div class="group flex flex-col bg-slate-900/70 backdrop-blur-sm rounded-xl p-6 min-h-[200px] border-2 border-slate-300/40">
                 <div class="flex items-center gap-3 mb-3">
                     <i class="fa-solid fa-wallet text-xl text-emerald-400"></i>
                     <h3 class="text-lg font-bold text-white">Mennyiért?</h3>
@@ -35,7 +35,7 @@
             </div>
 
             <!-- Hogyan? -->
-            <div class="group flex flex-col bg-slate-900/70 backdrop-blur-sm rounded-xl p-6 min-h-[200px]">
+            <div class="group flex flex-col bg-slate-900/70 backdrop-blur-sm rounded-xl p-6 min-h-[200px] border-2 border-slate-300/40">
                 <div class="flex items-center gap-3 mb-3">
                     <i class="fa-solid fa-bolt text-xl text-emerald-400"></i>
                     <h3 class="text-lg font-bold text-white">Hogyan?</h3>
@@ -51,7 +51,7 @@
             </div>
 
             <!-- Parkolási Zónák -->
-            <div class="group flex flex-col bg-slate-900/70 backdrop-blur-sm rounded-xl p-6 min-h-[200px]">
+            <div class="group flex flex-col bg-slate-900/70 backdrop-blur-sm rounded-xl p-6 min-h-[200px] border-2 border-slate-300/40">
                 <div class="flex items-center gap-3 mb-3">
                     <i class="fa-solid fa-map-location-dot text-xl text-emerald-400"></i>
                     <h3 class="text-lg font-bold text-white">Parkolási Zónák</h3>
