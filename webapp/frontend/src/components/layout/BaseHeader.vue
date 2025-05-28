@@ -52,6 +52,41 @@
             </div>
           </div>
 
+          <div class="hidden lg:flex lg:items-center lg:space-x-4">
+
+            <div class="relative" @click.stop>
+              <button @click="toggleCostumerSupportMenu"
+                class="px-4 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600/20 flex items-center">
+                <span class="font-medium lg:text-xl text-slate-100 hover:text-emerald-400 mr-2">Ügyfélszolgálat</span>
+                <i class="fa-solid fa-chevron-down text-xs text-slate-100"
+                  :class="{ 'transform rotate-180': isCostumerSupportMenuOpen }"></i>
+              </button>
+
+              <div v-if="isCostumerSupportMenuOpen"
+                class="fixed mt-2 w-48 bg-slate-800/95 backdrop-blur-sm rounded-xl border border-emerald-500/20 shadow-lg overflow-hidden"
+                style="transform: translateX(0); top: 4rem;">
+                <div class="relative">
+                  <RouterLink to="/admins" @click="isCostumerSupportMenuOpen = false"
+                    class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
+                    :class="getActiveClass('/')">
+                    <span class="font-medium text-slate-100">Flottakezelők</span>
+                  </RouterLink>
+                  <RouterLink to="/admins2" @click="isCostumerSupportMenuOpen = false"
+                    class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
+                    :class="getActiveClass('/admin3')">
+                    <span class="font-medium text-slate-100">Call-centeresek</span>
+                  </RouterLink>
+                  <RouterLink to="/rents/renthistory" @click="isCostumerSupportMenuOpen = false"
+                    class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
+                    :class="getActiveClass('/admins4')">
+                    <span class="font-medium text-slate-100">Supervisor Panel</span>
+                  </RouterLink>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
           <div class="relative" @click.stop>
             <button @click="toggleBillsMenu"
               class="px-4 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600/20 flex items-center">
@@ -100,7 +135,7 @@
                 <RouterLink to="/cars" @click="isCarsMenuOpen = false"
                   class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
                   :class="getActiveClass('/cars')">
-                  <span class="font-medium text-slate-100">Flotta nyilvántartó</span>
+                  <span class="font-medium text-slate-100">Gépjármű nyilvántartó</span>
                 </RouterLink>
                 <RouterLink to="/fleets/fleetIndex" @click="isCarsMenuOpen = false"
                   class="block px-4 py-3 hover:bg-emerald-600/20 transition-colors duration-200"
@@ -175,17 +210,27 @@ const menuOpen = ref(false);
 const isBillsMenuOpen = ref(false);
 const isCarsMenuOpen = ref(false);
 const isMailSystemMenuOpen = ref(false);
+const isCostumerSupportMenuOpen = ref(false);
 const router = useRouter();
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value;
 }
 
+function toggleCostumerSupportMenu() {
+  isCostumerSupportMenuOpen.value = !isCostumerSupportMenuOpen.value;
+  if (isCostumerSupportMenuOpen.value) {
+    isCarsMenuOpen.value = false;
+    isMailSystemMenuOpen.value = false;
+    isBillsMenuOpen.value = false;
+  }
+}
 function toggleBillsMenu() {
   isBillsMenuOpen.value = !isBillsMenuOpen.value;
   if (isBillsMenuOpen.value) {
     isCarsMenuOpen.value = false;
     isMailSystemMenuOpen.value = false;
+    isCostumerSupportMenuOpen.value = false;
   }
 }
 function toggleMailSystemMenu() {
@@ -193,6 +238,7 @@ function toggleMailSystemMenu() {
   if (isMailSystemMenuOpen.value) {
     isCarsMenuOpen.value = false;
     isBillsMenuOpen.value = false;
+    isCostumerSupportMenuOpen.value = false;
   }
 }
 
@@ -201,6 +247,7 @@ function toggleCarsMenu() {
   if (isCarsMenuOpen.value) {
     isBillsMenuOpen.value = false;
     isMailSystemMenuOpen.value = false;
+    isCostumerSupportMenuOpen.value = false;
   }
 }
 
@@ -215,9 +262,10 @@ function handleClickOutside(event) {
   if (!event.target.closest('.relative')) {
     isBillsMenuOpen.value = false;
     isCarsMenuOpen.value = false;
+    isCostumerSupportMenuOpen.value = false;
+    isMailSystemMenuOpen.value = false;
   }
 }
-
 onMounted(() => {
   document.addEventListener('click', handleClickOutside);
 });

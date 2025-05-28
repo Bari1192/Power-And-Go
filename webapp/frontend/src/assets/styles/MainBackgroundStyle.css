@@ -1,0 +1,7 @@
+.main {
+  background: url("@img/Welcome/blocks3.webp");
+  background-position: center;
+  background-repeat: repeat-y;
+  background-size: cover;
+  background-attachment: fixed;
+}

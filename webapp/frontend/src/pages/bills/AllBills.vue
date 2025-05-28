@@ -35,12 +35,11 @@
                     <!-- Filters & Controls -->
                     <div class="bg-slate-800 rounded-t-2xl p-6 border border-emerald-500/20">
                         <div class="flex flex-wrap gap-4 items-center justify-between">
-                            <!-- Search -->
                             <div class="flex-grow max-w-md">
                                 <div class="relative">
                                     <input type="text" placeholder="Keresés..."
                                         class="w-full bg-slate-700 border-2 border-emerald-100/20 rounded-xl p-3 text-white placeholder-slate-200 focus:outline-none focus:border-emerald-500">
-                                    <i class="fas fa-search absolute right-3 top-3 text-slate-200"></i>
+                                    <i class="fas fa-search absolute right-5 top-5 text-md text-lime-300"></i>
                                 </div>
                             </div>
 
@@ -66,7 +65,8 @@
                             <table class="w-full">
                                 <thead>
                                     <tr class="bg-slate-500/50 ">
-                                        <th class="px-6 py-4 text-left text-md font-semibold text-slate-100">Típus</th>
+                                        <th class="px-6 py-4 text-md font-semibold text-slate-100 text-center">Típus
+                                        </th>
 
                                         <th class="px-6 py-4 text-left text-md font-semibold text-slate-100">Bérlési idő
                                         </th>
@@ -85,10 +85,12 @@
                                     </tr>
                                 </thead>
                                 <tbody v-for="fine in fines" :key="fine.id">
-                                    <tr
-                                        class="border-t border-slate-700 hover:bg-slate-700/30 transition-colors duration-200 cursor-pointer">
-                                        <td class="px-6 py-4">
-                                            <div class="flex items-center">
+                                    <tr class="border-t border-slate-700 hover:bg-slate-700/30 transition-colors duration-200 cursor-pointer"
+                                        :class="isRentalDetailOpen(fine.id) ? 'bg-lime-700/45 hover:bg-lime-700/45' : 'bg-slate-800'">
+                                        <td class="px-6 py-4 hover:bg-gray-950/55" @click="toggleRentalDetail(fine.id)"
+                                            :class="{ 'bg-lime-950/75': isRentalDetailOpen(fine.id) }">
+
+                                            <div class="flex items-center justify-center mx-auto">
                                                 <i class="fas fa-file-invoice text-emerald-400 mr-3"></i>
                                                 <span class="text-white">{{ fine.bill_type }}</span>
                                             </div>
@@ -100,10 +102,12 @@
                                         <td v-if="fine.credits" class="px-6 py-4 flex flex-row justify-between m-auto">
                                             <span class="text-emerald-400">{{
                                                 carStore.formatToOneThousandPrice(fine.credits)
-                                                }} Ft</span> <span class="text-slate-400 text-md italic">({{
-                                                    fine.charged_kw }} kW)</span>
+                                                }} Ft</span> <span class="text-slate-400 text-md italic"
+                                                :class="{ 'text-gray-300': isRentalDetailOpen(fine.id) }">
+                                                ({{ fine.charged_kw }} kW)</span>
                                         </td>
-                                        <td v-else class="px-6 py-4 text-slate-400 italic">
+                                        <td v-else class="px-6 py-4 text-slate-400 italic"
+                                            :class="{ 'text-gray-300': isRentalDetailOpen(fine.id) }">
                                             Töltés nem volt.
                                         </td>
                                         <td class="px-6 py-4 text-slate-300">{{ fine.invoice_date }}</td>
@@ -114,7 +118,8 @@
                                         <td class="px-6 py-4">
                                             <span :class="{
                                                 'bg-emerald-500/20 text-emerald-400': fine.invoice_status === 'active',
-                                                'bg-amber-500/20 text-amber-400': fine.invoice_status === 'pending'
+                                                'bg-amber-500/20 text-amber-400': fine.invoice_status === 'pending' || !isRentalDetailOpen(fine.id),
+                                                'bg-amber-500/50 text-amber-200': isRentalDetailOpen(fine.id),
                                             }" class="px-3 py-1 rounded-full text-sm">
                                                 {{ fine.invoice_status }}
                                             </span>
@@ -128,14 +133,16 @@
                                         </td>
                                     </tr>
                                     <tr v-if="isRentalDetailOpen(fine.id)" class="bg-gray-800/30">
-                                        <td colspan="7" class="px-6 py-4">
+                                        <td colspan="7" class="px-6 pt-8 pb-4 md:pb-20">
                                             <div class="md:min-h-[100px] w-full border-x-4 border-emerald-500/85 pl-4 bg-slate-600/50 p-4 rounded-r-2xl 
                                                 rounded-l-2xl">
                                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                     <!-- Főbb adatok -->
                                                     <div class="space-y-2">
-                                                        <h3 class="text-emerald-400 font-semibold text-lg">Bérlési
-                                                            információk</h3>
+                                                        <h3
+                                                            class="text-emerald-400 font-semibold text-lg border-b-2 border-slate-100 w-fit">
+                                                            Bérlés
+                                                            összesítő</h3>
                                                         <div class="grid grid-cols-2 gap-2">
                                                             <div class="text-slate-300">Felhasználó:</div>
                                                             <div class="text-white">{{ fine.person }}</div>
@@ -156,7 +163,9 @@
 
                                                     <!-- Számlázási adatok -->
                                                     <div class="space-y-2">
-                                                        <h3 class="text-emerald-400 font-semibold text-lg">Számlázási
+                                                        <h3
+                                                            class="text-emerald-400 font-semibold text-lg border-b-2 border-slate-100 w-fit">
+                                                            Számlázási
                                                             adatok</h3>
                                                         <div class="grid grid-cols-2 gap-2">
                                                             <div class="text-slate-300">Számla azonosító:</div>
@@ -188,7 +197,9 @@
 
                                                     <!-- Egyéb adatok -->
                                                     <div class="space-y-2">
-                                                        <h3 class="text-emerald-400 font-semibold text-lg">Bérlés
+                                                        <h3
+                                                            class="text-emerald-400 font-semibold text-lg border-b-2 border-slate-100 w-fit">
+                                                            Bérlés
                                                             részletei</h3>
                                                         <div class="grid grid-cols-2 gap-2">
                                                             <div class="text-slate-300">Megtett távolság:</div>
@@ -203,11 +214,15 @@
                                                                 fine.charged_kw }} kW</div>
 
                                                             <div class="text-slate-300">Vezetési idő:</div>
-                                                            <div class="text-white italic">{{ fine.driving_minutes }} perc
+                                                            <div class="text-white italic">{{ fine.driving_minutes }}
+                                                                perc
                                                             </div>
 
-                                                            <div v-if="fine.parking_minutes > 0" class="text-slate-300">Parkolási idő:</div>
-                                                            <div v-if="fine.parking_minutes > 0" class="text-white italic">{{ fine.parking_minutes }} perc
+                                                            <div v-if="fine.parking_minutes > 0" class="text-slate-300">
+                                                                Parkolási idő:</div>
+                                                            <div v-if="fine.parking_minutes > 0"
+                                                                class="text-white italic">{{ fine.parking_minutes }}
+                                                                perc
                                                             </div>
 
                                                             <div v-if="fine.credits > 0" class="text-slate-300">Jóváírt
@@ -354,12 +369,5 @@ onMounted(() => {
 
 
 <style>
-.main {
-    background: url('@img/Welcome/blocks3.webp');
-    background-position: center;
-    background-repeat: repeat-y;
-    background-size: cover;
-    background-attachment: fixed;
-
-}
+@import url('@assets/styles/MainBackgroundStyle.css');
 </style>

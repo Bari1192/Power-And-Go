@@ -1,24 +1,153 @@
 <template>
     <BaseLayout>
-        <div class="my-6">
-            <div class="container mx-auto mb-20 bg-white/60 py-6 rounded-3xl">
-                <div class="col">
-                    <div class="row">
-                        <p
-                            class="text-5xl py-4 px-6 rounded-2xl bg-emerald-500 shadow-xl border-4 border-green-700 flex align-middle mx-auto justify-center w-fit text-center mt-10 text-sky-100 font-semibold">
-                            Autók Megjelenítése</p>
-                        <div class=" w-2/5 border-b-4 mx-auto border-slate-600 mt-3 mb-5 shadow-xl"></div>
-                        <div class=" w-2/3 border-b-4 mx-auto border-slate-600 mt-0 mb-6 shadow-xl"></div>
+        <div class="main">
+            <div class="min-h-screen bg-slate-900/45 py-20">
+                <div class="max-w-7xl mx-auto mb-8">
+                    <div
+                        class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 border border-emerald-500/20 backdrop-blur-sm">
+                        <h1 class="text-3xl font-bold text-white mb-2">Járműpark Áttekintése</h1>
+                        <p class="text-slate-400">
+                            Részletes kimutatás a flotta állapotáról és elérhetőségéről
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+                            <div class="bg-slate-800/50 p-4 rounded-xl border border-emerald-500/20">
+                                <div class="text-emerald-400 text-md font-semibold">Összes jármű</div>
+                                <div class="text-2xl font-bold text-white">{{ cars.length }} db</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-xl border border-emerald-500/20">
+                                <div class="text-emerald-400 text-md font-semibold">Folyamatban lévő bérlések</div>
+                                <div class="text-2xl font-bold text-white">{{ carsInRentAmount }} db</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-xl border border-emerald-500/20">
+                                <div class="text-emerald-400 text-md font-semibold">Szabad járművek</div>
+                                <div class="text-2xl font-bold text-white">{{ carsFreeForRent }} db</div>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-xl border border-emerald-500/20">
+                                <div class="text-emerald-400 text-md font-semibold">Lemerült járművek</div>
+                                <div class="text-2xl font-bold text-white">{{ carsWithLowCharge }} db</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="max-w-7xl mx-auto">
+                    <div class="bg-slate-800 rounded-t-2xl p-6 border border-emerald-500/20">
+                        <div class="flex justify-between gap-4 items-center">
+                            <div class="flex-grow max-w-md">
+                                <div class="relative">
+                                    <input type="text" placeholder="Keresés rendszám, márka vagy modell alapján..."
+                                        v-model="searchTerm"
+                                        class="w-full bg-slate-700 border-2 border-emerald-300/20 rounded-xl p-3 text-white placeholder-slate-200 focus:outline-none focus:border-emerald-500">
+                                    <i class="fas fa-search absolute right-5 top-5 text-md text-lime-300"></i>
+                                </div>
+                            </div>
+
+                            <div>
+                                <select v-model="statusFilter"
+                                    class="bg-slate-700 border border-emerald-500/20 rounded-xl font-semibold pl-4 pr-8 py-3 text-white focus:outline-none focus:border-emerald-500">
+                                    <option selected value="all">Minden státusz</option>
+                                    <option value="Szabad">Szabad</option>
+                                    <option value="Bérlés alatt">Bérlés alatt</option>
+                                    <option value="Kritikus töltés">Kritikus töltés</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
-                    <div v-if="!isLoading">
-                        <BaseTable :cars="carsStore.cars" @goToCar="goToCar" />
-                    </div>
-                    <div v-else-if="isLoading" class="text-center">
-                        <p class="text-3xl text-red-600 font-medium">Betöltés folyamatban...</p>
-                    </div>
-                    <div v-else>
-                        <p class="text-3xl text-gray-500 font-medium">Nem találhatóak autók az adatbázisban!</p>
+                    <div class="bg-slate-800 rounded-b-2xl border-x border-b border-emerald-500/20 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="bg-slate-500/50 ">
+                                        <th class="px-6 py-4 text-left text-md font-semibold text-slate-100">Rendszám
+                                        </th>
+                                        <th class="px-6 py-4 text-center text-md font-semibold text-slate-100">
+                                            Töltöttség
+                                        </th>
+                                        <th class="w-1">
+
+                                        </th>
+                                        <th class="px-6 py-4 text-center text-md font-semibold text-slate-100">Töltési
+                                            Hatótáv</th>
+                                        <th class="px-6 py-4 text-left text-md font-semibold text-slate-100">
+                                            Kilométeróra
+                                        </th>
+
+                                        <th class="px-6 py-4 text-left text-md font-semibold text-slate-100">Típus</th>
+
+                                        <th class="px-6 py-4 text-center text-md font-semibold text-slate-100">Státusz
+                                        </th>
+                                        <th class="px-6 py-4 text-center text-md font-semibold text-slate-100">Műveletek
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody v-for="car in carsFilterBy" :key="car.car_id">
+                                    <tr
+                                        class="border-t border-slate-700 hover:bg-slate-700/30 transition-colors duration-200"
+                                        :class="isOperationOpen(car.car_id) ? 'bg-emerald-600/35 hover:bg-emerald-600/35' : 'bg-slate-700/20 hover:bg-slate-700/30'">
+                                        <td class="px-6 py-4 text-white">{{ car.plate }}</td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center w-full gap-4">
+                                                <!-- Töltési sáv konténer -->
+                                                <div class="flex items-center flex-1 gap-2">
+                                                    <div class="relative w-32 h-2 bg-gray-700 rounded-full">
+                                                        <div class="absolute h-full rounded-full transition-all duration-300"
+                                                            :style="{
+                                                                width: car.power_percent + '%',
+                                                                backgroundColor: car.power_percent > 50 ? 'oklch(76.8% 0.233 130.85)' :
+                                                                    car.power_percent > 20 ? 'oklch(75% 0.183 55.934)' :
+                                                                        '#ef4444'
+                                                            }">
+                                                        </div>
+                                                    </div>
+                                                    <span class="text-sm font-medium text-white">
+                                                        {{ Math.round(car.power_percent) }}%
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <i v-if="car.power_percent < 20"
+                                                class="fas fa-exclamation-triangle text-yellow-400">
+                                            </i>
+                                        </td>
+                                        <td class="px-6 py-4 text-slate-300 text-center">{{ car.estimated_range }} km
+                                        </td>
+
+                                        <td class="px-6 py-4 text-slate-300">{{ car.manufacturer }} {{ car.carmodel }}
+                                        </td>
+                                        <td class="px-6 py-4 text-slate-300">
+                                            {{ carsStore.formatToOneThousandPrice(car.odometer) }} km</td>
+                                        <td class="px-6 py-4 text-center">
+                                            <span class="px-4 py-1 rounded-lg text-sm font-medium" :class="{
+                                                'bg-green-500/20 text-green-400': car.status_name === 'Szabad',
+                                                'bg-yellow-200/20 text-yellow-300': car.status_name === 'Bérlés alatt',
+                                                'bg-red-500/20 text-red-400': car.status_name === 'Kritikus töltés'
+                                            }">{{ car.status_name }}</span>
+                                        </td>
+                                        <td class="text-slate-400 hover:text-emerald-400 ">
+                                            <button @click="openOperation(car.car_id)"
+                                                class="w-full h-full  transition-all duration-200">
+                                                <i class="fas flex justify-center py-1 px-2 bg-slate-300/55 text-emerald-300 rounded-full"
+                                                    :class="isOperationOpen(car.car_id) ? 'fa-chevron-down' : 'fa-chevron-right'"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr v-if="isOperationOpen(car.car_id)" class="bg-gray-800/30">
+                                        <td colspan="8" class="px-6 py-2">
+                                            <carDetailsSection :carId="car.car_id"
+                                                :carFines="carsStore.getOneFineBill(car.car_id)" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div v-if="isLoading" class="p-4">
+                            <p class="text-center text-green">Betöltés folyamatban...</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -28,20 +157,58 @@
 
 <script setup>
 import BaseLayout from "@layouts/BaseLayout.vue";
-import BaseTable from "@layouts/BaseTable.vue";
-import { onMounted, ref } from "vue";
+import carDetailsSection from "./carDetailsSection.vue";
+
+import { computed, onMounted, ref } from "vue";
 import { useCarStore } from "@stores/carStore";
 import { storeToRefs } from 'pinia';
 
 const carsStore = useCarStore()
 const { cars } = storeToRefs(carsStore);
-const adatok = ref([]);
-const isLoading = ref(true);
-const goToCar = ref(null);
+
+const searchTerm = ref('');
+const statusFilter = ref('all');
+
+const isLoading = ref(false);
+const openCarDetails = ref({});
+
+const openOperation = (carId) => {
+    openCarDetails.value[carId] = !openCarDetails.value[carId];
+
+};
+// Ellenőrzés, nyitva / csukva
+const isOperationOpen = (carId) => !!openCarDetails.value[carId];
 
 onMounted(async () => {
     await carsStore.getCars();
+    await carsStore.getAllFinesBill();
     isLoading.value = false;
 });
 
+/////// Szűrési inputhoz a struki \\\\\\\\\\\\
+const carsFilterBy = computed(() => {
+    let resultValues = cars.value;
+
+    if (searchTerm.value && searchTerm.value.trim() !== '') {
+        resultValues = resultValues.filter(car =>
+            car.plate.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+            car.carmodel.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+            car.manufacturer.toLowerCase().includes(searchTerm.value.toLowerCase())
+        );
+    }
+
+    if (statusFilter.value !== 'all') {
+        resultValues = carsStore.cars.filter(car => car.status_name === statusFilter.value);
+    }
+    return resultValues;
+});
+const carsInRentAmount = computed(() => carsStore.cars.filter(car => car.status_name == "Bérlés alatt").length);
+const carsFreeForRent = computed(() => carsStore.cars.filter(car => car.status_name == "Szabad").length);
+const carsWithLowCharge = computed(() => carsStore.cars.filter(car => car.status_name == "Kritikus töltés").length);
 </script>
+
+<style>
+@import url('@assets/styles/MainBackgroundStyle.css');
+
+@import url("https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300;400;700&display=swap");
+</style>

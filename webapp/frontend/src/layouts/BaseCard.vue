@@ -1,20 +1,46 @@
 <template>
-  <div class="card-body sm:min-h-full lg:h-full border-2 border-lime-400 rounded-md overflow-hidden ">
-    <div class="card-title md:min-h-18 lg:min-h-16 lg:max-h-20 bg-emerald-400/65 border-b-2 border-emerald-300 py-1 text-xl px-2 text-white font-bold flex items-center">
-      {{ title }}
+  <div
+    class="card-container bg-slate-900 rounded-xl shadow-md border border-emerald-500/20 overflow-hidden hover:shadow-cyan-400/30 transition-shadow duration-300">
+    <!-- Card Header -->
+    <div
+      class="bg-gradient-to-r from-emerald-700/75 to-emerald-500/40 px-4 py-3 text-lg font-bold text-white flex items-center justify-between">
+      <span>{{ title }}</span>
+      <span class="text-slate-100 text-sm opacity-80">{{ subtitle }}</span>
     </div>
-    <div class="card-text sm:min-h-18 lg:h-24 bg-green-500/35 font-semibold text-xl p-3 text-white/90">
-      {{ text }}
+
+    <!-- Card Body -->
+    <div class="bg-gray-800 p-5 text-slate-200">
+      <div class="text-xl font-semibold text-emerald-100 flex items-center">
+        {{ text }}
+      </div>
       <slot />
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    title: [String, Number],
-    text: [String, Number], 
+<script setup>
+defineProps({
+  title: {
+    type: [String, Number],
+    required: true
   },
-}
+  text: {
+    type: [String, Number],
+    required: true
+  },
+  subtitle: {
+    type: [String, Number],
+    default: ''
+  }
+});
 </script>
+
+<style>
+.card-container:hover {
+  transform: translateY(-3px);
+}
+
+.card-container {
+  transition: transform 0.25s;
+}
+</style>
