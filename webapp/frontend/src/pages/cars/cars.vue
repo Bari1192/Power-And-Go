@@ -159,7 +159,7 @@
 import BaseLayout from "@layouts/BaseLayout.vue";
 import carDetailsSection from "./carDetailsSection.vue";
 
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 import { useCarStore } from "@stores/carStore";
 import { storeToRefs } from 'pinia';
 
@@ -178,12 +178,6 @@ const openOperation = (carId) => {
 };
 // Ellenőrzés, nyitva / csukva
 const isOperationOpen = (carId) => !!openCarDetails.value[carId];
-
-onMounted(async () => {
-    await carsStore.getCars();
-    await carsStore.getAllFinesBill();
-    isLoading.value = false;
-});
 
 /////// Szűrési inputhoz a struki \\\\\\\\\\\\
 const carsFilterBy = computed(() => {

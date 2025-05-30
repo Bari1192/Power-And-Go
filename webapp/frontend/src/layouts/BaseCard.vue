@@ -1,15 +1,12 @@
 <template>
   <div
-    class="card-container bg-slate-900 rounded-xl shadow-md border border-emerald-500/20 overflow-hidden hover:shadow-cyan-400/30 transition-shadow duration-300">
-    <!-- Card Header -->
+    class="card-container bg-slate-700 rounded-xl border border-slate-500/20 overflow-hidden" style="font-family: 'Nunito','Arial';">
     <div
-      class="bg-gradient-to-r from-emerald-700/75 to-emerald-500/40 px-4 py-3 text-lg font-bold text-white flex items-center justify-between">
+      class="bg-gradient-to-r from-purple-900 to-purple-700/85 px-4 py-1 text-lg font-bold text-slate-300 flex items-center">
       <span>{{ title }}</span>
       <span class="text-slate-100 text-sm opacity-80">{{ subtitle }}</span>
     </div>
-
-    <!-- Card Body -->
-    <div class="bg-gray-800 p-5 text-slate-200">
+    <div class="bg-gray-700 p-5 text-slate-200">
       <div class="text-xl font-semibold text-emerald-100 flex items-center">
         {{ text }}
       </div>
@@ -26,7 +23,7 @@ defineProps({
   },
   text: {
     type: [String, Number],
-    required: true
+    default: ''
   },
   subtitle: {
     type: [String, Number],
@@ -34,13 +31,3 @@ defineProps({
   }
 });
 </script>
-
-<style>
-.card-container:hover {
-  transform: translateY(-3px);
-}
-
-.card-container {
-  transition: transform 0.25s;
-}
-</style>

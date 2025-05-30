@@ -25,7 +25,7 @@ export default defaultConfig({
     classes: generateClasses({
       global: {},
       label: {
-        label: "text-lg font-bold text-sky-300 mb-2",
+        label: "",
       },
       select: {
         input: "form-select mx-auto",
@@ -37,7 +37,7 @@ export default defaultConfig({
         input: "form-checkbox",
       },
       textarea: {
-        input: "form-textarea text-sky-800 font-semibold",
+        input: "form-textarea",
       },
       submit: {
         submit: "submit",

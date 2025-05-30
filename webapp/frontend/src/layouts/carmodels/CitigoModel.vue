@@ -22,8 +22,7 @@
 </template>
 
 <script>
-import DemageForm from '@layouts/reportforms/vandalism/DemageForm.vue';
-
+import DemageForm from '@pages/cars/DemageForm.vue';
 export default {
     components: {
         DemageForm,
@@ -69,7 +68,6 @@ export default {
     align-items: center;
     border-top: 2px solid rgba(27, 132, 31, 0.6);
     border-bottom: 2px solid rgba(27, 132, 31, 0.6);
-    border-radius: 26rem;
     background-color: rgba(43, 171, 0, 0.02);
 }
 
@@ -87,18 +85,4 @@ export default {
 margin-top: 3rem;
 }
 
-.marker {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: rgb(223, 238, 244);
-    border-radius: 50%;
-    border: 2px rgb(2, 149, 2) solid;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-}
-
-.marker:hover {
-    background-color: rgba(130, 46, 57, 0.9);
-}
 </style>

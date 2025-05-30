@@ -1,7 +1,7 @@
 <template>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-6 font-semibold">
         <div>
-            <label for="location" class="text-2xl  my-4 text-white block">Baleset pontos helyszíne:</label>
+            <label for="location" class="text-xl my-4 font-semibold text-slate-400 block">Baleset pontos helyszíne:</label>
             <input id="location" type="text" class="border text-sky-900 font-semibold rounded-lg px-3 py-2 w-4/5"
                 placeholder="Kezdje el beírni a címet..." ref="autocompleteInput" />
             <div class="mt-4 space-y-2 text-white ">

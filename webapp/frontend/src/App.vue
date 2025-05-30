@@ -9,6 +9,7 @@ const carStore = useCarStore();
 onMounted(async () => {
   await authStore.initializeFromStorage();
   await carStore.getCars();
+  await carStore.getAllFinesBill();
 });
 </script>
 

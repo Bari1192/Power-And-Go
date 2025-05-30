@@ -32,12 +32,15 @@
 
                 <!-- Funkció gombok -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+
                     <button @click="toggleSection('cleanReport')" :class="[
                         'px-6 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105',
-                        cleanReport ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-500/30' : 'bg-slate-800 text-emerald-400 hover:bg-slate-700 border border-emerald-500/30'
+                        cleanReport ?
+                            'bg-sky-600 text-white shadow-lg shadow-sky-500/30' :
+                            'bg-slate-800 text-sky-400 hover:bg-slate-700 border border-sky-500/30'
                     ]">
                         <i class="fa-solid fa-broom-ball text-slate-50 pr-2"></i>
-                        Tisztasági jelentés
+                        Állapotbejelentés
                     </button>
 
                     <button @click="toggleSection('damageReport')" :class="[
@@ -45,7 +48,7 @@
                         damageReport ? 'bg-amber-600 text-white shadow-lg shadow-orange-500/30' : 'bg-slate-800 text-amber-400 hover:bg-slate-700 border border-amber-500/30'
                     ]">
                         <i class="fa-solid fa-hammer pr-2 text-slate-50"></i>
-                        Rongálás Jelentése
+                        Kárbejelentés
                     </button>
 
                     <button @click="toggleSection('accidentReport')" :class="[
@@ -67,36 +70,20 @@
 
                 <div class="relative">
                     <transition name="fade-slide" mode="out-in">
-                        <div v-if="cleanReport" key="clean"
-                            class="bg-slate-800 border border-emerald-500/20 rounded-xl p-6 mb-8 shadow-inner">
-                            <h3 class="text-xl font-bold text-emerald-400 mb-4">Tisztasági jelentés készítése</h3>
-                            <div class="bg-slate-900/50 rounded-lg p-4">
-                                <p class="text-slate-300">Tisztasági jelentés űrlap helye</p>
-                            </div>
+                        <div v-if="cleanReport" key="clean">
+                            <CleanReportCard :carId="carStore.car.car_id" :lastRenter="getLastRenter()" />
                         </div>
 
-                        <div v-else-if="damageReport" key="damage"
-                            class="bg-slate-800 border border-amber-500/20 rounded-xl p-6 mb-8 shadow-inner">
-                            <h3 class="text-xl font-bold text-amber-400 mb-4">Rongálás bejelentése</h3>
-                            <div class="bg-slate-900/50 rounded-lg p-4">
-                                <p class="text-slate-300">Rongálás jelentés űrlap helye</p>
-                            </div>
+                        <div v-else-if="damageReport && currentModel" key="damage">
+                            <component :is="currentModel" :car-id="carStore.car.car_id"  />
                         </div>
 
-                        <div v-else-if="accidentReport" key="accident"
-                            class="bg-slate-800 border border-red-500/20 rounded-xl p-6 mb-8 shadow-inner">
-                            <h3 class="text-xl font-bold text-red-400 mb-4">Baleset bejelentése</h3>
-                            <div class="bg-slate-900/50 rounded-lg p-4">
-                                <p class="text-slate-300">Baleset jelentés űrlap helye</p>
-                            </div>
+                        <div v-else-if="accidentReport" key="accident">
+                            <CarAccidentReport />
                         </div>
 
-                        <div v-else-if="manualFines" key="fines"
-                            class="bg-slate-800 border border-purple-500/20 rounded-xl p-6 mb-8 shadow-inner">
-                            <h3 class="text-xl font-bold text-purple-400 mb-4">Büntetés készítése</h3>
-                            <div class="bg-slate-900/50 rounded-lg p-4">
-                                <p class="text-slate-300">Büntetés készítés űrlap helye</p>
-                            </div>
+                        <div v-else-if="manualFines" key="fines">
+                            <BasedManualFines :carUserRentsHistory="carStore.carRentHistory" />
                         </div>
                     </transition>
                 </div>
@@ -213,7 +200,7 @@
                                 <div class="p-6">
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                                         <div>
-                                            <p class="text-md text-slate-200 mb-1 font-semibold tracking-wide">
+                                            <p class="text-md text-emerald-400 mb-1 font-semibold tracking-wide">
                                                 Státuszkód</p>
                                             <span
                                                 class="inline-block w-7 h-6 text-center m-auto bg-indigo-500/85 text-gray-50 rounded-full text-md font-semibold">
@@ -221,19 +208,20 @@
                                             </span>
                                         </div>
                                         <div class="md:col-span-2">
-                                            <p class="text-md text-slate-200 mb-1 font-bold tracking-wide">Létrehozva
+                                            <p class="text-md text-emerald-400 mb-1 font-bold tracking-wide">Létrehozva
                                             </p>
                                             <p class="text-slate-300 tracking-wide">{{ ticket.created_at }}
                                             </p>
                                         </div>
                                     </div>
                                     <div class="mt-4 pt-4 border-t border-slate-700">
-                                        <p class="text-md text-slate-200 mb-1 font-semibold tracking-wide">Bejelentés
+                                        <p class="text-md text-emerald-400 mb-1 font-semibold tracking-wide">Bejelentés
                                             tárgya</p>
                                         <p class="text-slate-300 tracking-wide italic">{{ ticket.status_descrip }}</p>
                                     </div>
                                     <div v-if="ticket.admin_description" class="mt-4">
-                                        <p class="text-md text-slate-200 mb-1 font-semibold tracking-wide">Részletek</p>
+                                        <p class="text-md text-emerald-400 mb-1 font-semibold tracking-wide">Részletek
+                                        </p>
                                         <p class="text-slate-300 tracking-wide italic">{{ ticket.admin_description }}
                                         </p>
                                     </div>
@@ -455,8 +443,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import { useCarStore } from '@/stores/carStore'
+import { ref, onMounted, computed } from 'vue';
+import { useCarStore } from '@stores/carStore';
+import CarAccidentReport from './CarAccidentReport.vue';
+import BasedManualFines from './BasedManualFines.vue';
+import CleanReportCard from './CleanReportCard.vue';
+import EupModel from '@layouts/carmodels/EupModel.vue';
+import CitigoModel from '@layouts/carmodels/CitigoModel.vue';
+import KangooModel from '@layouts/carmodels/KangooModel.vue';
+import VivaroModel from '@layouts/carmodels/VivaroModel.vue';
+import KiaNiroModel from '@layouts/carmodels/KiaNiroModel.vue';
 
 const props = defineProps({
     carId: {
@@ -470,6 +466,7 @@ const props = defineProps({
 })
 
 const carStore = useCarStore()
+
 const loadCarData = async () => {
     await carStore.getCarDetails(props.carId);
 }
@@ -478,7 +475,6 @@ const fineDetails = ref({})
 const carDetailsOpen = ref(false)
 const notesOpen = ref(false)
 const rentHistoryOpen = ref(false)
-const finesOpen = ref(false)
 
 // Jelentések
 const cleanReport = ref(false)
@@ -489,10 +485,23 @@ const manualFines = ref(false)
 const finesCount = computed(() => {
     return Array.isArray(props.carFines) ? props.carFines.length : 0;
 });
-
-// Módszerek
+function getLastRenter() {
+    const renters = carStore.carRentHistory.renters || []
+    return renters.length > 0 ? renters[renters.length - 1] : null
+}
+const currentModel = computed(() => {
+  const manufacturerModelMap = {
+    'VW': EupModel,
+    'Skoda': CitigoModel,
+    'Renault': KangooModel,
+    'Opel': VivaroModel,
+    'KIA': KiaNiroModel
+  }
+  const manufacturer = carStore.car?.manufacturer
+  return manufacturerModelMap[manufacturer] || null
+})
+// Dinamikus megjelenése a szekciós részeknek
 const toggleSection = (section) => {
-    // Dinamikus toggle megoldás
     if (section === 'cleanReport') {
         cleanReport.value = !cleanReport.value
         damageReport.value = false
@@ -528,10 +537,6 @@ const toggleRentHistory = () => {
     rentHistoryOpen.value = !rentHistoryOpen.value;
 }
 
-const toggleFines = () => {
-    finesOpen.value = !finesOpen.value
-}
-
 const toggleFineDetails = (fineId) => {
     fineDetails.value[fineId] = !fineDetails.value[fineId];
 };
@@ -542,24 +547,22 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Gyorsabb animáció az átfedés minimalizálásához */
 .fade-slide-leave-active {
-  transition: opacity 0.2s ease, transform 0.15s ease;
+    transition: opacity 0.2s ease, transform 0.15s ease;
 }
 
 .fade-slide-enter-active {
-  transition: opacity 0.2s ease, transform 0.15s ease;
-  /* Kis késleltetés, hogy az előző elem biztosan eltűnjön */
-  transition-delay: 0.05s;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+    transition-delay: 0.05s;
 }
 
 .fade-slide-enter-from {
-  opacity: 0;
-  transform: translateY(10px);
+    opacity: 0;
+    transform: translateY(10px);
 }
 
 .fade-slide-leave-to {
-  opacity: 0;
-  transform: translateY(-10px);
+    opacity: 0;
+    transform: translateY(-10px);
 }
 </style>
