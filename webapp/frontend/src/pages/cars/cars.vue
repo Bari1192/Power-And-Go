@@ -6,8 +6,8 @@
                     <div
                         class="bg-gradient-to-r from-slate-800 to-slate-900 rounded-2xl p-6 border border-emerald-500/20 backdrop-blur-sm">
                         <h1 class="text-3xl font-bold text-white mb-2">Járműpark Áttekintése</h1>
-                        <p class="text-slate-400">
-                            Részletes kimutatás a flotta állapotáról és elérhetőségéről
+                        <p class="text-slate-400 font-semibold">
+                            Részletes kimutatás a járművek állapotáról és elérhetőségéről
                         </p>
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
                             <div class="bg-slate-800/50 p-4 rounded-xl border border-emerald-500/20">
@@ -44,11 +44,17 @@
 
                             <div>
                                 <select v-model="statusFilter"
-                                    class="bg-slate-700 border border-emerald-500/20 rounded-xl font-semibold pl-4 pr-8 py-3 text-white focus:outline-none focus:border-emerald-500">
+                                    class="bg-slate-700 border border-emerald-500/20 rounded-xl cursor-pointer selection:cursor-pointer font-semibold pl-4 pr-8 py-3 text-white focus:outline-none focus:border-emerald-500">
                                     <option selected value="all">Minden státusz</option>
-                                    <option value="Szabad">Szabad</option>
-                                    <option value="Bérlés alatt">Bérlés alatt</option>
-                                    <option value="Kritikus töltés">Kritikus töltés</option>
+                                    <option class="cursor-pointer selection:cursor-pointer " value="Szabad">Szabad
+                                    </option> <!-- [1] -->
+                                    <option value="Foglalva">Foglalás alatt</option><!-- [2] | Felhasználói oldalról -->
+                                    <option value="Bérlés alatt">Aktív Bérlések</option> <!-- [3] -->
+                                    <option value="Baleset miatt kivonva">Balesetes - Kivonva</option> <!-- [4] -->
+                                    <option value="Szervízre vár">Szervízelésre előjegyezve</option> <!-- [5] -->
+                                    <option value="Tisztításra vár">Tisztításra előjegyezve</option> <!-- [6] -->
+                                    <option value="Kritikus töltés">Lemerült járművek</option> <!-- [7] -->
+                                    <option value="Előrendelésre lefoglalva">Előrendelések</option> <!-- [8] -->
                                 </select>
                             </div>
                         </div>
@@ -82,8 +88,7 @@
                                     </tr>
                                 </thead>
                                 <tbody v-for="car in carsFilterBy" :key="car.car_id">
-                                    <tr
-                                        class="border-t border-slate-700 hover:bg-slate-700/30 transition-colors duration-200"
+                                    <tr class="border-t border-slate-700 hover:bg-slate-700/30 transition-colors duration-200"
                                         :class="isOperationOpen(car.car_id) ? 'bg-emerald-600/35 hover:bg-emerald-600/35' : 'bg-slate-700/20 hover:bg-slate-700/30'">
                                         <td class="px-6 py-4 text-white">{{ car.plate }}</td>
                                         <td class="px-6 py-4">
@@ -108,9 +113,9 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <i v-if="car.power_percent < 20"
-                                                class="fas fa-exclamation-triangle text-yellow-400">
-                                            </i>
+                                            <span v-if="car.power_percent < 20" class="material-symbols-outlined text-amber-400 text-3xl">
+                                                battery_android_alert
+                                            </span>
                                         </td>
                                         <td class="px-6 py-4 text-slate-300 text-center">{{ car.estimated_range }} km
                                         </td>
@@ -118,12 +123,12 @@
                                         <td class="px-6 py-4 text-slate-300">{{ car.manufacturer }} {{ car.carmodel }}
                                         </td>
                                         <td class="px-6 py-4 text-slate-300">
-                                            {{ carsStore.formatToOneThousandPrice(car.odometer) }} km</td>
+                                            {{ formatService.formatToOneThousandPrice(car.odometer) }} km</td>
                                         <td class="px-6 py-4 text-center">
                                             <span class="px-4 py-1 rounded-lg text-sm font-medium" :class="{
-                                                'bg-green-500/20 text-green-400': car.status_name === 'Szabad',
-                                                'bg-yellow-200/20 text-yellow-300': car.status_name === 'Bérlés alatt',
-                                                'bg-red-500/20 text-red-400': car.status_name === 'Kritikus töltés'
+                                                'bg-green-500/20 text-green-400': car.status === 1,
+                                                'bg-yellow-200/20 text-yellow-300': car.status === 3,
+                                                'bg-red-500/20 text-red-400': car.status === 7
                                             }">{{ car.status_name }}</span>
                                         </td>
                                         <td class="text-slate-400 hover:text-emerald-400 ">
@@ -161,9 +166,12 @@ import carDetailsSection from "./carDetailsSection.vue";
 
 import { computed, ref } from "vue";
 import { useCarStore } from "@stores/carStore";
+import { useFormatStore } from "@stores/Services/FormatHelperService";
+
 import { storeToRefs } from 'pinia';
 
-const carsStore = useCarStore()
+const formatService = useFormatStore();
+const carsStore = useCarStore();
 const { cars } = storeToRefs(carsStore);
 
 const searchTerm = ref('');
@@ -196,13 +204,14 @@ const carsFilterBy = computed(() => {
     }
     return resultValues;
 });
-const carsInRentAmount = computed(() => carsStore.cars.filter(car => car.status_name == "Bérlés alatt").length);
-const carsFreeForRent = computed(() => carsStore.cars.filter(car => car.status_name == "Szabad").length);
-const carsWithLowCharge = computed(() => carsStore.cars.filter(car => car.status_name == "Kritikus töltés").length);
+const carsFreeForRent = computed(() => carsStore.cars.filter(car => car.status === 1).length);
+const carsReservedByUsers = computed(() => carsStore.cars.filter(car => car.status === 2).length);
+const carsInRentAmount = computed(() => carsStore.cars.filter(car => car.status === 3).length);
+
+const carsWithLowCharge = computed(() => carsStore.cars.filter(car => car.status === 7).length);
 </script>
 
 <style>
 @import url('@assets/styles/MainBackgroundStyle.css');
-
 @import url("https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300;400;700&display=swap");
 </style>

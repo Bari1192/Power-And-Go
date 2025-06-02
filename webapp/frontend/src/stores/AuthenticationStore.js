@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { http } from "@utils/http.mjs";
-import { ToastService } from "@layouts/toasts/ToastService.js";
+import { ToastService } from "./Services/ToastService";
 import { computed, ref } from "vue";
 
 export const useAuthStore = defineStore("auth", () => {

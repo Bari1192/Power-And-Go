@@ -23,7 +23,6 @@
           <BaseCard :title="getPenaltyTitle">
             <form @submit.prevent="handleSubmit">
               <div class="flex flex-col justify-between font-semibold">
-                <!-- Büntetés tétel választó -->
                 <FormKit type="select" v-model="selectedItem" :options="currentPenaltyItems" label="Büntetés típusa:"
                   placeholder="Kérem válassza ki a tétel típusát!" label-class="block text-lg font-semibold mb-2 w-fit"
                   input-class="w-full px-4 py-2 rounded-lg border bg-slate-700 text-slate-100" />
@@ -57,7 +56,7 @@
                     placeholder="Kérem írja le a büntetés kiszabásának indoklását:" label-class="text-lg text-slte-100"
                     input-class="w-full bg-slate-700 text-slate-100 mt-2 max-h-28 min-h-16 w-full border border-gray-200 rounded-lg p-2" />
                   <div v-if="selectedItem" class="text-md font-bold text-purple-200">
-                    Büntetés összege: {{ carStore.formatToOneThousandPrice(getCurrentItemAmount()) }} Ft
+                    Büntetés összege: {{ formatStore.formatToOneThousandPrice(getCurrentItemAmount()) }} Ft
                   </div>
                 </div>
 
@@ -93,7 +92,9 @@
 import { ref, computed } from 'vue';
 import BaseCard from '@layouts/BaseCard.vue';
 import { useCarStore } from "@stores/carStore";
+import { useFormatStore } from '@stores/Services/FormatHelperService';
 const carStore = useCarStore();
+const formatStore = useFormatStore();
 
 
 const minutesQuantity = ref(0);

@@ -45,8 +45,6 @@ class CarController extends Controller
     {
         return ($car->delete()) ? response()->noContent() : abort(500);
     }
-
-    
     
     ###     Egyedi kérések     ###
     public function filterCarFees(Car $car): CarWithFinesResource

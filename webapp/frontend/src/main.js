@@ -6,6 +6,8 @@ import { plugin, defaultConfig } from "@formkit/vue";
 import config from "../formkit.config.js";
 import fastdeepequal from "fast-deep-equal";
 
+
+
 // Vue Toastify - Az értesítésekhez
 import Toast from "vue3-toastify";
 import "vue3-toastify/dist/index.css";

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { http } from "@utils/http.mjs";
-import { ToastService } from "@layouts/toasts/ToastService.js";
+import { ToastService } from "@stores/Services/ToastService";
 
 export const useUserStore = defineStore("users", () => {
   const users = ref([]);
@@ -47,7 +47,8 @@ export const useUserStore = defineStore("users", () => {
       userSearch.value = users.value;
       return;
     }
-    const userTypedStringSetToLowerCase = basedOnSearchLetters.value.toLowerCase();
+    const userTypedStringSetToLowerCase =
+      basedOnSearchLetters.value.toLowerCase();
     userSearch.value = users.value.filter((user) => {
       const username = user.user_name.toLowerCase();
       return username.includes(userTypedStringSetToLowerCase);

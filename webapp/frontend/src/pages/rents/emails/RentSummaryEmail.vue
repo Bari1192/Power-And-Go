@@ -5,8 +5,8 @@
             <div class="flex items-center justify-between">
                 
                 <img src="http://backend.vm1.test/storage/carsImages/1.png" alt="PowerAndGo Logo" class="h-20 opacity-90 w-auto" />
-                <span class="text-gray-200 font-bold text-sm bg-emerald-300/50 border-2 border-teal-500/70 px-4 py-2 rounded-full">
-                    {{ rent.rent_start }}
+                <span class="text-slate-100 tracking-wide font-bold text-md bg-emerald-500 border-2 border-emerald-400 px-4 py-2 rounded-md">
+                     Bérlés Összesítő
                 </span>
             </div>
         </div>

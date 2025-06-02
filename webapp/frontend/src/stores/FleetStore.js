@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { http } from "@utils/http.mjs";
-import { ToastService } from "@layouts/toasts/ToastService.js";
+import { ToastService } from "@stores/Services/ToastService";
 
 export const useFleetStore = defineStore("fleets", () => {
   const fleets = ref([]);

@@ -16,7 +16,7 @@
                             <div class="bg-slate-800/50 p-4 rounded-xl border border-emerald-500/20">
                                 <div class="text-emerald-400 text-md">Összes számla</div>
                                 <div class="text-2xl font-bold text-white">{{
-                                    carStore.formatToOneThousandPrice(pagination.total) }} db</div>
+                                    formatStore.formatToOneThousandPrice(pagination.total) }} db</div>
                             </div>
                             <div class="bg-slate-800/50 p-4 rounded-xl border border-emerald-500/20">
                                 <div class="text-emerald-400 text-md">Aktív számlák</div>
@@ -101,7 +101,7 @@
                                         </td>
                                         <td v-if="fine.credits" class="px-6 py-4 flex flex-row justify-between m-auto">
                                             <span class="text-emerald-400">{{
-                                                carStore.formatToOneThousandPrice(fine.credits)
+                                                formatStore.formatToOneThousandPrice(fine.credits)
                                                 }} Ft</span> <span class="text-slate-400 text-md italic"
                                                 :class="{ 'text-gray-300': isRentalDetailOpen(fine.id) }">
                                                 ({{ fine.charged_kw }} kW)</span>
@@ -113,7 +113,7 @@
                                         <td class="px-6 py-4 text-slate-300">{{ fine.invoice_date }}</td>
                                         <td class="px-6 py-4">
                                             <span class="text-emerald-400 font-semibold">{{
-                                                carStore.formatToOneThousandPrice(fine.total_cost) }} Ft</span>
+                                                formatStore.formatToOneThousandPrice(fine.total_cost) }} Ft</span>
                                         </td>
                                         <td class="px-6 py-4">
                                             <span :class="{
@@ -190,7 +190,8 @@
 
                                                             <div class="text-slate-300">Teljes összeg:</div>
                                                             <div class="text-slate-200 font-semibold">{{
-                                                                carStore.formatToOneThousandPrice(fine.total_cost) }} Ft
+                                                                formatStore.formatToOneThousandPrice(fine.total_cost) }}
+                                                                Ft
                                                             </div>
                                                         </div>
                                                     </div>
@@ -228,7 +229,7 @@
                                                             <div v-if="fine.credits > 0" class="text-slate-300">Jóváírt
                                                                 kreditek:</div>
                                                             <div v-if="fine.credits > 0" class="text-white italic">{{
-                                                                carStore.formatToOneThousandPrice(fine.credits) }} Ft
+                                                                formatStore.formatToOneThousandPrice(fine.credits) }} Ft
                                                             </div>
                                                         </div>
                                                     </div>
@@ -277,7 +278,9 @@ import BaseLayout from '@layouts/BaseLayout.vue';
 import { http } from '@utils/http.mjs';
 import { ref, onMounted, computed } from 'vue';
 import { useCarStore } from '@stores/carStore';
+import { FormatHelperService } from '@stores/Services/FormatHelperService';
 
+const formatStore = FormatHelperService();
 const carStore = useCarStore();
 
 const openRentalDetails = ref({});

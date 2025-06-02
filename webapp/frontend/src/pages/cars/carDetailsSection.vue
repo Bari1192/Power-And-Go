@@ -75,7 +75,7 @@
                         </div>
 
                         <div v-else-if="damageReport && currentModel" key="damage">
-                            <component :is="currentModel" :car-id="carStore.car.car_id"  />
+                            <component :is="currentModel" :car-id="carStore.car.car_id" />
                         </div>
 
                         <div v-else-if="accidentReport" key="accident">
@@ -137,15 +137,16 @@
                                 class="bg-slate-800 rounded-lg p-4 border border-slate-700 hover:border-emerald-500/30 transition-colors">
                                 <h3 class="text-sm font-semibold text-slate-400 mb-1">Futásteljesítmény</h3>
                                 <p class="text-2xl font-bold text-emerald-400">{{
-                                    carStore.formatToOneThousandPrice(carStore.car.odometer) }}
+                                    formatStore.formatToOneThousandPrice(carStore.car.odometer) }}
                                     km</p>
                                 <p class="text-xs text-slate-500 mt-1">Összesen megtett távolság</p>
                             </div>
 
                             <div
                                 class="bg-slate-800 rounded-lg p-4 border border-slate-700 hover:border-emerald-500/30 transition-colors">
-                                <h3 class="text-sm font-semibold text-slate-400 mb-1">Akkumulátor teljesítmény</h3>
+                                <h3 class="text-sm font-semibold text-slate-400 mb-1">Akkumulátor töltöttsége</h3>
                                 <p class="text-2xl font-bold text-emerald-400">{{ carStore.car.power_kw }} kW</p>
+                                <p class="text-xs text-slate-500 mt-1">Aktuális energia szint</p>
                             </div>
 
                             <div
@@ -194,11 +195,15 @@
                                 duration-300">
                                 <div
                                     class="bg-gradient-to-r from-slate-600 to-slate-700 px-6 py-3 border-b border-slate-600">
-                                    <h3 class="text-lg font-semibold text-white/80 italic">Bejegyzés azonosító szám:
-                                        #{{ ticket.status_id + '-' + ticket.id }}</h3>
+                                    <div class="text-lg font-semibold text-white/80 italic">
+                                        <i class="text-2xl mb-0 text-center font-bold"
+                                            :class="checkTicketStatusNumber(ticket.status_id)"></i>
+                                        Bejegyzés azonosító szám:
+                                        #{{ ticket.status_id + '-' + ticket.id }}
+                                    </div>
                                 </div>
                                 <div class="p-6">
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-between">
                                         <div>
                                             <p class="text-md text-emerald-400 mb-1 font-semibold tracking-wide">
                                                 Státuszkód</p>
@@ -207,23 +212,30 @@
                                                 {{ ticket.status_id }}
                                             </span>
                                         </div>
-                                        <div class="md:col-span-2">
-                                            <p class="text-md text-emerald-400 mb-1 font-bold tracking-wide">Létrehozva
+                                        <div class="mr-0">
+                                            <p class="text-md text-emerald-400 mb-1 font-semibold tracking-wide">
+                                                Létrehozva
                                             </p>
                                             <p class="text-slate-300 tracking-wide">{{ ticket.created_at }}
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="mt-4 pt-4 border-t border-slate-700">
-                                        <p class="text-md text-emerald-400 mb-1 font-semibold tracking-wide">Bejelentés
-                                            tárgya</p>
-                                        <p class="text-slate-300 tracking-wide italic">{{ ticket.status_descrip }}</p>
-                                    </div>
-                                    <div v-if="ticket.admin_description" class="mt-4">
-                                        <p class="text-md text-emerald-400 mb-1 font-semibold tracking-wide">Részletek
-                                        </p>
-                                        <p class="text-slate-300 tracking-wide italic">{{ ticket.admin_description }}
-                                        </p>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-between">
+                                        <div class="mt-4 pt-4 border-t border-slate-700">
+                                            <p class="text-md text-emerald-400 mb-1 font-semibold tracking-wide">
+                                                Bejelentés
+                                                tárgya</p>
+                                            <p class="text-slate-300 tracking-wide italic">{{ ticket.status_descrip }}
+                                            </p>
+                                        </div>
+                                        <div v-if="ticket.admin_description" class="mt-4">
+                                            <p class="text-md text-emerald-400 mb-1 font-semibold tracking-wide">
+                                                Részletek
+                                            </p>
+                                            <p class="text-slate-300 tracking-wide italic">{{ ticket.admin_description
+                                                }}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -265,16 +277,24 @@
                                 <thead>
                                     <tr class="border-b border-slate-700">
                                         <th class="text-left py-3 px-4 text-sm lg:text-lg font-semibold text-slate-400">
+                                            Azonosító</th>
+                                        <th class="text-left py-3 px-4 text-sm lg:text-lg font-semibold text-slate-400">
                                             Bérlő</th>
                                         <th class="text-left py-3 px-4 text-sm lg:text-lg font-semibold text-slate-400">
                                             Zárás</th>
-                                        <th class="text-left py-3 px-4 text-sm lg:text-lg font-semibold text-slate-400">
-                                            Töltés</th>
-                                        <th class="text-left py-3 px-4 text-sm lg:text-lg font-semibold text-slate-400">
+                                        <th
+                                            class="text-center py-3 px-4 text-sm lg:text-lg font-semibold text-slate-400">
+                                            Nyit. Töltés</th>
+                                        <th
+                                            class="text-center py-3 px-4 text-sm lg:text-lg font-semibold text-slate-400">
+                                            Zár. Töltés</th>
+                                        <th
+                                            class="text-center py-3 px-4 text-sm lg:text-lg font-semibold text-slate-400">
                                             Távolság
                                         </th>
-                                        <th class="text-left py-3 px-4 text-sm lg:text-lg font-semibold text-slate-400">
-                                            Összeg</th>
+                                        <th
+                                            class="text-certer py-3 px-4 text-sm lg:text-lg font-semibold text-slate-400">
+                                            Végösszeg</th>
                                         <th class="text-left py-3 px-4 text-sm lg:text-lg font-semibold text-slate-400">
                                             Kiállítva
                                         </th>
@@ -283,6 +303,10 @@
                                 <tbody>
                                     <tr v-for="rent in carStore.carRentHistory.renters" :key="rent.rent_id"
                                         class="border-b border-slate-800 hover:bg-slate-800/50 transition-colors">
+                                        <td class="py-3 px-4 text-slate-300">{{
+                                            carStore.car.car_id + '-' + carStore.car.odometer + '-' + rent.rent_id }}
+                                        </td>
+                                        <!-- Amennyiben nem pörgetik a km órát, mindig egyedi azon. lesz -->
                                         <td class="py-3 px-4">
                                             <a :href="`/users/${rent.user}`"
                                                 class="text-emerald-400 hover:text-emerald-300 font-medium">
@@ -290,7 +314,15 @@
                                             </a>
                                         </td>
                                         <td class="py-3 px-4 text-slate-300">{{ rent.rent_close }}</td>
-                                        <td class="py-3 px-4">
+                                        <td class="py-3 px-4 text-center">
+                                            <span :class="[
+                                                'inline-block px-2 py-1 rounded text-sm ',
+                                                rent.start_percent > 20 ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'
+                                            ]">
+                                                {{ rent.start_percent }}%
+                                            </span>
+                                        </td>
+                                        <td class="py-3 px-4 text-center">
                                             <span :class="[
                                                 'inline-block px-2 py-1 rounded text-sm',
                                                 rent.end_percent > 20 ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'
@@ -298,8 +330,8 @@
                                                 {{ rent.end_percent }}%
                                             </span>
                                         </td>
-                                        <td class="py-3 px-4 text-slate-300">{{ rent.distance }} km</td>
-                                        <td class="py-3 px-4 text-emerald-400 font-semibold">{{
+                                        <td class="py-3 px-4 text-slate-300 text-center">{{ rent.distance }} km</td>
+                                        <td class="py-3 px-4 text-emerald-400 font-semibold text-center">{{
                                             rent.rental_cost }} Ft</td>
                                         <td class="py-3 px-4 text-slate-300">{{ rent.invoice_date }}</td>
                                     </tr>
@@ -343,7 +375,7 @@
                                     </h3>
                                     <div class="">
                                         <span class="text-xl font-bold text-red-400 rounded-xl">
-                                            {{ carStore.formatToOneThousandPrice(fine.total_cost) }} Ft
+                                            {{ formatStore.formatToOneThousandPrice(fine.total_cost) }} Ft
                                         </span>
                                         <i
                                             class="fas fa-chevron-down flex justify-center py-1 px-2 ml-2 text-white/85 rounded-full"></i>
@@ -357,50 +389,50 @@
                                     <div
                                         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 font-semibold mt-1 justify-center">
                                         <div>
-                                            <p class="text-sm text-slate-400 mb-1">Számla sorszám</p>
+                                            <p class="text-md text-slate-400 mb-1">Számla sorszám</p>
                                             <p class="text-emerald-400">#{{ fine.id }}</p>
                                         </div>
                                         <div>
-                                            <p class="text-sm text-slate-400 mb-1">Kiállítás dátuma</p>
-                                            <p class="text-emerald-400 text-sm">{{ fine.invoice_date }}</p>
+                                            <p class="text-md text-slate-400 mb-1">Kiállítás dátuma</p>
+                                            <p class="text-slate-300 text-md">{{ fine.invoice_date }}</p>
                                         </div>
                                         <div>
-                                            <p class="text-sm text-slate-400 mb-1">Email értesítés állapota</p>
+                                            <p class="text-md text-slate-400 mb-1">Email értesítés állapota</p>
                                             <span :class="[
-                                                'inline-block px-3 py-1 rounded-full text-sm tracking-wide',
+                                                'inline-block px-3 py-1 rounded-full text-md tracking-wide',
                                                 fine.email_sent === 1 ? 'bg-slate-800 text-emerald-400 hover:bg-slate-700 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-400'
                                             ]">
                                                 {{ fine.email_sent === 1 ? 'Elküldve' : 'Nem lett elküldve' }}
                                             </span>
                                         </div>
                                         <div>
-                                            <p class="text-sm text-slate-400 mb-1">Bérlő</p>
-                                            <p class="text-slate-200 text-sm">{{ fine.person }}</p>
+                                            <p class="text-md text-slate-400 mb-1">Bérlő</p>
+                                            <p class="text-emerald-400 text-md">{{ fine.person }}</p>
                                         </div>
                                     </div>
                                     <div class="w-full h-[2px] bg-slate-400/20 my-4 rounded-3xl"></div>
                                     <div
                                         class="mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 font-semibold">
                                         <div>
-                                            <p class="text-sm text-slate-400 mb-1">Bérlés indítása</p>
-                                            <p class="text-white text-sm ">{{ fine.rent_start }}</p>
+                                            <p class="text-md text-slate-400 mb-1">Bérlés indítása</p>
+                                            <p class="text-slate-300 text-md ">{{ fine.rent_start }}</p>
                                         </div>
                                         <div>
-                                            <p class="text-sm text-slate-400 mb-1">Bérlés zárása</p>
-                                            <p class="text-white text-sm">{{ fine.rent_close }}</p>
+                                            <p class="text-md text-slate-400 mb-1">Bérlés zárása</p>
+                                            <p class="text-slate-300 text-md">{{ fine.rent_close }}</p>
                                         </div>
-                                        <div class="text-sm">
-                                            <p class="text-sm text-slate-400 mb-1">Számla állapota</p>
+                                        <div class="text-md">
+                                            <p class="text-md text-slate-400 mb-1">Számla állapota</p>
                                             <span :class="[
-                                                'inline-block px-3 py-1 rounded-full text-sm tracking-wide',
+                                                'inline-block px-3 py-1 rounded-full text-md tracking-wide',
                                                 fine.invoice_status === 'pending' ? 'bg-slate-800 text-amber-400 hover:bg-slate-700 border border-amber-500/30' : 'bg-slate-800 text-emerald-400 hover:bg-slate-700 border border-emerald-500/30'
                                             ]">
                                                 {{ fine.invoice_status === 'pending' ? 'Kiállítva' : 'Kiegyenlítve' }}
                                             </span>
                                         </div>
                                         <div>
-                                            <p class="text-sm text-slate-400 mb-1">Felhasználónév</p>
-                                            <p class="text-slate-200 italic tracking-wide text-sm">{{ fine.username }}
+                                            <p class="text-md text-slate-400 mb-1">Felhasználónév</p>
+                                            <p class="text-slate-300 italic tracking-wide text-md">{{ fine.username }}
                                             </p>
                                         </div>
                                     </div>
@@ -453,6 +485,8 @@ import CitigoModel from '@layouts/carmodels/CitigoModel.vue';
 import KangooModel from '@layouts/carmodels/KangooModel.vue';
 import VivaroModel from '@layouts/carmodels/VivaroModel.vue';
 import KiaNiroModel from '@layouts/carmodels/KiaNiroModel.vue';
+import { useFormatStore } from '@stores/Services/FormatHelperService';
+const formatStore = useFormatStore();
 
 const props = defineProps({
     carId: {
@@ -490,16 +524,30 @@ function getLastRenter() {
     return renters.length > 0 ? renters[renters.length - 1] : null
 }
 const currentModel = computed(() => {
-  const manufacturerModelMap = {
-    'VW': EupModel,
-    'Skoda': CitigoModel,
-    'Renault': KangooModel,
-    'Opel': VivaroModel,
-    'KIA': KiaNiroModel
-  }
-  const manufacturer = carStore.car?.manufacturer
-  return manufacturerModelMap[manufacturer] || null
+    const manufacturerModelMap = {
+        'VW': EupModel,
+        'Skoda': CitigoModel,
+        'Renault': KangooModel,
+        'Opel': VivaroModel,
+        'KIA': KiaNiroModel
+    }
+    const manufacturer = carStore.car?.manufacturer
+    return manufacturerModelMap[manufacturer] || null
 })
+
+function checkTicketStatusNumber(statusNumber) {
+    if (statusNumber === 4) {
+        return 'bi bi-cone-striped text-orange-400 mr-2'
+    }
+    if (statusNumber === 5) {
+        return 'fa-solid fa-wrench text-black mr-2'
+    }
+    if (statusNumber === 6) {
+        return 'fa-solid fa-soap text-rose-400/90 mr-2'
+    }
+    return ''
+}
+
 // Dinamikus megjelenése a szekciós részeknek
 const toggleSection = (section) => {
     if (section === 'cleanReport') {

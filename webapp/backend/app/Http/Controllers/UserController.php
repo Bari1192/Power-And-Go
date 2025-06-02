@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index(): JsonResource
     {
-        Gate::authorize("viewAny", User::class);
+        // Gate::authorize("viewAny", User::class);
         $users = User::with('person')->get();
         return UserResource::collection($users);
     }
@@ -31,9 +31,9 @@ class UserController extends Controller
     public function show(User $user): JsonResource
     {
         $user->load(['cars.fleet', 'person','subscription.prices']);
-        Gate::authorize("view", $user);
-        return new UserResource($user);
-        // return new UserWithRentalResource($user);
+        // Gate::authorize("view", $user); EGYENLŐRE KIKAPCSOLVA!
+        // return new UserResource($user);
+        return new UserWithRentalResource($user);
     }
 
     public function update(StoreUserRequest $request, User $user)

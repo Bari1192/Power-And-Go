@@ -24,7 +24,7 @@
                                 <div class="text-red-400 text-sm sm:text-md font-semibold">Fennálló büntetések
                                     összértéke</div>
                                 <div class="text-xl sm:text-2xl font-bold text-white">
-                                    {{carStore.formatToOneThousandPrice(fines.reduce((sum, fine) => sum +
+                                    {{formatStore.formatToOneThousandPrice(fines.reduce((sum, fine) => sum +
                                         Number(fine.total_cost), 0))}} Ft</div>
                             </div>
                             <div class="bg-slate-800/50 p-3 sm:p-4 rounded-xl border border-red-500/20">
@@ -122,7 +122,7 @@
                                         </td>
                                         <td
                                             class="p-3 sm:p-4 text-xs sm:text-sm md:text-base font-semibold text-emerald-400">
-                                            {{ carStore.formatToOneThousandPrice(fine.total_cost) }} Ft
+                                            {{ formatStore.formatToOneThousandPrice(fine.total_cost) }} Ft
                                         </td>
                                         <td class="p-3 sm:p-4 text-xs sm:text-sm md:text-base text-slate-300">{{
                                             fine.invoice_date }}
@@ -149,8 +149,7 @@
                                                             <div class="text-xs sm:text-sm md:text-base text-slate-400">
                                                                 Felhasználó:
                                                             </div>
-                                                            <div
-                                                                class="text-xs sm:text-sm md:text-base text-white">
+                                                            <div class="text-xs sm:text-sm md:text-base text-white">
                                                                 {{ fine.person }}
                                                             </div>
                                                             <div class="text-xs sm:text-sm md:text-base text-slate-400">
@@ -207,7 +206,7 @@
                                                                 összeg:</div>
                                                             <div
                                                                 class="text-xs sm:text-sm md:text-base text-slate-200 font-semibold">
-                                                                {{ carStore.formatToOneThousandPrice(fine.total_cost) }}
+                                                                {{ formatStore.formatToOneThousandPrice(fine.total_cost) }}
                                                                 Ft
                                                             </div>
                                                         </div>
@@ -275,7 +274,7 @@
                                     <div>
                                         <div class="text-sm text-slate-400">Összeg</div>
                                         <div class="text-base font-semibold text-emerald-400">
-                                            {{ carStore.formatToOneThousandPrice(fine.total_cost) }} Ft
+                                            {{ formatStore.formatToOneThousandPrice(fine.total_cost) }} Ft
                                         </div>
                                     </div>
                                     <div>
@@ -303,7 +302,8 @@
                                         :class="isFeeDetailOpen(fine.id) ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
                                 </button>
                                 <!-- Expanded details -->
-                                <div v-if="isFeeDetailOpen(fine.id)" class="mt-3 pt-3 border-t border-slate-700 bg-slate-600/50 p-2 rounded-md">
+                                <div v-if="isFeeDetailOpen(fine.id)"
+                                    class="mt-3 pt-3 border-t border-slate-700 bg-slate-600/50 p-2 rounded-md">
                                     <div class="space-y-4">
                                         <!-- Bérlési információk -->
                                         <div>
@@ -351,8 +351,10 @@ import BaseLayout from '@layouts/BaseLayout.vue';
 import { ref, onMounted } from 'vue';
 import { http } from '@utils/http.mjs';
 import { useCarStore } from '@stores/carStore';
+import { useFormatStore } from '@stores/Services/FormatHelperService';
 
 const carStore = useCarStore();
+const formatStore = useFormatStore();
 const fines = ref([]);
 const openFeeDetails = ref({});
 

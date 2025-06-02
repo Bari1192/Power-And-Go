@@ -1,10 +1,9 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { http } from "@utils/http.mjs";
-import { ToastService } from "@layouts/toasts/ToastService.js";
+import { ToastService } from "@stores/Services/ToastService";
 
 export const useCarStore = defineStore("cars", () => {
-  // State
   const cars = ref([]);
   const car = ref(null);
   const carAllTickets = ref([]);
@@ -172,21 +171,8 @@ export const useCarStore = defineStore("cars", () => {
       isLoading.value = false;
     }
   }
-  const formatToOneThousandPrice = (price) => {
-    try {
-      if (!price && price !== 0) return "0";
-      const numPrice = Number(price);
-      if (isNaN(numPrice)) return "0";
-      return numPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    } catch (error) {
-      console.error("Hiba az ár formázása során:", error);
-      return "0";
-    }
-  };
 
-  // AD1 >> Return
   return {
-    // AD2 >> State
     cars,
     car,
     carAllTickets,
@@ -196,7 +182,6 @@ export const useCarStore = defineStore("cars", () => {
     isLoading,
     error,
 
-    // AD3 >> Actions
     getCars,
     getCar,
     createCar,
@@ -207,8 +192,6 @@ export const useCarStore = defineStore("cars", () => {
     getCarDetails,
     getAllFinesBill,
     getOneFineBill,
-
     getCarGroupCountByMotorPower,
-    formatToOneThousandPrice,
   };
 });

@@ -45,7 +45,7 @@ class BillController extends Controller
     {
         $bills = Bill::with(['users', 'cars.users', 'persons'])
             ->where('bill_type', 'rental')
-            ->paginate(15);
+            ->get();
         return BillResource::collection($bills);
     }
     public function feesCollection(): JsonResource

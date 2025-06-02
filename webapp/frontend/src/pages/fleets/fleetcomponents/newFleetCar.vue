@@ -1,162 +1,154 @@
 <template>
-    <div id="bgcolor"
-        class="m-auto d-flex justify-center my-10 lg:max-w-[1100px] border-4 rounded-2xl border-green-500/50 italic shadow-2xl font-semibold ">
-        <div class="flex justify-center bg-yellow-100/55 my-5 rounded-t-sm rounded-b-sm">
-            <p
-                class="text-center tracking-wide text-4xl font-semibold text-white my-5 outline-orange-400 drop-shadow-2xl capitalize">
-                új flotta modell hozzáadása
-            </p>
-        </div>
-        <div class="m-auto d-flex justify-center border-b-4 border-green-100 w-2/3 mb-2 rounded-md"></div>
-        <div class="flex mx-auto justify-center mt-4 mb-16">
-            <p class=" ml-2 text-red-600 rounded-md  bg-yellow-50/85 max-w-fit font-semibold text-xl italic py-1 px-2">
-                Kérjük fokozott figyelemmel töltse ki!</p>
-        </div>
-        <div v-if="submitted" class="flex justify-center mb-10 mx-auto">
-            <h2 class="text-green-600 italic w-fit bg-amber-50 font-semibold text-3xl">Az adatok sikeresen beküldésre
-                kerültek!</h2>
-        </div>
-        <FormKit type="form" id="registration-example" :form-class="submitted ? 'hide' : 'show'" submit-label="Küldés"
-            @submit="submitHandler" :actions="false" #default="{ value }" :validation="'required'" :validation-messages="{
-                required: 'Kérjük minden adatot töltsön ki!'
-            }">
-            <div class="flex flex-wrap my-5">
-                <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="manufacturer" type="text" label="Gyártó neve" placeholder="például: VW, Skoda!"
-                        :validation="'required|length:2,40'" :validation-messages="{
-                            alpha: 'Kizárólag betűket tartalmazhat!',
-                            length: 'A szöveg 2-40 karakterig terjedhet!',
-                            required: 'Kötelező kitölteni!'
-                        }" label-class="block tracking-wider text-white text-lg font-semibold mb-2"
-                        input-class="appearance-none block w-full bg-gray-100 text-lime-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
-                </div>
-                <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="carmodel" type="text" label="Modell Típusa" placeholder="például: E-up!"
-                        :validation="'required|length:2,30'" :validation-messages="{
-                            alpha: 'Kizárólag betűket tartalmazhat!',
-                            length: 'A szöveg 2-40 karakter hosszú lehet!',
-                            required: 'Kötelező kitölteni!'
-                        }" label-class="block tracking-wider text-white text-lg font-semibold mb-2"
-                        input-class="appearance-none block w-full bg-gray-100 text-lime-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
-                </div>
-                <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="motor_power" type="number" label="Teljesítmény (kW) értékben"
-                        placeholder="például: 18" :validation="'required|integer|min:18|max:500'" :validation-messages="{
-                            required: 'Kötelező kitölteni!',
-                            integer: 'Csak egész számot írhat be!',
-                            min: 'Minimum 18 kW-os érték megadása szükséges!',
-                            max: 'Maximum 500 kW-os értéket adhat meg!'
-                        }" label-class="block  tracking-wider text-white text-lg font-semibold mb-2"
-                        input-class="appearance-none block w-full bg-gray-100 text-lime-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
-                </div>
-            </div>
-            <div class="flex flex-wrap my-5">
-                <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="top_speed" type="number" label="Végsebesség (km/h)-ban" placeholder="például: 130"
-                        :validation="'required|integer|min:100|max:300'" :validation-messages="{
-                            required: 'Kötelező kitölteni!',
-                            integer: 'Csak egész számot írhat be!',
-                            min: 'Minimum 130km/h-ás érték megadása szükséges!',
-                            max: 'Maximum 300 km/h-ás értéket írhatbe!'
-                        }" label-class="block tracking-wider text-white text-lg font-semibold mb-2"
-                        input-class="appearance-none block w-full bg-gray-100 text-lime-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
-                        help-class="text-slate-600 italic text-start my-1 pl-2 text-sm" />
-                </div>
-                <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="tire_size" type="text" label="Gumiméret" placeholder="például: 165|65-R15"
-                        :validation="'length:8,30|required'" :validation-messages="{
-                            required: 'Kötelező kitölteni!',
-                            length: 'A szövegnek 8-30 karakter között kell lennie!',
-                        }" label-class="block tracking-wider text-white text-lg font-semibold mb-2"
-                        help-class="text-slate-600 italic text-start my-1 pl-2 text-sm"
-                        input-class="appearance-none block w-full bg-gray-100 text-lime-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
-                </div>
-                <div class="w-full md:w-1/3 px-3">
-                    <FormKit name="driving_range" type="number" label="Hatótáv értéke (km)" placeholder="például: 235"
-                        :validation="'required|integer|min:100|max:1000'" :validation-messages="{
-                            required: 'Kötelező kitölteni!',
-                            integer: 'Csak egész számot írhat be!',
-                            min: 'Minimum 100 km-es érték megadása szükséges!',
-                            max: 'Maximum 1 000 km-es érték lehet!'
-                        }" label-class="block tracking-wider text-white text-lg font-semibold mb-2"
-                        input-class="appearance-none block w-full bg-gray-100 text-lime-800 font-semibold border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
-                </div>
+    <div
+        class="max-w-7xl mx-auto p-8 bg-gradient-to-b from-indigo-950 to-gray-950 mb-10 rounded-2xl shadow-2xl border border-emerald-500">
+        <div class="w-11/12 mx-auto">
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-white">Járműfelviteli rendszer</h2>
+                <p class="text-slate-400 font-medium mt-1">Új flotta model hozzáadása</p>
             </div>
 
-            <div class="flex justify-center items-center align-middle bg-yellow-100/55 my-12 min-h-20 ">
-                <FormKit type="submit" label="Hozzáadás" id="addFleet" wrapper-class="w-full" input-class="tracking-[0.10em] text-lg bg-yellow-500 text-white font-semibold py-2
-                    px-12 border-b-4 border-b-yellow-50 rounded-lg transition-all duration-150 ease-in-out 
-                    hover:bg-yellow-600 active:translate-y-[2px] active:border-b-2" />
+            <!-- Figyelmeztetés -->
+            <div
+                class="bg-red-600/20 rounded-lg w-fit font-semibold px-6 py-3 mb-6 text-slate-100 border border-red-600">
+                <p>Kérjük, fokozott figyelemmel töltse ki az adatokat!</p>
             </div>
-        </FormKit>
+
+            <!-- Úrlap mezők -->
+            <form @submit.prevent="submitHandler" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Gyártó -->
+                <FormKit name="manufacturer" type="text" label="Gyártó" placeholder="Pl.: Toyota"
+                    label-class="block text-md font-semibold text-slate-100 mb-2 tracking-wide"
+                    input-class="w-full border border-slate-400 bg-slate-600 text-white tracking-wide rounded-md border border-slate-600 px-4 py-2 focus:ring-emerald-500" />
+
+                <!-- Modell -->
+                <FormKit name="carmodel" type="text" label="Modell típusa" placeholder="Pl.: Corolla"
+                    label-class="block text-md font-semibold text-slate-100 mb-2 tracking-wide"
+                    input-class="w-full border border-slate-400 bg-slate-600 text-white tracking-wide rounded-md border border-slate-600 px-4 py-2 focus:ring-emerald-500" />
+
+                <!-- Teljesítmény -->
+                <FormKit name="motor_power" type="number" label="Teljesítmény (kW)" placeholder="Pl.: 110"
+                    label-class="block text-md font-semibold text-slate-100 mb-2 tracking-wide"
+                    input-class="w-full border border-slate-400 bg-slate-600 text-white tracking-wide rounded-md border border-slate-600 px-4 py-2 focus:ring-emerald-500" />
+
+                <!-- Kiegészítő mezők (maradék) -->
+                <FormKit name="top_speed" type="number" label="Végsebesség" placeholder="Pl.: 180"
+                    label-class="block text-md font-semibold text-slate-100 mb-2 tracking-wide"
+                    input-class="w-full border border-slate-400 bg-slate-600 text-white tracking-wide rounded-md border border-slate-600 px-4 py-2 focus:ring-emerald-500" />
+                <FormKit name="tire_size" type="text" label="Gumiméret" placeholder="Pl.: 195|65-R16"
+                    label-class="block text-md font-semibold text-slate-100 mb-2 tracking-wide"
+                    input-class="w-full border border-slate-400 bg-slate-600 text-white tracking-wide rounded-md border border-slate-600 px-4 py-2 focus:ring-emerald-500" />
+                <FormKit name="driving_range" type="number" label="Hatótáv (km)" placeholder="Pl.: 500"
+                    label-class="block text-md font-semibold text-slate-100 mb-2 tracking-wide"
+                    input-class="w-full border border-slate-400 bg-slate-600 text-white tracking-wide rounded-md border border-slate-600 px-4 py-2 focus:ring-emerald-500" />
+
+                <!-- Submit Gomb -->
+                <div class="col-span-full text-center py-2">
+                    <button type="submit"
+                        class="px-6 py-3 text-md bg-emerald-600 hover:bg-emerald-700 transition-colors duration-200 text-slate-100 font-semibold rounded-md shadow-md shadow-teal-500/50">
+                        Járműfelvitel véglegesítése
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
-
 <script setup>
+import { ref } from 'vue'
+import { useFleetStore } from '@stores/FleetStore'
+import { storeToRefs } from 'pinia'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
+import BaseSpinner from '@layouts/sliders/BaseSpinner.vue'
 
-import { ref } from 'vue';
-import { useFleetStore } from '@stores/FleetStore';
-import { storeToRefs } from 'pinia';
+const fleetStore = useFleetStore()
+const { fleets } = storeToRefs(fleetStore)
 
-const fleetStore = useFleetStore();
-const { fleets } = storeToRefs(fleetStore);
-const submitted = ref(false);
-
+const submitted = ref(false)
+const loading = ref(false)
 
 const submitHandler = async (values) => {
-  try {
-    if (!values.manufacturer || !values.carmodel || !values.motor_power || 
-        !values.top_speed || !values.tire_size || !values.driving_range) {
-      console.error("Hiányzó mezők:", values);
-      return;
-    }
-    
-    // Számszerű értékek átalakítása
-    const formattedValues = {
-      manufacturer: values.manufacturer,
-      carmodel: values.carmodel,
-      motor_power: Number(values.motor_power),
-      top_speed: Number(values.top_speed),
-      tire_size: values.tire_size,
-      driving_range: Number(values.driving_range),
-    };
-    await fleetStore.createFleet(formattedValues);
+    loading.value = true
 
-    submitted.value = true;
-    await fleetStore.getFleets();
-    setTimeout(() => {
-      submitted.value = false;
-    }, 3000);
-  } catch (error) {
-    console.error("Hiba történt az adatok mentése közben:", error);
-  }
-};
+    try {
+        if (!values.manufacturer || !values.carmodel || !values.motor_power ||
+            !values.top_speed || !values.tire_size || !values.driving_range) {
+            console.error("Hiányzó mezők:", values)
+            toast.error('Kérjük minden adatot töltsön ki!', {
+                position: 'top-right',
+                autoClose: 6000,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: 'dark'
+            })
+            return
+        }
+
+        // Számszerű értékek átalakítása
+        const formattedValues = {
+            manufacturer: values.manufacturer,
+            carmodel: values.carmodel,
+            motor_power: Number(values.motor_power),
+            top_speed: Number(values.top_speed),
+            tire_size: values.tire_size,
+            driving_range: Number(values.driving_range),
+        }
+
+        await fleetStore.createFleet(formattedValues)
+        submitted.value = true
+        await fleetStore.getFleets()
+
+        toast.success('Flotta modell sikeresen hozzáadva!', {
+            position: 'bottom-center',
+            autoClose: 6000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: 'dark'
+        })
+
+        setTimeout(() => {
+            submitted.value = false
+        }, 3000)
+
+    } catch (error) {
+        console.error("Hiba történt az adatok mentése közben:", error)
+        toast.error('Hiba történt az adatok mentése közben!', {
+            position: 'top-right',
+            autoClose: 6000,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: 'dark'
+        })
+    } finally {
+        loading.value = false
+    }
+}
 </script>
 
 <style scoped>
-#bgcolor {
-    background: linear-gradient(to bottom,
-            rgba(25, 126, 0, .9) 0%,
-            rgba(57, 154, 33, .85) 35%,
-            rgba(91, 185, 68, .8) 70%,
-            rgba(101, 163, 13, .7) 100%);
+/* FormKit validációs üzenetek stílusa */
+:deep(.formkit-messages) {
+    color: #ef4444;
+    background-color: rgba(254, 240, 138, 0.2);
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    text-align: start;
+    margin: 0.5rem 0;
+    width: fit-content;
+    border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
-:deep(.formkit-message[data-message-type="validation"]) {
-    color: red;
-    background-color: yellow;
-    max-width: fit-content;
-    letter-spacing: 1px;
-    padding: 0 5px;
-    border-radius: 5px;
-    margin-top: 5px;
-}
-
-:deep(.formkit-message[data-message-type="ui"]) {
+/* FormKit help üzenetek elrejtése */
+:deep(.formkit-help) {
     display: none;
 }
 
-:deep(.formkit-wrapper[formkit-help="help-input_3"]) {
-    display: none;
+/* Input focus animáció */
+:deep(.formkit-input:focus) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.3);
 }
 </style>

@@ -8,10 +8,10 @@
       <div class="absolute -left-1/4 w-1/2 h-full bg-emerald-400/5 blur-3xl"></div>
     </div>
 
-    <div class="relative container mx-auto px-4">
+    <div class="relative w-full mx-auto px-4">
       <div class="flex justify-between items-center h-24">
         <!-- Logo -->
-        <RouterLink to="/" class="flex items-center gap-4" active-class="font-bold text-lime-500">
+        <RouterLink to="/" class="flex items-center" active-class="font-bold text-lime-500">
           <img src="../../assets/img/Models/eup.png" alt="Logo" class="h-24 w-auto" />
           <p class="text-emerald-500 md:text-3xl font-extrabold w-fit ">Power And Go</p>
           <div class="fixed left-0 w-1/12 top-1/2 h-1/6 bg-emerald-400 blur-3xl"></div>
@@ -28,15 +28,24 @@
           </svg>
         </button>
 
+
         <!-- Asztali menü -->
         <div class="hidden lg:flex lg:items-center lg:space-x-4">
-          <!-- Számlák Dropdown -->
+          <!-- Regisztráció Dropdown -->
+          <div class="relative" @click.stop>
+            <button @click="toggleRegistrationMenu" :class="isRegistrationMenuOpen ? 'bg-emerald-600/20' : 'bg-inherit'"
+              class="px-4 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600/20 text-slate-100 flex items-center">
+              <span class="font-medium lg:text-xl mr-2">Regisztráció</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-100"
+                :class="{ 'transform rotate-180': isRegistrationMenuOpen }"></i>
+            </button>
+
+          </div>
           <div class="relative" @click.stop>
 
             <button @click="toggleMailSystemMenu" :class="isMailSystemMenuOpen ? 'bg-emerald-600/20' : 'bg-inherit'"
               class="px-4 py-2 rounded-lg transition-all duration-200 hover:bg-emerald-600/20 text-slate-100 flex items-center">
-              <span class="font-medium lg:text-xl mr-2">Rendszer
-                értesítések</span>
+              <span class="font-medium lg:text-xl mr-2">Rendszer értesítések</span>
               <i class="fa-solid fa-chevron-down text-xs text-slate-100"
                 :class="{ 'transform rotate-180': isMailSystemMenuOpen }"></i>
             </button>
@@ -210,6 +219,7 @@ const menuOpen = ref(false);
 const isBillsMenuOpen = ref(false);
 const isCarsMenuOpen = ref(false);
 const isMailSystemMenuOpen = ref(false);
+const isRegistrationMenuOpen = ref(false);
 const isCostumerSupportMenuOpen = ref(false);
 const router = useRouter();
 
@@ -223,6 +233,7 @@ function toggleCostumerSupportMenu() {
     isCarsMenuOpen.value = false;
     isMailSystemMenuOpen.value = false;
     isBillsMenuOpen.value = false;
+    isRegistrationMenuOpen.value = false;
   }
 }
 function toggleBillsMenu() {
@@ -231,6 +242,7 @@ function toggleBillsMenu() {
     isCarsMenuOpen.value = false;
     isMailSystemMenuOpen.value = false;
     isCostumerSupportMenuOpen.value = false;
+    isRegistrationMenuOpen.value = false;
   }
 }
 function toggleMailSystemMenu() {
@@ -239,6 +251,16 @@ function toggleMailSystemMenu() {
     isCarsMenuOpen.value = false;
     isBillsMenuOpen.value = false;
     isCostumerSupportMenuOpen.value = false;
+    isRegistrationMenuOpen.value = false;
+  }
+}
+function toggleRegistrationMenu() {
+  isRegistrationMenuOpen.value = !isRegistrationMenuOpen.value;
+  if (isRegistrationMenuOpen.value) {
+    isCarsMenuOpen.value = false;
+    isBillsMenuOpen.value = false;
+    isCostumerSupportMenuOpen.value = false;
+    isMailSystemMenuOpen.value = false;
   }
 }
 
@@ -248,6 +270,7 @@ function toggleCarsMenu() {
     isBillsMenuOpen.value = false;
     isMailSystemMenuOpen.value = false;
     isCostumerSupportMenuOpen.value = false;
+    isRegistrationMenuOpen.value = false;
   }
 }
 
